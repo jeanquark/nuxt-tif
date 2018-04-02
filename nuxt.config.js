@@ -29,7 +29,7 @@ module.exports = {
       }
     },
     vendor: [
-      // 'vuetify',
+      'vuetify',
       '~/plugins/firebase-client-init.js'
     ],
     extractCSS: true,
@@ -118,7 +118,7 @@ module.exports = {
     }]
   ],
   plugins: [
-    // {src: '~/plugins/vuetify.js', ssr: true },
+    {src: '~/plugins/vuetify.js', ssr: true },
     {src: '~/plugins/firebase-client-init.js', ssr: false },
     {src: '~/plugins/auth-cookie.js', ssr: false },
     {src: '~/plugins/web-font-loader.js', ssr: false }
@@ -126,8 +126,8 @@ module.exports = {
   serverMiddleware: [
       '~/serverMiddleware/validateFirebaseIdToken'
   ],
-  css: [
-    // { src: '~/assets/css/main.css', lang: 'css'},
-    // { src: '~/assets/css/app.styl', lang: 'styl'}
-  ]
+  // css: [
+  //   { src: '~/assets/css/main.css', lang: 'css'},
+  //   { src: '~/assets/css/app.styl', lang: 'styl'}
+  // ]
 }

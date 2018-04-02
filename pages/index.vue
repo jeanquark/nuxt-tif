@@ -22,7 +22,8 @@
     export default {
         layout: 'layoutFront',
         created() {
-            return this.$store.dispatch('loadedPosts')
+            // return this.$store.dispatch('loadedPosts')
+            return this.$store.dispatch('posts/loadedPosts')
         },
         asyncData () {
             return {

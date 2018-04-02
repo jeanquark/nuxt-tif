@@ -13,6 +13,7 @@
             </div>
             <div class="col-md-6 col-sm-12">
                 <!-- <div v-if="error" style="color: red;">{{ error.message }}</div><br /> -->
+                <!-- {{ error }} -->
                 <div v-if="error" class="text-center" style="color: red;">{{ $t(error.code) }}</div><br />
                 <form>
                     <div class="form-group">
@@ -57,7 +58,8 @@
         },
         computed: {
             error() {
-                return this.$store.getters.error
+                // return this.$store.getters.error
+                return this.$store.getters['error']
             }
         },
         methods: {
@@ -82,7 +84,8 @@
             },
             async signUserIn () {
                 console.log('signUserIn')
-                await this.$store.dispatch('signUserIn', {
+                // await this.$store.dispatch('signUserIn', {
+                await this.$store.dispatch('users/signUserIn', {
                     email: this.email,
                     password: this.password
                 })
@@ -93,7 +96,8 @@
                 }
             },
             async signUserUp () {
-                await this.$store.dispatch('signUserUp', {
+                // await this.$store.dispatch('signUserUp', {
+                await this.$store.dispatch('users/signUserUp', {
                     email: this.email,
                     password: this.password
                 })

@@ -95,6 +95,7 @@
 </template>
 
 <script>
+	import { mapGetters } from 'vuex'
 	export default {
 		head: {
 		    script: [
@@ -131,17 +132,29 @@
 			    ]
 			}
 		},
+		// computed: {
+		// 	user() {
+		// 		return this.$store.getters.activeUser
+		// 	},
+		// 	lang() {
+		// 		return this.$i18n.locale
+		// 	}
+		// },
 		computed: {
-			user() {
-				return this.$store.getters.activeUser
-			},
-			lang() {
+            user() {
+            	return this.$store.getters['users/activeUser']
+            },
+            lang() {
 				return this.$i18n.locale
 			}
-		},
+        },
 		methods: {
 			logout () {
-		      	this.$store.dispatch('signOut').then(() => {
+		      	// this.$store.dispatch('signOut').then(() => {
+		       //  	alert('Vous allez effacer votre session!')
+		       //  	this.$router.push('/')
+		      	// })
+		      	this.$store.dispatch('users/signOut').then(() => {
 		        	alert('Vous allez effacer votre session!')
 		        	this.$router.push('/')
 		      	})
