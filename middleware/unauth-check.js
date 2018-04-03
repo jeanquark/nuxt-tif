@@ -3,6 +3,6 @@ export default function ({ store, redirect, error }) {
   //   return redirect('/')
   // }
   if (store.getters['users/activeUser']) {
-  	return redirec('/')
+  	return redirect('/')
   }
 }

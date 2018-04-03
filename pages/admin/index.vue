@@ -6,6 +6,12 @@
 
 <script>
   export default {
-    layout: 'layoutBack'
+    layout: 'layoutBack',
+    created () {
+        this.$store.dispatch('activities/loadedActivities')
+        this.$store.dispatch('categories/loadedCategories')
+        this.$store.dispatch('types/loadedTypes')
+        this.$store.dispatch('stadiums/loadedStadiums')
+    }
   }
 </script>
