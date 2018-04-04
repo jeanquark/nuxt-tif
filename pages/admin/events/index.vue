@@ -2,60 +2,95 @@
   	<v-flex xs12 sm10 offset-sm1>
   		<br /><br />
       	<h1 class="text-md-center">Events</h1>
+      	<!-- loadedEvents: {{ loadedEvents }} -->
       	<br /><br />
       	<v-btn color="primary" dark slot="activator" class="mb-2" to="/admin/events/create">Add an Event</v-btn>
-      	<v-card>
+      	<!-- <v-card>
 		    <v-card-title>
-		      Nutrition
-		      <v-spacer></v-spacer>
-		      <v-text-field
-		        append-icon="search"
-		        label="Search"
-		        single-line
-		        hide-details
-		        v-model="search"
-		      ></v-text-field>
+		      	Nutrition
+		      	<v-spacer></v-spacer>
+				<v-text-field
+					append-icon="search"
+					label="Search"
+					single-line
+					hide-details
+					v-model="search"
+				></v-text-field>
 		    </v-card-title>
 		    <v-data-table
-		      :headers="headers"
-		      :items="items"
-		      :search="search"
+			    :headers="headers"
+			    :items="items"
+			    :search="search"
 		    >
-		      <template slot="items" slot-scope="props">
-		        <td>{{ props.item.name }}</td>
-		        <td class="text-xs-right">{{ props.item.calories }}</td>
-		        <td class="text-xs-right">{{ props.item.fat }}</td>
-		        <td class="text-xs-right">{{ props.item.carbs }}</td>
-		        <td class="text-xs-right">{{ props.item.protein }}</td>
-		        <td class="text-xs-right">{{ props.item.iron }}</td>
-		      </template>
-		      <v-alert slot="no-results" :value="true" color="error" icon="warning">
-		        Your search for "{{ search }}" found no results.
-		      </v-alert>
+				<template slot="items" slot-scope="props">
+					<td>{{ props.item.name }}</td>
+					<td class="text-xs-right">{{ props.item.calories }}</td>
+					<td class="text-xs-right">{{ props.item.fat }}</td>
+					<td class="text-xs-right">{{ props.item.carbs }}</td>
+					<td class="text-xs-right">{{ props.item.protein }}</td>
+					<td class="text-xs-right">{{ props.item.iron }}</td>
+				</template>
+	      		<v-alert slot="no-results" :value="true" color="error" icon="warning">
+	        		Your search for "{{ search }}" found no results.
+	      		</v-alert>
 		    </v-data-table>
-		  </v-card>
+		</v-card> -->
+		<v-card>
+		    <v-card-title>
+		      	Events
+		      	<v-spacer></v-spacer>
+				<v-text-field
+					append-icon="search"
+					label="Search"
+					single-line
+					hide-details
+					v-model="search"
+				></v-text-field>
+		    </v-card-title>
+		    <v-data-table
+			    :headers="headers"
+			    :items="loadedEvents"
+			    :search="search"
+		    >
+				<template slot="items" slot-scope="props">
+					<td>{{ props.item.name }}</td>
+					<td class="text-xs-right">{{ props.item.activity.name }}</td>
+					<td class="text-xs-right">{{ props.item.category.name }}</td>
+					<td class="text-xs-right">{{ props.item.type.name }}</td>
+					<td class="text-xs-right">{{ props.item.date }}</td>
+					<td class="text-xs-right">{{ props.item.time }}</td>
+				</template>
+	      		<v-alert slot="no-results" :value="true" color="error" icon="warning">
+	        		Your search for "{{ search }}" found no results.
+	      		</v-alert>
+		    </v-data-table>
+		</v-card>
     </v-flex>
 </template>
 
 <script>
   	export default {
 	    layout: 'layoutBack',
+	    created () {
+	    	this.$store.dispatch('events/loadedEvents')
+	    },
 	    data () {
 	    	return {
 		        search: '',
 		        headers: [
 		        	{
-			            text: 'Dessert (100g serving)',
+			            text: 'Name',
 			            align: 'left',
 			            sortable: false,
 			            value: 'name'
 			        },
-					{ text: 'Calories', value: 'calories' },
-					{ text: 'Fat (g)', value: 'fat' },
-					{ text: 'Carbs (g)', value: 'carbs' },
-					{ text: 'Protein (g)', value: 'protein' },
-					{ text: 'Iron (%)', value: 'iron' }
+					{ text: 'Activity', value: 'activity.name' },
+					{ text: 'Category', value: 'category.name' },
+					{ text: 'Type', value: 'type.name' },
+					{ text: 'Date', value: 'date' },
+					{ text: 'Time', value: 'time' }
 		        ],
+		        events: '',
 		        items: [
 					{
 						value: false,
@@ -148,6 +183,11 @@
 						iron: '6%'
 					}
 		        ]	    
+	    	}
+	    },
+	    computed: {
+	    	loadedEvents () {
+	    		return this.$store.getters['events/loadedEvents']
 	    	}
 	    }
   	}

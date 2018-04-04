@@ -36,6 +36,7 @@ module.exports = {
   },
   modules: [
     // '@nuxtjs/pwa'
+    '@nuxtjs/toast',
     ['nuxt-i18n', {
       locales: [
         // { code: 'en' },
@@ -130,4 +131,15 @@ module.exports = {
   //   { src: '~/assets/css/main.css', lang: 'css'},
   //   { src: '~/assets/css/app.styl', lang: 'styl'}
   // ]
+  toast: {
+    duration: 5000,
+    className: ['title', 'p5'],
+    action: {
+      icon : 'close',
+      class: 'white--text',
+      onClick : (e, toastObject) => {
+          toastObject.goAway(0);
+      }
+    }
+  }
 }

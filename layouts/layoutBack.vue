@@ -283,4 +283,7 @@
   .application.theme--light a {
     text-decoration: none;
   }
+  .toast {
+    font-size: 2em;
+  }
 </style>
