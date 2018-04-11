@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app v-if="loading">
+    <v-app v-if="loadingPage">
       <main>
         <v-container fill-height>
           <v-layout align-center justify-center>
@@ -90,8 +90,9 @@
       >
         <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
           <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-          <!-- <span class="hidden-sm-and-down">Retour au site</span> -->
-          <nuxt-link class="hidden-sm-and-down" to="/" style="color: #fff;">Retour au site</nuxt-link>
+          <!-- <span class="hidden-sm-and-down" @click="backToSite">Retour au site</span> -->
+          <v-btn @click="backToSite">Retour au site</v-btn>
+          <!-- <nuxt-link class="hidden-sm-and-down" to="/" style="color: #fff;">Retour au site</nuxt-link> -->
         </v-toolbar-title>
         <v-text-field
           flat
@@ -202,6 +203,7 @@
 <script>
   // import '~/assets/css/main.css'
   // import '~/assets/css/app.styl'
+  import store from '~/store/index.js'
   export default {
     head: {
       script: [
@@ -215,7 +217,7 @@
     created() {
         setTimeout(() => {
           // console.log('abc')
-          this.loading = false
+          this.loadingPage = false
         }, 1000)
     },
     asyncData () {
@@ -226,13 +228,12 @@
     data: () => ({
       dialog: false,
       drawer: null,
-      loading: true,
+      loadingPage: true,
       items: [
         { icon: 'contacts', text: 'Users', to: '/admin/users' },
         { icon: 'event', text: 'Events', to: '/admin/events' },
-        { icon: 'contacts', text: 'Contacts', to: '' },
-        { icon: 'history', text: 'Frequently contacted', to: '' },
-        { icon: 'content_copy', text: 'Duplicates', to: '' },
+        { icon: 'history', text: 'Placeholder 1', to: '' },
+        { icon: 'content_copy', text: 'Placeholder 2', to: '' },
         {
           icon: 'keyboard_arrow_up',
           'icon-alt': 'keyboard_arrow_down',
@@ -245,7 +246,7 @@
         {
           icon: 'keyboard_arrow_up',
           'icon-alt': 'keyboard_arrow_down',
-          text: 'More',
+          text: 'Placeholder 3',
           model: false,
           children: [
             { text: 'Import', to: '' },
@@ -255,11 +256,11 @@
             { text: 'Other contacts', to: '' }
           ]
         },
-        { icon: 'settings', text: 'Settings', to: '' },
-        { icon: 'chat_bubble', text: 'Send feedback', to: '' },
-        { icon: 'help', text: 'Help', to: '' },
-        { icon: 'phonelink', text: 'App downloads', to: '' },
-        { icon: 'keyboard', text: 'Go to the old version', to: '' }
+        { icon: 'settings', text: 'Placeholder 4', to: '' },
+        { icon: 'chat_bubble', text: 'Placeholder 5', to: '' },
+        { icon: 'help', text: 'Placeholder 6', to: '' },
+        { icon: 'phonelink', text: 'Placeholder 7', to: '' },
+        { icon: 'keyboard', text: 'Placeholder 8', to: '' }
       ]
     }),
     props: {
@@ -275,6 +276,13 @@
     methods: {
       clickTile(item) {
         console.log(item)
+      },
+      backToSite () {
+        this.$store.commit('setLoadingPage', false, { root: true })
+        let timer = setTimeout(function() {
+          self.$store.commit('setLoadingPage', true, { root: true })
+        }, 2000)
+        this.$router.push('/')
       },
       logout () {
         this.$store.dispatch('users/signOut').then(() => {

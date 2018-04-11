@@ -171,7 +171,7 @@ export const actions = {
     // },
   	async signUserIn ({commit, dispatch}, payload) {
     	console.log(payload)
-        commit('setLoading', true, { root: true })
+      // commit('setLoadingPage', true, { root: true })
     	try {
       		let authData = await Auth.signInWithEmailAndPassword(payload.email, payload.password)
       		console.log(authData)
@@ -199,7 +199,7 @@ export const actions = {
             this.$toast.success('Successfully signed in!')
             // commit('setUser', buildUserObjectFromSignUp(authData))
             commit('setUser', setUser(authData))
-            commit('setLoading', false, { root: true })
+            // commit('setLoadingPage', false, { root: true })
     	}
     	catch(error) {
       		console.log(error)
@@ -208,12 +208,12 @@ export const actions = {
       		// commit('../errors/setError', error)
       		// this.$store.commit('errors/setError', error)
       		commit('setError', error, { root: true })
-            commit('setLoading', false, { root: true })
+          // commit('setLoadingPage', false, { root: true })
     	}
   	},
   	async signUserUp ({commit}, payload) {
     	console.log(payload)
-        commit('setLoading', true, { root: true })
+      commit('setLoading', true, { root: true })
     	try {
       		let authData = await Auth.createUserWithEmailAndPassword(payload.email, payload.password)
       		console.log(authData)
@@ -240,7 +240,7 @@ export const actions = {
       		console.log(error)
       		// commit('setError', error)
       		commit('setError', error, { root: true })
-            commit('setLoading', false, { root: true })
+          commit('setLoading', false, { root: true })
     	}
   	},
   	async signInWithGooglePopup ({commit}) {
@@ -271,8 +271,13 @@ export const actions = {
     	commit('setLoading', false)
   	},
   	async signOut ({commit}) {
+      commit('setLoadingPage', true, { root: true })
     	await Auth.signOut()
     	commit('setUser', null)
+      setTimeout(function() {
+        commit('setLoadingPage', false, { root: true })
+      }, 1000)
+
   	}
 }
 

@@ -6,14 +6,21 @@
 // Separate Module States
 // import moduleFirebase from './modules/firebase.js'
 
+// import VueLoading from 'vuex-loading'
+// export const plugins = [ VueLoading ]
+
 export const state = () => ({
     loading: false,
+    loadingPage: false,
     error: null
 })
 
 export const mutations = {
     setLoading (state, payload) {
       state.loading = payload
+    },
+    setLoadingPage (state, payload) {
+      state.loadingPage = payload
     },
     setError (state, payload) {
       console.log('setError mutation called')
@@ -40,6 +47,9 @@ export const actions = {
 export const getters = {
     loading (state) {
       return state.loading
+    },
+    loadingPage (state) {
+      return state.loadingPage
     },
     error (state) {
       return state.error

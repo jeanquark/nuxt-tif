@@ -30,7 +30,8 @@ module.exports = {
     },
     vendor: [
       'vuetify',
-      '~/plugins/firebase-client-init.js'
+      '~/plugins/firebase-client-init.js',
+      // 'vuex-loading'
     ],
     extractCSS: true,
   },
@@ -120,10 +121,12 @@ module.exports = {
     }]
   ],
   plugins: [
-    {src: '~/plugins/vuetify.js', ssr: true },
     {src: '~/plugins/firebase-client-init.js', ssr: false },
     {src: '~/plugins/auth-cookie.js', ssr: false },
-    {src: '~/plugins/web-font-loader.js', ssr: false }
+    {src: '~/plugins/web-font-loader.js', ssr: false },
+    // {src: '~/plugins/vuex-loading.js', ssr: true }
+    // {src: '~/plugins/vuex-loading.js' },
+    {src: '~/plugins/vuetify.js', ssr: true },
   ],
   serverMiddleware: [
       '~/serverMiddleware/validateFirebaseIdToken',

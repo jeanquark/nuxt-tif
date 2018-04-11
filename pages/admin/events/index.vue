@@ -51,19 +51,72 @@
 			    :headers="headers"
 			    :items="loadedEvents"
 			    :search="search"
+			    v-model="selected"
+			    item-key="id"
+			    select-all
 		    >
 				<template slot="items" slot-scope="props">
+					<td>
+				        <v-checkbox
+				          primary
+				          hide-details
+				          v-model="props.selected"
+				        ></v-checkbox>
+				    </td>
+				    <td>{{ props.index + 1 }}</td>
 					<td>{{ props.item.name }}</td>
 					<td class="text-xs-right">{{ props.item.activity.name }}</td>
 					<td class="text-xs-right">{{ props.item.category.name }}</td>
 					<td class="text-xs-right">{{ props.item.type.name }}</td>
 					<td class="text-xs-right">{{ props.item.date }}</td>
 					<td class="text-xs-right">{{ props.item.time }}</td>
+					<!-- <td>{{ props.item.name }}</td>
+					<td class="text-xs-right">{{ props.item.calories }}</td>
+					<td class="text-xs-right">{{ props.item.fat }}</td>
+					<td class="text-xs-right">{{ props.item.carbs }}</td>
+					<td class="text-xs-right">{{ props.item.protein }}</td>
+					<td class="text-xs-right">{{ props.item.iron }}</td> -->
+					<td class="justify-center layout px-0">
+			          <v-btn icon class="mx-0" @click="editItem(props.item)">
+			            <v-icon color="teal">edit</v-icon>
+			          </v-btn>
+			          <v-btn icon class="mx-0" @click="deleteItem(props.item)">
+			            <v-icon color="pink">delete</v-icon>
+			          </v-btn>
+			        </td>
 				</template>
 	      		<v-alert slot="no-results" :value="true" color="error" icon="warning">
 	        		Your search for "{{ search }}" found no results.
 	      		</v-alert>
+	      		<template slot="no-data">
+			      <v-alert :value="true" color="error" icon="warning">
+			        Sorry, nothing to display here. Either there is no data, or there is data, but you don't have the correct authorization to see it :(
+			      </v-alert>
+			    </template>
 		    </v-data-table>
+
+
+
+		    <!-- <v-data-table
+			    :headers="headers"
+			    :items="items"
+			    hide-actions
+			    class="elevation-1"
+			  >
+			    <template slot="items" slot-scope="props">
+			      <td>{{ props.item.name }}</td>
+			      <td class="text-xs-right">{{ props.item.calories }}</td>
+			      <td class="text-xs-right">{{ props.item.fat }}</td>
+			      <td class="text-xs-right">{{ props.item.carbs }}</td>
+			      <td class="text-xs-right">{{ props.item.protein }}</td>
+			      <td class="text-xs-right">{{ props.item.iron }}</td>
+			    </template>
+			    <template slot="no-data">
+			      <v-alert :value="true" color="error" icon="warning">
+			        Sorry, nothing to display here. Either there is no data, or there is data, but you don't have the correct authorization to see it :(
+			      </v-alert>
+			    </template>
+			  </v-data-table> -->
 		</v-card>
     </v-flex>
 </template>
@@ -77,18 +130,16 @@
 	    data () {
 	    	return {
 		        search: '',
+		        selected: [],
 		        headers: [
-		        	{
-			            text: 'Name',
-			            align: 'left',
-			            sortable: false,
-			            value: 'name'
-			        },
-					{ text: 'Activity', value: 'activity.name' },
-					{ text: 'Category', value: 'category.name' },
-					{ text: 'Type', value: 'type.name' },
+		        	{ text: 'N°', value: 'id' },
+		        	{ text: 'Name', value: 'name', align: 'left', sortable: false },
+					{ text: 'Activity', value: 'activity' },
+					{ text: 'Category', value: 'category' },
+					{ text: 'Type', value: 'type' },
 					{ text: 'Date', value: 'date' },
-					{ text: 'Time', value: 'time' }
+					{ text: 'Time', value: 'time' },
+					{ text: 'Actions', value: 'actions', sortable: false }
 		        ],
 		        events: '',
 		        items: [

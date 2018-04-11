@@ -27,6 +27,7 @@
     "nuxt": "^1.0.0-rc11",
     "nuxt-i18n": "^2.9.1",
     "vuetify": "^1.0.11",
+    "vuex-loading": "^0.2.6",
     "webfontloader": "^1.6.28",
     "xmlhttprequest": "^1.8.0"
   },

@@ -24,8 +24,11 @@
                         <label for="password">{{ $t('password') }}:</label>
                         <input type="password" class="form-control" id="passwrod" v-bind:placeholder="$t('password')" v-model="password">
                     </div>
-                    <button type="submit" class="btn btn-primary" :disabled="loading" :loading="loading" @click.prevent="signUserIn">Login <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>&nbsp;&nbsp;
-                    <button type="submit" class="btn btn-success" :disabled="registerLoading" :loading="registerLoading" @click.prevent="signUserUp">{{ $t('register') }} <i v-bind:class="{'fa fa-spinner fa-spin' : registerLoading}"></i></button>
+                    <button type="submit" class="btn btn-primary" :disabled="loading1" :loading="loading1" @click.prevent="signUserIn">Login <i v-bind:class="{'fa fa-spinner fa-spin' : loading1}"></i></button>&nbsp;&nbsp;
+                    <button type="submit" class="btn btn-success" :disabled="loading2" :loading="loading2" @click.prevent="signUserUp">{{ $t('register') }} <i v-bind:class="{'fa fa-spinner fa-spin' : loading2}"></i></button>
+
+
+
                 </form>
                 <br />
                 <hr>
@@ -42,6 +45,7 @@
 </template>
 
 <script>
+    // import { vueLoading } from 'vuex-loading'
     export default {
         layout: 'layoutFront',
         middleware: ['unauth-check'],
@@ -53,6 +57,8 @@
         data () {
             return {
                 // loading: true,
+                loading1: false,
+                loading2: false,
                 email: '',
                 password: ''
             }
@@ -90,6 +96,7 @@
                 }
             },
             async signUserIn () {
+                this.loading1 = true
                 console.log('signUserIn')
                 // this.$store.dispatch('setLoading', true);
                 // await this.$store.dispatch('signUserIn', {
@@ -97,18 +104,25 @@
                     email: this.email,
                     password: this.password
                 })
-                if (this.$i18n.locale != 'en') {
-                    this.$router.replace('/' + this.$i18n.locale + '/admin')
-                } else {
-                    this.$router.replace('/admin')
-                }
+                this.loading1 = false
+                this.$router.replace('/admin')
+                // if (this.$i18n.locale != 'en') {
+                //     this.$router.replace('/' + this.$i18n.locale + '/admin')
+                // } else {
+                //     this.$router.replace('/admin')
+                // }
             },
             async signUserUp () {
+                this.loading2 = true
                 // await this.$store.dispatch('signUserUp', {
                 await this.$store.dispatch('users/signUserUp', {
                     email: this.email,
                     password: this.password
                 })
+                this.loading2 = false
+                // setTimeout(function(loading2) {
+                //     this.loading2 = false
+                // }, 3000)
                 if (this.$i18n.locale != 'en') {
                     this.$router.replace('/' + this.$i18n.locale + '/admin')
                 } else {

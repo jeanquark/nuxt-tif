@@ -15,12 +15,18 @@
 			<h1 class="text-md-center">Create Event</h1>
 			selectedActivity: {{ this.selectedActivity }}<br />
 			selectedCategory: {{ this.selectedCategory }}<br />
-			selectedType: {{ this.selectedType }}
+			selectedType: {{ this.selectedType }}<br />
+			selectedCompetition: {{ this.selectedCompetition }}
 			<br /><br />
 			
 
 			<v-card>
 				<v-form>
+					<v-card-title class="primary-title">
+						<v-card-text class="text-md-center">
+							<h3>Créer un événement unique</h3>
+						</v-card-text>
+					</v-card-title>
 					<v-container fluid>
 					    <v-layout row wrap>
 <!-- <v-flex xs6>
@@ -157,26 +163,27 @@
 								<v-flex xs6>
 									<v-subheader>Stade</v-subheader>
 								</v-flex>
-<v-flex>
-	<v-select
-		:items="stadiums"
-		v-model="selectedStadium" 
-		label="Sélectionner un stade"
-		item-text="name"
-		item-value="{}"
-		:autocomplete="true"
-		single-line
-		:disabled="selectedType == ''"
-	>
-	    <template slot="item" scope="data">
-	      <v-list-tile-content>
-	        <v-list-tile-title>
-	          {{ data.item.name }} <small style="color: #ccc;">{{ data.item.city_name }} - {{ data.item.country_name}}</small>
-	        </v-list-tile-title>
-	      </v-list-tile-content>
-	    </template>
-	</v-select>
-</v-flex>
+
+								<v-flex>
+									<v-select
+										:items="stadiums"
+										v-model="selectedStadium" 
+										label="Sélectionner un stade"
+										item-text="name"
+										item-value="{}"
+										:autocomplete="true"
+										single-line
+										:disabled="selectedType == ''"
+									>
+									    <template slot="item" scope="data">
+									      <v-list-tile-content>
+									        <v-list-tile-title>
+									          {{ data.item.name }} <small style="color: #ccc;">{{ data.item.city_name }} - {{ data.item.country_name}}</small>
+									        </v-list-tile-title>
+									      </v-list-tile-content>
+									    </template>
+									</v-select>
+								</v-flex>
 								<!-- <v-flex xs6>
 									<v-select
 									  :items="stadiums"
@@ -231,12 +238,109 @@
     				</v-card-text>
 				</v-form>
 			</v-card>
+
 		</v-flex>
+
+
+
 		{{ loadedActivities }}<br />
 		{{ loadedCategories }}<br />
 		{{ loadedTypes }}<br />
 		{{ loadedStadiums }}<br />
-		{{ loadedTeams }}
+		{{ loadedTeams }}<br />
+
+
+
+
+		<v-flex xs12 sm8 offset-sm2>
+			<v-card>
+				<v-form>
+					<v-card-title class="primary-title">
+						<v-card-text class="text-md-center">
+							<h3>Créer une liste d'événements à l'aide de <a href="https://football-api.com/documentation2/#!/Competitions/get_competitions" target="_blank">Football API</a></h3>
+							<p>La requête va échouer en cas d'absence ou d'invalidité de la clé privée (voir console de debogage)</p>
+						</v-card-text>
+					</v-card-title>
+					<v-container fluid>
+					    <v-layout row wrap>
+							<v-flex xs6>
+								<v-subheader class="text-xl-center">Compétition</v-subheader>
+							</v-flex>
+							<v-flex xs6 v-if="loadedCompetitions != ''">
+								<v-select
+								  :items="loadedCompetitions"
+								  v-model="selectedCompetition"
+								  label="Sélectionner une compétition"
+								  item-text="name"
+								  item-value="football_api_id"
+								  :autocomplete="true"
+								  single-line
+								></v-select>
+							</v-flex>
+							<v-flex v-else>
+								<v-progress-linear :indeterminate="true" height="2"></v-progress-linear>
+							</v-flex>
+						</v-layout>
+						<v-layout row wrap>
+							<v-flex xs6>
+								<v-subheader class="text-xl-center">Date de début</v-subheader>
+							</v-flex>
+							<v-dialog
+							  ref="startDateDialog"
+							  persistent
+							  v-model="modalStartDate"
+							  lazy
+							  full-width
+							  width="290px"
+							  :return-value.sync="date"
+							>
+							  <v-text-field
+							    slot="activator"
+							    label="Choisissez une date"
+							    v-model="competitionStartDate"
+							    prepend-icon="date_range"
+							    readonly
+							  ></v-text-field>
+							  <v-date-picker v-model="competitionStartDate" locale="fr-fr" :first-day-of-week="1" actions>
+							    <v-spacer></v-spacer>
+							    <v-btn flat color="primary" @click="modalStartDate = false">Annuler</v-btn>
+							    <v-btn flat color="primary" @click="$refs.startDateDialog.save(date)">OK</v-btn>
+							  </v-date-picker>
+							</v-dialog>
+							<v-flex xs6>
+								<v-subheader class="text-xl-center">Date de fin</v-subheader>
+							</v-flex>
+							<v-dialog
+							  ref="endDateDialog"
+							  persistent
+							  v-model="modalEndDate"
+							  lazy
+							  full-width
+							  width="290px"
+							  :return-value.sync="date"
+							>
+							  <v-text-field
+							    slot="activator"
+							    label="Choisissez une date"
+							    v-model="competitionEndDate"
+							    prepend-icon="date_range"
+							    readonly
+							  ></v-text-field>
+							  <v-date-picker v-model="competitionEndDate" actions>
+							    <v-spacer></v-spacer>
+							    <v-btn flat color="primary" @click="modalEndDate = false">Cancel</v-btn>
+							    <v-btn flat color="primary" @click="$refs.endDateDialog.save(date)">OK</v-btn>
+							  </v-date-picker>
+							</v-dialog>
+						</v-layout>
+					</v-container>
+					<v-card-text class="text-md-center">
+				  		<v-btn @click="submitRequestToFootballAPI" color="info">submit request to Football API</v-btn>
+    					<v-btn @click="">clear</v-btn>
+    				</v-card-text>
+				</v-form>
+			</v-card>
+		</v-flex>
 	</div>
 </template>
 
@@ -270,18 +374,23 @@
         		// teams1: [],
 				date: null,
 				time: null,
+				competitionStartDate: null,
+				competitionEndDate: null,
         			// menu2: false,
         		modalDate: false,
         		modalTime: false,
-		        items: [
-		          { text: 'State 1' },
-		          { text: 'State 2' },
-		          { text: 'State 3' },
-		          { text: 'State 4' },
-		          { text: 'State 5' },
-		          { text: 'State 6' },
-		          { text: 'State 7' }
-		        ],
+        		modalStartDate: false,
+        		modalEndDate: false,
+		        // items: [
+		        //   { text: 'State 1' },
+		        //   { text: 'State 2' },
+		        //   { text: 'State 3' },
+		        //   { text: 'State 4' },
+		        //   { text: 'State 5' },
+		        //   { text: 'State 6' },
+		        //   { text: 'State 7' }
+		        // ],
+		        selectedCompetition: '',
 		        links: [
 			        {
 			          text: 'Dashboard',
@@ -331,6 +440,14 @@
 		        return this.loadedTeams.filter(function (el) {
 		          return el.type[type] && el.slug != team1
 		        })
+		    },
+		    loadedCompetitions () {
+		    	// console.log(this.loadedTypes)
+		    	// return this.loadedTypes.filter(type => type.category === 'football')
+		    	let competitions = this.loadedTypes.filter(type => type.category === 'football')
+		    	competitions.push({id: 'all_competition', name: 'All competitions'})
+		    	// console.log(competitions)
+		    	return competitions
 		    }
 		},
 		methods: {
@@ -372,6 +489,16 @@
 			        _updated_at: new Date().getTime()
 				}
 				this.$store.dispatch('events/createEvent', eventData)
+			},
+			submitRequestToFootballAPI () {
+				console.log('submitRequestToFootballAPI')
+				console.log('http://api.football-api.com/2.0/matches?comp_id=' + this.selectedCompetition + '&from_date=' + this.competitionStartDate + '&to_date=' + this.competitionEndDate + '&Authorization=565ec012251f932ea4000001fa542ae9d994470e73fdb314a8a56d76')
+				this.$axios.$get('https://reqres.in/api/users?page=2')
+				.then((response) => {
+					console.log(response)
+				}).catch(error => {
+					console.log(error)
+				})
 			}
 		},
 		watch: {
