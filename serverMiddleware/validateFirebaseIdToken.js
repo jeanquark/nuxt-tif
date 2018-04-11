@@ -39,6 +39,52 @@ function getIdTokenFromRequest(req, res) {
  */
 function addDecodedIdTokenToRequest(idToken, req) {
   return admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
+    console.log('CALL TO addDecodedIdTokenToRequest METHOD');
+    
+    if (decodedIdToken.admin != true) {
+      console.log('User does not have admin privileges');
+    } else {
+      console.log('User has admin privileges');
+    }
+    // console.log('abc');
+    
+    // var uid = decodedIdToken.uid;
+    // console.log('uid: ' + uid);
+
+    // admin.auth().setCustomUserClaims(uid, {admin: true}).then(() => {
+    // // The new custom claims will propagate to the user's ID token the
+    // // next time a new one is issued.
+    //     // Tell client to refresh token on user.
+    //     res.end(JSON.stringify({
+    //       status: 'success'
+    //     });
+    // });
+    // console.log(process.env.PROJECT_ID);
+    // console.log(process.env.ADMIN_EMAILS);
+
+    admin.auth().getUserByEmail('jm.kleger@gmail.com').then((user) => {
+      // console.log(user);
+      console.log('User is verified ?: ' + user.emailVerified);
+      // Add custom claims for additional privileges.
+      // This will be picked up by the user on token refresh or next sign in on new device.
+      // return admin.auth().setCustomUserClaims(user.uid, null);
+      return admin.auth().setCustomUserClaims(user.uid, {admin: true});
+    }).catch((error) => {
+      console.log(error);
+    });
+
+    admin.auth().getUserByEmail('test3@test.com').then((user) => {
+      // console.log(user);
+      // console.log('User is verified ?: ' + user.emailVerified);
+      // Add custom claims for additional privileges.
+      // This will be picked up by the user on token refresh or next sign in on new device.
+      return admin.auth().setCustomUserClaims(user.uid, null);
+      // return admin.auth().setCustomUserClaims(user.uid, {admin: true});
+    }).catch((error) => {
+      console.log(error);
+    });
+
+
     console.log('ID Token correctly decoded', decodedIdToken);
     req.user = decodedIdToken;
   }).catch(error => {

@@ -24,8 +24,8 @@
                         <label for="password">{{ $t('password') }}:</label>
                         <input type="password" class="form-control" id="passwrod" v-bind:placeholder="$t('password')" v-model="password">
                     </div>
-                    <button type="submit" class="btn btn-primary" @click.prevent="signUserIn">Login</button>&nbsp;&nbsp;
-                    <button type="submit" class="btn btn-success" @click.prevent="signUserUp">{{ $t('register') }}</button>
+                    <button type="submit" class="btn btn-primary" :disabled="loading" :loading="loading" @click.prevent="signUserIn">Login <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>&nbsp;&nbsp;
+                    <button type="submit" class="btn btn-success" :disabled="registerLoading" :loading="registerLoading" @click.prevent="signUserUp">{{ $t('register') }} <i v-bind:class="{'fa fa-spinner fa-spin' : registerLoading}"></i></button>
                 </form>
                 <br />
                 <hr>
@@ -52,11 +52,18 @@
         },
         data () {
             return {
+                // loading: true,
                 email: '',
                 password: ''
             }
         },
         computed: {
+            loading () {
+                return this.$store.getters['loading']
+            },
+            registerLoading () {
+                return this.$store.getters['loading']
+            },
             error() {
                 // return this.$store.getters.error
                 return this.$store.getters['error']
@@ -67,7 +74,7 @@
                 window.location.reload()
             },
             async googleSignUpPopup () {
-                await this.$store.dispatch('signInWithGooglePopup')
+                await this.$store.dispatch('users/signInWithGooglePopup')
                 if (this.$i18n.locale != 'en') {
                     this.$router.replace('/' + this.$i18n.locale + '/admin')
                 } else {
@@ -75,7 +82,7 @@
                 }
             },
             async facebookSignUpPopup () {
-                await this.$store.dispatch('signInWithFacebookPopup')
+                await this.$store.dispatch('users/signInWithFacebookPopup')
                 if (this.$i18n.locale != 'en') {
                     this.$router.replace('/' + this.$i18n.locale + '/admin')
                 } else {
@@ -84,6 +91,7 @@
             },
             async signUserIn () {
                 console.log('signUserIn')
+                // this.$store.dispatch('setLoading', true);
                 // await this.$store.dispatch('signUserIn', {
                 await this.$store.dispatch('users/signUserIn', {
                     email: this.email,

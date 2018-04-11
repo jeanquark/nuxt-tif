@@ -88,5 +88,6 @@ module.exports = {
 	"auth/weak-password": "Le mot de passe doit être d'au moins 6 caractères.",
 	"auth/invalid-email": "L'adresse e-mail n'est pas formatée correctement.",
 	"auth/wrong-password" : "Le mot de passe est invalide ou l'utilisateur n'a pas de mot de passe.",
-	"auth/user-not-found" : "Nous n'avons pas trouvé d'utilisateur correspondant. L'utilisateur a peu être été supprimé."
+	"auth/user-not-found" : "Nous n'avons pas trouvé d'utilisateur correspondant. L'utilisateur a peut-être été supprimé.",
+	"auth/network-request-failed": "La requête au réseau a échoué."
 }

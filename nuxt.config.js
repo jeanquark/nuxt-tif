@@ -36,6 +36,7 @@ module.exports = {
   },
   modules: [
     // '@nuxtjs/pwa'
+    '@nuxtjs/axios',
     '@nuxtjs/toast',
     ['nuxt-i18n', {
       locales: [
@@ -125,15 +126,18 @@ module.exports = {
     {src: '~/plugins/web-font-loader.js', ssr: false }
   ],
   serverMiddleware: [
-      '~/serverMiddleware/validateFirebaseIdToken'
+      '~/serverMiddleware/validateFirebaseIdToken',
+      // { path: '/api', handler: '~/serverMiddleware/api' },
+      { path: '/setCustomClaims', handler: '~/serverMiddleware/setCustomClaims'},
+      // '~/serverMiddleware/api.js',
   ],
   // css: [
   //   { src: '~/assets/css/main.css', lang: 'css'},
   //   { src: '~/assets/css/app.styl', lang: 'styl'}
   // ]
   toast: {
-    duration: 5000,
-    className: ['title', 'p5'],
+    duration: 8000,
+    className: ['title', 'p5', 'body-1'],
     action: {
       icon : 'close',
       class: 'white--text',

@@ -66,5 +66,6 @@ module.exports = {
 	"auth/weak-password" : "Password should be at least 6 characters.",
 	"auth/invalid-email" : "The email address is badly formatted.",
 	"auth/wrong-password" : "The password is invalid or the user does not have a password.",
-	"auth/user-not-found" : "There is no user record corresponding to this identifier. The user may have been deleted."
+	"auth/user-not-found" : "There is no user record corresponding to this identifier. The user may have been deleted.",
+	"auth/network-request-failed": "Network request failed."
 }

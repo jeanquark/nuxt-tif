@@ -30,5 +30,6 @@ module.exports = {
 	"auth/weak-password": "Das Passwort sollte mindestens 6 Zeichen lang sein.",
 	"auth/invalid-email": "Die E-Mail-Adresse ist falsch formatiert.",
 	"auth/wrong-password" : "Das Passwort ist ungültig oder der Benutzer hat kein Passwort.",
-	"auth/user-not-found" : "Zu dieser Kennung existiert kein Benutzerdatensatz. Der Benutzer wurde möglicherweise gelöscht."
+	"auth/user-not-found" : "Zu dieser Kennung existiert kein Benutzerdatensatz. Der Benutzer wurde möglicherweise gelöscht.",
+	"auth/network-request-failed": "Network request failed."
 }

@@ -104,7 +104,8 @@
       			{ src: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' }
 		    ],
 		    link: [
-      			{ rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' }
+      			{ rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' },
+      			{ rel: 'stylesheet', href: 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' }
 		    ]
 		},
 		data () {
@@ -142,7 +143,7 @@
 		// },
 		computed: {
             user() {
-            	return this.$store.getters['users/activeUser']
+            	return this.$store.getters['users/loadedUser']
             },
             lang() {
 				return this.$i18n.locale
@@ -155,7 +156,7 @@
 		       //  	this.$router.push('/')
 		      	// })
 		      	this.$store.dispatch('users/signOut').then(() => {
-		        	alert('Vous allez effacer votre session!')
+		        	// alert('Vous allez effacer votre session!')
 		        	this.$router.push('/')
 		      	})
 		    }

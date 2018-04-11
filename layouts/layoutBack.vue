@@ -101,13 +101,14 @@
           class="hidden-sm-and-down"
         ></v-text-field>
         <v-spacer></v-spacer>
-        {{ user.email }}
+        <span v-if="user">{{ user.email }}</span>
         <v-btn icon>
           <v-icon>apps</v-icon>
         </v-btn>
         <v-btn icon>
           <v-icon>notifications</v-icon>
         </v-btn>
+        <v-btn color="error" @click="logout">Logout</v-btn>
         <v-btn icon large>
           <v-avatar size="32px" tile>
             <img
@@ -268,12 +269,22 @@
     computed: {
       user () {
         // return this.$store.getters.activeUser
-        return this.$store.getters['users/activeUser']
+        return this.$store.getters['users/loadedUser']
       }
     },
     methods: {
       clickTile(item) {
         console.log(item)
+      },
+      logout () {
+        this.$store.dispatch('users/signOut').then(() => {
+          // alert('Vous allez effacer votre session!')
+          this.$router.push('/')
+
+          // setTimeout(function() {
+            
+          // }, 2000)
+        })
       }
     }
   }

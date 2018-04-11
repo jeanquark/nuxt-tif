@@ -16,8 +16,10 @@
     "hdeploy": "git push heroku ssr:master"
   },
   "dependencies": {
+    "@nuxtjs/axios": "^5.3.1",
     "@nuxtjs/pwa": "^1.0.2",
     "@nuxtjs/toast": "^3.0.0",
+    "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
     "dotenv": "^5.0.1",
     "firebase": "4.5.1",
