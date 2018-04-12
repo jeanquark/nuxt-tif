@@ -67,7 +67,7 @@
                 </v-list-tile-content>
               </v-list-tile>
             </v-list-group>
-            <v-list-tile v-else @click="" :key="item.text" :to="item.to">
+            <v-list-tile v-else @click="" :key="item.text" :to="item.to" :exact="item.exact">
               <v-list-tile-action>
                 <v-icon>{{ item.icon }}</v-icon>
               </v-list-tile-action>
@@ -91,7 +91,8 @@
         <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
           <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
           <!-- <span class="hidden-sm-and-down" @click="backToSite">Retour au site</span> -->
-          <v-btn @click="backToSite">Retour au site</v-btn>
+          <v-btn color="success" class="hidden-sm-and-down" @click="backToSite">Retour au site</v-btn>
+          <v-icon class="hidden-md-and-up" @click="backToSite">arrow_back</v-icon>
           <!-- <nuxt-link class="hidden-sm-and-down" to="/" style="color: #fff;">Retour au site</nuxt-link> -->
         </v-toolbar-title>
         <v-text-field
@@ -122,7 +123,7 @@
       <v-content>
         <nuxt/>
       </v-content>
-      <v-btn
+      <!-- <v-btn
         fab
         bottom
         right
@@ -195,7 +196,7 @@
             <v-btn flat @click="dialog = false">Save</v-btn>
           </v-card-actions>
         </v-card>
-      </v-dialog>
+      </v-dialog> -->
     </v-app>
   </div>
 </template>
@@ -211,6 +212,7 @@
       ],
       link: [
         { rel: 'stylesheet', href: 'https://unpkg.com/vuetify/dist/vuetify.min.css' },
+        { rel: 'stylesheet', href: 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' }
       ]
     },
     middleware: ['auth-check'],
@@ -230,37 +232,38 @@
       drawer: null,
       loadingPage: true,
       items: [
-        { icon: 'contacts', text: 'Users', to: '/admin/users' },
-        { icon: 'event', text: 'Events', to: '/admin/events' },
-        { icon: 'history', text: 'Placeholder 1', to: '' },
-        { icon: 'content_copy', text: 'Placeholder 2', to: '' },
-        {
-          icon: 'keyboard_arrow_up',
-          'icon-alt': 'keyboard_arrow_down',
-          text: 'Labels',
-          model: true,
-          children: [
-            { icon: 'add', text: 'Create label', to: '' }
-          ]
-        },
+        { icon: 'dashboard', text: 'Dashboard', to: '/admin', exact: true },
+        { icon: 'contacts', text: 'Users', to: '/admin/users', exact: false },
+        { icon: 'event', text: 'Events', to: '/admin/events', exact: false },
+        { icon: 'history', text: 'Placeholder 1', to: '', exact: false },
+        { icon: 'content_copy', text: 'Placeholder 2', to: '', exact: false },
         {
           icon: 'keyboard_arrow_up',
           'icon-alt': 'keyboard_arrow_down',
           text: 'Placeholder 3',
           model: false,
           children: [
-            { text: 'Import', to: '' },
-            { text: 'Export', to: '' },
-            { text: 'Print', to: '' },
-            { text: 'Undo changes', to: '' },
-            { text: 'Other contacts', to: '' }
+            { text: 'Placeholder 3.1', to: '', exact: false }
           ]
         },
-        { icon: 'settings', text: 'Placeholder 4', to: '' },
-        { icon: 'chat_bubble', text: 'Placeholder 5', to: '' },
-        { icon: 'help', text: 'Placeholder 6', to: '' },
-        { icon: 'phonelink', text: 'Placeholder 7', to: '' },
-        { icon: 'keyboard', text: 'Placeholder 8', to: '' }
+        {
+          icon: 'keyboard_arrow_up',
+          'icon-alt': 'keyboard_arrow_down',
+          text: 'Placeholder 4',
+          model: false,
+          children: [
+            { text: 'Placeholder 4.1', to: '', exact: false },
+            { text: 'Placeholder 4.2', to: '', exact: false },
+            { text: 'Placeholder 4.3', to: '', exact: false },
+            { text: 'Placeholder 4.4', to: '', exact: false },
+            { text: 'Placeholder 4.5', to: '', exact: false }
+          ]
+        },
+        { icon: 'settings', text: 'Placeholder 5', to: '', exact: false },
+        { icon: 'chat_bubble', text: 'Placeholder 6', to: '', exact: false },
+        { icon: 'help', text: 'Placeholder 7', to: '', exact: false },
+        { icon: 'phonelink', text: 'Placeholder 8', to: '', exact: false },
+        { icon: 'keyboard', text: 'Placeholder 9', to: '', exact: false }
       ]
     }),
     props: {
@@ -278,10 +281,10 @@
         console.log(item)
       },
       backToSite () {
-        this.$store.commit('setLoadingPage', false, { root: true })
-        let timer = setTimeout(function() {
-          self.$store.commit('setLoadingPage', true, { root: true })
-        }, 2000)
+        // this.$store.commit('setLoadingPage', false, { root: true })
+        // let timer = setTimeout(function() {
+        //   self.$store.commit('setLoadingPage', true, { root: true })
+        // }, 2000)
         this.$router.push('/')
       },
       logout () {

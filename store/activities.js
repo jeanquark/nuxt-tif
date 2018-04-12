@@ -12,7 +12,6 @@ export const mutations = {
 
 export const actions = {
 	loadedActivities ({commit}) {
-
     	firebase.database().ref('/activities/').on('value', function (snapshot) {
 	      	// console.log(snapshot.val())
 	      	const activitiesArray = []

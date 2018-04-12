@@ -13,10 +13,10 @@
 		<v-flex xs12 sm8 offset-sm2>
 			<br /><br />
 			<h1 class="text-md-center">Create Event</h1>
-			selectedActivity: {{ this.selectedActivity }}<br />
+			<!-- selectedActivity: {{ this.selectedActivity }}<br />
 			selectedCategory: {{ this.selectedCategory }}<br />
 			selectedType: {{ this.selectedType }}<br />
-			selectedCompetition: {{ this.selectedCompetition }}
+			selectedCompetition: {{ this.selectedCompetition }} -->
 			<br /><br />
 			
 
@@ -87,6 +87,7 @@
 								  single-line
 								  :disabled="selectedActivity.slug == ''"
 								></v-select>
+								<v-subheader style="color: green; padding: 0px;" v-if="selectedCategory.slug === 'football'"><i class="fa fa-exclamation-triangle"></i>&nbsp;Possibilité d'utiliser Football API &nbsp;<i class="fa fa-arrow-down"></i></v-subheader>
 							</v-flex>
 							<v-flex xs6>
 								<v-subheader>Type</v-subheader>
@@ -124,7 +125,7 @@
 								    prepend-icon="date_range"
 								    readonly
 								  ></v-text-field>
-								  <v-date-picker v-model="date" actions>
+								  <v-date-picker locale="fr-fr" :first-day-of-week="1" v-model="date" actions>
 								    <v-spacer></v-spacer>
 								    <v-btn flat color="primary" @click="modalDate = false">Cancel</v-btn>
 								    <v-btn flat color="primary" @click="$refs.dateDialog.save(date)">OK</v-btn>
@@ -146,7 +147,7 @@
 								>
 								  <v-text-field
 								    slot="activator"
-								    label="Choisissez une heure"
+								    label="Choisissez une heure (UTC)"
 								    v-model="time"
 								    prepend-icon="access_time"
 								    readonly
@@ -157,6 +158,7 @@
 								    <v-btn flat color="primary" @click="$refs.timeDialog.save(time)">OK</v-btn>
 								  </v-time-picker>
 								</v-dialog>
+								<!-- <v-subheader style="margin-top: -30px; margin-left: 20px; font-weight: normal;"><i class="fa fa-exclamation-triangle"></i>&nbsp;L'heure à inscrire est l'heure UTC &nbsp;</v-subheader> -->
 							</v-flex>
 							<v-divider></v-divider>
 							<v-layout row wrap v-if="selectedCategory.slug == 'football'">
@@ -242,23 +244,25 @@
 		</v-flex>
 
 
-
-		{{ loadedActivities }}<br />
+		<br />
+		<br />
+		<!-- {{ loadedActivities }}<br />
 		{{ loadedCategories }}<br />
 		{{ loadedTypes }}<br />
 		{{ loadedStadiums }}<br />
-		{{ loadedTeams }}<br />
+		{{ loadedTeams }}<br /> -->
+		Formatted date: {{ formattedDate('2018-04-12', '20:45') }}<br />
 
 
 
 
-		<v-flex xs12 sm8 offset-sm2>
+		<v-flex xs12 sm8 offset-sm2 v-if="selectedCategory.slug === 'football'">
 			<v-card>
 				<v-form>
 					<v-card-title class="primary-title">
 						<v-card-text class="text-md-center">
 							<h3>Créer une liste d'événements à l'aide de <a href="https://football-api.com/documentation2/#!/Competitions/get_competitions" target="_blank">Football API</a></h3>
-							<p>La requête va échouer en cas d'absence ou d'invalidité de la clé privée (voir console de debogage)</p>
+							<p>La requête peut échouer en cas d'absence ou d'invalidité de la clé privée (voir console de debogage)</p>
 						</v-card-text>
 					</v-card-title>
 					<v-container fluid>
@@ -301,7 +305,7 @@
 							    prepend-icon="date_range"
 							    readonly
 							  ></v-text-field>
-							  <v-date-picker v-model="competitionStartDate" locale="fr-fr" :first-day-of-week="1" actions>
+							  <v-date-picker locale="fr-fr" :first-day-of-week="1" v-model="competitionStartDate" actions>
 							    <v-spacer></v-spacer>
 							    <v-btn flat color="primary" @click="modalStartDate = false">Annuler</v-btn>
 							    <v-btn flat color="primary" @click="$refs.startDateDialog.save(date)">OK</v-btn>
@@ -326,7 +330,7 @@
 							    prepend-icon="date_range"
 							    readonly
 							  ></v-text-field>
-							  <v-date-picker v-model="competitionEndDate" actions>
+							  <v-date-picker locale="fr-fr" :first-day-of-week="1" v-model="competitionEndDate" actions>
 							    <v-spacer></v-spacer>
 							    <v-btn flat color="primary" @click="modalEndDate = false">Cancel</v-btn>
 							    <v-btn flat color="primary" @click="$refs.endDateDialog.save(date)">OK</v-btn>
@@ -338,6 +342,12 @@
 				  		<v-btn @click="submitRequestToFootballAPI" color="info">submit request to Football API</v-btn>
     					<v-btn @click="">clear</v-btn>
     				</v-card-text>
+    				<v-card-actions>
+    					<v-card-text class="text-md-center">
+    						<h3>Voici les résultats de la requête:</h3>
+    						{{ footballAPIRequestResult }}
+    					</v-card-text>
+    				</v-card-actions>
 				</v-form>
 			</v-card>
 		</v-flex>
@@ -345,6 +355,8 @@
 </template>
 
 <script>
+	import moment from 'moment'
+  	// import moment from '~/plugins/vue-moment'
 	export default {
 		layout: 'layoutBack',
 		created () {
@@ -406,7 +418,8 @@
 			          text: 'Create',
 			          disabled: true
 			        }
-			    ]
+			    ],
+			    footballAPIRequestResult: ''
 			}
 		},
 		computed: {
@@ -474,15 +487,17 @@
 			            slug: this.selectedTeam2.slug,// = 'undefined' ? null : this.selectedTeam2.slug,
 			            name: this.selectedTeam2.name,// = 'undefined' ? null : this.selectedTeam2.name
 			        },
-			        name: this.selectedTeam1.name + ' vs ' + this.selectedTeam2.name,
+			        name_pretty: this.selectedTeam1.name + ' vs ' + this.selectedTeam2.name,
+			        name_unique: this.selectedTeam1.football_api_id + '_vs_' + this.selectedTeam2.football_api_id + '_' + this.date,
 			        location: {
-			            name: this.selectedStadium.name,// = 'undefined' ? null : this.selectedStadium,
+			            venue: this.selectedStadium.name,// = 'undefined' ? null : this.selectedStadium,
 			            city: this.selectedStadium.city_name,// = 'undefined' ? null : this.selectedStadium
 			            country: this.selectedStadium.country_name,
 			            timezone: this.selectedStadium.timezone
 			        },
-			        formatted_date: this.date,
-			        time: this.time,
+			        // date: this.formattedDate(this.date, this.time),
+			        // time: this.time,
+			        date2: this.date,
 			        // endDate: this.endDate,
 			        _created_at: new Date().getTime(),
 			        // _created_by: document.getElementsByName('username')[0].value,
@@ -490,15 +505,85 @@
 				}
 				this.$store.dispatch('events/createEvent', eventData)
 			},
+			formattedDate (date, time) {
+		    	// if (this.date && this.time) {
+			    	let completeDate = date + ' ' + time
+			    	let formattedDate = parseInt(moment(completeDate).format('x')/1000)
+			    	console.log(formattedDate)
+			    	return formattedDate
+			    // }
+		    },
 			submitRequestToFootballAPI () {
 				console.log('submitRequestToFootballAPI')
 				console.log('http://api.football-api.com/2.0/matches?comp_id=' + this.selectedCompetition + '&from_date=' + this.competitionStartDate + '&to_date=' + this.competitionEndDate + '&Authorization=565ec012251f932ea4000001fa542ae9d994470e73fdb314a8a56d76')
-				this.$axios.$get('https://reqres.in/api/users?page=2')
-				.then((response) => {
-					console.log(response)
-				}).catch(error => {
-					console.log(error)
+				let abc = this.formattedDate('2018-04-12', '20:45')
+				console.log(abc)
+				// Get local data that micmic football api response
+				this.$axios.$get('/football_api_sample_data.json').then((response) => {
+					// console.log(response)
+		            this.footballAPIRequestResult = response
+		            
+		            const eventsArray = []
+					response.forEach((event) => {
+						let date_as_timestamp = this.formattedDate(event.formatted_date, event.time)
+						// console.log(abc)
+						// console.log(event)
+						let eventData = {
+			                id: parseInt(event.id),
+			                comp_id: event.comp_id,
+			                // date: event.formatted_date,
+			                date: date_as_timestamp,
+			                // time: event.time,
+			                localteam_id: event.localteam_id,
+			                localteam_name: event.localteam_name,
+			                visitorteam_id: event.visitorteam_id,
+			                visitorteam_name: event.visitorteam_name,
+			                venue_id: event.venue_id,
+			                venue: event.venue,
+			                venue_city: event.venue_city,
+			                week: event.week,
+			                name_pretty: event.localteam_name + ' vs ' + event.visitorteam_name,
+			                name_unique: event.localteam_id + '_vs_' + event.visitorteam_id + '_' + date_as_timestamp   
+			            }
+			            eventsArray.push(eventData)
+		            })
+		            console.log(eventsArray)
 				})
+
+
+
+				// this.$axios.$get('https://reqres.in/api/users?page=2').then((response) => {
+				// 	console.log(response)
+				// 	date2 = formattedDate(event.formatted_date, event.time)
+				// 	response.data.forEach((event) => {
+		  //             this.footballAPIRequestResult = response.data;
+		  //             let eventData = {
+		  //               id: parseInt(event.id),
+		  //               comp_id: event.comp_id,
+		  //               // date: event.formatted_date,
+		  //               date: date2,
+		  //               time: event.time,
+		  //               localteam_id: event.localteam_id,
+		  //               localteam_name: event.localteam_name,
+		  //               visitorteam_id: event.visitorteam_id,
+		  //               visitorteam_name: event.visitorteam_name,
+		  //               venue_id: event.venue_id,
+		  //               venue: event.venue,
+		  //               venue_city: event.venue_city,
+		  //               week: event.week,
+		  //               name_pretty: event.localteam_name + ' vs ' + event.visitorteam_name,
+		  //               name_unique: event.localteam_id + '_vs_' + event.visitorteam_id + '_' + date2v   
+		  //             }
+		  //             console.log(eventData)
+		  //             let updates = {}
+		  //             updates['/events2/' + eventData.id] = eventData
+		  //             this.loading = false
+		  //             // toastr.success('Evénement créé avec succès!', 'Succès')
+		  //             return firebase.database().ref().update(updates)
+		  //           })
+				// }).catch(error => {
+				// 	console.log(error)
+				// })
 			}
 		},
 		watch: {

@@ -126,6 +126,8 @@ module.exports = {
     {src: '~/plugins/web-font-loader.js', ssr: false },
     // {src: '~/plugins/vuex-loading.js', ssr: true }
     // {src: '~/plugins/vuex-loading.js' },
+    {src: '~/plugins/vue-moment', ssr: false },
+    {src: '~plugins/filters.js', ssr: false },
     {src: '~/plugins/vuetify.js', ssr: true },
   ],
   serverMiddleware: [

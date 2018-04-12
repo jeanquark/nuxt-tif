@@ -26,6 +26,7 @@
     "firebase-admin": "^5.4.2",
     "nuxt": "^1.0.0-rc11",
     "nuxt-i18n": "^2.9.1",
+    "vue-moment": "^3.2.0",
     "vuetify": "^1.0.11",
     "vuex-loading": "^0.2.6",
     "webfontloader": "^1.6.28",
