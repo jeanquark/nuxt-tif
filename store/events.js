@@ -21,7 +21,7 @@ export const mutations = {
 export const actions = {
 	loadedEvents ({commit}) {
     	try {
-    		firebase.database().ref('/events/').on('value', function (snapshot) {
+    		firebase.database().ref('/events_new/').on('value', function (snapshot) {
 		      	// console.log(snapshot.val())
 		      	const eventsArray = []
 		      	for (const key in snapshot.val()) {
@@ -38,7 +38,7 @@ export const actions = {
   		// console.log('createEvent')
   		try {
   			console.log(payload)
-			const newEventKey = firebase.database().ref().child('/events/').push().key
+			const newEventKey = firebase.database().ref().child('/events_new/').push().key
 			let updates = {}
 			updates['/events/' + newEventKey] = payload
 			firebase.database().ref().update(updates)

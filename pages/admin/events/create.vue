@@ -251,7 +251,7 @@
 		{{ loadedTypes }}<br />
 		{{ loadedStadiums }}<br />
 		{{ loadedTeams }}<br /> -->
-		Formatted date: {{ formattedDate('2018-04-12', '20:45') }}<br />
+		Formatted date: {{ formattedDate('12.01.2018', '20:45') }}<br />
 
 
 
@@ -357,6 +357,7 @@
 <script>
 	import moment from 'moment'
   	// import moment from '~/plugins/vue-moment'
+  	import firebase from 'firebase'
 	export default {
 		layout: 'layoutBack',
 		created () {
@@ -369,8 +370,8 @@
     		this.$store.dispatch('stadiums/loadedStadiums')
 			this.$store.dispatch('teams/loadedTeams')
 			// }, 3000)
-			// return this.$store.dispatch('stadiums/loadedStadiums')
-			
+			this.$store.dispatch('events/loadedEvents')
+
 		},
 		data () {
 			return {
@@ -438,11 +439,14 @@
 		    loadedTeams () {
 		    	return this.$store.getters['teams/loadedTeams']
 		    },
+		    loadedEvents () {
+		    	return this.$store.getters['events/loadedEvents']
+		    },
 		    teams1 () {
 		    	let type = this.selectedType.slug
-		    	console.log(type)
+		    	// console.log(type)
 		    	let team2 = this.selectedTeam2.slug
-		    	console.log(team2)
+		    	// console.log(team2)
 		        return this.loadedTeams.filter(function (el) {
 		          return el.type[type] && el.slug != team2
 		        })
@@ -506,48 +510,128 @@
 				this.$store.dispatch('events/createEvent', eventData)
 			},
 			formattedDate (date, time) {
-		    	// if (this.date && this.time) {
-			    	let completeDate = date + ' ' + time
-			    	let formattedDate = parseInt(moment(completeDate).format('x')/1000)
-			    	console.log(formattedDate)
-			    	return formattedDate
-			    // }
+		    	// Takes a string date with format DD.MM.YYYY and first transform it to YYYY-MM-DD and then to timestamp
+	    		const [day, month, year] = date.split(".")
+				const reOrderedDate = year + '-' + month + '-' + day
+		    	const completeDate = reOrderedDate + ' ' + time
+		    	const formattedDate = parseInt(moment(completeDate).format('x')/1000)
+		    	return formattedDate
 		    },
 			submitRequestToFootballAPI () {
 				console.log('submitRequestToFootballAPI')
-				console.log('http://api.football-api.com/2.0/matches?comp_id=' + this.selectedCompetition + '&from_date=' + this.competitionStartDate + '&to_date=' + this.competitionEndDate + '&Authorization=565ec012251f932ea4000001fa542ae9d994470e73fdb314a8a56d76')
-				let abc = this.formattedDate('2018-04-12', '20:45')
-				console.log(abc)
+				// console.log('http://api.football-api.com/2.0/matches?comp_id=' + this.selectedCompetition + '&from_date=' + this.competitionStartDate + '&to_date=' + this.competitionEndDate + '&Authorization=565ec012251f932ea4000001fa542ae9d994470e73fdb314a8a56d76')
+				// let abc = this.formattedDate('2018-04-12', '20:45')
+				// console.log(abc)
+
+				// First create an array of all unique_name properties
+				// const abc = this.loadedEvents
+				// console.log(abc)
+				const eventsArray= []
+				this.loadedEvents.forEach((event) => {
+					// console.log(event)
+					eventsArray.push(event.name_unique)
+				})
+				// console.log(eventsArray)
+				// console.log(eventsArray.includes('9158_vs_9249_on_1523093400'))
+				// console.log(eventsArray.includes('abc'))
+				// return
+
 				// Get local data that micmic football api response
-				this.$axios.$get('/football_api_sample_data.json').then((response) => {
+				this.$axios.$get('/football_api_sample_data_get_matches.json').then((response) => {
 					// console.log(response)
 		            this.footballAPIRequestResult = response
 		            
-		            const eventsArray = []
+		            console.log(eventsArray)
+		            // const eventsArray = []
+
 					response.forEach((event) => {
-						let date_as_timestamp = this.formattedDate(event.formatted_date, event.time)
+						const date_as_timestamp = this.formattedDate(event.formatted_date, event.time)
+						const name_unique = event.localteam_id + '_vs_' + event.visitorteam_id + '_on_' + date_as_timestamp
+						const name_pretty = event.localteam_name + ' vs ' + event.visitorteam_name
 						// console.log(abc)
 						// console.log(event)
-						let eventData = {
-			                id: parseInt(event.id),
-			                comp_id: event.comp_id,
-			                // date: event.formatted_date,
-			                date: date_as_timestamp,
-			                // time: event.time,
-			                localteam_id: event.localteam_id,
-			                localteam_name: event.localteam_name,
-			                visitorteam_id: event.visitorteam_id,
-			                visitorteam_name: event.visitorteam_name,
-			                venue_id: event.venue_id,
-			                venue: event.venue,
-			                venue_city: event.venue_city,
-			                week: event.week,
-			                name_pretty: event.localteam_name + ' vs ' + event.visitorteam_name,
-			                name_unique: event.localteam_id + '_vs_' + event.visitorteam_id + '_' + date_as_timestamp   
-			            }
-			            eventsArray.push(eventData)
+						// Only add to database if event does not already exists
+						// console.log(event)
+						// console.log(eventsArray)
+						// console.log(event.name_unique)
+						if (!eventsArray.includes(name_unique)) {
+							const newPostKey = firebase.database().ref().child('events_new').push().key
+						
+							let eventData = {
+				                id: newPostKey,
+				                football_api_id: event.id,
+				                competition_id: event.comp_id,
+				                date: date_as_timestamp,
+				                localteam_id: event.localteam_id,
+				                localteam_name: event.localteam_name,
+				                localteam_score: event.localteam_score,
+				                visitorteam_id: event.visitorteam_id,
+				                visitorteam_name: event.visitorteam_name,
+				                visitorteam_score: event.visitorteam_score,
+				                venue_id: event.venue_id,
+				                venue: event.venue,
+				                venue_city: event.venue_city,
+				                week: event.week,
+				                status: event.status,
+				                half_time_score: event.ht_score,
+				                full_time_score: event.ft_score,
+				                name_pretty: name_pretty,
+				                name_unique: name_unique
+				            }
+
+				            let updates = {}
+			            	updates['/events_new/' + eventData.id] = eventData
+			            	firebase.database().ref().update(updates).then(() => {
+			            		console.log('success!')
+			            	}).catch((error) => {
+			            		console.log('error')
+			            		console.log(error.message)
+			            	})
+						} else {
+							console.log('This event already exists in database!')
+						}
+
+			            // eventsArray.push(eventData)
+			            // console.log(eventData)
+			   //          firebase.database().ref('/events_new/' + eventData.id).set({
+						//     id: newPostKey,
+			   //              football_api_id: event.id,
+			   //              competition_id: event.comp_id,
+			   //              // date: event.formatted_date,
+			   //              date: date_as_timestamp,
+			   //              // time: event.time,
+			   //              localteam_id: event.localteam_id,
+			   //              localteam_name: event.localteam_name,
+			   //              localteam_score: event.localteam_score,
+			   //              visitorteam_id: event.visitorteam_id,
+			   //              visitorteam_name: event.visitorteam_name,
+			   //              visitorteam_score: event.visitorteam_score,
+			   //              venue_id: event.venue_id,
+			   //              venue: event.venue,
+			   //              venue_city: event.venue_city,
+			   //              week: event.week,
+			   //              status: event.status,
+			   //              half_time_score: event.ht_score,
+			   //              full_time_score: event.ft_score,
+			   //              name_pretty: event.localteam_name + ' vs ' + event.visitorteam_name,
+			   //              name_unique: event.localteam_id + '_vs_' + event.visitorteam_id + '_on_' + date_as_timestamp   
+						// }).then(() => {
+						// 	console.log('success!')
+						// }).catch((error) => {
+						// 	console.log('error!')
+						// 	console.log(error.message)
+						// })
+			            // let updates = {}
+		            	// updates['/events_new/' + eventData.id] = eventData
+		            	// firebase.database().ref().update(updates).then(() => {
+		            	// 	console.log('success!')
+		            	// }).catch((error) => {
+		            	// 	console.log('error')
+		            	// 	console.log(error.message)
+		            	// })
 		            })
 		            console.log(eventsArray)
+		            
 				})
 
 
@@ -588,7 +672,7 @@
 		},
 		watch: {
 			selectedActivity: function () {
-		        console.log('Watch selectedActivity')
+		        // console.log('Watch selectedActivity')
 		        this.categories = []
         		this.types = []
 		        this.selectedCategory = ''
@@ -602,7 +686,7 @@
 		        }
 		    },
 		    selectedCategory: function () {
-		    	console.log('Watch selectedCategory')
+		    	// console.log('Watch selectedCategory')
 		        if (this.selectedCategory.slug != '') {
 		          const category = this.selectedCategory.slug
 		          this.types = this.loadedTypes.filter(function (el) {

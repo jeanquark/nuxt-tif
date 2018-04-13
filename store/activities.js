@@ -21,7 +21,7 @@ export const actions = {
 	      	// console.log(postsArray)
 	      	setTimeout(function() {
 	      		commit('setActivities', activitiesArray)
-	      	}, 3000)
+	      	}, 200)
 	    })
   	},
 }

@@ -35,7 +35,7 @@ export const actions = {
         //     // }, 3000)
         // })
         try {
-            firebase.database().ref('/tasks/').on('value', function (snapshot) {
+            firebase.database().ref('/tasks/').once('value').then(function (snapshot) {
                 console.log(snapshot.val())
                 const tasksArray = []
                 for (const key in snapshot.val()) {
