@@ -31,6 +31,8 @@ module.exports = {
     vendor: [
       'vuetify',
       '~/plugins/firebase-client-init.js',
+      'vue-notifications',
+      // 'vue-nouislider'
       // 'vuex-loading'
     ],
     extractCSS: true,
@@ -129,6 +131,9 @@ module.exports = {
     {src: '~/plugins/vue-moment', ssr: false },
     {src: '~plugins/filters.js', ssr: false },
     {src: '~/plugins/vuetify.js', ssr: true },
+    {src: '~/plugins/vue-notifications.js', ssr: false },
+    // {src: '~/plugins/vue-nouislider.js', ssr: false }
+    {src: '~/plugins/vue-sweetalert2.js', ssr: false}
   ],
   serverMiddleware: [
       '~/serverMiddleware/validateFirebaseIdToken',

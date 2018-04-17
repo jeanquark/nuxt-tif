@@ -251,7 +251,7 @@
 		{{ loadedTypes }}<br />
 		{{ loadedStadiums }}<br />
 		{{ loadedTeams }}<br /> -->
-		Formatted date: {{ formattedDate('12.01.2018', '20:45') }}<br />
+		<!-- Formatted date: {{ formattedDate('12.01.2018', '20:45') }}<br /> -->
 
 
 
@@ -358,6 +358,7 @@
 	import moment from 'moment'
   	// import moment from '~/plugins/vue-moment'
   	import firebase from 'firebase'
+  	import VueNotifications from 'vue-notifications'
 	export default {
 		layout: 'layoutBack',
 		created () {
@@ -561,6 +562,18 @@
 				                id: newPostKey,
 				                football_api_id: event.id,
 				                competition_id: event.comp_id,
+				                activity: {
+						            slug: this.selectedActivity.slug,
+						            name: this.selectedActivity.name
+						        },
+								category: {
+									slug: this.selectedCategory.slug,
+									name: this.selectedCategory.name
+								},
+						        type: {
+						            slug: this.selectedType.slug,
+						            name: this.selectedType.name
+						        },
 				                date: date_as_timestamp,
 				                localteam_id: event.localteam_id,
 				                localteam_name: event.localteam_name,
@@ -589,6 +602,9 @@
 			            	})
 						} else {
 							console.log('This event already exists in database!')
+							// this.showSuccessMsg()
+							this.showWarnMsg({message: 'Event ' + name_pretty + ' already exists in database!'})
+							// VueNotifications.types.info({message: 'Event already exists in database!'})
 						}
 
 			            // eventsArray.push(eventData)
@@ -702,6 +718,11 @@
 		            return el.events[type]
 		          })
 		        }
+		    }
+		},
+		notifications: {
+		    showWarnMsg: {
+				type: VueNotifications.types.warn
 		    }
 		}
 	}

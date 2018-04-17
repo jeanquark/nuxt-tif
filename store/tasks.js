@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import Noty from 'noty'
 
 export const state = () => ({
     loadedTasks: []
@@ -39,7 +40,7 @@ export const actions = {
                 console.log(snapshot.val())
                 const tasksArray = []
                 for (const key in snapshot.val()) {
-                    tasksArray.push({ ...snapshot.val()[key]})
+                    tasksArray.push({ ...snapshot.val()[key], id: key})
                 }
                 // console.log(postsArray)
                 commit('setTasks', tasksArray)
@@ -50,27 +51,37 @@ export const actions = {
     },
     createTask ({commit, getters}, payload) {
         commit('setLoading', true, { root: true })
+        console.log(payload)
       
         const newTaskKey = firebase.database().ref().child('tasks/').push().key
 
-        firebase.database().ref('tasks/' + newTaskKey).set({
-            id: newTaskKey,
-            title: payload.title,
-            description: payload.description,
-            status: payload.status,
-            progress: payload.progress,
-            users: payload.users,
-            progress: payload.progress,
-            start_date: payload.start_date,
-            end_date: payload.end_date,
-            _created_at: payload.created_at,
-            _updated_at: payload.updated_at
-        })
+        try {
+            firebase.database().ref('tasks/' + newTaskKey).set(
+            // {
+            //     id: newTaskKey,
+            //     title: payload.title,
+            //     description: payload.description,
+            //     status: payload.status,
+            //     progress: payload.progress,
+            //     users: payload.users,
+            //     progress: payload.progress,
+            //     start_date: payload.startDate,
+            //     end_date: payload.endDate,
+            //     _created_at: new Date().getTime(),
+            //     _updated_at: new Date().getTime()
+            // }
+                { ...payload, _created_at: new Date().getTime()/1000, _updated_at: new Date().getTime()/1000}
+            )
 
-        commit('setLoading', false, { root: true })
-        commit('createTask', payload)
-        this.$toast.success('Nouvelle tâche créée avec succès!', 'Succès')
-        router.push({ name: 'Back' })
+            commit('setLoading', false, { root: true })
+            commit('createTask', payload)
+            // this.$toast.success('Nouvelle tâche créée avec succès!', 'Succès')
+            new Noty({type: 'success', layout: 'topRight', text: 'Nouvelle tâche créée avec succès!', timeout: 5000, theme: 'metroui'}).show()
+            // router.push('/admin/tasks')
+        } catch (error) {
+            console.log(error)
+            new Noty({type: 'error', layout: 'topRight', text: 'Une erreur est survenue lors de la création de la tâche', timeout: 5000, theme: 'metroui'}).show()
+        }
     },
     updateTask ({commit, getters}, payload) {
         commit('setLoading', true, { root: true })
@@ -84,13 +95,19 @@ export const actions = {
         this.$toast.success('Tâche éditée avec succès!', 'Succès')
         router.push({ name: 'Back' })
     },
-    deleteTask ({commit}, payload) {
+    deleteTask ({commit}, taskId) {
         commit('setLoading', true, { root: true })
 
-        const taskId = payload.task.id
+        // const taskId = payload.task.id
         // console.log(taskId)
 
-        firebase.database().ref('/tasks/' + taskId).remove()
+        try {
+            // firebase.database().ref('/tasks/' + taskId).remove()
+            new Noty({type: 'success', text: 'Tâche supprimée avec succès!', timeout: 5000, theme: 'metroui'}).show()
+        } catch (error) {
+            console.log(error)
+            new Noty({type: 'error', layout: 'topRight', text: 'Erreur lors de la suppression de la tâche.', timeout: 5000, theme: 'metroui'}).show()
+        }
 
         commit('deleteTask', taskId)
         commit('setLoading', false, { root: true })
