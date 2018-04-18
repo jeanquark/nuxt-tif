@@ -8,19 +8,16 @@
           </v-card-text>
         </v-card-title>
         <v-card-text>
-          <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis ipsa rerum sed repellendus commodi laborum debitis impedit cupiditate, eaque earum sequi unde perferendis dolore ullam iste omnis accusantium in hic.</p>
+          <p class="">Hey! Bienvenue les TIF ;-)</p>
         </v-card-text>
-        <v-card-actions>
-          <v-btn flat color="orange">Share</v-btn>
-          <v-btn flat color="orange">Explore</v-btn>
-        </v-card-actions>
       </v-card>
 
       <v-card class="mt-4">
         <v-card-title primary-title class="text-md-center">
           <v-card-text class="text-md-center">
             <h3 class="headline mb-0">Toutes les tâches</h3>
-            <v-btn color="primary" dark slot="activator" class="mb-2" to="/admin/tasks/create">Add a Task</v-btn>
+            <br />
+            <v-btn color="primary" dark slot="activator" class="mb-2" to="/admin/tasks/create">Ajouter une tâche</v-btn>
           </v-card-text>
         </v-card-title>
         <v-card-text>

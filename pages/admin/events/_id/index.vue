@@ -7,6 +7,7 @@
 			        :key="link.text"
 			        :disabled="link.disabled"
 			        :to="link.to"
+			        :exact="true"
 			      >
 		    		{{ link.text }}
 		  		</v-breadcrumbs-item>

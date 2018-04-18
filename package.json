@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.1",
+    "@nuxtjs/dotenv": "^1.1.1",
     "@nuxtjs/pwa": "^1.0.2",
     "@nuxtjs/toast": "^3.0.0",
     "body-parser": "^1.18.2",

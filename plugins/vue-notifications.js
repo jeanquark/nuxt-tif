@@ -6,7 +6,7 @@ import 'noty/lib/themes/metroui.css'
 
 function toast ({title, message, type, timeout, cb}) {
   if (type === VueNotifications.types.warn) type = 'warning'
-  return new Noty({text: message, timeout: 5000, type, theme: 'metroui'}).show()
+  return new Noty({text: message, timeout: 5000, type, theme: 'metroui', maxVisible: 10}).show()
 }
 
 const options = {

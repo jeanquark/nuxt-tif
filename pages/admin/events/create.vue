@@ -1,15 +1,25 @@
 <template>
 	<div>
-		<v-breadcrumbs divider="/">
+		<!-- <v-breadcrumbs divider="/">
 	  		<v-breadcrumbs-item
 		        v-for="link in links"
 		        :key="link.text"
-		        :disabled="link.disabled"
 		        :to="link.to"
+		        :class=""
 		      >
 	    		{{ link.text }}
 	  		</v-breadcrumbs-item>
-		</v-breadcrumbs>
+		</v-breadcrumbs> -->
+		<v-breadcrumbs divider="/">
+	      	<v-breadcrumbs-item
+		        v-for="item in items"
+		        :to="item.to"
+		        :key="item.text"
+		        :exact="true"
+	      	>
+	        	{{ item.text }}
+	      	</v-breadcrumbs-item>
+	    </v-breadcrumbs>
 		<v-flex xs12 sm8 offset-sm2>
 			<br /><br />
 			<h1 class="text-md-center">Create Event</h1>
@@ -177,7 +187,7 @@
 										single-line
 										:disabled="selectedType == ''"
 									>
-									    <template slot="item" scope="data">
+									    <template slot="item" slot-scope="data">
 									      <v-list-tile-content>
 									        <v-list-tile-title>
 									          {{ data.item.name }} <small style="color: #ccc;">{{ data.item.city_name }} - {{ data.item.country_name}}</small>
@@ -263,6 +273,7 @@
 						<v-card-text class="text-md-center">
 							<h3>Créer une liste d'événements à l'aide de <a href="https://football-api.com/documentation2/#!/Competitions/get_competitions" target="_blank">Football API</a></h3>
 							<p>La requête peut échouer en cas d'absence ou d'invalidité de la clé privée (voir console de debogage)</p>
+							<p>Pour qu'une requête soit acceptée, il faut sélectionner le championnat anglais de Premier League et ne pas avoir une différence de plus de 30 jours entre les deux dates.</p>
 						</v-card-text>
 					</v-card-title>
 					<v-container fluid>
@@ -270,13 +281,14 @@
 							<v-flex xs6>
 								<v-subheader class="text-xl-center">Compétition</v-subheader>
 							</v-flex>
+							{{ this.selectedCompetition }}
 							<v-flex xs6 v-if="loadedCompetitions != ''">
 								<v-select
 								  :items="loadedCompetitions"
 								  v-model="selectedCompetition"
 								  label="Sélectionner une compétition"
 								  item-text="name"
-								  item-value="football_api_id"
+								  item-value="{}"
 								  :autocomplete="true"
 								  single-line
 								></v-select>
@@ -332,14 +344,14 @@
 							  ></v-text-field>
 							  <v-date-picker locale="fr-fr" :first-day-of-week="1" v-model="competitionEndDate" actions>
 							    <v-spacer></v-spacer>
-							    <v-btn flat color="primary" @click="modalEndDate = false">Cancel</v-btn>
+							    <v-btn flat color="primary" @click="modalEndDate = false">Annuler</v-btn>
 							    <v-btn flat color="primary" @click="$refs.endDateDialog.save(date)">OK</v-btn>
 							  </v-date-picker>
 							</v-dialog>
 						</v-layout>
 					</v-container>
 					<v-card-text class="text-md-center">
-				  		<v-btn @click="submitRequestToFootballAPI" color="info">submit request to Football API</v-btn>
+				  		<v-btn color="info" :disabled="loading || !validAPIRequestData" :loading="loading" @click="submitRequestToFootballAPI">submit request to Football API <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></v-btn>
     					<v-btn @click="">clear</v-btn>
     				</v-card-text>
     				<v-card-actions>
@@ -359,6 +371,7 @@
   	// import moment from '~/plugins/vue-moment'
   	import firebase from 'firebase'
   	import VueNotifications from 'vue-notifications'
+  	import Noty from 'noty'
 	export default {
 		layout: 'layoutBack',
 		created () {
@@ -408,20 +421,39 @@
 		        links: [
 			        {
 			          text: 'Dashboard',
-			          to: '/Admin',
+			          to: '/admin',
 			          disabled: false
 			        },
 			        {
 			          text: 'Events',
-			          to: '/Admin/Events',
+			          to: '/admin/events',
 			          disabled: false
 			        },
 			        {
 			          text: 'Create',
+			          to: '/admin/events/create',
 			          disabled: true
 			        }
 			    ],
-			    footballAPIRequestResult: ''
+items: [
+    {
+      text: 'Dashboard',
+      disabled: false,
+      to: '/admin'
+    },
+    {
+      text: 'Events',
+      disabled: false,
+      to: '/admin/events'
+    },
+    {
+      text: 'Create',
+      disabled: true,
+      to: '/admin/events/create'
+    }
+],
+			    footballAPIRequestResult: '',
+			    loading: false,
 			}
 		},
 		computed: {
@@ -466,11 +498,22 @@
 		    	competitions.push({id: 'all_competition', name: 'All competitions'})
 		    	// console.log(competitions)
 		    	return competitions
+		    },
+		    validAPIRequestData () {
+		    	const a = moment(this.competitionStartDate)
+		    	// console.log(a)
+		    	const b = moment(this.competitionEndDate)
+		    	// console.log(b)
+		    	const diffDays = b.diff(a, 'days')
+		    	// console.log(diffDays)
+		    	return this.selectedCompetition.football_api_id === 1204 && a < b && diffDays <= 31
+
 		    }
 		},
 		methods: {
 			submitCreateEvent () {
 				console.log('submitCreateEvent')
+				this.loading = true
 				const eventData = {
 					activity: {
 			            slug: this.selectedActivity.slug,
@@ -538,7 +581,8 @@
 				// return
 
 				// Get local data that micmic football api response
-				this.$axios.$get('/football_api_sample_data_get_matches.json').then((response) => {
+				// this.$axios.$get('/football_api_sample_data_get_matches.json').then((response) => {
+				this.$axios.$get('http://api.football-api.com/2.0/matches?comp_id=' + this.selectedCompetition.football_api_id + '&from_date=' + this.competitionStartDate + '&to_date=' + this.competitionEndDate + '&Authorization=' + process.env.FOOTBALL_API_KEY).then((response) => {
 					// console.log(response)
 		            this.footballAPIRequestResult = response
 		            
@@ -563,16 +607,16 @@
 				                football_api_id: event.id,
 				                competition_id: event.comp_id,
 				                activity: {
-						            slug: this.selectedActivity.slug,
-						            name: this.selectedActivity.name
+						            slug: 'sport',
+						            name: 'Sport'
 						        },
 								category: {
-									slug: this.selectedCategory.slug,
-									name: this.selectedCategory.name
+									slug: 'football',
+									name: 'Football'
 								},
 						        type: {
-						            slug: this.selectedType.slug,
-						            name: this.selectedType.name
+						            slug: 'premier_league',
+						            name: 'Premier League'
 						        },
 				                date: date_as_timestamp,
 				                localteam_id: event.localteam_id,
@@ -596,13 +640,18 @@
 			            	updates['/events_new/' + eventData.id] = eventData
 			            	firebase.database().ref().update(updates).then(() => {
 			            		console.log('success!')
+			            		this.loading = false
+		            			new Noty({type: 'success', layout: 'topRight', text: 'Evénement ' + name_pretty + ' créé avec succès.', timeout: 5000, theme: 'metroui', maxVisible: 10}).show()
+
 			            	}).catch((error) => {
 			            		console.log('error')
+			            		this.loading = false
 			            		console.log(error.message)
 			            	})
 						} else {
 							console.log('This event already exists in database!')
 							// this.showSuccessMsg()
+							this.loading = false
 							this.showWarnMsg({message: 'Event ' + name_pretty + ' already exists in database!'})
 							// VueNotifications.types.info({message: 'Event already exists in database!'})
 						}
@@ -647,7 +696,6 @@
 		            	// })
 		            })
 		            console.log(eventsArray)
-		            
 				})
 
 

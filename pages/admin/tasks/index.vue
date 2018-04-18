@@ -7,6 +7,7 @@
 			        :key="link.text"
 			        :disabled="link.disabled"
 			        :to="link.to"
+			        :exact="true"
 			      >
 		    		{{ link.text }}
 		  		</v-breadcrumbs-item>
@@ -16,7 +17,7 @@
 		          <v-card-text class="text-md-center">
 		            <h3 class="headline mb-0">Toutes les tâches</h3>
 		            <br />
-		            <v-btn color="primary" dark slot="activator" class="mb-2" to="/admin/tasks/create">Add a Task</v-btn>
+		            <v-btn color="primary" dark slot="activator" class="mb-2" to="/admin/tasks/create">Ajouter une tâche</v-btn>
 		          </v-card-text>
 		        </v-card-title>
 		        <v-card-text>

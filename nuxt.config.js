@@ -41,6 +41,7 @@ module.exports = {
     // '@nuxtjs/pwa'
     '@nuxtjs/axios',
     '@nuxtjs/toast',
+    '@nuxtjs/dotenv',
     ['nuxt-i18n', {
       locales: [
         // { code: 'en' },
@@ -155,5 +156,8 @@ module.exports = {
           toastObject.goAway(0);
       }
     }
-  }
+  },
+  // env: {
+  //   football_api_key: process.env.FOOTBALL_API_KEY
+  // },
 }

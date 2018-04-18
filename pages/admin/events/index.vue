@@ -6,6 +6,7 @@
 		        :key="link.text"
 		        :disabled="link.disabled"
 		        :to="link.to"
+		        :exact="true"
 		      >
 	    		{{ link.text }}
 	  		</v-breadcrumbs-item>
@@ -17,120 +18,67 @@
 	      	<!-- loadedEvents: {{ loadedEvents }} -->
 	      	<br /><br />
 	      	<v-btn color="primary" dark slot="activator" class="mb-2" to="/admin/events/create">Add an Event</v-btn>
-	      	<!-- <v-card>
-			    <v-card-title>
-			      	Nutrition
-			      	<v-spacer></v-spacer>
-					<v-text-field
-						append-icon="search"
-						label="Search"
-						single-line
-						hide-details
-						v-model="search"
-					></v-text-field>
-			    </v-card-title>
-			    <v-data-table
-				    :headers="headers"
-				    :items="items"
-				    :search="search"
-			    >
-					<template slot="items" slot-scope="props">
-						<td>{{ props.item.name }}</td>
-						<td class="text-xs-right">{{ props.item.calories }}</td>
-						<td class="text-xs-right">{{ props.item.fat }}</td>
-						<td class="text-xs-right">{{ props.item.carbs }}</td>
-						<td class="text-xs-right">{{ props.item.protein }}</td>
-						<td class="text-xs-right">{{ props.item.iron }}</td>
-					</template>
-		      		<v-alert slot="no-results" :value="true" color="error" icon="warning">
-		        		Your search for "{{ search }}" found no results.
-		      		</v-alert>
-			    </v-data-table>
-			</v-card> -->
+			<!-- {{ loadedEvents }} -->
 			<v-card>
-			    <v-card-title>
-			      	Events
-			      	<v-spacer></v-spacer>
-					<v-text-field
-						append-icon="search"
-						label="Search"
-						single-line
-						hide-details
-						v-model="search"
-					></v-text-field>
-			    </v-card-title>
-			    <v-data-table
+				<template>
+				  <v-data-table
+				    v-model="selected"
 				    :headers="headers"
 				    :items="loadedEvents"
-				    :search="search"
-				    v-model="selected"
-				    item-key="id"
 				    select-all
-			    >
-			    	<div v-if="loadedEvents">
-						<template slot="items" slot-scope="props">
-							<td>
-						        <v-checkbox
-						          primary
-						          hide-details
-						          v-model="props.selected"
-						        ></v-checkbox>
-						    </td>
-						    <td>{{ props.index + 1 }}</td>
-							<td>{{ props.item.name }}</td>
-							<td class="text-xs-right">{{ props.item.activity.name }}</td>
-							<td class="text-xs-right">{{ props.item.category.name }}</td>
-							<td class="text-xs-right">{{ props.item.type.name }}</td>
-							<td class="text-xs-right">{{ props.item.date }}</td>
-							<td class="text-xs-right">{{ props.item.time }}</td>
-							<!-- <td>{{ props.item.name }}</td>
-							<td class="text-xs-right">{{ props.item.calories }}</td>
-							<td class="text-xs-right">{{ props.item.fat }}</td>
-							<td class="text-xs-right">{{ props.item.carbs }}</td>
-							<td class="text-xs-right">{{ props.item.protein }}</td>
-							<td class="text-xs-right">{{ props.item.iron }}</td> -->
-							<td class="justify-center layout px-0">
-					          <v-btn icon class="mx-0" :to="'/admin/tasks/' + props.item.id" :id="props.item.id">
-					            <v-icon color="teal">edit</v-icon>
-					          </v-btn>
-					          <v-btn icon class="mx-0" @click="deleteItem(props.item)">
-					            <v-icon color="pink">delete</v-icon>
-					          </v-btn>
-					        </td>
-						</template>
-					</div>
-					<template slot="no-data">
-				      <v-alert :value="true" color="error" icon="warning">
-				        Sorry, nothing to display here. Either there is no data or you don't have the correct authorization to see it :(
-				      </v-alert>
-				    </template>
-				    <v-alert slot="no-results" :value="true" color="error" icon="warning">
-		        		Your search for "{{ search }}" found no results.
-		      		</v-alert>
-			    </v-data-table>
-
-
-
-			    <!-- <v-data-table
-				    :headers="headers"
-				    :items="items"
-				    hide-actions
+				    :pagination.sync="pagination"
+				    item-key="name_pretty"
 				    class="elevation-1"
 				  >
+				    <template slot="headers" slot-scope="props">
+				      <tr>
+				        <th>
+				          <v-checkbox
+				            primary
+				            hide-details
+				            @click.native="toggleAll"
+				            :input-value="props.all"
+				            :indeterminate="props.indeterminate"
+				          ></v-checkbox>
+				        </th>
+				        <th
+				          v-for="header in props.headers"
+				          :key="header.text"
+				          :class="['column sortable', pagination.descending ? 'desc' : 'asc', header.value === pagination.sortBy ? 'active' : '']"
+				          @click="changeSort(header.value)"
+				        >
+				          <v-icon small>arrow_upward</v-icon>
+				          {{ header.text }}
+				        </th>
+				      </tr>
+				    </template>
 				    <template slot="items" slot-scope="props">
-				      <td>{{ props.item.name }}</td>
-				      <td class="text-xs-right">{{ props.item.calories }}</td>
-				      <td class="text-xs-right">{{ props.item.fat }}</td>
-				      <td class="text-xs-right">{{ props.item.carbs }}</td>
-				      <td class="text-xs-right">{{ props.item.protein }}</td>
-				      <td class="text-xs-right">{{ props.item.iron }}</td>
+				      <tr :active="props.selected" @click="props.selected = !props.selected">
+				        <td>
+				          <v-checkbox
+				            primary
+				            hide-details
+				            :input-value="props.selected"
+				          ></v-checkbox>
+				        </td>
+				        <td>{{ props.index + 1 }}</td>
+						<td>{{ props.item.name_pretty }}</td>
+						<td class="text-xs-right">{{ props.item.activity.name }}</td>
+						<td class="text-xs-right">{{ props.item.category.name }}</td>
+						<td class="text-xs-right">{{ props.item.type.name }}</td>
+						<td class="text-xs-right">{{ props.item.date | moment('DD MMMM YYYY') }}</td>
+						<td class="justify-center layout px-0">
+						  <v-btn icon class="mx-0" :to="'/admin/tasks/' + props.item.id" :id="props.item.id" disabled>
+						    <v-icon color="teal">edit</v-icon>
+						  </v-btn>
+						  <v-btn icon class="mx-0" @click="deleteItem(props.item)" disabled>
+						    <v-icon color="pink">delete</v-icon>
+						  </v-btn>
+						</td>
+				      </tr>
 				    </template>
-				    <template slot="no-data">
-				      <v-alert :value="true" color="error" icon="warning">
-				        Sorry, nothing to display here. Either there is no data, or there is data, but you don't have the correct authorization to see it :(
-				      </v-alert>
-				    </template>
-				  </v-data-table> -->
+				  </v-data-table>
+				</template>
 			</v-card>
 	    </v-flex>
 	</div>
@@ -159,16 +107,33 @@
 			        }
 			    ],
 		        headers: [
-		        	{ text: 'N°', value: 'id' },
-		        	{ text: 'Name', value: 'name', align: 'left', sortable: false },
+		        	{ text: 'N°', value: 'id', align: 'left', sortable: false },
+		        	{ text: 'Name', value: 'name_pretty' },
 					{ text: 'Activity', value: 'activity' },
 					{ text: 'Category', value: 'category' },
 					{ text: 'Type', value: 'type' },
 					{ text: 'Date', value: 'date' },
-					{ text: 'Time', value: 'time' },
+					// { text: 'Time', value: 'time' },
 					{ text: 'Actions', value: 'actions', sortable: false }
 		        ],
+		   		headers2: [
+					{
+						text: 'Dessert (100g serving)',
+						align: 'left',
+						sortable: false,
+						value: 'name'
+					},
+					{ text: 'Calories', value: 'calories' },
+					{ text: 'Fat (g)', value: 'fat' },
+					{ text: 'Carbs (g)', value: 'carbs' },
+					{ text: 'Protein (g)', value: 'protein' },
+					{ text: 'Iron (%)', value: 'iron' }
+				],
 		        events: '',
+		        pagination: {
+			        sortBy: 'date',
+			        descending: true
+			    },
 		        items: [
 					{
 						value: false,
@@ -267,6 +232,24 @@
 	    	loadedEvents () {
 	    		return this.$store.getters['events/loadedEvents']
 	    	}
+	    },
+	    methods: {
+	    	toggleAll () {
+		        if (this.selected.length) {
+		        	this.selected = []
+		        } else {
+		        	// this.selected = this.items.slice()
+		        	this.selected = this.loadedEvents.slice()
+		        }
+		    },
+		    changeSort (column) {
+		        if (this.pagination.sortBy === column) {
+		          this.pagination.descending = !this.pagination.descending
+		        } else {
+		          this.pagination.sortBy = column
+		          this.pagination.descending = false
+		        }
+		    }
 	    }
   	}
 </script>

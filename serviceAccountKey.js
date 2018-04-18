@@ -2,7 +2,8 @@ require('dotenv').config()
 
 module.exports = {
   type: "service_account",
-  project_id: "fir-auth-vue-1aa66",
+  // project_id: "fir-auth-vue-1aa66",
+  project_id: process.env.PROJECT_ID,
   private_key_id: process.env.PRIVATE_KEY_ID,
   private_key: process.env.PRIVATE_KEY,
   client_email: process.env.CLIENT_EMAIL,
