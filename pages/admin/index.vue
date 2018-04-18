@@ -7,7 +7,7 @@
             <h3 class="headline mb-0">Administration TIF</h3>
           </v-card-text>
         </v-card-title>
-        <v-card-text>
+        <v-card-text class="text-md-center">
           <p class="">Hey! Bienvenue les TIF ;-)</p>
         </v-card-text>
       </v-card>

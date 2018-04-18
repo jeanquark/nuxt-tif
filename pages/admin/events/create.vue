@@ -563,22 +563,11 @@ items: [
 		    },
 			submitRequestToFootballAPI () {
 				console.log('submitRequestToFootballAPI')
-				// console.log('http://api.football-api.com/2.0/matches?comp_id=' + this.selectedCompetition + '&from_date=' + this.competitionStartDate + '&to_date=' + this.competitionEndDate + '&Authorization=565ec012251f932ea4000001fa542ae9d994470e73fdb314a8a56d76')
-				// let abc = this.formattedDate('2018-04-12', '20:45')
-				// console.log(abc)
-
-				// First create an array of all unique_name properties
-				// const abc = this.loadedEvents
-				// console.log(abc)
 				const eventsArray= []
 				this.loadedEvents.forEach((event) => {
 					// console.log(event)
 					eventsArray.push(event.name_unique)
 				})
-				// console.log(eventsArray)
-				// console.log(eventsArray.includes('9158_vs_9249_on_1523093400'))
-				// console.log(eventsArray.includes('abc'))
-				// return
 
 				// Get local data that micmic football api response
 				// this.$axios.$get('/football_api_sample_data_get_matches.json').then((response) => {
@@ -593,12 +582,7 @@ items: [
 						const date_as_timestamp = this.formattedDate(event.formatted_date, event.time)
 						const name_unique = event.localteam_id + '_vs_' + event.visitorteam_id + '_on_' + date_as_timestamp
 						const name_pretty = event.localteam_name + ' vs ' + event.visitorteam_name
-						// console.log(abc)
-						// console.log(event)
-						// Only add to database if event does not already exists
-						// console.log(event)
-						// console.log(eventsArray)
-						// console.log(event.name_unique)
+
 						if (!eventsArray.includes(name_unique)) {
 							const newPostKey = firebase.database().ref().child('events_new').push().key
 						
@@ -655,45 +639,6 @@ items: [
 							this.showWarnMsg({message: 'Event ' + name_pretty + ' already exists in database!'})
 							// VueNotifications.types.info({message: 'Event already exists in database!'})
 						}
-
-			            // eventsArray.push(eventData)
-			            // console.log(eventData)
-			   //          firebase.database().ref('/events_new/' + eventData.id).set({
-						//     id: newPostKey,
-			   //              football_api_id: event.id,
-			   //              competition_id: event.comp_id,
-			   //              // date: event.formatted_date,
-			   //              date: date_as_timestamp,
-			   //              // time: event.time,
-			   //              localteam_id: event.localteam_id,
-			   //              localteam_name: event.localteam_name,
-			   //              localteam_score: event.localteam_score,
-			   //              visitorteam_id: event.visitorteam_id,
-			   //              visitorteam_name: event.visitorteam_name,
-			   //              visitorteam_score: event.visitorteam_score,
-			   //              venue_id: event.venue_id,
-			   //              venue: event.venue,
-			   //              venue_city: event.venue_city,
-			   //              week: event.week,
-			   //              status: event.status,
-			   //              half_time_score: event.ht_score,
-			   //              full_time_score: event.ft_score,
-			   //              name_pretty: event.localteam_name + ' vs ' + event.visitorteam_name,
-			   //              name_unique: event.localteam_id + '_vs_' + event.visitorteam_id + '_on_' + date_as_timestamp   
-						// }).then(() => {
-						// 	console.log('success!')
-						// }).catch((error) => {
-						// 	console.log('error!')
-						// 	console.log(error.message)
-						// })
-			            // let updates = {}
-		            	// updates['/events_new/' + eventData.id] = eventData
-		            	// firebase.database().ref().update(updates).then(() => {
-		            	// 	console.log('success!')
-		            	// }).catch((error) => {
-		            	// 	console.log('error')
-		            	// 	console.log(error.message)
-		            	// })
 		            })
 		            console.log(eventsArray)
 				})
