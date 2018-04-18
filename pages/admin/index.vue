@@ -27,35 +27,19 @@
         >
         <template slot="items" slot-scope="props">
           <td>{{ props.index + 1 }}</td>
-          <!-- <td>{{ props.item.id }}</td> -->
           <td>{{ props.item.title }}</td>
           <td>{{ props.item.description }}</td>
-          <!-- <td>{{ props.item.users }}</td> -->
           <td>
             <span v-for="(user, index) in props.item.users">{{user}}<span v-if="index < props.item.users.length - 1">,&nbsp;</span></span>
           </td>
-          <!-- <td>{{ props.item.status }}</td> -->
           <td><v-chip :color="props.item.status.class" text-color="white" style="height: 26px;">{{ props.item.status.name }}</v-chip></td>
-          <!-- <td>{{ props.item.progress }}</td> -->
           <td><v-progress-linear :value="props.item.progress" height="15" :color="props.item.status.class"></v-progress-linear></td>
           <td>{{ props.item._created_at | moment("DD MMMM YYYY") }}</td>
           <td>{{ props.item._updated_at | moment("DD MMMM YYYY") }}</td>
-          <!-- <td class="justify-center layout px-0">
-            <v-btn icon class="mx-0" @click="editItem(props.item)">
-              <v-icon color="teal">edit</v-icon>
-            </v-btn>
-            <v-btn icon class="mx-0" @click="deleteItem(props.item)">
-              <v-icon color="pink">delete</v-icon>
-            </v-btn>
-          </td> -->
           <td class="">
             <v-btn icon class="" :to="'/admin/tasks/' + props.item.id" :id="props.item.id">
               <v-icon color="teal">edit</v-icon>
             </v-btn>
-            <!-- <router-link class="btn btn-warning btn-xs" :to="{path: '/admin/tasks/' + props.item.id, params: {id: props.item.id}}">Edit</router-link> -->
-            <!-- <nuxt-link class="btn btn-warning btn-xs" :to="{path: '/admin/tasks/' + props.item.id, params: {id: props.item.id}}">Edit</nuxt-link> -->
-            <!-- <nuxt-link class="btn btn-warning btn-xs" :to="'/admin/tasks/' + props.item.id">Edit</nuxt-link> -->
-
             <v-btn icon class="" @click="deleteTask(props.item.id)">
               <v-icon color="pink">delete</v-icon>
             </v-btn>
@@ -69,10 +53,8 @@
 </template>
 
 <script>
-  // import moment from 'vue-moment'
   import moment from '~/plugins/vue-moment'
   import 'moment/locale/fr'
-  // import VueSweetalert2 from 'vue-sweetalert2'
   export default {
     layout: 'layoutBack',
     created () {
