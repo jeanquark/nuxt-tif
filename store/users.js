@@ -4,7 +4,7 @@ import firebase from 'firebase'
 import axios from 'axios'
 import setUser from '../helpers/setUser'
 
-function buildUserObject (authData) {
+function buildUserObjectOAuth (authData) {
   let { email, displayName, uid, photoURL } = authData.user
   let user = {}
   user['email'] = email
@@ -254,7 +254,7 @@ export const actions = {
             authData['status'] = 'user'
             authData['id'] = newUserKey
 
-            firebase.database().ref('/users/' + newUserKey).set(buildUserObject(authData))
+            firebase.database().ref('/users/' + newUserKey).set(buildUserObjectOAuth(authData))
 
             // Load user in store
             commit('setUser', buildUserObject(authData))

@@ -563,7 +563,8 @@ items: [
 		    },
 			submitRequestToFootballAPI () {
 				console.log('submitRequestToFootballAPI')
-				const eventsArray= []
+				this.loading = true
+				const eventsArray = []
 				this.loadedEvents.forEach((event) => {
 					// console.log(event)
 					eventsArray.push(event.name_unique)
