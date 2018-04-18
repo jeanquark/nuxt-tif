@@ -110,8 +110,12 @@
 		    ],
 		    link: [
       			{ rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' },
-      			{ rel: 'stylesheet', href: 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' }
-		    ]
+      			{ rel: 'stylesheet', href: 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' },
+      			// { rel: 'stylesheet', href: '/style.css' },
+		    ],
+		    // css: [
+		    // 	{ src: '~/assets/css/styles.css', lang: 'css' }
+		    // ]
 		},
 		// created() {
 	 //        setTimeout(() => {

@@ -28,3 +28,7 @@ a.adminNavRoute.nuxt-link-exact-active.nuxt-link-active {
 .layout-enter, .layout-leave-to {
   opacity: 0;
 }
+.abc {
+  font-size: 2em;
+  color: yellow;
+}

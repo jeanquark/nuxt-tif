@@ -281,7 +281,7 @@
 							<v-flex xs6>
 								<v-subheader class="text-xl-center">Compétition</v-subheader>
 							</v-flex>
-							{{ this.selectedCompetition }}
+							<!-- {{ this.selectedCompetition }} -->
 							<v-flex xs6 v-if="loadedCompetitions != ''">
 								<v-select
 								  :items="loadedCompetitions"
@@ -488,7 +488,7 @@ items: [
 		    	let type = this.selectedType.slug
 		    	let team1 = this.selectedTeam1.slug
 		        return this.loadedTeams.filter(function (el) {
-		          return el.type[type] && el.slug != team1
+		          	return el.type[type] && el.slug != team1
 		        })
 		    },
 		    loadedCompetitions () {

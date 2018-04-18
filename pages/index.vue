@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row" style="margin-bottom: 50px;">
             <div class="col-md-12 text-center">
-                <h2 class="">Nuxt.js app with Firebase Authentication and Heroku Deployment</h2>
+                <h2 class="yellow-color" style="">Nuxt.js app with Firebase Authentication and Heroku Deployment</h2>
                 <br /><br />
                 <h4>Server: Node.js - Database: Firebase - Frontend: Vue.js</h4>
                 <br /><br />

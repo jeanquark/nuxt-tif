@@ -174,7 +174,7 @@ export const actions = {
       // commit('setLoadingPage', true, { root: true })
     	try {
       		let authData = await Auth.signInWithEmailAndPassword(payload.email, payload.password)
-      		console.log(authData)
+      		  console.log(authData)
             console.log(authData.getIdToken())
 
             // Check user status based on user token
@@ -232,7 +232,7 @@ export const actions = {
             firebase.database().ref('/users/' + newUserKey).set(buildUserObject(authData))
 
             // Load user in store
-      		commit('setUser', buildUserObject(authData))
+            commit('setUser', buildUserObject(authData))
             this.$toast.success('Successfully signed up!')
             commit('setLoading', false, { root: true })
     	} 
@@ -240,29 +240,33 @@ export const actions = {
       		console.log(error)
       		// commit('setError', error)
       		commit('setError', error, { root: true })
-          commit('setLoading', false, { root: true })
+            commit('setLoading', false, { root: true })
     	}
   	},
   	async signInWithGooglePopup ({commit}) {
-    	commit('setLoading', true)
-    	let authData = await Auth.signInWithPopup(GoogleAuthProvider)
-    	commit('setUser', buildUserObject(authData))
+    	commit('setLoading', true, { root: true })
+        try {
+          	let authData = await Auth.signInWithPopup(GoogleAuthProvider)
+            console.log(authData)
 
-      let userStatus = Auth.currentUser.getIdToken().then((idToken) => {
-        console.log('idToken: ' + idToken)
-        const payload = JSON.parse(b64DecodeUnicode(idToken.split('.')[1]))
-        // Confirm the user is an Admin.
-        console.log(payload)
+            // Save user in database
+            const newUserKey = firebase.database().ref().child('/users').push().key
+            authData['status'] = 'user'
+            authData['id'] = newUserKey
 
-        if (!!payload['admin']) {
-            console.log('User is admin')
-            authData['isAdmin'] = true
-        } else {
-            console.log('User is not an admin')
-            authData['isAdmin'] = false
+            firebase.database().ref('/users/' + newUserKey).set(buildUserObject(authData))
+
+            // Load user in store
+            commit('setUser', buildUserObject(authData))
+            new Noty({type: 'success', text: 'Utilisateur enregistré avec succès!', timeout: 5000, theme: 'metroui'}).show()
+            commit('setLoading', false, { root: true })
+        } 
+        catch(error) {
+            console.log(error)
+            new Noty({type: 'error', text: 'Utilisateur n\'a pas pu être enregistré', timeout: 5000, theme: 'metroui'}).show()
+            commit('setError', error, { root: true })
+            commit('setLoading', false, { root: true })
         }
-      })
-    	commit('setLoading', false)
   	},
   	async signInWithFacebookPopup ({commit}) {
     	commit('setLoading', true)

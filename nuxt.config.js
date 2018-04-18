@@ -142,10 +142,11 @@ module.exports = {
       { path: '/setCustomClaims', handler: '~/serverMiddleware/setCustomClaims'},
       // '~/serverMiddleware/api.js',
   ],
-  // css: [
-  //   { src: '~/assets/css/main.css', lang: 'css'},
-  //   { src: '~/assets/css/app.styl', lang: 'styl'}
-  // ]
+  css: [
+    // { src: '~/assets/css/main.css', lang: 'css'},
+    // { src: '~/assets/css/app.styl', lang: 'styl'},
+    { src: '~/assets/css/style.css', lang: 'css'}
+  ],
   toast: {
     duration: 8000,
     className: ['title', 'p5', 'body-1'],
