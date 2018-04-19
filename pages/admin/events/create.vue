@@ -571,7 +571,7 @@ items: [
 
 				// Get local data that micmic football api response
 				// this.$axios.$get('/football_api_sample_data_get_matches.json').then((response) => {
-				this.$axios.$get('http://api.football-api.com/2.0/matches?comp_id=' + this.selectedCompetition.football_api_id + '&from_date=' + this.competitionStartDate + '&to_date=' + this.competitionEndDate + '&Authorization=' + process.env.FOOTBALL_API_KEY).then((response) => {
+				this.$axios.$get('http://api.football-api.com/2.0/matches?comp_id=' + this.selectedCompetition.football_api_id + '&from_date=' + this.competitionStartDate + '&to_date=' + this.competitionEndDate + '&Authorization=' + '565ec012251f932ea4000001d191fefd02dd4b6f65bf2e5aa5478f1d').then((response) => {
 					// console.log(response)
 		            this.footballAPIRequestResult = response
 		            
