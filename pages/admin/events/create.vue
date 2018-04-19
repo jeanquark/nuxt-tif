@@ -265,7 +265,6 @@
 
 
 
-
 		<v-flex xs12 sm8 offset-sm2 v-if="selectedCategory.slug === 'football'">
 			<v-card>
 				<v-form>
@@ -385,7 +384,7 @@
 			this.$store.dispatch('teams/loadedTeams')
 			// }, 3000)
 			this.$store.dispatch('events/loadedEvents')
-
+			console.log(process.env.FOOTBALL_API_KEY)
 		},
 		data () {
 			return {

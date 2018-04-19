@@ -196,7 +196,8 @@ export const actions = {
                     // dispatch('updateUser', {'isAdmin': false})
                 }
             })
-            this.$toast.success('Successfully signed in!')
+            new Noty({type: 'success', text: 'Successfully signed in!', timeout: 5000, theme: 'metroui'}).show()
+
             // commit('setUser', buildUserObjectFromSignUp(authData))
             commit('setUser', setUser(authData))
             // commit('setLoadingPage', false, { root: true })
