@@ -7,10 +7,11 @@ module.exports = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Nuxt.js project' },
-      { name: 'robots', content: 'nofollow' }
+      { name: 'robots', content: 'nofollow' },
       // { src: 'https://code.jquery.com/jquery-3.2.1.slim.min.js' },
       // { src: 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' },
       // { src: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' }
+      // { src: 'https://code.jquery.com/jquery-2.1.3.min.js' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -162,6 +163,7 @@ module.exports = {
       }
     }
   },
+  dev: (process.env.NODE_ENV !== 'production'),
   env: {
     // type: "service_account",
     // project_id: process.env.PROJECT_ID,
