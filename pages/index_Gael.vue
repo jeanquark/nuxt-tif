@@ -655,21 +655,21 @@
             <div class="row">
                 <div class="col-six tab-full pull-right social">
                     <ul class="footer-social">        
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                    </ul>              
-                </div>
+                      <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                      <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                      <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                   </ul>              
+            </div>
 
-                <div class="col-six tab-full">
-                    <div class="copyright">
+            <div class="col-six tab-full">
+                <div class="copyright">
                         <span>© Copyright ThisIsFan.com - 2018</span> 
-                    </div>                       
+                     </div>                       
                 </div>
 
                 <div id="go-top">
-                    <a class="smoothscroll" title="Back to Top" href="#top"><i class="fa fa-long-arrow-up"></i></a>
-                </div>
+                     <a class="smoothscroll" title="Back to Top" href="#top"><i class="fa fa-long-arrow-up"></i></a>
+                  </div>
             </div> <!-- /row -->        
         </footer>  
 
@@ -682,20 +682,12 @@
 
 <script>
     export default {
-        head: {
-            script: [
-                { src: 'http://use.edgefonts.net/bangers.js' }
-            ],
-            link: [
-                // { rel: 'stylesheet', href: '/css/main.css' },
-                // { rel: 'stylesheet', href: '/css/base.css' },
-                    { rel: 'stylesheet', href: 'http://fonts.googleapis.com/css?family=Open%20Sans' }
-            ],
-        //     css: [
-        //         // { src: '~/assets/css/styles.css', lang: 'css' },
-        //         // { src: '~/assets/css/main.css', lang: 'css' },
-        //         // { src: '~/assets/css/base.css', lang: 'css' },
-        //     ]
+        layout: 'layoutFront',
+        created() {
+        },
+        asyncData () {
+        },
+        methods: {
         }
     }
 </script>

@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 module.exports = {
   head: {
     title: 'This is Fan',
@@ -14,8 +16,15 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
       // { rel: 'preload', as: 'style', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700' },
       // { rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous' }
-    ]
+    ],
   },
+  css: [
+      // { src: '~/assets/css/main.css', lang: 'css'},
+      // { src: '~/assets/css/app.styl', lang: 'styl'},
+      { src: '~/assets/css/main.css', lang: 'css' },
+      { src: '~/assets/css/base.css', lang: 'css'},
+      { src: '~/assets/css/style.css', lang: 'css'}
+  ],
   loading: { color: '#3f51b5' },
   build: {
     extend (config, ctx) {
@@ -142,11 +151,6 @@ module.exports = {
       { path: '/setCustomClaims', handler: '~/serverMiddleware/setCustomClaims'},
       // '~/serverMiddleware/api.js',
   ],
-  css: [
-    // { src: '~/assets/css/main.css', lang: 'css'},
-    // { src: '~/assets/css/app.styl', lang: 'styl'},
-    { src: '~/assets/css/style.css', lang: 'css'}
-  ],
   toast: {
     duration: 8000,
     className: ['title', 'p5', 'body-1'],
@@ -158,7 +162,18 @@ module.exports = {
       }
     }
   },
-  // env: {
-  //   football_api_key: process.env.FOOTBALL_API_KEY
-  // },
+  env: {
+    // type: "service_account",
+    // project_id: process.env.PROJECT_ID,
+    // private_key_id: process.env.PRIVATE_KEY_ID,
+    // private_key: process.env.PRIVATE_KEY,
+    // // private_key: JSON.parse(process.env.PRIVATE_KEY),
+    // client_email: process.env.CLIENT_EMAIL,
+    // client_id: process.env.CLIENT_ID,
+    // auth_uri: "https://accounts.google.com/o/oauth2/auth",
+    // token_uri: "https://accounts.google.com/o/oauth2/token",
+    // auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
+    // client_x509_cert_url: "https//www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-li5wg%40fir-auth-vue-1aa66.iam.gserviceaccount.com",
+    // football_api_key: process.env.FOOTBALL_API_KEY
+  },
 }
