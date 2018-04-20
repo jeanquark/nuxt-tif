@@ -21,9 +21,9 @@ module.exports = {
   css: [
       // { src: '~/assets/css/main.css', lang: 'css'},
       // { src: '~/assets/css/app.styl', lang: 'styl'},
-      { src: '~/assets/css/main.css', lang: 'css' },
-      { src: '~/assets/css/base.css', lang: 'css'},
-      { src: '~/assets/css/style.css', lang: 'css'}
+      // { src: '~/assets/css/main.css', lang: 'css' },
+      // { src: '~/assets/css/base.css', lang: 'css'},
+      // { src: '~/assets/css/style.css', lang: 'css'}
   ],
   loading: { color: '#3f51b5' },
   build: {
