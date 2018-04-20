@@ -684,12 +684,12 @@
     export default {
         head: {
             script: [
-                { src: 'http://use.edgefonts.net/bangers.js' }
+                { src: 'https://use.edgefonts.net/bangers.js' }
             ],
             link: [
                 { rel: 'stylesheet', href: '/css/main.css' },
                 { rel: 'stylesheet', href: '/css/base.css' },
-                { rel: 'stylesheet', href: 'http://fonts.googleapis.com/css?family=Open%20Sans' }
+                { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open%20Sans' }
             ],
             css: [
                 // { src: '~/assets/css/main.css', lang: 'css' },
