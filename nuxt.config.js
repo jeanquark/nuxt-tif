@@ -151,6 +151,7 @@ module.exports = {
       // { path: '/api', handler: '~/serverMiddleware/api' },
       { path: '/setCustomClaims', handler: '~/serverMiddleware/setCustomClaims'},
       // '~/serverMiddleware/api.js',
+      { path: '/api-football', handler: '~/serverMiddleware/api-football'},
   ],
   toast: {
     duration: 8000,

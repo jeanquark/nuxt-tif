@@ -434,23 +434,23 @@
 			          disabled: true
 			        }
 			    ],
-items: [
-    {
-      text: 'Dashboard',
-      disabled: false,
-      to: '/admin'
-    },
-    {
-      text: 'Events',
-      disabled: false,
-      to: '/admin/events'
-    },
-    {
-      text: 'Create',
-      disabled: true,
-      to: '/admin/events/create'
-    }
-],
+				items: [
+				    {
+				      text: 'Dashboard',
+				      disabled: false,
+				      to: '/admin'
+				    },
+				    {
+				      text: 'Events',
+				      disabled: false,
+				      to: '/admin/events'
+				    },
+				    {
+				      text: 'Create',
+				      disabled: true,
+				      to: '/admin/events/create'
+				    }
+				],
 			    footballAPIRequestResult: '',
 			    loading: false,
 			}
@@ -571,25 +571,32 @@ items: [
 
 				// Get local data that micmic football api response
 				// this.$axios.$get('/football_api_sample_data_get_matches.json').then((response) => {
-				this.$axios.$get('http://api.football-api.com/2.0/matches?comp_id=' + this.selectedCompetition.football_api_id + '&from_date=' + this.competitionStartDate + '&to_date=' + this.competitionEndDate + '&Authorization=' + '565ec012251f932ea4000001d191fefd02dd4b6f65bf2e5aa5478f1d').then((response) => {
+				// this.$axios.$get('http://api.football-api.com/2.0/matches?comp_id=' + this.selectedCompetition.football_api_id + '&from_date=' + this.competitionStartDate + '&to_date=' + this.competitionEndDate + '&Authorization=' + '565ec012251f932ea4000001d191fefd02dd4b6f65bf2e5aa5478f1d').then((response) => {
+				this.$axios.$get('https://apifootball.com/api/?action=get_events&from=' + this.competitionStartDate + '&to=' + this.competitionEndDate + '&league_id=' + this.selectedCompetition.api_football_id + ' &APIkey=' + process.env.API_FOOTBALL_KEY).then((response) => {
 					// console.log(response)
 		            this.footballAPIRequestResult = response
-		            
-		            console.log(eventsArray)
+		            // console.log(eventsArray)
 		            // const eventsArray = []
 
 					response.forEach((event) => {
-						const date_as_timestamp = this.formattedDate(event.formatted_date, event.time)
-						const name_unique = event.localteam_id + '_vs_' + event.visitorteam_id + '_on_' + date_as_timestamp
-						const name_pretty = event.localteam_name + ' vs ' + event.visitorteam_name
+						console.log(event)
+						const hometeam = this.loadedTeams.find(team => team.api_football_name === event.match_hometeam_name)
+						const awayteam = this.loadedTeams.find(team => team.api_football_name === event.match_awayteam_name)
+						console.log(hometeam)
+						console.log(awayteam)
+						const date_as_timestamp = new Date(event.match_date).getTime() / 1000
+						console.log(date_as_timestamp)
+						const name_unique = hometeam.id + '_vs_' + awayteam.id + '_on_' + date_as_timestamp
+						console.log(name_unique)
+						const name_pretty = hometeam.name + ' vs ' + awayteam.name
+						console.log(name_pretty)
+						// return
 
 						if (!eventsArray.includes(name_unique)) {
 							const newPostKey = firebase.database().ref().child('events_new').push().key
 						
 							let eventData = {
 				                id: newPostKey,
-				                football_api_id: event.id,
-				                competition_id: event.comp_id,
 				                activity: {
 						            slug: 'sport',
 						            name: 'Sport'
@@ -602,24 +609,31 @@ items: [
 						            slug: 'premier_league',
 						            name: 'Premier League'
 						        },
+						        // football_api_id: event.id,
+				                api_football_id: event.match_id,
+				                country_name: event.country_name,
+				                country_id: event.country_id,
+				                competition_name: event.league_name,
+				                competition_id: event.league_id,
 				                date: date_as_timestamp,
-				                localteam_id: event.localteam_id,
-				                localteam_name: event.localteam_name,
-				                localteam_score: event.localteam_score,
-				                visitorteam_id: event.visitorteam_id,
-				                visitorteam_name: event.visitorteam_name,
-				                visitorteam_score: event.visitorteam_score,
-				                venue_id: event.venue_id,
-				                venue: event.venue,
-				                venue_city: event.venue_city,
-				                week: event.week,
-				                status: event.status,
-				                half_time_score: event.ht_score,
-				                full_time_score: event.ft_score,
+				                // localteam_id: event.localteam_id,
+				                localteam_name: event.match_hometeam_name,
+				                localteam_score: event.match_hometeam_score,
+				                localteam_halftime_score: event.match_hometeam_halftime_score,
+				                // visitorteam_id: event.visitorteam_id,
+				                visitorteam_name: event.match_awayteam_name,
+				                visitorteam_score: event.match_awayteam_score,
+				                visitorteam_halftime_score: event.match_awayteam_score,
+				                // venue_id: event.venue_id,
+				                // venue: event.venue,
+				                // venue_city: event.venue_city,
+				                // week: event.week,
+				                status: event.match_status,
+				                // half_time_score: event.ht_score,
+				                // full_time_score: event.ft_score,
 				                name_pretty: name_pretty,
 				                name_unique: name_unique
 				            }
-
 				            let updates = {}
 			            	updates['/events_new/' + eventData.id] = eventData
 			            	firebase.database().ref().update(updates).then(() => {
@@ -631,12 +645,13 @@ items: [
 			            		console.log('error')
 			            		this.loading = false
 			            		console.log(error.message)
+			            		new Noty({type: 'error', text: 'Erreur avec firebase: ' + error.message, timeout: 5000, theme: 'metroui'}).show()
 			            	})
 						} else {
 							console.log('This event already exists in database!')
 							// this.showSuccessMsg()
 							this.loading = false
-							this.showWarnMsg({message: 'Event ' + name_pretty + ' already exists in database!'})
+							this.showWarnMsg({message: 'Event ' + name_pretty + ' on ' + event.match_date + ' already exists in database!'})
 							// VueNotifications.types.info({message: 'Event already exists in database!'})
 						}
 		            })

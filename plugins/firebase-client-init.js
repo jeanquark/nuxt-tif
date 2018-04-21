@@ -10,13 +10,22 @@ import 'firebase/auth';
 //     messagingSenderId: "392469771982"
 // }
 
+// var config = {
+//     apiKey: "AIzaSyDWsmd2LkcWl_i9UBkjuEQ3XtdTeCJI5d0",
+//     authDomain: "thisisfan-71532.firebaseapp.com",
+//     databaseURL: "https://thisisfan-71532.firebaseio.com",
+//     projectId: "thisisfan-71532",
+//     storageBucket: "thisisfan-71532.appspot.com",
+//     messagingSenderId: "973998429266"
+// }
+
 var config = {
-    apiKey: "AIzaSyDWsmd2LkcWl_i9UBkjuEQ3XtdTeCJI5d0",
-    authDomain: "thisisfan-71532.firebaseapp.com",
-    databaseURL: "https://thisisfan-71532.firebaseio.com",
-    projectId: "thisisfan-71532",
-    storageBucket: "thisisfan-71532.appspot.com",
-    messagingSenderId: "973998429266"
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DATABASE_URL,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID
 }
 
 export default !firebase.apps.length ? firebase.initializeApp(config) : firebase.app()
