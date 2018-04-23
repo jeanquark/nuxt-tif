@@ -1,12 +1,16 @@
 import firebase from 'firebase'
 
 export const state = () => ({
-	loadedEvents: []
+	loadedEvents: [],
+	loadedLiveEvents: []
 })
 
 export const mutations = {
 	setEvents(state, payload) {
         state.loadedEvents = payload
+    },
+    setLiveEvents(state, payload) {
+        state.loadedLiveEvents = payload
     },
     createEvent (state, payload) {
 		  	state.loadedEvents.push(payload)
@@ -34,6 +38,21 @@ export const actions = {
 			console.log(error)
 		}
   	},
+  	loadedLiveEvents ({commit}) {
+  		try {
+    		firebase.database().ref('/events_new/').orderByChild('status').equalTo('live').on('value', function (snapshot) {
+		      	// console.log(snapshot.val())
+		      	const liveEventsArray = []
+		      	for (const key in snapshot.val()) {
+		        	liveEventsArray.push({ ...snapshot.val()[key]})
+		      	}
+		      	// console.log(postsArray)
+		      	commit('setLiveEvents', liveEventsArray)
+		    })
+		} catch(error) {
+			console.log(error)
+		}
+  	},
   	createEvent ({commit, getters}, payload) {
   		// console.log('createEvent')
   		try {
@@ -54,5 +73,8 @@ export const actions = {
 export const getters = {
 	loadedEvents(state) {
         return state.loadedEvents
+    },
+    loadedLiveEvents(state) {
+        return state.loadedLiveEvents
     }
 }

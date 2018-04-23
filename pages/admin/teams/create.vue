@@ -22,7 +22,7 @@
 	    </v-breadcrumbs>
 		<v-flex xs12 sm8 offset-sm2>
 			<br /><br />
-			<h1 class="text-md-center">Create Event</h1>
+			<h1 class="text-md-center">Create Team</h1>
 			<!-- selectedActivity: {{ this.selectedActivity }}<br />
 			selectedCategory: {{ this.selectedCategory }}<br />
 			selectedType: {{ this.selectedType }}<br />
@@ -34,7 +34,7 @@
 				<v-form>
 					<v-card-title class="primary-title">
 						<v-card-text class="text-md-center">
-							<h3>Créer un événement unique</h3>
+							<h3>Créer une équipe</h3>
 						</v-card-text>
 					</v-card-title>
 					<v-container fluid>
@@ -113,139 +113,11 @@
 								  :disabled="selectedCategory.slug == '' || selectedActivity.slug == ''"
 								></v-select>
 							</v-flex>
-					      	<!-- <br /><hr><br /> -->
 					      	<v-spacer></v-spacer>
-					      	<v-flex xs6>
-					      		<v-subheader>Date</v-subheader>
-					      	</v-flex>
-					      	<v-flex xs6>
-								<v-dialog
-								  ref="dateDialog"
-								  persistent
-								  v-model="modalDate"
-								  lazy
-								  full-width
-								  width="290px"
-								  :return-value.sync="date"
-								>
-								  <v-text-field
-								    slot="activator"
-								    label="Choisissez une date"
-								    v-model="date"
-								    prepend-icon="date_range"
-								    readonly
-								  ></v-text-field>
-								  <v-date-picker locale="fr-fr" :first-day-of-week="1" v-model="date" actions>
-								    <v-spacer></v-spacer>
-								    <v-btn flat color="primary" @click="modalDate = false">Cancel</v-btn>
-								    <v-btn flat color="primary" @click="$refs.dateDialog.save(date)">OK</v-btn>
-								  </v-date-picker>
-								</v-dialog>
-							</v-flex>
-							<v-flex xs6>
-					      		<v-subheader>Time</v-subheader>
-					      	</v-flex>
-					      	<v-flex xs6>
-								<v-dialog
-								  ref="timeDialog"
-								  persistent
-								  v-model="modalTime"
-								  lazy
-								  full-width
-								  width="290px"
-								  :return-value.sync="time"
-								>
-								  <v-text-field
-								    slot="activator"
-								    label="Choisissez une heure (UTC)"
-								    v-model="time"
-								    prepend-icon="access_time"
-								    readonly
-								  ></v-text-field>
-								  <v-time-picker v-model="time" actions>
-								    <v-spacer></v-spacer>
-								    <v-btn flat color="primary" @click="modalTime = false">Cancel</v-btn>
-								    <v-btn flat color="primary" @click="$refs.timeDialog.save(time)">OK</v-btn>
-								  </v-time-picker>
-								</v-dialog>
-								<!-- <v-subheader style="margin-top: -30px; margin-left: 20px; font-weight: normal;"><i class="fa fa-exclamation-triangle"></i>&nbsp;L'heure à inscrire est l'heure UTC &nbsp;</v-subheader> -->
-							</v-flex>
-							<v-divider></v-divider>
-							<v-layout row wrap v-if="selectedCategory.slug == 'football'">
-								<v-flex xs6>
-									<v-subheader>Stade</v-subheader>
-								</v-flex>
-
-								<v-flex>
-									<v-select
-										:items="stadiums"
-										v-model="selectedStadium" 
-										label="Sélectionner un stade"
-										item-text="name"
-										item-value="{}"
-										:autocomplete="true"
-										single-line
-										:disabled="selectedType == ''"
-									>
-									    <template slot="item" slot-scope="data">
-									      <v-list-tile-content>
-									        <v-list-tile-title>
-									          {{ data.item.name }} <small style="color: #ccc;">{{ data.item.city_name }} - {{ data.item.country_name}}</small>
-									        </v-list-tile-title>
-									      </v-list-tile-content>
-									    </template>
-									</v-select>
-								</v-flex>
-								<!-- <v-flex xs6>
-									<v-select
-									  :items="stadiums"
-									  v-model="selectedStadium"
-									  label="Sélectionner un stade"
-									  item-text="name"
-									  item-value="slug"
-									  single-line
-									  return-object
-	          						  :hint="`${selectedStadium.name}, ${selectedStadium.city_name}, ${selectedStadium.country_name}`"
-									  :disabled="selectedType == ''"
-									>
-								</v-select>
-								</v-flex> -->
-								<!-- <v-time-picker v-model="time"></v-time-picker> -->
-								<v-spacer></v-spacer>
-								<v-spacer></v-spacer>
-								<v-flex xs6 class="">
-									<v-subheader class="text-xl-center">Equipe recevante</v-subheader>
-								</v-flex>
-								<v-flex xs6>
-									<v-select
-									  :items="teams1"
-									  v-model="selectedTeam1"
-									  label="Sélectionner l'équipe recevante"
-									  item-text="name"
-									  item-value="{}"
-									  single-line
-									  :disabled="selectedType == ''"
-									></v-select>
-								</v-flex>
-								<v-flex xs6 class="">
-									<v-subheader class="text-xl-center">Equipe visiteuse</v-subheader>
-								</v-flex>
-								<v-flex xs6>
-									<v-select
-									  :items="teams2"
-									  v-model="selectedTeam2"
-									  label="Sélectionner l'équipe visiteuse"
-									  item-text="name"
-									  item-value="{}"
-									  single-line
-									  :disabled="selectedType == ''"
-									></v-select>
-								</v-flex>
-							</v-layout>
 					    </v-layout>
 				  	</v-container>
 				  	<v-card-text class="text-md-center">
-				  		<v-btn @click="submitCreateEvent" color="info">submit</v-btn>
+				  		<v-btn @click="submitCreateTeam" color="info">submit</v-btn>
     					<v-btn @click="">clear</v-btn>
     				</v-card-text>
 				</v-form>
@@ -296,61 +168,9 @@
 								<v-progress-linear :indeterminate="true" height="2"></v-progress-linear>
 							</v-flex>
 						</v-layout>
-						<v-layout row wrap>
-							<v-flex xs6>
-								<v-subheader class="text-xl-center">Date de début</v-subheader>
-							</v-flex>
-							<v-dialog
-							  ref="startDateDialog"
-							  persistent
-							  v-model="modalStartDate"
-							  lazy
-							  full-width
-							  width="290px"
-							  :return-value.sync="date"
-							>
-							  <v-text-field
-							    slot="activator"
-							    label="Choisissez une date"
-							    v-model="competitionStartDate"
-							    prepend-icon="date_range"
-							    readonly
-							  ></v-text-field>
-							  <v-date-picker locale="fr-fr" :first-day-of-week="1" v-model="competitionStartDate" actions>
-							    <v-spacer></v-spacer>
-							    <v-btn flat color="primary" @click="modalStartDate = false">Annuler</v-btn>
-							    <v-btn flat color="primary" @click="$refs.startDateDialog.save(date)">OK</v-btn>
-							  </v-date-picker>
-							</v-dialog>
-							<v-flex xs6>
-								<v-subheader class="text-xl-center">Date de fin</v-subheader>
-							</v-flex>
-							<v-dialog
-							  ref="endDateDialog"
-							  persistent
-							  v-model="modalEndDate"
-							  lazy
-							  full-width
-							  width="290px"
-							  :return-value.sync="date"
-							>
-							  <v-text-field
-							    slot="activator"
-							    label="Choisissez une date"
-							    v-model="competitionEndDate"
-							    prepend-icon="date_range"
-							    readonly
-							  ></v-text-field>
-							  <v-date-picker locale="fr-fr" :first-day-of-week="1" v-model="competitionEndDate" actions>
-							    <v-spacer></v-spacer>
-							    <v-btn flat color="primary" @click="modalEndDate = false">Annuler</v-btn>
-							    <v-btn flat color="primary" @click="$refs.endDateDialog.save(date)">OK</v-btn>
-							  </v-date-picker>
-							</v-dialog>
-						</v-layout>
 					</v-container>
 					<v-card-text class="text-md-center">
-				  		<v-btn color="info" :disabled="loading || !validAPIRequestData" :loading="loading" @click="submitRequestToFootballAPI">submit request to Football API <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></v-btn>
+				  		<v-btn color="info" @click="submitRequestToFootballAPI">submit request to Football API </v-btn>
     					<v-btn @click="">clear</v-btn>
     				</v-card-text>
     				<v-card-actions>
@@ -441,14 +261,14 @@
 				      to: '/admin'
 				    },
 				    {
-				      text: 'Events',
+				      text: 'Teams',
 				      disabled: false,
-				      to: '/admin/events'
+				      to: '/admin/teams'
 				    },
 				    {
 				      text: 'Create',
 				      disabled: true,
-				      to: '/admin/events/create'
+				      to: '/admin/teams/create'
 				    }
 				],
 			    footballAPIRequestResult: '',
@@ -510,8 +330,8 @@
 		    }
 		},
 		methods: {
-			submitCreateEvent () {
-				console.log('submitCreateEvent')
+			submitCreateTeam () {
+				console.log('submitCreateTeam')
 				this.loading = true
 				const eventData = {
 					activity: {
@@ -560,43 +380,54 @@
 		    	const formattedDate = parseInt(moment(completeDate).format('x')/1000)
 		    	return formattedDate
 		    },
+		    slugify (text) {
+				return text.toString().toLowerCase()
+					.replace(/\s+/g, '-')           // Replace spaces with -
+					.replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+					.replace(/\-\-+/g, '_')         // Replace multiple - with single -
+					.replace(/^-+/, '')             // Trim - from start of text
+					.replace(/-+$/, '');            // Trim - from end of text
+		    },
 			submitRequestToFootballAPI () {
 				console.log('submitRequestToFootballAPI')
 				this.loading = true
-				const eventsArray = []
-				this.loadedEvents.forEach((event) => {
+				const teamsArray = []
+				this.loadedTeams.forEach((team) => {
 					// console.log(event)
-					eventsArray.push(event.name_unique)
+					teamsArray.push(team.api_football_name)
 				})
+				console.log(teamsArray)
 
 				// Get local data that micmic football api response
 				// this.$axios.$get('/football_api_sample_data_get_matches.json').then((response) => {
 				// this.$axios.$get('http://api.football-api.com/2.0/matches?comp_id=' + this.selectedCompetition.football_api_id + '&from_date=' + this.competitionStartDate + '&to_date=' + this.competitionEndDate + '&Authorization=' + '565ec012251f932ea4000001d191fefd02dd4b6f65bf2e5aa5478f1d').then((response) => {
-				this.$axios.$get('https://apifootball.com/api/?action=get_events&from=' + this.competitionStartDate + '&to=' + this.competitionEndDate + '&league_id=' + this.selectedCompetition.api_football_id + ' &APIkey=' + process.env.API_FOOTBALL_KEY).then((response) => {
+				this.$axios.$get('https://apifootball.com/api/?action=get_standings&league_id=' + this.selectedCompetition.api_football_id + ' &APIkey=' + process.env.API_FOOTBALL_KEY).then((response) => {
 					// console.log(response)
 		            this.footballAPIRequestResult = response
 		            // console.log(eventsArray)
 		            // const eventsArray = []
 
-					response.forEach((event) => {
-						console.log(event)
-						const hometeam = this.loadedTeams.find(team => team.api_football_name === event.match_hometeam_name)
-						const awayteam = this.loadedTeams.find(team => team.api_football_name === event.match_awayteam_name)
-						console.log(hometeam)
-						console.log(awayteam)
-						const date_as_timestamp = new Date(event.match_date).getTime() / 1000
-						console.log(date_as_timestamp)
-						const name_unique = hometeam.id + '_vs_' + awayteam.id + '_on_' + date_as_timestamp
-						console.log(name_unique)
-						const name_pretty = hometeam.name + ' vs ' + awayteam.name
-						console.log(name_pretty)
+					response.forEach((team) => {
+						// console.log(event)
+						// const hometeam = this.loadedTeams.find(team => team.api_football_name === event.match_hometeam_name)
+						// const awayteam = this.loadedTeams.find(team => team.api_football_name === event.match_awayteam_name)
+						// console.log(hometeam)
+						// console.log(awayteam)
+						// const date_as_timestamp = new Date(event.match_date).getTime() / 1000
+						// console.log(date_as_timestamp)
+						// const name_unique = hometeam.id + '_vs_' + awayteam.id + '_on_' + date_as_timestamp
+						// console.log(name_unique)
+						// const name_pretty = hometeam.name + ' vs ' + awayteam.name
+						// console.log(name_pretty)
 						// return
-
-						if (!eventsArray.includes(name_unique)) {
+						const name_unique = this.loadedTeams.find(loadedTeam => loadedTeam.api_football_name === team.team_name)
+						console.log(name_unique)
+						if (!teamsArray.includes(name_unique)) {
 							const newPostKey = firebase.database().ref().child('events_new').push().key
 						
-							let eventData = {
+							let teamData = {
 				                id: newPostKey,
+				                slug: this.slugify(team.team_name),
 				                activity: {
 						            slug: 'sport',
 						            name: 'Sport'
@@ -609,38 +440,19 @@
 						            slug: 'premier_league',
 						            name: 'Premier League'
 						        },
-						        // football_api_id: event.id,
-				                api_football_id: event.match_id,
-				                country_name: event.country_name,
-				                country_id: event.country_id,
-				                competition_name: event.league_name,
-				                competition_id: event.league_id,
-				                date: date_as_timestamp,
-				                // localteam_id: event.localteam_id,
-				                localteam_name: event.match_hometeam_name,
-				                localteam_score: event.match_hometeam_score,
-				                localteam_halftime_score: event.match_hometeam_halftime_score,
-				                // visitorteam_id: event.visitorteam_id,
-				                visitorteam_name: event.match_awayteam_name,
-				                visitorteam_score: event.match_awayteam_score,
-				                visitorteam_halftime_score: event.match_awayteam_score,
-				                // venue_id: event.venue_id,
-				                // venue: event.venue,
-				                // venue_city: event.venue_city,
-				                // week: event.week,
-				                status: event.match_status,
-				                // half_time_score: event.ht_score,
-				                // full_time_score: event.ft_score,
-				                match_live: event.match_live,
-				                name_pretty: name_pretty,
-				                name_unique: name_unique
+				                country_name: team.country_name,
+				                // country_id: event.country_id,
+				                competition_name: team.league_name,
+				                competition_id: team.league_id,
+				                api_football_name: team.team_name,
+				                name: team.team_name,
 				            }
 				            let updates = {}
-			            	updates['/events_new/' + eventData.id] = eventData
+			            	updates['/teams/' + teamData.id] = teamData
 			            	firebase.database().ref().update(updates).then(() => {
 			            		console.log('success!')
 			            		this.loading = false
-		            			new Noty({type: 'success', layout: 'topRight', text: 'Evénement ' + name_pretty + ' créé avec succès.', timeout: 5000, theme: 'metroui', maxVisible: 10}).show()
+		            			new Noty({type: 'success', layout: 'topRight', text: 'Equipe ' + team.team_name + ' créée avec succès.', timeout: 5000, theme: 'metroui', maxVisible: 10}).show()
 
 			            	}).catch((error) => {
 			            		console.log('error')
@@ -649,14 +461,13 @@
 			            		new Noty({type: 'error', text: 'Erreur avec firebase: ' + error.message, timeout: 5000, theme: 'metroui'}).show()
 			            	})
 						} else {
-							console.log('This event already exists in database!')
+							console.log('This team already exists in database!')
 							// this.showSuccessMsg()
 							this.loading = false
-							this.showWarnMsg({message: 'Event ' + name_pretty + ' on ' + event.match_date + ' already exists in database!'})
-							// VueNotifications.types.info({message: 'Event already exists in database!'})
+							this.showWarnMsg({message: 'Team ' + team.team_name + ' already exists in database!'})
 						}
 		            })
-		            console.log(eventsArray)
+		            console.log(teamsArray)
 				})
 
 

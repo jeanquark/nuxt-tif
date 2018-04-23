@@ -32,20 +32,27 @@ module.exports = app.use(function (req, res, next) {
     console.log(randomNumber);
     let live_events = '';
     try {
-        firebase.database().ref('/events_live/lausanne_sport_vs_neuchatel_xamax').once('value').then(function(snapshot) {
-            console.log(snapshot.val());
-            live_events = snapshot.val();
-            console.log(live_events);
-            const payload = {
-                localteam_name: 'Lausanne-Sport',
-                localteam_score: randomNumber > 6 ? live_events.localteam_score + 1 : live_events.localteam_score,
-                visitorteam_name: 'Neuchâtel Xamax',
-                visitorteam_score: randomNumber <= 6 ? live_events.visitorteam_score + 1 : live_events.visitorteam_score
+        firebase.database().ref('/events_new/').orderByChild('status').equalTo('live').once('value', function (snapshot) {
+            const eventsArray = [];
+            for (const key in snapshot.val()) {
+                eventsArray.push({ ...snapshot.val()[key]});
             }
-            console.log(payload);
-            updates = {};
-            updates['/events_live/lausanne_sport_vs_neuchatel_xamax'] = payload;
-            firebase.database().ref().update(updates);
+            console.log(eventsArray);
+            eventsArray.forEach((event) => {
+                console.log(event);
+                const eventData = {
+                    id: event.id,
+                    localteam_name: event.localteam_name,
+                    localteam_score: randomNumber > 6 ? event.localteam_score + 1 : event.localteam_score,
+                    visitorteam_name: event.visitorteam_name,
+                    visitorteam_score: randomNumber <= 6 ? event.visitorteam_score + 1 : event.visitorteam_score,
+                    status: 'live'
+                }
+                console.log(eventData);
+                updates = {};
+                updates['/events_new/' + event.id] = eventData;
+                firebase.database().ref().update(updates);
+            })
         });
         res.send('GET request succeeded!');
     } catch(error) {
