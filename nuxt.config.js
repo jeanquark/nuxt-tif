@@ -134,17 +134,18 @@ module.exports = {
     }]
   ],
   plugins: [
-    {src: '~/plugins/firebase-client-init.js', ssr: false },
-    {src: '~/plugins/auth-cookie.js', ssr: false },
-    {src: '~/plugins/web-font-loader.js', ssr: false },
+    { src: '~/plugins/firebase-client-init.js', ssr: false },
+    { src: '~/plugins/auth-cookie.js', ssr: false },
+    { src: '~/plugins/web-font-loader.js', ssr: false },
     // {src: '~/plugins/vuex-loading.js', ssr: true }
     // {src: '~/plugins/vuex-loading.js' },
-    {src: '~/plugins/vue-moment', ssr: false },
-    {src: '~plugins/filters.js', ssr: false },
-    {src: '~/plugins/vuetify.js', ssr: true },
-    {src: '~/plugins/vue-notifications.js', ssr: false },
+    { src: '~/plugins/vue-moment', ssr: false },
+    { src: '~plugins/filters.js', ssr: false },
+    { src: '~/plugins/vuetify.js', ssr: true },
+    { src: '~/plugins/vue-notifications.js', ssr: false },
     // {src: '~/plugins/vue-nouislider.js', ssr: false }
-    {src: '~/plugins/vue-sweetalert2.js', ssr: false}
+    { src: '~/plugins/vue-sweetalert2.js', ssr: false },
+    { src: '~/plugins/vue-fullpage.js', ssr: false }
   ],
   serverMiddleware: [
       '~/serverMiddleware/validateFirebaseIdToken',
