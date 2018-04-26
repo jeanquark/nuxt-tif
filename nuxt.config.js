@@ -14,9 +14,10 @@ module.exports = {
       // { src: 'https://code.jquery.com/jquery-2.1.3.min.js' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       // { rel: 'preload', as: 'style', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700' },
-      // { rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous' }
+      { rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' },
+      { rel: 'stylesheet', href: 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' },
     ],
   },
   css: [
@@ -27,6 +28,7 @@ module.exports = {
       // { src: '~/assets/css/style.css', lang: 'css'}
   ],
   loading: { color: '#3f51b5' },
+  // loading: '~/components/loading.vue',
   build: {
     extend (config, ctx) {
       if (ctx.dev && ctx.isClient) {
