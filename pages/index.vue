@@ -8,7 +8,8 @@
             <a href="#what">Click me</a> -->
             <!-- <button type="button" v-for="btn in pageNum" :key="btn" :class="{active:index == btn + 2}" @click="moveTo(btn+2)">page {{btn+2}}</button>
             <button type="button" @click="showPage()">add page</button> -->
-            <quick-menu :menu-count="count" :icon-class="icons" :menu-url-list="list" :backgroundColor="color"></quick-menu>
+            <!-- <quick-menu :menu-count="count" :icon-class="icons" :menu-url-list="list" :backgroundColor="color" :abc="abc" @click.native="moveTo(2)"></quick-menu> -->
+            <quick-menu :menu-count="count" :icon-class="icons" :backgroundColor="color" :clicka="clicka" @clicked="onClickChild"></quick-menu>
         </div>
         <div class="fullpage-wp" v-fullpage="opts" ref="fullpage">
             <div class="page-1 page" id="page1">
@@ -80,7 +81,8 @@
 <script>
     import 'animate.css'
     import 'fullpage-vue/src/fullpage.css'
-    import quickMenu from 'vue-quick-menu'
+    // import quickMenu from 'vue-quick-menu'
+    import quickMenu from '~/components/quickMenu'
     export default {
         head: {
             script: [
@@ -90,7 +92,7 @@
             ],
             link: [
                 // { rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' },
-                // { rel: 'stylesheet', href: 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' },
+                { rel: 'stylesheet', href: 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' },
                 // { rel: 'stylesheet', href: '/style.css' },
             ],
             // css: [
@@ -117,52 +119,63 @@
         //   })
         // },
         data () {
-          let that = this;
-          return {
-            index: 0,
-            pageNum: 0,
-            opts: {
-                start: 0,
-                dir: 'v',
-                loop: false,
-                duration: 300,
-                beforeChange: function(ele, current, next) {
-                    console.log('before', current, next)
-                    that.index = next;
+            let that = this;
+            return {
+                index: 0,
+                pageNum: 0,
+                opts: {
+                    start: 0,
+                    dir: 'v',
+                    loop: false,
+                    duration: 300,
+                    beforeChange: function(ele, current, next) {
+                        console.log('before', current, next)
+                        that.index = next;
+                    },
+                    afterChange: function(ele, current) {
+                        that.index = current;
+                        console.log('after', current)
+                    }
                 },
-                afterChange: function(ele, current) {
-                    that.index = current;
-                    console.log('after', current)
-                }
-            },
-            count: 3,
-            icons: ['fa fa-user', 'fa fa-cog', 'fa fa-users'],
-            list: ['/avatar', '/preferences', '/teams'],
-            color: 'orangered',
-          }
+                count: 3,
+                icons: ['fa fa-user', 'fa fa-cog', 'fa fa-users'],
+                list: ['/avatar', '/preferences', '/teams'],
+                color: 'orangered',
+                // abc: '',
+                clicka: '',
+            }
         },
         methods: {
             moveTo: function(index) {
+                console.log('moveTo called')
                 this.$refs.fullpage.$fullpage.moveTo(index, true)
             },
             // showPage: function() {
             //     this.pageNum++;
             //     this.$refs.fullpage.$fullpage.$update();
             // }
-            // clickMenu () {
-            //     console.log('Click menu')
-            // }
+            // clickMenu(e) {
+            //   console.log('click Menu')
+            //   console.log(e)
+            //   let index = 1
+            //   this.$refs.fullpage.$fullpage.moveTo(index, true)
+            // },
             // start () {
             //   this.loading = true
             // },
             // finish () {
             //   this.loading = false
             // }
+            onClickChild (n) {
+                console.log('onClickChild')
+                console.log(n)
+                this.$refs.fullpage.$fullpage.moveTo(n, true)
+            }
         }
     }
 </script>
 
-<style scoped>
+<style>
   body {
     margin: 0;
   }
