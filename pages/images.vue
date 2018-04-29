@@ -13,11 +13,9 @@
           <br /><br />
           <!-- var arr: {{ arr }}<br /> -->
           <button class="btn btn-success" :disabled="loading" :loading="loading" v-if="arr.length > 0" @click="saveImage">Save Image <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
-          {{ loading }}
           <br /><br />
           <div class="progress" style="width: 50%; margin: 0 auto;" v-if="arr.length > 0">
             <div class="progress-bar bg-success" role="progressbar" :style="{width: progress + '%'}" :aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100"></div>
-            {{ this.progress }}
           </div>
           <br />
           <hr>
@@ -118,7 +116,6 @@ export default {
     saveImage() {
       console.log('saveImage')
       // this.$store.dispatch('setLoading', true, { root: true })
-      // let loading = this.loading
       this.loading = true
 
       // Save image in Firebase Cloud Storage
@@ -142,7 +139,8 @@ export default {
       // })
 
       var uploadTask = storageRef.putString(image, 'data_url')
-      uploadTask.on('state_changed', function(snapshot){
+      // uploadTask.on('state_changed', function(snapshot){
+      uploadTask.on('state_changed', (snapshot) => {
         // Observe state change events such as progress, pause, and resume
         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
         this.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
@@ -155,12 +153,13 @@ export default {
             console.log('Upload is running')
             break
         }
-        this.loading = false
-      }, function(error) {
+      // }, function(error) {
+      }, (error) => {
           // Handle unsuccessful uploads
           // this.$store.dispatch('setLoading', false, {root: true})
           this.loading = false
-      }, function() {
+      // }, function() {
+      }, () => {
           // Handle successful uploads on complete
           console.log(uploadTask.snapshot)
           const newImageKey = firebase.database().ref().child('/avatar_images/').push().key
@@ -171,13 +170,9 @@ export default {
           })
           console.log('Uploaded a data_url string!')
           // this.$store.dispatch('setLoading', false, { root: true })
-          // this.loading = false
-          
           this.loading = false
-          console.log(this.loading)
           new Noty({type: 'success', text: 'Successfully uploaded image!', timeout: 5000, theme: 'metroui'}).show()
       })
-      this.progress = 100
     }
   }
 }
