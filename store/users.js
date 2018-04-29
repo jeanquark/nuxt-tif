@@ -5,28 +5,28 @@ import axios from 'axios'
 import setUser from '../helpers/setUser'
 
 function buildUserObjectOAuth (authData) {
-  let { email, displayName, uid, photoURL } = authData.user
-  let user = {}
-  user['email'] = email
-  user['name'] = displayName
-  user['uid'] = uid
-  user['picture'] = photoURL
-  user['isAdmin'] = authData.isAdmin
-  return user
+    let { email, displayName, uid, photoURL } = authData.user
+    let user = {}
+    user['email'] = email
+    user['name'] = displayName
+    user['uid'] = uid
+    user['picture'] = photoURL
+    user['isAdmin'] = authData.isAdmin
+    return user
 }
 
 function buildUserObject (authData) {
-  // let user = {}
-  // user['email'] = authData.email
-  // user['id'] = authData.id
-  // user['status'] = 'user'
-  // return user
-  let user = {
-    email: authData.email,
-    id: authData.id,
-    status: authData.status
-  }
-  return user
+    // let user = {}
+    // user['email'] = authData.email
+    // user['id'] = authData.id
+    // user['status'] = 'user'
+    // return user
+    let user = {
+        email: authData.email,
+        id: authData.id,
+        status: authData.status
+    }
+    return user
 }
 
 function b64DecodeUnicode(str) {
@@ -39,7 +39,8 @@ function b64DecodeUnicode(str) {
 
 export const state = () => ({
 	loadedUser: null,
-    loadedAllUsers: []
+    loadedAllUsers: [],
+    loadedAvatarImages: [],
 })
 
 export const mutations = {
@@ -48,7 +49,10 @@ export const mutations = {
     },
     setAllUsers (state, payload) {
         state.loadedAllUsers = payload
-    }
+    },
+    setAvatarImages (state, payload) {
+        state.loadedAvatarImages = payload
+    },
 }
 
 export const actions = {
@@ -283,7 +287,24 @@ export const actions = {
         commit('setLoadingPage', false, { root: true })
       }, 1000)
 
-  	}
+  	},
+    async loadedAvatarImages ({commit}) {
+      try {
+          firebase.database().ref('/avatar_images/').on('value', function (snapshot) {
+            const imagesArray = []
+            for (const key in snapshot.val()) {
+              imagesArray.unshift({ ...snapshot.val()[key]})
+            }
+            commit('setAvatarImages', imagesArray)
+          })
+      } 
+      catch(error) {
+          console.log(error)
+          new Noty({type: 'error', text: 'Image non trouvée', timeout: 5000, theme: 'metroui'}).show()
+          commit('setError', error, { root: true })
+          commit('setLoading', false, { root: true })
+      }
+    }
 }
 
 export const getters = {
@@ -292,5 +313,8 @@ export const getters = {
     },
     loadedAllUsers (state) {
         return state.loadedAllUsers
+    },
+    loadedAvatarImages (state) {
+        return state.loadedAvatarImages
     }
 }

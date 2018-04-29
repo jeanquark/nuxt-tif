@@ -39,6 +39,9 @@ export const actions = {
             commit('users/setUser', req.user, { root: true })
         }
     },
+    // setLoading ({commit, payload}) {
+    //   commit('setLoading', payload)
+    // },
     clearError ({commit}) {
       commit('clearError')
     }

@@ -147,7 +147,8 @@ module.exports = {
     { src: '~/plugins/vue-notifications.js', ssr: false },
     // {src: '~/plugins/vue-nouislider.js', ssr: false }
     { src: '~/plugins/vue-sweetalert2.js', ssr: false },
-    { src: '~/plugins/vue-fullpage.js', ssr: false }
+    { src: '~/plugins/vue-fullpage.js', ssr: false },
+    // { src: '~/plugins/merge-images', ssr: false },
   ],
   serverMiddleware: [
       '~/serverMiddleware/validateFirebaseIdToken',
