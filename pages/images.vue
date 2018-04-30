@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div class="" style="background-color: #fff;">
       <div class="row">
         <div class="col-md-6 offset-md-3 text-center">
           <h1 class="title">merge-images</h1>
