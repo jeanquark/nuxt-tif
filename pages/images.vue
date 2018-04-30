@@ -4,10 +4,10 @@
         <div class="col-md-6 offset-md-3 text-center">
           <h1 class="title">merge-images</h1>
           <br /><br />
-          <img src="/images/body.png" width="100px" style="border: 2px solid #ccc; margin: 10px;" @click="addToMerge" />
-          <img src="/images/eyes.png" width="100px" style="border: 2px solid #ccc; margin: 10px;" @click="addToMerge" />
-          <img src="/images/mouth.png" width="100px" style="border: 2px solid #ccc; margin: 10px;" @click="addToMerge" />
-          <img src="/images/eyebrows.png" width="100px" style="border: 2px solid #ccc; margin: 10px;" @click="addToMerge" />
+          <img src="/images/body.png" width="100px" style="border: 2px solid #ccc; margin: 10px; cursor: pointer;" @click="addToMerge" />
+          <img src="/images/eyes.png" width="100px" style="border: 2px solid #ccc; margin: 10px; cursor: pointer;" @click="addToMerge" />
+          <img src="/images/mouth.png" width="100px" style="border: 2px solid #ccc; margin: 10px; cursor: pointer;" @click="addToMerge" />
+          <img src="/images/eyebrows.png" width="100px" style="border: 2px solid #ccc; margin: 10px; cursor: pointer;" @click="addToMerge" />
           <br /><br />
           <img src="" style="border: 2px solid #ccc;" ref="mergedImage" v-if="arr.length > 0" />
           <br /><br />
