@@ -21,7 +21,7 @@ export const actions = {
 	      	// console.log(postsArray)
 	      	commit('setTeams', teamsArray)
 	    })
-  	},
+  	}
 }
 
 export const getters = {

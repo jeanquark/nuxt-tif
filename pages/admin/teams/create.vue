@@ -142,7 +142,7 @@
 				<v-form>
 					<v-card-title class="primary-title">
 						<v-card-text class="text-md-center">
-							<h3>Créer une liste d'événements à l'aide de <a href="https://football-api.com/documentation2/#!/Competitions/get_competitions" target="_blank">Football API</a></h3>
+							<h3>Créer une liste d'équipes à l'aide de <a href="https://football-api.com/documentation2/#!/Competitions/get_competitions" target="_blank">Football API</a></h3>
 							<p>La requête peut échouer en cas d'absence ou d'invalidité de la clé privée (voir console de debogage)</p>
 							<p>Pour qu'une requête soit acceptée, il faut sélectionner le championnat anglais de Premier League et ne pas avoir une différence de plus de 30 jours entre les deux dates.</p>
 						</v-card-text>
@@ -333,44 +333,55 @@
 			submitCreateTeam () {
 				console.log('submitCreateTeam')
 				this.loading = true
-				const eventData = {
-					activity: {
-			            slug: this.selectedActivity.slug,
-			            name: this.selectedActivity.name
-			        },
-					category: {
-						slug: this.selectedCategory.slug,
-						name: this.selectedCategory.name
-					},
-			        type: {
-			            slug: this.selectedType.slug,
-			            name: this.selectedType.name
-			        },
-			        team1: {
-			            slug: this.selectedTeam1.slug,// = 'undefined' ? null : this.selectedTeam1.slug,
-			            name: this.selectedTeam1.name,// = 'undefined' ? null : this.selectedTeam1.name
-			        },
-			        team2: {
-			            slug: this.selectedTeam2.slug,// = 'undefined' ? null : this.selectedTeam2.slug,
-			            name: this.selectedTeam2.name,// = 'undefined' ? null : this.selectedTeam2.name
-			        },
-			        name_pretty: this.selectedTeam1.name + ' vs ' + this.selectedTeam2.name,
-			        name_unique: this.selectedTeam1.football_api_id + '_vs_' + this.selectedTeam2.football_api_id + '_' + this.date,
-			        location: {
-			            venue: this.selectedStadium.name,// = 'undefined' ? null : this.selectedStadium,
-			            city: this.selectedStadium.city_name,// = 'undefined' ? null : this.selectedStadium
-			            country: this.selectedStadium.country_name,
-			            timezone: this.selectedStadium.timezone
-			        },
-			        // date: this.formattedDate(this.date, this.time),
-			        // time: this.time,
-			        date2: this.date,
-			        // endDate: this.endDate,
-			        _created_at: new Date().getTime(),
-			        // _created_by: document.getElementsByName('username')[0].value,
-			        _updated_at: new Date().getTime()
-				}
-				this.$store.dispatch('events/createEvent', eventData)
+				const teamsArray = []
+				this.loadedTeams.forEach((team) => {
+					// console.log(event)
+					teamsArray.push(team.name)
+				})
+
+				this.$axios.$get('/football_api_sample_data_get_teams.json').then((response) => {
+					console.log(response)
+
+					response.forEach((team) => {
+						console.log(team)
+						if (!teamsArray.includes(team.name)) {
+							const newPostKey = firebase.database().ref().child('teams').push().key
+							let teamData = {
+								id: newPostKey,
+								activity: {
+									name: 'Sport',
+									slug: 'sport'
+								},
+								category: {
+									name: 'Football',
+									slug: 'football'
+								},
+								api_football_id: team.team_id,
+								name: team.team_name,
+								comp_id: team.comp_id,
+								country: team.country,
+							}
+							let updates = {}
+			            	updates['/teams/' + teamData.id] = teamData
+			            	firebase.database().ref().update(updates).then(() => {
+			            		console.log('success!')
+			            		this.loading = false
+		            			new Noty({type: 'success', layout: 'topRight', text: 'Equipe ' + teamData.name + ' créée avec succès.', timeout: 5000, theme: 'metroui', maxVisible: 10}).show()
+			            	}).catch((error) => {
+			            		console.log('error')
+			            		this.loading = false
+			            		console.log(error.message)
+			            		new Noty({type: 'error', text: 'Erreur avec firebase: ' + error.message, timeout: 5000, theme: 'metroui'}).show()
+			            	})
+			            } else {
+			            	console.log('This team already exists in database!')
+							this.loading = false
+							this.showWarnMsg({message: 'Event ' + name_pretty + ' on ' + event.match_date + ' already exists in database!'})
+							new Noty({type: 'warning', text: 'Team ' + team.name + 'already exists in database', timeout: 5000, theme: 'metroui'}).show()
+			            }
+					})
+				})
+				// this.$store.dispatch('teams/createTeam')
 			},
 			formattedDate (date, time) {
 		    	// Takes a string date with format DD.MM.YYYY and first transform it to YYYY-MM-DD and then to timestamp
