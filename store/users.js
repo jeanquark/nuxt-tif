@@ -3,6 +3,7 @@ import firebase from 'firebase'
 // import admin from 'firebase-admin'
 import axios from 'axios'
 import setUser from '../helpers/setUser'
+import Noty from 'noty'
 
 function buildUserObjectOAuth (authData) {
     let { email, displayName, uid, photoURL } = authData.user
@@ -175,11 +176,28 @@ export const actions = {
     // },
   	async signUserIn ({commit, dispatch}, payload) {
     	console.log(payload)
-      // commit('setLoadingPage', true, { root: true })
+      commit('setLoading', true, { root: true })
+      // return
+      // return redirect('/admin')
+      // redirect('/')
+      // this.$nuxt.$router.replace({ path: '/admin' })
+      // this.$router.replace({ path: '/admin' })
+      // return this.$router.replace({ path: '/admin' })
+      // this.$router.replace('/')
+      // this.$router.go('/admin')
+      // try {
+      //   // return redirect('/')
+      //   // this.$router.push({ path: '/home' })
+      //   this.$router.replace({ path: '/admin' })
+      // }
+      // catch(error) {
+      //   console.log(error)
+      //   return
+      // }
     	try {
       		let authData = await Auth.signInWithEmailAndPassword(payload.email, payload.password)
-      		  console.log(authData)
-            console.log(authData.getIdToken())
+      		  // console.log(authData)
+            // console.log(authData.getIdToken())
 
             // Check user status based on user token
             let userStatus = Auth.currentUser.getIdToken().then((idToken) => {
@@ -193,6 +211,12 @@ export const actions = {
                     // authData['isAdmin'] = true
                     // Push status to database
                     // dispatch('updateUser', {'isAdmin': true})
+                    // return document.location.replace('./admin')
+                    // return redirect('/admin')
+                    // this.$router.push({'path': '/admin'})
+                    // this.$router.go('/admin')
+                    // return redirect('/admin')
+                    // this.$router.replace({ path: '/admin' })
                 } else {
                     console.log('User is not an admin')
                     // authData['isAdmin'] = false
@@ -200,11 +224,13 @@ export const actions = {
                     // dispatch('updateUser', {'isAdmin': false})
                 }
             })
-            new Noty({type: 'success', text: 'Successfully signed in!', timeout: 5000, theme: 'metroui'}).show()
-
             // commit('setUser', buildUserObjectFromSignUp(authData))
             commit('setUser', setUser(authData))
-            // commit('setLoadingPage', false, { root: true })
+            commit('setLoading', false, { root: true })
+            // new Noty({type: 'success', text: 'You successfully signed in!', timeout: 5000, theme: 'metroui'}).show()
+            // return
+            // this.$router.replace('/home')
+            // return redirect('/home')
     	}
     	catch(error) {
       		console.log(error)
@@ -213,7 +239,7 @@ export const actions = {
       		// commit('../errors/setError', error)
       		// this.$store.commit('errors/setError', error)
       		commit('setError', error, { root: true })
-          // commit('setLoadingPage', false, { root: true })
+          commit('setLoading', false, { root: true })
     	}
   	},
   	async signUserUp ({commit}, payload) {
@@ -245,7 +271,7 @@ export const actions = {
       		console.log(error)
       		// commit('setError', error)
       		commit('setError', error, { root: true })
-            commit('setLoading', false, { root: true })
+          commit('setLoading', false, { root: true })
     	}
   	},
   	async signInWithGooglePopup ({commit}) {
@@ -280,14 +306,33 @@ export const actions = {
     	commit('setLoading', false)
   	},
   	async signOut ({commit}) {
-      commit('setLoadingPage', true, { root: true })
+      commit('setLoading', true, { root: true })
     	await Auth.signOut()
     	commit('setUser', null)
-      setTimeout(function() {
-        commit('setLoadingPage', false, { root: true })
-      }, 1000)
-
+      commit('setLoading', false, { root: true })
+      // new Noty({type: 'success', text: 'You successfully logged out!', timeout: 5000, theme: 'metroui'}).show()
+      // return redirect('/')
+      // setTimeout(function() {
+      //   commit('setLoadingPage', false, { root: true })
+      // }, 1000)
   	},
+    // signOut ({commit}) {
+    //   commit('setLoading', true, { root: true })
+    //   firebase.auth().signOut().then(() => {
+    //     // return redirect('/')
+    //     // this.$router.replace({ path: '/' })
+    //     commit('setUser', null)
+    //     commit('setLoading', false, { root: true })
+    //     new Noty({type: 'success', text: 'You successfully logged out!', timeout: 5000, theme: 'metroui'}).show()
+    //     // return router.replace('/')
+    //     // window.location.href = "https://google.ch"
+    //     // return redirect('/')
+    //   }).catch(function(error) {
+    //       console.log(error)
+    //   })
+    //   // this.$router.replace({ path: '/' })
+    // },
+
     async loadedAvatarImages ({commit}) {
       try {
           firebase.database().ref('/avatar_images/').on('value', function (snapshot) {

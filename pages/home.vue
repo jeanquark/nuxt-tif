@@ -2,7 +2,10 @@
 	<div class="container-fluid">
 		<!-- Header -->
 		<div id="header" class="col-12 col-sm-12 col-md-12 col-lg-12 top-fixed">
-		
+			<div class="flex-container-header" style="background: #ccc;" v-if="user">
+				<h3>{{ user.email }}</h3>
+				<button class="btn btn-danger" @click="logout">Logout</button>
+			</div>
 			<div class="flex-container-header">
 				<div class="column">
 					<span class="level-box"><i class="fa fa-star"></i> Niv. 1 - <i class="fa fa-angle-double-up"></i> 1 / 10</span>						
@@ -130,6 +133,22 @@
 <script>
 	export default {
 		layout: 'layoutFront',
+		computed: {
+			user () {
+				return this.$store.getters['users/loadedUser']
+			}
+		},
+		methods: {
+			logout() {
+				// return this.$store.dispatch('users/signOut')
+				this.$store.dispatch('users/signOut').then(() => {
+					console.log('abc')
+	          		// this.$router.push('/')
+	          		// this.$router.replace({ path: '/' })
+                	this.$router.replace('/login')
+	        	})
+	        }
+		}
 	}
 </script>
 

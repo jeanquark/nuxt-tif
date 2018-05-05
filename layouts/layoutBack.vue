@@ -287,7 +287,7 @@
         // let timer = setTimeout(function() {
         //   self.$store.commit('setLoadingPage', true, { root: true })
         // }, 2000)
-        this.$router.push('/')
+        this.$router.push('/home')
       },
       logout () {
         this.$store.dispatch('users/signOut').then(() => {

@@ -24,7 +24,7 @@
 		    // 	{ src: '~/assets/css/styles.css', lang: 'css' }
 		    // ]
 		},
-		middleware: ['auth-check'],
+		middleware: ['unauth-check'],
 		// created() {
 	 //        setTimeout(() => {
 	 //          this.loadingPage = false

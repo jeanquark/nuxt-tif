@@ -5,7 +5,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <!-- Modal Header -->
-                    <div class="modal-header">
+                    <div class="modal-header text-center">
                         <span class="modal-title">S'inscrire</span>
                         <nuxt-link to="/home">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -16,39 +16,42 @@
                     <!-- Modal body -->
                     <div id="modalTitle" class="modal-body">
 
-<br /><br />
+                        <br /><br />
+                        <div class="col-md-6 offset-md-6 text-center">
+                        <div v-if="error" class="text-center" style="color: red;">{{ $t(error.code) }}</div><br />
+
                         <form>
-<div class="group">      
-  <input type="text" required>
-  <span class="highlight"></span>
-  <span class="bar"></span>
-  <label>Name</label>
-</div>
-  
-<div class="group">      
-  <input type="text" required>
-  <span class="highlight"></span>
-  <span class="bar"></span>
-  <label>Email</label>
-</div>
+                            <!-- <div class="group">      
+                                <input type="text" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Name</label>
+                            </div> -->
+                                
+                            <div class="group">      
+                                <input type="text" v-model="email" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Email</label>
+                            </div>
 
-<div class="group">      
-  <input type="password" required>
-  <span class="highlight"></span>
-  <span class="bar"></span>
-  <label>Password</label>
-</div>
+                            <div class="group">      
+                                <input type="password" v-model="password" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Password</label>
+                            </div>
 
-<div class="form-group">
-    <label for="email">Email address</label>
-    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-</div>
-
-                            
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <!-- <div class="form-group">
+                                <label for="email">Email address</label>
+                                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            </div>   -->
+                            <button type="submit" class="btn btn-primary" style="" :disabled="loading" :loading="loading" @click.prevent="signUserIn">&nbsp;Login&nbsp;<i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>&nbsp;&nbsp;
+                            <br /><br />
                         </form>
-                    </div>
+                        </div>
+                    </div><!-- /.modal-body -->
                     <!-- Modal footer -->
                     <div class="modal-footer">
                         <nuxt-link to="/home" type="button" class="btn btn-danger" data-dismiss="modal">Fermer</nuxt-link>
@@ -61,7 +64,7 @@
 
 <script>
     export default {
-        layout: 'layoutFront',
+        layout: 'layoutLandingPage',
         head: {
             script: [
                 // { src: 'https://code.jquery.com/jquery-3.2.1.slim.min.js' },
@@ -81,24 +84,50 @@
                 // { rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' },
                 // { rel: 'stylesheet', href: '/css/styles.css' },
                 // { rel: 'stylesheet', href: '/css/material.min.css' },
-
             ]
+        },
+        data () {
+            return {
+                email: '',
+                password: ''
+            }
+        },
+        computed: {
+            loading () {
+                return this.$store.getters['loading']
+            },
+            error () {
+                return this.$store.getters['error']
+            }
+        },
+        methods: {
+            async signUserIn () {
+                console.log('signUserIn')
+                await this.$store.dispatch('users/signUserIn', {
+                    email: this.email,
+                    password: this.password
+                })
+                this.$router.replace('/home')
+            },
         }
     }
 </script>
 
 <style scoped>
+.container-fluid {
+    /*font-family: "bangers", Helvetica, sans-serif;*/
+}
 .group { 
-  position:relative; 
-  margin-bottom:45px; 
+    position:relative; 
+    margin-bottom:45px; 
 }
 input {
-  font-size:18px;
-  padding:10px 10px 10px 5px;
-  display:block;
-  width:300px;
-  border:none;
-  border-bottom:1px solid #757575;
+    background-color: whitesmoke;
+    padding:10px 10px 10px 5px;
+    display:block;
+    width:300px;
+    border:none;
+    border-bottom:1px solid #757575;
 }
 input:focus { 
     outline:none; 
@@ -106,23 +135,25 @@ input:focus {
 
 /* LABEL ======================================= */
 label {
-  color:#999; 
-  font-size:18px;
-  font-weight:normal;
-  position:absolute;
-  pointer-events:none;
-  left:5px;
-  top:10px;
-  transition:0.2s ease all; 
-  -moz-transition:0.2s ease all; 
-  -webkit-transition:0.2s ease all;
+    font-family: "bangers", Helvetica, sans-serif;
+    color:#999; 
+    font-size:18px;
+    font-weight:normal;
+    position:absolute;
+    pointer-events:none;
+    left:5px;
+    top:10px;
+    transition:0.2s ease all; 
+    -moz-transition:0.2s ease all; 
+    -webkit-transition:0.2s ease all;
 }
 
 /* active state */
 input:focus ~ label, input:valid ~ label {
-  top:-20px;
-  font-size:14px;
-  color:#5264AE;
+    top:-20px;
+    font-size:14px;
+    color:#007bff;
+    /*color:#5264AE;*/
 }
 
 /* BOTTOM BARS ================================= */
@@ -130,59 +161,60 @@ input:focus ~ label, input:valid ~ label {
     position:relative; 
     display:block; 
     width:300px; 
+    /*width: 100%;*/
 }
 .bar:before, .bar:after {
-  content:'';
-  height:2px; 
-  width:0;
-  bottom:0px; 
-  position:absolute;
-  background:#5264AE; 
-  transition:0.2s ease all; 
-  -moz-transition:0.2s ease all; 
-  -webkit-transition:0.2s ease all;
+    content:'';
+    height:2px; 
+    width:0;
+    bottom:0px; 
+    position:absolute;
+    background:#007bff; 
+    transition:0.2s ease all; 
+    -moz-transition:0.2s ease all; 
+    -webkit-transition:0.2s ease all;
 }
 .bar:before {
-  left:50%;
+    left:50%;
 }
 .bar:after {
-  right:50%; 
+    right:50%; 
 }
 
 /* active state */
 input:focus ~ .bar:before, input:focus ~ .bar:after {
-  width:50%;
+    width:50%;
 }
 
 /* HIGHLIGHTER ================================== */
 .highlight {
-  position:absolute;
-  height:60%; 
-  width:100px; 
-  top:25%; 
-  left:0;
-  pointer-events:none;
-  opacity:0.5;
+    position:absolute;
+    height:60%; 
+    width:100px; 
+    top:25%; 
+    left:0;
+    pointer-events:none;
+    opacity:0.5;
 }
 
 /* active state */
 input:focus ~ .highlight {
-  -webkit-animation:inputHighlighter 0.3s ease;
-  -moz-animation:inputHighlighter 0.3s ease;
-  animation:inputHighlighter 0.3s ease;
+    -webkit-animation:inputHighlighter 0.3s ease;
+    -moz-animation:inputHighlighter 0.3s ease;
+    animation:inputHighlighter 0.3s ease;
 }
 
 /* ANIMATIONS ================ */
 @-webkit-keyframes inputHighlighter {
-    from { background:#5264AE; }
-  to    { width:0; background:transparent; }
+        from { background:#007bff; }
+    to    { width:0; background:transparent; }
 }
 @-moz-keyframes inputHighlighter {
-    from { background:#5264AE; }
-  to    { width:0; background:transparent; }
+        from { background:#007bff; }
+    to    { width:0; background:transparent; }
 }
 @keyframes inputHighlighter {
-    from { background:#5264AE; }
-  to    { width:0; background:transparent; }
+        from { background:#007bff; }
+    to    { width:0; background:transparent; }
 }
 </style>
