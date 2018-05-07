@@ -251,11 +251,6 @@ export const actions = {
 
             // Save user in database
             const newUserKey = firebase.database().ref().child('/users').push().key
-            // firebase.database().ref('/users/' + newUserKey).set({
-            //     'email': payload.email,
-            //     'id': newUserKey,
-            //     'status': 'user'
-            // })
 
             authData['status'] = 'user'
             authData['id'] = newUserKey
@@ -264,7 +259,7 @@ export const actions = {
 
             // Load user in store
             commit('setUser', buildUserObject(authData))
-            this.$toast.success('Successfully signed up!')
+            // this.$toast.success('Successfully signed up!')
             commit('setLoading', false, { root: true })
     	} 
     	catch(error) {

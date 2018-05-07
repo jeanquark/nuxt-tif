@@ -142,10 +142,10 @@
 			logout() {
 				// return this.$store.dispatch('users/signOut')
 				this.$store.dispatch('users/signOut').then(() => {
-					console.log('abc')
+					// console.log('abc')
 	          		// this.$router.push('/')
 	          		// this.$router.replace({ path: '/' })
-                	this.$router.replace('/login')
+                	this.$router.replace('/')
 	        	})
 	        }
 		}

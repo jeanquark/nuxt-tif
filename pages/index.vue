@@ -77,7 +77,9 @@
             <div class="row button-section">
                 <div class="col-twelve">
                     <button onclick="document.getElementById('id01').style.display='block'" title="Inscription" class="button stroke smoothscroll">S'inscrire</button>              
-                    <button onclick="document.getElementById('id02').style.display='block'" title="Connection" class="button button-primary">Se connecter</button>              
+                    <!-- <nuxt-link to="/register"><button title="Inscription" class="button stroke smoothscroll">S'inscrire</button></nuxt-link>               -->
+                    <button onclick="document.getElementById('id02').style.display='block'" title="Connection" class="button button-primary">Se connecter</button>          
+                    <!-- <nuxt-link to="/login"><button title="Connection" class="button button-primary">Se connecter</button></nuxt-link>           -->
                 </div>          
             </div>
 
@@ -91,14 +93,16 @@
                     <h1>S'incrire</h1>
                     <p class="modalInscription">Entre dans la communauté de ThisIsFan.com et commence à encourager tes équipes favorites !</p>
                     <hr>
+                    <div v-if="error" class="text-center" style="color: red;"><br />{{ $t(error.code) }}<br /></div>
+                    <br />
                     <label for="email"><b>Email</b></label>
-                    <input type="text" placeholder="Enter Email" name="email" required>
+                    <input type="text" placeholder="Enter Email" name="email" v-model="email" required>
 
                     <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" required>
+                    <input type="password" placeholder="Enter Password" name="psw" v-model="password" required>
 
                     <label for="psw-repeat"><b>Répètes ton Password</b></label>
-                    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+                    <input type="password" placeholder="Repeat Password" name="psw-repeat" v-model="password_confirm" required>
 
                     <label>
                         <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Se souvenir de moi
@@ -108,8 +112,10 @@
 
                     <div class="row button-section">
                         <div class="col-twelve">
-                            <a href="index2.html" type="button" onclick="document.getElementById('id01').style.display='none'" class="button stroke smoothscroll">Non, je ne veux pas !</a>
-                            <a href="vue/load.html" type="submit" class="button button-primary">Je vais devenir fan !</a>
+                            <!-- <a href="index2.html" type="button" onclick="document.getElementById('id01').style.display='none'" class="button stroke smoothscroll">Non, je ne veux pas !</a> -->
+                            <nuxt-link to="/" type="button" onclick="document.getElementById('id01').style.display='none'" class="button stroke smoothscroll">Non, je ne veux pas !</nuxt-link>
+                            <!-- <a href="vue/load.html" type="submit" class="button button-primary">Je vais devenir fan !</a> -->
+                            <button type="submit" class="button button-primary" :disabled="loading" :loading="loading" @click.prevent="signUserUp">Je vais devenir fan ! <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
                         </div>
                     </div>
 
@@ -131,11 +137,13 @@
                     <h1>Se connecter</h1>
                     <p class="modalInscription">Va vite encourager tes équipes favorites !</p>
                     <hr>
+                    <div v-if="error" class="text-center" style="color: red;"><br />{{ $t(error.code) }}<br /></div>
+                    <br />
                     <label for="email"><b>Email</b></label>
-                    <input type="text" placeholder="Enter Email" name="email" required>
+                    <input type="text" placeholder="Enter Email" name="email" v-model="email" required>
 
                     <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" required>
+                    <input type="password" placeholder="Enter Password" name="psw" v-model="password" required>
 
                     <label>
                         <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Se souvenir de moi
@@ -144,7 +152,7 @@
                     <div class="row button-section">
                         <div class="col-twelve">
                             <a href="index2.html" type="button" onclick="document.getElementById('id02').style.display='none'" class="button stroke smoothscroll">Non, je ne veux pas !</a>
-                            <a href="vue/load.html" type="submit" class="button button-primary">Go Go Go, c'est parti !</a>
+                            <a href="vue/load.html" type="submit" class="button button-primary" :disabled="loading" :loading="loading" @click.prevent="signUserIn">Go Go Go, c'est parti ! <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></a>
                         </div>
                     </div>
 
@@ -710,6 +718,9 @@
         },
         mounted: () => {
         },
+        created () {
+            this.$store.dispatch('clearError')
+        },
         data () {
             let that = this
             return {
@@ -719,6 +730,17 @@
                 // list: ['/avatar', '/preferences', '/teams'],
                 anchors: ['intro', 'about', 'resume', 'portfolio', 'stats'],
                 color: 'orangered',
+                email: '',
+                password: '',
+                password_confirm: '',
+            }
+        },
+        computed: {
+            loading () {
+                return this.$store.getters['loading']
+            },
+            error () {
+                return this.$store.getters['error']
             }
         },
         methods: {
@@ -734,7 +756,24 @@
             onClickChild (n) {
                 console.log('onClickChild')
                 location.hash = "#" + this.anchors[n];
-            }
+            },
+            async signUserUp () {
+                console.log('signUserUp')
+                await this.$store.dispatch('users/signUserUp', {
+                    email: this.email,
+                    password: this.password,
+                    password_confirm: this.password_confirm
+                })
+                this.$router.replace('/home')
+            },
+            async signUserIn () {
+                console.log('signUserIn')
+                await this.$store.dispatch('users/signUserIn', {
+                    email: this.email,
+                    password: this.password
+                })
+                this.$router.replace('/home')
+            },
         }
     }
 </script>

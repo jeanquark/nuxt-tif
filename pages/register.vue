@@ -6,7 +6,7 @@
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header text-center">
-                        <span class="modal-title">Se connecter</span>
+                        <span class="modal-title">S'inscrire</span>
                         <nuxt-link to="/home">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
@@ -20,14 +20,7 @@
                         <div class="col-md-6 offset-md-6 text-center">
                         <div v-if="error" class="text-center" style="color: red;">{{ $t(error.code) }}</div><br />
 
-                        <form>
-                            <!-- <div class="group">      
-                                <input type="text" required>
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label>Name</label>
-                            </div> -->
-                                
+                        <form>  
                             <div class="group">      
                                 <input type="text" v-model="email" required>
                                 <span class="highlight"></span>
@@ -42,12 +35,14 @@
                                 <label>Password</label>
                             </div>
 
-                            <!-- <div class="form-group">
-                                <label for="email">Email address</label>
-                                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
-                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                            </div>   -->
-                            <button type="submit" class="btn btn-primary" style="" :disabled="loading" :loading="loading" @click.prevent="signUserIn"> Login <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>&nbsp;&nbsp;
+                            <div class="group">      
+                                <input type="password" v-model="confirm_password" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Confirm Password</label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="" :disabled="loading" :loading="loading" @click.prevent="signUserUp"> Register <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>&nbsp;&nbsp;
                             <br /><br />
                         </form>
                         </div>
@@ -89,7 +84,8 @@
         data () {
             return {
                 email: '',
-                password: ''
+                password: '',
+                confirm_password: ''
             }
         },
         computed: {
@@ -101,11 +97,12 @@
             }
         },
         methods: {
-            async signUserIn () {
-                console.log('signUserIn')
-                await this.$store.dispatch('users/signUserIn', {
+            async signUserUp () {
+                console.log('signUserUp')
+                await this.$store.dispatch('users/signUserUp', {
                     email: this.email,
-                    password: this.password
+                    password: this.password,
+                    password_confirm: this.password_confirm
                 })
                 this.$router.replace('/home')
             },
