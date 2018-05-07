@@ -7,7 +7,10 @@ export const state = () => ({
 export const mutations = {
 	setTeams(state, payload) {
         state.loadedTeams = payload
-    }
+    },
+    // setTeamsByCompetition (state, competition_id) {
+    //     state.loadedTeams.filter(team => team.competition_id === 1)
+    // } 
 }
 
 export const actions = {

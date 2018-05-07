@@ -208,20 +208,8 @@ export const actions = {
 
                 if (!!payload['admin']) {
                     console.log('User is admin')
-                    // authData['isAdmin'] = true
-                    // Push status to database
-                    // dispatch('updateUser', {'isAdmin': true})
-                    // return document.location.replace('./admin')
-                    // return redirect('/admin')
-                    // this.$router.push({'path': '/admin'})
-                    // this.$router.go('/admin')
-                    // return redirect('/admin')
-                    // this.$router.replace({ path: '/admin' })
                 } else {
                     console.log('User is not an admin')
-                    // authData['isAdmin'] = false
-                    // Push status to database
-                    // dispatch('updateUser', {'isAdmin': false})
                 }
             })
             // commit('setUser', buildUserObjectFromSignUp(authData))

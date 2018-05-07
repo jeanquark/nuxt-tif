@@ -7,7 +7,8 @@
                     <!-- Modal Header -->
                     <div class="modal-header text-center">
                         <span class="modal-title">S'inscrire</span>
-                        <nuxt-link to="/home">
+                        
+                        <nuxt-link to="/">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
                             </button>
@@ -15,7 +16,6 @@
                     </div>
                     <!-- Modal body -->
                     <div id="modalTitle" class="modal-body">
-
                         <br /><br />
                         <div class="col-md-6 offset-md-6 text-center">
                         <div v-if="error" class="text-center" style="color: red;">{{ $t(error.code) }}</div><br />
@@ -49,7 +49,7 @@
                     </div><!-- /.modal-body -->
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <nuxt-link to="/home" type="button" class="btn btn-danger" data-dismiss="modal">Fermer</nuxt-link>
+                        <nuxt-link to="/" type="button" class="btn btn-danger" data-dismiss="modal">Fermer</nuxt-link>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->

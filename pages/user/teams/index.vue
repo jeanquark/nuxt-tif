@@ -7,7 +7,7 @@
 					<!-- Modal Header -->
 					<div class="modal-header">
 					  	<span class="modal-title">Tes équipes</span>
-						<nuxt-link to="/user">
+						<nuxt-link to="/home">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
 							</button>
@@ -35,30 +35,18 @@
 						<div class="flex-container-modal-OtherTeam">
 							<h6>Choisis ta compétition</h6>
 						</div>
-						<div class="flex-container-modal-OtherTeam-Img">
+						<div class="flex-container-modal-OtherTeam-Img" v-for="competition in loadedCompetitions">
 							<div class="OtherTeam">
-								<img src="/images/competition/compFootIntCM18.png" class="imgModalAvatar"/>
-								<nuxt-link to="/user/teams/competitionTeams" class="overlayOtherTeam">
-									<div class="textActivity">Football</br>Coupe du monde</br>Russie</br>2018</br></br>+Infos</div>
+								<img :src="'/images/competitions/' + competition.image" class="imgModalAvatar"/>
+								<nuxt-link :to="'/user/competitions/' + competition.slug" class="overlayOtherTeam">
+									<div class="textActivity">{{ competition.name}}</br>{{ competition.country }}</br>{{ competition.year }}</br></br>+Infos</div>
 								</nuxt-link>
 							</div>
-							<div class="OtherTeam">
-								<img src="/images/competition/compFootCHE1819.png" class="imgModalAvatar"/>
-								<nuxt-link to="/user/teams/competitionTeams" class="overlayOtherTeam">
-									<div class="textActivity">Football</br>Championnat</br>Super League</br>Suisse</br>18/19</br></br>+Infos</div>
-								</nuxt-link>
-							</div>
-							<div class="OtherTeam">
-								<img src="/images/competition/compFootFRA1819.png" class="imgModalAvatar"/>
-								<nuxt-link to="/user/teams/competitionTeams" class="overlayOtherTeam">
-									<div class="textActivity">Football</br>Championnat</br>Ligue 1</br>France</br>18/19</br></br>+Infos</div>
-								</nuxt-link>
-							</div>
-						</div>	
+						</div>
 					</div>
 					<!-- Modal footer -->
 					<div class="modal-footer">
-					  	<nuxt-link to="/user">
+					  	<nuxt-link to="/home">
 					  		<button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
 					  	</nuxt-link>
 					</div>
@@ -72,6 +60,19 @@
 <script>
   export default {
     layout: 'layoutFront',
+    data () {
+    	return {
+
+    	}
+    },
+    created () {
+    	this.$store.dispatch('competitions/loadedCompetitions')
+    },
+    computed: {
+    	loadedCompetitions () {
+    		return this.$store.getters['competitions/loadedCompetitions']
+    	}
+    }
   }
 </script>
 

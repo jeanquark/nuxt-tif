@@ -76,10 +76,10 @@
 
             <div class="row button-section">
                 <div class="col-twelve">
-                    <button onclick="document.getElementById('id01').style.display='block'" title="Inscription" class="button stroke smoothscroll">S'inscrire</button>              
-                    <!-- <nuxt-link to="/register"><button title="Inscription" class="button stroke smoothscroll">S'inscrire</button></nuxt-link>               -->
-                    <button onclick="document.getElementById('id02').style.display='block'" title="Connection" class="button button-primary">Se connecter</button>          
-                    <!-- <nuxt-link to="/login"><button title="Connection" class="button button-primary">Se connecter</button></nuxt-link>           -->
+                    <!-- <button onclick="document.getElementById('id01').style.display='block'" title="Inscription" class="button stroke smoothscroll">S'inscrire</button>               -->
+                    <nuxt-link to="/register"><button title="Inscription" class="button stroke smoothscroll">S'inscrire</button></nuxt-link>              
+                    <!-- <button onclick="document.getElementById('id02').style.display='block'" title="Connection" class="button button-primary">Se connecter</button>           -->
+                    <nuxt-link to="/login"><button title="Connection" class="button button-primary">Se connecter</button></nuxt-link>          
                 </div>          
             </div>
 
@@ -692,7 +692,7 @@
 <script>
     import quickMenu from '~/components/quickMenu'
     export default {
-        layout: 'layoutFront',
+        layout: 'layoutLandingPage',
         head: {
             script: [
                 // { src: 'https://code.jquery.com/jquery-2.1.3.min.js' },

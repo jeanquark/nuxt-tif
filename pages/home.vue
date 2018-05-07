@@ -145,7 +145,7 @@
 					// console.log('abc')
 	          		// this.$router.push('/')
 	          		// this.$router.replace({ path: '/' })
-                	this.$router.replace('/')
+                	this.$router.replace('/login')
 	        	})
 	        }
 		}

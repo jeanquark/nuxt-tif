@@ -44,7 +44,7 @@
 				        <th
 				          v-for="header in props.headers"
 				          :key="header.text"
-				          :class="['column sortable', pagination.descending ? 'desc' : 'asc', header.value === pagination.sortBy ? 'active' : '']"
+				          :class="['column sortable', pagination.descending ? 'desc' : 'asc', header.value === pagination.sortBy ? 'active' : '', header.align === 'left' ? 'text-xs-left' : '',]"
 				          @click="changeSort(header.value)"
 				        >
 				          <v-icon small>arrow_upward</v-icon>
@@ -63,9 +63,9 @@
 				        </td>
 				        <td>{{ props.index + 1 }}</td>
 						<td>{{ props.item.name }}</td>
-						<td class="text-xs-right">{{ props.item.activity.name }}</td>
-						<td class="text-xs-right">{{ props.item.category.name }}</td>
-						<td class="text-xs-right">{{ props.item.type.name }}</td>
+						<td class="">{{ props.item.activity.name }}</td>
+						<td class="">{{ props.item.category.name }}</td>
+						<!-- <td class="text-xs-right">{{ props.item.type.name }}</td> -->
 						<td class="justify-center layout px-0">
 						  <v-btn icon class="mx-0" :to="'/admin/teams/' + props.item.id" :id="props.item.id" disabled>
 						    <v-icon color="teal">edit</v-icon>
@@ -107,10 +107,10 @@
 			    ],
 		        headers: [
 		        	{ text: 'N°', value: 'id', align: 'left', sortable: false },
-		        	{ text: 'Name', value: 'name' },
-					{ text: 'Activity', value: 'activity' },
-					{ text: 'Category', value: 'category' },
-					{ text: 'Type', value: 'type' },
+		        	{ text: 'Name', value: 'name', align: 'left' },
+					{ text: 'Activity', value: 'activity', align: 'left' },
+					{ text: 'Category', value: 'category', align: 'left' },
+					// { text: 'Type', value: 'type' },
 					// { text: 'Time', value: 'time' },
 					{ text: 'Actions', value: 'actions', sortable: false }
 		        ],

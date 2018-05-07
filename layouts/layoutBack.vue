@@ -235,7 +235,7 @@
         { icon: 'dashboard', text: 'Dashboard', to: '/admin', exact: true },
         { icon: 'contacts', text: 'Users', to: '/admin/users', exact: false },
         { icon: 'event', text: 'Events', to: '/admin/events', exact: false },
-        { text: 'Teams', to: '/admin/teams', exact: false },
+        { icon: 'event', text: 'Teams', to: '/admin/teams', exact: false },
         { icon: 'history', text: 'Placeholder 1', to: '', exact: false },
         { icon: 'content_copy', text: 'Placeholder 2', to: '', exact: false },
         {
