@@ -33,15 +33,16 @@ function buildUserObject (authData) {
 function b64DecodeUnicode(str) {
     // Going backwards: from bytestream, to percent-encoding, to original string.
     return decodeURIComponent(atob(str).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
 }
 
 
 export const state = () => ({
-	loadedUser: null,
+    loadedUser: null,
     loadedAllUsers: [],
     loadedAvatarImages: [],
+    loadedUserTeams: []
 })
 
 export const mutations = {
@@ -54,15 +55,18 @@ export const mutations = {
     setAvatarImages (state, payload) {
         state.loadedAvatarImages = payload
     },
+    setUserTeams (state, payload) {
+        state.loadedUserTeams = payload
+    }
 }
 
 export const actions = {
-	// nuxtServerInit ({ commit }, { req }) {
-	//     if (req.user) {
-	//       	// commit('setUser', req.user)
-	//       	commit('users/setUser', req.user, { root: true })
-	//     }
- //  	},
+    // nuxtServerInit ({ commit }, { req }) {
+    //     if (req.user) {
+    //          // commit('setUser', req.user)
+    //          commit('users/setUser', req.user, { root: true })
+    //     }
+ //     },
     loadedAllUsers ({commit}) {
         try {
             firebase.database().ref('/users/').on('value', function (snapshot) {
@@ -75,86 +79,85 @@ export const actions = {
                 commit('setAllUsers', usersArray)
             })
         } catch(error) {
-          console.log(error)
-        }
-    },
-    async updateUserAccount ({commit, state, dispatch}, payload) {
-        console.log('async updateUserAccount')
-        try {
-            // admin.auth().getUserByEmail('test3@test.com').then((user) => {
-            //     admin.auth().setCustomUserClaims(user.uid, null)
-            // })
-            console.log(payload)
-            const userEmail = payload.userEmail
-            // const uid = payload.uid
-            const action = payload.action
-
-            // // this.$axios.$post('/setCustomClaims', {userEmail: userEmail})
-            // // $.post('/setCustomClaims', {userEmail: userEmail}, (data, status) => {})
-            // // this.$axios({ method: 'post', url: '/setCustomClaims', data: {firstName: 'Fred', lastName: 'Flintstone'}})
-            // // await this.$axios.$post('/setCustomClaims', { userEmail: 'jm.kleger@gmail.com' })
-            // await this.$axios.$post('/setCustomClaims', { userEmail: userEmail, action: action })
-            // // dispatch('updateUser', {status: 'admin'})
-            // console.log('successfully called setCustomClaims ' + action + ' method.')
-            // console.log('called ' + action)
-            // console.log(user2)
-            // const userId = "-L9jQ_OL56RapwI3K1C7"
-            // const user = state.loadedAllUsers.find(user => user.email === userEmail)
-            // console.log(user)
-
-            // if (action == 'userToAdmin') {
-            //     dispatch('updateUser', {status: 'admin', id: user.id})
-            // } else if (action == 'adminToUser') {
-            //     dispatch('updateUser', {status: 'user', id: user.id})
-            // }
-            // this.$toast.success('Successfully updated ' + userEmail + ' account!')
-
-
-            return this.$axios.$post('/setCustomClaims', { userEmail: userEmail, action: action }).then((user) => {
-              console.log('successfully called setCustomClaims method.')
-              console.log('called ' + action)
-              console.log(user)
-
-              const user2 = state.loadedAllUsers.find(user => user.email === userEmail)
-
-              if (action == 'userToAdmin') {
-                dispatch('updateUser', {status: 'admin', id: user2.id})
-              } else if (action == 'adminToUser') {
-                dispatch('updateUser', {status: 'user', id: user2.id})
-              }
-              this.$toast.success('Successfully updated account!')
-            })
-
-        }
-        catch(error) {
             console.log(error)
         }
     },
+    async updateUserAccount ({commit, state, dispatch}, payload) {
+            console.log('async updateUserAccount')
+            try {
+                // admin.auth().getUserByEmail('test3@test.com').then((user) => {
+                //     admin.auth().setCustomUserClaims(user.uid, null)
+                // })
+                console.log(payload)
+                const userEmail = payload.userEmail
+                // const uid = payload.uid
+                const action = payload.action
+
+                // // this.$axios.$post('/setCustomClaims', {userEmail: userEmail})
+                // // $.post('/setCustomClaims', {userEmail: userEmail}, (data, status) => {})
+                // // this.$axios({ method: 'post', url: '/setCustomClaims', data: {firstName: 'Fred', lastName: 'Flintstone'}})
+                // // await this.$axios.$post('/setCustomClaims', { userEmail: 'jm.kleger@gmail.com' })
+                // await this.$axios.$post('/setCustomClaims', { userEmail: userEmail, action: action })
+                // // dispatch('updateUser', {status: 'admin'})
+                // console.log('successfully called setCustomClaims ' + action + ' method.')
+                // console.log('called ' + action)
+                // console.log(user2)
+                // const userId = "-L9jQ_OL56RapwI3K1C7"
+                // const user = state.loadedAllUsers.find(user => user.email === userEmail)
+                // console.log(user)
+
+                // if (action == 'userToAdmin') {
+                //     dispatch('updateUser', {status: 'admin', id: user.id})
+                // } else if (action == 'adminToUser') {
+                //     dispatch('updateUser', {status: 'user', id: user.id})
+                // }
+                // this.$toast.success('Successfully updated ' + userEmail + ' account!')
+
+
+                return this.$axios.$post('/setCustomClaims', { userEmail: userEmail, action: action }).then((user) => {
+                    console.log('successfully called setCustomClaims method.')
+                    console.log('called ' + action)
+                    console.log(user)
+
+                    const user2 = state.loadedAllUsers.find(user => user.email === userEmail)
+
+                    if (action == 'userToAdmin') {
+                        dispatch('updateUser', {status: 'admin', id: user2.id})
+                    } else if (action == 'adminToUser') {
+                        dispatch('updateUser', {status: 'user', id: user2.id})
+                    }
+                    this.$toast.success('Successfully updated account!')
+                })
+            }
+            catch(error) {
+                console.log(error)
+            }
+    },
     loadedUser ({commit}) {
-      console.log('Entering loadedUser')
-      const userId = firebase.auth().currentUser.uid
-      console.log(userId)
-      // console.log(userId)
-      // firebase.database().ref('users/' + userId).on('value')
-      firebase.database().ref('users/' + userId).on('value', function (snapshot) {
-        const userArray = []
-          for (const key in snapshot.val()) {
-            userArray.push({ ...snapshot.val()[key]})
-          }
-          commit('setUser', userArray)
-      })
+        console.log('Entering loadedUser')
+        const userId = firebase.auth().currentUser.uid
+        console.log(userId)
+        // console.log(userId)
+        // firebase.database().ref('users/' + userId).on('value')
+        firebase.database().ref('users/' + userId).on('value', function (snapshot) {
+            const userArray = []
+            for (const key in snapshot.val()) {
+                userArray.push({ ...snapshot.val()[key]})
+            }
+            commit('setUser', userArray)
+        })
     },
     async updateUser ({commit}, payload) {
         try {
-          // const userId = firebase.auth().currentUser.uid
-          // console.log(userId)
-          // let updateObj = payload
-          // console.log(updateObj)
-          const userId = payload.id
-          return firebase.database().ref('/users/' + userId).update(payload)
+            // const userId = firebase.auth().currentUser.uid
+            // console.log(userId)
+            // let updateObj = payload
+            // console.log(updateObj)
+            const userId = payload.id
+            return firebase.database().ref('/users/' + userId).update(payload)
 
         } catch(error) {
-          console.log(error)
+            console.log(error)
         }
     },
     // updateUserAccountToAdmin ({commit}, payload) {
@@ -174,29 +177,29 @@ export const actions = {
     //     console.log('checkUserCustomClaim')
     //     return 'abc'
     // },
-  	async signUserIn ({commit, dispatch}, payload) {
-    	console.log(payload)
-      commit('setLoading', true, { root: true })
-      // return
-      // return redirect('/admin')
-      // redirect('/')
-      // this.$nuxt.$router.replace({ path: '/admin' })
-      // this.$router.replace({ path: '/admin' })
-      // return this.$router.replace({ path: '/admin' })
-      // this.$router.replace('/')
-      // this.$router.go('/admin')
-      // try {
-      //   // return redirect('/')
-      //   // this.$router.push({ path: '/home' })
-      //   this.$router.replace({ path: '/admin' })
-      // }
-      // catch(error) {
-      //   console.log(error)
-      //   return
-      // }
-    	try {
-      		let authData = await Auth.signInWithEmailAndPassword(payload.email, payload.password)
-      		  // console.log(authData)
+    async signUserIn ({commit, dispatch}, payload) {
+        console.log(payload)
+        commit('setLoading', true, { root: true })
+        // return
+        // return redirect('/admin')
+        // redirect('/')
+        // this.$nuxt.$router.replace({ path: '/admin' })
+        // this.$router.replace({ path: '/admin' })
+        // return this.$router.replace({ path: '/admin' })
+        // this.$router.replace('/')
+        // this.$router.go('/admin')
+        // try {
+        //   // return redirect('/')
+        //   // this.$router.push({ path: '/home' })
+        //   this.$router.replace({ path: '/admin' })
+        // }
+        // catch(error) {
+        //   console.log(error)
+        //   return
+        // }
+        try {
+            let authData = await Auth.signInWithEmailAndPassword(payload.email, payload.password)
+            // console.log(authData)
             // console.log(authData.getIdToken())
 
             // Check user status based on user token
@@ -207,9 +210,9 @@ export const actions = {
                 console.log(payload)
 
                 if (!!payload['admin']) {
-                    console.log('User is admin')
+                        console.log('User is admin')
                 } else {
-                    console.log('User is not an admin')
+                        console.log('User is not an admin')
                 }
             })
             // commit('setUser', buildUserObjectFromSignUp(authData))
@@ -219,23 +222,23 @@ export const actions = {
             // return
             // this.$router.replace('/home')
             // return redirect('/home')
-    	}
-    	catch(error) {
-      		console.log(error)
-      		// commit('setError', error)
-      		// commit['errors/setError', error]
-      		// commit('../errors/setError', error)
-      		// this.$store.commit('errors/setError', error)
-      		commit('setError', error, { root: true })
-          commit('setLoading', false, { root: true })
-    	}
-  	},
-  	async signUserUp ({commit}, payload) {
-    	console.log(payload)
-      commit('setLoading', true, { root: true })
-    	try {
-      		let authData = await Auth.createUserWithEmailAndPassword(payload.email, payload.password)
-      		console.log(authData)
+        }
+        catch(error) {
+            console.log(error)
+            // commit('setError', error)
+            // commit['errors/setError', error]
+            // commit('../errors/setError', error)
+            // this.$store.commit('errors/setError', error)
+            commit('setError', error, { root: true })
+            commit('setLoading', false, { root: true })
+        }
+    },
+    async signUserUp ({commit}, payload) {
+        console.log(payload)
+        commit('setLoading', true, { root: true })
+        try {
+            let authData = await Auth.createUserWithEmailAndPassword(payload.email, payload.password)
+            console.log(authData)
 
             // Save user in database
             const newUserKey = firebase.database().ref().child('/users').push().key
@@ -249,18 +252,18 @@ export const actions = {
             commit('setUser', buildUserObject(authData))
             // this.$toast.success('Successfully signed up!')
             commit('setLoading', false, { root: true })
-    	} 
-    	catch(error) {
-      		console.log(error)
-      		// commit('setError', error)
-      		commit('setError', error, { root: true })
-          commit('setLoading', false, { root: true })
-    	}
-  	},
-  	async signInWithGooglePopup ({commit}) {
-    	commit('setLoading', true, { root: true })
+        } 
+        catch(error) {
+            console.log(error)
+            // commit('setError', error)
+            commit('setError', error, { root: true })
+            commit('setLoading', false, { root: true })
+        }
+    },
+    async signInWithGooglePopup ({commit}) {
+        commit('setLoading', true, { root: true })
         try {
-          	let authData = await Auth.signInWithPopup(GoogleAuthProvider)
+            let authData = await Auth.signInWithPopup(GoogleAuthProvider)
             console.log(authData)
 
             // Save user in database
@@ -281,24 +284,24 @@ export const actions = {
             commit('setError', error, { root: true })
             commit('setLoading', false, { root: true })
         }
-  	},
-  	async signInWithFacebookPopup ({commit}) {
-    	commit('setLoading', true)
-    	let authData = await Auth.signInWithPopup(FacebookAuthProvider)
-    	commit('setUser', buildUserObject(authData))
-    	commit('setLoading', false)
-  	},
-  	async signOut ({commit}) {
-      commit('setLoading', true, { root: true })
-    	await Auth.signOut()
-    	commit('setUser', null)
-      commit('setLoading', false, { root: true })
-      // new Noty({type: 'success', text: 'You successfully logged out!', timeout: 5000, theme: 'metroui'}).show()
-      // return redirect('/')
-      // setTimeout(function() {
-      //   commit('setLoadingPage', false, { root: true })
-      // }, 1000)
-  	},
+    },
+    async signInWithFacebookPopup ({commit}) {
+        commit('setLoading', true)
+        let authData = await Auth.signInWithPopup(FacebookAuthProvider)
+        commit('setUser', buildUserObject(authData))
+        commit('setLoading', false)
+    },
+    async signOut ({commit}) {
+        commit('setLoading', true, { root: true })
+        await Auth.signOut()
+        commit('setUser', null)
+        commit('setLoading', false, { root: true })
+        // new Noty({type: 'success', text: 'You successfully logged out!', timeout: 5000, theme: 'metroui'}).show()
+        // return redirect('/')
+        // setTimeout(function() {
+        //   commit('setLoadingPage', false, { root: true })
+        // }, 1000)
+    },
     // signOut ({commit}) {
     //   commit('setLoading', true, { root: true })
     //   firebase.auth().signOut().then(() => {
@@ -317,26 +320,88 @@ export const actions = {
     // },
 
     async loadedAvatarImages ({commit}) {
-      try {
-          firebase.database().ref('/avatar_images/').on('value', function (snapshot) {
-            const imagesArray = []
-            for (const key in snapshot.val()) {
-              imagesArray.unshift({ ...snapshot.val()[key]})
-            }
-            commit('setAvatarImages', imagesArray)
-          })
-      } 
-      catch(error) {
-          console.log(error)
-          new Noty({type: 'error', text: 'Image non trouvée', timeout: 5000, theme: 'metroui'}).show()
-          commit('setError', error, { root: true })
-          commit('setLoading', false, { root: true })
-      }
+        try {
+            firebase.database().ref('/avatar_images/').on('value', function (snapshot) {
+                const imagesArray = []
+                for (const key in snapshot.val()) {
+                    imagesArray.unshift({ ...snapshot.val()[key]})
+                }
+                commit('setAvatarImages', imagesArray)
+            })
+        } 
+        catch(error) {
+            console.log(error)
+            new Noty({type: 'error', text: 'Image non trouvée', timeout: 5000, theme: 'metroui'}).show()
+            commit('setError', error, { root: true })
+            commit('setLoading', false, { root: true })
+        }
+    },
+    async loadedUserTeams ({commit, state}) {
+        try {
+            // const userId = firebase.auth().currentUser.uid
+            const userId = state.loadedUser.user_id
+            firebase.database().ref('/userTeams/').child(userId).on('value', function (snapshot) {
+                // console.log(snapshot.val())
+                const userTeamsArray = []
+                // const userTeamsArray = snapshot.val()
+
+                for (const key in snapshot.val()) {
+                    // console.log(key)
+                    // userTeamsArray.push({ ...snapshot.val()[key]})
+                    // userTeamsArray.push({[key]: snapshot.val()[key]})
+                    // for (const teamId in key) {
+                    //     userTeamsArray.push({[key]: teamId})
+                    // }
+                    userTeamsArray.push(key)
+                }
+                console.log(userTeamsArray)
+                commit('setUserTeams', userTeamsArray)
+            })
+        } 
+        catch(error) {
+            console.log(error)
+            commit('setError', error, { root: true })
+        }
+    },
+    async updateUserTeams ({commit}, payload) {
+        // console.log(payload)
+        try {
+            const userId = firebase.auth().currentUser.uid
+            const teams = payload
+
+            // 1) First delete all existing team references in userTeams node
+            firebase.database().ref('/userTeams/').child(userId).remove()
+
+            // 2) Then delete all existing user references in teamUsers node
+            firebase.database().ref('/teamUsers/').orderByChild(userId).equalTo(true).once('value', function (snapshot) {
+                // console.log(snapshot.val())
+                snapshot.forEach(function(childSnapshot) {
+                    console.log(childSnapshot.key)
+                    firebase.database().ref('/teamUsers').child(childSnapshot.key).child(userId).remove()
+                })
+            }).then(() => {
+                // console.log('Done')
+                // console.log(teams)
+                // 3) Save each team in userTeams node && user in each teamUsers node
+                teams.forEach((team) => {
+                    firebase.database().ref('/userTeams/').child(userId).update({[team.id]: true})
+                    firebase.database().ref('/teamUsers/').child(team.id).update({[userId]: true})
+
+                    new Noty({type: 'success', text: 'You are following ' + team.name + '. Future will tell whether it\'s a wise move or not&#9786;', timeout: 5000, theme: 'metroui'}).show()
+                })
+            })
+        } 
+        catch(error) {
+            console.log(error)
+            new Noty({type: 'error', text: 'Erreur lors de la sauvegarde des nouvelles équipes', timeout: 5000, theme: 'metroui'}).show()
+            commit('setError', error, { root: true })
+            commit('setLoading', false, { root: true })
+        }
     }
 }
 
 export const getters = {
-	loadedUser (state) {
+    loadedUser (state) {
         return state.loadedUser
     },
     loadedAllUsers (state) {
@@ -344,5 +409,8 @@ export const getters = {
     },
     loadedAvatarImages (state) {
         return state.loadedAvatarImages
+    },
+    loadedUserTeams (state) {
+        return state.loadedUserTeams
     }
 }
