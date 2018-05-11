@@ -56,6 +56,7 @@ export const mutations = {
         state.loadedAvatarImages = payload
     },
     setUserTeams (state, payload) {
+        console.log('call to setUserTeams mutation')
         state.loadedUserTeams = payload
     }
 }
@@ -338,25 +339,181 @@ export const actions = {
     },
     async loadedUserTeams ({commit, state}) {
         try {
+            const userTeams1 = []
+            const team1 = {
+              "activity" : {
+                "name" : "Sport",
+                "slug" : "sport"
+              },
+              "alpha2" : "UY",
+              "alpha3" : "URY",
+              "capitale" : "Montevideo",
+              "category" : {
+                "name" : "Football",
+                "slug" : "football"
+              },
+              "code" : 858,
+              "competitions" : {
+                "world_cup_2018" : true
+              },
+              "continent_en" : "America",
+              "continent_fr" : "Amérique",
+              "couleur1" : "bleu",
+              "couleur2" : "noir",
+              "couleur3" : "",
+              "flags" : "images/flags/183.jpg",
+              "hymne" : "Orientales, la Patria o la tumba",
+              "hymne_son" : "",
+              "icon" : "images/flags/icon/183.png",
+              "id" : "-LBVgvTA8hEe39qNgaIv",
+              "image" : "uruguay.png",
+              "langue" : "Espagnol",
+              "map" : "images/carte/183.gif",
+              "name" : "Uruguay",
+              "name_fr" : "Uruguay",
+              "slug" : "uruguay",
+              "small_flags" : "images/flags/small_flags/183.jpg"
+            }
+            const team2 = {
+              "activity" : {
+                "name" : "Sport",
+                "slug" : "sport"
+              },
+              "alpha2" : "SE",
+              "alpha3" : "SWE",
+              "capitale" : "Stockholm",
+              "category" : {
+                "name" : "Football",
+                "slug" : "football"
+              },
+              "code" : 752,
+              "competitions" : {
+                "world_cup_2018" : true
+              },
+              "continent_en" : "Europa",
+              "continent_fr" : "Europe",
+              "couleur1" : "jaune",
+              "couleur2" : "bleu",
+              "couleur3" : "",
+              "flags" : "images/flags/161.jpg",
+              "hymne" : "Du gamla, du fria",
+              "hymne_son" : "",
+              "icon" : "images/flags/icon/161.png",
+              "id" : "-LBVgvShxjCtTvfi7X9N",
+              "image" : "sweden.png",
+              "langue" : "Suédois",
+              "map" : "images/carte/161.gif",
+              "name" : "Sweden",
+              "name_fr" : "Suède",
+              "slug" : "sweden",
+              "small_flags" : "images/flags/small_flags/161.jpg"
+            }
+
+            userTeams1.push(team1)
+            userTeams1.push(team2)
+            // commit('setUserTeams', userTeams1)
+            // return userTeams1
+
             // const userId = firebase.auth().currentUser.uid
             const userId = state.loadedUser.user_id
-            firebase.database().ref('/userTeams/').child(userId).on('value', function (snapshot) {
-                // console.log(snapshot.val())
-                const userTeamsArray = []
-                // const userTeamsArray = snapshot.val()
+            // firebase.database().ref('/userTeams/').child(userId).on('value')
+            //     .then(function (snapshot) {
+            //         // console.log(snapshot.val())
+            //         const userTeamsArray = []
+            //         // const userTeamsArray = snapshot.val()
 
+            //         for (const key in snapshot.val()) {
+            //             // console.log(key)
+            //             // userTeamsArray.push({ ...snapshot.val()[key]})
+            //             // userTeamsArray.push({[key]: snapshot.val()[key]})
+            //             // for (const teamId in key) {
+            //             //     userTeamsArray.push({[key]: teamId})
+            //             // }
+            //             userTeamsArray.push(key)
+            //         }
+            //         // console.log(userTeamsArray)
+            //         // commit('setUserTeams', userTeamsArray)
+            //     })
+            //     .then(function (childSnapshot) {
+
+            //     })
+            let userTeamsIds = []
+            let userTeams = []
+            let abc = []
+            // const teamIds = ['-LBVgvOsCUALzowK576H', '-LBVgvR__QJEcYxQ7a7g', '-LBVgvSq8Kukah-OB-ib']
+            // let promise = new Promise((resolve, reject) => {
+            firebase.database().ref('userTeams').child(userId).on('value', function (snapshot) {
+                console.log(snapshot.val())
                 for (const key in snapshot.val()) {
-                    // console.log(key)
-                    // userTeamsArray.push({ ...snapshot.val()[key]})
-                    // userTeamsArray.push({[key]: snapshot.val()[key]})
-                    // for (const teamId in key) {
-                    //     userTeamsArray.push({[key]: teamId})
-                    // }
-                    userTeamsArray.push(key)
+                    userTeamsIds.push(key)
                 }
-                console.log(userTeamsArray)
-                commit('setUserTeams', userTeamsArray)
+                // userTeamsIds.forEach((teamId) => {
+                if (userTeamsIds.length > 0) {
+                    firebase.database().ref('/teams').child(userTeamsIds[0]).on('value', function (childSnapshot) {
+                    // firebase.database().ref('/teams').child(teamId).on('value', function (childSnapshot) {
+                        userTeams.push(childSnapshot.val())
+                        // for (const key in childSnapshot.val()) {
+                        //     userTeamsIds.push(key)
+                        //     abc.push(key)
+                        // }
+                        commit('setUserTeams', userTeams)
+                    })
+                }
+                    // commit('setUserTeams', userTeams)
+                // })
+                // setTimeout(() => {
+                //     commit('setUserTeams', userTeams)
+                // }, 3000)
+
+                // const start = async () => {
+                //   await Promise.all(userTeamsIds.map(async teamId => {
+                //     // await waitFor(50)
+                //     // console.log(num)
+                //     firebase.database().ref('/teams').child(teamId).on('value', function (childSnapshot) {
+                //         userTeams.push(childSnapshot.val())
+                //     })
+                //   }))
+                //   console.log('Done')
+                // }
+                // start()
+                // commit('setUserTeams', userTeams)
+                console.log(userTeamsIds)
+                console.log(userTeams)
+                // resolve(userTeams)
             })
+            // })
+            // .then(() => {
+            //     console.log('abc')
+            //     commit('setUserTeams', userTeams)
+            // })
+
+            // setTimeout(() => {
+            //     commit('setUserTeams', userTeams)
+            // }, 3000)
+            // var p = new Promise(function(resolve, reject) {  
+            //     setTimeout(() => resolve(4), 5000);
+            // })
+            // p.then((res) => {
+            //     console.log('resolved')
+            // })
+
+            // promise.then((res) => {
+            //     console.log('promise resolved')
+            //     console.log(res)
+            //     commit('setUserTeams', res)
+            // })
+
+            // teamIds.forEach((teamId) => {
+                // console.log(teamId)
+                // firebase.database().ref('/teams').child(teamIds[2]).on('value', function (snapshot) {
+                //     userTeams.push(snapshot.val())
+                //     // return userTeams
+                //     commit('setUserTeams', userTeams)
+
+                // })
+            // })
+            // console.log(userTeams)
+            // return userTeams
         } 
         catch(error) {
             console.log(error)

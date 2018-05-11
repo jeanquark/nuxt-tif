@@ -26,6 +26,9 @@
 
                     <!-- Modal body -->
                     <div id="modalBoxContent" class="modal-body">
+                        <div style="color: #000;" v-for="userTeam in loadedUserTeams">
+                            {{ userTeam.name }}
+                        </div>
                         <div class="flex-container-modal-OtherTeam-Img" v-for="team in loadedTeamsByCompetition">
                             <!-- <div class="OtherTeam" @click="selectTeam(team.id)">
                                 <img :src="'/images/teams/' + team.image" class="imgModalAvatar" v-bind:class="{active: isActive}" />
@@ -60,14 +63,18 @@
             if (Object.keys(this.$store.getters['teams/loadedTeams']).length === 0) {
                 this.$store.dispatch('teams/loadedTeams')
             }
-            if (Object.keys(this.$store.getters['users/loadedUserTeams']).length === 0) {
-                this.$store.dispatch('users/loadedUserTeams')
-            }
+            // if (Object.keys(this.$store.getters['users/loadedUserTeams']).length === 0) {
+            this.$store.dispatch('users/loadedUserTeams')
+            // }
             // this.selectedTeams.push({id: '-LBVgvOsCUALzowK576H', name: 'Argentina'}, {id: '-LBVgvOxY6A_ylDQBOmp', name: 'Australia'}, {id: '-LBVgvR__QJEcYxQ7a7g', name: 'Republic of Korea'})
+            // this.selectedTeams.push({abc})
                 // console.log(this.$route.params)
                 // const competititon = this.$route.params.id
                 // loadedTeams
                 // this.$store.getters['competitions/'].filter()
+            for (let team of this.loadedUserTeams) {
+                this.selectedTeams.push(team)
+            }
         },
         data () {
             return {
@@ -102,57 +109,10 @@
                 // return abc
                 // const userTeams = []
                 // 1) First retrieve all userteam ids
-                const teamIds = this.$store.getters['users/loadedUserTeams']
-                // return teamIds
-                console.log(teamIds)
-                // return teamIds
-
-                // 2) Then get complete team data
-                const teams = []
-                teamIds.forEach((teamId) => {
-                    console.log(teamId)
-                    let abc = this.loadedTeamsByCompetition.find(team => team.id === teamId)
-                    teams.push(abc)
-                })
-                console.log(teams)
-                // for (let teamId in teamIds) {
-                //     console.log(teamId)
-                //     if (teamId.hasOwnProperty()) {
-                //         console.log('abc')
-                //         console.log(lunch[key]); // value (ex. turkey)
-                //     }
-                // }
-                // console.log(teams)
-                // return
-                // console.log(teamIds)
-                // this.loadedTeamsByCompetition.forEach((team) => {
-                //     if (teamIds.find(el => el === team.id)) {
-                //         userTeams.push({id: team.id, name: team.name})
-                //     }
-                // })
-                // console.log(userTeams)
-                // return this.$store.getters['users/loadedUserTeams']
-                // console.log(this.loadedTeamsByCompetition)
-                // let def = this.loadedTeamsByCompetition.filter(el => el.id === '-LBVgvOsCUALzowK576H')
-                // let ghi = teamIds.some(el => this.loadedTeamsByCompetition.includes(el))
-                // console.log(ghi)
-                let def = teams.map(obj => {
-                    let rObj = {}
-                    rObj['id'] = obj.id
-                    rObj['name'] = obj.name
-                    this.selectedTeams.push(rObj)
-                    return rObj
-                })
-                console.log(def)
-                // this.selectedTeams.push(def)
-                return def
-                const abc = [{id: '-LBVgvOsCUALzowK576H', name: 'Argentina'}, {id: '-LBVgvOxY6A_ylDQBOmp', name: 'Australia'}, {id: '-LBVgvR__QJEcYxQ7a7g', name: 'Republic of Korea'}]
-                // this.selectedTeams.push(abc)
-                return abc
-
-            },
-            abc () {
-                return this.selectedTeams.push[{id: '-LBVgvOsCUALzowK576H', name: 'Argentina'}, {id: '-LBVgvOxY6A_ylDQBOmp', name: 'Australia'}, {id: '-LBVgvR__QJEcYxQ7a7g', name: 'Republic of Korea'}]
+                // let loadedUserTeams = this.$store.getters['users/loadedUserTeams']
+                // this.selectedTeams = loadedUserTeams
+                // return loadedUserTeams
+                return this.$store.getters['users/loadedUserTeams']
             }
         },
         methods: {

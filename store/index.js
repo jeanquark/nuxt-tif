@@ -8,6 +8,7 @@
 
 // import VueLoading from 'vuex-loading'
 // export const plugins = [ VueLoading ]
+// export const strict = false
 
 export const state = () => ({
     loading: false,

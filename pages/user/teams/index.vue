@@ -16,13 +16,17 @@
 					<!-- Modal body -->
 					<div id="modalBoxContent" class="modal-body">
 						<div class="flex-container-modal-MyTeam">
-							<h1>Tu supportes 7 équipes...</h1>
+							<h1 v-if="this.loadedUserTeams">Tu supportes {{ this.loadedUserTeams.length }} équipes...</h1>
+							<h1 v-else>Tu ne supportes pas encore d'équipe!</h1>
 						</div>
 						<div class="flex-container-modal-Title banner2 text-center">
 							<h2>Tes équipes</h2>
 						</div>
-						<div class="flex-container-MesEquipes">
-							<div class="OtherTeam"><img src="/images/flags/163.png" class="imgModalAvatar"/><nuxt-link to="/userTeamDetails" class="overlay"><div class="textActivity">Football</br>Suisse</br></br>+Infos</div></nuxt-link></div>
+						<div class="flex-container-MesEquipes" v-for="team in this.loadedUserTeams">
+							<div class="OtherTeam">
+								<img :src="'/images/teams/' + team.image" class="imgModalAvatar"/>
+								<nuxt-link :to="'/teams/' + team.slug" class="overlay"><div class="textActivity">Football</br>{{ team.name }}</br></br>+Infos</div></nuxt-link>
+							</div>
 						</div>	
 					</div>
 					<div id="modalBoxContent" class="modal-body">
@@ -67,11 +71,15 @@
     },
     created () {
     	this.$store.dispatch('competitions/loadedCompetitions')
+    	this.$store.dispatch('users/loadedUserTeams')
     },
     computed: {
     	loadedCompetitions () {
     		return this.$store.getters['competitions/loadedCompetitions']
-    	}
+    	},
+    	loadedUserTeams () {
+            return this.$store.getters['users/loadedUserTeams']
+        }
     }
   }
 </script>
