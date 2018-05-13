@@ -8,7 +8,9 @@
 
 // import VueLoading from 'vuex-loading'
 // export const plugins = [ VueLoading ]
-// export const strict = false
+import firebase from 'firebase'
+import setUser from '../helpers/setUser'
+export const strict = false
 
 export const state = () => ({
     loading: false,
@@ -36,8 +38,13 @@ export const mutations = {
 export const actions = {
     nuxtServerInit ({ commit }, { req }) {
         if (req.user) {
-            // commit('setUser', req.user)
             commit('users/setUser', req.user, { root: true })
+            // const userId = req.user.id
+            // console.log(userId)
+            // firebase.database().ref('/users/' + userId).once('value').then(() => {
+            //   const user = setUser(snapshot.val())
+            //   commit('users/setUser', user, { root: true })
+            // })
         }
     },
     // setLoading ({commit, payload}) {

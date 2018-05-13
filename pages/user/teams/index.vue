@@ -14,22 +14,23 @@
 						</nuxt-link>					
 					</div>
 					<!-- Modal body -->
-					<div id="modalBoxContent" class="modal-body">
+					<div id="modalBoxContent" class="modal-body" v-if="this.loadedUserTeams.length > 0">
 						<div class="flex-container-modal-MyTeam">
-							<h1 v-if="this.loadedUserTeams">Tu supportes {{ this.loadedUserTeams.length }} équipes...</h1>
-							<h1 v-else>Tu ne supportes pas encore d'équipe!</h1>
+							<h1>Tu supportes {{ this.loadedUserTeams.length }} équipes...</h1>
 						</div>
 						<div class="flex-container-modal-Title banner2 text-center">
 							<h2>Tes équipes</h2>
 						</div>
 						<div class="flex-container-MesEquipes" v-for="team in this.loadedUserTeams">
 							<div class="OtherTeam">
-								<img :src="'/images/teams/' + team.image" class="imgModalAvatar"/>
-								<nuxt-link :to="'/teams/' + team.slug" class="overlay"><div class="textActivity">Football</br>{{ team.name }}</br></br>+Infos</div></nuxt-link>
+								<img :src="'/images/teams/' + team.image" class="imgModalAvatar" />
+								<nuxt-link :to="'/teams/' + team.slug" class="overlay">
+									<div class="textActivity">Football<br />{{ team.name }}<br /><br />+Infos</div>
+								</nuxt-link>
 							</div>
 						</div>	
 					</div>
-					<div id="modalBoxContent" class="modal-body">
+					<div id="modalBoxContent" class="modal-body" v-else>
 						<div class="flex-container-modal-OtherTeam">
 							<h1>Supporter une nouvelle équipe ?</h1>
 						</div>
@@ -54,11 +55,10 @@
 					  		<button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
 					  	</nuxt-link>
 					</div>
-			  	</div>
-			</div>
-		</div>
-		<!-- End Modal Team -->					
-	</div>
+			  	</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal-box -->		
+	</div><!-- /.container-fluid -->
 </template>
 
 <script>
@@ -70,8 +70,13 @@
     	}
     },
     created () {
-    	this.$store.dispatch('competitions/loadedCompetitions')
-    	this.$store.dispatch('users/loadedUserTeams')
+    	if (Object.keys(this.$store.getters['competitions/loadedCompetitions']).length === 0) {
+    		this.$store.dispatch('competitions/loadedCompetitions')
+    	}
+
+    	if (Object.keys(this.$store.getters['users/loadedUserTeams']).length === 0) {
+    		this.$store.dispatch('users/loadedUserTeams')
+    	}
     },
     computed: {
     	loadedCompetitions () {

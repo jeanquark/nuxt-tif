@@ -4,7 +4,7 @@ body, html {
 	width: 100%;
 	color: #ffffff;
 	background-color: #000000;
-	background-image: url(../images/bg.png);
+	/*background-image: url(../images/bg.png);*/
 	font-size: 100%;
 }
 

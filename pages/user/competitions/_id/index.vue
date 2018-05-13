@@ -63,9 +63,9 @@
             if (Object.keys(this.$store.getters['teams/loadedTeams']).length === 0) {
                 this.$store.dispatch('teams/loadedTeams')
             }
-            // if (Object.keys(this.$store.getters['users/loadedUserTeams']).length === 0) {
-            this.$store.dispatch('users/loadedUserTeams')
-            // }
+            if (Object.keys(this.$store.getters['users/loadedUserTeams']).length === 0) {
+                this.$store.dispatch('users/loadedUserTeams')
+            }
             // this.selectedTeams.push({id: '-LBVgvOsCUALzowK576H', name: 'Argentina'}, {id: '-LBVgvOxY6A_ylDQBOmp', name: 'Australia'}, {id: '-LBVgvR__QJEcYxQ7a7g', name: 'Republic of Korea'})
             // this.selectedTeams.push({abc})
                 // console.log(this.$route.params)
@@ -120,7 +120,10 @@
                 // this.isActive = !this.isActive
                 console.log('selectTeam')
                 console.log(team.id)
-                const selectedTeam = {id: team.id, name: team.name}
+                // const selectedTeam = {id: team.id, name: team.name}
+                const selectedTeam = team
+                console.log(selectedTeam)
+                // return
                 // console.log(selectedTeam)
                 const index = this.selectedTeams.findIndex(el => el.id === team.id)
                 console.log('index: ' + index)

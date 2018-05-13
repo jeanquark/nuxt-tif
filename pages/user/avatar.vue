@@ -6,7 +6,7 @@
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header text-center">
-                        <span class="modal-title">Ton avatar {{ this.avatars }}</span>
+                        <span class="modal-title">Ton avatar {{ this.face }}</span>
                         <nuxt-link to="/home">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
@@ -16,31 +16,37 @@
                     <!-- Modal body -->
                     <div id="modalBoxContent" class="modal-body">
                         <div class="flex-container-modal-MyTeam">
-                            <h1>Envie de changer de tête ? arr: {{ this.arr }} obj: {{ this.obj }}</h1>
+                            <h1>Envie de changer de tête ? arr: {{ this.arr }} <br /><br />obj: {{ this.obj }}</h1>
                         </div>
-                        <div class="flex-container-modalAvatar">
+                        <div class="flex-container-modalAvatar" v-if="this.arr.length > 0">
                             <!-- <div style="flex-grow: 1"><img src="/images/avatar.png" class="imgModalAvatar"/></div> -->
-                            <div style="flex-grow: 1"><img src="" ref="mergedImage" class="imgModalAvatar" width="100px" /></div>
+                            <div style="flex-grow: 1"><img src="" ref="mergedImage" class="imgModalAvatar" width="300px" /></div>
+                        </div>
+                        <div class="flex-container-modalAvatar" v-else>
+                            <h4 style="color: orangered; margin: 0 auto;">Please select a property below</h4><br /><br />
                         </div>
                         <div class="flex-container-modalMenuAvatar">
                             <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'female'}" @click="selectGender('female')"><span class="textModalMenuAvatar">FEMALE</span></div>
                             <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'male'}" @click="selectGender('male')"><span class="textModalMenuAvatar">MALE</span></div>
                         </div>
                         <div class="flex-container-modalMenuAvatar">
+                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'background'}" @click="selectBodyPart('background')"><span class="textModalMenuAvatar">BACKGROUND</span></div>
+                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'body'}" @click="selectBodyPart('body')"><span class="textModalMenuAvatar">BODY</span></div>
                             <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'skin'}" @click="selectBodyPart('skin')"><span class="textModalMenuAvatar">SKIN</span></div>
                             <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'face'}" @click="selectBodyPart('face')"><span class="textModalMenuAvatar">FACE</span></div>
                             <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'hair'}" @click="selectBodyPart('hair')"><span class="textModalMenuAvatar">HAIR</span></div>
-                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'background'}" @click="selectBodyPart('background')"><span class="textModalMenuAvatar">BACK</span></div>
                         </div>
-                        <div class="flex-container-modalAvatarImg" v-for="avatar in loadedAvatars">
-                            <!-- <div style="cursor: pointer;" @click="addToMerge('/images/avatars/' + avatar.type + '/' + avatar.image)"><img :src="'/images/avatars/' + avatar.type + '/' + avatar.image" class="imgModalAvatar" /></div> -->
-                            <div style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.image" class="imgModalAvatar" /></div>
-                        </div>  
+                        <div class="flex-container-modalAvatarImg">
+                            <div v-for="avatar in loadedAvatars" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.image" class="imgModalAvatar" :class="{active: (avatar.name === background ||  avatar.name === body || avatar.name === skin || avatar.name === face || avatar.name === hair) }" /></div>
+                        </div>
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
+                        <div class="progress" style="width: 50%; margin: 0 auto;" v-if="arr.length > 0">
+                            <div class="progress-bar bg-success" role="progressbar" :style="{width: progress + '%'}" :aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <button class="btn btn-success" data-dismiss="modal" :disabled="loading" :loading="loading" @click="saveImage">Allez, valide ! <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
                         <nuxt-link to="/home"><button type="button" class="btn btn-danger" data-dismiss="modal">Annule tout !</button></nuxt-link>
-                        <nuxt-link to="/home"><button type="button" class="btn btn-success" data-dismiss="modal" @click="saveImage">Allez, valide !</button></nuxt-link>
                     </div>
                 </div>
             </div><!-- /.modal-dialog -->
@@ -52,6 +58,8 @@
 <script>
     import firebase from 'firebase'
     import mergeImages from 'merge-images'
+    import moment from 'moment'
+    import Noty from 'noty'
     export default {
         layout: 'layoutFront',
         created () {
@@ -67,13 +75,21 @@
         },
         data () {
             return {
+                loading: false,
                 gender: 'female',
-                bodyPart: 'skin',
+                bodyPart: 'background',
+                name: '',
+                background: '',
+                body: '',
+                skin: '',
+                face: '',
+                hair: '',
                 avatars: [],
                 imagesArray: [],
                 typeArray: [],
                 arr: [],
-                obj: []
+                obj: [],
+                progress: 0
             }
         },
         computed: {
@@ -85,16 +101,44 @@
             selectGender(gender) {
                 console.log(gender)
                 this.gender = gender
+                if (gender === 'female') {
+                    for (let i = 0; i < this.obj.length; i++) {
+                        this.obj[i].image = this.obj[i].image.replace('male', 'female')
+                        this.obj[i].gender = 'female'
+                    }
+                    this.mergeImages()
+                } else {
+                    for (let i = 0; i < this.obj.length; i++) {
+                        this.obj[i].image = this.obj[i].image.replace('female', 'male')
+                        this.obj[i].gender = 'male'
+                    }
+                    this.mergeImages()
+                }
             },
             selectBodyPart(part) {
                 console.log(part)
                 this.bodyPart = part
             },
-            addToMerge(gender, type, image) {
+            addToMerge(gender, type, image, name) {
                 console.log('addToMerge')
-                console.log(gender)
-                console.log(type)
-                console.log(image)
+                // console.log(gender)
+                // console.log(type)
+                // console.log(image)
+                // console.log(name)
+                this.name = name
+                // if (name) {
+                    if (name.includes('background')) {
+                        this.background = name
+                    } else if (name.includes('body')) {
+                        this.body = name
+                    } else if (name.includes('skin')) {
+                        this.skin = name
+                    } else if (name.includes('face')) {
+                        this.face = name
+                    } else if (name.includes('hair')) {
+                        this.hair = name
+                    }
+                // }
                 // Remove any image of the same type
                 // if (this.arr.includes(image) || this.obj.includes(type)) {
                 //     const index = this.arr.indexOf(image)
@@ -122,16 +166,47 @@
                         break;
                     }
                 }
-                this.obj.push({'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
+
+                // Add image to the object array
+                // this.obj.push({'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
+                if (type === 'background') {
+                    this.obj.splice(0, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
+                } else if (type === 'face') {
+                    this.obj.splice(4, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
+                } else if (type === 'hair') {
+                    this.obj.splice(3, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
+                } else {
+                    this.obj.splice(1, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
+                }
                 this.mergeImages()
             },
             mergeImages() {
-                console.log(this.obj)
+                // console.log(type)
+                // console.log('obj: ')
+                // console.log(this.obj)
                 // Build an array of image paths from the object
                 this.arr = []
+                // this.arr = this.obj
                 for (let i = 0; i < this.obj.length; i++) {
                     this.arr.push(this.obj[i].image)
+                    // // this.arr.splice(i, 0, this.obj[i].image)
+                    // if (this.obj[i].type === 'background') {
+                    //     // this.arr.unshift(this.obj[i].image)
+                    //     this.arr.splice(0, 0, this.obj[i].image)
+                    // } else if (this.obj[i].type === 'face') {
+                    //     this.arr.splice(1, 0, this.obj[i].image)
+                    // } else {
+                    //     this.arr.push(this.obj[i].image)
+                    // }
                 }
+                // if (type === 'background') {
+                //     this.arr.splice(0, 0, this.obj[0])
+                // } else if (type === 'face') {
+
+                // } else {
+
+                // }
+
                 if (process.browser) {
                     mergeImages(this.arr)
                     .then(
@@ -141,7 +216,54 @@
             },
             saveImage() {
                 console.log('saveImage')
-                console.log(this.$refs.mergedImage.src)
+                // this.$store.dispatch('setLoading', true, { root: true })
+                this.loading = true
+
+                // Save image in Firebase Cloud Storage
+                const now = moment().unix()
+                const userId = firebase.auth().currentUser.uid
+                const image_name = userId + '_' + this.background + '_' + this.body + '_' + this.skin + '_' + this.face + '_' + this.hair
+                console.log(image_name)
+                let storageRef = firebase.storage().ref('/images/avatars/' + image_name)
+                console.log(storageRef)
+                let image = this.$refs.mergedImage.src
+
+                var uploadTask = storageRef.putString(image, 'data_url')
+                // return
+
+                uploadTask.on('state_changed', (snapshot) => {
+                    // Observe state change events such as progress, pause, and resume
+                    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                    this.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    console.log('Upload is ' + this.progress + '% done')
+                    switch (snapshot.state) {
+                        case firebase.storage.TaskState.PAUSED: // or 'paused'
+                        console.log('Upload is paused')
+                        break
+                        case firebase.storage.TaskState.RUNNING: // or 'running'
+                        console.log('Upload is running')
+                        break
+                    }
+                }, (error) => {
+                  // Handle unsuccessful uploads
+                  // this.$store.dispatch('setLoading', false, {root: true})
+                  console.log(error)
+                  this.loading = false
+                // }, function() {
+                }, () => {
+                    // Handle successful uploads on complete
+                    console.log(uploadTask.snapshot)
+                    // const newImageKey = firebase.database().ref().child('/avatar_images/').push().key
+                    firebase.database().ref('/users/' + userId + '/avatar').set({
+                        name: uploadTask.snapshot.metadata.name,
+                        url: uploadTask.snapshot.downloadURL,
+                        updated_at: now,
+                    })
+                    console.log('Uploaded a data_url string!')
+                    // this.$store.dispatch('setLoading', false, { root: true })
+                    this.loading = false
+                    new Noty({type: 'success', text: 'Successfully uploaded image!', timeout: 5000, theme: 'metroui'}).show()
+                })
             }
         }
     }

@@ -25,11 +25,11 @@
 		<div id="proprieteJoueur" class="col-12 col-sm-12 col-md-12 col-lg-12">
 
 			<div class="flex-container-playerPropriety">
-				<nuxt-link to="/user/avatar" class="boxShadow" style="flex-basis: 60px"><img src="avatar.png" class="imgAvatar"/></nuxt-link>
+				<nuxt-link to="/user/avatar" class="boxShadow" style="flex-basis: 60px"><img src="/images/avatar.png" class="imgAvatar"/></nuxt-link>
 				<nuxt-link to="/user" class="boxShadow flex-container-modalProfil" style="flex-grow: 1">
-					<div class="columnProfil"><img src="163.png" class="imgModalProprieteFlags"/> <span class="modal-Propriete">CarolineKaeser</span> <span class="modal-ProprietePlace boxShadow"><img src="cup.png" class="imgModalProprieteCup"/> 1863ème</span></div>
+					<div class="columnProfil"><img src="/images/163.png" class="imgModalProprieteFlags"/> <span class="modal-Propriete">CarolineKaeser</span> <span class="modal-ProprietePlace boxShadow"><img src="/images/cup.png" class="imgModalProprieteCup"/> 1863ème</span></div>
 				</nuxt-link>				  
-				<nuxt-link to="/user/preferences" class="boxShadow"  style="flex-basis: 60px"><img src="parametre.png" class="imgParametre"/></nuxt-link>
+				<nuxt-link to="/user/preferences" class="boxShadow"  style="flex-basis: 60px"><img src="/images/parametre.png" class="imgParametre"/></nuxt-link>
 			</div>
 
 		</div>
@@ -55,9 +55,9 @@
 		<!-- Lieu événement -->
 		<div id="localisation" class="col-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="flex-container-localisation2">
-			  <a href="mesClassements.html" style="flex-basis: 60px"><img src="cup.png" class="imgCup2 boxShadow"/></a>
-			  <a href="mesEvent.html" style="flex-grow: 1"><img src="images/where/stadium.jpg" class="imgLocalisation"/></a>
-			  <a href="mrfan.html" style="flex-basis: 60px"><img src="images/mrfan/mrFan.png" class="imgCup2 boxShadow"/></a>
+			  <a href="mesClassements.html" style="flex-basis: 60px"><img src="/images/cup.png" class="imgCup2 boxShadow"/></a>
+			  <a href="mesEvent.html" style="flex-grow: 1"><img src="/images/stadium.jpg" class="imgLocalisation"/></a>
+			  <a href="mrfan.html" style="flex-basis: 60px"><img src="/images/mrFan.png" class="imgCup2 boxShadow"/></a>
 			</div>
 		</div>
 		<!-- End Lieu événement -->
@@ -80,19 +80,19 @@
 				<div class="flex-container-news">
 				  <a href="boxNews.html" class="flex-contrainer-column" style="flex-grow: 1">
 					<div class="DodgerBlue" style="flex-grow: 1"><span class="newsTitle">NEWS</span></div>
-					<div style="flex-grow: 1"><img src="images/news/newsCompetition.png" class="imgNews"/></div>
+					<div style="flex-grow: 1"><img src="/images/newsCompetition.png" class="imgNews"/></div>
 				  </a>
 				  <a href="boxNews.html" class="flex-contrainer-column" style="flex-grow: 1">
 					<div class="DodgerBlue" style="flex-grow: 1"><span class="newsTitle">NEWS</span></div>
-					<div style="flex-grow: 1"><img src="images/news/newsTif.png" class="imgNews"/></div>
+					<div style="flex-grow: 1"><img src="/images/newsTif.png" class="imgNews"/></div>
 				  </a>
 				  <a href="boxNews.html" class="flex-contrainer-column" style="flex-grow: 1">
 					<div class="DodgerBlue" style="flex-grow: 1"><span class="newsTitle">NEWS</span></div>
-					<div style="flex-grow: 1"><img src="images/news/newsEvent.png" class="imgNews"/></div>
+					<div style="flex-grow: 1"><img src="/images/newsEvent.png" class="imgNews"/></div>
 				  </a>
 				  <a href="boxNews.html" class="flex-contrainer-column" style="flex-grow: 1">
 					<div class="DodgerBlue" style="flex-grow: 1"><span class="newsTitle">NEWS</span></div>
-					<div style="flex-grow: 1"><img src="images/news/newsGoodies.png" class="imgNews"/></div>
+					<div style="flex-grow: 1"><img src="/images/newsGoodies.png" class="imgNews"/></div>
 				  </a>
 				</div>
 			</div>
@@ -102,23 +102,23 @@
 				<div id="dock">
 					<ul>
 					  <li>
-						<a href="fanshop.html"><img src="images/menu/menuShop.png">
+						<a href="fanshop.html"><img src="/images/menuShop.png">
 						<span class="textMenu">FanShop</span></a>
 					  </li>
 					  <li>
-						<a href="collection.html"><img src="images/menu/menuCollection.png">
+						<a href="collection.html"><img src="/images/menuCollection.png">
 						<span class="textMenu">Collection</span></a>
 					  </li>
 					  <li id="active">
-						 <a href="index.html"><img src="images/menu/menuHome.png">
+						 <a href="index.html"><img src="/images/menuHome.png">
 						 <span class="textMenu">ThisIsFan</span></a>
 					  </li>
 					  <li>
-						 <a href="social.html"><img src="images/menu/menuSocial.png">
+						 <a href="social.html"><img src="/images/menuSocial.png">
 						 <span class="textMenu">Social</span></a>
 					  </li>
 					  <li>
-						 <a href="resultat.html"><img src="images/menu/menuResultat.png">
+						 <a href="resultat.html"><img src="/images/menuResultat.png">
 						 <span class="textMenu">Résultat</span></a>
 					  </li>
 					</ul>

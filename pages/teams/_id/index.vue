@@ -7,7 +7,7 @@
                     <!-- Modal Header -->
                     <div class="modal-header">
                         <span class="modal-title">Pleins d'infos ! <span class="modal-title-Sub">(Tes équipes)</span></span>
-                        <nuxt-link to="/home">
+                        <nuxt-link to="/user/teams">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
                             </button>
