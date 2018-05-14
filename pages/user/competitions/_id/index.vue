@@ -18,17 +18,17 @@
                                 <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
                             </button>
                         </nuxt-link>
-                        {{ this.selectedTeams }}<br /><br />
-                        {{ this.loadedUserTeams }}<br /><br />
+                        <!-- {{ this.selectedTeams }}<br /><br /> -->
+                        <!-- {{ this.loadedUserTeams }}<br /><br /> -->
                         <!-- {{ this.loadedTeamsByCompetition }} -->
 
                     </div><!-- /.modal-header -->
 
                     <!-- Modal body -->
                     <div id="modalBoxContent" class="modal-body">
-                        <div style="color: #000;" v-for="userTeam in loadedUserTeams">
+                        <!--<div style="color: #000;" v-for="userTeam in loadedUserTeams">
                             {{ userTeam.name }}
-                        </div>
+                        </div> -->
                         <div class="flex-container-modal-OtherTeam-Img" v-for="team in loadedTeamsByCompetition">
                             <!-- <div class="OtherTeam" @click="selectTeam(team.id)">
                                 <img :src="'/images/teams/' + team.image" class="imgModalAvatar" v-bind:class="{active: isActive}" />

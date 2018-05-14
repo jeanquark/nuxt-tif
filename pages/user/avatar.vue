@@ -6,7 +6,7 @@
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header text-center">
-                        <span class="modal-title">Ton avatar {{ this.face }}</span>
+                        <span class="modal-title">Ton avatar</span>
                         <nuxt-link to="/home">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
@@ -16,7 +16,9 @@
                     <!-- Modal body -->
                     <div id="modalBoxContent" class="modal-body">
                         <div class="flex-container-modal-MyTeam">
-                            <h1>Envie de changer de tête ? arr: {{ this.arr }} <br /><br />obj: {{ this.obj }}</h1>
+                            <h1>Envie de changer de tête ?</h1>
+                            <!-- <h2> arr: {{ this.arr }} <br /><br />obj: {{ this.obj }}<br /><br />user: {{ this.loadedUser.avatar.name }}</h2> -->
+                            <!-- <h2>{{ this.loadedUser }}</h2> -->
                         </div>
                         <div class="flex-container-modalAvatar" v-if="this.arr.length > 0">
                             <!-- <div style="flex-grow: 1"><img src="/images/avatar.png" class="imgModalAvatar"/></div> -->
@@ -72,6 +74,24 @@
                 console.log(avatarsArray)
             })
             this.avatars = avatarsArray
+
+            // const array = []
+            if (this.$store.getters['users/loadedUser'].avatar) {
+                const array = this.$store.getters['users/loadedUser'].avatar.name.split('_')
+                if (array.length >= 7) {
+                    this.gender = ''
+                    this.gender = array[1]
+                    this.background = array[2]
+                    this.body = array[3]
+                    this.skin = array[4]
+                    this.face = array[5]
+                    this.hair = array[6]
+
+                    this.obj = [{ "image": '/images/avatars/' + this.gender + '/background/' + this.background + '.png', 'gender': this.gender, 'type': 'background' }, { 'image': '/images/avatars/' + this.gender + '/skin/' + this.skin + '.png', 'gender': this.gender, 'type': 'skin' }, { 'image': '/images/avatars/' + this.gender + '/body/' + this.body + '.png', 'gender': this.gender, 'type': 'body' }, { 'image': '/images/avatars/' + this.gender + '/hair/' + this.hair + '.png', 'gender': this.gender, 'type': 'hair' }, { 'image': '/images/avatars/' + this.gender + '/face/' + this.face + '.png', 'gender': this.gender, 'type': 'face' }]
+                    this.mergeImages()
+                }
+                console.log(array)
+            }
         },
         data () {
             return {
@@ -93,6 +113,9 @@
             }
         },
         computed: {
+            loadedUser () {
+                return this.$store.getters['users/loadedUser']
+            },
             loadedAvatars () {
                 return this.avatars.filter(avatar => avatar.gender === this.gender && avatar.type === this.bodyPart)
             }
@@ -127,17 +150,17 @@
                 // console.log(name)
                 this.name = name
                 // if (name) {
-                    if (name.includes('background')) {
-                        this.background = name
-                    } else if (name.includes('body')) {
-                        this.body = name
-                    } else if (name.includes('skin')) {
-                        this.skin = name
-                    } else if (name.includes('face')) {
-                        this.face = name
-                    } else if (name.includes('hair')) {
-                        this.hair = name
-                    }
+                if (name.includes('background')) {
+                    this.background = name
+                } else if (name.includes('body')) {
+                    this.body = name
+                } else if (name.includes('skin')) {
+                    this.skin = name
+                } else if (name.includes('face')) {
+                    this.face = name
+                } else if (name.includes('hair')) {
+                    this.hair = name
+                }
                 // }
                 // Remove any image of the same type
                 // if (this.arr.includes(image) || this.obj.includes(type)) {
@@ -222,7 +245,7 @@
                 // Save image in Firebase Cloud Storage
                 const now = moment().unix()
                 const userId = firebase.auth().currentUser.uid
-                const image_name = userId + '_' + this.background + '_' + this.body + '_' + this.skin + '_' + this.face + '_' + this.hair
+                const image_name = userId + '_' + this.gender + '_' + this.background + '_' + this.body + '_' + this.skin + '_' + this.face + '_' + this.hair
                 console.log(image_name)
                 let storageRef = firebase.storage().ref('/images/avatars/' + image_name)
                 console.log(storageRef)

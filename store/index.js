@@ -36,15 +36,42 @@ export const mutations = {
 }
 
 export const actions = {
-    nuxtServerInit ({ commit }, { req }) {
-        if (req.user) {
-            commit('users/setUser', req.user, { root: true })
-            // const userId = req.user.id
-            // console.log(userId)
-            // firebase.database().ref('/users/' + userId).once('value').then(() => {
-            //   const user = setUser(snapshot.val())
-            //   commit('users/setUser', user, { root: true })
-            // })
+    // ORIGINAL nuxtServerInit function
+    // nuxtServerInit ({commit}, {req}) {
+    //     if (req.user) {
+    //         console.log('Entering nuxtServerInit')
+    //         console.log(req.user)
+    //         commit('users/setUser', req.user, { root: true })
+    //     }
+    // },
+
+    async nuxtServerInit ({commit}, {req}) {
+        try {
+            if (req.user) {
+                console.log('Entering nuxtServerInit')
+                console.log(req.user)
+                // commit('users/setUser', req.user, { root: true })
+                const userId = req.user.uid
+                console.log('ABC')
+                console.log(userId)
+                // console.log(userId)
+                const userData = ''
+                // await firebase.database().ref('/users/' + userId).once('value').then(function (snapshot) {
+                await firebase.database().ref('/users/' + userId).on('value', function (snapshot) {
+                    commit('users/setLoadedUser', snapshot.val(), { root: true })
+                    console.log('End of nuxtServerInit')
+                })
+                // const authData = {
+                //   avatar: '',
+                //   email: 'test2@test.com',
+                //   id: 'RHhcGpLRSgRNm1ByOA9j7qASopf1',
+                //   status: 'user'
+                // }
+                // commit('users/setUser', authData, {root: true})
+            }
+        }
+        catch (e) {
+            console.log(e)
         }
     },
     // setLoading ({commit, payload}) {

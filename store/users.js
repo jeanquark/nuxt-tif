@@ -46,7 +46,7 @@ export const state = () => ({
 })
 
 export const mutations = {
-    setUser (state, payload) {
+    setLoadedUser (state, payload) {
         state.loadedUser = payload
     },
     setAllUsers (state, payload) {
@@ -143,11 +143,13 @@ export const actions = {
         firebase.database().ref('users/' + userId).on('value', function (snapshot) {
             console.log(snapshot.val())
             const user = setUser(snapshot.val())
+            // commit('setUser', user)
             // const userArray = []
             // for (const key in snapshot.val()) {
-            //     userArray.push({ ...snapshot.val()[key]})
+            //     userArray.push(snapshot.val())
             // }
-            commit('setUser', user)
+            commit('setLoadedUser', userArray)
+
         })
     },
     async updateUser ({commit}, payload) {
@@ -202,7 +204,8 @@ export const actions = {
         // }
         try {
             let authData = await Auth.signInWithEmailAndPassword(payload.email, payload.password)
-            // console.log(authData)
+            console.log('authData:')
+            console.log(authData)
             // console.log(authData.getIdToken())
 
             // Check user status based on user token
@@ -218,17 +221,22 @@ export const actions = {
                     console.log('User is not an admin')
                 }
             })
-            .then(() => {
-                // this.loadedUser()
-                console.log(authData)
-                const userId = authData.uid
-                firebase.database().ref('users/' + userId).on('value', function (snapshot) {
-                    console.log(snapshot.val())
-                    const user = setUser(snapshot.val())
-                    commit('setUser', user)
-                    commit('setLoading', false, { root: true })
-                    // this.$router.replace('/home')
-                })
+            // .then(() => {
+            //     // this.loadedUser()
+            //     console.log(authData)
+            //     const userId = authData.uid
+            //     firebase.database().ref('users/' + userId).on('value', function (snapshot) {
+            //         console.log(snapshot.val())
+            //         const user = setUser(snapshot.val())
+            //         commit('setUser', user)
+            //         commit('setLoading', false, { root: true })
+            //         // this.$route.replace('/home')
+            //         // this.$router.replace({ path: '/home' })
+            //     })
+            // })
+            const userId = authData.uid
+            await firebase.database().ref('/users/' + userId).once('value').then(function (snapshot) {
+                commit('setLoadedUser', snapshot.val())
             })
             // commit('setUser', setUser(authData))
             
@@ -259,7 +267,7 @@ export const actions = {
             firebase.database().ref('/users/' + newUserKey).set(buildUserObject(authData))
 
             // Load user in store
-            commit('setUser', buildUserObject(authData))
+            commit('setLoadedUser', buildUserObject(authData))
             // this.$toast.success('Successfully signed up!')
             commit('setLoading', false, { root: true })
         } 
@@ -284,7 +292,7 @@ export const actions = {
             firebase.database().ref('/users/' + newUserKey).set(buildUserObjectOAuth(authData))
 
             // Load user in store
-            commit('setUser', buildUserObject(authData))
+            commit('setLoadedUser', buildUserObject(authData))
             new Noty({type: 'success', text: 'Utilisateur enregistré avec succès!', timeout: 5000, theme: 'metroui'}).show()
             commit('setLoading', false, { root: true })
         } 
@@ -298,13 +306,13 @@ export const actions = {
     async signInWithFacebookPopup ({commit}) {
         commit('setLoading', true)
         let authData = await Auth.signInWithPopup(FacebookAuthProvider)
-        commit('setUser', buildUserObject(authData))
+        commit('setLoadedUser', buildUserObject(authData))
         commit('setLoading', false)
     },
     async signOut ({commit}) {
         commit('setLoading', true, { root: true })
         await Auth.signOut()
-        commit('setUser', null)
+        commit('setLoadedUser', null)
         commit('setLoading', false, { root: true })
         // new Noty({type: 'success', text: 'You successfully logged out!', timeout: 5000, theme: 'metroui'}).show()
         // return redirect('/')
@@ -437,9 +445,13 @@ export const actions = {
             })
 
             // const userId = firebase.auth().currentUser.uid
-            const userId = state.loadedUser.user_id
+            // const userId = state.loadedUser.user_id
+            const userId = state.loadedUser.id
+            // return userId
+            console.log(userId)
             let userTeamsIds = []
             let userTeams = []
+            // console.log('DEF')
             // let ghi = function() {
                 // return new Promise(function (resolve, reject) {
                     // firebase.database().ref('/userTeams').child(userId).on('value', function (snapshot) {
