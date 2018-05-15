@@ -1,0 +1,12 @@
+div.jsoneditor-tree {
+    /*overflow: hidden;*/
+}
+
+div.jsoneditor {
+	border: 1px solid #337ab7;
+}
+
+div.jsoneditor-menu {
+	background: #337ab7;
+	border-bottom: yellow;
+}

@@ -18,7 +18,7 @@
                         <div class="flex-container-modal-MyTeam">
                             <h1>Envie de changer de tête ?</h1>
                             <!-- <h2> arr: {{ this.arr }} <br /><br />obj: {{ this.obj }}<br /><br />user: {{ this.loadedUser.avatar.name }}</h2> -->
-                            <!-- <h2>{{ this.loadedUser }}</h2> -->
+                            <!-- <h2>{{ loadedUser }}</h2> -->
                         </div>
                         <div class="flex-container-modalAvatar" v-if="this.arr.length > 0">
                             <!-- <div style="flex-grow: 1"><img src="/images/avatar.png" class="imgModalAvatar"/></div> -->
@@ -65,6 +65,8 @@
     export default {
         layout: 'layoutFront',
         created () {
+            this.$store.dispatch('posts/loadedPosts')
+
             const avatarsArray = []
             firebase.database().ref('avatars').once('value', function (snapshot) {
                 // console.log(snapshot.val())
@@ -118,6 +120,9 @@
             },
             loadedAvatars () {
                 return this.avatars.filter(avatar => avatar.gender === this.gender && avatar.type === this.bodyPart)
+            },
+            loadedPosts() {
+                return this.$store.getters['posts/loadedPosts']
             }
         },
         methods: {

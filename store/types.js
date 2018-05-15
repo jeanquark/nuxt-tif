@@ -12,13 +12,12 @@ export const mutations = {
 
 export const actions = {
 	loadedTypes ({commit}) {
-    	firebase.database().ref('/types/').on('value', function (snapshot) {
+    	firebase.database().ref('/types/').once('value').then(function (snapshot) {
 	      	// console.log(snapshot.val())
 	      	const typesArray = []
 	      	for (const key in snapshot.val()) {
-	        	typesArray.push({ ...snapshot.val()[key]})
+	        	typesArray.push({ ...snapshot.val()[key], id: key})
 	      	}
-	      	// console.log(postsArray)
 	      	commit('setTypes', typesArray)
 	    })
   	},

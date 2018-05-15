@@ -47,6 +47,7 @@ export const state = () => ({
 
 export const mutations = {
     setLoadedUser (state, payload) {
+        console.log('entering setLoadedUser mutation')
         state.loadedUser = payload
     },
     setAllUsers (state, payload) {
@@ -135,6 +136,11 @@ export const actions = {
             }
     },
     loadedUser ({commit}) {
+        // const userId = firebase.auth().currentUser.uid
+        // firebase.database().ref('/posts/' + userId).on('value', function (snapshot) {
+        //     console.log(snapshot.val())
+        //     commit('setLoadedUser', snapshot.val())
+        // })
         console.log('Entering loadedUser')
         const userId = firebase.auth().currentUser.uid
         console.log(userId)
@@ -142,13 +148,14 @@ export const actions = {
         // firebase.database().ref('users/' + userId).on('value')
         firebase.database().ref('users/' + userId).on('value', function (snapshot) {
             console.log(snapshot.val())
-            const user = setUser(snapshot.val())
+            commit('setLoadedUser', snapshot.val())
+            // const user = setUser(snapshot.val())
             // commit('setUser', user)
             // const userArray = []
             // for (const key in snapshot.val()) {
             //     userArray.push(snapshot.val())
             // }
-            commit('setLoadedUser', userArray)
+            // commit('setLoadedUser', userArray)
 
         })
     },
@@ -235,7 +242,7 @@ export const actions = {
             //     })
             // })
             const userId = authData.uid
-            await firebase.database().ref('/users/' + userId).once('value').then(function (snapshot) {
+            await firebase.database().ref('/users/' + userId).on('value', function (snapshot) {
                 commit('setLoadedUser', snapshot.val())
             })
             // commit('setUser', setUser(authData))

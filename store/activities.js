@@ -12,16 +12,16 @@ export const mutations = {
 
 export const actions = {
 	loadedActivities ({commit}) {
-    	firebase.database().ref('/activities/').on('value', function (snapshot) {
+    	firebase.database().ref('/activities/').once('value').then(function (snapshot) {
 	      	// console.log(snapshot.val())
 	      	const activitiesArray = []
 	      	for (const key in snapshot.val()) {
-	        	activitiesArray.push({ ...snapshot.val()[key]})
+	        	activitiesArray.push({ ...snapshot.val()[key], id: key})
 	      	}
 	      	// console.log(postsArray)
-	      	setTimeout(function() {
+	      	// setTimeout(function() {
 	      		commit('setActivities', activitiesArray)
-	      	}, 200)
+	      	// }, 200)
 	    })
   	},
 }

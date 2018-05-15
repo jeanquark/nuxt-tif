@@ -12,11 +12,11 @@ export const mutations = {
 
 export const actions = {
 	loadedCategories ({commit}) {
-    	firebase.database().ref('/categories/').on('value', function (snapshot) {
+    	firebase.database().ref('/categories/').once('value').then(function (snapshot) {
 	      	// console.log(snapshot.val())
 	      	const categoriesArray = []
 	      	for (const key in snapshot.val()) {
-	        	categoriesArray.push({ ...snapshot.val()[key]})
+	        	categoriesArray.push({ ...snapshot.val()[key], id: key})
 	      	}
 	      	// console.log(postsArray)
 	      	commit('setCategories', categoriesArray)

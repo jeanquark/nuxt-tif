@@ -9,19 +9,16 @@
             </div>
             <br />
             <b>Posts: (in json format)</b> {{ loadedPosts }}
+            <br /><br />
+            {{ abc }}
         </div>
     </div><!-- /.container -->
 </template>
 
 <script>
-    // import { mapGetters } from 'vuex'
-
     export default {
         layout: 'layoutFront',
         created() {
-            // return this.$store.dispatch('loadedPosts')
-            // return this.$store.dispatch.posts.loadedPosts
-            // return this.$store.commit('posts/setPosts')
             return this.$store.dispatch('posts/loadedPosts')
         },
         asyncData () {
@@ -31,19 +28,12 @@
         },
         computed: {
             loadedPosts() {
-                // return this.$store.getters.loadedPosts
-                // return this.$store.getters.posts.loadedPosts
-                // return this.$store.getters('posts/loadedPosts')
-                // return this.$store.getters.posts('loadedPosts')
-                // return this.$store.posts.getters('loadedPosts')
-                // return this.$store.state.posts.loadedPosts
                 return this.$store.getters['posts/loadedPosts']
-                // return 'abc'
+            },
+            abc () {
+                return 'reload'
             }
         },
-        // computed: mapGetters({
-        //     loadedPosts: 'posts/loadedPosts'
-        // }),
         methods: {
             reloadPage () {
                 window.location.reload()

@@ -13,9 +13,9 @@ export const mutations = {
         state.loadedLiveEvents = payload
     },
     createEvent (state, payload) {
-		  	state.loadedEvents.push(payload)
-		  	state.loadedUserEvents.push(payload)
-		},
+	  	state.loadedEvents.push(payload)
+	  	state.loadedUserEvents.push(payload)
+	},
 	deleteEvent (state, id) {
 		const loadedEvents = state.loadedEvents
   		state.loadedEvents.splice(loadedEvents.findIndex(event => event.id === id), 1)
