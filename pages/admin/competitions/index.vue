@@ -100,7 +100,7 @@
 </template>
 
 <script>
-	import jsonEditor from 'vue2-jsonEditor'
+	import jsonEditor from 'vue2-jsoneditor'
 	import '~/static/css/jsoneditor-tree.css'
 	import Confirm from '~/components/Confirm.vue'
   	export default {
