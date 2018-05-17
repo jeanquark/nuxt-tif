@@ -2,10 +2,6 @@
 	<div class="container-fluid">
 		<!-- Header -->
 		<div id="header" class="col-12 col-sm-12 col-md-12 col-lg-12 top-fixed">
-			<div class="flex-container-header" style="background: #ccc;" v-if="user">
-				<h3>{{ user.email }}</h3>
-				<button class="btn btn-danger" @click="logout">Logout</button>
-			</div>
 			<div class="flex-container-header">
 				<div class="column">
 					<span class="level-box"><i class="fa fa-star"></i> Niv. 1 - <i class="fa fa-angle-double-up"></i> 1 / 10</span>						
@@ -27,7 +23,7 @@
 			<div class="flex-container-playerPropriety">
 				<nuxt-link to="/user/avatar" class="boxShadow" style="flex-basis: 60px"><img src="/images/avatar.png" class="imgAvatar"/></nuxt-link>
 				<nuxt-link to="/user" class="boxShadow flex-container-modalProfil" style="flex-grow: 1">
-					<div class="columnProfil"><img src="/images/163.png" class="imgModalProprieteFlags"/> <span class="modal-Propriete">CarolineKaeser</span> <span class="modal-ProprietePlace boxShadow"><img src="/images/cup.png" class="imgModalProprieteCup"/> 1863ème</span></div>
+					<div class="columnProfil"><img src="/images/163.png" class="imgModalProprieteFlags"/> <span class="modal-Propriete" v-if="user">{{ user.email }}</span> <span class="modal-ProprietePlace boxShadow"><img src="/images/cup.png" class="imgModalProprieteCup"/> 1863ème</span> <button class="btn btn-danger" @click="logout">Logout</button></div>
 				</nuxt-link>				  
 				<nuxt-link to="/user/preferences" class="boxShadow"  style="flex-basis: 60px"><img src="/images/parametre.png" class="imgParametre"/></nuxt-link>
 			</div>
