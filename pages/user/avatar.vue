@@ -18,7 +18,7 @@
                         <div class="flex-container-modal-MyTeam">
                             <h1>Envie de changer de tête ?</h1>
                             <!-- <h2> arr: {{ this.arr }} <br /><br />obj: {{ this.obj }}<br /><br />user: {{ this.loadedUser.avatar.name }}</h2> -->
-                            <!-- <h2>{{ loadedUser }}</h2> -->
+                            <!-- <h2>{{ this.loadedUser }}</h2> -->
                         </div>
                         <div class="flex-container-modalAvatar" v-if="this.arr.length > 0">
                             <!-- <div style="flex-grow: 1"><img src="/images/avatar.png" class="imgModalAvatar"/></div> -->
@@ -35,11 +35,14 @@
                             <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'background'}" @click="selectBodyPart('background')"><span class="textModalMenuAvatar">BACKGROUND</span></div>
                             <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'body'}" @click="selectBodyPart('body')"><span class="textModalMenuAvatar">BODY</span></div>
                             <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'skin'}" @click="selectBodyPart('skin')"><span class="textModalMenuAvatar">SKIN</span></div>
-                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'face'}" @click="selectBodyPart('face')"><span class="textModalMenuAvatar">FACE</span></div>
-                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'hair'}" @click="selectBodyPart('hair')"><span class="textModalMenuAvatar">HAIR</span></div>
+                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'eyes'}" @click="selectBodyPart('background')"><span class="textModalMenuAvatar">EYES</span></div>
+                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'mouth'}" @click="selectBodyPart('body')"><span class="textModalMenuAvatar">MOUTH</span></div>
+							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'face'}" @click="selectBodyPart('face')"><span class="textModalMenuAvatar">FACE</span></div>
+							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'cache'}" @click="selectBodyPart('face')">
+							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'hair'}" @click="selectBodyPart('hair')"><span class="textModalMenuAvatar">HAIR</span></div>
                         </div>
                         <div class="flex-container-modalAvatarImg">
-                            <div v-for="avatar in loadedAvatars" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.image" class="imgModalAvatar" :class="{active: (avatar.name === background ||  avatar.name === body || avatar.name === skin || avatar.name === face || avatar.name === hair) }" /></div>
+                            <div v-for="avatar in loadedAvatars" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.image" class="imgModalAvatar" :class="{active: (avatar.name === background ||  avatar.name === body || avatar.name === skin || avatar.name === eyes || avatar.name === mouth || avatar.name === face || avatar.name === cache || avatar.name === hair) }" /></div>
                         </div>
                     </div>
                     <!-- Modal footer -->
@@ -65,8 +68,6 @@
     export default {
         layout: 'layoutFront',
         created () {
-            this.$store.dispatch('posts/loadedPosts')
-
             const avatarsArray = []
             firebase.database().ref('avatars').once('value', function (snapshot) {
                 // console.log(snapshot.val())
@@ -80,16 +81,19 @@
             // const array = []
             if (this.$store.getters['users/loadedUser'].avatar) {
                 const array = this.$store.getters['users/loadedUser'].avatar.name.split('_')
-                if (array.length >= 7) {
+                if (array.length >= 10) {
                     this.gender = ''
                     this.gender = array[1]
                     this.background = array[2]
                     this.body = array[3]
                     this.skin = array[4]
-                    this.face = array[5]
-                    this.hair = array[6]
+					this.eyes = array[5]
+					this.mouth = array[6]
+                    this.face = array[7]
+					this.cache = array[8]
+                    this.hair = array[9]
 
-                    this.obj = [{ "image": '/images/avatars/' + this.gender + '/background/' + this.background + '.png', 'gender': this.gender, 'type': 'background' }, { 'image': '/images/avatars/' + this.gender + '/skin/' + this.skin + '.png', 'gender': this.gender, 'type': 'skin' }, { 'image': '/images/avatars/' + this.gender + '/body/' + this.body + '.png', 'gender': this.gender, 'type': 'body' }, { 'image': '/images/avatars/' + this.gender + '/hair/' + this.hair + '.png', 'gender': this.gender, 'type': 'hair' }, { 'image': '/images/avatars/' + this.gender + '/face/' + this.face + '.png', 'gender': this.gender, 'type': 'face' }]
+                    this.obj = [{ "image": '/images/avatars/' + this.gender + '/1_background/' + this.background + '.png', 'gender': this.gender, 'type': 'background' }, { 'image': '/images/avatars/' + this.gender + '/2_body/' + this.body + '.png', 'gender': this.gender, 'type': 'body' }, { 'image': '/images/avatars/' + this.gender + '/3_skin/' + this.skin + '.png', 'gender': this.gender, 'type': 'skin' }, { 'image': '/images/avatars/' + this.gender + '/4_eyes/' + this.eyes + '.png', 'gender': this.gender, 'type': 'eyes' }, { 'image': '/images/avatars/' + this.gender + '/5_mouth/' + this.mouth + '.png', 'gender': this.gender, 'type': 'mouth' }, { 'image': '/images/avatars/' + this.gender + '/6_face/' + this.face + '.png', 'gender': this.gender, 'type': 'face' }, { 'image': '/images/avatars/' + this.gender + '/7_cache/' + this.cache + '.png', 'gender': this.gender, 'type': 'cache' }, { 'image': '/images/avatars/' + this.gender + '/8_hair/' + this.hair + '.png', 'gender': this.gender, 'type': 'hair' }]
                     this.mergeImages()
                 }
                 console.log(array)
@@ -104,7 +108,10 @@
                 background: '',
                 body: '',
                 skin: '',
+				eyes: '',
+				mouth: '',
                 face: '',
+				cache: '',
                 hair: '',
                 avatars: [],
                 imagesArray: [],
@@ -120,9 +127,6 @@
             },
             loadedAvatars () {
                 return this.avatars.filter(avatar => avatar.gender === this.gender && avatar.type === this.bodyPart)
-            },
-            loadedPosts() {
-                return this.$store.getters['posts/loadedPosts']
             }
         },
         methods: {
@@ -161,8 +165,14 @@
                     this.body = name
                 } else if (name.includes('skin')) {
                     this.skin = name
-                } else if (name.includes('face')) {
+                } else if (name.includes('eyes')) {
+					this.eyes = name
+				} else if (name.includes('mouth')) {
+					this.mouth = name	
+				} else if (name.includes('face')) {
                     this.face = name
+				} else if (name.includes('cache')) {
+					this.cache = name
                 } else if (name.includes('hair')) {
                     this.hair = name
                 }
@@ -250,7 +260,7 @@
                 // Save image in Firebase Cloud Storage
                 const now = moment().unix()
                 const userId = firebase.auth().currentUser.uid
-                const image_name = userId + '_' + this.gender + '_' + this.background + '_' + this.body + '_' + this.skin + '_' + this.face + '_' + this.hair
+                const image_name = userId + '_' + this.gender + '_' + this.background + '_' + this.body + '_' + this.skin + '_' + this.eyes + '_' + this.mouth + '_' + this.face + '_' + this.cache + '_' + this.hair
                 console.log(image_name)
                 let storageRef = firebase.storage().ref('/images/avatars/' + image_name)
                 console.log(storageRef)
