@@ -31,7 +31,7 @@ module.exports = {
 	"auth/invalid-email": "Die E-Mail-Adresse ist falsch formatiert.",
 	"auth/wrong-password" : "Das Passwort ist ungültig oder der Benutzer hat kein Passwort.",
 	"auth/user-not-found" : "Zu dieser Kennung existiert kein Benutzerdatensatz. Der Benutzer wurde möglicherweise gelöscht.",
-	"auth/network-request-failed": "Network request failed."
+	"auth/network-request-failed": "Network request failed.",
 	// Liste des continents
 	"Europa" : "Europe",
 	"Asia" : "Asie",
