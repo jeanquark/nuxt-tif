@@ -21,8 +21,8 @@
 						<div class="flex-container-modal-Title banner2 text-center">
 							<h2>Tes équipes</h2>
 						</div>
-						<div class="flex-container-MesEquipes" v-for="team in this.loadedUserTeams">
-							<div class="OtherTeam">
+						<div class="flex-container-MesEquipes">
+							<div class="OtherTeam" v-for="team in this.loadedUserTeams">
 								<img :src="'/images/teams/' + team.image" class="imgModalAvatar" />
 								<nuxt-link :to="'/teams/' + team.slug" class="overlay">
 									<div class="textActivity">Football<br />{{ team.name }}<br /><br />+Infos</div>
@@ -42,8 +42,8 @@
 						<div class="flex-container-modal-OtherTeam">
 							<h6>Choisis ta compétition</h6>
 						</div>
-						<div class="flex-container-modal-OtherTeam-Img" v-for="competition in loadedCompetitions">
-							<div class="OtherTeam">
+						<div class="flex-container-modal-OtherTeam-Img">
+							<div class="OtherTeam" v-for="competition in loadedCompetitions">
 								<img :src="'/images/competitions/' + competition.image" class="imgModalAvatar"/>
 								<nuxt-link :to="'/user/competitions/' + competition.slug" class="overlayOtherTeam">
 									<div class="textActivity">{{ competition.name}}</br>{{ competition.country }}</br>{{ competition.year }}</br></br>+Infos</div>
