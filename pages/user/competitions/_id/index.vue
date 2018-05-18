@@ -12,7 +12,7 @@
                     <!-- {{ loadedTeamsByCompetition[0]['competitions'][this.competition_id] }} -->
     
                     <div class="modal-header">
-                        <span class="modal-title">{{ loadedCompetition.name }} <span class="modal-title-Sub">(Les équipes)</span></span>
+                        <span class="modal-title">Compétition en cours <span class="modal-title-Sub">(Les équipes)</span></span>
                         <nuxt-link to="/user/teams">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
@@ -29,11 +29,20 @@
                         <!--<div style="color: #000;" v-for="userTeam in loadedUserTeams">
                             {{ userTeam.name }}
                         </div> -->
-                        <div class="flex-container-modal-OtherTeam-Img" v-for="team in loadedTeamsByCompetition">
+						<div class="flex-container-modal-MyTeam">
+							<h1>Supporter une nouvelle équipe ?</h1>
+						</div>
+						<div class="flex-container-modal-Title banner text-center">
+							<h2>{{ loadedCompetition.category }}</br>{{ loadedCompetition.name }}</br>{{ loadedCompetition.country }}</br>{{ loadedCompetition.year }}</h2>
+						</div>
+						<div class="flex-container-modal-OtherTeam">
+							<h6>Choisis ton équipe !</h6>
+						</div>
+                        <div class="flex-container-modal-OtherTeam-Img">
                             <!-- <div class="OtherTeam" @click="selectTeam(team.id)">
                                 <img :src="'/images/teams/' + team.image" class="imgModalAvatar" v-bind:class="{active: isActive}" />
                             </div> -->
-                            <div class="OtherTeam" style="cursor: pointer;" :class="{active: selectedTeams.findIndex(e => e.id === team.id) != -1}" @click="selectTeam(team)">
+                            <div class="OtherTeam"  v-for="team in loadedTeamsByCompetition" style="cursor: pointer;" :class="{active: selectedTeams.findIndex(e => e.id === team.id) != -1}" @click="selectTeam(team)">
                                 <img :src="'/images/teams/' + team.image" class="imgModalAvatar" v-bind:class="{active: isActive}" />
                             </div>
                         </div>
