@@ -33,11 +33,11 @@ module.exports = {
 	"auth/user-not-found" : "Zu dieser Kennung existiert kein Benutzerdatensatz. Der Benutzer wurde möglicherweise gelöscht.",
 	"auth/network-request-failed": "Network request failed."
 	// Liste des continents
-	"Europa" : "Europe",
+	"Europa" : "Europa",
 	"Asia" : "Asien",
-	"Africa" : "Afrique",
-	"America" : "Amérique",
-	"Oceania" : "Océanie",
+	"Africa" : "Afrika",
+	"America" : "Amérika",
+	"Oceania" : "Ozeanien",
 	// Liste des pays
 	"Afghanistan" : "Afghanistan",
 	"Aland Islands" : "Îles Aland",
