@@ -84,15 +84,15 @@
                     this.gender = ''
                     this.gender = array[1]
                     this.background = array[2]
-                    this.body = array[3]
-                    this.skin = array[4]
+                    this.skin = array[3]
+                    this.body = array[4]
 					this.eyes = array[5]
 					this.mouth = array[6]
                     this.face = array[7]
 					this.cache = array[8]
                     this.hair = array[9]
 
-                    this.obj = [{ "image": '/images/avatars/' + this.gender + '/1_background/' + this.background + '.png', 'gender': this.gender, 'type': 'background' }, { 'image': '/images/avatars/' + this.gender + '/2_body/' + this.body + '.png', 'gender': this.gender, 'type': 'body' }, { 'image': '/images/avatars/' + this.gender + '/3_skin/' + this.skin + '.png', 'gender': this.gender, 'type': 'skin' }, { 'image': '/images/avatars/' + this.gender + '/4_eyes/' + this.eyes + '.png', 'gender': this.gender, 'type': 'eyes' }, { 'image': '/images/avatars/' + this.gender + '/5_mouth/' + this.mouth + '.png', 'gender': this.gender, 'type': 'mouth' }, { 'image': '/images/avatars/' + this.gender + '/6_face/' + this.face + '.png', 'gender': this.gender, 'type': 'face' }, { 'image': '/images/avatars/' + this.gender + '/7_cache/' + this.cache + '.png', 'gender': this.gender, 'type': 'cache' }, { 'image': '/images/avatars/' + this.gender + '/8_hair/' + this.hair + '.png', 'gender': this.gender, 'type': 'hair' }]
+                    this.obj = [{ "image": '/images/avatars/' + this.gender + '/1_background/' + this.background + '.png', 'gender': this.gender, 'type': 'background' }, { 'image': '/images/avatars/' + this.gender + '/3_skin/' + this.skin + '.png', 'gender': this.gender, 'type': 'skin' }, { 'image': '/images/avatars/' + this.gender + '/2_body/' + this.body + '.png', 'gender': this.gender, 'type': 'body' }, { 'image': '/images/avatars/' + this.gender + '/4_eyes/' + this.eyes + '.png', 'gender': this.gender, 'type': 'eyes' }, { 'image': '/images/avatars/' + this.gender + '/5_mouth/' + this.mouth + '.png', 'gender': this.gender, 'type': 'mouth' }, { 'image': '/images/avatars/' + this.gender + '/6_face/' + this.face + '.png', 'gender': this.gender, 'type': 'face' }, { 'image': '/images/avatars/' + this.gender + '/7_cache/' + this.cache + '.png', 'gender': this.gender, 'type': 'cache' }, { 'image': '/images/avatars/' + this.gender + '/8_hair/' + this.hair + '.png', 'gender': this.gender, 'type': 'hair' }]
                     this.mergeImages()
                 }
                 console.log(array)
@@ -105,8 +105,8 @@
                 bodyPart: 'background',
                 name: '',
                 background: '',
-                body: '',
                 skin: '',
+                body: '',
 				eyes: '',
 				mouth: '',
                 face: '',
