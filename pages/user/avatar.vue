@@ -35,13 +35,13 @@
                             <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'background'}" @click="selectBodyPart('background')"><span class="textModalMenuAvatar">BACKGROUND</span></div>
                             <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'body'}" @click="selectBodyPart('body')"><span class="textModalMenuAvatar">BODY</span></div>
                             <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'skin'}" @click="selectBodyPart('skin')"><span class="textModalMenuAvatar">SKIN</span></div>
-                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'eyes'}" @click="selectBodyPart('background')"><span class="textModalMenuAvatar">EYES</span></div>
-                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'mouth'}" @click="selectBodyPart('body')"><span class="textModalMenuAvatar">MOUTH</span></div>
-							              <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'face'}" @click="selectBodyPart('face')"><span class="textModalMenuAvatar">FACE</span></div>
-							              <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'hair'}" @click="selectBodyPart('hair')"><span class="textModalMenuAvatar">HAIR</span></div>
+                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'eyes'}" @click="selectBodyPart('eyes')"><span class="textModalMenuAvatar">EYES</span></div>
+                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'mouth'}" @click="selectBodyPart('mouth')"><span class="textModalMenuAvatar">MOUTH</span></div>
+							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'face'}" @click="selectBodyPart('face')"><span class="textModalMenuAvatar">FACE</span></div>
+							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'hair'}" @click="selectBodyPart('hair')"><span class="textModalMenuAvatar">HAIR</span></div>
                         </div>
                         <div class="flex-container-modalAvatarImg">
-                            <div v-for="avatar in loadedAvatars" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.image" class="imgModalAvatar" :class="{active: (avatar.name === background ||  avatar.name === body || avatar.name === skin || avatar.name === eyes || avatar.name === mouth || avatar.name === face || avatar.name === cache || avatar.name === hair) }" /></div>
+                            <div v-for="avatar in loadedAvatars" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === background ||  avatar.name === body || avatar.name === skin || avatar.name === eyes || avatar.name === mouth || avatar.name === face || avatar.name === cache || avatar.name === hair) }" /></div>
                         </div>
                     </div>
                     <!-- Modal footer -->
