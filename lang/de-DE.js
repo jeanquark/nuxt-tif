@@ -34,7 +34,7 @@ module.exports = {
 	"auth/network-request-failed": "Network request failed."
 	// Liste des continents
 	"Europa" : "Europe",
-	"Asia" : "Asie",
+	"Asia" : "Asien",
 	"Africa" : "Afrique",
 	"America" : "Amérique",
 	"Oceania" : "Océanie",
