@@ -19,9 +19,9 @@
       			// { rel: 'stylesheet', href: '/css/bootstrap-min.css' },
       			{ rel: 'stylesheet', href: 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' },
       			{ rel: 'stylesheet', href: '/css/styles.css' },
-            { rel: 'stylesheet', href: '/css/styles_768.css' },
-            { rel: 'stylesheet', href: '/css/styles_1024.css' },
-            { rel: 'stylesheet', href: '/css/styles_1280.css' },
+	            { rel: 'stylesheet', href: '/css/styles_768.css' },
+	            { rel: 'stylesheet', href: '/css/styles_1024.css' },
+	            { rel: 'stylesheet', href: '/css/styles_1280.css' },
 		    ],
 		    // css: [
 		    // 	{ src: '~/assets/css/styles.css', lang: 'css' }
