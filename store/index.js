@@ -46,7 +46,7 @@ export const actions = {
     // },
 
     async nuxtServerInit ({commit}, {req}) {
-        try {
+        // try {
             if (req.user) {
                 console.log('Entering nuxtServerInit')
                 console.log(req.user)
@@ -69,10 +69,10 @@ export const actions = {
                 // }
                 // commit('users/setUser', authData, {root: true})
             }
-        }
-        catch (e) {
-            console.log(e)
-        }
+        // }
+        // catch (e) {
+        //     console.log(e)
+        // }
     },
     // setLoading ({commit, payload}) {
     //   commit('setLoading', payload)

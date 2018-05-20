@@ -156,6 +156,7 @@ module.exports = {
       { path: '/setCustomClaims', handler: '~/serverMiddleware/setCustomClaims'},
       // '~/serverMiddleware/api.js',
       { path: '/api-football', handler: '~/serverMiddleware/api-football'},
+      { path: '/upload-image', handler: '~/serverMiddleware/uploadImage' },
   ],
   toast: {
     duration: 8000,

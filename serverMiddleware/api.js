@@ -22,11 +22,11 @@ app.get('/say/:word', (req, res) => {
 // })
 
 app.get('/api-football', (req, res) => {
-	console.log('api-football called')
+	console.log('api-football called');
 }).then() => ({
 	app.get('https://www.google.com', (req, res) => {
-		console.log('GET request sent')
-		res.end()
+		console.log('GET request sent');
+		res.end();
 	})
 });
 
