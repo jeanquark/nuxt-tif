@@ -40,7 +40,7 @@ module.exports = {
 	"Oceania" : "Ozeanien",
 	// Liste des pays
 	"Afghanistan" : "Afghanistan",
-	"Aland Islands" : "Îles Aland",
+	"Aland Islands" : "Aland-Inseln",
 	"Albania" : "Albanien",
 	"Algeria" : "Algerien",
 	"American Samoa" : "Amerikanisch-Samoa",
