@@ -204,7 +204,7 @@ module.exports = {
 	"Nigeria" : "Nigeria",
 	"Niue" : "Niue",
 	"Norfolk Islands" : "Norfolkinsel",
-	"Northern Irland" : "Irlande du Nord",
+	"Northern Irland" : "Nordirland",
 	"Northern Mariana Islands" : "Nördliche Marianen",
 	"Norway" : "Norwegen",
 	"Occupied Palestinian Territory" : "Palästinensische Autonomiegebiete",
