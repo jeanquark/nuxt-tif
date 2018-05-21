@@ -104,7 +104,7 @@ module.exports = {
 	"Ecuador" : "Ecuador",
 	"Egypt" : "Ägypten",
 	"El Salvador" : "El Salvador",
-	"England" : "Angleterre",
+	"England" : "England",
 	"Equatorial Guinea" : "Äquatorialguinea",
 	"Eritrea" : "Eritrea",
 	"Estonia" : "Estland",
