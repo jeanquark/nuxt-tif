@@ -39,7 +39,7 @@ module.exports = app.use(function (req, res, next) {
     console.log('response from server 1');
     let imageName = req.body.name;
 
-	fs.writeFile('./static/images/' + imageName + '.' + imageBuffer.type, imageBuffer.data, function(err) {
+	fs.writeFile('./static/images/teams/' + imageName + '.' + imageBuffer.type, imageBuffer.data, function(err) {
 		console.log('The image was successfully saved on relative path!');
 	});
 
@@ -55,7 +55,9 @@ module.exports = app.use(function (req, res, next) {
 	// app.use('upload-image', (req, res) => {
 	//   	console.log(req.body);
 	// });
+	let imagePath = imageName + '.' + imageBuffer.type;
 
-	res.send('POST request to upload-image succeeded!');
+	// res.send('POST request to upload-image succeeded!');
+	res.send(imagePath);
 	// next();
 });

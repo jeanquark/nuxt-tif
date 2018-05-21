@@ -232,41 +232,41 @@
       drawer: null,
       loadingPage: true,
       items: [
-        { icon: 'dashboard', text: 'Dashboard', to: '/admin', exact: true },
-        { icon: 'contacts', text: 'Users', to: '/admin/users', exact: false },
-        { icon: 'event', text: 'Events', to: '/admin/events', exact: false },
-        { icon: 'fa fa-user', text: 'Competitions', to: '/admin/competitions', exact: false },
-        { icon: 'event', text: 'Teams', to: '/admin/teams', exact: false },
-        { icon: 'history', text: 'Placeholder 1', to: '', exact: false },
-        { icon: 'content_copy', text: 'Placeholder 2', to: '', exact: false },
-        {
-          icon: 'keyboard_arrow_up',
-          'icon-alt': 'keyboard_arrow_down',
-          text: 'Placeholder 3',
-          model: false,
-          children: [
-            { text: 'Placeholder 3.1', to: '', exact: false },
-            { text: 'Teams', to: '/admin/teams', exact: false }
-          ]
-        },
-        {
-          icon: 'keyboard_arrow_up',
-          'icon-alt': 'keyboard_arrow_down',
-          text: 'Placeholder 4',
-          model: false,
-          children: [
-            { text: 'Placeholder 4.1', to: '', exact: false },
-            { text: 'Placeholder 4.2', to: '', exact: false },
-            { text: 'Placeholder 4.3', to: '', exact: false },
-            { text: 'Placeholder 4.4', to: '', exact: false },
-            { text: 'Placeholder 4.5', to: '', exact: false }
-          ]
-        },
-        { icon: 'settings', text: 'Placeholder 5', to: '', exact: false },
-        { icon: 'chat_bubble', text: 'Placeholder 6', to: '', exact: false },
-        { icon: 'help', text: 'Placeholder 7', to: '', exact: false },
-        { icon: 'phonelink', text: 'Placeholder 8', to: '', exact: false },
-        { icon: 'keyboard', text: 'Placeholder 9', to: '', exact: false }
+        { icon: 'fa fa-tachometer', text: 'Dashboard', to: '/admin', exact: true },
+        { icon: 'fa fa-users', text: 'Users', to: '/admin/users', exact: false },
+        { icon: 'fa fa-list-ol', text: 'Competitions', to: '/admin/competitions', exact: false },
+        { icon: 'fa fa-list-ol', text: 'Teams', to: '/admin/teams', exact: false },
+        { icon: 'fa fa-calendar', text: 'Events', to: '/admin/events', exact: false },
+        // { icon: 'history', text: 'Placeholder 1', to: '', exact: false },
+        // { icon: 'content_copy', text: 'Placeholder 2', to: '', exact: false },
+        // {
+        //   icon: 'keyboard_arrow_up',
+        //   'icon-alt': 'keyboard_arrow_down',
+        //   text: 'Placeholder 3',
+        //   model: false,
+        //   children: [
+        //     { text: 'Placeholder 3.1', to: '', exact: false },
+        //     { text: 'Teams', to: '/admin/teams', exact: false }
+        //   ]
+        // },
+        // {
+        //   icon: 'keyboard_arrow_up',
+        //   'icon-alt': 'keyboard_arrow_down',
+        //   text: 'Placeholder 4',
+        //   model: false,
+        //   children: [
+        //     { text: 'Placeholder 4.1', to: '', exact: false },
+        //     { text: 'Placeholder 4.2', to: '', exact: false },
+        //     { text: 'Placeholder 4.3', to: '', exact: false },
+        //     { text: 'Placeholder 4.4', to: '', exact: false },
+        //     { text: 'Placeholder 4.5', to: '', exact: false }
+        //   ]
+        // },
+        // { icon: 'settings', text: 'Placeholder 5', to: '', exact: false },
+        // { icon: 'chat_bubble', text: 'Placeholder 6', to: '', exact: false },
+        // { icon: 'help', text: 'Placeholder 7', to: '', exact: false },
+        // { icon: 'phonelink', text: 'Placeholder 8', to: '', exact: false },
+        // { icon: 'keyboard', text: 'Placeholder 9', to: '', exact: false }
       ]
     }),
     props: {

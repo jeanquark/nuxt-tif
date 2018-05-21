@@ -190,21 +190,13 @@
   	import axios from 'axios'
 	export default {
 		layout: 'layoutBack',
-		// components: {
-  //       	'picture-input': PictureInput
-  //     	},
 		created () {
-			// setTimeout(function() {
-			// 	alert('Timeout!')
-			// 	commit('setActivities')
 			this.$store.dispatch('activities/loadedActivities')
     		this.$store.dispatch('categories/loadedCategories')
     		this.$store.dispatch('types/loadedTypes')
     		this.$store.dispatch('stadiums/loadedStadiums')
 			this.$store.dispatch('teams/loadedTeams')
-			// }, 3000)
 			this.$store.dispatch('events/loadedEvents')
-			// console.log(process.env.FOOTBALL_API_KEY)
 			this.$store.dispatch('competitions/loadedCompetitions')
 			this.$store.dispatch('countries/loadedCountries')
 		},
@@ -284,199 +276,56 @@
 		    loadedCountries () {
 		    	return this.$store.getters['countries/loadedCountries']
 		    },
-		    // validAPIRequestData () {
-		    // 	const a = moment(this.competitionStartDate)
-		    // 	// console.log(a)
-		    // 	const b = moment(this.competitionEndDate)
-		    // 	// console.log(b)
-		    // 	const diffDays = b.diff(a, 'days')
-		    // 	// console.log(diffDays)
-		    // 	return this.selectedCompetition.football_api_id === 1204 && a < b && diffDays <= 31
-		    // }
 		},
 		methods: {
-			submitFile(){
-	        	/*
-	                Initialize the form data
-	            */
-	            let formData = new FormData();
-
-	            /*
-	                Add the form data we need to submit
-	            */
-	            formData.append('file', this.file);
-	            console.log(formData)
-
-		        /*
-		          Make the request to the POST /single-file URL
-		        */
-		        axios.post( '/upload-image', formData, { headers: { 'Content-Type': 'multipart/form-data'}})
-		        .then(function() {
-		          	console.log('SUCCESS!!')
-		        })
-		        .catch(function(){
-		          	console.log('FAILURE!!')
-		        })
-		    },
 			/*
 		        Handles a change on the file upload
 		    */
 		    handleFileUpload () {
 		    	console.log('handleFileUpload')
 		        this.file = this.$refs.file1.files[0]
-		        // this.file = 'abc'
 		    },
 			submitCreateTeam () {
 				console.log('submitCreateTeam')
-				const abc = 'abc'
 
-				// this.$axios.$post('/upload-image', { image: this.imageData })
-				// axios.post('/upload-image', { image: this.imageData }, {
-				//     headers: {
-				//         'Content-Type': 'multipart/form-data'
-				//     }
-				// })
-				// axios.post('/upload-image', { image: this.imageData })
-				// .then(function(){
-				//   	console.log('SUCCESS!!');
-				// })
-				// .catch(function(){
-				//   	console.log('FAILURE!!');
-				// });
+				const teamData = {
+					activity: {
+			            slug: this.selectedActivity.slug,
+			            name: this.selectedActivity.name
+			        },
+					category: {
+						slug: this.selectedCategory.slug,
+						name: this.selectedCategory.name
+					},
+					country: {
+						slug: this.selectedCountry.slug,
+						name: this.selectedCountry.name
+					},
+					competitions: {
+						[this.selectedCompetition.slug]: true
+					},
+			        name: this.selectedName,
+			        slug: this.selectedSlug,
+			        // image: this.selectedSlug,
+			        _created_at: new Date().getTime(),
+			        _updated_at: new Date().getTime()
+				}
 
-				return axios.post('/upload-image', {
+				axios.post('/upload-image', {
 				    image: this.imageData,
 				    name: this.selectedSlug
-				}).then(function (response) {
+				}).then((response) => {
 					console.log('success')
-				    console.log(response)
+				    console.log(response.data)
+				    teamData['image'] = response.data
+				    console.log(teamData)
+				    this.$store.dispatch('teams/createTeam', teamData)
+				    // return this.$router.push('/admin/teams')
 				}).catch(function (error) {
 					console.log('error')
 				    console.log(error)
 				})
-
-				// return this.$axios.$post('/upload-image', { firstName: 'Fred', lastName: 'FLintstone' }).then((response) => {
-    //                 console.log('success')
-    //                 console.log(response)
-    //             }).catch(function (error) {
-				// 	console.log('error')
-				//     console.log(error.response)
-				// })
-
-				// const teamData = {
-				// 	activity: {
-			 //            slug: this.selectedActivity.slug,
-			 //            name: this.selectedActivity.name
-			 //        },
-				// 	category: {
-				// 		slug: this.selectedCategory.slug,
-				// 		name: this.selectedCategory.name
-				// 	},
-				// 	country: {
-				// 		slug: this.selectedCountry.slug,
-				// 		name: this.selectedCountry.name
-				// 	},
-			 //        name: this.selectedName,
-			 //        slug: this.selectedSlug,
-			 //        image: this.imageData,
-			 //        _created_at: new Date().getTime(),
-			 //        _updated_at: new Date().getTime()
-				// }
-				// console.log(teamData)
-				// this.$store.dispatch('teams/createTeam', teamData)
-				// return this.$router.push('/admin/competitions')
 			},
-			// formattedDate (date, time) {
-		 //    	// Takes a string date with format DD.MM.YYYY and first transform it to YYYY-MM-DD and then to timestamp
-	  //   		const [day, month, year] = date.split(".")
-			// 	const reOrderedDate = year + '-' + month + '-' + day
-		 //    	const completeDate = reOrderedDate + ' ' + time
-		 //    	const formattedDate = parseInt(moment(completeDate).format('x')/1000)
-		 //    	return formattedDate
-		 //    },
-
-			// submitRequestToFootballAPI () {
-			// 	console.log('submitRequestToFootballAPI')
-			// 	this.loading = true
-			// 	const teamsArray = []
-			// 	this.loadedTeams.forEach((team) => {
-			// 		// console.log(event)
-			// 		teamsArray.push(team.api_football_name)
-			// 	})
-			// 	console.log(teamsArray)
-
-			// 	// Get local data that micmic football api response
-			// 	// this.$axios.$get('/football_api_sample_data_get_matches.json').then((response) => {
-			// 	// this.$axios.$get('http://api.football-api.com/2.0/matches?comp_id=' + this.selectedCompetition.football_api_id + '&from_date=' + this.competitionStartDate + '&to_date=' + this.competitionEndDate + '&Authorization=' + '565ec012251f932ea4000001d191fefd02dd4b6f65bf2e5aa5478f1d').then((response) => {
-			// 	this.$axios.$get('https://apifootball.com/api/?action=get_standings&league_id=' + this.selectedCompetition.api_football_id + ' &APIkey=' + process.env.API_FOOTBALL_KEY).then((response) => {
-			// 		// console.log(response)
-		 //            this.footballAPIRequestResult = response
-		 //            // console.log(eventsArray)
-		 //            // const eventsArray = []
-
-			// 		response.forEach((team) => {
-			// 			// console.log(event)
-			// 			// const hometeam = this.loadedTeams.find(team => team.api_football_name === event.match_hometeam_name)
-			// 			// const awayteam = this.loadedTeams.find(team => team.api_football_name === event.match_awayteam_name)
-			// 			// console.log(hometeam)
-			// 			// console.log(awayteam)
-			// 			// const date_as_timestamp = new Date(event.match_date).getTime() / 1000
-			// 			// console.log(date_as_timestamp)
-			// 			// const name_unique = hometeam.id + '_vs_' + awayteam.id + '_on_' + date_as_timestamp
-			// 			// console.log(name_unique)
-			// 			// const name_pretty = hometeam.name + ' vs ' + awayteam.name
-			// 			// console.log(name_pretty)
-			// 			// return
-			// 			const name_unique = this.loadedTeams.find(loadedTeam => loadedTeam.api_football_name === team.team_name)
-			// 			console.log(name_unique)
-			// 			if (!teamsArray.includes(name_unique)) {
-			// 				const newPostKey = firebase.database().ref().child('events_new').push().key
-						
-			// 				let teamData = {
-			// 	                id: newPostKey,
-			// 	                slug: this.slugify(team.team_name),
-			// 	                activity: {
-			// 			            slug: 'sport',
-			// 			            name: 'Sport'
-			// 			        },
-			// 					category: {
-			// 						slug: 'football',
-			// 						name: 'Football'
-			// 					},
-			// 			        type: {
-			// 			            slug: 'premier_league',
-			// 			            name: 'Premier League'
-			// 			        },
-			// 	                country_name: team.country_name,
-			// 	                // country_id: event.country_id,
-			// 	                competition_name: team.league_name,
-			// 	                competition_id: team.league_id,
-			// 	                api_football_name: team.team_name,
-			// 	                name: team.team_name,
-			// 	            }
-			// 	            let updates = {}
-			//             	updates['/teams/' + teamData.id] = teamData
-			//             	firebase.database().ref().update(updates).then(() => {
-			//             		console.log('success!')
-			//             		this.loading = false
-		 //            			new Noty({type: 'success', layout: 'topRight', text: 'Equipe ' + team.team_name + ' créée avec succès.', timeout: 5000, theme: 'metroui', maxVisible: 10}).show()
-
-			//             	}).catch((error) => {
-			//             		console.log('error')
-			//             		this.loading = false
-			//             		console.log(error.message)
-			//             		new Noty({type: 'error', text: 'Erreur avec firebase: ' + error.message, timeout: 5000, theme: 'metroui'}).show()
-			//             	})
-			// 			} else {
-			// 				console.log('This team already exists in database!')
-			// 				// this.showSuccessMsg()
-			// 				this.loading = false
-			// 				this.showWarnMsg({message: 'Team ' + team.team_name + ' already exists in database!'})
-			// 			}
-		 //            })
-		 //            console.log(teamsArray)
-			// 	})
-			// },
 			previewImage (event) {
 	            // Reference to the DOM input element
 	            let input = event.target;
@@ -547,22 +396,4 @@
 	.toast {
 		background-color: yellow;
 	}
-	/*.jbtn-file {
-	    cursor: pointer;
-	    position: relative;
-	    overflow: hidden;
-	}*/
-	/*.jbtn-file input[type=file] {
-	    position: absolute;
-	    top: 0;
-	    right: 0;
-	    min-width: 100%;
-	    min-height: 100%;
-	    text-align: right;
-	    filter: alpha(opacity=0);
-	    opacity: 0;
-	    outline: none;
-	    cursor: inherit;
-	    display: block;
-	}*/
 </style>
