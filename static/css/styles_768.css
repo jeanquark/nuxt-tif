@@ -302,7 +302,7 @@
 		padding: 2px;
 	}
 	
-	.flex-container-playerPropriety > a {
+	.flex-container-playerPropriety > nuxt-link {
 		border: 1px solid orangered;
 		border-radius: 5px;
 		color: white;
@@ -574,7 +574,7 @@
 		padding: 2px;
 	}
 	
-	.flex-container-teamGoodies > a {
+	.flex-container-teamGoodies > nuxt-link {
 		border: 1px solid orangered;
 		border-radius: 5px;
 		color: white;
@@ -594,7 +594,7 @@
 		font-size: 70%;
 	}
 	
-	.lex-container-teamGoodies > a:hover {
+	.lex-container-teamGoodies > nuxt-link:hover {
 		text-decoration: none;
 	}
 	
