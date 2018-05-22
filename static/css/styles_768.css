@@ -1,6 +1,6 @@
 /* Tablette en mode portrait et résolutions inférieurs */
 
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 200px) and (max-width: 768px) {
 	
 	body, html {
 		width: 100%;
