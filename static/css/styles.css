@@ -300,7 +300,7 @@ align-items: stretch;
 padding: 2px;
 }
 
-.flex-container-playerPropriety > nuxt-link {
+.flex-container-playerPropriety > link {
 border: 1px solid orangered;
 border-radius: 5px;
 color: white;
@@ -320,7 +320,7 @@ text-align: center;
 font-size: 100%;
 }
 
-.flex-container-playerPropriety > a:hover {
+.flex-container-playerPropriety > link:hover {
 text-decoration: none;
 }
 
