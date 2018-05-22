@@ -1,5 +1,7 @@
 /* Style par défaut (écran de bureau) - Résolution 1400x1050 */
 
+@media only screen and (min-width: 1281px) {
+
 body, html {
 width: 100%;
 color: #ffffff;
@@ -4038,4 +4040,6 @@ left: 5px;
 margin-top: -5px;
 border-width: 0 5px 5px;
 border-bottom-color: #000;
+}
+
 }
