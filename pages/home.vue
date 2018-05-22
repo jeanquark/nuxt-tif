@@ -135,7 +135,22 @@
 				return this.$store.getters['users/loadedUser']
 			}
 		},
-		methods: {
+		mergeImages() {
+            // Build an array of image paths from the object
+            this.arr = []
+            // this.arr = this.obj
+            for (let i = 0; i < this.obj.length; i++) {
+                this.arr.push(this.obj[i].image)
+            }
+
+            if (process.browser) {
+                mergeImages(this.arr)
+                .then(
+                    b64 => this.$refs.mergedImage.src = b64
+                )
+            }
+        },		
+        methods: {
 			logout() {
 				// return this.$store.dispatch('users/signOut')
 				this.$store.dispatch('users/signOut').then(() => {
