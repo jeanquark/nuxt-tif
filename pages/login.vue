@@ -1,54 +1,43 @@
 <template>
     <div class="container-fluid">
         <!-- The Modal Player -->
-        <div id="modalBox">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-					<!-- nouvelle version du login -->
-                    
-					<div v-if="error" class="text-center" style="color: red;">{{ $t(error.code) }}</div><br />
-					
-					<form>
-					<div class="container">
-					  <h1>Se connecter</h1>
-					  <p class="modalInscription">Va vite encourager tes équipes favorites !</p>
-					  <hr>
-					  						
-					  <label for="email"><b>Email</b></label>
-					  <input type="text" v-model="email" placeholder="Enter Email" name="email" required>
-					  <span class="highlight"></span>
-					  <span class="bar"></span>
-					  
-					  <label for="psw"><b>Password</b></label>
-					  <input type="password" v-model="password" placeholder="Enter Password" name="psw" required>
-					  <span class="highlight"></span>
-					  <span class="bar"></span>
-					  
-					  <label>
-						<input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Se souvenir de moi
-					  </label>
+        <div class="modalBox text-center" v-if="error" style="color: red;">{{ $t(error.code) }}</div><br />
+            <form class="modal-content">
+            	<div class="container"> 
+               		<h1>Se connecter</h1>
+               		<p class="modalInscription">Va vite encourager tes équipes favorites !</p>
+               		<hr>
+					<label for="email"><b>Email</b></label>
+					<input type="text" v-model="email" placeholder="Enter Email" name="email" required>
+					<span class="highlight"></span>
+					<span class="bar"></span>
 
-					  <div class="row button-section">
-					  <div class="col-twelve">
-						<nuxt-link to="/" type="button" class="button stroke smoothscroll">Non, je ne veux pas !</a>
-                        <button type="submit" class="button button-primary" style="" :disabled="loading" :loading="loading" @click.prevent="signUserIn"> Go go go, c'est parti ! <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
-					  </div>
-					  </div>
+					<label for="psw"><b>Password</b></label>
+					<input type="password" v-model="password" placeholder="Enter Password" name="psw" required>
+					<span class="highlight"></span>
+					<span class="bar"></span>
 
-					  <div class="row button-section">
-					  <div class="col-twelve">
-						<a href="vue/load.html" type="submit" class="button btn-facebook"><i class="fa fa-facebook"></i> Connecte-toi avec FB</a>
-						<a href="vue/load.html" type="submit" class="button btn-twitter"><i class="fa fa-google"></i> Connecte-toi avec G+</a>
-					  </div>
-					  </div>
-					  
+					<label>
+					<input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Se souvenir de moi
+					</label>
+
+					<div class="row button-section">
+					<div class="col-twelve">
+					<nuxt-link to="/" type="button" class="button stroke smoothscroll">Non, je ne veux pas !</a>
+					<button type="submit" class="button button-primary" style="" :disabled="loading" :loading="loading" @click.prevent="signUserIn"> Go go go, c'est parti ! <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
 					</div>
-					</form>
-					<!-- Fin de la nouvelle version du login -->
-          </div>
-          </div>
-        </div><!-- /#modalBox -->
-    </div><!-- /.container-fluid -->
+					</div>
+
+					<div class="row button-section">
+					<div class="col-twelve">
+					<a href="vue/load.html" type="submit" class="button btn-facebook"><i class="fa fa-facebook"></i> Connecte-toi avec FB</a>
+					<a href="vue/load.html" type="submit" class="button btn-twitter"><i class="fa fa-google"></i> Connecte-toi avec G+</a>
+					</div>
+					</div>
+           		</div>
+            </form>
+        </div>
+    </div>
 </template>
 
 <script>
