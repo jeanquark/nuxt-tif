@@ -1,6 +1,6 @@
 /* Style par défaut (écran de bureau) - Résolution 1400x1050 */
 
-@media only screen and (max-width: 1280px) {
+@media only screen and (min-width: 1025px) and (max-width: 1280px) {
 
 body, html {
 width: 100%;
