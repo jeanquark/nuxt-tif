@@ -555,15 +555,8 @@
             </div> <!-- /contact-form -->
 
             <div class="row contact-info">
-                <div class="col-six tab-full">
-                    <div class="icon">
-                        <i class="icon-pin"></i>
-                    </div>
-                    <h5>Nos coordonnées</h5>
-                    <p>ThisIsFan.com<br>Switzerland</p>
-                </div>
 
-                <div class="col-six tab-full collapse">
+              <div class="col-six tab-full collapse">
                     <div class="icon">
                         <i class="icon-mail"></i>
                     </div>
