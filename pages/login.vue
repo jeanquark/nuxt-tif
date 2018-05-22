@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">
         <!-- The Modal Player -->
-        <div class="modalBox text-center" v-if="error" style="color: red;">{{ $t(error.code) }}</div><br />
+        <div class="modalBox" v-if="error" style="color: red;">{{ $t(error.code) }}</div><br />
             <form class="modal-content">
             	<div class="container"> 
                		<h1>Se connecter</h1>
@@ -9,13 +9,9 @@
                		<hr>
 					<label for="email"><b>Email</b></label>
 					<input type="text" v-model="email" placeholder="Enter Email" name="email" required>
-					<span class="highlight"></span>
-					<span class="bar"></span>
 
 					<label for="psw"><b>Password</b></label>
 					<input type="password" v-model="password" placeholder="Enter Password" name="psw" required>
-					<span class="highlight"></span>
-					<span class="bar"></span>
 
 					<label>
 					<input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Se souvenir de moi
@@ -23,8 +19,8 @@
 
 					<div class="row button-section">
 					<div class="col-twelve">
-					<nuxt-link to="/" type="button" class="button stroke smoothscroll">Non, je ne veux pas !</a>
-					<button type="submit" class="button button-primary" style="" :disabled="loading" :loading="loading" @click.prevent="signUserIn"> Go go go, c'est parti ! <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
+					<a href="index2.html" type="button" class="button stroke smoothscroll">Non, je ne veux pas !</a>
+					<a href="vue/load.html" type="submit" class="button button-primary">Go Go Go, c'est parti !</a>
 					</div>
 					</div>
 
