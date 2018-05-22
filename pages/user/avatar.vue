@@ -118,8 +118,8 @@
                 bodyPart: 'background',
                 name: '',
                 background: '',
+                skin: '',
                 body: '',
-				skin: '',
                 eyes: '',
                 mouth: '',
                 face: '',
@@ -139,7 +139,7 @@
                 return this.avatars.filter(avatar => avatar.gender === this.gender && avatar.type === this.bodyPart)
             },
             disabled () {
-                return this.background == '' && this.body == '' && this.skin == '' && this.eyes == '' && this.mouth == '' && this.face == ''
+                return this.background == '' && this.skin == '' && this.body == '' && this.eyes == '' && this.mouth == '' && this.face == ''
             },
             loadedTeams () {
                 return this.$store.getters['teams/loadedTeams']
