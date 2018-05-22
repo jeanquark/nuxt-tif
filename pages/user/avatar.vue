@@ -17,10 +17,10 @@
                     <div id="modalBoxContent" class="modal-body">
                         <div class="flex-container-modal-MyTeam">
                             <h1>Envie de changer de tête ?</h1>
-                            <h2> arr: {{ this.arr }} <br /><br />obj: {{ this.obj }}<br /><br /></h2>
+                            <!-- <h2> arr: {{ this.arr }} <br /><br />obj: {{ this.obj }}<br /><br /></h2> -->
                                 <!-- <h2> user: {{ this.loadedUser.avatar.name }}</h2>  -->
-                            <h2>loadedUser: {{ this.loadedUser }}</h2><br /><br />
-                            <h2>loadedTeams: {{ this.loadedTeams }}</h2>
+                            <!-- <h2>loadedUser: {{ this.loadedUser }}</h2><br /><br /> -->
+                            <!-- <h2>loadedTeams: {{ this.loadedTeams }}</h2> -->
                         </div>
                         <div class="flex-container-modalAvatar" v-if="this.arr.length > 0">
                             <!-- <div style="flex-grow: 1"><img src="/images/avatar.png" class="imgModalAvatar"/></div> -->
