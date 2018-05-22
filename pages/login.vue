@@ -45,6 +45,8 @@
 					</div>
 					</form>
 					<!-- Fin de la nouvelle version du login -->
+          </div>
+          </div>
         </div><!-- /#modalBox -->
     </div><!-- /.container-fluid -->
 </template>
