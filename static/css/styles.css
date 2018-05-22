@@ -300,7 +300,7 @@ align-items: stretch;
 padding: 2px;
 }
 
-.flex-container-playerPropriety > a {
+.flex-container-playerPropriety > nuxt-link {
 border: 1px solid orangered;
 border-radius: 5px;
 color: white;
@@ -572,7 +572,7 @@ align-items: stretch;
 padding: 2px;
 }
 
-.flex-container-teamGoodies > a {
+.flex-container-teamGoodies > nuxt-link {
 border: 1px solid orangered;
 border-radius: 5px;
 color: white;
