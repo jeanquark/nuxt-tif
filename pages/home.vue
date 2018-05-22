@@ -20,8 +20,8 @@
 		<!-- Propriété du joueur -->
 		<div id="proprieteJoueur" class="col-12 col-sm-12 col-md-12 col-lg-12">
 
-			<div class="flex-container-playerPropriety" v-if="this.arr.length > 0">
-				<nuxt-link to="/user/avatar" class="boxShadow" style="flex-basis: 60px"><img src="" ref="mergedImage" class="imgAvatar"/></nuxt-link>
+			<div class="flex-container-playerPropriety">
+				<nuxt-link to="/user/avatar" class="boxShadow" style="flex-basis: 60px"><img src="/images/avatar.png" class="imgAvatar"/></nuxt-link>
 				<nuxt-link to="/user" class="boxShadow flex-container-modalProfil" style="flex-grow: 1">
 					<div class="columnProfil"><img src="/images/163.png" class="imgModalProprieteFlags"/> <span class="modal-Propriete" v-if="user">{{ user.email }}</span> <span class="modal-ProprietePlace boxShadow"><img src="/images/cup.png" class="imgModalProprieteCup"/> 1863ème</span> <button class="btn btn-danger" @click="logout">Logout</button> <button class="btn btn-success"><nuxt-link to="/admin">Admin</nuxt-link></button></div>
 				</nuxt-link>
@@ -135,22 +135,7 @@
 				return this.$store.getters['users/loadedUser']
 			}
 		},
-		mergeImages() {
-            // Build an array of image paths from the object
-            this.arr = []
-            // this.arr = this.obj
-            for (let i = 0; i < this.obj.length; i++) {
-                this.arr.push(this.obj[i].image)
-            }
-
-            if (process.browser) {
-                mergeImages(this.arr)
-                .then(
-                    b64 => this.$refs.mergedImage.src = b64
-                )
-            }
-        },		
-        methods: {
+		methods: {
 			logout() {
 				// return this.$store.dispatch('users/signOut')
 				this.$store.dispatch('users/signOut').then(() => {
