@@ -17,10 +17,10 @@
                     <div id="modalBoxContent" class="modal-body">
                         <div class="flex-container-modal-MyTeam">
                             <h1>Envie de changer de tête ?</h1>
-                            <h2> arr: {{ this.arr }} <br /><br />obj: {{ this.obj }}<br /><br /></h2>
+                            <!-- <h2> arr: {{ this.arr }} <br /><br />obj: {{ this.obj }}<br /><br /></h2> -->
                                 <!-- <h2> user: {{ this.loadedUser.avatar.name }}</h2>  -->
-                            <h2>loadedUser: {{ this.loadedUser }}</h2><br /><br />
-                            <h2>loadedTeams: {{ this.loadedTeams }}</h2>
+                            <!-- <h2>loadedUser: {{ this.loadedUser }}</h2><br /><br /> -->
+                            <!-- <h2>loadedTeams: {{ this.loadedTeams }}</h2> -->
                         </div>
                         <div class="flex-container-modalAvatar" v-if="this.arr.length > 0">
                             <!-- <div style="flex-grow: 1"><img src="/images/avatar.png" class="imgModalAvatar"/></div> -->
@@ -43,7 +43,7 @@
                             <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'hair'}" @click="selectBodyPart('hair')"><span class="textModalMenuAvatar">HAIR</span></div>
                         </div>
                         <div class="flex-container-modalAvatarImg">
-                            <div v-for="avatar in loadedAvatars" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.image" class="imgModalAvatar" :class="{active: (avatar.name === background ||  avatar.name === body || avatar.name === skin || avatar.name === eyes || avatar.name === mouth || avatar.name === face || avatar.name === hair) }" /></div>
+                            <div v-for="avatar in loadedAvatars" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.image" class="imgModalAvatar" :class="{active: (avatar.name === background ||  avatar.name === body || avatar.name === skin || avatar.name === eyes || avatar.name === mouth || avatar.name === face || avatar.name === hair) }" /></div>
                         </div>
                     </div>
                     <!-- Modal footer -->
