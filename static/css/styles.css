@@ -572,7 +572,7 @@ align-items: stretch;
 padding: 2px;
 }
 
-.flex-container-teamGoodies > a-link {
+.flex-container-teamGoodies > a {
 border: 1px solid orangered;
 border-radius: 5px;
 color: white;
