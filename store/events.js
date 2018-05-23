@@ -23,20 +23,15 @@ export const mutations = {
 }
 
 export const actions = {
+	// Load all events
 	loadedEvents ({commit}) {
-    	try {
-    		firebase.database().ref('/events_new/').on('value', function (snapshot) {
-		      	// console.log(snapshot.val())
-		      	const eventsArray = []
-		      	for (const key in snapshot.val()) {
-		        	eventsArray.push({ ...snapshot.val()[key]})
-		      	}
-		      	// console.log(postsArray)
-		      	commit('setEvents', eventsArray)
-		    })
-		} catch(error) {
-			console.log(error)
-		}
+		firebase.database().ref('/events_new/').on('value', function (snapshot) {
+	      	const eventsArray = []
+	      	for (const key in snapshot.val()) {
+	        	eventsArray.push({ ...snapshot.val()[key], id: key})
+	      	}
+	      	commit('setEvents', eventsArray)
+	    })
   	},
   	loadedLiveEvents ({commit}) {
   		try {
@@ -53,20 +48,24 @@ export const actions = {
 			console.log(error)
 		}
   	},
+
+  	// Create a new event
   	createEvent ({commit, getters}, payload) {
-  		// console.log('createEvent')
-  		try {
-  			console.log(payload)
-			const newEventKey = firebase.database().ref().child('/events_new/').push().key
-			let updates = {}
-			updates['/events/' + newEventKey] = payload
-			firebase.database().ref().update(updates)
-			this.$toast.success('Successfully added event!')
-  		} catch(error) {
-  			console.log(error)
-      		commit('setError', error, { root: true })
-      		this.$toast.error('Could not add event.')
-  		}
+  		commit('setLoading', true, { root: true })
+
+        // Generate new unique key
+        const newEventKey = firebase.database().ref().child('/events_new/').push().key
+
+        let updates = {}
+        updates['/events_new/' + newEventKey] = payload
+
+        firebase.database().ref().update(updates).then(() => {
+            new Noty({type: 'success', text: 'Événement ' + payload.name + ' enregistré avec succès!', timeout: 5000, theme: 'metroui'}).show()
+        }).catch((error) => {
+            console.log(error)
+            commit('setError', error, { root: true })
+            new Noty({type: 'error', text: 'Événement non enregistré. Erreur: ' + error, timeout: 5000, theme: 'metroui'}).show()
+        })
   	}
 }
 

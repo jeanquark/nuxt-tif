@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<Confirm ref="confirm"></Confirm>
 		<v-breadcrumbs divider="/">
 	  		<v-breadcrumbs-item
 		        v-for="link in links"
@@ -7,7 +8,7 @@
 		        :disabled="link.disabled"
 		        :to="link.to"
 		        :exact="true"
-		      >
+		    >
 	    		{{ link.text }}
 	  		</v-breadcrumbs-item>
 		</v-breadcrumbs>
@@ -17,7 +18,7 @@
 	      	<h1 class="text-md-center">Teams</h1>
 	      	<!-- loadedEvents: {{ loadedEvents }} -->
 	      	<br /><br />
-	      	<v-btn color="primary" dark slot="activator" class="mb-2" to="/admin/competitions/create">Add a Team</v-btn>
+	      	<v-btn color="primary" dark slot="activator" class="mb-2" to="/admin/teams/create">Add a Team</v-btn>
 			<!-- {{ loadedEvents }} -->
 			<v-card>
 				<template>
@@ -80,26 +81,26 @@
 	    
 	    <br /><br />
 	    <h2 class="text-md-center">Noeud "Teams" dans la base de données:</h2>
-	    <b>modifyJSON:</b> {{ modifyJSON }}
+	    <!-- <b>modifyJSON:</b> {{ modifyJSON }} -->
 	    <br />
 	    <v-flex xs12 sm10 offset-sm1>
-		    <v-card>
-		    	<!-- <div> -->
-			    	<json-editor :json="old_action"></json-editor>
-				<!-- </div> -->
-				<br />
-			</v-card>
-		</v-flex> -->
+			<json-editor :json="oldJSON" :onChange="onChange"></json-editor>
+			<br />
+			<div class="text-xs-center">
+				<v-btn class="btn" :disabled="!changed || loading" @click="updateTeam" color="success"><i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i>Sauver les changements</v-btn>
+			</div><br />
+		</v-flex>
 	</div>
 </template>
 
 <script>
 	import Confirm from '~/components/Confirm.vue'
-	import jsonEditor from 'vue2-jsoneditor'
+	// import jsonEditor from 'vue2-jsoneditor'
+	// import jsonEditor from '~/plugins/vue2-jsoneditor.js'
 	import '~/static/css/jsoneditor-tree.css'
   	export default {
 	    layout: 'layoutBack',
-	    components: { jsonEditor, Confirm },
+	    components: { Confirm },
 	    created () {
 	    	this.$store.dispatch('teams/loadedTeams')
 	    },
@@ -129,31 +130,31 @@
 			        sortBy: 'date',
 			        descending: true
 			    },
-			    old_action: this.$store.getters['teams/loadedTeams'],
-			    // old_action: loadedTeams,
-		        new_action: this.$store.getters['teams/loadedTeams'],
-		        // new_action: loadedTeams,
-		        displayJSON: false
+		        newJSON: '',
 	    	}
 	    },
 	    computed: {
+	    	loading () {
+	    		return this.$store.getters['loading']
+	    	},
 	    	loadedTeams () {
 	    		return this.$store.getters['teams/loadedTeams']
 	    	},
-	    	changes () {
-		        return !_.isEqual(this.old_action, this.new_action) ? true : false
+	    	changed () {
+	    		return this.newJSON && !_.isEqual(this.oldJSON, this.newJSON) ? true : false
+		        // return !_.isEqual(this.oldJSON, this.newJSON) ? true : false
 		    },
-			modifyJSON () {
-				const arrayToObject = (array) =>
+			oldJSON () {
+		    	console.log(typeof this.loadedTeams)
+	    		const arrayToObject = (array) =>
 				   	array.reduce((obj, item) => {
-				     	obj[item.slug] = item
-				     	// item['id2'] = item.key
+				     	obj[item.id] = item
 				     	return obj
 				   	},{})
-				const peopleObject = arrayToObject(this.loadedTeams.sort((a, b) => a.slug.localeCompare(b.slug)))
-				console.log(peopleObject)
-				return peopleObject
-				// return 'abc'
+				// const teamObject = arrayToObject(this.loadedTeams)
+				const teamObject = arrayToObject(this.loadedTeams.sort((a, b) => a.slug.localeCompare(b.slug)))
+				console.log(teamObject)
+				return teamObject
 			}
 	    },
 	    methods: {
@@ -181,19 +182,15 @@
 		    		}
 		    	})
 		    },
-		    // onChange(newJson) {
-		    //     // console.log(newJson)
-		    //     this.new_action = newJson
-		    // },
-		    // onUpdateAction () {
-		    //     console.log('onUpdateAction called!')
-		    //     const actionData = this.new_action
-		    //     actionData._updated_at = new Date().getTime()
-		    //     this.$store.dispatch('updateAction', actionData)
-		    // },
-		    // toggleJSON() {
-		    //     this.displayJSON = !this.displayJSON
-		    // },
+		    onChange(newJson) {
+		        this.newJSON = newJson
+		    },
+		    updateTeam () {
+		        console.log('updateTeam called!')
+		        const teamData = this.newJSON
+		        this.$store.dispatch('teams/updateTeam', teamData)
+		       	return this.$router.push('/admin/teams')
+		    },
 	    }
   	}
 </script>

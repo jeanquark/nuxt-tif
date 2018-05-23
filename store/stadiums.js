@@ -13,13 +13,10 @@ export const mutations = {
 export const actions = {
 	loadedStadiums ({commit}) {
 		console.log('Entering stadiums actions')
-		firebase.database().ref('/stadiums/').on('value', function (snapshot) {
-    	// firebase.database().ref('/activities/').on('value', function (snapshot) {
-			// console.log('abc')
-	      	// console.log(snapshot.val())
+		firebase.database().ref('/stadiums/').orderByChild('slug').once('value', function (snapshot) {
 	      	const stadiumsArray = []
 	      	for (const key in snapshot.val()) {
-	        	stadiumsArray.push({ ...snapshot.val()[key]})
+	        	stadiumsArray.push({ ...snapshot.val()[key], id: key})
 	      	}
 	      	commit('setStadiums', stadiumsArray)
 	    })

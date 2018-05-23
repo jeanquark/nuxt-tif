@@ -1,4 +1,5 @@
 require('dotenv').config()
+// const nodeExternals = require('webpack-node-externals')
 
 module.exports = {
   head: {
@@ -40,12 +41,22 @@ module.exports = {
         // })
       }
     },
+    // extend(config, ctx) {
+    //   if (ctx.isServer) {
+    //     config.externals = [
+    //       nodeExternals({
+    //         whitelist: [/^vue2-jsoneditor/]
+    //       })
+    //     ]
+    //   }
+    // },
     vendor: [
       'vuetify',
       '~/plugins/firebase-client-init.js',
       'vue-notifications',
       // 'vue-nouislider'
       // 'vuex-loading'
+      'vue2-jsoneditor',
     ],
     extractCSS: true,
   },
@@ -149,6 +160,7 @@ module.exports = {
     { src: '~/plugins/vue-sweetalert2.js', ssr: false },
     { src: '~/plugins/vue-fullpage.js', ssr: false },
     // { src: '~/plugins/merge-images', ssr: false },
+    { src: '~/plugins/vue2-jsoneditor.js', ssr: false },
   ],
   serverMiddleware: [
       '~/serverMiddleware/validateFirebaseIdToken',
