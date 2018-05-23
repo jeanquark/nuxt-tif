@@ -103,11 +103,11 @@
         methods: {
             async signUserUp () {
                 console.log('signUserUp')
-                await this.$store.dispatch('users/signUserUp'), {
+                await this.$store.dispatch('users/signUserUp', {
                     email: this.email,
                     password: this.password,
                     password_confirm: this.password_confirm
-                }
+                })
                 this.$router.replace('/home')
             },
         }
