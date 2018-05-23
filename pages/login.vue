@@ -93,10 +93,10 @@
         methods: {
             async signUserIn () {
                 console.log('signUserIn')
-                await this.$store.dispatch('users/signUserIn'), {
+                await this.$store.dispatch('users/signUserIn', {
                     email: this.email,
                     password: this.password
-                }
+                })
                 this.$router.replace('/home')
             },
         }
