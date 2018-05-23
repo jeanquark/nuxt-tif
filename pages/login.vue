@@ -35,8 +35,6 @@
 					<button type="submit" class="button button-primary" style="" :disabled="loading" :loading="loading" @click.prevent="signUserIn">Go Go Go, c'est parti ! <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
 				  </div>
 				  </div>
-          
-          <button type="submit" class="btn btn-primary" style="" :disabled="loading" :loading="loading" @click.prevent="signUserIn"> Login <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>&nbsp;&nbsp;
 
 				  <div class="row button-section">
 				  <div class="col-twelve">
@@ -95,7 +93,7 @@
         methods: {
             async signUserIn () {
                 console.log('signUserIn')
-                await this.$store.dispatch('users/signUserIn', {
+                await this.$store.dispatch('users/signUserIn'), {
                     email: this.email,
                     password: this.password
                 })
