@@ -1,4 +1,46 @@
 <template>
+
+<div class="container-fluid">
+		
+			<!-- The Modal Pseudo -->
+			<div class="modalBox">
+			  <form class="modal-content" action="/action_page.php">
+				<div class="container">
+				  <h1>Se connecter</h1>
+				  <p class="modalInscription">Va vite encourager tes équipes favorites !</p>
+				  <hr>
+				  <label for="email"><b>Email</b></label>
+				  <input type="text" placeholder="Enter Email" name="email" required>
+
+				  <label for="psw"><b>Password</b></label>
+				  <input type="password" placeholder="Enter Password" name="psw" required>
+				  
+				  <label>
+					<input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Se souvenir de moi
+				  </label>
+
+				  <div class="row button-section">
+				  <div class="col-twelve">
+					<a href="index2.html" type="button" class="button stroke smoothscroll">Non, je ne veux pas !</a>
+					<a href="vue/load.html" type="submit" class="button button-primary">Go Go Go, c'est parti !</a>
+				  </div>
+				  </div>
+
+				  <div class="row button-section">
+				  <div class="col-twelve">
+					<a href="vue/load.html" type="submit" class="button btn-facebook"><i class="fa fa-facebook"></i> Connecte-toi avec FB</a>
+					<a href="vue/load.html" type="submit" class="button btn-twitter"><i class="fa fa-google"></i> Connecte-toi avec G+</a>
+				  </div>
+				  </div>
+				  
+				</div>
+			  </form>
+			</div>   
+			<!-- End Modal Pseudo -->
+						
+		</div>
+
+
     <div class="container-fluid">
         <!-- The Modal Player -->
         <div id="modalBox">
