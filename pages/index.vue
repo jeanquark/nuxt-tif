@@ -40,7 +40,7 @@
                         <h5>Bienvenue sur</h5>
                         <h1>ThisIsFan.com</h1>
                         <p class="intro-position">
-                            <span>Le premier jeu consacré aux supporters !</span>
+                            <span>La première application consacrée aux supporters !</span>
                         </p>                    
                         <img src="images/avatar.png" class="imgAvatar" />
                     </div>                     
@@ -68,7 +68,7 @@
 
                         <img src="images/avatar.png" alt="Profile Picture">
 
-                        <p class="lead">ThisIsFan.com est le premier jeu consacré aux supporters. Gères ton fan au quotidien, effectues des actions pour gagner des $fans et pour augmenter tes compétences. Plus ton fan aura un niveau élevé, plus il rapportera de point de ferveur à tes équipes préférées.</p>
+                        <p class="lead">ThisIsFan.com est la première application consacrée aux supporters. Voir les résultats de tes équipes préférées tout en jouant ! Gères ton fan au quotidien, effectues des actions pour gagner des $fans et pour augmenter tes compétences. Plus ton fan aura un niveau élevé, plus il rapportera de point de ferveur à tes équipes préférées.</p>
                     </div>              
 
                 </div>          
@@ -378,10 +378,12 @@
                         <!-- Simply type    the promocode in the box labeled “Promo Code” when placing your order. -->  </p>
 
                     <div class="row button-section">
-                        <div class="col-twelve">
-                            <button onclick="document.getElementById('id01').style.display='block'" title="Inscription" class="button stroke smoothscroll">S'inscrire</button>              
-                            <button onclick="document.getElementById('id02').style.display='block'" title="Connection" class="button button-primary">Se connecter</button>              
-                        </div>          
+						<div class="col-twelve">
+							<!-- <button onclick="document.getElementById('id01').style.display='block'" title="Inscription" class="button stroke smoothscroll">S'inscrire</button>               -->
+							<nuxt-link to="/register"><button title="Inscription" class="button stroke smoothscroll">S'inscrire</button></nuxt-link>              
+							<!-- <button onclick="document.getElementById('id02').style.display='block'" title="Connection" class="button button-primary">Se connecter</button>           -->
+							<nuxt-link to="/login"><button title="Connection" class="button button-primary">Se connecter</button></nuxt-link>          
+						</div>          
                     </div>
 
                 </div>
@@ -556,7 +558,7 @@
 
             <div class="row contact-info">
 
-              <div class="col-six tab-full collapse">
+              <div class="col-twelve tab-full collapse">
                     <div class="icon">
                         <i class="icon-mail"></i>
                     </div>
@@ -613,9 +615,9 @@
                 // { src: '/js/main.js '},
             ],
             link: [
-                { rel: 'stylesheet', href: '/css/base.css' },
-                { rel: 'stylesheet', href: '/css/main.css' },
-                { rel: 'stylesheet', href: '/css/vendor.css' },
+                // { rel: 'stylesheet', href: '/css/base.css' },
+                // { rel: 'stylesheet', href: '/css/main.css' },
+                // { rel: 'stylesheet', href: '/css/vendor.css' },
                 { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open%20Sans' },
             ],
             css: [
@@ -636,9 +638,9 @@
             return {
                 index: 0,
                 count: 4,
-                icons: ['fa fa-user', 'fa fa-cog', 'fa fa-users', 'fa fa-users', 'fa fa-users'],
+                icons: ['fa fa-home', 'fa fa-sign-in', 'fa fa-gamepad', 'fa fa-image', 'fa fa-comment'],
                 // list: ['/avatar', '/preferences', '/teams'],
-                anchors: ['intro', 'about', 'resume', 'portfolio', 'stats'],
+                anchors: ['intro', 'about', 'resume', 'portfolio', 'contact'],
                 color: 'orangered',
                 email: '',
                 password: '',
