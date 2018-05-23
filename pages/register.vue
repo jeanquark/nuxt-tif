@@ -107,7 +107,7 @@
                     email: this.email,
                     password: this.password,
                     password_confirm: this.password_confirm
-                })
+                }
                 this.$router.replace('/home')
             },
         }
