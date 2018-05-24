@@ -47,6 +47,12 @@
                 </div>                  
             </div> <!-- /intro-content --> 
 
+            <ul class="intro-language">
+              <li><nuxt-ling to="#"><img src="vue/images/flags/france.png" class="flagsLanguage"/></nuxt-link></li>
+              <li><nuxt-ling to="#"><img src="vue/images/flags/germany.png" class="flagsLanguage"/></nuxt-link></li>
+              <li><nuxt-ling to="#"><img src="vue/images/flags/united_kingdom.png" class="flagsLanguage"/></nuxt-link></li>
+            </ul>
+
             <ul class="intro-social">        
                 <li><nuxt-link to="/#"><i class="fa fa-facebook"></i></nuxt-link></li>
                 <li><nuxt-link to="/#"><i class="fa fa-twitter"></i></nuxt-link></li>
