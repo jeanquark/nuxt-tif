@@ -12,6 +12,12 @@
 				<div class="column">
 					<div class="token-box"><i class="fa fa-certificate"></i> 5</div>					
 				</div>
+				<div class="column">
+					<button class="btn btn-danger" @click="logout">Logout</button>
+				</div>
+				<div class="column">
+					<button class="btn btn-success"><nuxt-link to="/admin">Admin</nuxt-link></button>
+				</div>
 			</div>
 		
 		</div>
@@ -23,9 +29,8 @@
 			<div class="flex-container-playerPropriety">
 				<nuxt-link to="/user/avatar" class="boxShadow" style="flex-basis: 60px"><img src="/images/avatar.png" class="imgAvatar"/></nuxt-link>
 				<nuxt-link to="/user" class="boxShadow flex-container-modalProfil" style="flex-grow: 1">
-					<div class="columnProfil"><img src="/images/163.png" class="imgModalProprieteFlags"/> <span class="modal-Propriete" v-if="user">{{ user.pseudo }}</span> <span class="modal-ProprietePlace boxShadow"><img src="/images/cup.png" class="imgModalProprieteCup"/> 1863ème</span> <button class="btn btn-danger" @click="logout">Logout</button> <button class="btn btn-success"><nuxt-link to="/admin">Admin</nuxt-link></button></div>
+					<div class="columnProfil"><img src="/images/163.png" class="imgModalProprieteFlags"/> <span class="modal-Propriete" v-if="user">{{ user.pseudo }}</span> <span class="modal-ProprietePlace boxShadow"><img src="/images/cup.png" class="imgModalProprieteCup"/> 1863ème</span></div>
 				</nuxt-link>
-
 				<nuxt-link to="/user/preferences" class="boxShadow"  style="flex-basis: 60px"><img src="/images/parametre.png" class="imgParametre"/></nuxt-link>
 			</div>
 
