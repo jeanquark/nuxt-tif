@@ -6,7 +6,7 @@
 				<div class="modal-content loginmodal-container">
 					<!-- Modal Header -->
 					<div class="modal-header">
-					  	<span class="modal-title">Ton pseudo <span class="modal-title-Sub">(Tes Paramètres)</span></span>
+					  	<span class="modal-title">Ton pseudo <span class="modal-title-Sub">(Tes ParamÃ¨tres)</span></span>
 						<nuxt-link to="/user/preferences">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
@@ -19,7 +19,7 @@
 							<h1>C'est quoi ton pseudo ?</h1>
 						</div>
 						<form>
-							<input type="text" name="Pseudo1234567" placeholder="Pseudo1234567">
+							<input type="text"  v-if="user" name="{{ user.pseudo }}" placeholder="{{ user.pseudo }}">
 						</form>
 						<div class="flex-container-modal-Pseudo">
 							<div class="flex-container-modal-Niveau">
@@ -42,9 +42,25 @@
 </template>
 
 <script>
-  	export default {
-    	layout: 'layoutFront',
-  	}
+	export default {
+		layout: 'layoutFront',
+		computed: {
+			user () {
+				return this.$store.getters['users/loadedUser']
+			}
+		},
+		methods: {
+			logout() {
+				// return this.$store.dispatch('users/signOut')
+				this.$store.dispatch('users/signOut').then(() => {
+					// console.log('abc')
+	          		// this.$router.push('/')
+	          		// this.$router.replace({ path: '/' })
+                	this.$router.replace('/')
+	        	})
+	        }
+		}
+	}
 </script>
 
 <style>
