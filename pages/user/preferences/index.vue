@@ -63,8 +63,8 @@
                                 <div class="columnParametreTexte">
                                     Pseudo
                                 </div>
-                                <nuxt-link to="/user/preferences/pseudo" class="columnParametreButton">
-                                    Pseudo1234567
+                                <nuxt-link to="/user/preferences/pseudo" class="columnParametreButton" v-if="user">
+                                    {{ user.pseudo }}
                                 </nuxt-link>
                             </div>
                             <div class="flex-container-modal-Niveau">
@@ -123,9 +123,25 @@
 </template>
 
 <script>
-    export default {
-        layout: 'layoutFront',
-    }
+	export default {
+		layout: 'layoutFront',
+		computed: {
+			user () {
+				return this.$store.getters['users/loadedUser']
+			}
+		},
+		methods: {
+			logout() {
+				// return this.$store.dispatch('users/signOut')
+				this.$store.dispatch('users/signOut').then(() => {
+					// console.log('abc')
+	          		// this.$router.push('/')
+	          		// this.$router.replace({ path: '/' })
+                	this.$router.replace('/')
+	        	})
+	        }
+		}
+	}
 </script>
 
 <style>
