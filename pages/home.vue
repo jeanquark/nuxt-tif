@@ -2,26 +2,23 @@
 	<div class="container-fluid">
 		<!-- Header -->
 		<div id="header" class="col-12 col-sm-12 col-md-12 col-lg-12 top-fixed">
-			<div class="flex-container-header">
-				<div class="column">
-					<span class="level-box"><i class="fa fa-star"></i> Niv. 1 - <i class="fa fa-angle-double-up"></i> 1 / 10</span>						
-				</div>
-				<div class="column">
-					<div class="dollar-box"><i class="fa fa-dollar-sign"></i> 500</div>						
-				</div>
-				<div class="column">
-					<div class="token-box"><i class="fa fa-certificate"></i> 5</div>					
-				</div>
-				<div class="column">
-					<button class="btn btn-danger" @click="logout">Logout</button>
-				</div>
-				<div class="column">
-					<button class="btn btn-success"><nuxt-link to="/admin">Admin</nuxt-link></button>
-				</div>
-			</div>
-		
-		</div>
-		<!-- End Header -->
+				  <div class="column">
+						<span class="level-box"><i class="fa fa-star"></i> Niv. 1 - <i class="fa fa-angle-double-up"></i> 1 / 10</span>						
+					</div>
+					<div class="column">
+						<div class="dollar-box"><i class="fa fa-dollar-sign"></i> 500</div>						
+					</div>
+					<div class="column">
+						<div class="token-box"><i class="fa fa-certificate"></i> 5</div>					
+					</div>
+					<div class="columnButton text-right">
+						<div class="quit-box" @click="logout"><i class="fa fa-times"></i></div>					
+					</div>
+					<div class="columnButton text-right">
+						<div class="quit-box"><nuxt-link to="/admin"><i class="fa fa-share-alt"></i></nuxt-link></div>					
+          </div>
+    </div>
+    <!-- End Header -->
 
 		<!-- Propriété du joueur -->
 		<div id="proprieteJoueur" class="col-12 col-sm-12 col-md-12 col-lg-12">
