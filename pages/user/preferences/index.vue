@@ -56,7 +56,7 @@
                                     Langues
                                 </div>
                                 <nuxt-link to="/user/preferences/language" class="columnParametreButton" v-if="user">
-                                    {{ user.language }}
+                                    {{ user.language.name }}
                                 </nuxt-link>
                             </div>
                             <div class="flex-container-modal-Niveau">
@@ -72,7 +72,7 @@
                                     Année de naissance
                                 </div>
                                 <nuxt-link to="/user/preferences/birth" class="columnParametreButton" v-if="user">
-                                    {{ user.yeau_birth }}
+                                    {{ user.year_birth }}
                                 </nuxt-link>
                             </div>
                             <div class="flex-container-modal-Niveau">
@@ -80,7 +80,7 @@
                                     Nationalité
                                 </div>
                                 <nuxt-link to="/user/preferences/country" class="columnParametreButton" v-if="user">
-                                    {{ user.country }}
+                                    {{ user.country.name }}
                                 </nuxt-link>
                             </div>
                         </div><!-- /.flex-container -->
