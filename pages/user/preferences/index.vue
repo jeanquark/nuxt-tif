@@ -19,7 +19,7 @@
                             <h1>Infos et/ou besoin d'aide ?</h1>
                         </div>
                         <div class="flex-container-modal-Parametre">
-                            <div class="flex-container-modal-Niveau">
+                            <!-- <div class="flex-container-modal-Niveau">
                                 <div class="columnParametreTexte">
                                     Musique
                                 </div>
@@ -50,12 +50,12 @@
                                 <div class="columnParametreButtonNo">
                                     Hors ligne
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="flex-container-modal-Niveau">
                                 <div class="columnParametreTexte">
                                     Langues
                                 </div>
-                                <nuxt-link to="/language" class="columnParametreButton">
+                                <nuxt-link to="user/preferences/language" class="columnParametreButton">
                                     Français
                                 </nuxt-link>
                             </div>
@@ -63,7 +63,7 @@
                                 <div class="columnParametreTexte">
                                     Pseudo
                                 </div>
-                                <nuxt-link to="/pseudo" class="columnParametreButton">
+                                <nuxt-link to="user/preferences/pseudo" class="columnParametreButton">
                                     Pseudo1234567
                                 </nuxt-link>
                             </div>
@@ -71,7 +71,7 @@
                                 <div class="columnParametreTexte">
                                     Année de naissance
                                 </div>
-                                <nuxt-link to="/birth" class="columnParametreButton">
+                                <nuxt-link to="user/preferences/birth" class="columnParametreButton">
                                     1998
                                 </nuxt-link>
                             </div>
@@ -79,7 +79,7 @@
                                 <div class="columnParametreTexte">
                                     Nationalité
                                 </div>
-                                <nuxt-link to="/country" class="columnParametreButton">
+                                <nuxt-link to="user/preferences/country" class="columnParametreButton">
                                     Suisse
                                 </nuxt-link>
                             </div>
