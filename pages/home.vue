@@ -1,8 +1,10 @@
 <template>
 	<div class="container-fluid">
 		<!-- Header -->
-		<div id="header" class="col-12 col-sm-12 col-md-12 col-lg-12 top-fixed">
-				  <div class="column">
+			<div id="header" class="col-12 col-sm-12 col-md-12 col-lg-12 top-fixed">
+			
+				<div class="flex-container-header text-center">
+					<div class="column">
 						<span class="level-box"><i class="fa fa-star"></i> Niv. 1 - <i class="fa fa-angle-double-up"></i> 1 / 10</span>						
 					</div>
 					<div class="column">
@@ -16,8 +18,11 @@
 					</div>
 					<div class="columnButton text-right">
 						<div class="quit-box"><nuxt-link to="/admin"><i class="fa fa-share-alt"></i></nuxt-link></div>					
-          </div>
-    </div>
+					</div>
+				</div>	
+			
+			</div>
+
     <!-- End Header -->
 
 		<!-- Propriété du joueur -->
