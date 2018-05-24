@@ -55,8 +55,8 @@
                                 <div class="columnParametreTexte">
                                     Langues
                                 </div>
-                                <nuxt-link to="/user/preferences/language" class="columnParametreButton">
-                                    Français
+                                <nuxt-link to="/user/preferences/language" class="columnParametreButton" v-if="user">
+                                    {{ user.language }}
                                 </nuxt-link>
                             </div>
                             <div class="flex-container-modal-Niveau">
@@ -71,16 +71,16 @@
                                 <div class="columnParametreTexte">
                                     Année de naissance
                                 </div>
-                                <nuxt-link to="/user/preferences/birth" class="columnParametreButton">
-                                    1998
+                                <nuxt-link to="/user/preferences/birth" class="columnParametreButton" v-if="user">
+                                    {{ user.yeau_birth }}
                                 </nuxt-link>
                             </div>
                             <div class="flex-container-modal-Niveau">
                                 <div class="columnParametreTexte">
                                     Nationalité
                                 </div>
-                                <nuxt-link to="/user/preferences/country" class="columnParametreButton">
-                                    Suisse
+                                <nuxt-link to="/user/preferences/country" class="columnParametreButton" v-if="user">
+                                    {{ user.country }}
                                 </nuxt-link>
                             </div>
                         </div><!-- /.flex-container -->
