@@ -6,13 +6,14 @@ import setUser from '../helpers/setUser'
 import Noty from 'noty'
 
 function buildUserObjectOAuth (authData) {
-    let { email, displayName, uid, photoURL } = authData.user
+    let { email, displayName, uid, photoURL, pseudo } = authData.user
     let user = {}
     user['email'] = email
     user['name'] = displayName
     user['uid'] = uid
     user['picture'] = photoURL
     user['isAdmin'] = authData.isAdmin
+	user['pseudo'] = pseudo
     return user
 }
 
