@@ -1421,6 +1421,31 @@ header .logo a {
 .intro-social li a:hover, .intro-social li a:focus {
 	color: orangered;
 }
+.intro-language {
+	display: block;
+	position: absolute;
+	width: 100%;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	top: 10px;
+}
+.intro-language li {
+	display: inline-block;
+	margin: 0 2px;
+	padding: 0;
+}
+.intro-language li a, .intro-social li a:visited {
+	color: #FFFFFF;
+}
+.intro-language li a:hover, .intro-social li a:focus {
+	color: orangered;
+}
+.flagsLanguage {
+	height: 25px;
+	width: 25px;
+	border: 1px solid white;
+}
 
 /**
  * responsive:
