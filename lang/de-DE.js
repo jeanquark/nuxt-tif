@@ -12,7 +12,10 @@
 // 'auth/weak-password': 'Password should be at least 6 characters.',
 // 'auth/invalid-email': 'The email address is badly formatted.'
 
-module.exports = { 
+module.exports = {	
+	"your_teams" : 'Deine Mannschaften',
+	"info_and_or_help" : 'Brauchst du Informationnen?',
+	"how_do_you_speak" : "Was spichst du?",
 	"welcome" : "Herzlich Willkommen zu",
 	"and" : "und",
 	"about" : "Über uns Seite",

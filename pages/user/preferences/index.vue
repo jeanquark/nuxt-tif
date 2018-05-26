@@ -16,7 +16,7 @@
                     <!-- Modal body -->
                     <div id="modalBoxContent" class="modal-body">
                         <div class="flex-container-modal-MyTeam">
-                            <h1>Infos et/ou besoin d'aide ?</h1>
+                            <h1>{{ $t('info_and_or_help') }} {{$i18n.locale}}</h1>
                         </div>
                         <div class="flex-container-modal-Parametre">
                             <div class="flex-container-modal-Niveau">
@@ -55,8 +55,8 @@
                                 <div class="columnParametreTexte">
                                     Langues
                                 </div>
-                                <nuxt-link to="/language" class="columnParametreButton">
-                                    Français
+                                <nuxt-link to="/user/preferences/language" class="columnParametreButton">
+                                    {{ $i18n.locale }}
                                 </nuxt-link>
                             </div>
                             <div class="flex-container-modal-Niveau">
@@ -125,6 +125,26 @@
 <script>
     export default {
         layout: 'layoutFront',
+        data () {
+            return {
+                selectedLanguage: ''
+            }
+        },
+        method: {
+            language (language) {
+                switch(language) {
+                    case 'en':
+                        this.selectedLanguage = 'english'
+                        break
+                    case 'fr':
+                        this.selectedLanguage = 'français'
+                        break
+                    case 'de':
+                        this.selectedLanguage = 'deutsch'
+                        break
+                }
+            }
+        }
     }
 </script>
 

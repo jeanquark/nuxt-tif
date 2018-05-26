@@ -1,105 +1,31 @@
-// console.log('abc')
-// {
-// 	messages: {
-// 	    'welcome': 'Bienvenue',
-// 	    'auth/email-already-in-use': 'email déjà utilisé'
-// 	}
-// }
-
-// {
-// 	messages: {
-// 	  fr: {
-// 	    welcome: 'Bienvenue'
-// 	  }
-// 	}
-// }
-
-// {
-//   "fr": {
-//   	"welcome": "Bienvenue"
-//   }
-// }
-
-// messages: {
-//   en: {
-//     welcome: 'Welcome',
-//     'auth/email-already-in-use': 'email déjà utilisé'
-//   },
-//   fr: {
-//     welcome: 'Bienvenue',
-//     'auth/email-already-in-use': 'email déjà utilisé'
-//   },
-//   de: {
-//     welcome: 'Herzlich Willkommen'
-//   }
-// }
-
-// vueI18n: {
-// 	messages: {
-// 		{
-// 			'welcome': 'Bienvenue',
-// 			'auth/email-already-in-use': 'email déjà utilisé'
-// 		}
-// 	}
-// }
-
-// const messages = {
-//   	messages: {
-// 			'welcome': 'Bienvenue',
-// 			'auth/email-already-in-use': 'email déjà utilisé'
-// 		}
-// 	}
-// }
-
-// export default messages
-
-// export default {
-// 	messages: {
-// 		'welcome': 'Bienvenue',
-// 		'auth/email-already-in-use': 'email déjà utilisé'
-// 	}
-// }
-
-// welcome: 'Bienvenue à 1',
-// about: 'Page à propos',
-// blog: 'Page du blog',
-// login: 'Page login',
-// render: 'Rendu depuis',
-// reload: 'Recharger la page',
-// 'auth/email-already-in-use': 'Cette adresse email est déjà utilisée.',
-// 'auth/weak-password': 'Le mot de passe doit être d\'au moins 6 caractères.',
-// 'auth/invalid-email': 'The email address is badly formatted.'
-
-module.exports = {
-	"your_teams" : "Tes Équipes",
-	"info_and_or_help" : "Infos et/ou besoin d'aide?",
-	"how_do_you_speak" : "Tu parles comment?",
-	"welcome" : "Bienvenue à",
-	"and" : "et",
-	"about" : "Page à propos",
-	"blog" : "Page du blog",
-	"login" : "Page login",
-	"admin" : "Page admin",
-	"render" : "Rendu depuis",
-	"reload" : "Recharger la page",
-	"connected_as" : "Connecté comme",
-	"email_address" : "Adresse E-mail",
-	"password" : "Mot de passe",
-	"register" : "S'enregistrer",
-	"protected" : "Cette page est protégée. Seuls les membres connectés peuvent y accéder.",
-	"auth/email-already-in-use": "Cette adresse email est déjà utilisée.",
-	"auth/weak-password": "Le mot de passe doit être d'au moins 6 caractères.",
-	"auth/invalid-email": "L'adresse e-mail n'est pas formatée correctement.",
-	"auth/wrong-password" : "Le mot de passe est invalide ou l'utilisateur n'a pas de mot de passe.",
-	"auth/user-not-found" : "Nous n'avons pas trouvé d'utilisateur correspondant. L'utilisateur a peut-être été supprimé.",
-	"auth/network-request-failed": "La requête au réseau a échoué.",
-	// Liste des continents
+{	
+	"your_teams" : "Deine Mannschaften",
+	"info_and_or_help" : "Brauchst du Informationnen?",
+	"how_do_you_speak" : "Was spichst du?",
+	"welcome" : "Herzlich Willkommen zu",
+	"and" : "und",
+	"about" : "Über uns Seite",
+	"blog" : "Blog Seite",
+	"login" : "Login Seite",
+	"admin" : "Verwaltung Seite",
+	"render" : "Leisten von",
+	"reload" : "Seite neu laden",
+	"connected_as" : "Verbunden als",
+	"email_address" : "E-Mail-Addresse",
+	"password" : "Passwort",
+	"register" : "Registrieren",
+	"protected" : "Diese Seite ist geschützt. Nur angemeldete Mitglieder können darauf zugreifen.",
+	"auth/email-already-in-use": "Diese E-Mail-Adresse wird schon verwendet.",
+	"auth/weak-password": "Das Passwort sollte mindestens 6 Zeichen lang sein.",
+	"auth/invalid-email": "Die E-Mail-Adresse ist falsch formatiert.",
+	"auth/wrong-password" : "Das Passwort ist ungültig oder der Benutzer hat kein Passwort.",
+	"auth/user-not-found" : "Zu dieser Kennung existiert kein Benutzerdatensatz. Der Benutzer wurde möglicherweise gelöscht.",
+	"auth/network-request-failed": "Network request failed.",
 	"Europa" : "Europe",
 	"Asia" : "Asie",
 	"Africa" : "Afrique",
 	"America" : "Amérique",
 	"Oceania" : "Océanie",
-	// Liste des pays
 	"Afghanistan" : "Afghanistan",
 	"Aland Islands" : "Îles Aland",
 	"Albania" : "Albanie",

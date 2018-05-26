@@ -49,6 +49,9 @@
 // export default vueI18n
 
 module.exports = { 
+	"your_teams" : "Your teams",
+	"info_and_or_help" : "Info and/or need help?",
+	"how_do_you_speak" : "How do you speak?",
 	"welcome" : "Welcome to",
 	"and" : "and",
 	"about" : "About Page",

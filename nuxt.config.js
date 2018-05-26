@@ -92,7 +92,8 @@ module.exports = {
       loadLanguagesAsync: true,
       langDir: 'lang/',
       defaultLocale: 'en',
-      routes: {
+      parsePages: false,
+      pages: {
         about: {
           fr: '/a-propos',
           de: '/uber-uns'
@@ -104,8 +105,19 @@ module.exports = {
         admin: {
           fr: '/administration',
           de: '/verwaltung'
-        }
-      },
+        },
+        user: {
+          fr: '/membre',
+          de: '/user'
+        },
+        // preferences: {
+        //   fr: '/preferences-fr',
+        //   de: '/einstellungen'
+        // },
+        // '/user/preferences': {
+        //   fr: '/membre/preferences-fr',
+        //   de: '/user/einstellungen'
+        // }
       // vueI18n: {
       //   fallbackLocale: 'en',
       //   messages: {
@@ -169,6 +181,7 @@ module.exports = {
       // '~/serverMiddleware/api.js',
       { path: '/api-football', handler: '~/serverMiddleware/api-football'},
       { path: '/upload-image', handler: '~/serverMiddleware/uploadImage' },
+      { path: '/update-translation-file', handler: '~/serverMiddleware/updateTranslationFile' },
   ],
   toast: {
     duration: 8000,

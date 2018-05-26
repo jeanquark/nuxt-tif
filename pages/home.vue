@@ -35,7 +35,7 @@
 		<!-- Team&Goodies du joueur -->
 		<div id="teamGoodies" class="col-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="flex-container-teamGoodies">
-			  <nuxt-link to="user/teams" class="boxShadow" style="flex-grow: 1"><span class="textTitle">Tes équipes</span></nuxt-link>
+			  <nuxt-link to="user/teams" class="boxShadow" style="flex-grow: 1"><span class="textTitle">{{ $t('your_teams') }}</span></nuxt-link>
 			  <nuxt-link to="user/inventory" class="boxShadow" style="flex-grow: 1"><span class="textTitle">Ton inventaire</span></nuxt-link>
 			</div>
 		</div>
