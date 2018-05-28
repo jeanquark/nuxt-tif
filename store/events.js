@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import Noty from 'noty'
 
 export const state = () => ({
 	loadedEvents: [],
@@ -25,7 +26,7 @@ export const mutations = {
 export const actions = {
 	// Load all events
 	loadedEvents ({commit}) {
-		firebase.database().ref('/events_new/').on('value', function (snapshot) {
+		firebase.database().ref('/events_new/').orderByChild('date').on('value', function (snapshot) {
 	      	const eventsArray = []
 	      	for (const key in snapshot.val()) {
 	        	eventsArray.push({ ...snapshot.val()[key], id: key})
@@ -43,10 +44,10 @@ export const actions = {
 		      	}
 		      	// console.log(postsArray)
 		      	commit('setLiveEvents', liveEventsArray)
-		    })
-		} catch(error) {
-			console.log(error)
-		}
+  		    })
+  		} catch(error) {
+  			console.log(error)
+  		}
   	},
 
   	// Create a new event
@@ -66,7 +67,39 @@ export const actions = {
             commit('setError', error, { root: true })
             new Noty({type: 'error', text: 'Événement non enregistré. Erreur: ' + error, timeout: 5000, theme: 'metroui'}).show()
         })
-  	}
+  	},
+
+    // Update an event
+    updateEvent ({commit, dispatch}, payload) {
+        commit('setLoading', true, { root: true})
+        // console.log(payload)
+        let updates = {}
+        updates['/events_new/'] = payload
+
+        firebase.database().ref().update(updates).then(() => {
+            // dispatch('loadedEvents');
+            commit('setLoading', false, { root: true})
+            new Noty({type: 'success', text: 'Changements dans le noeud "events" effectués avec succès!', timeout: 5000, theme: 'metroui'}).show()
+        }).catch((error) => {
+            console.log(error)
+            commit('setLoading', false, { root: true})
+            commit('setError', error, { root: true })
+            new Noty({type: 'error', text: 'Changements non effectués. Erreur: ' + error, timeout: 5000, theme: 'metroui'}).show()
+        })
+    },
+
+    // Delete an event
+    deleteEvent ({commit}, eventId) {
+        commit('setLoading', true, { root: true })
+          firebase.database().ref('/events/' + eventId).remove().then(() => {
+            // commit('deleteEvent', eventId)
+            commit('setLoading', false, { root: true })
+            new Noty({type: 'success', text: 'Événement supprimé avec succès!', timeout: 5000, theme: 'metroui'}).show()
+        }).catch((error) => {
+            console.log(error)
+            new Noty({type: 'error', text: 'Erreur lors de la suppression de l\'événement. ' + error, timeout: 5000, theme: 'metroui'}).show()
+        })
+    }
 }
 
 export const getters = {

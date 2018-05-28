@@ -6,33 +6,31 @@
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <span class="modal-title">Tes Paramètres</span>
-                        <nuxt-link to="/home">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
-                            </button>
-                        </nuxt-link>         
+                        <span class="modal-title">{{ $t('pages.user-preferences.your_parameters') }}</span>
+                        <nuxt-link :to="localePath({ name: 'home'})">
+                            <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left fa-2x"></i></span>
+                        </nuxt-link>     
                     </div>
                     <!-- Modal body -->
                     <div id="modalBoxContent" class="modal-body">
                         <div class="flex-container-modal-MyTeam">
-                            <h1>{{ $t('info_and_or_help') }} {{$i18n.locale}}</h1>
+                            <h1>{{ $t('pages.user-preferences.info_and_or_help') }}</h1>
                         </div>
                         <div class="flex-container-modal-Parametre">
                             <div class="flex-container-modal-Niveau">
                                 <div class="columnParametreTexte">
-                                    Musique
+                                    {{ $t('pages.user-preferences.music') }}
                                 </div>
                                 <div class="columnParametreButtonYes">
-                                    Oui
+                                    {{ $t('pages.user-preferences.yes') }}
                                 </div>
                             </div>
                             <div class="flex-container-modal-Niveau">
                                 <div class="columnParametreTexte">
-                                    Son
+                                    {{ $t('pages.user-preferences.sound') }}
                                 </div>
                                 <div class="columnParametreButtonNo">
-                                    Non
+                                    {{ $t('pages.user-preferences.no') }}
                                 </div>
                             </div>
                             <div class="flex-container-modal-Niveau">
@@ -40,7 +38,7 @@
                                     Facebook
                                 </div>
                                 <div class="columnParametreButtonYes">
-                                    En ligne
+                                    {{ $t('pages.user-preferences.online') }}
                                 </div>
                             </div>
                             <div class="flex-container-modal-Niveau">
@@ -48,20 +46,20 @@
                                     Google+
                                 </div>
                                 <div class="columnParametreButtonNo">
-                                    Hors ligne
+                                    {{ $t('pages.user-preferences.offline') }}
                                 </div>
                             </div>
                             <div class="flex-container-modal-Niveau">
                                 <div class="columnParametreTexte">
-                                    Langues
+                                    {{ $t('pages.user-preferences.languages') }}
                                 </div>
-                                <nuxt-link to="/user/preferences/language" class="columnParametreButton">
+                                <nuxt-link :to="localePath({name: 'user-preferences-language'})" class="columnParametreButton">
                                     {{ $i18n.locale }}
                                 </nuxt-link>
                             </div>
                             <div class="flex-container-modal-Niveau">
                                 <div class="columnParametreTexte">
-                                    Pseudo
+                                    {{ $t('pages.user-preferences.pseudo') }}
                                 </div>
                                 <nuxt-link to="/pseudo" class="columnParametreButton">
                                     Pseudo1234567
@@ -69,7 +67,7 @@
                             </div>
                             <div class="flex-container-modal-Niveau">
                                 <div class="columnParametreTexte">
-                                    Année de naissance
+                                    {{ $t('pages.user-preferences.birthyear') }}
                                 </div>
                                 <nuxt-link to="/birth" class="columnParametreButton">
                                     1998
@@ -77,10 +75,10 @@
                             </div>
                             <div class="flex-container-modal-Niveau">
                                 <div class="columnParametreTexte">
-                                    Nationalité
+                                    {{ $t('pages.user-preferences.nationality') }}
                                 </div>
                                 <nuxt-link to="/country" class="columnParametreButton">
-                                    Suisse
+                                    {{ $t('countries.switzerland') }}
                                 </nuxt-link>
                             </div>
                         </div><!-- /.flex-container -->
@@ -89,22 +87,22 @@
                         <div class="flex-container-modal-Parametre">
                             <div class="flex-container-modal-Niveau">
                                 <nuxt-link to="#" class="columnParametreButtonGd">
-                                    Aide / Assistance
+                                    {{ $t('pages.user-preferences.help-assistance') }}
                                 </nuxt-link>
                             </div>
                             <div class="flex-container-modal-Niveau">
                                 <nuxt-link to="#" class="columnParametreButtonGd">
-                                    Confidentialité
+                                    {{ $t('pages.user-preferences.confidentiality') }}
                                 </nuxt-link>
                             </div>
                             <div class="flex-container-modal-Niveau">
                                 <nuxt-link to="#" class="columnParametreButtonGd">
-                                    Conditions d'utilisation
+                                    {{ $t('pages.user-preferences.user-conditions') }}
                                 </nuxt-link>
                             </div>
                             <div class="flex-container-modal-Niveau">
                                 <nuxt-link to="#" class="columnParametreButtonGd">
-                                    Crédit
+                                    {{ $t('pages.user-preferences.credits') }}
                                 </nuxt-link>
                             </div>
                         </div>  
@@ -112,7 +110,7 @@
                     <!-- Modal footer -->
                     <div class="modal-footer">
                         <nuxt-link to="/home">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">{{ $t('pages.user-preferences.close') }}</button>
                         </nuxt-link>
                     </div>
                 </div>
@@ -148,6 +146,6 @@
     }
 </script>
 
-<style>
+<style scoped>
 
 </style>

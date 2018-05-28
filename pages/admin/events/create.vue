@@ -46,7 +46,7 @@
 							<v-flex xs6>
 								<v-subheader class="text-md-right">Catégorie</v-subheader>
 							</v-flex>
-							<v-flex xs6>
+							<v-flex xs6 v-if="loadedCategories != ''">
 								<v-select
 								  :items="categories"
 								  v-model="selectedCategory"
@@ -56,14 +56,16 @@
 								  single-line
 								  :disabled="selectedActivity.slug == ''"
 								></v-select>
-							</v-flex>		
+							</v-flex>	
+							<v-flex v-else>
+								<v-progress-linear :indeterminate="true" height="2"></v-progress-linear>
+							</v-flex>	
 					    </v-layout>
 				  	</v-container>
 				</v-form>
 			</v-card>
 
 			<football-event :activity='this.selectedActivity' :category='this.selectedCategory' v-if="selectedCategory.slug === 'football'"></football-event>
-
 		</v-flex>
 		<br />
 		<br />
@@ -84,23 +86,6 @@
 				selectedActivity: '',
         		selectedCategory: '',
         		categories: [],
-		        links: [
-			        {
-			          text: 'Dashboard',
-			          to: '/admin',
-			          disabled: false
-			        },
-			        {
-			          text: 'Events',
-			          to: '/admin/events',
-			          disabled: false
-			        },
-			        {
-			          text: 'Create',
-			          to: '/admin/events/create',
-			          disabled: true
-			        }
-			    ],
 				items: [
 				    {
 				      text: 'Dashboard',

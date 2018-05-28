@@ -74,26 +74,26 @@ module.exports = {
           code: 'en',
           iso: 'en-US',
           name: 'English',
-          langFile: 'en-US.js'
+          langFile: 'en-US.json'
         },
         {
           code: 'fr',
           iso: 'fr-FR',
           name: 'Français',
-          langFile: 'fr-FR.js'
+          langFile: 'fr-FR.json'
         },
         {
           code: 'de',
           iso: 'de-DE',
           name: 'Deutsch',
-          langFile: 'de-DE.js'
+          langFile: 'de-DE.json'
         }
       ],
       loadLanguagesAsync: true,
       langDir: 'lang/',
       defaultLocale: 'en',
-      parsePages: false,
-      pages: {
+      // parsePages: false,
+      routes: {
         about: {
           fr: '/a-propos',
           de: '/uber-uns'
@@ -110,6 +110,11 @@ module.exports = {
           fr: '/membre',
           de: '/user'
         },
+        home: {
+          fr: '/accueil',
+          de: '/home'
+        }
+      }
         // preferences: {
         //   fr: '/preferences-fr',
         //   de: '/einstellungen'

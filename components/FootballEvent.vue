@@ -2,12 +2,12 @@
 	<div>
 		<v-card>
 			<!-- loadedCompetitions: {{ this.loadedCompetitions }}<br /><br />-->
-			selectedCompetition: {{ this.selectedCompetition }}<br /><br />
+			<!-- selectedCompetition: {{ this.selectedCompetition }}<br /><br /> -->
 			<!-- competitions: {{ this.competitions }}<br /><br />
 			activity: {{ this.activity }}<br /><br />
 			category: {{ this.category }}<br /><br /> -->
 			<!-- loadedTeams: {{ this.loadedTeams }}<br /><br />-->
-			loadedStadiums: {{ this.loadedStadiums }}<br /><br />
+			<!-- loadedStadiums: {{ this.loadedStadiums }}<br /><br /> -->
 			<!--teams1: {{ this.teams1 }}<br /><br />
 			teams2: {{ this.teams2 }}<br /><br /> -->
 			<v-form>
@@ -78,7 +78,7 @@
 							    prepend-icon="access_time"
 							    readonly
 							  ></v-text-field>
-							  <v-time-picker v-model="time" actions>
+							  <v-time-picker v-model="time" format="24hr" actions>
 							    <v-spacer></v-spacer>
 							    <v-btn flat color="primary" @click="modalTime = false">Cancel</v-btn>
 							    <v-btn flat color="primary" @click="$refs.timeDialog.save(time)">OK</v-btn>
@@ -101,6 +101,13 @@
 								single-line
 								:disabled="selectedCompetition == ''"
 							>
+								<template slot="item" slot-scope="data">
+							      	<v-list-tile-content>
+							        	<v-list-tile-title>
+							          		{{ data.item.name }} <small style="color: #ccc;">{{ data.item.city.name }} - {{ data.item.country.name}}</small>
+							        	</v-list-tile-title>
+							      	</v-list-tile-content>
+							    </template>
 							</v-select>
 						</v-flex>
 
@@ -138,8 +145,10 @@
 					</v-layout>
 				</v-container>
 				<v-card-text class="text-md-center">
-			  		<v-btn @click="createEvent" color="info" :disabled="!this.date || !this.time">soumettre</v-btn>
+			  		<v-btn @click="createEvent" color="info" :disabled="!this.date || !this.time || !this.selectedTeam2">soumettre</v-btn>
 					<v-btn @click="">clear</v-btn>
+					<!-- {{ this.selectedCompetition.country.slug }} -->
+					<!-- {{ this.selectedCompetition }} -->
 				</v-card-text>
 			</v-form>
 		</v-card>
@@ -185,15 +194,16 @@
 			loadedCompetitions () {
 				console.log('loadedCompetitions')
 				return this.$store.getters['competitions/loadedCompetitions']
-				// return this.$store.getters['competitions/loadedCompetitions'].filter(competition => competition.category.slug === 'football')
-				// return abc.filter(competition => competition.category.slug === 'football')
-				return 'abc'
 			},
 			loadedTeams () {
 		    	return this.$store.getters['teams/loadedTeams']
 		    },
 		    loadedStadiums () {
-		    	return this.$store.getters['stadiums/loadedStadiums']
+		    	if (this.selectedCompetition != '') {
+		    		return this.$store.getters['stadiums/loadedStadiums'].filter(stadium => stadium.country.slug === this.selectedCompetition.country.slug)
+		    	} else {
+		    		return this.$store.getters['stadiums/loadedStadiums']
+		    	}
 		    },
 			teams1 () {
 		    	let team2 = this.selectedTeam2.slug
@@ -227,36 +237,39 @@
 						slug: this.category.slug,
 						name: this.category.name
 					},
-			        // type: {
-			        //     slug: this.selectedType.slug,
-			        //     name: this.selectedType.name
-			        // },
-			        team1: {
-			            slug: this.selectedTeam1.slug,// = 'undefined' ? null : this.selectedTeam1.slug,
-			            name: this.selectedTeam1.name,// = 'undefined' ? null : this.selectedTeam1.name
+			        type: {
+			            slug: this.selectedCompetition.slug,
+			            name: this.selectedCompetition.name
 			        },
-			        team2: {
-			            slug: this.selectedTeam2.slug,// = 'undefined' ? null : this.selectedTeam2.slug,
-			            name: this.selectedTeam2.name,// = 'undefined' ? null : this.selectedTeam2.name
+			        localteam: {
+			            slug: this.selectedTeam1.slug,
+			            name: this.selectedTeam1.name,
 			        },
-			        name_pretty: this.selectedTeam1.name + ' vs ' + this.selectedTeam2.name,
+			        visitorteam: {
+			            slug: this.selectedTeam2.slug,
+			            name: this.selectedTeam2.name,
+			        },
+			        name: this.selectedTeam1.name + ' vs ' + this.selectedTeam2.name,
 			        name_unique: this.selectedTeam1.id + '_vs_' + this.selectedTeam2.id + '_on_' + this.date,
 			        location: {
-			            venue: this.selectedStadium.name,// = 'undefined' ? null : this.selectedStadium,
-			            city: this.selectedStadium.city.name,// = 'undefined' ? null : this.selectedStadium
+			            venue: this.selectedStadium.name,
+			            city: this.selectedStadium.city.name,
 			            country: this.selectedStadium.country.name,
 			            timezone: this.selectedStadium.timezone
 			        },
-			        // date: this.formattedDate(this.date, this.time),
-			        // time: this.time,
 			        date: formattedDate(this.date, this.time),
-			        // endDate: this.endDate,
+			        localteam_halftime_score: '',
+			        localteam_score: '',
+			        visitorteam_helftime_score: '',
+			        visitorteam_score: '',
+			        match_live: '',
+			        match_status: '',
 			        _created_at: new Date().getTime(),
-			        // _created_by: document.getElementsByName('username')[0].value,
 			        _updated_at: new Date().getTime()
 				}
 				console.log(eventData)
-				// this.$store.dispatch('events/createEvent', eventData)
+				this.$store.dispatch('events/createEvent', eventData)
+				this.$router.push('/admin/events')
 			}
 		},
 		watch: {

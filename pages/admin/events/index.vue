@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<Confirm ref="confirm"></Confirm>
 		<v-breadcrumbs divider="/">
 	  		<v-breadcrumbs-item
 		        v-for="link in links"
@@ -62,16 +63,16 @@
 				          ></v-checkbox>
 				        </td>
 				        <td>{{ props.index + 1 }}</td>
-						<td class="text-xs-left">{{ props.item.name_pretty }}</td>
+						<td class="text-xs-left">{{ props.item.name }}</td>
 						<td class="text-xs-left">{{ props.item.activity.name }}</td>
 						<td class="text-xs-left">{{ props.item.category.name }}</td>
 						<td class="text-xs-left">{{ props.item.type.name }}</td>
 						<td class="text-xs-left">{{ props.item.date | moment('DD MMMM YYYY') }}</td>
 						<td class="justify-center layout px-0">
-						  <v-btn icon class="mx-0" :to="'/admin/tasks/' + props.item.id" :id="props.item.id" disabled>
+						  <v-btn icon class="mx-0" :to="'/admin/events/' + props.item.id" :id="props.item.id" disabled>
 						    <v-icon color="teal">edit</v-icon>
 						  </v-btn>
-						  <v-btn icon class="mx-0" @click="deleteItem(props.item)" disabled>
+						  <v-btn icon class="mx-0" @click="deleteItem(props.item)">
 						    <v-icon color="pink">delete</v-icon>
 						  </v-btn>
 						</td>
@@ -81,12 +82,27 @@
 				</template>
 			</v-card>
 	    </v-flex>
+
+	    <br /><br />
+	    <h2 class="text-md-center">Noeud "Events" dans la base de données:</h2>
+	    <!-- <b>modifyJSON:</b> {{ modifyJSON }} -->
+	    <br />
+	    <v-flex xs12 sm10 offset-sm1>
+			<json-editor :json="oldJSON" :onChange="onChange"></json-editor>
+			<br />
+			<div class="text-xs-center">
+				<v-btn class="btn" :disabled="!changed || loading" @click="updateEvent" color="success"><i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i>Sauver les changements</v-btn>
+			</div><br />
+		</v-flex>
 	</div>
 </template>
 
 <script>
+	import Confirm from '~/components/Confirm.vue'
+	import '~/static/css/jsoneditor-tree.css'
   	export default {
 	    layout: 'layoutBack',
+	    components: { Confirm },
 	    created () {
 	    	this.$store.dispatch('events/loadedEvents')
 	    },
@@ -120,13 +136,32 @@
 		        pagination: {
 			        sortBy: 'date',
 			        descending: true
-			    }	    
+			    },
+			    newJSON: ''  
 	    	}
 	    },
 	    computed: {
+	    	loading () {
+	    		return this.$store.getters['loading']
+	    	},
 	    	loadedEvents () {
 	    		return this.$store.getters['events/loadedEvents']
-	    	}
+	    	},
+	    	changed () {
+	    		return this.newJSON && !_.isEqual(this.oldJSON, this.newJSON) ? true : false
+		    },
+	    	oldJSON () {
+	    		// return this.loadedEvents
+		    	console.log(typeof this.loadedEvents)
+	    		const arrayToObject = (array) =>
+				   	array.reduce((obj, item) => {
+				     	obj[item.name] = item
+				     	return obj
+				   	},{})
+				const eventObject = arrayToObject(this.loadedEvents.sort((a, b) => a.name.localeCompare(b.name)))
+				console.log(eventObject)
+				return eventObject
+			}
 	    },
 	    methods: {
 	    	toggleAll () {
@@ -144,7 +179,24 @@
 		          this.pagination.sortBy = column
 		          this.pagination.descending = false
 		        }
-		    }
+		    },
+		    deleteItem (item) {
+		    	this.$refs.confirm.open('Delete', 'Are you sure you want to delete "' + item.name + '" ?', { color: 'red' }).then((confirm) => {
+		    		console.log(confirm)
+		    		if (confirm) {
+		    			this.$store.dispatch('events/deleteEvent', item.id)
+		    		}
+		    	})
+		    },
+		    onChange(newJson) {
+		        this.newJSON = newJson
+		    },
+		    updateEvent () {
+		        console.log('updateEvent called!')
+		        const eventData = this.newJSON
+		        this.$store.dispatch('events/updateEvent', eventData)
+		       	return this.$router.push('/admin/events')
+		    },
 	    }
   	}
 </script>

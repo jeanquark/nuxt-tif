@@ -30,6 +30,7 @@
 				    :pagination.sync="pagination"
 				    item-key="name"
 				    class="elevation-1"
+				    :rows-per-page-items="[10,25,{'text':'All','value':-1}]"
 				  >
 				    <template slot="headers" slot-scope="props">
 				      <tr>

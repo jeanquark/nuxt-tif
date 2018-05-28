@@ -65,7 +65,7 @@ export const actions = {
         updates['/teams/'] = payload
 
         firebase.database().ref().update(updates).then(() => {
-            dispatch('loadedTeams');
+            dispatch('loadedTeams')
             commit('setLoading', false, { root: true})
             new Noty({type: 'success', text: 'Changements dans le noeud "teams" effectués avec succès!', timeout: 5000, theme: 'metroui'}).show()
         }).catch((error) => {

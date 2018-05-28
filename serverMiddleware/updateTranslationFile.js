@@ -14,6 +14,10 @@ app.use(bodyParser.json());
 
 module.exports = app.use(function (req, res, next) {
 	var file = './lang/essai.json'
+	// var file = './lang/fr-FR.json'
+	console.log(req.body.file)
+	// var file = './lang/' + req.body.file
+
 	// var obj = 'module.exports = ' + {"welcome" : "Herzlich Willkommen zu","and" : "und"}
 	// var obj1 = 'module.exports = '
 	var obj = req.body.json
