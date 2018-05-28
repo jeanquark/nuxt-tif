@@ -91,7 +91,7 @@ export const actions = {
     // Delete an event
     deleteEvent ({commit}, eventId) {
         commit('setLoading', true, { root: true })
-          firebase.database().ref('/events/' + eventId).remove().then(() => {
+          firebase.database().ref('/events_new/' + eventId).remove().then(() => {
             // commit('deleteEvent', eventId)
             commit('setLoading', false, { root: true })
             new Noty({type: 'success', text: 'Événement supprimé avec succès!', timeout: 5000, theme: 'metroui'}).show()

@@ -48,9 +48,9 @@
             </div> <!-- /intro-content --> 
 
             <ul class="intro-language">
-              <li><nuxt-ling to="#"><img src="/images/flags/61.png" class="flagsLanguage"/></nuxt-link></li>
-              <li><nuxt-ling to="#"><img src="/images/flags/65.png" class="flagsLanguage"/></nuxt-link></li>
-              <li><nuxt-ling to="#"><img src="/images/flags/179.png" class="flagsLanguage"/></nuxt-link></li>
+              <li><nuxt-link to="#"><img src="/images/flags/61.png" class="flagsLanguage"/></nuxt-link></li>
+              <li><nuxt-link to="#"><img src="/images/flags/65.png" class="flagsLanguage"/></nuxt-link></li>
+              <li><nuxt-link to="#"><img src="/images/flags/179.png" class="flagsLanguage"/></nuxt-link></li>
             </ul>
 
             <ul class="intro-social">        

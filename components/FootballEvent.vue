@@ -104,7 +104,8 @@
 								<template slot="item" slot-scope="data">
 							      	<v-list-tile-content>
 							        	<v-list-tile-title>
-							          		{{ data.item.name }} <small style="color: #ccc;">{{ data.item.city.name }} - {{ data.item.country.name}}</small>
+							          		<!-- {{ data.item.name }} <small style="color: #ccc;">{{ data.item.city.name }} - {{ data.item.country.name}}</small> -->
+							          		{{ data.item.name }}
 							        	</v-list-tile-title>
 							      	</v-list-tile-content>
 							    </template>
