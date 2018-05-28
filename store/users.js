@@ -163,16 +163,24 @@ export const actions = {
 
         })
     },
-    async updateUser ({commit}, payload) {
+    updateUser ({commit}, payload) {
         try {
-            // const userId = firebase.auth().currentUser.uid
+            const userId = firebase.auth().currentUser.uid
+            console.log(userId)
+            console.log(payload)
             // console.log(userId)
             // let updateObj = payload
             // console.log(updateObj)
-            const userId = payload.id
-            return firebase.database().ref('/users/' + userId).update(payload)
+            // const userId = payload.id
+            firebase.database().ref('/users/' + userId).update(payload).then((response) => {
+                console.log(response)
+                new Noty({type: 'success', text: 'Modifications effectuées avec succès', timeout: 5000, theme: 'metroui'}).show()
+            }).catch(e => {
+                console.log(e)
+            })
 
         } catch(error) {
+            new Noty({type: 'error', text: 'Modifications non effectuées. Erreur: ' + error, timeout: 5000, theme: 'metroui'}).show()
             console.log(error)
         }
     },

@@ -69,7 +69,7 @@
             </v-list-group>
             <v-list-tile v-else @click="" :key="item.text" :to="item.to" :exact="item.exact">
               <v-list-tile-action>
-                <v-icon>{{ item.icon }}</v-icon>
+                <v-icon style="padding-bottom: 5px;">{{ item.icon }}</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>
@@ -212,7 +212,8 @@
       ],
       link: [
         { rel: 'stylesheet', href: 'https://unpkg.com/vuetify/dist/vuetify.min.css' },
-        { rel: 'stylesheet', href: 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' }
+        // { rel: 'stylesheet', href: 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' }
+        { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.0.13/css/all.css' }
       ]
     },
     middleware: ['auth-check'],
@@ -232,11 +233,12 @@
       drawer: null,
       loadingPage: true,
       items: [
-        { icon: 'fa fa-tachometer', text: 'Dashboard', to: '/admin', exact: true },
+        { icon: 'fa fa-th', text: 'Dashboard', to: '/admin', exact: true },
         { icon: 'fa fa-users', text: 'Users', to: '/admin/users', exact: false },
         { icon: 'fa fa-list-ol', text: 'Competitions', to: '/admin/competitions', exact: false },
-        { icon: 'fa fa-list-ol', text: 'Teams', to: '/admin/teams', exact: false },
+        { icon: 'fa fa-futbol', text: 'Teams', to: '/admin/teams', exact: false },
         { icon: 'fa fa-calendar', text: 'Events', to: '/admin/events', exact: false },
+        { icon: 'fa fa-language', text: 'Translation', to: '/admin/translations', exact: false },
         // { icon: 'history', text: 'Placeholder 1', to: '', exact: false },
         // { icon: 'content_copy', text: 'Placeholder 2', to: '', exact: false },
         // {

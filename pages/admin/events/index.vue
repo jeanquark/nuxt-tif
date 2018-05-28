@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<Confirm ref="confirm"></Confirm>
 		<v-breadcrumbs divider="/">
 	  		<v-breadcrumbs-item
 		        v-for="link in links"
@@ -62,16 +63,16 @@
 				          ></v-checkbox>
 				        </td>
 				        <td>{{ props.index + 1 }}</td>
-						<td>{{ props.item.name_pretty }}</td>
-						<td class="text-xs-right">{{ props.item.activity.name }}</td>
-						<td class="text-xs-right">{{ props.item.category.name }}</td>
-						<td class="text-xs-right">{{ props.item.type.name }}</td>
-						<td class="text-xs-right">{{ props.item.date | moment('DD MMMM YYYY') }}</td>
+						<td class="text-xs-left">{{ props.item.name }}</td>
+						<td class="text-xs-left">{{ props.item.activity.name }}</td>
+						<td class="text-xs-left">{{ props.item.category.name }}</td>
+						<td class="text-xs-left">{{ props.item.type.name }}</td>
+						<td class="text-xs-left">{{ props.item.date | moment('DD MMMM YYYY') }}</td>
 						<td class="justify-center layout px-0">
-						  <v-btn icon class="mx-0" :to="'/admin/tasks/' + props.item.id" :id="props.item.id" disabled>
+						  <v-btn icon class="mx-0" :to="'/admin/events/' + props.item.id" :id="props.item.id" disabled>
 						    <v-icon color="teal">edit</v-icon>
 						  </v-btn>
-						  <v-btn icon class="mx-0" @click="deleteItem(props.item)" disabled>
+						  <v-btn icon class="mx-0" @click="deleteItem(props.item)">
 						    <v-icon color="pink">delete</v-icon>
 						  </v-btn>
 						</td>
@@ -81,12 +82,27 @@
 				</template>
 			</v-card>
 	    </v-flex>
+
+	    <br /><br />
+	    <h2 class="text-md-center">Noeud "Events" dans la base de données:</h2>
+	    <!-- <b>modifyJSON:</b> {{ modifyJSON }} -->
+	    <br />
+	    <v-flex xs12 sm10 offset-sm1>
+			<json-editor :json="oldJSON" :onChange="onChange"></json-editor>
+			<br />
+			<div class="text-xs-center">
+				<v-btn class="btn" :disabled="!changed || loading" @click="updateEvent" color="success"><i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i>Sauver les changements</v-btn>
+			</div><br />
+		</v-flex>
 	</div>
 </template>
 
 <script>
+	import Confirm from '~/components/Confirm.vue'
+	import '~/static/css/jsoneditor-tree.css'
   	export default {
 	    layout: 'layoutBack',
+	    components: { Confirm },
 	    created () {
 	    	this.$store.dispatch('events/loadedEvents')
 	    },
@@ -108,130 +124,44 @@
 			    ],
 		        headers: [
 		        	{ text: 'N°', value: 'id', align: 'left', sortable: false },
-		        	{ text: 'Name', value: 'name_pretty' },
-					{ text: 'Activity', value: 'activity' },
-					{ text: 'Category', value: 'category' },
-					{ text: 'Type', value: 'type' },
-					{ text: 'Date', value: 'date' },
+		        	{ text: 'Name', value: 'name_pretty', align: 'center' },
+					{ text: 'Activity', value: 'activity', align: 'center' },
+					{ text: 'Category', value: 'category', align: 'center' },
+					{ text: 'Type', value: 'type', align: 'center' },
+					{ text: 'Date', value: 'date', align: 'center' },
 					// { text: 'Time', value: 'time' },
 					{ text: 'Actions', value: 'actions', sortable: false }
 		        ],
-		   		headers2: [
-					{
-						text: 'Dessert (100g serving)',
-						align: 'left',
-						sortable: false,
-						value: 'name'
-					},
-					{ text: 'Calories', value: 'calories' },
-					{ text: 'Fat (g)', value: 'fat' },
-					{ text: 'Carbs (g)', value: 'carbs' },
-					{ text: 'Protein (g)', value: 'protein' },
-					{ text: 'Iron (%)', value: 'iron' }
-				],
 		        events: '',
 		        pagination: {
 			        sortBy: 'date',
 			        descending: true
 			    },
-		        items: [
-					{
-						value: false,
-						name: 'Frozen Yogurt',
-						calories: 159,
-						fat: 6.0,
-						carbs: 24,
-						protein: 4.0,
-						iron: '1%'
-					},
-					{
-						value: false,
-						name: 'Ice cream sandwich',
-						calories: 237,
-						fat: 9.0,
-						carbs: 37,
-						protein: 4.3,
-						iron: '1%'
-					},
-					{
-						value: false,
-						name: 'Eclair',
-						calories: 262,
-						fat: 16.0,
-						carbs: 23,
-						protein: 6.0,
-						iron: '7%'
-					},
-					{
-						value: false,
-						name: 'Cupcake',
-						calories: 305,
-						fat: 3.7,
-						carbs: 67,
-						protein: 4.3,
-						iron: '8%'
-					},
-					{
-						value: false,
-						name: 'Gingerbread',
-						calories: 356,
-						fat: 16.0,
-						carbs: 49,
-						protein: 3.9,
-						iron: '16%'
-					},
-					{
-						value: false,
-						name: 'Jelly bean',
-						calories: 375,
-						fat: 0.0,
-						carbs: 94,
-						protein: 0.0,
-						iron: '0%'
-					},
-					{
-						value: false,
-						name: 'Lollipop',
-						calories: 392,
-						fat: 0.2,
-						carbs: 98,
-						protein: 0,
-						iron: '2%'
-					},
-					{
-						value: false,
-						name: 'Honeycomb',
-						calories: 408,
-						fat: 3.2,
-						carbs: 87,
-						protein: 6.5,
-						iron: '45%'
-					},
-					{
-						value: false,
-						name: 'Donut',
-						calories: 452,
-						fat: 25.0,
-						carbs: 51,
-						protein: 4.9,
-						iron: '22%'
-					},
-					{
-						value: false,
-						name: 'KitKat',
-						calories: 518,
-						fat: 26.0,
-						carbs: 65,
-						protein: 7,
-						iron: '6%'
-					}
-		        ]	    
+			    newJSON: ''  
 	    	}
 	    },
 	    computed: {
+	    	loading () {
+	    		return this.$store.getters['loading']
+	    	},
 	    	loadedEvents () {
 	    		return this.$store.getters['events/loadedEvents']
-	    	}
+	    	},
+	    	changed () {
+	    		return this.newJSON && !_.isEqual(this.oldJSON, this.newJSON) ? true : false
+		    },
+	    	oldJSON () {
+	    		// return this.loadedEvents
+		    	console.log(typeof this.loadedEvents)
+	    		const arrayToObject = (array) =>
+				   	array.reduce((obj, item) => {
+				     	obj[item.name] = item
+				     	return obj
+				   	},{})
+				const eventObject = arrayToObject(this.loadedEvents.sort((a, b) => a.name.localeCompare(b.name)))
+				console.log(eventObject)
+				return eventObject
+			}
 	    },
 	    methods: {
 	    	toggleAll () {
@@ -249,7 +179,24 @@
 		          this.pagination.sortBy = column
 		          this.pagination.descending = false
 		        }
-		    }
+		    },
+		    deleteItem (item) {
+		    	this.$refs.confirm.open('Delete', 'Are you sure you want to delete "' + item.name + '" ?', { color: 'red' }).then((confirm) => {
+		    		console.log(confirm)
+		    		if (confirm) {
+		    			this.$store.dispatch('events/deleteEvent', item.id)
+		    		}
+		    	})
+		    },
+		    onChange(newJson) {
+		        this.newJSON = newJson
+		    },
+		    updateEvent () {
+		        console.log('updateEvent called!')
+		        const eventData = this.newJSON
+		        this.$store.dispatch('events/updateEvent', eventData)
+		       	return this.$router.push('/admin/events')
+		    },
 	    }
   	}
 </script>

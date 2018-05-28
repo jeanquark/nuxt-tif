@@ -113,4 +113,11 @@
     .isActive {
     	color: red;
     }
+
+    span i {
+        color: #fff;
+    }
+    span i:hover {
+        color: orangered;
+    }
 </style>

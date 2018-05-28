@@ -24,8 +24,8 @@ export const mutations = {
 export const actions = {
 	// Load all teams
 	loadedTeams ({commit}) {
-    	firebase.database().ref('/teams/').once('value').then(function (snapshot) {
-	      	// console.log(snapshot.val())
+    	firebase.database().ref('/teams/').orderByChild('slug').once('value').then(function (snapshot) {
+	      	console.log(snapshot.val())
 	      	const teamsArray = []
 	      	for (const key in snapshot.val()) {
 	        	teamsArray.push({ ...snapshot.val()[key], id: key})
@@ -54,6 +54,25 @@ export const actions = {
             commit('setLoading', false, { root: true })
             commit('setError', error, { root: true })
             new Noty({type: 'error', text: 'Équipe non enregistrée. Erreur: ' + error, timeout: 5000, theme: 'metroui'}).show()
+        })
+    },
+
+    // Update a team
+    updateTeam ({commit, dispatch}, payload) {
+        commit('setLoading', true, { root: true})
+        // console.log(payload)
+        let updates = {}
+        updates['/teams/'] = payload
+
+        firebase.database().ref().update(updates).then(() => {
+            dispatch('loadedTeams')
+            commit('setLoading', false, { root: true})
+            new Noty({type: 'success', text: 'Changements dans le noeud "teams" effectués avec succès!', timeout: 5000, theme: 'metroui'}).show()
+        }).catch((error) => {
+            console.log(error)
+            commit('setLoading', false, { root: true})
+            commit('setError', error, { root: true })
+            new Noty({type: 'error', text: 'Changements non effectués. Erreur: ' + error, timeout: 5000, theme: 'metroui'}).show()
         })
     },
 

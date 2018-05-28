@@ -1,4 +1,5 @@
 require('dotenv').config()
+// const nodeExternals = require('webpack-node-externals')
 
 module.exports = {
   head: {
@@ -40,12 +41,22 @@ module.exports = {
         // })
       }
     },
+    // extend(config, ctx) {
+    //   if (ctx.isServer) {
+    //     config.externals = [
+    //       nodeExternals({
+    //         whitelist: [/^vue2-jsoneditor/]
+    //       })
+    //     ]
+    //   }
+    // },
     vendor: [
       'vuetify',
       '~/plugins/firebase-client-init.js',
       'vue-notifications',
       // 'vue-nouislider'
       // 'vuex-loading'
+      'vue2-jsoneditor',
     ],
     extractCSS: true,
   },
@@ -63,24 +74,25 @@ module.exports = {
           code: 'en',
           iso: 'en-US',
           name: 'English',
-          langFile: 'en-US.js'
+          langFile: 'en-US.json'
         },
         {
           code: 'fr',
           iso: 'fr-FR',
           name: 'Français',
-          langFile: 'fr-FR.js'
+          langFile: 'fr-FR.json'
         },
         {
           code: 'de',
           iso: 'de-DE',
           name: 'Deutsch',
-          langFile: 'de-DE.js'
+          langFile: 'de-DE.json'
         }
       ],
       loadLanguagesAsync: true,
       langDir: 'lang/',
       defaultLocale: 'en',
+      // parsePages: false,
       routes: {
         about: {
           fr: '/a-propos',
@@ -93,8 +105,24 @@ module.exports = {
         admin: {
           fr: '/administration',
           de: '/verwaltung'
+        },
+        user: {
+          fr: '/membre',
+          de: '/user'
+        },
+        home: {
+          fr: '/accueil',
+          de: '/home'
         }
-      },
+      }
+        // preferences: {
+        //   fr: '/preferences-fr',
+        //   de: '/einstellungen'
+        // },
+        // '/user/preferences': {
+        //   fr: '/membre/preferences-fr',
+        //   de: '/user/einstellungen'
+        // }
       // vueI18n: {
       //   fallbackLocale: 'en',
       //   messages: {
@@ -149,6 +177,7 @@ module.exports = {
     { src: '~/plugins/vue-sweetalert2.js', ssr: false },
     { src: '~/plugins/vue-fullpage.js', ssr: false },
     // { src: '~/plugins/merge-images', ssr: false },
+    { src: '~/plugins/vue2-jsoneditor.js', ssr: false },
   ],
   serverMiddleware: [
       '~/serverMiddleware/validateFirebaseIdToken',
@@ -157,6 +186,7 @@ module.exports = {
       // '~/serverMiddleware/api.js',
       { path: '/api-football', handler: '~/serverMiddleware/api-football'},
       { path: '/upload-image', handler: '~/serverMiddleware/uploadImage' },
+      { path: '/update-translation-file', handler: '~/serverMiddleware/updateTranslationFile' },
   ],
   toast: {
     duration: 8000,

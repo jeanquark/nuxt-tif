@@ -87,25 +87,36 @@
 	    <br />
 	    <v-flex xs12 sm10 offset-sm1>
 		    <v-card>
+				<!-- oldJSON: {{ this.oldJSON }}<br /><br /> -->
+		    	<!-- newJSON: {{ this.newJSON }} -->
 		    	<!-- <div> -->
-			    	<json-editor :json="old_action" :onChange="onChange"></json-editor>
+			    	<json-editor :json="oldJSON" :onChange="onChange"></json-editor>
 				<!-- </div> -->
 				<br />
-				<v-btn class="btn" :disabled="!changes" @click="onUpdateAction" color="success">Sauver les changements</v-btn>
+				<div class="text-xs-center">
+					<v-btn class="btn" :disabled="!changed || loading" @click="updateCompetition" color="success"><i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i>Sauver les changements</v-btn>
+				</div>
 				<br />
-				<div v-if="displayJSON">{{ this.new_action }}</div>
+				<!-- <div v-if="displayJSON">{{ this.new_action }}</div> -->
 			</v-card>
 		</v-flex>
 	</div>
 </template>
 
 <script>
-	import jsonEditor from 'vue2-jsoneditor'
+	// if (process.browser) {
+	// 	require('vue2-jsoneditor')
+	// }
+	// import jsonEditor from 'vue2-jsoneditor'
+	// import jsonEditor from '~/plugins/vue2-jsoneditor.js'
 	import '~/static/css/jsoneditor-tree.css'
 	import Confirm from '~/components/Confirm.vue'
   	export default {
 	    layout: 'layoutBack',
-	    components: { jsonEditor, Confirm },
+	    // components: { jsonEditor, Confirm },
+	    // if (process.browser) {
+	    	components: { Confirm },
+	    // },
 	    created () {
 	    	this.$store.dispatch('competitions/loadedCompetitions')
 	    },
@@ -140,18 +151,44 @@
 			        sortBy: 'date',
 			        descending: true
 			    },
-			    old_action: this.$store.getters['competitions/loadedCompetitions'],
-		        new_action: this.$store.getters['competitions/loadedCompetitions'],
-		        displayJSON: false
+			    // old_action: this.$store.getters['competitions/loadedCompetitions'],
+		        // new_action: this.$store.getters['competitions/loadedCompetitions'],
+		        // newJSON: this.oldJSON,
+		        newJSON: '',
+		        // displayJSON: false
 	    	}
 	    },
 	    computed: {
+	    	loading () {
+	    		return this.$store.getters['loading']
+	    	},
 	    	loadedCompetitions () {
 	    		return this.$store.getters['competitions/loadedCompetitions']
 	    	},
-	    	changes () {
-		        return !_.isEqual(this.old_action, this.new_action) ? true : false
-		    }
+	    	changed () {
+	    		console.log('changed!')
+	    		if (this.newJSON && !_.isEqual(this.oldJSON, this.newJSON) ? true : false) {
+	    			return true
+	    		}
+		        // return !_.isEqual(this.oldJSON, this.newJSON) ? true : false
+		    },
+		    oldJSON () {
+		    	// return this.loadedCompetitions
+		    	console.log(typeof this.loadedCompetitions)
+		    	// if (typeof this.loadedCompetitions === 'object') {
+		    		const arrayToObject = (array) =>
+					   	array.reduce((obj, item) => {
+					     	obj[item.slug] = item
+					     	return obj
+					   	},{})
+					   	// const competitionObject = arrayToObject(this.loadedCompetitions)
+				// } else {
+				// 	const competitionObject = this.loadedCompetitions
+				// }
+						const competitionObject = arrayToObject(this.loadedCompetitions.sort((a, b) => a.slug.localeCompare(b.slug)))
+				console.log(competitionObject)
+				return competitionObject
+			}
 	    },
 	    methods: {
 	    	toggleAll () {
@@ -180,17 +217,19 @@
 		    },
 		    onChange(newJson) {
 		        // console.log(newJson)
-		        this.new_action = newJson
+		        this.newJSON = newJson
 		    },
-		    onUpdateAction () {
-		        console.log('onUpdateAction called!')
-		        const actionData = this.new_action
-		        actionData._updated_at = new Date().getTime()
-		        this.$store.dispatch('updateAction', actionData)
+		    updateCompetition () {
+		        console.log('updateCompetition called!')
+		        const competitionData = this.newJSON
+		        // competitionData['_updated_at'] = new Date().getTime()
+		        this.$store.dispatch('competitions/updateCompetition', competitionData)
+		       	return this.$router.push('/admin/competitions')
+		       	// return this.$router.push('/admin')
 		    },
-		    toggleJSON() {
-		        this.displayJSON = !this.displayJSON
-		    },
+		    // toggleJSON() {
+		    //     this.displayJSON = !this.displayJSON
+		    // },
 	    }
   	}
 </script>
