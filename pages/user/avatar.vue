@@ -24,7 +24,7 @@
                         </div>
                         <div class="flex-container-modalAvatar" v-if="this.arr.length > 0">
                             <!-- <div style="flex-grow: 1"><img src="/images/avatar.png" class="imgModalAvatar"/></div> -->
-                            <div style="flex-grow: 1"><img src="" ref="mergedImage" class="imgModalAvatar" width="300px" /></div>
+                            <div style="flex-grow: 1"><img src="" ref="mergedImage" class="imgModalAvatar"/></div>
                         </div>
                         <div class="flex-container-modalAvatar" v-else>
                             <h4 style="color: orangered; margin: 0 auto; font: normal 150%/1 'bangers', Helvetica, sans-serif;">Sélectionne les caractéristiques</h4><br /><br />
@@ -34,7 +34,7 @@
                             <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'male'}" @click="selectGender('male')"><span class="textModalMenuAvatar">MALE</span></div>
                         </div>
                         <div class="flex-container-modalMenuAvatar">
-                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'background'}" @click="selectBodyPart('background')"><span class="textModalMenuAvatar">BACKGROUND</span></div>
+                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'background'}" @click="selectBodyPart('background')"><span class="textModalMenuAvatar">COLOR</span></div>
                             <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'body'}" @click="selectBodyPart('body')"><span class="textModalMenuAvatar">BODY</span></div>
                             <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'skin'}" @click="selectBodyPart('skin')"><span class="textModalMenuAvatar">SKIN</span></div>
                             <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'eyes'}" @click="selectBodyPart('eyes')"><span class="textModalMenuAvatar">EYES</span></div>
@@ -43,7 +43,7 @@
                             <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'hair'}" @click="selectBodyPart('hair')"><span class="textModalMenuAvatar">HAIR</span></div>
                         </div>
                         <div class="flex-container-modalAvatarImg">
-                            <div v-for="avatar in loadedAvatars" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.image" class="imgModalAvatar" :class="{active: (avatar.name === background ||  avatar.name === body || avatar.name === skin || avatar.name === eyes || avatar.name === mouth || avatar.name === face || avatar.name === hair) }" /></div>
+                            <div v-for="avatar in loadedAvatars" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === background ||  avatar.name === body || avatar.name === skin || avatar.name === eyes || avatar.name === mouth || avatar.name === face || avatar.name === hair) }" /></div>
                         </div>
                     </div>
                     <!-- Modal footer -->
@@ -54,7 +54,7 @@
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-success" data-dismiss="modal" :disabled="loading || disabled" :loading="loading" @click="saveImage">Allez, valide ! <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
-                        <nuxt-link to="/home"><button type="button" class="btn btn-danger" data-dismiss="modal">Annule tout !</button></nuxt-link>
+                        <nuxt-link to="/home"><button type="button" class="btn btn-danger" data-dismiss="modal">Fermer !</button></nuxt-link>
                     </div>
                 </div>
             </div><!-- /.modal-dialog -->
@@ -167,7 +167,7 @@
                 // console.log(part)
                 this.bodyPart = part
             },
-            addToMerge(gender, type, image, name) {
+            addToMerge(gender, type, image, imageSmall, name) {
                 // console.log('addToMerge')
                 this.name = name
                 if (name.includes('background')) {

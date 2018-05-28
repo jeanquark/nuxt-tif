@@ -24,7 +24,7 @@
     menuCount:{
       type: Number,
       required: true,
-      default:4
+      default:5
     },
     iconClass:{
       type:Array,

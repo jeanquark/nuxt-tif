@@ -40,12 +40,18 @@
                         <h5>Bienvenue sur</h5>
                         <h1>ThisIsFan.com</h1>
                         <p class="intro-position">
-                            <span>Le premier jeu consacré aux supporters !</span>
+                            <span>La première application consacrée aux supporters !</span>
                         </p>                    
                         <img src="images/avatar.png" class="imgAvatar" />
                     </div>                     
                 </div>                  
             </div> <!-- /intro-content --> 
+
+            <ul class="intro-language">
+              <li><nuxt-ling to="#"><img src="/images/flags/61.png" class="flagsLanguage"/></nuxt-link></li>
+              <li><nuxt-ling to="#"><img src="/images/flags/65.png" class="flagsLanguage"/></nuxt-link></li>
+              <li><nuxt-ling to="#"><img src="/images/flags/179.png" class="flagsLanguage"/></nuxt-link></li>
+            </ul>
 
             <ul class="intro-social">        
                 <li><nuxt-link to="/#"><i class="fa fa-facebook"></i></nuxt-link></li>
@@ -68,7 +74,7 @@
 
                         <img src="images/avatar.png" alt="Profile Picture">
 
-                        <p class="lead">ThisIsFan.com est le premier jeu consacré aux supporters. Gères ton fan au quotidien, effectues des actions pour gagner des $fans et pour augmenter tes compétences. Plus ton fan aura un niveau élevé, plus il rapportera de point de ferveur à tes équipes préférées.</p>
+                        <p class="lead">ThisIsFan.com est la première application consacrée aux supporters. Voir les résultats de tes équipes préférées tout en jouant ! Gères ton fan au quotidien, effectues des actions pour gagner des $fans et pour augmenter tes compétences. Plus ton fan aura un niveau élevé, plus il rapportera de point de ferveur à tes équipes préférées.</p>
                     </div>              
 
                 </div>          
@@ -83,90 +89,7 @@
                 </div>          
             </div>
 
-        </section> <!-- /process-->   
-
-
-        <!-- Modal s'incrire -->
-        <div id="id01" class="modal">
-            <form class="modal-content" action="/action_page.php">
-                <div class="container">
-                    <h1>S'incrire</h1>
-                    <p class="modalInscription">Entre dans la communauté de ThisIsFan.com et commence à encourager tes équipes favorites !</p>
-                    <hr>
-                    <div v-if="error" class="text-center" style="color: red;"><br />{{ $t(error.code) }}<br /></div>
-                    <br />
-                    <label for="email"><b>Email</b></label>
-                    <input type="text" placeholder="Enter Email" name="email" v-model="email" required>
-
-                    <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" v-model="password" required>
-
-                    <label for="psw-repeat"><b>Répètes ton Password</b></label>
-                    <input type="password" placeholder="Repeat Password" name="psw-repeat" v-model="password_confirm" required>
-
-                    <label>
-                        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Se souvenir de moi
-                    </label>
-
-                    <p>En validant ton inscription, tu es d'accord avec les <a href="#" style="color:dodgerblue">conditions générales</a> de ThisIsFan.com.</p>
-
-                    <div class="row button-section">
-                        <div class="col-twelve">
-                            <!-- <a href="index2.html" type="button" onclick="document.getElementById('id01').style.display='none'" class="button stroke smoothscroll">Non, je ne veux pas !</a> -->
-                            <nuxt-link to="/" type="button" onclick="document.getElementById('id01').style.display='none'" class="button stroke smoothscroll">Non, je ne veux pas !</nuxt-link>
-                            <!-- <a href="vue/load.html" type="submit" class="button button-primary">Je vais devenir fan !</a> -->
-                            <button type="submit" class="button button-primary" :disabled="loading" :loading="loading" @click.prevent="signUserUp">Je vais devenir fan ! <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
-                        </div>
-                    </div>
-
-                    <div class="row button-section">
-                        <div class="col-twelve">
-                            <a href="vue/load.html" type="submit" class="button btn-facebook"><i class="fa fa-facebook"></i> Connecte-toi avec FB</a>
-                            <a href="vue/load.html" type="submit" class="button btn-twitter"><i class="fa fa-google"></i> Connecte-toi avec G+</a>
-                        </div>
-                    </div>       
-                </div><!-- /container -->
-            </form>
-        </div><!-- /Modal s'incrire -->
-    
-
-        <!-- Modal Se connecter -->
-        <div id="id02" class="modal">
-            <form class="modal-content" action="/action_page.php">
-                <div class="container">
-                    <h1>Se connecter</h1>
-                    <p class="modalInscription">Va vite encourager tes équipes favorites !</p>
-                    <hr>
-                    <div v-if="error" class="text-center" style="color: red;"><br />{{ $t(error.code) }}<br /></div>
-                    <br />
-                    <label for="email"><b>Email</b></label>
-                    <input type="text" placeholder="Enter Email" name="email" v-model="email" required>
-
-                    <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" v-model="password" required>
-
-                    <label>
-                        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Se souvenir de moi
-                    </label>
-
-                    <div class="row button-section">
-                        <div class="col-twelve">
-                            <a href="index2.html" type="button" onclick="document.getElementById('id02').style.display='none'" class="button stroke smoothscroll">Non, je ne veux pas !</a>
-                            <a href="vue/load.html" type="submit" class="button button-primary" :disabled="loading" :loading="loading" @click.prevent="signUserIn">Go Go Go, c'est parti ! <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="row button-section">
-                        <div class="col-twelve">
-                            <a href="vue/load.html" type="submit" class="button btn-facebook"><i class="fa fa-facebook"></i> Connecte-toi avec FB</a>
-                            <a href="vue/load.html" type="submit" class="button btn-twitter"><i class="fa fa-google"></i> Connecte-toi avec G+</a>
-                        </div>
-                    </div>
-
-                </div><!-- /container -->
-            </form>
-        </div><!-- /id02 --><!-- /Modal Se connecter -->
-       
+        </section> <!-- /process-->        
 
         <!-- resume Section
         ================================================== -->
@@ -461,10 +384,12 @@
                         <!-- Simply type    the promocode in the box labeled “Promo Code” when placing your order. -->  </p>
 
                     <div class="row button-section">
-                        <div class="col-twelve">
-                            <button onclick="document.getElementById('id01').style.display='block'" title="Inscription" class="button stroke smoothscroll">S'inscrire</button>              
-                            <button onclick="document.getElementById('id02').style.display='block'" title="Connection" class="button button-primary">Se connecter</button>              
-                        </div>          
+						<div class="col-twelve">
+							<!-- <button onclick="document.getElementById('id01').style.display='block'" title="Inscription" class="button stroke smoothscroll">S'inscrire</button>               -->
+							<nuxt-link to="/register"><button title="Inscription" class="button stroke smoothscroll">S'inscrire</button></nuxt-link>              
+							<!-- <button onclick="document.getElementById('id02').style.display='block'" title="Connection" class="button button-primary">Se connecter</button>           -->
+							<nuxt-link to="/login"><button title="Connection" class="button button-primary">Se connecter</button></nuxt-link>          
+						</div>          
                     </div>
 
                 </div>
@@ -638,15 +563,8 @@
             </div> <!-- /contact-form -->
 
             <div class="row contact-info">
-                <div class="col-six tab-full">
-                    <div class="icon">
-                        <i class="icon-pin"></i>
-                    </div>
-                    <h5>Nos coordonnées</h5>
-                    <p>ThisIsFan.com<br>Switzerland</p>
-                </div>
 
-                <div class="col-six tab-full collapse">
+              <div class="col-twelve tab-full collapse">
                     <div class="icon">
                         <i class="icon-mail"></i>
                     </div>
@@ -703,9 +621,9 @@
                 // { src: '/js/main.js '},
             ],
             link: [
-                { rel: 'stylesheet', href: '/css/base.css' },
-                { rel: 'stylesheet', href: '/css/main.css' },
-                { rel: 'stylesheet', href: '/css/vendor.css' },
+                // { rel: 'stylesheet', href: '/css/base.css' },
+                // { rel: 'stylesheet', href: '/css/main.css' },
+                // { rel: 'stylesheet', href: '/css/vendor.css' },
                 { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open%20Sans' },
             ],
             css: [
@@ -726,9 +644,9 @@
             return {
                 index: 0,
                 count: 4,
-                icons: ['fa fa-user', 'fa fa-cog', 'fa fa-users', 'fa fa-users', 'fa fa-users'],
+                icons: ['fa fa-home', 'fa fa-sign-in', 'fa fa-gamepad', 'fa fa-image', 'fa fa-comment'],
                 // list: ['/avatar', '/preferences', '/teams'],
-                anchors: ['intro', 'about', 'resume', 'portfolio', 'stats'],
+                anchors: ['intro', 'about', 'resume', 'portfolio', 'contact'],
                 color: 'orangered',
                 email: '',
                 password: '',

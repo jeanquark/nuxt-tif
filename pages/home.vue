@@ -2,7 +2,8 @@
 	<div class="container-fluid">
 		<!-- Header -->
 		<div id="header" class="col-12 col-sm-12 col-md-12 col-lg-12 top-fixed">
-			<div class="flex-container-header">
+		
+			<div class="flex-container-header text-center">
 				<div class="column">
 					<span class="level-box"><i class="fa fa-star"></i> Niv. 1 - <i class="fa fa-angle-double-up"></i> 1 / 10</span>						
 				</div>
@@ -12,10 +13,15 @@
 				<div class="column">
 					<div class="token-box"><i class="fa fa-certificate"></i> 5</div>					
 				</div>
-			</div>
+				<div class="columnButton text-right">
+					<div class="quit-box" @click="logout"><i class="fa fa-times"></i></div>					
+				</div>
+				<div class="columnButton text-right">
+					<div class="quit-box"><nuxt-link to="/admin"><i class="fa fa-share-alt"></i></nuxt-link></div>					
+				</div>
+			</div>	
 		
-		</div>
-		<!-- End Header -->
+		</div><!-- End Header -->
 
 		<!-- Propriété du joueur -->
 		<div id="proprieteJoueur" class="col-12 col-sm-12 col-md-12 col-lg-12">
@@ -23,9 +29,8 @@
 			<div class="flex-container-playerPropriety">
 				<nuxt-link to="/user/avatar" class="boxShadow" style="flex-basis: 60px"><img src="/images/avatar.png" class="imgAvatar"/></nuxt-link>
 				<nuxt-link to="/user" class="boxShadow flex-container-modalProfil" style="flex-grow: 1">
-					<div class="columnProfil"><img src="/images/163.png" class="imgModalProprieteFlags"/> <span class="modal-Propriete" v-if="user">{{ user.email }}</span> <span class="modal-ProprietePlace boxShadow"><img src="/images/cup.png" class="imgModalProprieteCup"/> 1863ème</span> <button class="btn btn-danger" @click="logout">Logout</button> <button class="btn btn-success"><nuxt-link to="/admin">Admin</nuxt-link></button></div>
+					<div class="columnProfil"><img src="/images/163.png" class="imgModalProprieteFlags"/> <span class="modal-Propriete" v-if="user">{{ user.pseudo }}</span> <span class="modal-ProprietePlace boxShadow"><img src="/images/cup.png" class="imgModalProprieteCup"/> 1863ème</span></div>
 				</nuxt-link>
-
 				<nuxt-link to="/user/preferences" class="boxShadow"  style="flex-basis: 60px"><img src="/images/parametre.png" class="imgParametre"/></nuxt-link>
 			</div>
 
@@ -142,7 +147,7 @@
 					// console.log('abc')
 	          		// this.$router.push('/')
 	          		// this.$router.replace({ path: '/' })
-                	this.$router.replace('/login')
+                	this.$router.replace('/')
 	        	})
 	        }
 		}

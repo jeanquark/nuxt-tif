@@ -1,5 +1,7 @@
 /* Style par défaut (écran de bureau) - Résolution 1400x1050 */
 
+@media only screen and (min-width: 1281px) {
+
 body, html {
 width: 100%;
 color: #ffffff;
@@ -65,9 +67,9 @@ vertical-align: middle;
 
 #header {
 max-width: 1000px;
-justify-content: center;
-margin-left: -5px;
 z-index: 1;
+width: 100%;
+padding: 0;
 }
 
 .top-fixed {
@@ -78,13 +80,41 @@ top: 0;
 .flex-container-header {
 max-width: 100%;
 display: flex;
-margin-bottom: 0;
+justify-content: center;
+padding: 0;
+margin-right: 15px;
+margin-left: 5px;
 }
 
 .column {
-margin: 10px;
-flex-grow: 1;
-flex-shrink: 1;
+padding: 0;
+padding-top: 10px;
+width: 100%;
+}
+
+.columnButton {
+padding: 0;
+padding-top: 10px;
+}	
+
+.quit-box {
+display: inline-block;
+-webkit-box-sizing: content-box;
+-moz-box-sizing: content-box;
+box-sizing: content-box;
+padding: 5px 5px 5px 5px;
+overflow: hidden;
+border: none;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+font: normal 120%/1 "bangers", Helvetica, sans-serif;
+color: white;
+text-align: center;
+-o-text-overflow: ellipsis;
+text-overflow: ellipsis;
+background: dodgerblue;
+-webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.5) ;
+box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.5) ;
 }
 
 .level-box {
@@ -92,8 +122,8 @@ display: inline-block;
 -webkit-box-sizing: content-box;
 -moz-box-sizing: content-box;
 box-sizing: content-box;
-width: 100%;
 padding: 5px 5px 5px 5px;
+width: 92%;
 overflow: hidden;
 border: none;
 -webkit-border-radius: 5px;
@@ -124,8 +154,8 @@ display: inline-block;
 -webkit-box-sizing: content-box;
 -moz-box-sizing: content-box;
 box-sizing: content-box;
-width: 100%;
 padding: 5px 5px 5px 5px;
+width: 92%;
 overflow: hidden;
 border: none;
 -webkit-border-radius: 5px;
@@ -156,8 +186,8 @@ display: inline-block;
 -webkit-box-sizing: content-box;
 -moz-box-sizing: content-box;
 box-sizing: content-box;
-width: 100%;
 padding: 5px 5px 5px 5px;
+width: 92%;
 overflow: hidden;
 border: none;
 -webkit-border-radius: 5px;
@@ -1531,7 +1561,7 @@ font: normal 100%/1 "bangers", Helvetica, sans-serif;
 }
 
 .btn {
-font: normal 140%/1 "bangers", Helvetica, sans-serif;
+font: normal 100%/1 "bangers", Helvetica, sans-serif;
 }
 
 /* Paramètres */
@@ -4038,4 +4068,6 @@ left: 5px;
 margin-top: -5px;
 border-width: 0 5px 5px;
 border-bottom-color: #000;
+}
+
 }

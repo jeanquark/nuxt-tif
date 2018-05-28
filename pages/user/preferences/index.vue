@@ -19,7 +19,7 @@
                             <h1>Infos et/ou besoin d'aide ?</h1>
                         </div>
                         <div class="flex-container-modal-Parametre">
-                            <div class="flex-container-modal-Niveau">
+                            <!-- <div class="flex-container-modal-Niveau">
                                 <div class="columnParametreTexte">
                                     Musique
                                 </div>
@@ -50,37 +50,37 @@
                                 <div class="columnParametreButtonNo">
                                     Hors ligne
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="flex-container-modal-Niveau">
                                 <div class="columnParametreTexte">
                                     Langues
                                 </div>
-                                <nuxt-link to="/language" class="columnParametreButton">
-                                    Français
+                                <nuxt-link to="/user/preferences/language" class="columnParametreButton" v-if="user">
+                                    {{ user.language.name }}
                                 </nuxt-link>
                             </div>
                             <div class="flex-container-modal-Niveau">
                                 <div class="columnParametreTexte">
                                     Pseudo
                                 </div>
-                                <nuxt-link to="/pseudo" class="columnParametreButton">
-                                    Pseudo1234567
+                                <nuxt-link to="/user/preferences/pseudo" class="columnParametreButton" v-if="user">
+                                    {{ user.pseudo }}
                                 </nuxt-link>
                             </div>
                             <div class="flex-container-modal-Niveau">
                                 <div class="columnParametreTexte">
                                     Année de naissance
                                 </div>
-                                <nuxt-link to="/birth" class="columnParametreButton">
-                                    1998
+                                <nuxt-link to="/user/preferences/birth" class="columnParametreButton" v-if="user">
+                                    {{ user.year_birth }}
                                 </nuxt-link>
                             </div>
                             <div class="flex-container-modal-Niveau">
                                 <div class="columnParametreTexte">
                                     Nationalité
                                 </div>
-                                <nuxt-link to="/country" class="columnParametreButton">
-                                    Suisse
+                                <nuxt-link to="/user/preferences/country" class="columnParametreButton" v-if="user">
+                                    {{ user.country.name }}
                                 </nuxt-link>
                             </div>
                         </div><!-- /.flex-container -->
@@ -123,9 +123,25 @@
 </template>
 
 <script>
-    export default {
-        layout: 'layoutFront',
-    }
+	export default {
+		layout: 'layoutFront',
+		computed: {
+			user () {
+				return this.$store.getters['users/loadedUser']
+			}
+		},
+		methods: {
+			logout() {
+				// return this.$store.dispatch('users/signOut')
+				this.$store.dispatch('users/signOut').then(() => {
+					// console.log('abc')
+	          		// this.$router.push('/')
+	          		// this.$router.replace({ path: '/' })
+                	this.$router.replace('/')
+	        	})
+	        }
+		}
+	}
 </script>
 
 <style>
