@@ -5,7 +5,7 @@
 		<div id="header" class="col-12 col-sm-12 col-md-12 col-lg-12 top-fixed">
 			<div class="flex-container-header text-center">
 				<div class="column">
-					<span class="level-box"><i class="fa fa-star"></i> Niv. 1 - <i class="fa fa-angle-double-up"></i> 1 / 10</span>						
+					<div class="level-box"><i class="fa fa-star"></i> Niv. 1 - <i class="fa fa-angle-double-up"></i> 1 / 10</div>						
 				</div>
 				<div class="column">
 					<div class="dollar-box"><i class="fa fa-dollar-sign"></i> 500</div>						
