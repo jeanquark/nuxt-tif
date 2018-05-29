@@ -84,7 +84,7 @@
             if (this.$store.getters['users/loadedUser'].avatar) {
                 const array = this.$store.getters['users/loadedUser'].avatar.name.split('_')
                 console.log(array)
-                if (array.length >= 9) {
+                if (array.length >= 11) {
                     this.gender = ''
                     this.gender = array[1]
                     this.background = array[2]
@@ -95,6 +95,8 @@
                     this.face = array[7]
                     // this.cache = array[8]
                     this.hair = array[8]
+					this.cache = array[9]
+					this.thisisfan = array[10]
 
                     this.obj = [
                         { "image": '/images/avatars/' + this.gender + '/background/' + this.background + '.png', 'gender': this.gender, 'type': 'background' },
@@ -104,7 +106,9 @@
                         { 'image': '/images/avatars/' + this.gender + '/mouth/' + this.mouth + '.png', 'gender': this.gender, 'type': 'mouth' }, 
                         { 'image': '/images/avatars/' + this.gender + '/face/' + this.face + '.png', 'gender': this.gender, 'type': 'face' }, 
                         // { 'image': '/images/avatars/' + this.gender + '/cache/' + this.cache + '.png', 'gender': this.gender, 'type': 'cache' }, 
-                        { 'image': '/images/avatars/' + this.gender + '/hair/' + this.hair + '.png', 'gender': this.gender, 'type': 'hair' }
+                        { 'image': '/images/avatars/' + this.gender + '/hair/' + this.hair + '.png', 'gender': this.gender, 'type': 'hair' },
+						{ 'image': '/images/avatars/' + this.gender + '/cache/' + this.cache + '.png', 'gender': this.gender, 'type': 'cache' },
+						{ 'image': '/images/avatars/' + this.gender + '/thisisfan/' + this.thisisfan + '.png', 'gender': this.gender, 'type': 'thisisfan' }
                     ]
                     this.mergeImages()
                 }
@@ -125,6 +129,8 @@
                 face: '',
                 // cache: '',
                 hair: '',
+				cache: '',
+				thisisfan: '',
                 avatars: [],
                 arr: [],
                 obj: [],
@@ -186,7 +192,11 @@
                 //  this.cache = name
                 } else if (name.includes('hair')) {
                     this.hair = name
-                }
+                } else if (name.includes('cache')) {
+					this.cache = name
+				} else if (name.include('thisisfan')) {
+					this.cache = name
+				}
 
                 // Remove any existing image of the same type
                 let found = false;
@@ -237,7 +247,7 @@
                 // Save image in Firebase Cloud Storage
                 const now = moment().unix()
                 const userId = firebase.auth().currentUser.uid
-                const image_name = userId + '_' + this.gender + '_' + this.background + '_' + this.body + '_' + this.skin + '_' + this.eyes + '_' + this.mouth + '_' + this.face + '_' + this.hair
+                const image_name = userId + '_' + this.gender + '_' + this.background + '_' + this.body + '_' + this.skin + '_' + this.eyes + '_' + this.mouth + '_' + this.face + '_' + this.hair + '_' + this.cache + '_' + this.thisisfan
                 console.log(image_name)
                 let storageRef = firebase.storage().ref('/images/avatars/' + image_name)
                 let image = this.$refs.mergedImage.src
