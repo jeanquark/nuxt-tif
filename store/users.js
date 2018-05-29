@@ -210,7 +210,7 @@ export const actions = {
         // this.$nuxt.$router.replace({ path: '/admin' })
         // this.$router.replace({ path: '/admin' })
         // return this.$router.replace({ path: '/admin' })
-        // this.$router.replace('/')
+        this.$router.replace('/home')
         // this.$router.go('/admin')
         // try {
         //   // return redirect('/')
