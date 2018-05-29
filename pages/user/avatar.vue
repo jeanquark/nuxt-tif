@@ -107,8 +107,8 @@
                         { 'image': '/images/avatars/' + this.gender + '/face/' + this.face + '.png', 'gender': this.gender, 'type': 'face' }, 
                         // { 'image': '/images/avatars/' + this.gender + '/cache/' + this.cache + '.png', 'gender': this.gender, 'type': 'cache' }, 
                         { 'image': '/images/avatars/' + this.gender + '/hair/' + this.hair + '.png', 'gender': this.gender, 'type': 'hair' },
-						{ 'image': '/images/avatars/' + this.gender + '/cache/' + this.cache + '.png', 'gender': this.gender, 'type': 'cache' },
-						{ 'image': '/images/avatars/' + this.gender + '/thisisfan/' + this.thisisfan + '.png', 'gender': this.gender, 'type': 'thisisfan' }
+						{ 'image': '/images/avatars/' + this.gender + '/cache/' + 'cache.png', 'gender': this.gender, 'type': 'cache' },
+						{ 'image': '/images/avatars/' + this.gender + '/thisisfan/' + 'thisisfan.png', 'gender': this.gender, 'type': 'thisisfan' }
                     ]
                     this.mergeImages()
                 }
