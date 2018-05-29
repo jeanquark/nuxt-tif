@@ -42,8 +42,8 @@
 				  <div class="row button-section">
 				  <div class="col-twelve">
 					<button type="submit" class="button button-primary" style="" :disabled="loading" :loading="loading" @click.prevent="signUserUp">Je vais devenir fan ! <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
-					<a href="vue/load.html" type="submit" class="button btn-facebook"><i class="fa fa-facebook"></i> Connecte-toi avec FB</a>
-					<a href="vue/load.html" type="submit" class="button btn-twitter"><i class="fa fa-google"></i> Connecte-toi avec G+</a>
+					<button  href="vue/load.html" type="submit" class="button btn-facebook"><i class="fa fa-facebook"></i> Connecte-toi avec FB</button>
+					<button  href="vue/load.html" type="submit" class="button btn-twitter"><i class="fa fa-google"></i> Connecte-toi avec G+</button>
 				  </div>
 				  </div>
 				  
