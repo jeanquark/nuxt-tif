@@ -108,7 +108,7 @@ border: none;
 -webkit-border-radius: 5px;
 border-radius: 5px;
 font: normal 120%/1 "bangers", Helvetica, sans-serif;
-color: white;
+color: rgba(0,0,0,1);
 text-align: center;
 -o-text-overflow: ellipsis;
 text-overflow: ellipsis;
@@ -122,8 +122,8 @@ display: inline-block;
 -webkit-box-sizing: content-box;
 -moz-box-sizing: content-box;
 box-sizing: content-box;
-padding: 5px 5px 5px 5px;
 width: 92%;
+padding: 5px 5px 5px 5px;
 overflow: hidden;
 border: none;
 -webkit-border-radius: 5px;
@@ -154,8 +154,8 @@ display: inline-block;
 -webkit-box-sizing: content-box;
 -moz-box-sizing: content-box;
 box-sizing: content-box;
-padding: 5px 5px 5px 5px;
 width: 92%;
+padding: 5px 5px 5px 5px;
 overflow: hidden;
 border: none;
 -webkit-border-radius: 5px;
@@ -186,8 +186,8 @@ display: inline-block;
 -webkit-box-sizing: content-box;
 -moz-box-sizing: content-box;
 box-sizing: content-box;
-padding: 5px 5px 5px 5px;
 width: 92%;
+padding: 5px 5px 5px 5px;
 overflow: hidden;
 border: none;
 -webkit-border-radius: 5px;
@@ -252,35 +252,35 @@ text-decoration: none;
 }
 
 .imgModalProprieteCup {
-height: 40px;
-width: 40px;
+height: 30px;
+width: 30px;
 }
 
 .imgModalProprieteCupNo {
-height: 40px;
-width: 40px;
+height: 30px;
+width: 30px;
 filter: grayscale(100%);
 }
 
 .imgModalProprieteFlags {
 position: relative;
 top: 6px;
-height: 80px;
-width: 80px;
+height: 55px;
+width: 55px;
 }
 
 .imgModalAgendaFlags {
 position: relative;
 top: 0;
-height: 50px;
-width: 50px;
+height: 45px;
+width: 45px;
 }
 
 .imgModalEvent1Flags {
 position: relative;
 top: 0;
-height: 100px;
-width: 100px;
+height: 90px;
+width: 90px;
 }
 
 .imgModalProprieteFlagsNo {
@@ -334,7 +334,7 @@ padding: 2px;
 border: 1px solid orangered;
 border-radius: 5px;
 color: white;
-height: 100px;
+height: 80px;
 margin: 3px;
 text-align: center;
 font-size: 100%;
@@ -606,7 +606,7 @@ padding: 2px;
 border: 1px solid orangered;
 border-radius: 5px;
 color: white;
-height: 80px;
+height: 60px;
 margin: 3px;
 text-align: center;
 font-size: 100%;
@@ -616,7 +616,7 @@ font-size: 100%;
 border: 1px solid LightGray;
 border-radius: 5px;
 color: LightGray;
-height: 80px;
+height: 60px;
 margin: 3px;
 text-align: center;
 font-size: 100%;
@@ -628,7 +628,7 @@ text-decoration: none;
 
 .textTitle {
 position: relative;
-top: 23px;
+top: 13px;
 font: normal 200%/1 "bangers", Helvetica, sans-serif;
 text-shadow: 2px 2px 1px rgba(255,255,255,0.5);
 }
@@ -646,7 +646,7 @@ padding-left: 0;
 
 .textXP {
 position: relative;
-top: 23px;
+top: 13px;
 font: normal 200%/1 "bangers", Helvetica, sans-serif;
 text-shadow: 2px 2px 1px rgba(255,255,255,0.5) ;
 }	
@@ -668,7 +668,7 @@ border: 1px solid darkred;
 background-color: darkred;
 border-radius: 5px;
 color: white;
-height: 80px;
+height: 60px;
 text-align: center;
 font-size: 100%;
 }
@@ -677,7 +677,7 @@ font-size: 100%;
 border: 1px solid LightGray;
 border-radius: 5px;
 color: LightGray;
-height: 80px;
+height: 60px;
 text-align: center;
 font-size: 100%;
 }
@@ -810,7 +810,7 @@ padding-left: 0;
 
 .textEvent {
 position: relative;
-top: 23px;
+top: 13px;
 font: normal 200%/1 "bangers", Helvetica, sans-serif;
 text-shadow: 2px 2px 1px rgba(255,255,255,0.5) ;
 }	
@@ -826,7 +826,7 @@ border: 1px solid darkturquoise;
 background-color: darkturquoise;
 border-radius: 5px;
 color: white;
-height: 80px;
+height: 60px;
 margin: 3px;
 text-align: center;
 font-size: 100%;
@@ -836,7 +836,7 @@ font-size: 100%;
 border: 1px solid LightGray;
 border-radius: 5px;
 color: LightGray;
-height: 80px;
+height: 60px;
 margin: 3px;
 text-align: center;
 font-size: 100%;
@@ -881,7 +881,7 @@ border: 1px solid DodgerBlue;
 background-color: white;
 border-radius: 5px;
 color: white;
-height: 180px;
+height: 120px;
 margin: 3px;
 text-align: center;
 font-size: 100%;
@@ -893,7 +893,7 @@ border: 1px solid lightgrey;
 background-color: lightgrey;
 border-radius: 5px;
 color: lightgrey;
-height: 180px;
+height: 120px;
 margin: 3px;
 text-align: center;
 font-size: 100%;
@@ -927,12 +927,12 @@ color: white;
 }
 
 .imgNews {
-max-height: 150px;
+max-height: 95px;
 width: auto;
 }
 
 .imgNewsNo {
-max-height: 150px;
+max-height: 95px;
 width: auto;
 filter: grayscale(100%);
 }
@@ -940,7 +940,7 @@ filter: grayscale(100%);
 /* Menu */
 
 #dock-container {
-height: 80px;
+height: 70px;
 padding: 0;
 margin: 0;
 bottom: 0;
@@ -972,8 +972,8 @@ margin-bottom: 0;
 }
 
 #dock-container li img {
-width: 58px;
-height: 58px;
+width: 48px;
+height: 48px;
 -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.7, transparent), to(rgba(255,255,255,.5)));
 -webkit-transition: all 0.3s;
 -webkit-transform-origin: 50% 100%;
@@ -1274,7 +1274,7 @@ padding: 2px;
 
 .flex-container-modalAvatarImg > div {
 border: 1px solid darkred;
-max-width: 16%;
+max-width: 19%;
 margin: 2px;
 border-radius: 5px;
 color: white;
@@ -1561,7 +1561,7 @@ font: normal 100%/1 "bangers", Helvetica, sans-serif;
 }
 
 .btn {
-font: normal 100%/1 "bangers", Helvetica, sans-serif;
+font: normal 140%/1 "bangers", Helvetica, sans-serif;
 }
 
 /* Paramètres */
@@ -1901,28 +1901,6 @@ margin: 2px;
 text-decoration: none;
 }
 
-.flex-container-modal-Goodies-Img2 {
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-margin-top: 10px;
-margin-bottom: 10px;
-}
-
-.flex-container-modal-Goodies-Img2 > span {
-border: 1px solid orangered;
-width: 16%;
-border-radius: 5px;
-color: white;
-text-align: center;
-padding: 2px;
-margin: 2px;
-}
-
-.flex-container-modal-Goodies-Img2 > a:hover {
-text-decoration: none;
-}
-
 .borderMatchAgenda {
 display: flex;
 flex-wrap: wrap;
@@ -1962,7 +1940,8 @@ margin-bottom: 10px;
 
 .flex-container-modal-XPAction-Img > span {
 border: 1px solid darkred;
-width: 24%;
+width: 23%;
+max-width: 120px;
 border-radius: 5px;
 color: white;
 text-align: center;
@@ -1983,7 +1962,8 @@ margin-top: 10px;
 
 .flex-container-modal-Event4 > span {
 border: 1px solid darkturquoise;
-width: 24%;
+width: 23%;
+max-width: 120px;
 border-radius: 5px;
 color: white;
 text-align: center;
@@ -1992,27 +1972,6 @@ margin: 2px;
 }
 
 .flex-container-modal-Event4 > a:hover {
-text-decoration: none;
-}
-
-.flex-container-modal-Event41 {
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-margin-top: 10px;
-}
-
-.flex-container-modal-Event41 > span {
-border: 1px solid darkturquoise;
-width: 16%;
-border-radius: 5px;
-color: white;
-text-align: center;
-padding: 2px;
-margin: 2px;
-}
-
-.flex-container-modal-Event41 > a:hover {
 text-decoration: none;
 }
 
@@ -2196,7 +2155,7 @@ text-align: center;
 
 .textEventCountry {
 color: #ffffff;
-font: normal 150%/1 "bangers", Helvetica, sans-serif;
+font: normal 120%/1 "bangers", Helvetica, sans-serif;
 position: absolute;
 top: 25%;
 left: 50%;
@@ -2219,18 +2178,6 @@ text-align: center;
 .textActivity {
 color: #ffffff;
 font: normal 100%/1 "bangers", Helvetica, sans-serif;
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
--ms-transform: translate(-50%, -50%);
-text-align: center;
-margin: 0;
-}
-
-.textGoodies {
-color: #ffffff;
-font: normal 140%/1 "bangers", Helvetica, sans-serif;
 position: absolute;
 top: 50%;
 left: 50%;
@@ -2737,17 +2684,19 @@ font: normal 100%/1 "bangers", Helvetica, sans-serif;
 
 .tableTextEvent {
 color: #000000;
-font: normal 120%/1 "bangers", Helvetica, sans-serif;
+font: normal 100%/1 "bangers", Helvetica, sans-serif;
 }
 
 .tableTextClassement {
 color: #000000;
-font: normal 120%/1 "bangers", Helvetica, sans-serif;
+font: normal 140%/1 "bangers", Helvetica, sans-serif;
 }
 
 table .tdEvent {
 padding-left: 10px;
 padding-right: 10px;
+padding-top: 8px;
+padding-bottom: 5px;
 margin: 0;
 font-weight: normal;
 width: 28%;
@@ -2758,6 +2707,8 @@ border: none;
 table .tdEvent1 {
 padding-left: 10px;
 padding-right: 10px;
+padding-top: 14px;
+padding-bottom: 5px;
 margin: 0;
 font-weight: normal;
 width: 8%;
@@ -2768,6 +2719,8 @@ border: none;
 table .tdEvent2 {
 padding-left: 10px;
 padding-right: 10px;
+padding-top: 14px;
+padding-bottom: 5px;
 margin: 0;
 font-weight: normal;
 width: 28%;
@@ -2860,7 +2813,7 @@ padding-right: 10px;
 margin: 0;
 font-weight: normal;
 width: 20%;
-font: normal 80%/1 "bangers", Helvetica, sans-serif;
+font: normal 100%/1 "bangers", Helvetica, sans-serif;
 border: none;
 }
 
@@ -2868,10 +2821,11 @@ table .tdResultat1 {
 width: 40%;
 padding-left: 10px;
 padding-right: 10px;
+padding-top: 10px;
 margin: 0;
 font-weight: normal;
 color: #000000;
-font: normal 120%/1 "bangers", Helvetica, sans-serif;
+font: normal 150%/1 "bangers", Helvetica, sans-serif;
 border: none;
 }
 
@@ -2883,7 +2837,7 @@ padding-top: 15px;
 margin: 0;
 font-weight: normal;
 color: #000000;
-font: normal 120%/1 "bangers", Helvetica, sans-serif;
+font: normal 110%/1 "bangers", Helvetica, sans-serif;
 border: none;
 }
 
@@ -2913,22 +2867,16 @@ color: green;
 
 .boxGreen {
 background-color: green;
-padding: 30px;
+padding: 20px;
 text-align: center;
 margin: 5px;
-width: 35%;
-border-radius: 5px;
-font: normal 120%/1 "bangers", Helvetica, sans-serif;
 }
 
 .boxOrangered {
 background-color: orangered;
-padding: 30px;
+padding: 20px;
 text-align: center;
-margin: 5px;
-width: 35%;
-border-radius: 5px;
-font: normal 120%/1 "bangers", Helvetica, sans-serif;
+color: white;
 }
 
 .modal-footer-event {
@@ -3005,21 +2953,21 @@ width: 100%;
 margin: 0;
 padding: 0;
 color: #ffffff;
-font: normal 100%/1 "bangers", Helvetica, sans-serif;
+font: normal 80%/1 "bangers", Helvetica, sans-serif;
 text-shadow: 2px 2px 1px rgba(255,255,255,0.25) ;
 }
 
 .imgModalMatchFlags {
 position: relative;
-height: 75px;
-width: 75px;
+height: 50px;
+width: 50px;
 }	
 
 .flex-container-match {
 display: flex;
 width: 100%;
 flex: row;
-align-content: center;
+align-items: center;
 margin: 0;
 padding: 5px;
 background: rgba(1,1,1,0.5) !important;
@@ -3029,14 +2977,14 @@ color: #fff;
 .flex-container-match > div {
 display: flex;
 flex: row;
-align-content: center;
-width: 100%;
+align-items: center;
+width: 31%;
 }
 
 .flex-container-match-flagMatch {
 display: flex;
 flex: row;
-height: 75px;
+height: 50px;
 align-items: center;
 justify-content: center;
 width: 100%;
@@ -3047,7 +2995,6 @@ margin-bottom: 10px;
 .flagMatch {
 flex-grow: 1;
 text-align: center;
-width: 50%;
 }
 
 .scorePF {
@@ -3067,7 +3014,7 @@ margin: 5px;
 .statutMatch {
 background-color: green;
 border-radius: 3px;
-width: 100%;
+width: 70%;
 margin: 3px;
 padding: 3px;
 flex-grow: 2;
@@ -3103,69 +3050,38 @@ text-shadow: 2px 2px 1px rgba(0,0,0,0.25);
 .flex-container-teamMatch {
 display: flex;
 flex: row;
+height: 50px;
 align-items: center;
 justify-content: center;
 width: 100%;
+margin-top: 10px;
 margin-bottom: 10px;
 }
 
 .teamMatch {
 flex-grow: 2;
-width: 75%;
+width: 100%;
+height: 30px;
 flex-grow: 1;
 text-align: center;
 color: #000000;
-font: normal 150%/1 "bangers", Helvetica, sans-serif;
+font: normal 120%/1 "bangers", Helvetica, sans-serif;
 text-shadow: 2px 2px 1px rgba(0,0,0,0.25);
-padding: 10px;
-margin: 5px;
-margin-bottom: 0;
-background: rgba(1,1,1,0.5) !important;
-color: #fff;
-border-radius: 3px;
-}
-
-.matchInfo {
-flex-grow: 1;
-width: 100%;
-flex-grow: 1;
-color: #000000;
-font: normal 80%/1 "bangers", Helvetica, sans-serif;
-text-shadow: 2px 2px 1px rgba(0,0,0,0.25);
-padding: 10px;
-padding-left: 40px;
-margin-top: 0;
+padding: 5px;
+padding-top: 7px;
 margin: 5px;
 background: rgba(1,1,1,0.5) !important;
 color: #fff;
-border-radius: 3px;
-}
-
-.matchInfoRight {
-flex-grow: 1;
-width: 100%;
-flex-grow: 1;
-color: #000000;
-font: normal 80%/1 "bangers", Helvetica, sans-serif;
-text-shadow: 2px 2px 1px rgba(0,0,0,0.25);
-padding: 10px;
-padding-right: 40px;
-text-align: right;
-margin-top: 0;
-margin: 5px;
-background: rgba(1,1,1,0.5) !important;
-color: #fff;
-border-radius: 3px;
 }
 
 .scoreReal {
 border-radius: 3px;
-width: 30%;
-margin: 5px;
-padding: 10px;
+width: 50%;
+margin: 3px;
+padding: 3px;
 flex-grow: 1;
 text-align: center;
-font: normal 100%/1 "bangers", Helvetica, sans-serif;
+font: normal 80%/1 "bangers", Helvetica, sans-serif;
 text-shadow: 2px 2px 1px rgba(0,0,0,0.25);
 background: rgba(1,1,1,0.5) !important;
 color: #fff;
@@ -3426,7 +3342,6 @@ margin: 2px;
 display: flex;
 flex-wrap: wrap;
 justify-content: center;
-margin-bottom: 10px;
 }
 
 .flex-container-modal-FanShop-Goodies-small > div {
@@ -3448,7 +3363,7 @@ margin-bottom: 10px;
 .flex-container-modal-FanShop-Goodies-No > a {
 border: 1px solid MediumSlateBlue;
 background-color: Gainsboro;
-width: 16%;
+width: 31%;
 border-radius: 5px;
 text-align: center;
 padding: 2px;
@@ -3724,7 +3639,7 @@ color: white;
 background-color: orangered;
 border-radius: 5px;
 padding: 5px;
-font: normal 100%/1 "bangers", Helvetica, sans-serif;
+font: normal 80%/1 "bangers", Helvetica, sans-serif;
 text-align: center;
 margin-bottom: 0;
 margin-top: 5px;
@@ -3735,7 +3650,7 @@ color: white;
 background-color: orangered;
 border-radius: 5px;
 padding: 5px;
-font: normal 100%/1 "bangers", Helvetica, sans-serif;
+font: normal 80%/1 "bangers", Helvetica, sans-serif;
 text-align: center;
 margin-bottom: 0;
 }
@@ -4071,3 +3986,4 @@ border-bottom-color: #000;
 }
 
 }
+
