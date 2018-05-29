@@ -41,13 +41,7 @@
 
 				  <div class="row button-section">
 				  <div class="col-twelve">
-					<nuxt-link to="/" type="button" class="button stroke smoothscroll">Non, je ne veux pas !</nuxt-link>
 					<button type="submit" class="button button-primary" style="" :disabled="loading" :loading="loading" @click.prevent="signUserUp">Je vais devenir fan ! <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
-				  </div>
-				  </div>
-
-				  <div class="row button-section">
-				  <div class="col-twelve">
 					<a href="vue/load.html" type="submit" class="button btn-facebook"><i class="fa fa-facebook"></i> Connecte-toi avec FB</a>
 					<a href="vue/load.html" type="submit" class="button btn-twitter"><i class="fa fa-google"></i> Connecte-toi avec G+</a>
 				  </div>
