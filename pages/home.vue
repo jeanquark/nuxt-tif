@@ -1,7 +1,7 @@
 <template>
 	<div class="container-fluid">
 		<!-- Header -->
-<<<<<<< HEAD
+
 		<div id="header" class="col-12 col-sm-12 col-md-12 col-lg-12 top-fixed">
 		
 			<div class="flex-container-header text-center">
@@ -29,7 +29,7 @@
 		<div id="proprieteJoueur" class="col-12 col-sm-12 col-md-12 col-lg-12">
 
 			<div class="flex-container-playerPropriety">
-				<nuxt-link to="/user/avatar" class="boxShadow" style="flex-basis: 60px"><img src="/images/avatar.png" class="imgAvatar"/></nuxt-link>
+				<nuxt-link to="/user/avatar" class="boxShadow" style="flex-basis: 60px"  v-if="this.arr.length > 0"><img src="" ref="mergedImage" class="imgAvatar"/></nuxt-link>
 				<nuxt-link to="/user" class="boxShadow flex-container-modalProfil" style="flex-grow: 1">
 					<div class="columnProfil"><img src="/images/163.png" class="imgModalProprieteFlags"/> <span class="modal-Propriete" v-if="user">{{ user.pseudo }}</span> <span class="modal-ProprietePlace boxShadow"><img src="/images/cup.png" class="imgModalProprieteCup"/> 1863ème</span></div>
 				</nuxt-link>
