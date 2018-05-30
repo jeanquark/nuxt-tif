@@ -1163,7 +1163,14 @@ color: white;
 height: 100%;
 margin: 3px;
 text-align: center;
-font-size: 70%;
+}
+  
+.flex-container-modalAvatar > div.no-border {
+border: none;
+}
+  
+.imgAvatarUser {
+	width: 100%;
 }
 
 .flex-container-modalAvatar > div.infoBoxGoodies {
@@ -1249,7 +1256,7 @@ color: MediumSlateBlue;
 
 .flex-container-modalMenuAvatar {
 display: flex;
-align-items: stretch;
+flex-direction: column;
 padding: 2px;
 }
 
@@ -1261,7 +1268,7 @@ color: white;
 height: 30px;
 margin: 3px;
 text-align: center;
-padding-top: 2px;
+padding: 5px;
 }
 
 .flex-container-modalAvatarImg {
