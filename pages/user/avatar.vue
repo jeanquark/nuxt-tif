@@ -38,7 +38,7 @@
 							</div>
                         </div>
                         <div class="flex-container-modalAvatarImg">
-                            <div v-for="avatar in loadedAvatars" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === background || avatar.name === backgroundColor || avatar.name === body || avatar.name === skin || avatar.name === eyes || avatar.name === mouth || avatar.name === face || avatar.name === hair) }" /></div>
+                            <div v-for="avatar in loadedAvatars" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === background ||  avatar.name === body || avatar.name === skin || avatar.name === eyes || avatar.name === mouth || avatar.name === face || avatar.name === hair) }" /></div>
                         </div>
                     </div>
                     <!-- Modal footer -->
@@ -82,7 +82,7 @@
                 if (array.length >= 11) {
                     this.gender = ''
                     this.gender = array[1]
-                    this.backgroundColor = array[2]
+                    this.background = array[2]
                     this.body = array[3]
                     this.skin = array[4]
                     this.eyes = array[5]
@@ -94,7 +94,7 @@
 					this.thisisfan = array[10]
 
                     this.obj = [
-                        { "image": '/images/avatars/' + this.gender + '/backgroundColor/' + this.backgroundColor + '.png', 'gender': this.gender, 'type': 'backgroundColor' },
+                        { "image": '/images/avatars/' + this.gender + '/background/' + this.background + '.png', 'gender': this.gender, 'type': 'background' },
                         { 'image': '/images/avatars/' + this.gender + '/body/' + this.body + '.png', 'gender': this.gender, 'type': 'body' },
                         { 'image': '/images/avatars/' + this.gender + '/skin/' + this.skin + '.png', 'gender': this.gender, 'type': 'skin' },
                         { 'image': '/images/avatars/' + this.gender + '/eyes/' + this.eyes + '.png', 'gender': this.gender, 'type': 'eyes' }, 
@@ -117,7 +117,6 @@
                 bodyPart: 'background',
                 name: '',
                 background: '',
-                backgroundColor: '',
 				body: '',
                 skin: '',
                 eyes: '',
@@ -141,7 +140,7 @@
                 return this.avatars.filter(avatar => avatar.gender === this.gender && avatar.type === this.bodyPart)
             },
             disabled () {
-                return this.backgroundColor == '' && this.body == '' && this.skin == '' && this.eyes == '' && this.mouth == '' && this.face == ''
+                return this.background == '' && this.body == '' && this.skin == '' && this.eyes == '' && this.mouth == '' && this.face == ''
             },
             loadedTeams () {
                 return this.$store.getters['teams/loadedTeams']
@@ -172,8 +171,8 @@
             addToMerge(gender, type, image, imageSmall, name) {
                 // console.log('addToMerge')
                 this.name = name
-                if (name.includes('backgroundColor')) {
-                    this.backgroundColor = name
+                if (name.includes('background')) {
+                    this.background = name
                 } else if (name.includes('body')) {
                     this.body = name
                 } else if (name.includes('skin')) {
@@ -206,7 +205,7 @@
                 }
 
                 // Add image to the object array
-                if (type === 'backgroundColor') {
+                if (type === 'background') {
                     this.obj.splice(0, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
                 } else if (type === 'eyes') {
                     this.obj.splice(6, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
@@ -243,7 +242,7 @@
                 // Save image in Firebase Cloud Storage
                 const now = moment().unix()
                 const userId = firebase.auth().currentUser.uid
-                const image_name = userId + '_' + this.gender + '_' + this.backgroundColor + '_' + this.body + '_' + this.skin + '_' + this.eyes + '_' + this.mouth + '_' + this.face + '_' + this.hair + '_' + this.cache + '_' + this.thisisfan
+                const image_name = userId + '_' + this.gender + '_' + this.background + '_' + this.body + '_' + this.skin + '_' + this.eyes + '_' + this.mouth + '_' + this.face + '_' + this.hair + '_' + this.cache + '_' + this.thisisfan
                 console.log(image_name)
                 let storageRef = firebase.storage().ref('/images/avatars/' + image_name)
                 let image = this.$refs.mergedImage.src
