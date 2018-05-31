@@ -61,7 +61,7 @@
                                 <div class="columnParametreTexte">
                                     {{ $t('pages.user-preferences.pseudo') }}
                                 </div>
-                                <nuxt-link to="/pseudo" class="columnParametreButton" v-if="user">
+                                <nuxt-link to="/user/preferences/pseudo" class="columnParametreButton" v-if="user">
                                     {{ user.pseudo }}
                                 </nuxt-link>
                             </div>
@@ -69,7 +69,7 @@
                                 <div class="columnParametreTexte">
                                     {{ $t('pages.user-preferences.birthyear') }}
                                 </div>
-                                <nuxt-link to="/birth" class="columnParametreButton" v-if="user">
+                                <nuxt-link to="/user/preferences/birth" class="columnParametreButton" v-if="user">
                                     {{ user.year_birth }}
                                 </nuxt-link>
                             </div>
@@ -77,8 +77,8 @@
                                 <div class="columnParametreTexte">
                                     {{ $t('pages.user-preferences.nationality') }}
                                 </div>
-                                <nuxt-link to="/country" class="columnParametreButton" v-if="user">
-                                    {{ user.country }}
+                                <nuxt-link to="/user/preferences/country" class="columnParametreButton" v-if="user">
+                                    {{ user.country.name }}
                                 </nuxt-link>
                             </div>
                         </div><!-- /.flex-container -->
@@ -136,13 +136,13 @@
         method: {
             language (language) {
                 switch(language) {
-                    case 'English':
+                    case 'en':
                         this.selectedLanguage = 'english'
                         break
-                    case 'Français':
+                    case 'fr':
                         this.selectedLanguage = 'français'
                         break
-                    case 'Deutsch':
+                    case 'de':
                         this.selectedLanguage = 'deutsch'
                         break
                 }
