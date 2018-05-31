@@ -7,7 +7,7 @@
                     <!-- Modal Header -->
                     <div class="modal-header">
                         <span class="modal-title">{{ $t('pages.user-preferences.your_parameters') }}</span>
-                        <nuxt-link :to="localePath({ name: 'home'})">
+                        <nuxt-link :to="localePath({ name: 'home'})" class="close">
                             <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
                         </nuxt-link>     
                     </div>
