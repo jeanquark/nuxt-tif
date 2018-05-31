@@ -3,6 +3,6 @@ export default function ({ store, redirect, error }) {
   //   return redirect('/login')
   // }
   if(!store.getters['users/loadedUser']) {
-  	return redirect('/home')
+  	return redirect('/')
   }
 }
