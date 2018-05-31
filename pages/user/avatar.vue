@@ -6,7 +6,7 @@
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header text-center">
-                        <span class="modal-title">Ton avatar</span>
+                        <span class="modal-title">{{ $t('pages.user-avatar.your_avatar')}}</span>
                         <nuxt-link to="/home">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
@@ -16,25 +16,25 @@
                     <!-- Modal body -->
                     <div id="modalBoxContent" class="modal-body">
                         <div class="flex-container-modal-MyTeam">
-                            <h1>Envie de changer de tête ?</h1>
+                            <h1>{{ $t('pages.user-avatar.want_to_change_your_mind') }}</h1>
                         </div>
 						<div class="flex-container-modalAvatar">
 							<div class="flex-container-modalMenuAvatar no-border">
-								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'female'}" @click="selectGender('female')"><span class="textModalMenuAvatar">FEMALE</span></div>
-								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'male'}" @click="selectGender('male')"><span class="textModalMenuAvatar">MALE</span></div>
+								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'female'}" @click="selectGender('female')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.female') }}</span></div>
+								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'male'}" @click="selectGender('male')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.male') }}</span></div>
 							</div>						
                             <div class="imgAvatarUser"  v-if="this.arr.length > 0"><img src="" ref="mergedImage" class="imgModalAvatar"/></div>
 							<div class="flex-container-modalAvatar" v-else>
 								<h4 style="color: orangered; margin: 0 auto; font: normal 150%/1 'bangers', Helvetica, sans-serif;">Sélectionne les caractéristiques</h4><br /><br />
 							</div>
 							<div class="flex-container-modalMenuAvatar no-border">
-								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'background'}" @click="selectBodyPart('background')"><span class="textModalMenuAvatar">COLOR</span></div>
-								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'body'}" @click="selectBodyPart('body')"><span class="textModalMenuAvatar">BODY</span></div>
-								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'skin'}" @click="selectBodyPart('skin')"><span class="textModalMenuAvatar">SKIN</span></div>
-								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'eyes'}" @click="selectBodyPart('eyes')"><span class="textModalMenuAvatar">EYES</span></div>
-								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'mouth'}" @click="selectBodyPart('mouth')"><span class="textModalMenuAvatar">MOUTH</span></div>
-								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'face'}" @click="selectBodyPart('face')"><span class="textModalMenuAvatar">FACE</span></div>
-								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'hair'}" @click="selectBodyPart('hair')"><span class="textModalMenuAvatar">HAIR</span></div>
+								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'background'}" @click="selectBodyPart('background')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.background') }}</span></div>
+								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'body'}" @click="selectBodyPart('body')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.clothes') }}</span></div>
+								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'skin'}" @click="selectBodyPart('skin')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.skin') }}</span></div>
+								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'eyes'}" @click="selectBodyPart('eyes')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.eyes') }}</span></div>
+								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'mouth'}" @click="selectBodyPart('mouth')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.mouth') }}</span></div>
+								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'face'}" @click="selectBodyPart('face')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.face') }}</span></div>
+								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'hair'}" @click="selectBodyPart('hair')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.hair') }}</span></div>
 							</div>
                         </div>
                         <div class="flex-container-modalAvatarImg">
@@ -48,8 +48,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-success" data-dismiss="modal" :disabled="loading || disabled" :loading="loading" @click="saveImage">Allez, valide ! <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
-                        <nuxt-link to="/home"><button type="button" class="btn btn-danger" data-dismiss="modal">Fermer !</button></nuxt-link>
+                        <button class="btn btn-success" data-dismiss="modal" :disabled="loading || disabled" :loading="loading" @click="saveImage">{{ $t('pages.user-avatar.go_and_validate') }} <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
+                        <nuxt-link to="/home"><button type="button" class="btn btn-danger" data-dismiss="modal">{{ $t('pages.user-avatar.cancel_all') }}</button></nuxt-link>
                     </div>
                 </div>
             </div><!-- /.modal-dialog -->
@@ -146,7 +146,20 @@
                 return this.$store.getters['teams/loadedTeams']
             }
         },
-        methods: {
+	    methods: {
+	    	updateUserLanguage2 (language) {
+	    		console.log('updateUsersLanguage')
+	    		console.log(language)
+				this.$store.dispatch('users/updateUser', {language: language})
+				console.log(this.$i18n)
+				// return this.$router.push(localePath({ name: 'user-preferences'}))
+				// return this.$router.push(this.$i18n.localePath({ name: 'user-preferences'}))
+				if (this.$i18n.locale != this.$i18n.defaultLocale) {
+					return this.$router.push('/' + this.$i18n.locale + '/user/preferences')
+				} else {
+					return this.$router.push('/user/preferences')
+				}
+	    	},
             selectGender(gender) {
                 // console.log(gender)
                 this.gender = gender

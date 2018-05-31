@@ -7,7 +7,7 @@
                     <!-- Modal Header -->
                     <div class="modal-header">
                         <span class="modal-title">{{ $t('pages.user-preferences.your_parameters') }}</span>
-                        <nuxt-link :to="localePath({ name: 'home'})">
+                        <nuxt-link :to="localePath({ name: 'home'})" class="close">
                             <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left fa-2x"></i></span>
                         </nuxt-link>     
                     </div>
@@ -61,7 +61,7 @@
                                 <div class="columnParametreTexte">
                                     {{ $t('pages.user-preferences.pseudo') }}
                                 </div>
-                                <nuxt-link to="/user/preferences/pseudo" class="columnParametreButton" v-if="user">
+                                <nuxt-link to="/pseudo" class="columnParametreButton" v-if="user">
                                     {{ user.pseudo }}
                                 </nuxt-link>
                             </div>
@@ -69,7 +69,7 @@
                                 <div class="columnParametreTexte">
                                     {{ $t('pages.user-preferences.birthyear') }}
                                 </div>
-                                <nuxt-link to="/user/preferences/birth" class="columnParametreButton" v-if="user">
+                                <nuxt-link to="/birth" class="columnParametreButton" v-if="user">
                                     {{ user.year_birth }}
                                 </nuxt-link>
                             </div>
@@ -77,8 +77,8 @@
                                 <div class="columnParametreTexte">
                                     {{ $t('pages.user-preferences.nationality') }}
                                 </div>
-                                <nuxt-link to="/country" class="columnParametreButton">
-                                    {{ $t('countries.switzerland') }}
+                                <nuxt-link to="/country" class="columnParametreButton" v-if="user">
+                                    {{ user.country }}
                                 </nuxt-link>
                             </div>
                         </div><!-- /.flex-container -->

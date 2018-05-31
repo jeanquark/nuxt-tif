@@ -1,5 +1,5 @@
 {
-    "your_teams": "Tes Équipes 3",
+    "your_teams": "Tes Équipes",
     "welcome": "Bienvenue à",
     "and": "et",
     "render": "Rendu depuis",
@@ -10,6 +10,21 @@
     "register": "S'enregistrer",
     "protected": "Cette page est protégée. Seuls les membres connectés peuvent y accéder.",
     "pages": {
+		"user-avatar": {
+			"your_avatar" : "Ton avatar",
+			"want_to_change_your_mind" : "Envie de changer de tête ?",
+			"female" : "Femme",
+			"male" : "Homme",
+            "cancel_all": "Annule tout!",
+            "go_and_validate": "Allez valide!",
+			"background": "Arrière-plan",
+			"clothes": "Vêtement",
+			"skin": "Peau",
+			"mouth": "Bouche",
+			"eyes": "Yeux",
+			"face": "Visage",
+			"hair": "Cheveux"
+		},
         "user-preferences": {
             "your_parameters": "Tes paramètres",
             "info_and_or_help": "Infos et/ou besoin d'aide?",
