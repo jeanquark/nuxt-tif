@@ -61,7 +61,7 @@
                                 <div class="columnParametreTexte">
                                     {{ $t('pages.user-preferences.pseudo') }}
                                 </div>
-                                <nuxt-link :to="localePath({name: 'user-preferences-pseudo'})" class="columnParametreButton">
+                                <nuxt-link to="/pseudo" class="columnParametreButton" v-if="user">
                                     {{ user.pseudo }}
                                 </nuxt-link>
                             </div>
@@ -69,7 +69,7 @@
                                 <div class="columnParametreTexte">
                                     {{ $t('pages.user-preferences.birthyear') }}
                                 </div>
-                                <nuxt-link :to="localePath({name: 'user-preferences-birth'})" class="columnParametreButton">
+                                <nuxt-link to="/birth" class="columnParametreButton" v-if="user">
                                     {{ user.year_birth }}
                                 </nuxt-link>
                             </div>
@@ -77,7 +77,7 @@
                                 <div class="columnParametreTexte">
                                     {{ $t('pages.user-preferences.nationality') }}
                                 </div>
-                                <nuxt-link :to="localePath({name: 'user-preferences-country'})" class="columnParametreButton">
+                                <nuxt-link to="/country" class="columnParametreButton" v-if="user">
                                     {{ user.country }}
                                 </nuxt-link>
                             </div>
