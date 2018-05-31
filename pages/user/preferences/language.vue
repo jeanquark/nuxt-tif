@@ -18,13 +18,13 @@
 					</div>
 					<div class="flex-container-modal-Parametre">
 						<div class="flex-container-modal-Niveau">
-							<nuxt-link :to="switchLocalePath('français')" class="columnParametreButtonLangue" :class="{ active: $i18n.locale === 'français' }">français</nuxt-link>
+							<nuxt-link :to="switchLocalePath('fr')" class="columnParametreButtonLangue" :class="{ active: $i18n.locale === 'fr' }">français</nuxt-link>
 						</div>
 						<div class="flex-container-modal-Niveau">
-							<nuxt-link :to="switchLocalePath('english')" class="columnParametreButtonLangue" :class="{ active: $i18n.locale === 'english' }">english</nuxt-link>
+							<nuxt-link :to="switchLocalePath('en')" class="columnParametreButtonLangue" :class="{ active: $i18n.locale === 'en' }">english</nuxt-link>
 						</div>
 						<div class="flex-container-modal-Niveau">							
-							<nuxt-link :to="switchLocalePath('deutsch')" class="columnParametreButtonLangue" :class="{ active: $i18n.locale === 'deutsch' }">deutsch</nuxt-link>
+							<nuxt-link :to="switchLocalePath('de')" class="columnParametreButtonLangue" :class="{ active: $i18n.locale === 'de' }">deutsch</nuxt-link>
 						</div>
 						<!-- <div class="flex-container-modal-Niveau">
 							<div class="columnParametreButtonLangue">
