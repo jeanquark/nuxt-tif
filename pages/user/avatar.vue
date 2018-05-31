@@ -43,7 +43,30 @@
                             <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'hair'}" @click="selectBodyPart('hair')"><span class="textModalMenuAvatar">HAIR</span></div>
                         </div>
                         <div class="flex-container-modalAvatarImg">
-                            <div v-for="avatar in loadedAvatars" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === background ||  avatar.name === body || avatar.name === skin || avatar.name === eyes || avatar.name === mouth || avatar.name === face || avatar.name === hair) }" /></div>
+                            <div v-for="avatar in loadedAvatars2" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === background ||  avatar.name === body || avatar.name === skin || avatar.name === eyes || avatar.name === mouth || avatar.name === face || avatar.name === hair) }" /></div>
+                            
+                            <div style="color: #000;">
+                                <h3>loadedAvatars.length: {{ loadedAvatars.length }}</h3><br />
+                                <h3>totalPages: {{ totalPages }}</h3><br />
+                                <!-- <h3>avatars: {{ this.avatars }}</h3><br /> -->
+                            </div>
+
+                            <br /><br /><br /><br />
+                            <paginate
+                              :page-count="totalPages"
+                              :click-handler="clickCallback"
+                              :prev-text="'Prev'"
+                              :next-text="'Next'"
+                              :container-class="'pagination pagination-sm'"
+                              :page-class="'page-item'" 
+                              :prev-class="'page-item'" 
+                              :next-class="'page-item'"
+                              :page-link-class="'page-link'" 
+                              :prev-link-class="'page-link'" 
+                              :next-link-class="'page-link'"
+                            >
+                            </paginate>
+                            <br /><br />
                         </div>
                     </div>
                     <!-- Modal footer -->
@@ -68,8 +91,10 @@
     import mergeImages from 'merge-images'
     import moment from 'moment'
     import Noty from 'noty'
+    import Paginate from 'vuejs-paginate'
     export default {
         layout: 'layoutFront',
+        components: { Paginate },
         created () {
             const avatarsArray = []
             firebase.database().ref('avatars').once('value', function (snapshot) {
@@ -134,7 +159,9 @@
                 avatars: [],
                 arr: [],
                 obj: [],
-                progress: 0
+                progress: 0,
+                currentPage: 0,
+                itemsPerPage: 18
             }
         },
         computed: {
@@ -144,11 +171,19 @@
             loadedAvatars () {
                 return this.avatars.filter(avatar => avatar.gender === this.gender && avatar.type === this.bodyPart)
             },
+            loadedAvatars2 () {
+                let index = this.currentPage * this.itemsPerPage
+                return this.avatars.filter(avatar => avatar.gender === this.gender && avatar.type === this.bodyPart).slice(index, index + this.itemsPerPage)
+            },
             disabled () {
                 return this.background == '' && this.body == '' && this.skin == '' && this.eyes == '' && this.mouth == '' && this.face == ''
             },
             loadedTeams () {
                 return this.$store.getters['teams/loadedTeams']
+            },
+            totalPages () {
+                // return this.loadedAvatars.length
+                return Math.ceil(this.loadedAvatars.length / this.itemsPerPage)
             }
         },
         methods: {
@@ -172,6 +207,7 @@
             selectBodyPart(part) {
                 // console.log(part)
                 this.bodyPart = part
+                this.currentPage = 0
             },
             addToMerge(gender, type, image, imageSmall, name) {
                 // console.log('addToMerge')
@@ -282,13 +318,48 @@
                     this.loading = false
                     new Noty({type: 'success', text: 'Successfully uploaded image!', timeout: 5000, theme: 'metroui'}).show()
                 })
+            },
+            clickCallback: function(page) {
+                console.log(page)
+                this.currentPage = page
+                let index = this.currentPage * this.itemsPerPage
+                console.log(this.loadedAvatars.slice(index, index + this.itemsPerPage))
+                this.loadedAvatars.slice(index, index + this.itemsPerPage)
+            },
+            paginate2 (list) {
+                // this.resultCount = list.length
+                // if (this.currentPage >= this.totalPages) {
+                //   this.currentPage = this.totalPages - 1
+                // }
+                // var index = this.currentPage * this.itemsPerPage
+                return list.slice(0, 12)
             }
-        }
+        },
+        // filters: {
+        //     paginate2: function(list) {
+        //         // this.resultCount = list.length
+        //         // if (this.currentPage >= this.totalPages) {
+        //         //   this.currentPage = this.totalPages - 1
+        //         // }
+        //         // var index = this.currentPage * this.itemsPerPage
+        //         return list.slice(0, 12)
+        //     }
+        // }
     }
 </script>
 
 <style scoped>
     .active {
         background-color: orangered;
+    }
+    .pagination {
+        margin: 0;
+    }
+    .page-link {
+        font-size: 12px !important;
+    }
+    .page-item.active .page-link {
+        background-color: #387BCA;
+        border-color: #387BCA;
     }
 </style>
