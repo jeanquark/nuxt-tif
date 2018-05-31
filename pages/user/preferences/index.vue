@@ -8,7 +8,7 @@
                     <div class="modal-header">
                         <span class="modal-title">{{ $t('pages.user-preferences.your_parameters') }}</span>
                         <nuxt-link :to="localePath({ name: 'home'})">
-                            <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left fa-2x"></i></span>
+                            <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
                         </nuxt-link>     
                     </div>
                     <!-- Modal body -->
@@ -131,13 +131,13 @@
         method: {
             language (language) {
                 switch(language) {
-                    case 'en':
+                    case 'english':
                         this.selectedLanguage = 'english'
                         break
-                    case 'fr':
+                    case 'français':
                         this.selectedLanguage = 'français'
                         break
-                    case 'de':
+                    case 'deutsch':
                         this.selectedLanguage = 'deutsch'
                         break
                 }
