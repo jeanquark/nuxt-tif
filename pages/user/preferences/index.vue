@@ -123,6 +123,11 @@
 <script>
     export default {
         layout: 'layoutFront',
+        computed: {
+            user () {
+                return this.$store.getters['users/loadedUser']
+            }
+        },        
         data () {
             return {
                 selectedLanguage: ''
@@ -131,13 +136,13 @@
         method: {
             language (language) {
                 switch(language) {
-                    case 'en':
+                    case 'English':
                         this.selectedLanguage = 'english'
                         break
-                    case 'fr':
+                    case 'Français':
                         this.selectedLanguage = 'français'
                         break
-                    case 'de':
+                    case 'Deutsch':
                         this.selectedLanguage = 'deutsch'
                         break
                 }
