@@ -4,6 +4,7 @@ import firebase from 'firebase'
 import axios from 'axios'
 import setUser from '../helpers/setUser'
 import Noty from 'noty'
+// import Router from 'vue-router'
 
 function buildUserObjectOAuth (authData) {
     let { email, displayName, uid, photoURL, pseudo, country, year_birth, language } = authData.user
@@ -201,65 +202,23 @@ export const actions = {
     //     console.log('checkUserCustomClaim')
     //     return 'abc'
     // },
-    async signUserIn ({commit, dispatch}, payload) {
+    async signUserIn ({commit}, payload) {
         console.log(payload)
-        commit('setLoading', true, { root: true })
-        // return
-        // return redirect('/admin')
-        // redirect('/')
-        // this.$nuxt.$router.replace({ path: '/admin' })
-        // this.$router.replace({ path: '/admin' })
-        // return this.$router.replace({ path: '/admin' })
-        this.$router.replace('/home')
-        // this.$router.go('/admin')
-        // try {
-        //   // return redirect('/')
-        //   // this.$router.push({ path: '/home' })
-        //   this.$router.replace({ path: '/admin' })
-        // }
-        // catch(error) {
-        //   console.log(error)
-        //   return
-        // }
         try {
             let authData = await Auth.signInWithEmailAndPassword(payload.email, payload.password)
-            console.log('authData:')
             console.log(authData)
-            // console.log(authData.getIdToken())
-
-            // Check user status based on user token
-            let userStatus = Auth.currentUser.getIdToken().then((idToken) => {
-                console.log('idToken: ' + idToken)
-                const payload = JSON.parse(b64DecodeUnicode(idToken.split('.')[1]))
-                // Confirm the user is an Admin.
-                console.log(payload)
-
-                if (!!payload['admin']) {
-                    console.log('User is admin')
-                } else {
-                    console.log('User is not an admin')
-                }
-            })
-            // .then(() => {
-            //     // this.loadedUser()
-            //     console.log(authData)
-            //     const userId = authData.uid
-            //     firebase.database().ref('users/' + userId).on('value', function (snapshot) {
-            //         console.log(snapshot.val())
-            //         const user = setUser(snapshot.val())
-            //         commit('setUser', user)
-            //         commit('setLoading', false, { root: true })
-            //         // this.$route.replace('/home')
-            //         // this.$router.replace({ path: '/home' })
-            //     })
-            // })
             const userId = authData.uid
-            await firebase.database().ref('/users/' + userId).on('value', function (snapshot) {
+            // First set loadedUser with temporary data from firebase auth
+            commit('setLoadedUser', authData)
+            commit('setLoading', false, { root: true })
+            // Then asynchronously update loadedUser object with data from user node
+            firebase.database().ref('/users/' + userId).on('value', function (snapshot) {
                 commit('setLoadedUser', snapshot.val())
+                console.log('loadedUser done')
             })
-            // commit('setUser', setUser(authData))
-            
-        }
+            // commit('setUser', buildUserObject2(authData))
+            console.log(userId)
+        } 
         catch(error) {
             console.log(error)
             // commit('setError', error)
@@ -267,9 +226,87 @@ export const actions = {
             // commit('../errors/setError', error)
             // this.$store.commit('errors/setError', error)
             commit('setError', error, { root: true })
-            commit('setLoading', false, { root: true })
         }
     },
+    // async signUserIn ({commit, dispatch}, payload) {
+    //     console.log(payload)
+    //     commit('setLoading', true, { root: true })
+    //     // window.location.replace("http://stackoverflow.com")
+    //     // return
+    //     // return redirect('/')
+    //     // redirect('/')
+    //     // this.$nuxt.$router.replace({ path: '/admin' })
+    //     // this.$router.replace({ path: '/admin' })
+    //     // return this.$router.replace({ path: '/admin' })
+    //     // this.$router.replace('/home')
+    //     // this.$router.go('/admin')
+    //     // try {
+    //     //   // return redirect('/')
+    //     //   // this.$router.push({ path: '/home' })
+    //     //   this.$router.replace({ path: '/admin' })
+    //     // }
+    //     // catch(error) {
+    //     //   console.log(error)
+    //     //   return
+    //     // }
+    //     try {
+    //         let authData = await Auth.signInWithEmailAndPassword(payload.email, payload.password)
+    //         console.log('authData:')
+    //         console.log(authData)
+    //         // console.log(authData.getIdToken())
+
+    //         // Check user status based on user token
+    //         let userStatus = Auth.currentUser.getIdToken().then((idToken) => {
+    //             console.log('idToken: ' + idToken)
+    //             const payload = JSON.parse(b64DecodeUnicode(idToken.split('.')[1]))
+    //             // Confirm the user is an Admin.
+    //             console.log(payload)
+
+    //             if (!!payload['admin']) {
+    //                 console.log('User is admin')
+    //             } else {
+    //                 console.log('User is not an admin')
+    //             }
+    //         })
+    //         // .then(() => {
+    //         //     // this.loadedUser()
+    //         //     console.log(authData)
+    //         //     const userId = authData.uid
+    //         //     firebase.database().ref('users/' + userId).on('value', function (snapshot) {
+    //         //         console.log(snapshot.val())
+    //         //         const user = setUser(snapshot.val())
+    //         //         commit('setUser', user)
+    //         //         commit('setLoading', false, { root: true })
+    //         //         // this.$route.replace('/home')
+    //         //         // this.$router.replace({ path: '/home' })
+    //         //     })
+    //         // })
+    //         const userId = authData.uid
+    //         await firebase.database().ref('/users/' + userId).on('value', function (snapshot) {
+    //             commit('setLoadedUser', snapshot.val())
+    //             commit('setLoading', false, { root: true })
+    //             // return redirect('/home')
+    //             // this.$router.replace('/home')
+    //             // router.push({ name: 'Home' })
+    //             // window.location.replace("http://stackoverflow.com")
+    //             // this.$router.replace({ path: '/home' })
+    //             console.log('await done')
+    //             // redirect('/home')
+    //             // window.location.replace('http://localhost:3000/home')
+    //         })
+    //         // commit('setUser', setUser(authData))
+            
+    //     }
+    //     catch(error) {
+    //         console.log(error)
+    //         // commit('setError', error)
+    //         // commit['errors/setError', error]
+    //         // commit('../errors/setError', error)
+    //         // this.$store.commit('errors/setError', error)
+    //         commit('setError', error, { root: true })
+    //         commit('setLoading', false, { root: true })
+    //     }
+    // },
     async signUserUp ({commit}, payload) {
         console.log(payload)
         commit('setLoading', true, { root: true })

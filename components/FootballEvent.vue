@@ -209,6 +209,7 @@
 			teams1 () {
 		    	let team2 = this.selectedTeam2.slug
 		        if (this.selectedCompetition) {
+		        	// return this.loadedTeams
 		        	return this.loadedTeams.filter(team => team.competitions[this.selectedCompetition.slug] && team.slug != team2)
 		    	}
 		        // return this.loadedTeams.filter(function (el) {
@@ -221,6 +222,7 @@
 		    teams2 () {
 		    	let team1 = this.selectedTeam1.slug
 		        if (this.selectedCompetition) {
+		        	// return this.loadedTeams
 		        	return this.loadedTeams.filter(team => team.competitions[this.selectedCompetition.slug] && team.slug != team1)
 		    	}
 		    },
