@@ -12,7 +12,8 @@
     "pages": {
         "index": {
             "welcome": "Bienvenue sur",
-            "thisisfan": "ThisIsFan.com"
+            "thisisfan": "ThisIsFan.com",
+            "first_application": "La première application consacrée aux supporters !"
         }
 		"user-avatar": {
 			"your_avatar" : "Ton avatar",
