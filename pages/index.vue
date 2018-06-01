@@ -1,4 +1,4 @@
-	<template>
+<template>
     <div id="top" ref="fullpage">
 
         <!-- header 
@@ -37,10 +37,10 @@
             <div class="intro-content">
                 <div class="row">
                     <div class="col-twelve">
-                        <h5>{{ $t('pages.index.welcome') }}</h5>
-                        <h1>{{ $t('pages.index.thisisfan') }}</h1>
+                        <h5>Bienvenue sur</h5>
+                        <h1>ThisIsFan.com</h1>
                         <p class="intro-position">
-                            <span>{{ $t('pages.index.first_application') }}</span>
+                            <span>La première application consacrée aux supporters !</span>
                         </p>                    
                         <img src="images/avatar.png" class="imgAvatar" />
                     </div>                     
@@ -48,9 +48,9 @@
             </div> <!-- /intro-content --> 
 
             <ul class="intro-language">
-              <li><nuxt-link :to="switchLocalePath('fr')" class="columnParametreButtonLangue" :class="{ active: $i18n.locale === 'fr' }"><img src="/images/flags/61.png" class="flagsLanguage"/></nuxt-link></li>
-              <li><nuxt-link :to="switchLocalePath('en')" class="columnParametreButtonLangue" :class="{ active: $i18n.locale === 'en' }"><img src="/images/flags/65.png" class="flagsLanguage"/></nuxt-link></li>
-              <li><nuxt-link :to="switchLocalePath('de')" class="columnParametreButtonLangue" :class="{ active: $i18n.locale === 'de' }"><img src="/images/flags/179.png" class="flagsLanguage"/></nuxt-link></li>
+              <li><nuxt-link to="#"><img src="/images/flags/61.png" class="flagsLanguage"/></nuxt-link></li>
+              <li><nuxt-link to="#"><img src="/images/flags/65.png" class="flagsLanguage"/></nuxt-link></li>
+              <li><nuxt-link to="#"><img src="/images/flags/179.png" class="flagsLanguage"/></nuxt-link></li>
             </ul>
 
             <ul class="intro-social">        
@@ -662,19 +662,6 @@
             }
         },
         methods: {
-	    	updateUserLanguage2 (language) {
-	    		console.log('updateUsersLanguage')
-	    		console.log(language)
-				this.$store.dispatch('users/updateUser', {language: language})
-				console.log(this.$i18n)
-				// return this.$router.push(localePath({ name: 'user-preferences'}))
-				// return this.$router.push(this.$i18n.localePath({ name: 'user-preferences'}))
-				if (this.$i18n.locale != this.$i18n.defaultLocale) {
-					return this.$router.push('/' + this.$i18n.locale + '/user/preferences')
-				} else {
-					return this.$router.push('/user/preferences')
-				}
-	    	}
             // moveTo: function(index) {
             //     console.log('moveTo called')
             //     this.$refs.fullpage.$fullpage.moveTo(index, true)
