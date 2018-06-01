@@ -10,6 +10,10 @@
     "register": "S'enregistrer",
     "protected": "Cette page est protégée. Seuls les membres connectés peuvent y accéder.",
     "pages": {
+        "index": {
+            "welcome": "Bienvenue sur",
+            "thisisfan": "ThisIsFan.com"
+        }
 		"user-avatar": {
 			"your_avatar" : "Ton avatar",
 			"want_to_change_your_mind" : "Envie de changer de tête ?",
