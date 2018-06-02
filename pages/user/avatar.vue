@@ -37,9 +37,27 @@
 								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'hair'}" @click="selectBodyPart('hair')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.hair') }}</span></div>
 							</div>
                         </div>
-                        <div class="flex-container-modalAvatarImg">
-                            <div v-for="avatar in loadedAvatars" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === background ||  avatar.name === body || avatar.name === skin || avatar.name === eyes || avatar.name === mouth || avatar.name === face || avatar.name === hair) }" /></div>
+                        <!-- <p style="color: #000;">{{ this.hair }}</p> -->
+                        <p style="color: #000;">{{ this.face }}</p>
+                        <!-- <p style="color: #000;">{{ this.haircut }}</p> -->
+                        <!-- <p style="color: #000;">{{ this.haircolor }}</p> -->
+                        <div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'hair'">
+                            <!-- <div class="col-md-6" style="cursor: pointer; background: yellow">yellow</div> -->
+                            <!-- <div class="col-md-6" style="cursor: pointer; background: red">red</div> -->
+                            <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'haircut')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" /></div>
                         </div>
+                        <div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'hair'">
+                            <!-- <div class="col-md-6" style="cursor: pointer; background: yellow">yellow</div> -->
+                            <!-- <div class="col-md-6" style="cursor: pointer; background: red">red</div> -->
+                            <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'color')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" /></div>
+                        </div>
+                        <br /><br /><hr><br /><br />
+
+                        <div class="flex-container-modalAvatarImg">
+                            <div v-for="avatar in loadedAvatars" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === background ||  avatar.name === body || avatar.name === skin || avatar.name === eyes || avatar.name === mouth || avatar.name === face || avatar.name === hair) }" />
+                            </div>
+                        </div>
+                        
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
@@ -124,6 +142,8 @@
                 face: '',
                 // cache: '',
                 hair: '',
+                haircut: '',
+                haircolor: '',
 				cache: '',
 				thisisfan: '',
                 avatars: [],
@@ -199,7 +219,12 @@
                 // } else if (name.includes('cache')) {
                 //  this.cache = name
                 } else if (name.includes('hair')) {
-                    this.hair = name
+                    // this.hair = name
+                    // this.haircut = '01'
+                    // this.haircolor = '01'
+                    // this.hair = 'haircut01'
+                    this.name = 'hair0202'
+                    console.log(this.name)
                 } else if (name.includes('cache')) {
 					this.cache = name
 				} else if (name.include('thisisfan')) {
@@ -212,8 +237,8 @@
                     if (this.obj[i].type === type) {
                         const index = this.obj.indexOf(this.obj[i])
                         this.obj.splice(index, 1)
-                        found = true;
-                        break;
+                        found = true
+                        break
                     }
                 }
 
