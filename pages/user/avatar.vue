@@ -44,13 +44,14 @@
                         <div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'hair'">
                             <!-- <div class="col-md-6" style="cursor: pointer; background: yellow">yellow</div> -->
                             <!-- <div class="col-md-6" style="cursor: pointer; background: red">red</div> -->
-                            <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'haircut')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" /></div>
+                            <div style="width: 50%;">
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'haircut')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" /></div>
+                            </div>
+                            <div style="width: 50%;">
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'color')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" /></div>
+                            </div>
                         </div>
-                        <div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'hair'">
-                            <!-- <div class="col-md-6" style="cursor: pointer; background: yellow">yellow</div> -->
-                            <!-- <div class="col-md-6" style="cursor: pointer; background: red">red</div> -->
-                            <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'color')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" /></div>
-                        </div>
+
                         <br /><br /><hr><br /><br />
 
                         <div class="flex-container-modalAvatarImg">
@@ -201,7 +202,7 @@
                 // console.log(part)
                 this.bodyPart = part
             },
-            addToMerge(gender, type, image, imageSmall, name) {
+            addToMerge(gender, type, image, imageSmall, name, property) {
                 // console.log('addToMerge')
                 this.name = name
                 if (name.includes('background')) {
@@ -219,12 +220,20 @@
                 // } else if (name.includes('cache')) {
                 //  this.cache = name
                 } else if (name.includes('hair')) {
-                    // this.hair = name
-                    // this.haircut = '01'
-                    // this.haircolor = '01'
-                    // this.hair = 'haircut01'
-                    this.name = 'hair0202'
+                    console.log(name)
+                    if (name.includes('hair_cut')) {
+                        // Retrieve haircut integer in string
+                        this.haircut = this.name.match(/\d+/)[0]
+                        console.log(this.haircut)
+                    }
+                    if (name.includes('hair_color')) {
+                        // Retrieve haircolor integer in string
+                        this.haircolor = this.name.match(/\d+/)[0]
+                        console.log(this.haircolor)
+                    }
                     console.log(this.name)
+                    console.log(image)
+                    image = 'hair' + this.haircut + this.haircolor + '.png'
                 } else if (name.includes('cache')) {
 					this.cache = name
 				} else if (name.include('thisisfan')) {
