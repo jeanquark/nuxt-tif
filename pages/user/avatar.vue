@@ -15,10 +15,11 @@
                     </div>
                     <!-- Modal body -->
                     <div id="modalBoxContent" class="modal-body">
+
                         <div class="flex-container-modal-MyTeam">
                             <h1>{{ $t('pages.user-avatar.want_to_change_your_mind') }}</h1>
                         </div>
-						<div class="flex-container-modalAvatar">
+						<div class="flex-container-modalAvatar" v-cloak>
 							<div class="flex-container-modalMenuAvatar no-border">
 								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'female'}" @click="selectGender('female')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.female') }}</span></div>
 								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'male'}" @click="selectGender('male')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.male') }}</span></div>
@@ -37,28 +38,53 @@
 								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'hair'}" @click="selectBodyPart('hair')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.hair') }}</span></div>
 							</div>
                         </div>
-                        <!-- <p style="color: #000;">{{ this.hair }}</p> -->
-                        <p style="color: #000;">{{ this.face }}</p>
-                        <!-- <p style="color: #000;">{{ this.haircut }}</p> -->
-                        <!-- <p style="color: #000;">{{ this.haircolor }}</p> -->
+
+                        <br /><br />
+                        <!-- Display dummy text while loading -->
+                        <div v-if="loadedAvatars.length == 0">
+                            <h1 class="text-center" style="color: #000;">Loading...</h1>
+                            <!-- <content-placeholders>
+                                <content-placeholders-heading :img="true" />
+                                <content-placeholders-text :lines="3" />
+                            </content-placeholders> -->
+                        </div>
+
                         <div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'hair'">
-                            <!-- <div class="col-md-6" style="cursor: pointer; background: yellow">yellow</div> -->
-                            <!-- <div class="col-md-6" style="cursor: pointer; background: red">red</div> -->
+                            <p style="color: #000;">{{ this.hair }}</p>
                             <div style="width: 50%;">
-                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'haircut')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" /></div>
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'haircut')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'hair_cut' + haircut) }" /></div>
+                                }
                             </div>
                             <div style="width: 50%;">
-                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'color')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" /></div>
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'color')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'hair_color' + haircolor) }" /></div>
+                            </div>
+                        </div>
+                        <div class="flex-container-modalAvatarImg" v-else>
+                            <div v-for="avatar in loadedAvatars2" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === background ||  avatar.name === body || avatar.name === skin || avatar.name === eyes || avatar.name === mouth || avatar.name === face || avatar.name === hair) }" />
                             </div>
                         </div>
 
-                        <br /><br /><hr><br /><br />
-
-                        <div class="flex-container-modalAvatarImg">
-                            <div v-for="avatar in loadedAvatars" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === background ||  avatar.name === body || avatar.name === skin || avatar.name === eyes || avatar.name === mouth || avatar.name === face || avatar.name === hair) }" />
+                         <div style="color: #000;">
+                                <h3>loadedAvatars.length: {{ loadedAvatars.length }}</h3><br />
+                                <h3>totalPages: {{ totalPages }}</h3><br />
+                                <!-- <h3>avatars: {{ this.avatars }}</h3><br /> -->
                             </div>
-                        </div>
-                        
+
+                        <br /><br /><hr><br />
+                        <paginate
+                              :page-count="totalPages"
+                              :click-handler="changePage"
+                              :prev-text="'Prev'"
+                              :next-text="'Next'"
+                              :container-class="'pagination pagination-sm'"
+                              :page-class="'page-item'" 
+                              :prev-class="'page-item'" 
+                              :next-class="'page-item'"
+                              :page-link-class="'page-link'" 
+                              :prev-link-class="'page-link'" 
+                              :next-link-class="'page-link'"
+                            >
+                        </paginate>
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
@@ -82,8 +108,12 @@
     import mergeImages from 'merge-images'
     import moment from 'moment'
     import Noty from 'noty'
+    // import contentPlaceholders from '~/plugins/vue-placeholders.js'
+    import Paginate from 'vuejs-paginate'
     export default {
         layout: 'layoutFront',
+        // components: { contentPlaceholders },
+        components: { Paginate },
         created () {
             const avatarsArray = []
             firebase.database().ref('avatars').once('value', function (snapshot) {
@@ -98,8 +128,7 @@
             if (this.$store.getters['users/loadedUser'].avatar) {
                 const array = this.$store.getters['users/loadedUser'].avatar.name.split('_')
                 console.log(array)
-                if (array.length >= 11) {
-                    this.gender = ''
+                if (array.length >= 9) {
                     this.gender = array[1]
                     this.background = array[2]
                     this.body = array[3]
@@ -109,8 +138,10 @@
                     this.face = array[7]
                     // this.cache = array[8]
                     this.hair = array[8]
-					this.cache = array[9]
-					this.thisisfan = array[10]
+                    this.haircut = this.hair ? this.hair.match(/\d+/)[0].substr(0, 2) : '01'
+                    this.haircolor = this.hair ? this.hair.match(/\d+/)[0].substr(2, 4) : '01'
+					// this.cache = array[9]
+					// this.thisisfan = array[10]
 
                     this.obj = [
                         { "image": '/images/avatars/' + this.gender + '/background/' + this.background + '.png', 'gender': this.gender, 'type': 'background' },
@@ -121,12 +152,29 @@
                         { 'image': '/images/avatars/' + this.gender + '/face/' + this.face + '.png', 'gender': this.gender, 'type': 'face' }, 
                         // { 'image': '/images/avatars/' + this.gender + '/cache/' + this.cache + '.png', 'gender': this.gender, 'type': 'cache' }, 
                         { 'image': '/images/avatars/' + this.gender + '/hair/' + this.hair + '.png', 'gender': this.gender, 'type': 'hair' },
-						{ 'image': '/images/avatars/' + this.gender + '/cache/' + 'cache.png', 'gender': this.gender, 'type': 'cache' },
-						{ 'image': '/images/avatars/' + this.gender + '/thisisfan/' + 'thisisfan.png', 'gender': this.gender, 'type': 'thisisfan' }
+						// { 'image': '/images/avatars/' + this.gender + '/cache/' + 'cache.png', 'gender': this.gender, 'type': 'cache' },
+						// { 'image': '/images/avatars/' + this.gender + '/thisisfan/' + 'thisisfan.png', 'gender': this.gender, 'type': 'thisisfan' }
                     ]
+                    // console.log(this.hair)
+                    // console.log(this.haircut)
+                    // console.log(this.haircolor)
                     this.mergeImages()
-                }
-                // console.log(array)
+                } 
+            } else { // No previous avatar is registered
+                console.log('No defined avatar yet')
+                this.obj = [
+                    { "image": '/images/avatars/' + this.gender + '/background/' + this.background + '.png', 'gender': this.gender, 'type': 'background' },
+                    { 'image': '/images/avatars/' + this.gender + '/body/' + this.body + '.png', 'gender': this.gender, 'type': 'body' },
+                    { 'image': '/images/avatars/' + this.gender + '/skin/' + this.skin + '.png', 'gender': this.gender, 'type': 'skin' },
+                    { 'image': '/images/avatars/' + this.gender + '/eyes/' + this.eyes + '.png', 'gender': this.gender, 'type': 'eyes' }, 
+                    { 'image': '/images/avatars/' + this.gender + '/mouth/' + this.mouth + '.png', 'gender': this.gender, 'type': 'mouth' }, 
+                    { 'image': '/images/avatars/' + this.gender + '/face/' + this.face + '.png', 'gender': this.gender, 'type': 'face' }, 
+                    // { 'image': '/images/avatars/' + this.gender + '/cache/' + this.cache + '.png', 'gender': this.gender, 'type': 'cache' }, 
+                    { 'image': '/images/avatars/' + this.gender + '/hair/' + this.hair + '.png', 'gender': this.gender, 'type': 'hair' },
+                    { 'image': '/images/avatars/' + this.gender + '/cache/' + 'cache.png', 'gender': this.gender, 'type': 'cache' },
+                    { 'image': '/images/avatars/' + this.gender + '/thisisfan/' + 'thisisfan.png', 'gender': this.gender, 'type': 'thisisfan' }
+                ]
+                this.mergeImages()
             }
         },
         data () {
@@ -135,22 +183,24 @@
                 gender: 'female',
                 bodyPart: 'background',
                 name: '',
-                background: '',
-				body: '',
-                skin: '',
-                eyes: '',
-                mouth: '',
-                face: '',
+                background: 'background0',
+				body: 'body0',
+                skin: 'skin1',
+                eyes: 'eyes1',
+                mouth: 'mouth1',
+                face: 'face1',
                 // cache: '',
-                hair: '',
-                haircut: '',
-                haircolor: '',
+                hair: 'hair0101',
+                haircut: '01',
+                haircolor: '01',
 				cache: '',
 				thisisfan: '',
                 avatars: [],
                 arr: [],
                 obj: [],
-                progress: 0
+                progress: 0,
+                currentPage: 0,
+                itemsPerPage: 28,
             }
         },
         computed: {
@@ -160,11 +210,18 @@
             loadedAvatars () {
                 return this.avatars.filter(avatar => avatar.gender === this.gender && avatar.type === this.bodyPart)
             },
+            loadedAvatars2 () {
+                let index = this.currentPage * this.itemsPerPage
+                return this.avatars.filter(avatar => avatar.gender === this.gender && avatar.type === this.bodyPart).slice(index, index + this.itemsPerPage)
+            },
             disabled () {
-                return this.background == '' && this.body == '' && this.skin == '' && this.eyes == '' && this.mouth == '' && this.face == ''
+                return this.background == '' && this.body == '' && this.skin == '' && this.eyes == '' && this.mouth == '' && this.face == '' && this.hair == ''
             },
             loadedTeams () {
                 return this.$store.getters['teams/loadedTeams']
+            },
+            totalPages () {
+                return Math.ceil(this.loadedAvatars.length / this.itemsPerPage)
             }
         },
 	    methods: {
@@ -220,20 +277,16 @@
                 // } else if (name.includes('cache')) {
                 //  this.cache = name
                 } else if (name.includes('hair')) {
-                    console.log(name)
                     if (name.includes('hair_cut')) {
                         // Retrieve haircut integer in string
                         this.haircut = this.name.match(/\d+/)[0]
-                        console.log(this.haircut)
                     }
                     if (name.includes('hair_color')) {
                         // Retrieve haircolor integer in string
                         this.haircolor = this.name.match(/\d+/)[0]
-                        console.log(this.haircolor)
                     }
-                    console.log(this.name)
-                    console.log(image)
-                    image = 'hair' + this.haircut + this.haircolor + '.png'
+                    this.hair = 'hair' + this.haircut + this.haircolor
+                    image = this.hair + '.png'
                 } else if (name.includes('cache')) {
 					this.cache = name
 				} else if (name.include('thisisfan')) {
@@ -269,6 +322,7 @@
             },
             mergeImages() {
                 // Build an array of image paths from the object
+                // console.log('mergeImages')
                 this.arr = []
                 // this.arr = this.obj
                 for (let i = 0; i < this.obj.length; i++) {
@@ -289,7 +343,8 @@
                 // Save image in Firebase Cloud Storage
                 const now = moment().unix()
                 const userId = firebase.auth().currentUser.uid
-                const image_name = userId + '_' + this.gender + '_' + this.background + '_' + this.body + '_' + this.skin + '_' + this.eyes + '_' + this.mouth + '_' + this.face + '_' + this.hair + '_' + this.cache + '_' + this.thisisfan
+                // const image_name = userId + '_' + this.gender + '_' + this.background + '_' + this.body + '_' + this.skin + '_' + this.eyes + '_' + this.mouth + '_' + this.face + '_' + this.hair + '_' + this.cache + '_' + this.thisisfan
+                const image_name = userId + '_' + this.gender + '_' + this.background + '_' + this.body + '_' + this.skin + '_' + this.eyes + '_' + this.mouth + '_' + this.face + '_' + this.hair
                 console.log(image_name)
                 let storageRef = firebase.storage().ref('/images/avatars/' + image_name)
                 let image = this.$refs.mergedImage.src
@@ -314,23 +369,62 @@
                   console.log(error)
                   this.loading = false
                 }, () => {
+                    // Delete old avatar if it exists
+                    if (this.loadedUser.avatar) {
+                        var oldImageRef = firebase.storage().ref('/images/avatars/' + this.loadedUser.avatar.name)
+                        oldImageRef.delete().then(function() {
+                            console.log('Successfully deleted old image')
+                        }).catch(function(error) {
+                            console.log('An error occured and the old image could not be deleted:')
+                            console.log(error)
+                        })
+                    }
+
                     // Handle successful uploads on complete
                     firebase.database().ref('/users/' + userId + '/avatar').set({
                         name: uploadTask.snapshot.metadata.name,
                         url: uploadTask.snapshot.downloadURL,
                         updated_at: now,
                     })
+
                     // console.log('Uploaded a data_url string!')
                     this.loading = false
                     new Noty({type: 'success', text: 'Successfully uploaded image!', timeout: 5000, theme: 'metroui'}).show()
                 })
-            }
+            },
+            changePage (page) {
+                console.log(page)
+                this.currentPage = page
+                let index = this.currentPage * this.itemsPerPage
+                console.log(index)
+                console.log(this.loadedAvatars.slice(index, index + this.itemsPerPage))
+                this.loadedAvatars.slice(0, 0 + this.itemsPerPage)
+            },
         }
     }
 </script>
 
 <style scoped>
+    [v-cloak] > * { display:none; }
+    [v-cloak]::before { 
+        content: " ";
+        display: block;
+        width: 16px;
+        height: 16px;
+        background-image: url('data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==');
+    }
     .active {
         background-color: orangered;
+        border: 2px solid red;
+    }
+    .pagination {
+        margin: 0;
+    }
+    .page-link {
+        font-size: 12px !important;
+    }
+    .page-item.active .page-link {
+        background-color: #387BCA;
+        border-color: #387BCA;
     }
 </style>

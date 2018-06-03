@@ -40,6 +40,7 @@
     "vue-quick-menu": "^1.0.6",
     "vue-sweetalert2": "^1.2.4",
     "vue2-jsoneditor": "^1.0.5",
+    "vuejs-paginate": "^1.9.3",
     "vuetify": "^1.0.17",
     "vuex-loading": "^0.2.6",
     "webfontloader": "^1.6.28",
