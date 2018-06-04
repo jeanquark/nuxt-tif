@@ -10,9 +10,9 @@
 				  <h1>S'incrire</h1>
 				  <p class="modalInscription">Entre dans la communauté de ThisIsFan.com et commence à encourager tes équipes favorites !</p>
 				  <hr>
-                  <nuxt-link :to="localePath({ name: 'user-preferences'})" class="close">
-                                <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
-                            </nuxt-link>
+                    <nuxt-link ="/" class="close">
+                      <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
+</nuxt-link>
           <div class="group">      
 				    <label for="email"><b>Email</b></label>
 				    <input type="text" v-model="email" placeholder="Enter Email" name="email" required>
