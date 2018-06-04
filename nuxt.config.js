@@ -178,6 +178,7 @@ module.exports = {
     { src: '~/plugins/vue-fullpage.js', ssr: false },
     // { src: '~/plugins/merge-images', ssr: false },
     { src: '~/plugins/vue2-jsoneditor.js', ssr: false },
+    // { src: '~/plugins/vue-placeholders.js', ssr: false },
   ],
   serverMiddleware: [
       '~/serverMiddleware/validateFirebaseIdToken',

@@ -7,10 +7,17 @@
     			<div class="container">
                     <h1>Se connecter</h1>
                     <p class="modalInscription">Va vite encourager tes équipes favorites !</p>
+<<<<<<< HEAD
 					  <hr>
 					  <nuxt-link :to="localePath({ name: '/'})" class="close">
 						<span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
 					  </nuxt-link>
+=======
+                    <hr>
+                    <nuxt-link ="/" class="close">
+                      <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
+                    </nuxt-link>
+>>>>>>> 74920956aa959883658f73261d04f923806e818a
                     <div class="group">
                         <label for="email"><b>Email</b></label>
                         <input type="text" v-model="email" placeholder="Enter Email" name="email" required>   
