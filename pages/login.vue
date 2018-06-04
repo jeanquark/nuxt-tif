@@ -8,7 +8,9 @@
                     <h1>Se connecter</h1>
                     <p class="modalInscription">Va vite encourager tes équipes favorites !</p>
                     <hr>
-          
+                    <nuxt-link ="/" class="close">
+                      <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
+                    </nuxt-link>
                     <div class="group">
                         <label for="email"><b>Email</b></label>
                         <input type="text" v-model="email" placeholder="Enter Email" name="email" required>   
