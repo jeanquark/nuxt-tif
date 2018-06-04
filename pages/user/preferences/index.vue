@@ -54,31 +54,31 @@
                                     {{ $t('pages.user-preferences.languages') }}
                                 </div>
                                 <nuxt-link :to="localePath({name: 'user-preferences-language'})" class="columnParametreButton">
-                                    {{ $i18n.locale }}
+                                    {{ this.language }}
                                 </nuxt-link>
                             </div>
                             <div class="flex-container-modal-Niveau">
                                 <div class="columnParametreTexte">
                                     {{ $t('pages.user-preferences.pseudo') }}
                                 </div>
-                                <nuxt-link to="/user/preferences/pseudo" class="columnParametreButton" v-if="user">
-                                    {{ user.pseudo }}
+                                <nuxt-link to="/user/preferences/pseudo" class="columnParametreButton" v-if="loadedUser">
+                                    {{ loadedUser.pseudo }}
                                 </nuxt-link>
                             </div>
                             <div class="flex-container-modal-Niveau">
                                 <div class="columnParametreTexte">
                                     {{ $t('pages.user-preferences.birthyear') }}
                                 </div>
-                                <nuxt-link to="/user/preferences/birth" class="columnParametreButton" v-if="user">
-                                    {{ user.year_birth }}
+                                <nuxt-link to="/user/preferences/birth" class="columnParametreButton" v-if="loadedUser">
+                                    {{ loadedUser.year_birth }}
                                 </nuxt-link>
                             </div>
                             <div class="flex-container-modal-Niveau">
                                 <div class="columnParametreTexte">
                                     {{ $t('pages.user-preferences.nationality') }}
                                 </div>
-                                <nuxt-link to="/user/preferences/country" class="columnParametreButton" v-if="user">
-                                    {{ user.country.name }}
+                                <nuxt-link to="/user/preferences/country" class="columnParametreButton" v-if="loadedUser && loadedUser.country">
+                                    {{ loadedUser.country.name }}
                                 </nuxt-link>
                             </div>
                         </div><!-- /.flex-container -->
@@ -123,30 +123,31 @@
 <script>
     export default {
         layout: 'layoutFront',
-        computed: {
-            user () {
-                return this.$store.getters['users/loadedUser']
-            }
-        },        
+        // created () {
+        //     this.selectedLanguage = this.language($i18n.locale)
+        // },       
         data () {
             return {
                 selectedLanguage: ''
             }
         },
-        method: {
-            language (language) {
+        computed: {
+            loadedUser () {
+                return this.$store.getters['users/loadedUser']
+            },
+            language () {
+                let language = this.$i18n.locale
                 switch(language) {
                     case 'en':
-                        this.selectedLanguage = 'english'
-                        break
+                        return 'english'
                     case 'fr':
-                        this.selectedLanguage = 'français'
-                        break
+                        return 'français'
                     case 'de':
-                        this.selectedLanguage = 'deutsch'
-                        break
+                        return 'deutsch'
                 }
             }
+        }, 
+        method: {
         }
     }
 </script>

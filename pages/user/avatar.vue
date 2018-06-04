@@ -1,5 +1,6 @@
 <template>
     <div class="container-fluid">
+        {{ this.loadedUser }}
         <!-- The monAvatar -->
         <div id="modalBox">
             <div class="modal-dialog modal-lg">
@@ -71,20 +72,23 @@
                             </div>
 
                         <br /><br /><hr><br />
-                        <paginate
-                              :page-count="totalPages"
-                              :click-handler="changePage"
-                              :prev-text="'Prev'"
-                              :next-text="'Next'"
-                              :container-class="'pagination pagination-sm'"
-                              :page-class="'page-item'" 
-                              :prev-class="'page-item'" 
-                              :next-class="'page-item'"
-                              :page-link-class="'page-link'" 
-                              :prev-link-class="'page-link'" 
-                              :next-link-class="'page-link'"
-                            >
-                        </paginate>
+                        <div class="d-flex justify-content-center">
+                            <paginate
+                                  :page-count="totalPages"
+                                  :click-handler="changePage"
+                                  :prev-text="'Prev'"
+                                  :next-text="'Next'"
+                                  :container-class="'pagination pagination-sm'"
+                                  :page-class="'page-item'" 
+                                  :prev-class="'page-item'" 
+                                  :next-class="'page-item'"
+                                  :page-link-class="'page-link'" 
+                                  :prev-link-class="'page-link'" 
+                                  :next-link-class="'page-link'"
+                                >
+                            </paginate>
+                            <br /><br />
+                        </div>
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
@@ -109,7 +113,8 @@
     import moment from 'moment'
     import Noty from 'noty'
     // import contentPlaceholders from '~/plugins/vue-placeholders.js'
-    import Paginate from 'vuejs-paginate'
+    // import Paginate from 'vuejs-paginate'
+    import Paginate from 'vuejs-paginate/src/components/Paginate'
     export default {
         layout: 'layoutFront',
         // components: { contentPlaceholders },
@@ -199,7 +204,7 @@
                 arr: [],
                 obj: [],
                 progress: 0,
-                currentPage: 0,
+                currentPage: 1,
                 itemsPerPage: 28,
             }
         },
@@ -212,7 +217,7 @@
             },
             loadedAvatars2 () {
                 let index = this.currentPage * this.itemsPerPage
-                return this.avatars.filter(avatar => avatar.gender === this.gender && avatar.type === this.bodyPart).slice(index, index + this.itemsPerPage)
+                return this.avatars.filter(avatar => avatar.gender === this.gender && avatar.type === this.bodyPart).slice(index - this.itemsPerPage, index)
             },
             disabled () {
                 return this.background == '' && this.body == '' && this.skin == '' && this.eyes == '' && this.mouth == '' && this.face == '' && this.hair == ''
@@ -393,12 +398,12 @@
                 })
             },
             changePage (page) {
-                console.log(page)
+                console.log('page: ' + page)
                 this.currentPage = page
                 let index = this.currentPage * this.itemsPerPage
-                console.log(index)
-                console.log(this.loadedAvatars.slice(index, index + this.itemsPerPage))
-                this.loadedAvatars.slice(0, 0 + this.itemsPerPage)
+                console.log('index: ' + index)
+                console.log(this.loadedAvatars.slice(index - this.itemsPerPage, index))
+                this.loadedAvatars.slice(index - this.itemsPerPage, index)
             },
         }
     }
@@ -422,9 +427,17 @@
     }
     .page-link {
         font-size: 12px !important;
+        font-color: #ccc;
+        /*background: orangered;*/
+        /*border-color: orangered;*/
+    }
+    .page-item {
+        color: #000;
     }
     .page-item.active .page-link {
         background-color: #387BCA;
+        /*background-color: orangered;*/
         border-color: #387BCA;
+        /*border-color: orangered;*/
     }
 </style>

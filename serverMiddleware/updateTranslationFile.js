@@ -13,16 +13,18 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 module.exports = app.use(function (req, res, next) {
-	var file = './lang/essai.json'
+	// var file = './lang/essai.json'
 	// var file = './lang/fr-FR.json'
-	console.log(req.body.file)
-	// var file = './lang/' + req.body.file
+	// console.log(req.body.file)
+	var file = './lang/' + req.body.file
+	console.log(file)
 
 	// var obj = 'module.exports = ' + {"welcome" : "Herzlich Willkommen zu","and" : "und"}
 	// var obj1 = 'module.exports = '
 	var obj = req.body.json
+	console.log(obj)
 	
-	jsonfile.writeFile(file, obj, {spaces: 2, EOL: '\r\n'}, function (err) {
+	jsonfile.writeFile(file, obj, {spaces: 4, EOL: '\r\n'}, function (err) {
 		console.error(err)
 	})
 

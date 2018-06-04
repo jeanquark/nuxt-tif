@@ -37,10 +37,10 @@
             <div class="intro-content">
                 <div class="row">
                     <div class="col-twelve">
-                        <h5>Bienvenue sur</h5>
+                        <h5>{{ $t('pages.index.welcome') }}</h5>
                         <h1>ThisIsFan.com</h1>
                         <p class="intro-position">
-                            <span>La première application consacrée aux supporters !</span>
+                            <span>{{ $t('pages.index.first_application') }}</span>
                         </p>                    
                         <img src="images/avatar.png" class="imgAvatar" />
                     </div>                     
@@ -48,9 +48,9 @@
             </div> <!-- /intro-content --> 
 
             <ul class="intro-language">
-              <li><nuxt-link to="#"><img src="/images/flags/61.png" class="flagsLanguage"/></nuxt-link></li>
-              <li><nuxt-link to="#"><img src="/images/flags/65.png" class="flagsLanguage"/></nuxt-link></li>
-              <li><nuxt-link to="#"><img src="/images/flags/179.png" class="flagsLanguage"/></nuxt-link></li>
+                <li><nuxt-link :to="switchLocalePath('fr')"><img src="/images/flags/france.png" class="flagsLanguage" :class="{ active: $i18n.locale === 'fr' }" alt="flag of France" /></nuxt-link></li>
+                <li><nuxt-link :to="switchLocalePath('de')"><img src="/images/flags/germany.png" class="flagsLanguage" :class="{ active: $i18n.locale === 'de' }" alt="flag of Germany" /></nuxt-link></li>
+                <li><nuxt-link :to="switchLocalePath('en')"><img src="/images/flags/united_kingdom.png" class="flagsLanguage" :class="{ active: $i18n.locale === 'en' }" alt="flag of United Kingdom" /></nuxt-link></li>
             </ul>
 
             <ul class="intro-social">        
@@ -68,7 +68,7 @@
             <div class="row section-intro">
                 <div class="col-twelve">
 
-                    <h1>ThisIsFan.com, qu'est-ce que c'est ?</h1>
+                    <h1>{{ $t('pages.index.what_is_it') }}</h1>
 
                     <div class="intro-info">
 
@@ -697,5 +697,7 @@
 </script>
 
 <style scoped>
-    
+    .active {
+        border: 1px solid orangered;
+    }
 </style>
