@@ -39,8 +39,8 @@
                     <div class="row button-section">
                         <div class="col-twelve">
                             <button type="submit" class="button button-primary" style="" :disabled="loading" :loading="loading" @click.prevent="signUserIn">Go Go Go, c'est parti ! <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
-                            <a href="vue/load.html" type="submit" class="button btn-facebook"><i class="fa fa-facebook"></i> Connecte-toi avec FB</a>
-                            <a href="vue/load.html" type="submit" class="button btn-twitter"><i class="fa fa-google"></i> Connecte-toi avec G+</a>
+                            <button type="submit" class="button btn-facebook" @click.prevent="signInWithFacebook"><i class="fa fa-facebook"></i> Connecte-toi avec FB</button>
+                            <button type="submit" class="button btn-twitter" @click.prevent="signInWithGoogle"><i class="fa fa-google"></i> Connecte-toi avec G+</button>
                         </div>
                     </div>
     			</div><!-- /.container -->
@@ -52,6 +52,7 @@
 <script>
     export default {
         layout: 'layoutLandingPage',
+        // layout: 'layoutFront',
         head: {
             script: [
                 // { src: 'https://code.jquery.com/jquery-3.2.1.slim.min.js' },
@@ -112,7 +113,7 @@
             // }
             async signUserIn () {
                 console.log('signUserIn')
-                await this.$store.dispatch('users/signUserIn', {
+                await this.$store.dispatch('firebase-auth/signUserIn', {
                     email: this.email,
                     password: this.password
                 })
@@ -124,6 +125,21 @@
                     this.$router.replace('/home')
                 }
             },
+            async signInWithGoogle () {
+                console.log('signInWithGoogle')
+                await this.$store.dispatch('firebase-auth/signInWithGooglePopup')
+                if (this.$i18n.locale != 'en') {
+                    console.log('done')
+                    this.$router.replace('/' + this.$i18n.locale + '/home')
+                } else {
+                    console.log('done')
+                    this.$router.replace('/home')
+                }
+            },
+            async signInWithFacebook () {
+                console.log('signInWithFacebook')
+                await this.$store.dispatch('firebase-auth/signInWithFacebookPopup')
+            }
         }
     }
 </script>

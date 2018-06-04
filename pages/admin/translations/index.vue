@@ -103,6 +103,7 @@
 				    }
 				],
 				language: 'french',
+				file: 'fr-FR.json',
 				json: french,
 				newJSON: ''
 			}
@@ -117,8 +118,11 @@
 		},
 		methods: {
 			updateJSON () {
-				console.log('updateJSON')
-				console.log(this.newJSON)
+				// console.log('updateJSON')
+				// console.log(this.newJSON)
+				// console.log(this.file)
+				// console.log(this.language)
+				// return
 
 				axios.post('/update-translation-file', {
 				    language: this.language,

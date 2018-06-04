@@ -11,8 +11,8 @@
     "protected": "Cette page est protégée. Seuls les membres connectés peuvent y accéder.",
     "messages": {
         "login": {
-            "success": "Utililisateur enregistré avec succès",
-            "error": "L'utilisateur n'a pas pu être enregistré"
+            "success": "Utililisateur enregistré avec succès 2",
+            "error": "L'utilisateur n'a pas pu être enregistré 2"
         }
     },
     "pages": {
