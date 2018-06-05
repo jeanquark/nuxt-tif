@@ -149,7 +149,7 @@
                         <div class="timeline-block">
 
                             <div class="timeline-ico">
-                                <i class="fa fa-user-cog fa-2x"></i>
+                                <i class="fa fa-chart-bar fa-2x"></i>
                             </div>
 
                             <div class="timeline-header">
@@ -197,7 +197,7 @@
                         <div class="timeline-block">
 
                             <div class="timeline-ico">
-                                <i class="fa fa-dollar-sign fa-2x"></i>
+                                <i class="fa fa-money-bill fa-2x"></i>
                             </div>
 
                             <div class="timeline-header">
