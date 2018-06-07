@@ -54,8 +54,12 @@
                         </div>
 
                         <div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'hair'">
-                            <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'haircut')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'hair_cut' + haircut) }" /></div>
-                            <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'color')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'hair_color' + haircolor) }" /></div>
+                            <div>
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'haircut')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'hair_cut' + haircut) }" /></div>
+                            </div>
+                            <div>
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'color')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'hair_color' + haircolor) }" /></div>
+                            </div>
                         </div>
                         <div class="flex-container-modalAvatarImg" v-else>
                             <div v-for="avatar in loadedAvatars2" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === background ||  avatar.name === body || avatar.name === skin || avatar.name === eyes || avatar.name === mouth || avatar.name === face || avatar.name === hair) }" />
@@ -130,32 +134,40 @@
             if (this.$store.getters['users/loadedUser'].avatar) {
                 const array = this.$store.getters['users/loadedUser'].avatar.name.split('_')
                 console.log(array)
-                if (array.length >= 9) {
+                if (array.length >= 14) {
                     this.gender = array[1]
                     this.background = array[2]
-                    this.body = array[3]
-                    this.skin = array[4]
-                    this.eyes = array[5]
+                    this.backgroundform = this.background ? this.background.match(/\d+/)[0].substr(0, 2) : '01'
+                    this.backgroundcolor = this.background ? this.background.match(/\d+/)[0].substr(2, 4) : '01'
+                    this.skin = array[3]
+                    this.skinform = this.skin ? this.skin.match(/\d+/)[0].substr(0, 2) : '01'
+                    this.skincolor = this.skin ? this.skin.match(/\d+/)[0].substr(2, 4) : '01'
+                    this.eyes = array[4]
+                    this.eyebrows = array [5]
                     this.mouth = array[6]
-                    this.face = array[7]
-                    // this.cache = array[8]
-                    this.hair = array[8]
+                    this.hair = array[7]
                     this.haircut = this.hair ? this.hair.match(/\d+/)[0].substr(0, 2) : '01'
                     this.haircolor = this.hair ? this.hair.match(/\d+/)[0].substr(2, 4) : '01'
-					// this.cache = array[9]
-					// this.thisisfan = array[10]
+                    this.beard = array[8]
+                    this.glasses = array[9]
+                    this.clothes = array[10]
+                    this.accessory = array[11]
+					this.cache = array[12]
+					this.thisisfan = array[13]
 
                     this.obj = [
                         { "image": '/images/avatars/' + this.gender + '/background/' + this.background + '.png', 'gender': this.gender, 'type': 'background' },
-                        { 'image': '/images/avatars/' + this.gender + '/body/' + this.body + '.png', 'gender': this.gender, 'type': 'body' },
                         { 'image': '/images/avatars/' + this.gender + '/skin/' + this.skin + '.png', 'gender': this.gender, 'type': 'skin' },
-                        { 'image': '/images/avatars/' + this.gender + '/eyes/' + this.eyes + '.png', 'gender': this.gender, 'type': 'eyes' }, 
+                        { 'image': '/images/avatars/' + this.gender + '/eyes/' + this.eyes + '.png', 'gender': this.gender, 'type': 'eyes' },
+                        { 'image': '/images/avatars/' + this.gender + '/eyebrows/' + this.eyebrows + '.png', 'gender': this.gender, 'type': 'eyebrows' },  
                         { 'image': '/images/avatars/' + this.gender + '/mouth/' + this.mouth + '.png', 'gender': this.gender, 'type': 'mouth' }, 
-                        { 'image': '/images/avatars/' + this.gender + '/face/' + this.face + '.png', 'gender': this.gender, 'type': 'face' }, 
-                        // { 'image': '/images/avatars/' + this.gender + '/cache/' + this.cache + '.png', 'gender': this.gender, 'type': 'cache' }, 
                         { 'image': '/images/avatars/' + this.gender + '/hair/' + this.hair + '.png', 'gender': this.gender, 'type': 'hair' },
-						// { 'image': '/images/avatars/' + this.gender + '/cache/' + 'cache.png', 'gender': this.gender, 'type': 'cache' },
-						// { 'image': '/images/avatars/' + this.gender + '/thisisfan/' + 'thisisfan.png', 'gender': this.gender, 'type': 'thisisfan' }
+                        { 'image': '/images/avatars/' + this.gender + '/beard/' + this.beard + '.png', 'gender': this.gender, 'type': 'beard' },
+                        { 'image': '/images/avatars/' + this.gender + '/glasses/' + this.glasses + '.png', 'gender': this.gender, 'type': 'glasses' },
+                        { 'image': '/images/avatars/' + this.gender + '/clothes/' + this.clothes + '.png', 'gender': this.gender, 'type': 'clothes' },
+                        { 'image': '/images/avatars/' + this.gender + '/accessory/' + this.accessory + '.png', 'gender': this.gender, 'type': 'accessory' },
+						{ 'image': '/images/avatars/' + this.gender + '/cache/' + 'cache.png', 'gender': this.gender, 'type': 'cache' },
+						{ 'image': '/images/avatars/' + this.gender + '/thisisfan/' + 'thisisfan.png', 'gender': this.gender, 'type': 'thisisfan' }
                     ]
                     // console.log(this.hair)
                     // console.log(this.haircut)
@@ -166,15 +178,17 @@
                 console.log('No defined avatar yet')
                 this.obj = [
                     { "image": '/images/avatars/' + this.gender + '/background/' + this.background + '.png', 'gender': this.gender, 'type': 'background' },
-                    { 'image': '/images/avatars/' + this.gender + '/body/' + this.body + '.png', 'gender': this.gender, 'type': 'body' },
-                    { 'image': '/images/avatars/' + this.gender + '/skin/' + this.skin + '.png', 'gender': this.gender, 'type': 'skin' },
-                    { 'image': '/images/avatars/' + this.gender + '/eyes/' + this.eyes + '.png', 'gender': this.gender, 'type': 'eyes' }, 
-                    { 'image': '/images/avatars/' + this.gender + '/mouth/' + this.mouth + '.png', 'gender': this.gender, 'type': 'mouth' }, 
-                    { 'image': '/images/avatars/' + this.gender + '/face/' + this.face + '.png', 'gender': this.gender, 'type': 'face' }, 
-                    // { 'image': '/images/avatars/' + this.gender + '/cache/' + this.cache + '.png', 'gender': this.gender, 'type': 'cache' }, 
-                    { 'image': '/images/avatars/' + this.gender + '/hair/' + this.hair + '.png', 'gender': this.gender, 'type': 'hair' },
-                    { 'image': '/images/avatars/' + this.gender + '/cache/' + 'cache.png', 'gender': this.gender, 'type': 'cache' },
-                    { 'image': '/images/avatars/' + this.gender + '/thisisfan/' + 'thisisfan.png', 'gender': this.gender, 'type': 'thisisfan' }
+                        { 'image': '/images/avatars/' + this.gender + '/skin/' + this.skin + '.png', 'gender': this.gender, 'type': 'skin' },
+                        { 'image': '/images/avatars/' + this.gender + '/eyes/' + this.eyes + '.png', 'gender': this.gender, 'type': 'eyes' },
+                        { 'image': '/images/avatars/' + this.gender + '/eyebrows/' + this.eyebrows + '.png', 'gender': this.gender, 'type': 'eyebrows' },  
+                        { 'image': '/images/avatars/' + this.gender + '/mouth/' + this.mouth + '.png', 'gender': this.gender, 'type': 'mouth' }, 
+                        { 'image': '/images/avatars/' + this.gender + '/hair/' + this.hair + '.png', 'gender': this.gender, 'type': 'hair' },
+                        { 'image': '/images/avatars/' + this.gender + '/beard/' + this.beard + '.png', 'gender': this.gender, 'type': 'beard' },
+                        { 'image': '/images/avatars/' + this.gender + '/glasses/' + this.glasses + '.png', 'gender': this.gender, 'type': 'glasses' },
+                        { 'image': '/images/avatars/' + this.gender + '/clothes/' + this.clothes + '.png', 'gender': this.gender, 'type': 'clothes' },
+                        { 'image': '/images/avatars/' + this.gender + '/accessory/' + this.accessory + '.png', 'gender': this.gender, 'type': 'accessory' },
+						{ 'image': '/images/avatars/' + this.gender + '/cache/' + 'cache.png', 'gender': this.gender, 'type': 'cache' },
+						{ 'image': '/images/avatars/' + this.gender + '/thisisfan/' + 'thisisfan.png', 'gender': this.gender, 'type': 'thisisfan' }
                 ]
                 this.mergeImages()
             }
@@ -185,16 +199,18 @@
                 gender: 'female',
                 bodyPart: 'background',
                 name: '',
-                background: 'background0',
-				body: 'body0',
+                background: 'background1',
                 skin: 'skin1',
                 eyes: 'eyes1',
+                eyebrows: 'eyebrows1',
                 mouth: 'mouth1',
-                face: 'face1',
-                // cache: '',
                 hair: 'hair0101',
                 haircut: '01',
                 haircolor: '01',
+                beard: 'beard1',
+                glasses: 'glasses1',
+                clothes: 'clothes1',
+                accessory: 'accessory1',
 				cache: '',
 				thisisfan: '',
                 avatars: [],
@@ -202,7 +218,7 @@
                 obj: [],
                 progress: 0,
                 currentPage: 1,
-                itemsPerPage: 28,
+                itemsPerPage: 14,
             }
         },
         computed: {
@@ -217,7 +233,7 @@
                 return this.avatars.filter(avatar => avatar.gender === this.gender && avatar.type === this.bodyPart).slice(index - this.itemsPerPage, index)
             },
             disabled () {
-                return this.background == '' && this.body == '' && this.skin == '' && this.eyes == '' && this.mouth == '' && this.face == '' && this.hair == ''
+                return this.background == '' && this.skin == '' && this.eyes == '' && this.eyebrows == '' && this.mouth == '' && this.hair == '' && this.beard == '' && this.glasses == '' && this.clothes == '' && this.accessory == ''
             },
             loadedTeams () {
                 return this.$store.getters['teams/loadedTeams']
@@ -266,18 +282,17 @@
                 this.name = name
                 if (name.includes('background')) {
                     this.background = name
-                } else if (name.includes('body')) {
-                    this.body = name
                 } else if (name.includes('skin')) {
                     this.skin = name
                 } else if (name.includes('eyes')) {
                     this.eyes = name
+                } else if (name.includes('eyebrows')) {
+                    this.eyebrows = name
                 } else if (name.includes('mouth')) {
-                    this.mouth = name   
-                } else if (name.includes('face')) {
-                    this.face = name
-                // } else if (name.includes('cache')) {
-                //  this.cache = name
+                    this.mouth = name
+
+// j'en suis là... à demain
+
                 } else if (name.includes('hair')) {
                     if (name.includes('hair_cut')) {
                         // Retrieve haircut integer in string
