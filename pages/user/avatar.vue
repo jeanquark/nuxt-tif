@@ -46,19 +46,90 @@
                         <br /><br />
                         <!-- Display dummy text while loading -->
                         <div v-if="loadedAvatars.length == 0">
-                            <h1 class="text-center" style="color: #000;">Loading...</h1>
+                            <h1 class="text-center">{{ $t('pages.user-avatar.loading') }}</h1>
                             <!-- <content-placeholders>
                                 <content-placeholders-heading :img="true" />
                                 <content-placeholders-text :lines="3" />
                             </content-placeholders> -->
                         </div>
-
-                        <div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'hair'">
+						<div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'background'">
+                            <div>
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'backgroundform')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'background_form' + backgroundform) }" /></div>
+                            </div>
+                            <div>
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'backgroundcolor')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'background_color' + backgroundcolor) }" /></div>
+                            </div>
+                        </div>
+						<div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'skin'">
+                            <div>
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'skinform')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'skin_form' + skinform) }" /></div>
+                            </div>
+                            <div>
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'skincolor')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'skin_color' + skincolor) }" /></div>
+                            </div>
+                        </div> 
+						<div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'eyes'">
+                            <div>
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'eyesform')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'eyes_form' + eyesform) }" /></div>
+                            </div>
+                            <div>
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'eyescolor')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'eyes_color' + eyescolor) }" /></div>
+                            </div>
+                        </div>
+						<div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'eyebrows'">
+                            <div>
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'eyebrowsform')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'eyebrows_form' + eyebrowsform) }" /></div>
+                            </div>
+                            <div>
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'eyebrowscolor')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'eyebrows_color' + eyebrowscolor) }" /></div>
+                            </div>
+                        </div>
+						<div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'mouth'">
+                            <div>
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'mouthform')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'mouth_form' + mouthform) }" /></div>
+                            </div>
+                            <div>
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'mouthcolor')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'mouth_color' + mouthcolor) }" /></div>
+                            </div>
+                        </div>
+						<div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'hair'">
                             <div>
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'haircut')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'hair_cut' + haircut) }" /></div>
                             </div>
                             <div>
-                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'color')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'hair_color' + haircolor) }" /></div>
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'haircolor')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'hair_color' + haircolor) }" /></div>
+                            </div>
+                        </div>
+						<div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'beard'">
+                            <div>
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'beardform')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'beard_form' + beardform) }" /></div>
+                            </div>
+                            <div>
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'beardcolor')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'beard_color' + beardcolor) }" /></div>
+                            </div>
+                        </div>
+						<div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'glasses'">
+                            <div>
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'glassesform')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'glasses_form' + glassesform) }" /></div>
+                            </div>
+                            <div>
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'glassescolor')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'glasses_color' + glassescolor) }" /></div>
+                            </div>
+                        </div>
+						<div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'clothes'">
+                            <div>
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'clothesform')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'clothes_form' + clothesform) }" /></div>
+                            </div>
+                            <div>
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'clothescolor')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'clothes_color' + clothescolor) }" /></div>
+                            </div>
+                        </div>
+						<div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'accessory'">
+                            <div>
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'accessoryform')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'accessory_form' + accessoryform) }" /></div>
+                            </div>
+                            <div>
+                                <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'accessorycolor')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'accessory_color' + accessorycolor) }" /></div>
                             </div>
                         </div>
                         <div class="flex-container-modalAvatarImg" v-else>
@@ -138,20 +209,34 @@
                     this.gender = array[1]
                     this.background = array[2]
                     this.backgroundform = this.background ? this.background.match(/\d+/)[0].substr(0, 2) : '01'
-                    this.backgroundcolor = this.background ? this.background.match(/\d+/)[0].substr(2, 4) : '01'
+                    this.backgroundcolor = this.background ? this.background.match(/\d+/)[0].substr(2, 4) : '001'
                     this.skin = array[3]
                     this.skinform = this.skin ? this.skin.match(/\d+/)[0].substr(0, 2) : '01'
                     this.skincolor = this.skin ? this.skin.match(/\d+/)[0].substr(2, 4) : '01'
                     this.eyes = array[4]
+                    this.eyesform = this.eyes ? this.eyes.match(/\d+/)[0].substr(0, 2) : '01'
+                    this.eyescolor = this.eyes ? this.eyes.match(/\d+/)[0].substr(2, 4) : '01'
                     this.eyebrows = array [5]
+                    this.eyebrowsform = this.eyebrows ? this.eyebrows.match(/\d+/)[0].substr(0, 2) : '01'
+                    this.eyebrowscolor = this.eyebrows ? this.eyebrows.match(/\d+/)[0].substr(2, 4) : '01'
                     this.mouth = array[6]
+                    this.mouthform = this.mouth ? this.mouth.match(/\d+/)[0].substr(0, 2) : '01'
+                    this.mouthscolor = this.mouth ? this.mouth.match(/\d+/)[0].substr(2, 4) : '01'
                     this.hair = array[7]
                     this.haircut = this.hair ? this.hair.match(/\d+/)[0].substr(0, 2) : '01'
                     this.haircolor = this.hair ? this.hair.match(/\d+/)[0].substr(2, 4) : '01'
                     this.beard = array[8]
+                    this.beardform = this.beard ? this.beard.match(/\d+/)[0].substr(0, 2) : '01'
+                    this.beardcolor = this.beard ? this.beard.match(/\d+/)[0].substr(2, 4) : '01'
                     this.glasses = array[9]
+                    this.glassesform = this.glasses ? this.glasses.match(/\d+/)[0].substr(0, 2) : '01'
+                    this.glassescolor = this.glasses ? this.glasses.match(/\d+/)[0].substr(2, 4) : '01'
                     this.clothes = array[10]
+                    this.clothesform = this.clothes ? this.clothes.match(/\d+/)[0].substr(0, 2) : '01'
+                    this.clothescolor = this.clothes ? this.clothes.match(/\d+/)[0].substr(2, 4) : '01'
                     this.accessory = array[11]
+                    this.accessoryform = this.accessory ? this.accessory.match(/\d+/)[0].substr(0, 2) : '01'
+                    this.accessorycolor = this.accessory ? this.accessory.match(/\d+/)[0].substr(2, 4) : '01'
 					this.cache = array[12]
 					this.thisisfan = array[13]
 
@@ -177,7 +262,7 @@
             } else { // No previous avatar is registered
                 console.log('No defined avatar yet')
                 this.obj = [
-                    { "image": '/images/avatars/' + this.gender + '/background/' + this.background + '.png', 'gender': this.gender, 'type': 'background' },
+						{ "image": '/images/avatars/' + this.gender + '/background/' + this.background + '.png', 'gender': this.gender, 'type': 'background' },
                         { 'image': '/images/avatars/' + this.gender + '/skin/' + this.skin + '.png', 'gender': this.gender, 'type': 'skin' },
                         { 'image': '/images/avatars/' + this.gender + '/eyes/' + this.eyes + '.png', 'gender': this.gender, 'type': 'eyes' },
                         { 'image': '/images/avatars/' + this.gender + '/eyebrows/' + this.eyebrows + '.png', 'gender': this.gender, 'type': 'eyebrows' },  
@@ -199,18 +284,36 @@
                 gender: 'female',
                 bodyPart: 'background',
                 name: '',
-                background: 'background1',
-                skin: 'skin1',
-                eyes: 'eyes1',
-                eyebrows: 'eyebrows1',
-                mouth: 'mouth1',
+                background: 'background01001',
+				backgroundform: '01',
+				backgroundcolor: '001',
+                skin: 'skin0101',
+				skinform: '01',
+				skincolor: '01'
+                eyes: 'eyes0101',
+				eyesform: '01',
+				eyescolor: '01',
+                eyebrows: 'eyebrows0101',
+				eyebrowsform: '01',
+				eyebrowscolor: '01',
+                mouth: 'mouth01',
+				mouthform: '01',
+				mouthcolor: '01',
                 hair: 'hair0101',
                 haircut: '01',
                 haircolor: '01',
-                beard: 'beard1',
-                glasses: 'glasses1',
-                clothes: 'clothes1',
-                accessory: 'accessory1',
+                beard: 'beard0101',
+				beardform: '01',
+				beardcolor: '01',
+                glasses: 'glasses0101',
+				glassesform: '01',
+				glassescolor: '01',
+                clothes: 'clothes01001',
+				clothesform: '01',
+				clothescolor: '001',
+                accessory: 'accessory0101',
+				accessoryform: '01',
+				accessorycolor: '01',
 				cache: '',
 				thisisfan: '',
                 avatars: [],
@@ -281,18 +384,60 @@
                 // console.log('addToMerge')
                 this.name = name
                 if (name.includes('background')) {
-                    this.background = name
+                    if (name.includes('background_form')) {
+                        // Retrieve backgroundform integer in string
+                        this.backgroundform = this.name.match(/\d+/)[0]
+                    }
+                    if (name.includes('background_color')) {
+                        // Retrieve backgroundcolor integer in string
+                        this.backgroundcolor = this.name.match(/\d+/)[0]
+                    }
+                    this.background = 'background' + this.backgroundform + this.backgroundcolor
+                    image = this.background + '.png'
                 } else if (name.includes('skin')) {
-                    this.skin = name
+                    if (name.includes('skin_form')) {
+                        // Retrieve skinform integer in string
+                        this.skinform = this.name.match(/\d+/)[0]
+                    }
+                    if (name.includes('skin_color')) {
+                        // Retrieve skincolor integer in string
+                        this.skincolor = this.name.match(/\d+/)[0]
+                    }
+                    this.skin = 'skin' + this.skinform + this.skincolor
+                    image = this.skin + '.png'
                 } else if (name.includes('eyes')) {
-                    this.eyes = name
+                    if (name.includes('eyes_form')) {
+                        // Retrieve eyesform integer in string
+                        this.eyesform = this.name.match(/\d+/)[0]
+                    }
+                    if (name.includes('eyes_color')) {
+                        // Retrieve eyescolor integer in string
+                        this.eyescolor = this.name.match(/\d+/)[0]
+                    }
+                    this.eyes = 'eyes' + this.eyesform + this.eyescolor
+                    image = this.eyes + '.png'
                 } else if (name.includes('eyebrows')) {
-                    this.eyebrows = name
+                    if (name.includes('eyebrows_form')) {
+                        // Retrieve eyebrowsform integer in string
+                        this.eyebrowsform = this.name.match(/\d+/)[0]
+                    }
+                    if (name.includes('eyebrows_color')) {
+                        // Retrieve eyebrowscolor integer in string
+                        this.eyebrowscolor = this.name.match(/\d+/)[0]
+                    }
+                    this.eyebrows = 'eyebrows' + this.eyebrowsform + this.eyebrowscolor
+                    image = this.eyebrows + '.png'
                 } else if (name.includes('mouth')) {
-                    this.mouth = name
-
-// j'en suis là... à demain
-
+                    if (name.includes('mouth_form')) {
+                        // Retrieve mouthform integer in string
+                        this.mouthform = this.name.match(/\d+/)[0]
+                    }
+                    if (name.includes('mouth_color')) {
+                        // Retrieve mouthcolor integer in string
+                        this.mouthcolor = this.name.match(/\d+/)[0]
+                    }
+                    this.mouth = 'mouth' + this.mouthform + this.mouthcolor
+                    image = this.mouth + '.png'
                 } else if (name.includes('hair')) {
                     if (name.includes('hair_cut')) {
                         // Retrieve haircut integer in string
@@ -304,6 +449,50 @@
                     }
                     this.hair = 'hair' + this.haircut + this.haircolor
                     image = this.hair + '.png'
+				} else if (name.includes('beard')) {
+                    if (name.includes('beard_form')) {
+                        // Retrieve beardform integer in string
+                        this.beardform = this.name.match(/\d+/)[0]
+                    }
+                    if (name.includes('beard_color')) {
+                        // Retrieve beardcolor integer in string
+                        this.beardcolor = this.name.match(/\d+/)[0]
+                    }
+                    this.beard = 'beard' + this.beardform + this.beardcolor
+                    image = this.beard + '.png'
+				} else if (name.includes('glasses')) {
+                    if (name.includes('glasses_form')) {
+                        // Retrieve glassesform integer in string
+                        this.glassesform = this.name.match(/\d+/)[0]
+                    }
+                    if (name.includes('glasses_color')) {
+                        // Retrieve glassescolor integer in string
+                        this.glassescolor = this.name.match(/\d+/)[0]
+                    }
+                    this.glasses = 'glasses' + this.glassesform + this.glassescolor
+                    image = this.glasses + '.png'
+				} else if (name.includes('clothes')) {
+                    if (name.includes('clothes_form')) {
+                        // Retrieve clothesform integer in string
+                        this.clothesform = this.name.match(/\d+/)[0]
+                    }
+                    if (name.includes('clothes_color')) {
+                        // Retrieve clothescolor integer in string
+                        this.clothescolor = this.name.match(/\d+/)[0]
+                    }
+                    this.clothes = 'clothes' + this.clothesform + this.clothescolor
+                    image = this.clothes + '.png'
+				} else if (name.includes('accessory')) {
+                    if (name.includes('accessory_form')) {
+                        // Retrieve accessoryform integer in string
+                        this.accessoryform = this.name.match(/\d+/)[0]
+                    }
+                    if (name.includes('accessory_color')) {
+                        // Retrieve accessorycolor integer in string
+                        this.accessorycolor = this.name.match(/\d+/)[0]
+                    }
+                    this.accessory = 'accessory' + this.accessoryform + this.accessorycolor
+                    image = this.accessory + '.png'
                 } else if (name.includes('cache')) {
 					this.cache = name
 				} else if (name.include('thisisfan')) {
@@ -361,7 +550,7 @@
                 const now = moment().unix()
                 const userId = firebase.auth().currentUser.uid
                 // const image_name = userId + '_' + this.gender + '_' + this.background + '_' + this.body + '_' + this.skin + '_' + this.eyes + '_' + this.mouth + '_' + this.face + '_' + this.hair + '_' + this.cache + '_' + this.thisisfan
-                const image_name = userId + '_' + this.gender + '_' + this.background + '_' + this.body + '_' + this.skin + '_' + this.eyes + '_' + this.mouth + '_' + this.face + '_' + this.hair
+                const image_name = userId + '_' + this.gender + '_' + this.background + '_' + this.skin + '_' + this.eyes + '_' + this.eyebrows + '_' + this.mouth + '_' + this.hair + '_' + this.beard + '_' + this.glasses + '_' + this.clothes + '_' + this.accessory
                 console.log(image_name)
                 let storageRef = firebase.storage().ref('/images/avatars/' + image_name)
                 let image = this.$refs.mergedImage.src
