@@ -1,6 +1,5 @@
 <template>
     <div class="container-fluid">
-        {{ this.loadedUser }}
         <!-- The monAvatar -->
         <div id="modalBox">
             <div class="modal-dialog modal-lg">
@@ -27,7 +26,7 @@
 							</div>						
                             <div class="imgAvatarUser"  v-if="this.arr.length > 0"><img src="" ref="mergedImage" class="imgModalAvatar"/></div>
 							<div class="flex-container-modalAvatar" v-else>
-								<h4 style="color: orangered; margin: 0 auto; font: normal 150%/1 'bangers', Helvetica, sans-serif;">Sélectionne les caractéristiques</h4><br /><br />
+								<h4 style="color: orangered; margin: 0 auto; font: normal 150%/1 'bangers', Helvetica, sans-serif;">{{ $t('pages.user-avatar.select') }}</h4><br /><br />
 							</div>
 							<div class="flex-container-modalMenuAvatar no-border">
 								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'background'}" @click="selectBodyPart('background')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.background') }}</span></div>
@@ -52,96 +51,91 @@
                                 <content-placeholders-text :lines="3" />
                             </content-placeholders> -->
                         </div>
-						<div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'background'">
-                            <div>
+						<div v-if="this.bodyPart === 'background'">
+                            <div class="flex-container-modalAvatarImg">
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'backgroundform')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'background_form' + backgroundform) }" /></div>
                             </div>
-                            <div>
+                            <div class="flex-container-modalAvatarImg">
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'backgroundcolor')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'background_color' + backgroundcolor) }" /></div>
                             </div>
                         </div>
-						<div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'skin'">
-                            <div>
+						<div v-if="this.bodyPart === 'skin'">
+                            <div class="flex-container-modalAvatarImg">
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'skinform')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'skin_form' + skinform) }" /></div>
                             </div>
-                            <div>
+                            <div class="flex-container-modalAvatarImg">
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'skincolor')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'skin_color' + skincolor) }" /></div>
                             </div>
                         </div> 
-						<div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'eyes'">
-                            <div>
+						<div v-if="this.bodyPart === 'eyes'">
+                            <div class="flex-container-modalAvatarImg">
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'eyesform')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'eyes_form' + eyesform) }" /></div>
                             </div>
-                            <div>
+                            <div class="flex-container-modalAvatarImg">
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'eyescolor')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'eyes_color' + eyescolor) }" /></div>
                             </div>
                         </div>
-						<div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'eyebrows'">
-                            <div>
+						<div v-if="this.bodyPart === 'eyebrows'">
+                            <div class="flex-container-modalAvatarImg">
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'eyebrowsform')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'eyebrows_form' + eyebrowsform) }" /></div>
                             </div>
-                            <div>
+                            <div class="flex-container-modalAvatarImg">
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'eyebrowscolor')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'eyebrows_color' + eyebrowscolor) }" /></div>
                             </div>
                         </div>
-						<div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'mouth'">
-                            <div>
+						<div v-if="this.bodyPart === 'mouth'">
+                            <div class="flex-container-modalAvatarImg">
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'mouthform')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'mouth_form' + mouthform) }" /></div>
                             </div>
-                            <div>
+                            <div class="flex-container-modalAvatarImg">
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'mouthcolor')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'mouth_color' + mouthcolor) }" /></div>
                             </div>
                         </div>
-						<div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'hair'">
-                            <div>
+						<div v-if="this.bodyPart === 'hair'">
+                            <div class="flex-container-modalAvatarImg">
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'haircut')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'hair_cut' + haircut) }" /></div>
                             </div>
-                            <div>
+                            <div class="flex-container-modalAvatarImg">
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'haircolor')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'hair_color' + haircolor) }" /></div>
                             </div>
                         </div>
-						<div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'beard'">
-                            <div>
+						<div v-if="this.bodyPart === 'beard'">
+                            <div class="flex-container-modalAvatarImg">
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'beardform')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'beard_form' + beardform) }" /></div>
                             </div>
-                            <div>
+                            <div class="flex-container-modalAvatarImg">
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'beardcolor')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'beard_color' + beardcolor) }" /></div>
                             </div>
                         </div>
-						<div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'glasses'">
-                            <div>
+						<div v-if="this.bodyPart === 'glasses'">
+                            <div class="flex-container-modalAvatarImg">
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'glassesform')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'glasses_form' + glassesform) }" /></div>
                             </div>
-                            <div>
+                            <div class="flex-container-modalAvatarImg">
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'glassescolor')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'glasses_color' + glassescolor) }" /></div>
                             </div>
                         </div>
-						<div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'clothes'">
-                            <div>
+						<div v-if="this.bodyPart === 'clothes'">
+                            <div class="flex-container-modalAvatarImg">
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'clothesform')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'clothes_form' + clothesform) }" /></div>
                             </div>
-                            <div>
+                            <div class="flex-container-modalAvatarImg">
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'clothescolor')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'clothes_color' + clothescolor) }" /></div>
                             </div>
                         </div>
-						<div class="flex-container-modalAvatarImg" v-if="this.bodyPart === 'accessory'">
-                            <div>
+						<div v-if="this.bodyPart === 'accessory'">
+                            <div class="flex-container-modalAvatarImg">
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'accessoryform')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'accessory_form' + accessoryform) }" /></div>
                             </div>
-                            <div>
+                            <div class="flex-container-modalAvatarImg"
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'accessorycolor')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'accessory_color' + accessorycolor) }" /></div>
                             </div>
                         </div>
-                        <div class="flex-container-modalAvatarImg" v-else>
-                            <div v-for="avatar in loadedAvatars2" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === background ||  avatar.name === body || avatar.name === skin || avatar.name === eyes || avatar.name === mouth || avatar.name === face || avatar.name === hair) }" />
-                            </div>
-                        </div>
-
-                         <div style="color: #000;">
-                                <h3>loadedAvatars.length: {{ loadedAvatars.length }}</h3><br />
-                                <h3>totalPages: {{ totalPages }}</h3><br />
-                                <!-- <h3>avatars: {{ this.avatars }}</h3><br /> -->
-                            </div>
+						
+                        <!-- <div style="color: #000;">
+							<h3>loadedAvatars.length: {{ loadedAvatars.length }}</h3><br />
+							<h3>totalPages: {{ totalPages }}</h3><br />
+                        </div> -->
 
                         <br /><br /><hr><br />
                         <div class="d-flex justify-content-center">
@@ -159,7 +153,6 @@
                                   :next-link-class="'page-link'"
                                 >
                             </paginate>
-                            <br /><br />
                         </div>
                     </div>
                     <!-- Modal footer -->
