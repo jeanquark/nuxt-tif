@@ -12,7 +12,7 @@
         </v-card-text>
       </v-card>
 
-      <v-card class="mt-4">
+      <v-card class="mt-4" v-cloak>
         <v-card-title primary-title class="text-md-center">
           <v-card-text class="text-md-center">
             <h3 class="headline mb-0">Toutes les tâches</h3>
@@ -115,3 +115,9 @@
     }
   }
 </script>
+
+<style scoped>
+  [v-cloak] > * { 
+    display:none; 
+  }
+</style>

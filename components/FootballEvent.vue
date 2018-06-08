@@ -10,6 +10,8 @@
 			<!-- loadedStadiums: {{ this.loadedStadiums }}<br /><br /> -->
 			<!--teams1: {{ this.teams1 }}<br /><br />
 			teams2: {{ this.teams2 }}<br /><br /> -->
+			<!-- date: {{ this.date }}<br /><br /> -->
+			<!-- time: {{ this.time }}<br /><br /> -->
 			<v-form>
 				<v-card-title class="primary-title">
 					<v-card-text class="text-md-center">

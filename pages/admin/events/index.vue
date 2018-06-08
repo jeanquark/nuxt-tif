@@ -64,12 +64,13 @@
 				        </td>
 				        <td>{{ props.index + 1 }}</td>
 						<td class="text-xs-left">{{ props.item.name }}</td>
+						<td class="text-xs-left">{{ props.item.localteam_score}} - {{ props.item.visitorteam_score }}</td>
 						<td class="text-xs-left">{{ props.item.activity.name }}</td>
 						<td class="text-xs-left">{{ props.item.category.name }}</td>
 						<td class="text-xs-left">{{ props.item.type.name }}</td>
 						<td class="text-xs-left">{{ props.item.date | moment('DD MMMM YYYY') }}</td>
 						<td class="justify-center layout px-0">
-						  <v-btn icon class="mx-0" :to="'/admin/events/' + props.item.id" :id="props.item.id" disabled>
+						  <v-btn icon class="mx-0" :to="'/admin/events/' + props.item.id" :id="props.item.id">
 						    <v-icon color="teal">edit</v-icon>
 						  </v-btn>
 						  <v-btn icon class="mx-0" @click="deleteItem(props.item)">
@@ -84,10 +85,11 @@
 	    </v-flex>
 
 	    <br /><br />
-	    <h2 class="text-md-center">Noeud "Events" dans la base de données:</h2>
+	    <h2 class="text-md-center">Noeud "events_new" dans la base de données:</h2>
 	    <!-- <b>modifyJSON:</b> {{ modifyJSON }} -->
 	    <br />
 	    <v-flex xs12 sm10 offset-sm1>
+	    	{{ this.new_newJSON }}<br />
 			<json-editor :json="oldJSON" :onChange="onChange"></json-editor>
 			<br />
 			<div class="text-xs-center">
@@ -125,9 +127,10 @@
 		        headers: [
 		        	{ text: 'N°', value: 'id', align: 'left', sortable: false },
 		        	{ text: 'Name', value: 'name_pretty', align: 'center' },
+		        	{ text: 'Score', value: 'score', align: 'center' },
 					{ text: 'Activity', value: 'activity', align: 'center' },
 					{ text: 'Category', value: 'category', align: 'center' },
-					{ text: 'Type', value: 'type', align: 'center' },
+					{ text: 'Competition', value: 'type', align: 'center' },
 					{ text: 'Date', value: 'date', align: 'center' },
 					// { text: 'Time', value: 'time' },
 					{ text: 'Actions', value: 'actions', sortable: false }
@@ -137,7 +140,8 @@
 			        sortBy: 'date',
 			        descending: true
 			    },
-			    newJSON: ''  
+			    newJSON: '',
+			    new_newJSON: ''
 	    	}
 	    },
 	    computed: {
@@ -193,9 +197,41 @@
 		    },
 		    updateEvent () {
 		        console.log('updateEvent called!')
-		        const eventData = this.newJSON
-		        this.$store.dispatch('events/updateEvent', eventData)
-		       	return this.$router.push('/admin/events')
+		  //       const arrayToObject = (array) =>
+				//    	array.reduce((obj, item) => {
+				//      	obj[item.id] = item
+				//      	return obj
+				//    	},{})
+				// this.new_newJSON = arrayToObject(this.newJSON)
+		  //       console.log(this.new_newJSON)
+		  		let myObj = this.newJSON
+			 //  	Object.entries(myObj).forEach(function (obj, index) {
+				// 	console.log('key: ' + obj[0])
+				// 	console.log('values: ' + obj[1])
+				// 	console.log('new key: ' + obj[1].id)
+				// 	obj[0] = obj[1].id
+				// 	// console.log(Object.keys(obj))
+				// 	// myObj[key] = index
+				// 	// key = 1
+				// })
+				// console.log(myObj) 
+				const keyValues = Object.keys(myObj).map((key, index) => {
+				 	console.log(key)
+				 	// [key] = index
+					const newKey = myObj[key].id || key
+    				return { [newKey]: myObj[key] }
+				})
+				const abc = Object.assign({}, ...keyValues);
+				console.log(abc)
+
+				// console.log(replacedItems)
+				// const object2 = Object.assign({c: 4, d: 5}, myObj)
+				// console.log(object2)
+
+
+		        // const eventData = this.newJSON
+		        // this.$store.dispatch('events/updateEvent', eventData)
+		       	// return this.$router.push('/admin/events')
 		    },
 	    }
   	}

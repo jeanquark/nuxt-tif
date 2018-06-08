@@ -43,9 +43,11 @@ export const actions = {
     // Create a new competition
     createCompetition ({commit, getters}, payload) {
         commit('setLoading', true, { root: true })
+        console.log(payload)
+        // return
 
-        // Generate new unique key
-        const newCompetitionKey = firebase.database().ref().child('/competitions/').push().key
+        // Define key from competition slug
+        const newCompetitionKey = payload.slug
 
         let updates = {}
         updates['/competitions/' + newCompetitionKey] = payload

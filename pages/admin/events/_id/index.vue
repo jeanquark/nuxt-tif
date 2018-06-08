@@ -16,90 +16,49 @@
 	      		<v-form>
 					<v-card-title class="primary-title">
 						<v-card-text class="text-md-center">
-							<h3>Tasks</h3>
+							<!-- <h3>Edit event "{{ this.event.name }}"</h3> -->
 						</v-card-text>
 					</v-card-title>
 					<v-container fluid>
-					    <v-layout row wrap>
-							
-						</v-layout>
-						<v-layout row wrap>
-							<v-flex xs6>
-								<v-subheader class="text-xl-center">Date de début</v-subheader>
-							</v-flex>
-							<v-dialog
-							  ref="startDateDialog"
-							  persistent
-							  v-model="modalStartDate"
-							  lazy
-							  full-width
-							  width="290px"
-							  :return-value.sync="date"
-							>
-							  <v-text-field
-							    slot="activator"
-							    label="Choisissez une date"
-							    v-model="competitionStartDate"
-							    prepend-icon="date_range"
-							    readonly
-							  ></v-text-field>
-							  <v-date-picker locale="fr-fr" :first-day-of-week="1" v-model="competitionStartDate" actions>
-							    <v-spacer></v-spacer>
-							    <v-btn flat color="primary" @click="modalStartDate = false">Annuler</v-btn>
-							    <v-btn flat color="primary" @click="$refs.startDateDialog.save(date)">OK</v-btn>
-							  </v-date-picker>
-							</v-dialog>
-							<v-flex xs6>
-								<v-subheader class="text-xl-center">Date de fin</v-subheader>
-							</v-flex>
-							<v-dialog
-							  ref="endDateDialog"
-							  persistent
-							  v-model="modalEndDate"
-							  lazy
-							  full-width
-							  width="290px"
-							  :return-value.sync="date"
-							>
-							  <v-text-field
-							    slot="activator"
-							    label="Choisissez une date"
-							    v-model="competitionEndDate"
-							    prepend-icon="date_range"
-							    readonly
-							  ></v-text-field>
-							  <v-date-picker locale="fr-fr" :first-day-of-week="1" v-model="competitionEndDate" actions>
-							    <v-spacer></v-spacer>
-							    <v-btn flat color="primary" @click="modalEndDate = false">Cancel</v-btn>
-							    <v-btn flat color="primary" @click="$refs.endDateDialog.save(date)">OK</v-btn>
-							  </v-date-picker>
-							</v-dialog>
-						</v-layout>
+					   
 					</v-container>
-					<v-card-text class="text-md-center">
-				  		<v-btn @click="submitRequestToFootballAPI" color="info">submit request to Football API</v-btn>
-						<v-btn @click="">clear</v-btn>
-					</v-card-text>
-					<v-card-actions>
-						<v-card-text class="text-md-center">
-							<h3>Voici les résultats de la requête:</h3>
-						</v-card-text>
-					</v-card-actions>
 				</v-form>
 	      	</v-card>
+	      	<!-- {{ this.event }} -->
+
+			<football-event :event="event" v-if="selectedCategory.slug === 'football'"></football-event>
+
 	    </v-flex>
     </v-layout>
 </template>
 
 <script>
+  	import FootballEvent from '~/components/football/eventEdit'
 	export default {
 		layout: 'layoutBack',
-		props: ['id'],
+		components: { FootballEvent },
 		created () {
-
+			// Retrieve event by url id param
+			// console.log(this.$route.params.id)
+			const eventId = this.$route.params.id
+			this.event = this.$store.getters['events/loadedEvents'].find(event => (event.id === eventId))
+			// console.log(event)
+			// this.name = event.name
+			// this.loadedEvent = event
 		},
 		data () {
 			return {
+				selectedActivity: {
+					name: 'Sport',
+					slug: 'sport'
+				},
+        		selectedCategory: {
+        			name: 'Football',
+        			slug: 'football'
+        		},
+        		name: '',
+        		event: '',
+        		categories: [],
 				links: [
 					{
 						text: 'Dashboard',
@@ -107,15 +66,23 @@
 						disabled: false
 					}, 
 					{
-						text: 'Tasks',
-						to: '/admin/tasks',
+						text: 'Events',
+						to: '/admin/events',
 						disabled: false
 					},
 					{
-						text: 'Edit Task',
+						text: 'Edit event',
 						disabled: true
 					}
 				]
+			}
+		},
+		computed: {
+			loadedEvents () {
+				return this.$store.getters['events/loadedEvents']
+			},
+			loadedEvent () {
+				return this
 			}
 		}
 	}

@@ -15,10 +15,10 @@
 
 	  	<v-flex xs12 sm10 offset-sm1>
 	  		<br /><br />
-	      	<h1 class="text-md-center">Competitions</h1>
+	      	<h1 class="text-md-center">Compétitions</h1>
 	      	<!-- loadedEvents: {{ loadedEvents }} -->
 	      	<br /><br />
-	      	<v-btn color="primary" dark slot="activator" class="mb-2" to="/admin/competitions/create">Add a Competition</v-btn>
+	      	<v-btn color="primary" dark slot="activator" class="mb-2" to="/admin/competitions/create">Créer une competition</v-btn>
 			<!-- {{ loadedEvents }} -->
 			<v-card>
 				<template>
