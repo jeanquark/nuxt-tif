@@ -83,7 +83,7 @@
             "contact_tif_mail": "Notre email"
         },
         "user-avatar": {
-            "your_avatar": "Ton avatar",
+                        "your_avatar": "Ton avatar",
             "want_to_change_your_mind": "Envie de changer de tête ?",
             "female": "Femme",
             "male": "Homme",
@@ -95,7 +95,12 @@
             "mouth": "Bouche",
             "eyes": "Yeux",
             "face": "Visage",
-            "hair": "Cheveux"
+            "hair": "Cheveux",
+			"eyebrows": "Sourcils",
+			"glasses": "Lunettes",
+			"accessory": "Accessoirs",
+			"beard": "Barbe",
+			"loading": "Chargement en cours"
         },
         "user-preferences": {
             "your_parameters": "Tes paramètres",
