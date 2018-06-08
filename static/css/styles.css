@@ -1290,6 +1290,25 @@ text-align: center;
 font-size: 100%;
 }
 
+.flex-container-modalAvatarImgColor {
+display: flex;
+flex-wrap: wrap;
+align-content: stretch;
+justify-content: center;
+padding: 2px;
+}
+
+.flex-container-modalAvatarImgColor > div {
+border: 1px solid darkred;
+max-width: 7%;
+margin: 4px;
+border-radius: 5px;
+color: white;
+height: 100%;
+text-align: center;
+font-size: 100%;
+}
+
 .imgModalMenuAvatar {
 position: relative;
 height: auto;
@@ -3993,4 +4012,3 @@ border-bottom-color: #000;
 }
 
 }
-
