@@ -125,7 +125,7 @@
                             <div class="flex-container-modalAvatarImg">
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'accessoryform')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'accessory_form' + accessoryform) }" /></div>
                             </div>
-                            <div class="flex-container-modalAvatarImgColor"
+                            <div class="flex-container-modalAvatarImgColor">
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'accessorycolor')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'accessory_color' + accessorycolor) }" /></div>
                             </div>
                         </div>
@@ -135,7 +135,7 @@
 							<h3>totalPages: {{ totalPages }}</h3><br />
                         </div> -->
 
-                        <hr><br />
+                        <hr>
                         <div class="d-flex justify-content-center">
                             <paginate
                                   :page-count="totalPages"
@@ -152,7 +152,6 @@
                                 >
                             </paginate>
                         </div>
-                    </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
                         <div class="progress" style="width: 50%; margin: 0 auto;" v-if="arr.length > 0">
@@ -504,14 +503,24 @@
                 // Add image to the object array
                 if (type === 'background') {
                     this.obj.splice(0, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
+                } else if (type === 'skin') {
+                    this.obj.splice(10, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
                 } else if (type === 'eyes') {
-                    this.obj.splice(6, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
+                    this.obj.splice(9, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
+                } else if (type === 'eyebrows') {
+                    this.obj.splice(8, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
                 } else if (type === 'mouth') {
-                    this.obj.splice(5, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
-                } else if (type === 'face') {
-                    this.obj.splice(4, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
+                    this.obj.splice(7, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
+                } else if (type === 'beard') {
+                    this.obj.splice(6, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
                 } else if (type === 'hair') {
+                    this.obj.splice(5, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
+                } else if (type === 'glasses') {
+                    this.obj.splice(4, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
+                } else if (type === 'clothes') {
                     this.obj.splice(3, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
+                } else if (type === 'accessory') {
+                    this.obj.splice(2, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
                 } else {
                     this.obj.splice(1, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
                 }
@@ -616,20 +625,19 @@
     }
     .pagination {
         margin: 0;
+		padding: 0;
     }
     .page-link {
         font-size: 12px !important;
-        font-color: #ccc;
+        font-color: orangered;
         /*background: orangered;*/
         /*border-color: orangered;*/
     }
     .page-item {
-        color: #000;
+        color: #ffffff;
     }
     .page-item.active .page-link {
-        background-color: #387BCA;
-        /*background-color: orangered;*/
-        border-color: #387BCA;
-        /*border-color: orangered;*/
+        background-color: orangered;
+        border-color: orangered;
     }
 </style>
