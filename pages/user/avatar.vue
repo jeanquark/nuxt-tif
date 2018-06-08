@@ -41,8 +41,6 @@
 								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'accessory'}" @click="selectBodyPart('accessory')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.accessory') }}</span></div>
 							</div>
                         </div>
-
-                        <br /><br />
                         <!-- Display dummy text while loading -->
                         <div v-if="loadedAvatars.length == 0">
                             <h1 class="text-center">{{ $t('pages.user-avatar.loading') }}</h1>
@@ -52,10 +50,10 @@
                             </content-placeholders> -->
                         </div>
 						<div v-if="this.bodyPart === 'background'">
-                            <div class="flex-container-modalAvatarImg">
+                            <div class="flex-container-modalAvatarImg" style="width : 50%">
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'backgroundform')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'background_form' + backgroundform) }" /></div>
                             </div>
-                            <div class="flex-container-modalAvatarImg">
+                            <div class="flex-container-modalAvatarImgColor" style="width : 50%">
                                 <div v-for="avatar in loadedAvatars.filter(avatar => avatar.property === 'backgroundcolor')" style="cursor: pointer;" @click="addToMerge(avatar.gender, avatar.type, avatar.image, avatar.imageSmall, avatar.name)"><img :src="'/images/avatars/' + avatar.gender + '/' + avatar.type + '/' + avatar.imageSmall" class="imgModalAvatar" :class="{active: (avatar.name === 'background_color' + backgroundcolor) }" /></div>
                             </div>
                         </div>
