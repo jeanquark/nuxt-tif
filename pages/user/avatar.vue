@@ -152,6 +152,7 @@
                                 >
                             </paginate>
                         </div>
+						<hr>
                     <!-- Modal footer -->
                     <div class="modal-footer">
                         <div class="progress" style="width: 50%; margin: 0 auto;" v-if="arr.length > 0">
@@ -504,25 +505,25 @@
                 if (type === 'background') {
                     this.obj.splice(0, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
                 } else if (type === 'skin') {
-                    this.obj.splice(10, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
-                } else if (type === 'eyes') {
-                    this.obj.splice(9, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
-                } else if (type === 'eyebrows') {
-                    this.obj.splice(8, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
-                } else if (type === 'mouth') {
-                    this.obj.splice(7, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
-                } else if (type === 'beard') {
-                    this.obj.splice(6, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
-                } else if (type === 'hair') {
-                    this.obj.splice(5, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
-                } else if (type === 'glasses') {
-                    this.obj.splice(4, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
-                } else if (type === 'clothes') {
-                    this.obj.splice(3, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
-                } else if (type === 'accessory') {
-                    this.obj.splice(2, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
-                } else {
                     this.obj.splice(1, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
+                } else if (type === 'eyes') {
+                    this.obj.splice(10, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
+                } else if (type === 'eyebrows') {
+                    this.obj.splice(9, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
+                } else if (type === 'mouth') {
+                    this.obj.splice(8, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
+                } else if (type === 'beard') {
+                    this.obj.splice(7, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
+                } else if (type === 'hair') {
+                    this.obj.splice(6, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
+                } else if (type === 'glasses') {
+                    this.obj.splice(5, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
+                } else if (type === 'clothes') {
+                    this.obj.splice(4, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
+                } else if (type === 'accessory') {
+                    this.obj.splice(3, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
+                } else {
+                    this.obj.splice(2, 0, {'image': '/images/avatars/' + gender + '/' + type + '/' + image, 'gender': gender, 'type': type})
                 }
                 this.mergeImages()
             },
