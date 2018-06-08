@@ -37,11 +37,14 @@
             <div class="intro-content">
                 <div class="row">
                     <div class="col-twelve">
-                        <h5>{{ $t('pages.index.welcome') }}</h5>
+                        <h5>{{ $t('pages.index.welcome_on') }}</h5>
                         <h1>ThisIsFan.com</h1>
                         <p class="intro-position">
-                            <span>{{ $t('pages.index.first_application') }}</span>
-                        </p>                    
+                            <span>{{ $t('pages.index.slogan') }} {{ $t('pages.index.slogan2') }}</span>
+                        </p>
+                        <p class="intro-position">
+                            <span>{{ $t('pages.index.stamp1') }} {{ $t('pages.index.stamp2') }}</span>
+                        </p>                   
                         <img src="images/avatar.png" class="imgAvatar" />
                     </div>                     
                 </div>                  
@@ -68,13 +71,13 @@
             <div class="row section-intro">
                 <div class="col-twelve">
 
-                    <h1>{{ $t('pages.index.what_is_it') }}</h1>
+                    <h1>{{ $t('pages.index.what_is_TIF_title') }}</h1>
 
                     <div class="intro-info">
 
                         <img src="images/avatar.png" alt="Profile Picture">
 
-                        <p class="lead">ThisIsFan.com est la première application consacrée aux supporters. Voir les résultats de tes équipes préférées tout en jouant ! Gères ton fan au quotidien, effectues des actions pour gagner des $fans et pour augmenter tes compétences. Plus ton fan aura un niveau élevé, plus il rapportera de point de ferveur à tes équipes préférées.</p>
+                        <p class="lead">{{ $t('pages.index.what_is_TIF_text') }}</p>
                     </div>              
 
                 </div>          
@@ -82,10 +85,8 @@
 
             <div class="row button-section">
                 <div class="col-twelve">
-                    <!-- <button onclick="document.getElementById('id01').style.display='block'" title="Inscription" class="button stroke smoothscroll">S'inscrire</button>               -->
-                    <nuxt-link to="/register"><button title="Inscription" class="button stroke smoothscroll">S'inscrire</button></nuxt-link>              
-                    <!-- <button onclick="document.getElementById('id02').style.display='block'" title="Connection" class="button button-primary">Se connecter</button>           -->
-                    <nuxt-link to="/login"><button title="Connection" class="button button-primary">Se connecter</button></nuxt-link>          
+                    <nuxt-link to="/register"><button title="Inscription" class="button stroke smoothscroll">{{ $t('pages.index.sign_up') }}</button></nuxt-link>              
+                    <nuxt-link to="/login"><button title="Connection" class="button button-primary">{{ $t('pages.index.log_in') }}</button></nuxt-link>          
                 </div>          
             </div>
 
@@ -97,16 +98,16 @@
 
             <div class="row section-intro">
                 <div class="col-twelve">
-                    <h5>Comment y jouer</h5>
-                    <h1>En savoir un peu plus...</h1>
-                    <p class="lead">Si tu n'as pas encore cliqué pour t'inscrire et que tu veux en savoir un peu plus sur le jeu, c'est ici que cela se passe !</p>
+                    <h5>{{ $t('pages.index.how_to_title1') }}</h5>
+                    <h1>{{ $t('pages.index.how_to_title2') }}</h1>
+                    <p class="lead">{{ $t('pages.index.how_to_text') }}</p>
                 </div>          
             </div> <!-- /section-intro--> 
 
             <div class="row resume-timeline">
 
                 <div class="col-twelve resume-header">
-                    <h2>Le jeu</h2>
+                    <h2>{{ $t('pages.index.the_game_title') }}</h2>
                 </div> <!-- /resume-header -->
 
                 <div class="col-twelve">
@@ -116,15 +117,15 @@
                         <div class="timeline-block">
 
                             <div class="timeline-ico">
-                                <i class="fa fa-user fa-2x"></i>
+                                <i class="fa fa-plug fa-2x"></i>
                             </div>
 
                             <div class="timeline-header">
-                                <h3>Inscription</h3>
+                                <h3>{{ $t('pages.index.the_game_register_title') }}</h3>
                             </div>
 
                             <div class="timeline-content">
-                                <p>Tu vas créer ton fan, choisir ton avatar, ta nationalité et ta première équipe favorite.</p>
+                                <p>{{ $t('pages.index.the_game_register_text') }}</p>
                             </div>
 
                         </div> <!-- /timeline-block -->
@@ -132,15 +133,15 @@
                         <div class="timeline-block">
 
                             <div class="timeline-ico">
-                                <i class="fa fa-user fa-2x"></i>
+                                <i class="fa fa-child fa-2x"></i>
                             </div>
 
                             <div class="timeline-header">
-                                <h3>Supporter</h3>
+                                <h3>{{ $t('pages.index.the_game_supporter_title') }}</h3>
                             </div>
 
                             <div class="timeline-content">
-                                <p>Tu pourras soutenir plusieurs équipes, joueurs de divers sports.</p>
+                                <p>{{ $t('pages.index.the_game_supporter_text') }}</p>
                             </div>
 
                         </div> <!-- /timeline-block -->
@@ -148,31 +149,15 @@
                         <div class="timeline-block">
 
                             <div class="timeline-ico">
-                                <i class="fa fa-user fa-2x"></i>
+                                <i class="fa fa-chart-bar fa-2x"></i>
                             </div>
 
                             <div class="timeline-header">
-                                <h3>Compétences</h3>
+                                <h3>{{ $t('pages.index.the_game_skills_title') }}</h3>
                             </div>
 
                             <div class="timeline-content">
-                                <p>Tu devra développer 8 compétences pour pouvoir avoir accès à de nouveaux métiers, de nouvelles formations et pour être toujours plus performant lors des événements de tes équipes favorites.</p>
-                            </div>
-
-                        </div> <!-- /timeline-block -->
-                        
-                        <div class="timeline-block">
-
-                            <div class="timeline-ico">
-                                <i class="fa fa-user fa-2x"></i>
-                            </div>
-
-                            <div class="timeline-header">
-                                <h3>Niveau - Point de ferveur</h3>
-                            </div>
-
-                            <div class="timeline-content">
-                                <p>Les points de ferveur que tu rapporteras à ton équipe préférée lors des matches sont étroitement liés au niveau de ton fan !</p>
+                                <p>{{ $t('pages.index.the_game_skills_text') }}</p>
                             </div>
 
                         </div> <!-- /timeline-block -->
@@ -180,15 +165,31 @@
                         <div class="timeline-block">
 
                             <div class="timeline-ico">
-                                <i class="fa fa-user fa-2x"></i>
+                                <i class="fa fa-star fa-2x"></i>
                             </div>
 
                             <div class="timeline-header">
-                                <h3>Actions "XP"</h3>
+                                <h3>{{ $t('pages.index.the_game_level_title') }}</h3>
                             </div>
 
                             <div class="timeline-content">
-                                <p>Chaque jour, tu pourras augmenter tes compétences. A toi de bien réfléchir à utiliser les bonnes actions (job, formation, bon plan, sport, etc...) pour faire monter en compétences ton personnage.</p>
+                                <p>{{ $t('pages.index.the_game_level_text') }}</p>
+                            </div>
+
+                        </div> <!-- /timeline-block -->
+                        
+                        <div class="timeline-block">
+
+                            <div class="timeline-ico">
+                                <i class="fa fa-bookmark fa-2x"></i>
+                            </div>
+
+                            <div class="timeline-header">
+                                <h3>{{ $t('pages.index.the_game_actionsXP_title') }}</h3>
+                            </div>
+
+                            <div class="timeline-content">
+                                <p>{{ $t('pages.index.the_game_actionsXP_text') }}</p>
                             </div>
 
                         </div> <!-- /timeline-block -->
@@ -196,15 +197,15 @@
                         <div class="timeline-block">
 
                             <div class="timeline-ico">
-                                <i class="fa fa-user fa-2x"></i>
+                                <i class="fa fa-money-bill fa-2x"></i>
                             </div>
 
                             <div class="timeline-header">
-                                <h3>$fans</h3>
+                                <h3>{{ $t('pages.index.the_game_fans_title') }}</h3>
                             </div>
 
                             <div class="timeline-content">
-                                <p>Sans argent, tu ne seras pas d'une grande aide à tes équipes. Grâce aux $fans, tu pourras acheter le maillot de ton équipe préférée, le mettre le jour du match et rapporter encore plus de point de ferveur !</p>
+                                <p>{{ $t('pages.index.the_game_fans_text') }}</p>
                             </div>
 
                         </div> <!-- /timeline-block -->
@@ -212,15 +213,15 @@
                         <div class="timeline-block">
 
                             <div class="timeline-ico">
-                                <i class="fa fa-user fa-2x"></i>
+                                <i class="fa fa-flag fa-2x"></i>
                             </div>
 
                             <div class="timeline-header">
-                                <h3>Tes équipes</h3>
+                                <h3>{{ $t('pages.index.the_game_yourTeams_title') }}</h3>
                             </div>
 
                             <div class="timeline-content">
-                                <p>Tu pourras suivre tes équipes préférées, voir les résultats, les classements. Mais surtout, tu pourras les encourager le jour J !</p>
+                                <p>{{ $t('pages.index.the_game_yourTeams_text') }}</p>
                             </div>
 
                         </div> <!-- /timeline-block -->
@@ -228,15 +229,15 @@
                         <div class="timeline-block">
 
                             <div class="timeline-ico">
-                                <i class="fa fa-user fa-2x"></i>
+                                <i class="fa fa-calendar fa-2x"></i>
                             </div>
 
                             <div class="timeline-header">
-                                <h3>Event (événements)</h3>
+                                <h3>{{ $t('pages.index.the_game_events_title') }}</h3>
                             </div>
 
                             <div class="timeline-content">
-                                <p>Choisi ton équipe, prépares-toi, choisi où voir ton match, crie, chante, boit une bière, participe au tifo et rapporte le maximum de points de ferveur à ton équipe !</p>
+                                <p>{{ $t('pages.index.the_game_events_text') }}</p>
                             </div>
 
                         </div> <!-- /timeline-block -->
@@ -253,10 +254,10 @@
             <div class="row section-intro">
                 <div class="col-twelve">
 
-                    <h5>En images...</h5>
-                    <h1>Envie de voir à quoi cela ressemble ?</h1>
+                    <h5>{{ $t('pages.index.pictures_title1') }}</h5>
+                    <h1>{{ $t('pages.index.pictures_title2') }}</h1>
 
-                    <p class="lead">Tu trouveras ici quelques copies d'écran de se qui t'attend lorsque tu enteras sur notre application !</p>
+                    <p class="lead">{{ $t('pages.index.pictures_text') }}</p>
 
                 </div>          
             </div> <!-- /section-intro--> 
@@ -267,13 +268,13 @@
                      <div id="folio-wrapper" class="block-1-2 block-mob-full stack">
                         <div class="bgrid folio-item">
                            <div class="item-wrap">
-                                <img src="images/portfolio/1.png" alt="Avatar">
+                                <img src="images/portfolio/1.png" alt="{{ $t('pages.index.pictures_avatar_title') }}">
                                 <div class="overlay">                                
                                     <div class="folio-item-table">
                                         <div class="folio-item-cell">
-                                            <h3 class="folio-title">Avatar</h3>                              
+                                            <h3 class="folio-title">{{ $t('pages.index.pictures_avatar_title') }}</h3>                              
                                             <span class="folio-types">
-                                                Tu pourras changer de tête...
+                                                {{ $t('pages.index.pictures_avatar') }}
                                             </span>
                                         </div>                           
                                     </div>                    
@@ -283,13 +284,13 @@
 
                         <div class="bgrid folio-item">
                             <div class="item-wrap">
-                                <img src="images/portfolio/2.png" alt="Inventaire">
+                                <img src="images/portfolio/2.png" alt="{{ $t('pages.index.pictures_inventory_title') }}">
                                 <div class="overlay">                                     
                                     <div class="folio-item-table">
                                         <div class="folio-item-cell">
-                                            <h3 class="folio-title">Inventaire</h3>                             
+                                            <h3 class="folio-title">{{ $t('pages.index.pictures_inventory_title') }}</h3>                             
                                             <span class="folio-types">
-                                                Enfile ton maillot et va au match...
+                                                {{ $t('pages.index.pictures_inventory') }}
                                             </span>                   
                                         </div>                           
                                     </div>                    
@@ -299,13 +300,13 @@
 
                         <div class="bgrid folio-item">
                             <div class="item-wrap">
-                                <img src="images/portfolio/3.png"alt="Profil">
+                                <img src="images/portfolio/3.png"alt="{{ $t('pages.index.pictures_profile_title') }}">
                                 <div class="overlay">                                       
                                     <div class="folio-item-table">
                                         <div class="folio-item-cell">
-                                            <h3 class="folio-title">Profil</h3>                             
+                                            <h3 class="folio-title">{{ $t('pages.index.pictures_profile_title') }}</h3>                             
                                             <span class="folio-types">
-                                                Plus tu as le niveau, plus tu rapportes de point de ferveur...
+                                                {{ $t('pages.index.pictures_profile') }}
                                             </span>                   
                                         </div>                           
                                     </div>                    
@@ -315,13 +316,13 @@
 
                         <div class="bgrid folio-item">
                             <div class="item-wrap">
-                                <img src="images/portfolio/4.png" alt="FanShop">
+                                <img src="images/portfolio/4.png" alt="{{ $t('pages.index.pictures_fanshop_title') }}">
                                 <div class="overlay">                                      
                                     <div class="folio-item-table">
                                         <div class="folio-item-cell">
-                                            <h3 class="folio-title">FanShop</h3>
+                                            <h3 class="folio-title">{{ $t('pages.index.pictures_fanshop_title') }}</h3>
                                             <span class="folio-types">
-                                                Un peu d'argent de côté, achète toi la nouvelle écharpe de ton équipe favorite...
+                                                {{ $t('pages.index.pictures_fanshop') }}
                                             </span>                   
                                        </div>                           
                                     </div>                    
@@ -331,13 +332,13 @@
 
                         <div class="bgrid folio-item">
                             <div class="item-wrap">
-                                <img src="images/portfolio/5.png" alt="Cartes Actions XP">
+                                <img src="images/portfolio/5.png" alt="{{ $t('pages.index.pictures_actionXPCards_title') }}">
                                 <div class="overlay">                                      
                                     <div class="folio-item-table">
                                         <div class="folio-item-cell">
-                                            <h3 class="folio-title">Cartes "Actions XP"</h3>
+                                            <h3 class="folio-title">{{ $t('pages.index.pictures_actionXPCards_title') }}</h3>
                                             <span class="folio-types">
-                                                Plus tu développeras tes compétences, plus tu auras accès à d'autres cartes "Actions XP"...
+                                                {{ $t('pages.index.pictures_actionXPCards') }}
                                             </span>                   
                                        </div>                           
                                     </div>                    
@@ -347,13 +348,13 @@
 
                         <div class="bgrid folio-item">
                             <div class="item-wrap">
-                                <img src="images/portfolio/6.png" alt="Tes équipes">
+                                <img src="images/portfolio/6.png" alt="{{ $t('pages.index.pictures_yourTeams_title') }}">
                                 <div class="overlay">
                                     <div class="folio-item-table">
                                         <div class="folio-item-cell">
-                                            <h3 class="folio-title">Tes équipes</h3>
+                                            <h3 class="folio-title">{{ $t('pages.index.pictures_yourTeams_title') }}</h3>
                                             <span class="folio-types">
-                                                Résultats et classements réels et résultats et classements "TIF" de toutes tes équipes préférées...
+                                                {{ $t('pages.index.pictures_yourTeams') }}
                                             </span>                   
                                         </div>                           
                                     </div>                    
@@ -378,17 +379,15 @@
 
                 <div class="col-twelve section-ads">  
 
-                    <h2 class="h01">Tu n'es toujours pas inscris ?!</h2>
+                    <h2 class="h01">{{ $t('pages.index.still_not_registered_title') }}</h2>
 
-                    <p class="lead">On ne te l'as peut-être pas encore dit, mais le jeu est GRATUIT !.
+                    <p class="lead">{{ $t('pages.index.still_not_registered_text') }}
                         <!-- Simply type    the promocode in the box labeled “Promo Code” when placing your order. -->  </p>
 
                     <div class="row button-section">
 						<div class="col-twelve">
-							<!-- <button onclick="document.getElementById('id01').style.display='block'" title="Inscription" class="button stroke smoothscroll">S'inscrire</button>               -->
-							<nuxt-link to="/register"><button title="Inscription" class="button stroke smoothscroll">S'inscrire</button></nuxt-link>              
-							<!-- <button onclick="document.getElementById('id02').style.display='block'" title="Connection" class="button button-primary">Se connecter</button>           -->
-							<nuxt-link to="/login"><button title="Connection" class="button button-primary">Se connecter</button></nuxt-link>          
+							<nuxt-link to="/register"><button title="Inscription" class="button stroke smoothscroll">{{ $t('pages.index.sign_up') }}</button></nuxt-link>              
+							<nuxt-link to="/login"><button title="Connection" class="button button-primary">{{ $t('pages.index.log_in') }}</button></nuxt-link>          
 						</div>          
                     </div>
 
@@ -416,7 +415,7 @@
                             </h3>
 
                             <h5 class="stat-title">
-                                fans
+                                {{ $t('pages.index.dashboard_nbFans') }}
                             </h5>
 
                         </div> <!-- /stat -->                   
@@ -432,7 +431,7 @@
                             </h3>
 
                             <h5 class="stat-title">
-                                Sports différents
+                                {{ $t('pages.index.dashboard_nbSports') }}
                             </h5>
 
                         </div> <!-- /stat -->
@@ -448,7 +447,7 @@
                             </h3>
 
                             <h5 class="stat-title">
-                                Compétitions en cours
+                                {{ $t('pages.index.dashboard_nbCompetitions') }}
                             </h5>
 
                         </div> <!-- /stat -->                                   
@@ -464,7 +463,7 @@
                             </h3>
 
                             <h5 class="stat-title">
-                                équipes dans la base de données
+                                {{ $t('pages.index.dashboard_nbTeams') }}
                             </h5>
 
                         </div> <!-- /stat -->
@@ -480,7 +479,7 @@
                             </h3>
 
                             <h5 class="stat-title">
-                                joueurs dans la base de données
+                                {{ $t('pages.index.dashboard_nbPlayers') }}
                             </h5>
 
                         </div> <!-- /stat -->
@@ -496,7 +495,7 @@
                             </h3>
 
                             <h5 class="stat-title">
-                                points de ferveur / match
+                                {{ $t('pages.index.dashboard_nbFervor') }}
                             </h5>
 
                         </div> <!-- /stat -->
@@ -513,9 +512,9 @@
 
             <div class="row section-intro">
                 <div class="col-twelve">
-                    <h5>Contact</h5>
-                    <h1>Tu as une remarque sur notre jeu ?</h1>
-                    <p class="lead">N'hésite pas à nous contacter si tu as une idée, une remarque ou tout autre chose qui se rapporterait à notre jeu.</p>
+                    <h5>{{ $t('pages.index.contact_title1') }}</h5>
+                    <h1>{{ $t('pages.index.contact_title2') }}</h1>
+                    <p class="lead">{{ $t('pages.index.contact_text') }}</p>
                 </div> 
             </div> <!-- /section-intro -->
 
@@ -526,21 +525,21 @@
                         <fieldset>
 
                             <div class="form-field">
-                                <input name="contactName" type="text" id="contactName" placeholder="Ton nom" value="" minlength="2" required="">
+                                <input name="contactName" type="text" id="contactName" placeholder="{{ $t('pages.index.contact_form_name') }}" value="" minlength="2" required="">
                             </div>
                             <div class="form-field">
-                               <input name="contactEmail" type="email" id="contactEmail" placeholder="Ton email" value="" required="">
+                               <input name="contactEmail" type="email" id="contactEmail" placeholder="{{ $t('pages.index.contact_form_email') }}" value="" required="">
                             </div>
                             <div class="form-field">
-                                <input name="contactSubject" type="text" id="contactSubject" placeholder="Tu veux nous dire quoi ?" value="">
+                                <input name="contactSubject" type="text" id="contactSubject" placeholder="{{ $t('pages.index.contact_form_comment') }}" value="">
                             </div>                       
                             <div class="form-field">
-                                <textarea name="contactMessage" id="contactMessage" placeholder="Et c'est à que tu écris ton message..." rows="10" cols="50" required=""></textarea>
+                                <textarea name="contactMessage" id="contactMessage" placeholder="{{ $t('pages.index.contact_form_to') }}" rows="10" cols="50" required=""></textarea>
                             </div>                      
                             <div class="form-field">
-                                <button class="submitform">Envoyer</button>
+                                <button class="submitform">{{ $t('pages.index.contact_form_send') }}</button>
                                 <div id="submit-loader">
-                                    <div class="text-loader">Envoi en cours...</div>                             
+                                    <div class="text-loader">{{ $t('pages.index.contact_form_loading') }}</div>                             
                                     <div class="s-loader">
                                         <div class="bounce1"></div>
                                         <div class="bounce2"></div>
@@ -555,7 +554,7 @@
                     <div id="message-warning"></div>            
                     <!-- contact-success -->
                     <div id="message-success">
-                        <i class="fa fa-check"></i>Ton message a bien été envoyé !<br>
+                        <i class="fa fa-check"></i> {{ $t('pages.index.contact_form_sending') }}<br>
                     </div>
 
                 </div> <!-- /col-twelve -->
@@ -568,7 +567,7 @@
                     <div class="icon">
                         <i class="icon-mail"></i>
                     </div>
-                    <h5>Notre email</h5>
+                    <h5>{{ $t('pages.index.contact_tif_mail') }}</h5>
                     <p>info@thisisfan.com</p>
                 </div>  
             </div> <!-- /contact-info -->
