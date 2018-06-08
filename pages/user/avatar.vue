@@ -289,7 +289,7 @@
 				backgroundcolor: '001',
                 skin: 'skin0101',
 				skinform: '01',
-				skincolor: '01'
+				skincolor: '01',
                 eyes: 'eyes0101',
 				eyesform: '01',
 				eyescolor: '01',
