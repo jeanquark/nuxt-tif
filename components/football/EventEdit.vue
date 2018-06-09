@@ -110,7 +110,7 @@
 
 		<v-card>
 			<!-- loadedCompetitions: {{ this.loadedCompetitions }}<br /><br /> -->
-			selectedCompetition: {{ this.selectedCompetition }}<br /><br />
+			<!-- selectedCompetition: {{ this.selectedCompetition }}<br /><br /> -->
 			<!-- competitions: {{ this.competitions }}<br /><br />
 			activity: {{ this.activity }}<br /><br />
 			category: {{ this.category }}<br /><br /> -->
@@ -121,11 +121,11 @@
 			<!-- teams1: {{ this.teams1 }}<br /><br /> -->
 			<!-- event: {{ this.event }}<br /><br />  -->
 			<!-- formattedDate: {{ this.event.date }}<br /><br /> -->
-			selectedStadium: {{ this.selectedStadium }}<br /><br />
+			<!-- selectedStadium: {{ this.selectedStadium }}<br /><br /> -->
 			<!-- team1: {{ this.event.localteam }}<br /><br /> -->
-			selectedTeam1: {{ this.selectedTeam1 }}<br /><br />
-			selectedTeam2: {{ this.selectedTeam2 }}<br /><br />
-			event: {{ this.event }}<br /><br />
+			<!-- selectedTeam1: {{ this.selectedTeam1 }}<br /><br /> -->
+			<!-- selectedTeam2: {{ this.selectedTeam2 }}<br /><br /> -->
+			<!-- event: {{ this.event }}<br /><br /> -->
 			<v-form>
 				<v-card-title class="primary-title">
 					<v-card-text class="text-md-center">

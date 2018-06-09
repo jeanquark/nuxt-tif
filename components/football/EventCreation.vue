@@ -149,7 +149,7 @@
 				</v-container>
 				<v-card-text class="text-md-center">
 			  		<v-btn @click="createEvent" color="info" :disabled="!this.date || !this.time || !this.selectedTeam2">soumettre</v-btn>
-					<v-btn @click="">clear</v-btn>
+					<!-- <v-btn @click="">clear</v-btn> -->
 					<!-- {{ this.selectedCompetition.country.slug }} -->
 					<!-- {{ this.selectedCompetition }} -->
 				</v-card-text>
