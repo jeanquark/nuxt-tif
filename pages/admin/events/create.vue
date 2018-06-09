@@ -73,7 +73,7 @@
 </template>
 
 <script>
-  	import FootballEvent from '~/components/football/eventCreate'
+  	import FootballEvent from '~/components/football/EventCreate'
 	export default {
 		layout: 'layoutBack',
 		components: { FootballEvent },
