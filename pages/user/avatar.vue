@@ -153,17 +153,18 @@
                             </paginate>
                         </div>
 						<hr>
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <div class="progress" style="width: 50%; margin: 0 auto;" v-if="arr.length > 0">
-                            <div class="progress-bar bg-success" role="progressbar" :style="{width: progress + '%'}" :aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100"></div>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <div class="progress" style="width: 50%; margin: 0 auto;" v-if="arr.length > 0">
+                                <div class="progress-bar bg-success" role="progressbar" :style="{width: progress + '%'}" :aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-success" data-dismiss="modal" :disabled="loading || disabled" :loading="loading" @click="saveImage">{{ $t('pages.user-avatar.go_and_validate') }} <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
-                        <nuxt-link to="/home"><button type="button" class="btn btn-danger" data-dismiss="modal">{{ $t('pages.user-avatar.cancel_all') }}</button></nuxt-link>
-                    </div>
-                </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-success" data-dismiss="modal" :disabled="loading || disabled" :loading="loading" @click="saveImage">{{ $t('pages.user-avatar.go_and_validate') }} <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
+                            <nuxt-link to="/home"><button type="button" class="btn btn-danger" data-dismiss="modal">{{ $t('pages.user-avatar.cancel_all') }}</button></nuxt-link>
+                        </div>
+                    </div><!-- /#modalBoxContent -->
+                </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /#modalBox -->
         <!-- End monAvatar -->

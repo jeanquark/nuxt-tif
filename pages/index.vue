@@ -268,7 +268,7 @@
                      <div id="folio-wrapper" class="block-1-2 block-mob-full stack">
                         <div class="bgrid folio-item">
                            <div class="item-wrap">
-                                <img src="images/portfolio/1.png" alt="{{ $t('pages.index.pictures_avatar_title') }}">
+                                <img src="images/portfolio/1.png" :alt="$t('pages.index.pictures_avatar_title')">
                                 <div class="overlay">                                
                                     <div class="folio-item-table">
                                         <div class="folio-item-cell">
@@ -284,7 +284,7 @@
 
                         <div class="bgrid folio-item">
                             <div class="item-wrap">
-                                <img src="images/portfolio/2.png" alt="{{ $t('pages.index.pictures_inventory_title') }}">
+                                <img src="images/portfolio/2.png" :alt="$t('pages.index.pictures_inventory_title')">
                                 <div class="overlay">                                     
                                     <div class="folio-item-table">
                                         <div class="folio-item-cell">
@@ -300,7 +300,7 @@
 
                         <div class="bgrid folio-item">
                             <div class="item-wrap">
-                                <img src="images/portfolio/3.png"alt="{{ $t('pages.index.pictures_profile_title') }}">
+                                <img src="images/portfolio/3.png" :alt="$t('pages.index.pictures_profile_title')">
                                 <div class="overlay">                                       
                                     <div class="folio-item-table">
                                         <div class="folio-item-cell">
@@ -316,7 +316,7 @@
 
                         <div class="bgrid folio-item">
                             <div class="item-wrap">
-                                <img src="images/portfolio/4.png" alt="{{ $t('pages.index.pictures_fanshop_title') }}">
+                                <img src="images/portfolio/4.png" :alt="$t('pages.index.pictures_fanshop_title')">
                                 <div class="overlay">                                      
                                     <div class="folio-item-table">
                                         <div class="folio-item-cell">
@@ -332,7 +332,7 @@
 
                         <div class="bgrid folio-item">
                             <div class="item-wrap">
-                                <img src="images/portfolio/5.png" alt="{{ $t('pages.index.pictures_actionXPCards_title') }}">
+                                <img src="images/portfolio/5.png" :alt="$t('pages.index.pictures_actionXPCards_title')">
                                 <div class="overlay">                                      
                                     <div class="folio-item-table">
                                         <div class="folio-item-cell">
@@ -348,7 +348,7 @@
 
                         <div class="bgrid folio-item">
                             <div class="item-wrap">
-                                <img src="images/portfolio/6.png" alt="{{ $t('pages.index.pictures_yourTeams_title') }}">
+                                <img src="images/portfolio/6.png" :alt="$t('pages.index.pictures_yourTeams_title')">
                                 <div class="overlay">
                                     <div class="folio-item-table">
                                         <div class="folio-item-cell">
@@ -525,16 +525,16 @@
                         <fieldset>
 
                             <div class="form-field">
-                                <input name="contactName" type="text" id="contactName" placeholder="{{ $t('pages.index.contact_form_name') }}" value="" minlength="2" required="">
+                                <input name="contactName" type="text" id="contactName" :placeholder="$t('pages.index.contact_form_name')" value="" minlength="2" required="">
                             </div>
                             <div class="form-field">
-                               <input name="contactEmail" type="email" id="contactEmail" placeholder="{{ $t('pages.index.contact_form_email') }}" value="" required="">
+                               <input name="contactEmail" type="email" id="contactEmail" :placeholder="$t('pages.index.contact_form_email')" value="" required="">
                             </div>
                             <div class="form-field">
-                                <input name="contactSubject" type="text" id="contactSubject" placeholder="{{ $t('pages.index.contact_form_comment') }}" value="">
+                                <input name="contactSubject" type="text" id="contactSubject" :placeholder="$t('pages.index.contact_form_comment')" value="">
                             </div>                       
                             <div class="form-field">
-                                <textarea name="contactMessage" id="contactMessage" placeholder="{{ $t('pages.index.contact_form_to') }}" rows="10" cols="50" required=""></textarea>
+                                <textarea name="contactMessage" id="contactMessage" :placeholder="$t('pages.index.contact_form_to')" rows="10" cols="50" required=""></textarea>
                             </div>                      
                             <div class="form-field">
                                 <button class="submitform">{{ $t('pages.index.contact_form_send') }}</button>

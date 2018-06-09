@@ -69,7 +69,7 @@
 </template>
 
 <script>
-  	import FootballCompetition from '~/components/football/CompetitionCreate'
+  	import FootballCompetition from '~/components/football/competitionCreate'
 	export default {
 		layout: 'layoutBack',
 		components: { FootballCompetition },
