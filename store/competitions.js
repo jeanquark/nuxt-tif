@@ -25,7 +25,8 @@ export const actions = {
     // Load all competitions
     loadedCompetitions ({commit}) {
         console.log('loadedCompetitions')
-        firebase.database().ref('/competitions/').once('value').then(function (snapshot) {
+        // firebase.database().ref('/competitions/').once('value').then(function (snapshot) {
+        firebase.database().ref('/competitions/').on('value', function (snapshot) {
             const competitionsArray = []
             for (const key in snapshot.val()) {
                 competitionsArray.push({ ...snapshot.val()[key], id: key})

@@ -22,6 +22,7 @@
 	            { rel: 'stylesheet', href: '/css/styles_768.css' },
 	            { rel: 'stylesheet', href: '/css/styles_1024.css' },
 	            { rel: 'stylesheet', href: '/css/styles_1280.css' },
+	            { rel: 'stylesheet', href: 'https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css' },
 		    ],
 		    // css: [
 		    // 	{ src: '~/assets/css/styles.css', lang: 'css' }

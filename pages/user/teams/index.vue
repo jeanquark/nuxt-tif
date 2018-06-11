@@ -14,15 +14,15 @@
 						</nuxt-link>					
 					</div>
 					<!-- Modal body -->
-					<div id="modalBoxContent" class="modal-body" v-if="this.loadedUserTeams.length > 0">
+					<div id="modalBoxContent" class="modal-body" v-if="loadedUserTeams.length > 0">
 						<div class="flex-container-modal-MyTeam">
-							<h1>Tu supportes {{ this.loadedUserTeams.length }} équipes...</h1>
+							<h1>Tu supportes {{ loadedUserTeams.length }} équipes...</h1>
 						</div>
 						<div class="flex-container-modal-Title banner2 text-center">
 							<h2>Tes équipes</h2>
 						</div>
 						<div class="flex-container-MesEquipes">
-							<div class="OtherTeam" v-for="team in this.loadedUserTeams">
+							<div class="OtherTeam" v-for="team in loadedUserTeams">
 								<img :src="'/images/teams/' + team.image" class="imgModalAvatar" />
 								<nuxt-link :to="'/teams/' + team.slug" class="overlay">
 									<div class="textActivity">Football<br />{{ team.name }}<br /><br />+Infos</div>
@@ -35,6 +35,8 @@
 							<h1>Supporter une nouvelle équipe ?</h1>
 						</div>
 					</div>
+
+
 					<div id="modalBoxContent" class="modal-body">
 						<div class="flex-container-modal-Title banner text-center">
 							<h2>Compétitions en cours / à venir</h2>
@@ -42,12 +44,27 @@
 						<div class="flex-container-modal-OtherTeam">
 							<h6>Choisis ta compétition</h6>
 						</div>
-						<div class="flex-container-modal-OtherTeam-Img">
+						<div class="flex-container-modal-OtherTeam-Img" v-if="loadedCompetitions != ''">
 							<div class="OtherTeam" v-for="competition in loadedCompetitions">
 								<img :src="'/images/competitions/' + competition.image" class="imgModalAvatar"/>
 								<nuxt-link :to="'/user/competitions/' + competition.slug" class="overlayOtherTeam">
 									<div class="textActivity">{{ competition.name}}</br>{{ competition.country }}</br>{{ competition.year }}</br></br>+Infos</div>
 								</nuxt-link>
+							</div>
+						</div>
+						
+						<div class="ph-item" v-else>
+							<div class="col-md-3">
+						        <div class="ph-picture"></div>
+							</div>
+							<div class="col-md-3">
+						        <div class="ph-picture"></div>
+							</div>
+							<div class="col-md-3">
+						        <div class="ph-picture"></div>
+							</div>
+							<div class="col-md-3">
+						        <div class="ph-picture"></div>
 							</div>
 						</div>
 					</div>

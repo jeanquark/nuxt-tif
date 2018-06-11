@@ -113,6 +113,10 @@ module.exports = {
         home: {
           fr: '/accueil',
           de: '/home'
+        },
+        teams: {
+          fr: '/equipes',
+          de: '/mannschaften'
         }
       }
         // preferences: {
