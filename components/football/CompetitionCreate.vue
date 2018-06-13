@@ -178,7 +178,7 @@
 						<input type="file" @change="previewImage" accept="image/*" style="padding-top: 15px;">
 						<div class="image-preview" v-if="imageData.length > 0"><br />
 							<img class="preview" :src="imageData" width="100px">
-							{{ this.imageData }}
+							<!-- {{ this.imageData }} -->
 						</div>
 					</v-flex>
 				</v-layout>
@@ -197,6 +197,7 @@
   	import Noty from 'noty'
   	import slugify from '~/helpers/slugify'
   	import moment from 'moment'
+  	import axios from 'axios'
 	export default {
 		layout: 'layoutBack',
 		props: ['activity', 'category'],
@@ -298,7 +299,7 @@
 				console.log('submitCreateTeam')
 				console.log(this.selectedGroups)
 				console.log(this.checkCompetitionSlugUniqueness(this.selectedSlug))
-				return
+				// return
 
 				// Organize teams data
 				let teams = {}
@@ -400,7 +401,7 @@
 					    competitionData['image'] = response.data
 					    console.log(competitionData)
 					    this.$store.dispatch('competitions/createCompetition', competitionData)
-					    // return this.$router.push('/admin/teams')
+					    return this.$router.push('/admin/teams')
 					}).catch(function (error) {
 						console.log('error')
 					    console.log(error)

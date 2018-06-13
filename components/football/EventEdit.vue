@@ -3,7 +3,7 @@
 		<Confirm ref="confirm"></Confirm>
 		<v-card>
 			<!-- this.selectedMatchType: {{ this.selectedMatchType }}<br /><br /> -->
-			event: {{ this.event }}<br /><br />
+			<!-- event: {{ this.event }}<br /><br /> -->
 			<v-form>
 				<v-card-title class="primary-title">
 					<v-card-text class="text-md-center">
@@ -12,16 +12,47 @@
 				</v-card-title>
 				<v-container fluid>
 					<v-layout row wrap>
+						<!-- <v-flex xs6 v-if="selectedMatchStatus != 'to_be_played1'">
+							<v-subheader class="text-xl-center">Classement calculé ?</v-subheader>
+						</v-flex>
+						<v-flex xs6 v-if="selectedMatchStatus != 'to_be_played1'">
+							<v-radio-group v-model="standingCalculated">
+								<v-radio
+								  label="Oui, le classement tient compte du résultat de ce match"
+								  color="success"
+								  disabled
+								></v-radio>
+								<v-radio
+								  label="Non, le classement ne tient pas compte du résultat de ce match"
+								  color="error"
+								  disabled
+								></v-radio>
+							</v-radio-group>
+						</v-flex> -->
+						<!-- selectedMatchStatus: {{ this.selectedMatchStatus }}<br /><br /> -->
+						<!-- event.match_status: {{  this.event.match_status }}<br /><br /> -->
+						<!-- event.match_type: {{ this.event.match_type }}<br /><br /> -->
 						<v-flex xs6>
 							<v-subheader class="text-xl-center">Statut du match</v-subheader>
 						</v-flex>
 						<v-flex xs6>
-							<v-checkbox
-							  v-model="selectedMatchStatus"
-						      label="Match terminé"
-						      color="primary"
-						      style="padding-top: 12px"
-						    ></v-checkbox>
+							<v-radio-group v-model="selectedMatchStatus">
+								<v-radio
+								  label="A venir"
+								  color="primary"
+								  value="to_be_played"
+								></v-radio>
+								<v-radio
+								  label="En cours"
+								  color="warning"
+								  value="playing"
+								></v-radio>
+								<v-radio
+								  label="Match terminé"
+								  color="success"
+								  value="played"
+								></v-radio>
+							</v-radio-group>
 						</v-flex>
 
 						<v-flex xs6>
@@ -38,33 +69,35 @@
 					        ></v-select>
 						</v-flex>
 
-						<v-flex xs4 offset-xs1>
+						<v-flex xs4 offset-xs1 v-if="selectedMatchStatus != 'to_be_played'">
 							<v-text-field
 								v-model="selectedTeam1Score"
 								type="number"
-								label="Score équipe locale"
+					      		min="0"
+								:label="'Score équipe locale: ' + this.selectedTeam1.name"
 					            placeholder="Indiquer le score de l'équipe locale"
 					        ></v-text-field>
 						</v-flex>
 
-						<v-flex xs4 offset-xs1>
+						<v-flex xs4 offset-xs1 v-if="selectedMatchStatus != 'to_be_played'">
 							<v-text-field
 								v-model="selectedTeam2Score"
 								type="number"
-					            label="Score équipe visiteuse"
+					    		min="0"
+					            :label="'Score équipe visiteuse: ' + this.selectedTeam2.name"
 					            placeholder="Indiquer le score de l'équipe visiteuse"
 					        ></v-text-field>
 						</v-flex>
 					</v-layout>
 						
-					<v-layout row wrap v-if="this.selectedMatchType != 'group_stage'">
+					<v-layout row wrap v-if="this.selectedMatchType != 'group_stage' && selectedMatchStatus != 'to_be_played'">
 						<v-flex xs6>
 							<v-subheader class="text-xl-center">Le score mentionné ci-dessus a-t-il été obtenu après prolongations?</v-subheader>
 						</v-flex>
 						<v-flex xs6>
 							<v-checkbox
 							  v-model="selectedExtraTime"
-						      label="Prolongations"
+						      label="Oui, après prolongations"
 						      color="primary"
 						      style="padding-top: 12px"
 						    ></v-checkbox>
@@ -85,6 +118,7 @@
 							<v-text-field
 								v-model="selectedTeam1PenaltyScore"
 								type="number"
+					      		min="0"									
 								label="Score aux penalties de l'équipe locale"
 					            placeholder="Indiquer le score aux penalties de l'équipe locale"
 					        ></v-text-field>
@@ -94,6 +128,7 @@
 							<v-text-field
 								v-model="selectedTeam2PenaltyScore"
 								type="number"
+					      		min="0"
 								label="Score aux penalties de l'équipe visiteuse"
 					            placeholder="Indiquer le score aux penalties de l'équipe visiteuse"
 					        ></v-text-field>
@@ -101,7 +136,10 @@
 					</v-layout>
 				</v-container>
 				<v-card-text class="text-md-center">
-			  		<v-btn @click="editMatchResult" color="info" :disabled="!this.selectedTeam1Score || !this.selectedTeam2Score">soumettre le nouveau résultat</v-btn>
+			  		<v-btn @click="editMatchResult" color="info" :disabled="this.event.match_status === 'played' && this.event.match_type === 'group_stage'">soumettre le nouveau résultat</v-btn>
+			  		<v-alert :value="true" type="error" v-if="this.event.match_status === 'played' && this.event.match_type === 'group_stage'">
+      					Ce match a déjà été enregistré et le classement calculé. Les modifications ne sont donc plus possibles. Si toutefois le score doit être changé, il peut l'être manuellement sous le noeud "events" de firebase (voir bas de page <nuxt-link to="/admin/events">events</nuxt-link>). Il faut cependant prendre garde à également mettre à jour le classement.
+    				</v-alert>
 				</v-card-text>
 			</v-form>
 		</v-card>
@@ -332,7 +370,7 @@
         		selectedTeam1: this.event.localteam,
         		// selectedTeam2: '',
         		selectedTeam2: this.event.visitorteam,
-        		selectedStatus: '',
+        		// selectedStatus: this.event.match_status,
         		radioGroup: 1,
         		// event: ''
         		selectedMatchStatus: this.event.match_status,
@@ -357,7 +395,8 @@
         		selectedPenaltyShootout: '',
         		selectedTeam1PenaltyScore: '',
         		selectedTeam2PenaltyScore: '',	
-        		event: '',		
+        		// standingCalculated: this.event.standing_calculated,
+        		// event: '',
         	}
 		},
 		computed: {
@@ -413,6 +452,7 @@
 			editMatchResult () {
 				const matchData = {
 					event_id: this.eventId,
+					name: this.event.name,
 					localteam: this.selectedTeam1,
 					visitorteam: this.selectedTeam2,
 					competition: this.selectedCompetition,
@@ -424,18 +464,22 @@
 					visitorteam_penalty_score: this.selectedTeam2PenaltyScore,
 					extra_time: this.selectedExtraTime,
 					penalty_shootout: this.selectedPenaltyShootout,
+					// standing_calculated: this.standingCalculated
 				}
 				console.log(matchData)
 
-				if (!this.selectedMatchStatus) {
-					this.$refs.confirm.open('Avertissement', 'Comme le match n\'est pas indiqué comme étant terminé, le classement ne sera pas mis à jour.', { color: 'orange' }).then((confirm) => {
-			    		console.log(confirm)
+
+				if (this.selectedMatchStatus === 'played' && this.selectedMatchType === 'group_stage') {
+					this.$refs.confirm.open('Avertissement', 'Le match étant indiqué comme terminé, le classement sera mis à jour. Vérifiez donc que le résultat transmis est bien correct. Tout changement ultérieur du résultat a des conséquences sur le classement et devra donc être manuellement implémenté.', { color: 'orange' }).then((confirm) => {
 			    		if (confirm) {
-			    			this.$store.dispatch('events/updateMatchResult', matchData )
-							// this.$router.push('/admin/events')
-			    		}
+			    			this.$store.dispatch('events/updateMatchResult', matchData)
+							this.$router.push('/admin/events')
+						}
 			    	})
-				}
+				} else {
+					this.$store.dispatch('events/updateMatchResult', matchData)
+					this.$router.push('/admin/events')
+				}						
 			},
 			editEvent () {
 				console.log('submitEditEvent')

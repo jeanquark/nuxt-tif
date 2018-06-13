@@ -21,48 +21,28 @@
 	      	<v-btn color="primary" dark slot="activator" class="mb-2" to="/admin/events/create">Add an Event</v-btn>
 			<!-- {{ loadedEvents }} -->
 			<v-card>
-				<template>
-				  <v-data-table
-				    v-model="selected"
-				    :headers="headers"
-				    :items="loadedEvents"
-				    select-all
-				    :pagination.sync="pagination"
-				    item-key="name_pretty"
-				    class="elevation-1"
-				  >
-				    <template slot="headers" slot-scope="props">
-				      <tr>
-				        <th>
-				          <v-checkbox
-				            primary
-				            hide-details
-				            @click.native="toggleAll"
-				            :input-value="props.all"
-				            :indeterminate="props.indeterminate"
-				          ></v-checkbox>
-				        </th>
-				        <th
-				          v-for="header in props.headers"
-				          :key="header.text"
-				          :class="['column sortable', pagination.descending ? 'desc' : 'asc', header.value === pagination.sortBy ? 'active' : '']"
-				          @click="changeSort(header.value)"
-				        >
-				          <v-icon small>arrow_upward</v-icon>
-				          {{ header.text }}
-				        </th>
-				      </tr>
-				    </template>
-				    <template slot="items" slot-scope="props">
-				      <tr :active="props.selected" @click="props.selected = !props.selected">
-				        <td>
-				          <v-checkbox
-				            primary
-				            hide-details
-				            :input-value="props.selected"
-				          ></v-checkbox>
-				        </td>
-				        <td>{{ props.index + 1 }}</td>
+				<v-card-title>
+					Events
+      				<v-spacer></v-spacer>
+					<v-text-field
+						append-icon="search"
+						label="Search"
+						single-line
+						hide-details
+						v-model="search"
+					></v-text-field>
+			    </v-card-title>
+				<v-data-table
+					:headers="headers"
+					:items="loadedEvents"
+					:search="search"
+					:pagination.sync="pagination"
+					:rows-per-page-items="[10,20,50]"
+				>
+					<template slot="items" slot-scope="props">
+					  <tr>
+					    <td>{{ props.index + 1 }}</td>
+					    <td>{{ props.item.id }}</td>
 						<td class="text-xs-left">{{ props.item.name }}</td>
 						<td class="text-xs-left">{{ props.item.localteam_score}} - {{ props.item.visitorteam_score }}</td>
 						<td class="text-xs-left">{{ props.item.activity.name }}</td>
@@ -77,10 +57,12 @@
 						    <v-icon color="pink">delete</v-icon>
 						  </v-btn>
 						</td>
-				      </tr>
-				    </template>
-				  </v-data-table>
-				</template>
+					  </tr>
+					</template>
+					<v-alert slot="no-results" :value="true" color="error" icon="warning">
+						Your search for "{{ search }}" found no results.
+					</v-alert>
+				</v-data-table>
 			</v-card>
 	    </v-flex>
 
@@ -125,8 +107,9 @@
 			        }
 			    ],
 		        headers: [
-		        	{ text: 'N°', value: 'id', align: 'left', sortable: false },
-		        	{ text: 'Name', value: 'name_pretty', align: 'center' },
+		        	{ text: 'N°', value: 'id', align: 'left' },
+		        	{ text: 'ID', value: 'id', align: 'center' },
+		        	{ text: 'Name', value: 'name', align: 'center' },
 		        	{ text: 'Score', value: 'score', align: 'center' },
 					{ text: 'Activity', value: 'activity', align: 'center' },
 					{ text: 'Category', value: 'category', align: 'center' },

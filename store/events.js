@@ -93,6 +93,7 @@ export const actions = {
     async updateMatchResult ({commit, dispatch}, payload) {
         commit('setLoading', true, { root: true})
         console.log(payload)
+        // return
 
         // Retrieve both teams data
         // const localteam = await firebase.database().ref('/competitions/' + payload.competition_id + '/teams').child(payload.localteam_id).once('value')
@@ -108,102 +109,107 @@ export const actions = {
         // console.log(localteam)
 
         // const eventref = firebase.database().ref('/competitions/' + 'world_cup_2018' + '/teams').child('brasil')
-        const snapshot1 = await firebase.database().ref('/competitions/' + payload.competition.slug + '/teams').child(payload.localteam.slug).once('value')
-        const oldLocalTeamData = snapshot1.val()
-        const snapshot2 = await firebase.database().ref('/competitions/' + payload.competition.slug + '/teams').child(payload.visitorteam.slug).once('value')
-        const oldVisitorTeamData = snapshot2.val()
-        console.log(oldLocalTeamData)
-        console.log(oldVisitorTeamData)
+        
         // return
 
+        // Update the ranking only if the match is over
+        if (payload.match_status === 'played' && payload.match_type === 'group_stage') {
+            const snapshot1 = await firebase.database().ref('/competitions/' + payload.competition.slug + '/teams').child(payload.localteam.slug).once('value')
+            const oldLocalTeamData = snapshot1.val()
+            const snapshot2 = await firebase.database().ref('/competitions/' + payload.competition.slug + '/teams').child(payload.visitorteam.slug).once('value')
+            const oldVisitorTeamData = snapshot2.val()
+            console.log(oldLocalTeamData)
+            console.log(oldVisitorTeamData)
 
-        // Update standings
+            // Update standings
+            let updates = {}
+            // Localteam won
+            if (payload.localteam_score > payload.visitorteam_score) {
+                console.log('localteam won')
+                console.log(payload)
+                console.log(payload.competition.slug)
+                console.log(payload.localteam.slug)
+                console.log(payload.visitorteam.slug)
+                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/wins'] = oldLocalTeamData.wins + 1
+                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/goals_scored'] = oldLocalTeamData.goals_scored + payload.localteam_score
+                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/goals_conceded'] = oldLocalTeamData.goals_conceded + payload.visitorteam_score
+                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/points'] = oldLocalTeamData.points + 3
+
+                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/losses'] = oldVisitorTeamData.losses + 1
+                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/goals_scored'] = oldVisitorTeamData.goals_scored + payload.visitorteam_score
+                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/goals_conceded'] = oldVisitorTeamData.goals_conceded + payload.localteam_score
+            // Visitorteam won
+            } else if (payload.localteam_score < payload.visitorteam_score ) {
+                console.log('visitorteam won')
+                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/wins'] = oldVisitorTeamData.wins + 1
+                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/goals_scored'] = oldVisitorTeamData.goals_scored + payload.visitorteam_score
+                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/goals_conceded'] = oldVisitorTeamData.goals_conceded + payload.localteam_score
+                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/points'] = oldVisitorTeamData.points + 3
+
+                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/losses'] = oldLocalTeamData.losses + 1
+                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/goals_scored'] = oldLocalTeamData.goals_scored + payload.localteam_score
+                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/goals_conceded'] = oldLocalTeamData.goals_conceded + payload.visitorteam_score
+            // Draw and no penalties
+            } else if (payload.localteam_score === payload.visitorteam_score && !payload.penalty_shootout) {
+                console.log('draw')
+                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/draws'] = oldLocalTeamData.draws + 1
+                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/goals_scored'] = oldLocalTeamData.goals_scored + payload.localteam_score
+                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/goals_conceded'] = oldLocalTeamData.goals_conceded + payload.visitorteam_score
+                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/points'] = oldLocalTeamData.points + 1
+
+                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/draws'] = oldVisitorTeamData.draws + 1
+                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/goals_scored'] = oldVisitorTeamData.goals_scored + payload.visitorteam_score
+                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/goals_conceded'] = oldVisitorTeamData.goals_conceded + payload.localteam_score
+                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/points'] = oldVisitorTeamData.points + 1
+            // Draw and penalties
+            } else if (payload.localteam_score === payload.visitorteam_score && payload.penalty_shootout) {
+
+            }
+
+            // console.log(payload.localteam_score)
+            // console.log(payload.visitorteam_score)
+
+            // Update localteam standing
+            // firebase.database().ref('/competitions/' + payload.competition.slug + '/teams').child(payload.localteam.slug).once('value').then(function(snapshot) {
+            //     console.log(snapshot.val())
+            //     const oldLocalTeamData = snapshot.val()
+            //     console.log(payload)
+      
+            //     try {
+            //         firebase.database().ref().update(updates)
+            //             new Noty({type: 'success', text: 'Le résultat a été mis à jour.', timeout: 5000, theme: 'metroui'}).show()
+            //     } catch(error) {
+            //         new Noty({type: 'error', text: 'Le résultat n\'a pas pu être mis à jour. Erreur: ' + error, timeout: 5000, theme: 'metroui'}).show()
+            //         console.log(error)
+            //     }
+            //     // firebase.database().ref('/competitions/world_cup_2018/teams').child('brasil').set({
+            //     //   wins: oldLocalTeamData.wins + 1
+            //     // })
+            // })
+
+            try {
+                firebase.database().ref().update(updates)
+                    new Noty({type: 'success', text: 'Le classement pour le match ' + payload.name + ' a été mis à jour.', timeout: 5000, theme: 'metroui'}).show()
+            } catch(error) {
+                new Noty({type: 'error', text: 'Le classement n\'a pas pu être mis à jour. Erreur: ' + error, timeout: 5000, theme: 'metroui'}).show()
+                console.log(error)
+            }
+            // return
+        }            
+
+        // Update match result in events node
         let updates = {}
-        // Localteam won
-        if (payload.localteam_score > payload.visitorteam_score) {
-            console.log('localteam won')
-            console.log(payload)
-            console.log(payload.competition.slug)
-            console.log(payload.localteam.slug)
-            console.log(payload.visitorteam.slug)
-            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/wins'] = oldLocalTeamData.wins + 1
-            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/goals_scored'] = oldLocalTeamData.goals_scored + payload.localteam_score
-            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/goals_conceded'] = oldLocalTeamData.goals_conceded + payload.visitorteam_score
-            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/goals_conceded'] = oldLocalTeamData.points + 3
-
-            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/losses'] = oldVisitorTeamData.losses + 1
-            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/goals_scored'] = oldVisitorTeamData.goals_scored + payload.visitorteam_score
-            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/goals_conceded'] = oldVisitorTeamData.goals_conceded + payload.localteam_score
-        // Visitorteam won
-        } else if (payload.localteam_score < payload.visitorteam_score ) {
-            console.log('visitorteam won')
-            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/wins'] = oldVisitorTeamData.wins + 1
-            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/goals_scored'] = oldVisitorTeamData.goals_scored + payload.visitorteam_score
-            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/goals_conceded'] = oldVisitorTeamData.goals_conceded + payload.localteam_score
-            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/goals_conceded'] = oldVisitorTeamData.points + 3
-
-            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/losses'] = oldLocalTeamData.losses + 1
-            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/goals_scored'] = oldLocalTeamData.goals_scored + payload.localteam_score
-            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/goals_conceded'] = oldLocalTeamData.goals_conceded + payload.visitorteam_score
-        // Draw and no penalties
-        } else if (payload.localteam_score === payload.visitorteam_score && !payload.penalty_shootout) {
-
-        // Draw and penalties
-        } else if (payload.localteam_score === payload.visitorteam_score && payload.penalty_shootout) {
-
-        }
-        // console.log(payload.localteam_score)
-        // console.log(payload.visitorteam_score)
-
+        updates['/events_new/' + payload.event_id + '/localteam_score'] = payload.localteam_score
+        updates['/events_new/' + payload.event_id + '/visitorteam_score'] = payload.visitorteam_score
+        updates['/events_new/' + payload.event_id + '/match_status'] = payload.match_status
+        updates['/events_new/' + payload.event_id + '/match_type'] = payload.match_type
         try {
             firebase.database().ref().update(updates)
-                new Noty({type: 'success', text: 'Le résultat et le classement ont été mis à jour.', timeout: 5000, theme: 'metroui'}).show()
+            new Noty({type: 'success', text: 'Le résultat du match ' + payload.name + ' a été mis à jour.', timeout: 5000, theme: 'metroui'}).show()
         } catch(error) {
             new Noty({type: 'error', text: 'Le résultat n\'a pas pu être mis à jour. Erreur: ' + error, timeout: 5000, theme: 'metroui'}).show()
             console.log(error)
         }
-        return
-
-
-        // Update the ranking only if the match is over
-        if (payload.match_status) {
-            // Update team1 results
-            firebase.database().ref('/competitions/' + payload.competition_id + '/teams').child(payload.localteam_id).once('value').then(function(snapshot) {
-                console.log(snapshot.val())
-                const oldLocalTeamData = snapshot.val()
-                console.log(payload)
-                // const newLocalTeamData = {
-                //     wins: oldLocalTeamData.wins + 1
-                // }
-
-                
-                
-            
-                try {
-                    firebase.database().ref().update(updates)
-                        new Noty({type: 'success', text: 'Le résultat a été mis à jour.', timeout: 5000, theme: 'metroui'}).show()
-                } catch(error) {
-                    new Noty({type: 'error', text: 'Le résultat n\'a pas pu être mis à jour. Erreur: ' + error, timeout: 5000, theme: 'metroui'}).show()
-                    console.log(error)
-                }
-                // firebase.database().ref('/competitions/world_cup_2018/teams').child('brasil').set({
-                //   wins: oldLocalTeamData.wins + 1
-                // })
-            })
-        }
-
-        // Update match result
-        // let updates = {}
-        // updates['/events_new/' + payload.event_id + '/localteam_score'] = payload.localteam_score
-        // updates['/events_new/' + payload.event_id + '/visitorteam_score'] = payload.visitorteam_score
-        // try {
-        //     firebase.database().ref().update(updates)
-        //     new Noty({type: 'success', text: 'Le résultat a été mis à jour.', timeout: 5000, theme: 'metroui'}).show()
-        // } catch(error) {
-        //     new Noty({type: 'error', text: 'Le résultat n\'a pas pu être mis à jour. Erreur: ' + error, timeout: 5000, theme: 'metroui'}).show()
-        //     console.log(error)
-        // }
-
       
     },
 
