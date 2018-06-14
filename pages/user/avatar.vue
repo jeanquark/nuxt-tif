@@ -36,9 +36,9 @@
 								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'mouth'}" @click="selectBodyPart('mouth')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.mouth') }}</span></div>
 								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'hair'}" @click="selectBodyPart('hair')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.hair') }}</span></div>
 								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'beard'}" @click="selectBodyPart('beard')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.beard') }}</span></div>
-								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'glasses'}" @click="selectBodyPart('glasses')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.glasses') }}</span></div>
+								<!-- <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'glasses'}" @click="selectBodyPart('glasses')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.glasses') }}</span></div> -->
 								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'clothes'}" @click="selectBodyPart('clothes')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.clothes') }}</span></div>
-								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'accessory'}" @click="selectBodyPart('accessory')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.accessory') }}</span></div>
+								<!-- <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'accessory'}" @click="selectBodyPart('accessory')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.accessory') }}</span></div> -->
 							</div>
                         </div>
                         <!-- Display dummy text while loading -->
