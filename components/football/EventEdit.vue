@@ -470,7 +470,7 @@
 
 
 				if (this.selectedMatchStatus === 'played' && this.selectedMatchType === 'group_stage') {
-					this.$refs.confirm.open('Avertissement', 'Le match étant indiqué comme terminé, le classement sera mis à jour. Vérifiez donc que le résultat transmis est bien correct. Tout changement ultérieur du résultat a des conséquences sur le classement et devra donc être manuellement implémenté.', { color: 'orange' }).then((confirm) => {
+					this.$refs.confirm.open('Avertissement', 'Le match est indiqué comme étant terminé, le classement sera mis à jour. Vérifiez donc que le résultat transmis est bien correct. Tout changement ultérieur du résultat a des conséquences sur le classement et devra donc être manuellement implémenté.', { color: 'orange' }).then((confirm) => {
 			    		if (confirm) {
 			    			this.$store.dispatch('events/updateMatchResult', matchData)
 							this.$router.push('/admin/events')

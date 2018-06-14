@@ -344,6 +344,9 @@ export const actions = {
             // const newUserKey = firebase.database().ref().child('/users').push().key
             authData['status'] = 'user'
             newUserKey = authData['id']
+            console.log(newUserKey)
+            console.log('authData:')
+            console.log(authData)
 
             firebase.database().ref('/users/' + newUserKey).set(buildUserObjectOAuth(authData))
 

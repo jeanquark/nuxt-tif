@@ -379,6 +379,7 @@
 					countries: countries,
 					groups: this.selectedGroups,
 					groups_number: this.selectedGroupsNumber,
+					groups_format: this.selectedGroupsFormat,
 					teams: teams,
 			        name: this.selectedName,
 			        slug: this.selectedSlug,

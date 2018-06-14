@@ -32,7 +32,7 @@
                     <div class="row button-section">
                         <div class="col-twelve">
                             <button type="submit" class="button button-primary" style="" :disabled="loading" :loading="loading" @click.prevent="signUserIn">Go Go Go, c'est parti ! <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
-                            <button type="submit" class="button btn-facebook" @click.prevent="signInWithFacebook"><i class="fa fa-facebook"></i> Connecte-toi avec FB</button>
+                            <button type="submit" class="button btn-facebook" @click.prevent="signInWithFacebook" disabled><i class="fa fa-facebook"></i> Connecte-toi avec FB</button>
                             <button type="submit" class="button btn-twitter" @click.prevent="signInWithGoogle"><i class="fa fa-google"></i> Connecte-toi avec G+</button>
                         </div>
                     </div>

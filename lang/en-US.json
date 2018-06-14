@@ -11,7 +11,11 @@
     "protected": "This page is protected. Only signed in member can access it.",
     "messages": {
         "login": {
-            "success": "Successful login registration",
+            "success": "Successful login!",
+            "error": "Sorry, user could not be log in successfully"
+        },
+        "registration": {
+            "success": "Successful registration!",
             "error": "Sorry, user could not be registered successfully"
         }
     },

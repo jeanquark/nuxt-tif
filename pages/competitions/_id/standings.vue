@@ -7,14 +7,14 @@
 					<!-- Modal Header -->
 					<div class="modal-header">
 					  	<span class="modal-title">Résultats et classements<span class="modal-title-Sub">(Tes équipes)</span></span>
-					  	competition id: {{ this.competition_id }}<br /><br />
-					  	loadedCompetition : {{ this.loadedCompetition }}<br /><br />
+					  	<!-- competition id: {{ this.competition_id }}<br /><br /> -->
+					  	<!-- loadedCompetition : {{ this.loadedCompetition }}<br /><br /> -->
 					  	<!-- loadedCompetitionTeams: <span v-if="loadedCompetition != ''">{{ this.loadedCompetition.teams }}</span><br /><br /> -->
 					  	<!-- loadedCompetitionTeams: <span v-if="loadedCompetition != ''">{{ this.loadedCompetitionTeams }}</span><br /><br /> -->
-					  	loadedCompetitionTeams: {{ this.loadedCompetition }}</span><br /><br />
-					  	loadedCompetitionGroups: {{ loadedCompetitionGroups }}<br /><br />
+					  	<!-- loadedCompetitionTeams: {{ this.loadedCompetition }}</span><br /><br /> -->
+					  	<!-- loadedCompetitionGroups: {{ loadedCompetitionGroups }}<br /><br /> -->
 
-                        <nuxt-link :to="localePath({ name: 'teams'})" class="">
+                        <nuxt-link :to="'/teams/'" class="">
 							<i class="fa fa-arrow-circle-left fa-2x"></i>
 						</nuxt-link> 
 	            	</div>
@@ -67,7 +67,7 @@
 
 					<!-- Modal footer -->
 					<div class="modal-footer">
-					  	<a href="mesEquipesDetails.html"><button type="button" class="btn btn-danger" data-dismiss="modal">Sortir d'ici !</button></a>
+					  	<nuxt-link :to="'/teams/'"><button type="button" class="btn btn-danger" data-dismiss="modal">Sortir d'ici !</button></nuxt-link>
 					</div>
 			  	</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
@@ -92,11 +92,13 @@
 				return this.$store.getters['competitions/loadedCompetitions'].find(competition => competition.slug === this.competition_id)
 			},
 			loadedCompetitionGroups () {
+				console.log('entering loadedCompetitionGroups')
 				let competition = this.$store.getters['competitions/loadedCompetitions'].find(competition => competition.slug === this.competition_id)
+				console.log(competition)
 				const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 				let groupsArray = []
-				for (let i = 0; i < competition.groups.number; i++) {
-					if (competition.groups.format === 'letters') {
+				for (let i = 0; i < competition.groups_number; i++) {
+					if (competition.groups_format === 'letters') {
 						groupsArray.push(alphabet[i])
 					} else  {
 						groupsArray.push(i + 1)

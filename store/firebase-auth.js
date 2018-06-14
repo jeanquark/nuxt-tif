@@ -5,6 +5,27 @@ import setUser from '../helpers/setUser'
 import Noty from 'noty'
 // import i18n from 'vue-i18n'
 
+function buildUserObjectOAuth (authData) {
+    // let { email, displayName, uid, photoURL, pseudo, country, year_birth, language } = authData.user
+    // let user = {}
+    // user['email'] = email
+    // user['name'] = displayName
+    // user['uid'] = uid
+    // user['picture'] = photoURL
+    // user['isAdmin'] = authData.isAdmin
+    // user['pseudo'] = pseudo
+    // user['country'] = country
+    // user['year_birth'] = year_birth
+    // user['language'] = language
+    // return user
+    let { email, uid } = authData.user
+    let user = {}
+    user['email'] = email
+    user['id'] = uid
+    user['status'] = 'user'
+    return user
+}
+
 export const state = () => ({
 })
 
@@ -168,21 +189,25 @@ export const actions = {
 
             // Check if user already exists in database
             let user = await firebase.database().ref('/users/' + userId).once('value')
-            console.log(user)
+            console.log(user.val())
+            const userIsAlreadyRegistered = user.val()
 
-            // If not save new user in database
-            if (!user) {
+            // If user does not exists, save new user in database
+            if (!userIsAlreadyRegistered) {
                 console.log('new user')
                 const newUserKey = userId
-                let user = firebase.database().ref('/users/' + newUserKey).set(userObject)
+                let user = firebase.database().ref('/users/' + newUserKey).set(buildUserObjectOAuth(authData))
+            } else {
+                console.log('user already registered')
             }
 
-            // console.log(i18n.t('pages.index.welcome'))
-            // console.log(this.app.i18n.t('messages.login.success'))
-            // let abc = this.app.i18n.t('messages.login.success')
             // Load user in store
             commit('users/setLoadedUser', user, { root: true })
-            new Noty({type: 'success', text: this.app.i18n.t('messages.login.success'), timeout: 5000, theme: 'metroui'}).show()
+            if (!userIsAlreadyRegistered) {
+                new Noty({type: 'success', text: this.app.i18n.t('messages.registration.success'), timeout: 5000, theme: 'metroui'}).show()
+            } else {
+                new Noty({type: 'success', text: this.app.i18n.t('messages.login.success'), timeout: 5000, theme: 'metroui'}).show()        
+            }
             // new Noty({type: 'success', text: i18n.t('pages.index.welcome'), timeout: 5000, theme: 'metroui'}).show()
             commit('setLoading', false, { root: true })
             console.log('signInWithGooglePopup done')

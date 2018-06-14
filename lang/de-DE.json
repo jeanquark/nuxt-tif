@@ -11,7 +11,11 @@
     "protected": "Diese Seite ist geschützt. Nur angemeldete Mitglieder können darauf zugreifen.",
     "messages": {
         "login": {
-            "success": "Erfolgreiche Benutzeranmeldung",
+            "success": "Erfolgreiche Anmeldung!",
+            "error": "Benutzer konnte leider nicht erfolgreich angemeldet werden"
+        },
+        "registration": {
+            "success": "Erfolgreiche Registrierung!",
             "error": "Benutzer konnte leider nicht erfolgreich registriert werden"
         }
     },

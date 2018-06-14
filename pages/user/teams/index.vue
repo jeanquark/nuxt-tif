@@ -23,10 +23,12 @@
 						</div>
 						<div class="flex-container-MesEquipes">
 							<div class="OtherTeam" v-for="team in loadedUserTeams">
-								<img :src="'/images/teams/' + team.image" class="imgModalAvatar" />
-								<nuxt-link :to="'/teams/' + team.slug" class="overlay">
-									<div class="textActivity">Football<br />{{ team.name }}<br /><br />+Infos</div>
-								</nuxt-link>
+								<span v-if="team">
+									<img :src="'/images/teams/' + team.image" class="imgModalAvatar" />
+									<nuxt-link :to="'/teams/' + team.slug" class="overlay">
+										<div class="textActivity">Football<br />{{ team.name }}<br /><br />+Infos</div>
+									</nuxt-link>
+								</span>
 							</div>
 						</div>	
 					</div>
