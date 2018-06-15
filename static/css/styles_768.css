@@ -1255,8 +1255,6 @@
 	}
 	
 	.flex-container-modalMenuAvatar {
-		display: flex;
-		align-items: stretch;
 		padding: 2px;
 	}
 
@@ -1287,7 +1285,7 @@
 
 	.flex-container-modalAvatarImg > div {
 	border: 1px solid darkred;
-	max-width: 13%;
+	max-width: 17%;
 	margin: 4px;
 	border-radius: 5px;
 	color: white;
@@ -1306,7 +1304,7 @@
 
 	.flex-container-modalAvatarImgColor > div {
 	border: 1px solid darkred;
-	max-width: 5%;
+	max-width: 10%;
 	margin: 2px;
 	border-radius: 5px;
 	color: white;
