@@ -1164,7 +1164,7 @@
 		height: 100%;
 		margin: 3px;
 		text-align: center;
-		font-size: 70%;
+		font-size: 100%;
 	}
 	
 	.flex-container-modalAvatar > div.infoBoxGoodies {
@@ -1285,7 +1285,7 @@
 
 	.flex-container-modalAvatarImg > div {
 	border: 1px solid darkred;
-	max-width: 20%;
+	max-width: 13%;
 	margin: 2px;
 	border-radius: 5px;
 	color: white;
@@ -1304,7 +1304,7 @@
 
 	.flex-container-modalAvatarImgColor > div {
 	border: 1px solid darkred;
-	max-width: 13%;
+	max-width: 9%;
 	margin: 2px;
 	border-radius: 5px;
 	color: white;
