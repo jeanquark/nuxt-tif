@@ -1276,20 +1276,24 @@
 		width: 100%;
 	}
 	
+	
 	.flex-container-modalAvatarImg {
-		justify-content: center;
+	display: flex;
+	flex-wrap: wrap;
+	align-content: stretch;
+	justify-content: center;
+	padding: 2px;
 	}
 
 	.flex-container-modalAvatarImg > div {
-		border: 1px solid darkred;
-		width: 100%;
-		margin: 6px;
-		border-radius: 5px;
-		color: white;
-		height: 100%;
-		margin: 3px;
-		text-align: center;
-		font-size: 100%;
+	border: 1px solid darkred;
+	max-width: 13%;
+	margin: 4px;
+	border-radius: 5px;
+	color: white;
+	height: 100%;
+	text-align: center;
+	font-size: 100%;
 	}
 	
 	.flex-container-modalAvatarImgColor {
