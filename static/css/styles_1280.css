@@ -1311,6 +1311,7 @@ width: 100%;
 .textModalMenuAvatar {
 position: relative;
 top: 0;
+height: 30px;
 font: normal 120%/1 "bangers", Helvetica, sans-serif;
 }
 
