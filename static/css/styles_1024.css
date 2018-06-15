@@ -1259,7 +1259,7 @@
 		color: white;
 		margin: 3px;
 		text-align: center;
-		padding-top: 2px;
+		padding: 5px;
 	}
 	
 	.imgModalMenuAvatar {
@@ -1298,7 +1298,7 @@
 
 	.flex-container-modalAvatarImgColor > div {
 	border: 1px solid darkred;
-	max-width: 10%;
+	max-width: 13%;
 	margin: 2px;
 	border-radius: 5px;
 	color: white;

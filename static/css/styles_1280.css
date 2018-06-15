@@ -1274,7 +1274,7 @@ padding: 2px;
 
 .flex-container-modalAvatarImg > div {
 border: 1px solid darkred;
-max-width: 13%;
+max-width: 15%;
 margin: 4px;
 border-radius: 5px;
 color: white;
@@ -1293,7 +1293,7 @@ padding: 2px;
 
 .flex-container-modalAvatarImgColor > div {
 border: 1px solid darkred;
-max-width: 7%;
+max-width: 13%;
 margin: 4px;
 border-radius: 5px;
 color: white;
