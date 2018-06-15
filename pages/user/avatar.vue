@@ -24,7 +24,7 @@
 								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'female'}" @click="selectGender('female')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.female') }}</span></div>
 								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'male'}" @click="selectGender('male')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.male') }}</span></div>
 							</div>						
-                            <div class="imgAvatarUser"  v-if="this.arr.length > 1"><img src="" ref="mergedImage" class="imgModalAvatar"/></div>
+                            <div class="imgAvatarUser"  v-if="this.arr.length > 0"><img src="" ref="mergedImage" class="imgModalAvatar"/></div>
 							<div class="flex-container-modalAvatar" v-else>
 								<h4 style="color: orangered; margin: 0 auto; font: normal 150%/1 'bangers', Helvetica, sans-serif;">{{ $t('pages.user-avatar.select') }}</h4><br /><br />
 							</div>
@@ -43,7 +43,7 @@
                         </div>
                         <!-- Display dummy text while loading -->
                         <div v-if="loadedAvatars.length == 0">
-                            <h1 class="text-center">{{ $t('pages.user-avatar.loading') }}</h1>
+                            <h1 class="loading text-center">{{ $t('pages.user-avatar.loading') }}</h1>
                             <!-- <content-placeholders>
                                 <content-placeholders-heading :img="true" />
                                 <content-placeholders-text :lines="3" />
@@ -642,4 +642,7 @@
         background-color: orangered;
         border-color: orangered;
     }
+    loading {
+      color: black;
+     }
 </style>
