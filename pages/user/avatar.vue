@@ -134,7 +134,8 @@
 							<h3>loadedAvatars.length: {{ loadedAvatars.length }}</h3><br />
 							<h3>totalPages: {{ totalPages }}</h3><br />
                         </div> -->
-
+						
+						<!--
                         <hr>
                         <div class="d-flex justify-content-center">
                             <paginate
@@ -153,6 +154,8 @@
                             </paginate>
                         </div>
 						<hr>
+						-->
+						
                         <!-- Modal footer -->
                         <div class="modal-footer">
                             <div class="progress" style="width: 50%; margin: 0 auto;" v-if="arr.length > 0">

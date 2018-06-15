@@ -1148,8 +1148,6 @@
 	}
 	
 	.flex-container-modalAvatar {
-		display: flex;
-		align-items: stretch;
 		padding: 2px;
 	}
 
@@ -1259,7 +1257,6 @@
 		background-color: black;
 		border-radius: 5px;
 		color: white;
-		height: 30px;
 		margin: 3px;
 		text-align: center;
 		padding-top: 2px;
@@ -1271,22 +1268,43 @@
 		width: 100%;
 	}
 	
+	
 	.flex-container-modalAvatarImg {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
+	display: flex;
+	flex-wrap: wrap;
+	align-content: stretch;
+	justify-content: center;
+	padding: 2px;
 	}
 
 	.flex-container-modalAvatarImg > div {
-		border: 1px solid darkred;
-		width: 23%;
-		margin: 6px;
-		border-radius: 5px;
-		color: white;
-		height: 100%;
-		margin: 3px;
-		text-align: center;
-		font-size: 70%;
+	border: 1px solid darkred;
+	max-width: 17%;
+	margin: 4px;
+	border-radius: 5px;
+	color: white;
+	height: 100%;
+	text-align: center;
+	font-size: 100%;
+	}
+	
+	.flex-container-modalAvatarImgColor {
+	display: flex;
+	flex-wrap: wrap;
+	align-content: stretch;
+	justify-content: center;
+	padding: 2px;
+	}
+
+	.flex-container-modalAvatarImgColor > div {
+	border: 1px solid darkred;
+	max-width: 10%;
+	margin: 2px;
+	border-radius: 5px;
+	color: white;
+	height: 100%;
+	text-align: center;
+	font-size: 100%;
 	}
 	
 	.imgModalMenuAvatar {

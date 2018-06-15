@@ -1154,8 +1154,6 @@
 	}
 	
 	.flex-container-modalAvatar {
-		display: flex;
-		align-items: stretch;
 		padding: 2px;
 	}
 
@@ -1255,6 +1253,8 @@
 	}
 	
 	.flex-container-modalMenuAvatar {
+		display: flex;
+		align-items: stretch;
 		padding: 2px;
 	}
 
