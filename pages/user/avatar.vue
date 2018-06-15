@@ -313,7 +313,7 @@
                 obj: [],
                 progress: 0,
                 currentPage: 1,
-                itemsPerPage: 14,
+                itemsPerPage: 8,
             }
         },
         computed: {
@@ -321,8 +321,7 @@
                 return this.$store.getters['users/loadedUser']
             },
             loadedAvatars () {
-                let index = this.currentPage * this.itemsPerPage
-                return this.avatars.filter(avatar => avatar.gender === this.gender && avatar.type === this.bodyPart).slice(index - this.itemsPerPage, index)
+                return this.avatars.filter(avatar => avatar.gender === this.gender && avatar.type === this.bodyPart)
             },
             loadedAvatars2 () {
                 let index = this.currentPage * this.itemsPerPage
