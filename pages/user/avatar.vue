@@ -331,7 +331,7 @@
                 return this.avatars.filter(avatar => avatar.gender === this.gender && avatar.type === this.bodyPart).slice(index - this.itemsPerPage, index)
             },
             disabled () {
-                return this.background == '' && this.skin == '' && this.eyes == '' && this.eyebrows == '' && this.mouth == '' && this.hair == '' && this.beard == '' && this.glasses == '' && this.clothes == '' && this.accessory == ''
+                return this.background == '' && this.skin == '' && this.eyes == '' && this.eyebrows == '' && this.mouth == '' && this.hair == '' && this.beard == '' && this.glasses == '' && this.clothes == '' && this.accessory == '' && this.cache == '' && this.thisisfan == ''
             },
             loadedTeams () {
                 return this.$store.getters['teams/loadedTeams']
