@@ -321,7 +321,8 @@
                 return this.$store.getters['users/loadedUser']
             },
             loadedAvatars () {
-                return this.avatars.filter(avatar => avatar.gender === this.gender && avatar.type === this.bodyPart)
+                let index = this.currentPage * this.itemsPerPage
+                return this.avatars.filter(avatar => avatar.gender === this.gender && avatar.type === this.bodyPart).slice(index - this.itemsPerPage, index)
             },
             loadedAvatars2 () {
                 let index = this.currentPage * this.itemsPerPage
