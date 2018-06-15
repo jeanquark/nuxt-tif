@@ -50,11 +50,11 @@
                 </div>                  
             </div> <!-- /intro-content --> 
 
-            <ul class="intro-language">
+            <!-- <ul class="intro-language">
                 <li><nuxt-link :to="switchLocalePath('fr')"><img src="/images/flags/france.png" class="flagsLanguage" :class="{ active: $i18n.locale === 'fr' }" alt="flag of France" /></nuxt-link></li>
                 <li><nuxt-link :to="switchLocalePath('de')"><img src="/images/flags/germany.png" class="flagsLanguage" :class="{ active: $i18n.locale === 'de' }" alt="flag of Germany" /></nuxt-link></li>
                 <li><nuxt-link :to="switchLocalePath('en')"><img src="/images/flags/united_kingdom.png" class="flagsLanguage" :class="{ active: $i18n.locale === 'en' }" alt="flag of United Kingdom" /></nuxt-link></li>
-            </ul>
+            </ul> -->
 
             <ul class="intro-social">        
                 <li><nuxt-link to="/#"><i class="fa fa-facebook"></i></nuxt-link></li>
