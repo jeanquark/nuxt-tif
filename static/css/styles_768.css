@@ -1285,7 +1285,7 @@
 
 	.flex-container-modalAvatarImg > div {
 		border: 1px solid darkred;
-		width: 23%;
+		width: 100%;
 		margin: 6px;
 		border-radius: 5px;
 		color: white;
