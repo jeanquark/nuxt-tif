@@ -138,7 +138,7 @@
 				</v-layout>
 			</v-container>
 			<v-card-text class="text-md-center">
-		  		<v-btn @click="submitCreateTeam" color="info" :disabled="this.selectedTeams.length === 0 || this.checkTeamSlugUniqueness(this.selectedSlug)">Soumettre</v-btn>
+		  		<v-btn @click="submitCreateTeam" color="info" :disabled="this.selectedTeams.length === 0 && this.selectedTeamsGroup.length === 0 || this.checkCompetitionSlugUniqueness(this.selectedSlug)">Soumettre</v-btn>
 				<v-btn @click="clearAll" color="warning">Nettoyer</v-btn>
 				<nuxt-link to="/admin/competitions" class="btn">Retour</nuxt-link>
 			</v-card-text>
@@ -223,12 +223,12 @@
 		    }
 		},
 		methods: {
-			checkTeamSlugUniqueness (slug) {
+			checkCompetitionSlugUniqueness (slug) {
 				console.log(slug)
 				let found = false
-				for (let team of this.loadedTeams) {
-					console.log(team)
-				    if (team.slug === slug) {
+				for (let competition of this.loadedCompetitions) {
+					console.log(competition)
+				    if (competition.slug === slug) {
 				        found = true
 				        break
 				    }
@@ -241,7 +241,8 @@
 		    },
 			submitCreateTeam () {
 				console.log('submitCreateTeam')
-				console.log(this.checkTeamSlugUniqueness(this.selectedSlug))
+				console.log(this.selectedGroups)
+				console.log(this.checkCompetitionSlugUniqueness(this.selectedSlug))
 				// return
 
 				// Organize teams data
