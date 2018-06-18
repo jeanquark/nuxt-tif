@@ -79,13 +79,12 @@
 					<v-flex xs6>
 						<v-select
 							:items="loadedStadiums"
-							v-model="selectedStadium" 
+							v-model="selectedStadiums" 
 							label="Sélectionner un stade"
 							item-text="name"
 							item-value="{}"
 							:autocomplete="true"
 							single-line
-							:disabled="selectedCompetition == ''"
 						>
 							<template slot="item" slot-scope="data">
 								<v-list-tile-content>
