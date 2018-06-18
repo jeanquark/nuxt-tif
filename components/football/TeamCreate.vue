@@ -107,7 +107,22 @@
 					      	<v-radio label="Équipes nationales" value="national_team" color="primary"></v-radio>
 					    </v-radio-group>
 					</v-flex>
-
+					
+					<v-flex xs6>
+						<v-subheader class="text-xl-center">Participe à quelle(s) compétition(s) ?</v-subheader>
+					</v-flex>
+					<v-flex xs6>
+						<v-select
+        				  :items="loadedCompetitions"
+						  v-model="selectedCompetitions"
+						  item-text="name"
+						  item-value="slug"
+						  label="Sélectionner la compétition"
+						  multiple
+				          chips
+				          :return-object="true"
+						></v-select>
+					</v-flex>
 				</v-layout>
 
 				<v-layout>
