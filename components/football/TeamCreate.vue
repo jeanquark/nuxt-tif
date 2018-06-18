@@ -138,7 +138,7 @@
 				</v-layout>
 			</v-container>
 			<v-card-text class="text-md-center">
-		  		<v-btn @click="submitCreateTeam" color="info" :disabled="this.selectedTeams.length === 0 && this.selectedTeamsGroup.length === 0 || this.checkCompetitionSlugUniqueness(this.selectedSlug)">Soumettre</v-btn>
+		  		<v-btn @click="submitCreateCompetition" color="info" :disabled="this.selectedTeams.length === 0 && this.selectedTeamsGroup.length === 0 || this.checkCompetitionSlugUniqueness(this.selectedSlug)">Soumettre</v-btn>
 				<v-btn @click="clearAll" color="warning">Nettoyer</v-btn>
 				<nuxt-link to="/admin/competitions" class="btn">Retour</nuxt-link>
 			</v-card-text>
@@ -165,19 +165,22 @@
 			this.$store.dispatch('countries/loadedCountries')
 			this.$store.dispatch('teams/loadedTeams')
 			this.$store.dispatch('competitions/loadedCompetitions')
-			this.$store.dispatch('stadiums/loadedStadiums')
 		},
 		data () {
 			return {
 		        selectedCompetitionType: 'club',
+				radios: 'countries',
+        		selectedContinents: [],
 		        selectedCountries: [],
 		        selectedName: '',
 		        selectedSlug: '',
-				selectedColor: '',
-				selectedWebsite: '',
-				selectedStadiums: [],
-				selectedCompetitions: [],
-				imageData: '',
+		        selectedYear: moment().year() + 1,
+		        selectedTeams: [],
+		        selectedTeamsGroup: [],
+		        imageData: '',
+				selectedGroups: false,
+				selectedGroupsNumber: this.selectedGroups ? 2 : 0,
+				selectedGroupsFormat: 'letters',
 			    footballAPIRequestResult: '',
 			    loading: false,
 			    items: [
@@ -187,14 +190,14 @@
 				      to: '/admin'
 				    },
 				    {
-				      text: 'Teams',
+				      text: 'Competitions',
 				      disabled: false,
-				      to: '/admin/teams'
+				      to: '/admin/competitions'
 				    },
 				    {
 				      text: 'Create',
 				      disabled: true,
-				      to: '/admin/teams/create'
+				      to: '/admin/competitions/create'
 				    }
 				],
 			}
@@ -215,14 +218,21 @@
 		    loadedCountries () {
 		    	return this.$store.getters['countries/loadedCountries']
 		    },
-			loadedStadiums () {
-				return this.$store.getters['stadiums/loadedStadiums']
-			},
 		    loadedTeams () {
 		    	return this.$store.getters['teams/loadedTeams'].filter(team => (team.type === this.selectedCompetitionType))
 		    }
 		},
 		methods: {
+			convertNumberToLetter (index) {
+				if (this.selectedGroupsFormat === 'letters') {
+					if (index <= 26) {
+						const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+						return alphabet[index]
+					}
+				} else {
+					return index + 1
+				}
+			},
 			checkCompetitionSlugUniqueness (slug) {
 				console.log(slug)
 				let found = false
@@ -239,7 +249,7 @@
 		    	console.log('handleFileUpload')
 		        this.file = this.$refs.file1.files[0]
 		    },
-			submitCreateTeam () {
+			submitCreateCompetition () {
 				console.log('submitCreateTeam')
 				console.log(this.selectedGroups)
 				console.log(this.checkCompetitionSlugUniqueness(this.selectedSlug))
