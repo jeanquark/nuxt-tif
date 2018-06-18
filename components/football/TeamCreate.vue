@@ -17,12 +17,12 @@
 			<v-container>
 				<v-layout row wrap>
 					<v-flex xs6>
-						<v-subheader class="text-xl-center">Nom de la compétition</v-subheader>
+						<v-subheader class="text-xl-center">Nom de l'équipe</v-subheader>
 					</v-flex>
 					<v-flex xs6>
 						<v-text-field
 					      v-model="selectedName"
-					      label="Nom"
+					      label="Nom de l'équipe"
 					    ></v-text-field>
 					</v-flex>
 
@@ -33,17 +33,6 @@
 						<v-text-field
 					      v-model="selectedSlug"
 					      label="Slug"
-					    ></v-text-field>
-					</v-flex>
-
-					<v-flex xs6>
-						<v-subheader class="text-xl-center">Année/Saison</v-subheader>
-					</v-flex>
-					<v-flex xs6>
-						<v-text-field
-					      v-model="selectedYear"
-					      label="Année (2018 ou 2018-2019)"
-					      placeholder="2018 ou 2018-2019"
 					    ></v-text-field>
 					</v-flex>
 
