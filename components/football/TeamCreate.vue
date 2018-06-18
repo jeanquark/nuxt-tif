@@ -17,7 +17,7 @@
 			<v-container>
 				<v-layout row wrap>
 					<v-flex xs6>
-						<v-subheader class="text-xl-center">Nom de l'équipe</v-subheader>
+						<v-subheader class="text-xl-center">Nom de la compétition</v-subheader>
 					</v-flex>
 					<v-flex xs6>
 						<v-text-field
@@ -37,6 +37,17 @@
 					</v-flex>
 
 					<v-flex xs6>
+						<v-subheader class="text-xl-center">Année/Saison</v-subheader>
+					</v-flex>
+					<v-flex xs6>
+						<v-text-field
+					      v-model="selectedYear"
+					      label="Année (2018 ou 2018-2019)"
+					      placeholder="2018 ou 2018-2019"
+					    ></v-text-field>
+					</v-flex>
+
+					<v-flex xs6>
 						<v-subheader class="text-xl-center">Type de compétition</v-subheader>
 					</v-flex>
 					<v-flex xs6>
@@ -47,9 +58,20 @@
 					</v-flex>
 
 					<v-flex xs6>
-						<v-subheader class="text-xl-center">Pays hôte(s) de la compétition</v-subheader>
+						<v-subheader class="text-xl-center">La compétition se déroule dans...</v-subheader>
 					</v-flex>
 					<v-flex xs6>
+						<v-radio-group v-model="radios" :mandatory="true">
+					      	<v-radio label="Un ou plusieurs pays" value="countries" color="primary"></v-radio>
+					      	<v-radio label="Un ou plusieurs continents" value="continents" color="primary"></v-radio>
+					      	<!-- <v-radio label="Une ou plusieurs villes" value="cities"></v-radio> -->
+					    </v-radio-group>
+					</v-flex>
+
+					<v-flex xs6 v-if="this.radios === 'countries'">
+						<v-subheader class="text-xl-center">Pays hôte(s) de la compétition</v-subheader>
+					</v-flex>
+					<v-flex xs6 v-if="this.radios === 'countries'">
 						<v-select
 						  :items="loadedCountries"
 						  v-model="selectedCountries"
@@ -57,6 +79,25 @@
 						  item-text="name"
 						  item-value="slug"
 						  :autocomplete="true"
+						  multiple
+						  chips
+						  single-line
+						  :return-object="true"
+						></v-select>
+					</v-flex>
+
+					<v-flex xs6 v-if="this.radios === 'continents'">
+						<v-subheader class="text-xl-center">Continent(s) hôte(s) de la compétition</v-subheader>
+					</v-flex>
+					<v-flex xs6 v-if="this.radios === 'continents'">
+						<v-select
+						  :items="loadedContinents"
+						  v-model="selectedContinents"
+						  label="Sélectionner un ou plusieurs continent"
+						  item-text="name"
+						  item-value="slug"
+						  :autocomplete="true"
+						  multiple
 						  chips
 						  single-line
 						  :return-object="true"
@@ -64,21 +105,72 @@
 					</v-flex>
 
 					<v-flex xs6>
-						<v-subheader class="text-xl-center">Participation à quelle compétition ?</v-subheader>
+						<v-subheader class="text-xl-center">La compétition contient-elle des groupes?</v-subheader>
 					</v-flex>
 					<v-flex xs6>
+						<v-checkbox
+							v-model="selectedGroups"
+							label="Oui, il y a des groupes"
+							color="primary"
+						></v-checkbox>
+					</v-flex>
+
+					<v-flex xs6 v-if="selectedGroups">
+						<v-subheader class="text-xl-center">Format des noms de groupes</v-subheader>
+					</v-flex>
+					<v-flex xs6 v-if="selectedGroups">
+						<v-radio-group v-model="selectedGroupsFormat" :mandatory="true">
+					      	<v-radio label="Lettres" value="letters" color="primary"></v-radio>
+					      	<v-radio label="Numéros" value="numbers" color="primary"></v-radio>
+					    </v-radio-group>
+					</v-flex>
+
+					<v-flex xs6 v-if="selectedGroups">
+						<v-subheader class="text-xl-center">Nombre de groupes</v-subheader>
+					</v-flex>
+					<v-flex xs6 v-if="selectedGroups">
+						<v-text-field
+					      v-model="selectedGroupsNumber"
+					      label="Nombre de groupes"
+					      type="number"
+					      min="0"
+					    ></v-text-field>
+					</v-flex>		
+				</v-layout>
+				<v-layout row wrap v-if="selectedGroups">
+					<v-flex xs4 offset-xs1 v-for="(group, index) in (1, parseInt(selectedGroupsNumber))" :key="group">
 						<v-select
-        				  :items="loadedCompetitions"
-						  v-model="selectedCompetitions"
+        				  :items="loadedTeams"
+						  v-model="selectedTeamsGroup[index]"
 						  item-text="name"
 						  item-value="slug"
-						  label="Sélectionner la compétition"
+						  :label="'Équipes du groupe ' + convertNumberToLetter(parseInt(index))"
 						  multiple
 				          chips
 				          :return-object="true"
 						></v-select>
 					</v-flex>
+				</v-layout>
 
+				<v-layout v-else>
+					<v-flex xs6>
+						<v-subheader class="text-xl-center">Équipes participants à la compétition</v-subheader>
+					</v-flex>
+					<v-flex xs6>
+						<v-select
+        				  :items="loadedTeams"
+						  v-model="selectedTeams"
+						  item-text="name"
+						  item-value="slug"
+						  label="Sélectionner les équipes"
+						  multiple
+				          chips
+				          :return-object="true"
+						></v-select>
+					</v-flex>
+				</v-layout>
+
+				<v-layout>
 					<v-flex xs6>
 						<v-subheader class="text-xl-center">Image</v-subheader>
 					</v-flex>
@@ -92,7 +184,7 @@
 				</v-layout>
 			</v-container>
 			<v-card-text class="text-md-center">
-		  		<v-btn @click="submitCreateTeam" color="info" :disabled="this.checkTeamSlugUniqueness(this.selectedSlug)">Soumettre</v-btn>
+		  		<v-btn @click="submitCreateCompetition" color="info" :disabled="this.selectedTeams.length === 0 && this.selectedTeamsGroup.length === 0 || this.checkCompetitionSlugUniqueness(this.selectedSlug)">Soumettre</v-btn>
 				<v-btn @click="clearAll" color="warning">Nettoyer</v-btn>
 				<nuxt-link to="/admin/competitions" class="btn">Retour</nuxt-link>
 			</v-card-text>
