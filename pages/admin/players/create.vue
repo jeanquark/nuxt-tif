@@ -165,10 +165,6 @@
 			this.$store.dispatch('activities/loadedActivities')
     		this.$store.dispatch('categories/loadedCategories')
     		this.$store.dispatch('types/loadedTypes')
-    		this.$store.dispatch('stadiums/loadedStadiums')
-			this.$store.dispatch('teams/loadedTeams')
-			this.$store.dispatch('events/loadedEvents')
-			this.$store.dispatch('competitions/loadedCompetitions')
 			this.$store.dispatch('countries/loadedCountries')
 			this.$store.dispatch('players/loadedPlayers')
 		},
@@ -177,8 +173,6 @@
 				selectedActivity: '',
         		selectedCategory: '',
         		categories: [],
-		        selectedCompetition: '',
-		        competitions: [],
 		        selectedCountry: '',
 		        selectedName: '',
 				selectedSurname: '',
@@ -236,21 +230,9 @@
 		    loadedTypes () {
 		        return this.$store.getters['types/loadedTypes']
 		    },
-		    loadedStadiums () {
-		    	return this.$store.getters['stadiums/loadedStadiums']
-		    },
-		    loadedTeams () {
-		    	return this.$store.getters['teams/loadedTeams']
-		    },
 			loadedPlayers () {
 				return this.$store.getters['players/loadedPlayers']
 			},
-		    loadedEvents () {
-		    	return this.$store.getters['events/loadedEvents']
-		    },
-		    loadedCompetitions () {
-		    	return this.$store.getters['competitions/loadedCompetitions']
-		    },
 		    loadedCountries () {
 		    	return this.$store.getters['countries/loadedCountries']
 		    },
@@ -279,13 +261,10 @@
 						slug: this.selectedCountry.slug,
 						name: this.selectedCountry.name
 					},
-					competitions: {
-						[this.selectedCompetition.slug]: true
-					},
 			        name: this.selectedName,
 					surname: this.selectedSurname,
 					tifname: this.selectedTifname,
-					website: this. selectedWebsite,
+					website: this.selectedWebsite,
 			        slug: this.selectedSlug,
 			        // image: this.selectedSlug,
 			        _created_at: new Date().getTime(),
