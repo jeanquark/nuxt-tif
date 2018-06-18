@@ -35,7 +35,52 @@
 					      label="Slug"
 					    ></v-text-field>
 					</v-flex>
-
+					
+					<v-flex xs6>
+						<v-subheader class="text-xl-center">Couleurs</v-subheader>
+					</v-flex>
+					<v-flex xs6>
+						<v-text-field
+					      v-model="selectedColor"
+					      label="Couleurs de l'équipe"
+					    ></v-text-field>
+					</v-flex>
+					
+					<v-flex xs6>
+						<v-subheader class="text-xl-center">Site internet</v-subheader>
+					</v-flex>
+					<v-flex xs6>
+						<v-text-field
+					      v-model="selectedWebsite"
+					      label="Site internet"
+					    ></v-text-field>
+					</v-flex>
+					
+					<v-flex xs6>
+						<v-subheader>Stade</v-subheader>
+					</v-flex>
+					<v-flex xs6>
+						<v-select
+							:items="loadedStadiums"
+							v-model="selectedStadium" 
+							label="Sélectionner un stade"
+							item-text="name"
+							item-value="{}"
+							:autocomplete="true"
+							single-line
+							:disabled="selectedCompetition == ''"
+						>
+							<template slot="item" slot-scope="data">
+								<v-list-tile-content>
+									<v-list-tile-title>
+										<!-- {{ data.item.name }} <small style="color: #ccc;">{{ data.item.city.name }} - {{ data.item.country.name}}</small> -->
+										{{ data.item.name }}
+									</v-list-tile-title>
+								</v-list-tile-content>
+							</template>
+						</v-select>
+					</v-flex>
+					
 					<v-flex xs6>
 						<v-subheader class="text-xl-center">Type de compétition</v-subheader>
 					</v-flex>
