@@ -11,18 +11,18 @@
 		<v-form v-cloak>
 			<v-card-title class="primary-title">
 				<v-card-text class="text-md-center">
-					<h2>Equipe de football <i class="fa fa-futbol"></i></h2>
+					<h2>Compétition de Football <i class="fa fa-futbol"></i></h2>
 				</v-card-text>
 			</v-card-title>
 			<v-container>
 				<v-layout row wrap>
 					<v-flex xs6>
-						<v-subheader class="text-xl-center">Nom de l'équipe</v-subheader>
+						<v-subheader class="text-xl-center">Nom de la compétition</v-subheader>
 					</v-flex>
 					<v-flex xs6>
 						<v-text-field
 					      v-model="selectedName"
-					      label="Nom de l'équipe"
+					      label="Nom"
 					    ></v-text-field>
 					</v-flex>
 
@@ -37,6 +37,17 @@
 					</v-flex>
 
 					<v-flex xs6>
+						<v-subheader class="text-xl-center">Année/Saison</v-subheader>
+					</v-flex>
+					<v-flex xs6>
+						<v-text-field
+					      v-model="selectedYear"
+					      label="Année (2018 ou 2018-2019)"
+					      placeholder="2018 ou 2018-2019"
+					    ></v-text-field>
+					</v-flex>
+
+					<v-flex xs6>
 						<v-subheader class="text-xl-center">Type de compétition</v-subheader>
 					</v-flex>
 					<v-flex xs6>
@@ -47,33 +58,111 @@
 					</v-flex>
 
 					<v-flex xs6>
-						<v-subheader class="text-xl-center">Pays/Region</v-subheader>
+						<v-subheader class="text-xl-center">La compétition se déroule dans...</v-subheader>
 					</v-flex>
 					<v-flex xs6>
+						<v-radio-group v-model="radios" :mandatory="true">
+					      	<v-radio label="Un ou plusieurs pays" value="countries" color="primary"></v-radio>
+					      	<v-radio label="Un ou plusieurs continents" value="continents" color="primary"></v-radio>
+					      	<!-- <v-radio label="Une ou plusieurs villes" value="cities"></v-radio> -->
+					    </v-radio-group>
+					</v-flex>
+
+					<v-flex xs6 v-if="this.radios === 'countries'">
+						<v-subheader class="text-xl-center">Pays hôte(s) de la compétition</v-subheader>
+					</v-flex>
+					<v-flex xs6 v-if="this.radios === 'countries'">
 						<v-select
 						  :items="loadedCountries"
-						  v-model="selectedCountry"
-						  label="Sélectionner un pays"
+						  v-model="selectedCountries"
+						  label="Sélectionner un ou plusieurs pays"
 						  item-text="name"
-						  item-value="{}"
+						  item-value="slug"
 						  :autocomplete="true"
+						  multiple
+						  chips
 						  single-line
+						  :return-object="true"
 						></v-select>
 					</v-flex>
 
+					<v-flex xs6 v-if="this.radios === 'continents'">
+						<v-subheader class="text-xl-center">Continent(s) hôte(s) de la compétition</v-subheader>
+					</v-flex>
+					<v-flex xs6 v-if="this.radios === 'continents'">
+						<v-select
+						  :items="loadedContinents"
+						  v-model="selectedContinents"
+						  label="Sélectionner un ou plusieurs continent"
+						  item-text="name"
+						  item-value="slug"
+						  :autocomplete="true"
+						  multiple
+						  chips
+						  single-line
+						  :return-object="true"
+						></v-select>
+					</v-flex>
+
+					<v-flex xs6>
+						<v-subheader class="text-xl-center">La compétition contient-elle des groupes?</v-subheader>
+					</v-flex>
+					<v-flex xs6>
+						<v-checkbox
+							v-model="selectedGroups"
+							label="Oui, il y a des groupes"
+							color="primary"
+						></v-checkbox>
+					</v-flex>
+
+					<v-flex xs6 v-if="selectedGroups">
+						<v-subheader class="text-xl-center">Format des noms de groupes</v-subheader>
+					</v-flex>
+					<v-flex xs6 v-if="selectedGroups">
+						<v-radio-group v-model="selectedGroupsFormat" :mandatory="true">
+					      	<v-radio label="Lettres" value="letters" color="primary"></v-radio>
+					      	<v-radio label="Numéros" value="numbers" color="primary"></v-radio>
+					    </v-radio-group>
+					</v-flex>
+
+					<v-flex xs6 v-if="selectedGroups">
+						<v-subheader class="text-xl-center">Nombre de groupes</v-subheader>
+					</v-flex>
+					<v-flex xs6 v-if="selectedGroups">
+						<v-text-field
+					      v-model="selectedGroupsNumber"
+					      label="Nombre de groupes"
+					      type="number"
+					      min="0"
+					    ></v-text-field>
+					</v-flex>		
+				</v-layout>
+				<v-layout row wrap v-if="selectedGroups">
+					<v-flex xs4 offset-xs1 v-for="(group, index) in (1, parseInt(selectedGroupsNumber))" :key="group">
+						<v-select
+        				  :items="loadedTeams"
+						  v-model="selectedTeamsGroup[index]"
+						  item-text="name"
+						  item-value="slug"
+						  :label="'Équipes du groupe ' + convertNumberToLetter(parseInt(index))"
+						  multiple
+				          chips
+				          :return-object="true"
+						></v-select>
+					</v-flex>
 				</v-layout>
 
 				<v-layout v-else>
 					<v-flex xs6>
-						<v-subheader class="text-xl-center">Participation à quelle compétition ?</v-subheader>
+						<v-subheader class="text-xl-center">Équipes participants à la compétition</v-subheader>
 					</v-flex>
 					<v-flex xs6>
 						<v-select
-        				  :items="loadedCompetitions"
-						  v-model="selectedCompetitions"
+        				  :items="loadedTeams"
+						  v-model="selectedTeams"
 						  item-text="name"
 						  item-value="slug"
-						  label="Sélectionner les compétitions"
+						  label="Sélectionner les équipes"
 						  multiple
 				          chips
 				          :return-object="true"
@@ -95,9 +184,9 @@
 				</v-layout>
 			</v-container>
 			<v-card-text class="text-md-center">
-		  		<v-btn @click="submitCreateTeam" color="info" :disabled="this.checkTeamSlugUniqueness(this.selectedSlug)">Soumettre</v-btn>
+		  		<v-btn @click="submitCreateCompetition" color="info" :disabled="this.selectedTeams.length === 0 && this.selectedTeamsGroup.length === 0 || this.checkCompetitionSlugUniqueness(this.selectedSlug)">Soumettre</v-btn>
 				<v-btn @click="clearAll" color="warning">Nettoyer</v-btn>
-				<nuxt-link to="/admin/teams" class="btn">Retour</nuxt-link>
+				<nuxt-link to="/admin/competitions" class="btn">Retour</nuxt-link>
 			</v-card-text>
 		</v-form>
 	</v-card>
@@ -116,19 +205,28 @@
 
 		},
 		created () {
+			// this.$store.dispatch('activities/loadedActivities')
+    		// this.$store.dispatch('categories/loadedCategories')
+    		this.$store.dispatch('continents/loadedContinents')
 			this.$store.dispatch('countries/loadedCountries')
 			this.$store.dispatch('teams/loadedTeams')
 			this.$store.dispatch('competitions/loadedCompetitions')
 		},
 		data () {
 			return {
-		        selectedTeamType: 'club',
+		        selectedCompetitionType: 'club',
 				radios: 'countries',
+        		selectedContinents: [],
 		        selectedCountries: [],
 		        selectedName: '',
 		        selectedSlug: '',
+		        selectedYear: moment().year() + 1,
 		        selectedTeams: [],
+		        selectedTeamsGroup: [],
 		        imageData: '',
+				selectedGroups: false,
+				selectedGroupsNumber: this.selectedGroups ? 2 : 0,
+				selectedGroupsFormat: 'letters',
 			    footballAPIRequestResult: '',
 			    loading: false,
 			    items: [
@@ -138,14 +236,14 @@
 				      to: '/admin'
 				    },
 				    {
-				      text: 'Teams',
+				      text: 'Competitions',
 				      disabled: false,
-				      to: '/admin/teams'
+				      to: '/admin/competitions'
 				    },
 				    {
 				      text: 'Create',
 				      disabled: true,
-				      to: '/admin/teams/create'
+				      to: '/admin/competitions/create'
 				    }
 				],
 			}
@@ -160,17 +258,33 @@
 		    loadedCompetitions () {
 		    	return this.$store.getters['competitions/loadedCompetitions']
 		    },
+		    loadedContinents () {
+		    	return this.$store.getters['continents/loadedContinents']
+		    },
 		    loadedCountries () {
 		    	return this.$store.getters['countries/loadedCountries']
+		    },
+		    loadedTeams () {
+		    	return this.$store.getters['teams/loadedTeams'].filter(team => (team.type === this.selectedCompetitionType))
 		    }
 		},
 		methods: {
-			checkTeamSlugUniqueness (slug) {
+			convertNumberToLetter (index) {
+				if (this.selectedGroupsFormat === 'letters') {
+					if (index <= 26) {
+						const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+						return alphabet[index]
+					}
+				} else {
+					return index + 1
+				}
+			},
+			checkCompetitionSlugUniqueness (slug) {
 				console.log(slug)
 				let found = false
-				for (let team of this.loadedTeams) {
-					console.log(team)
-				    if (team.slug === slug) {
+				for (let competition of this.loadedCompetitions) {
+					console.log(competition)
+				    if (competition.slug === slug) {
 				        found = true
 				        break
 				    }
@@ -181,10 +295,52 @@
 		    	console.log('handleFileUpload')
 		        this.file = this.$refs.file1.files[0]
 		    },
-			submitCreateTeam () {
+			submitCreateCompetition () {
 				console.log('submitCreateTeam')
-				console.log(this.checkTeamSlugUniqueness(this.selectedSlug))
+				console.log(this.selectedGroups)
+				console.log(this.checkCompetitionSlugUniqueness(this.selectedSlug))
 				// return
+
+				// Organize teams data
+				let teams = {}
+				if (this.selectedGroups) {
+					console.log('There is groups')
+					let index = 0
+					for (let group of this.selectedTeamsGroup) {
+						// console.log(group)
+						for (let team of group) {
+							teams[team.slug] = {
+								name: team.name,
+								slug: team.slug,
+								group: this.convertNumberToLetter(index),
+								wins: 0,
+								draws: 0,
+								losses: 0,
+								goals_scored: 0,
+								goals_conceded: 0,
+								points: 0
+							}
+						}
+						index++
+					}
+				} else {
+					console.log('There is no  groups')
+					// console.log(this.selectedTeams)
+					for (let team of this.selectedTeams) {
+						// console.log(team)
+						teams[team.slug] = {
+							name: team.name,
+							slug: team.slug,
+							wins: 0,
+							draws: 0,
+							losses: 0,
+							goals_scored: 0,
+							goals_conceded: 0,
+							points: 0
+						}
+					}
+				}
+				console.log(teams)
 
 				// Organize countries and continents data
 				let continents = {}
@@ -208,9 +364,8 @@
 						}
 					}
 				}
-				
 				// return
-				const teamData = {
+				const competitionData = {
 					activity: {
 			            slug: this.activity.slug,
 			            name: this.activity.name
@@ -220,35 +375,41 @@
 						name: this.category.name
 					},
 					type: this.selectedCompetitionType,
+					continents: continents,
 					countries: countries,
+					groups: this.selectedGroups,
+					groups_number: this.selectedGroupsNumber,
+					groups_format: this.selectedGroupsFormat,
+					teams: teams,
 			        name: this.selectedName,
 			        slug: this.selectedSlug,
+			        year: this.selectedYear,
 			        _created_at: new Date().getTime(),
 			        _updated_at: new Date().getTime()
 				}
-				console.log(teamData)
+				console.log(competitionData)
 				// return
 
-				// If there is an image, upload the image first and then update team node
+				// If there is an image, upload the image first and then update competition node
 				if (this.imageData) {
-					axios.post('/upload-team-image', {
+					axios.post('/upload-competition-image', {
 					    image: this.imageData,
 					    name: this.selectedSlug,
-					    folder: 'teams'
+					    folder: 'competitions'
 					}).then((response) => {
 						console.log('success')
 					    console.log(response.data)
-					    teamData['image'] = response.data
-					    console.log(teanData)
-					    this.$store.dispatch('teams/createTeam', teamData)
+					    competitionData['image'] = response.data
+					    console.log(competitionData)
+					    this.$store.dispatch('competitions/createCompetition', competitionData)
 					    return this.$router.push('/admin/teams')
 					}).catch(function (error) {
 						console.log('error')
 					    console.log(error)
 					})
 				} else {
-					this.$store.dispatch('teams/createTeam', teamData)
-					return this.$router.push('/admin/teams')
+					this.$store.dispatch('competitions/createCompetition', competitionData)
+					return this.$router.push('/admin/competitions')
 				}
 			},
 			previewImage (event) {
@@ -269,11 +430,18 @@
 	            }
         	},
 			clearAll () {
-				this.selectedTeamType = 'club'
+				this.selectedCompetitionType = 'club'
+        		this.selectedContinents = []
 		        this.selectedCountries = []
 		        this.selectedName = ''
 		        this.selectedSlug = ''
+		        this.selectedYear = ''
+		        this.selectedTeams = []
+		        this.selectedTeamsGroup = []
 		        this.imageData = ''
+				this.selectedGroups = false
+				this.selectedGroupsNumber = 2
+				this.selectedGroupsFormat = 'letters'
 			}
 		},
 		watch: {
@@ -292,6 +460,25 @@
 		    selectedName: function () {
 		    	console.log('Watch selectedName')
 		    	this.selectedSlug = slugify(this.selectedName)
+		    },
+		    // selectedTeamsGroup () {
+		    // 	console.log(this.selectedTeamsGroup[0][0].slug)
+		    // 	let teamsArray = []
+		    // 	if (this.selectedTeamsGroup) {
+		    // 		for (let group of this.selectedTeamsGroup) {
+		    // 			teamsArray.push(group.map(team => team.slug))
+		    // 		}
+		    // 	}
+		    // 	console.log(teamsArray)
+		    // 	this.teamsArray = teamsArray[0]
+		    // 	return
+		    // }
+		    selectedGroups () {
+		    	if (this.selectedGroups) {
+		    		this.selectedTeams = []
+		    	} else {
+		    		this.selectedTeamsGroup = []
+		    	}
 		    }
 		}
 	}
