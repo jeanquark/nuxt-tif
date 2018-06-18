@@ -54,7 +54,6 @@
 								  single-line
 								  :disabled="selectedActivity.slug == ''"
 								></v-select>
-								<!--<v-subheader style="color: green; padding: 0px;" v-if="selectedCategory.slug === 'football'"><i class="fa fa-exclamation-triangle"></i>&nbsp;Possibilité d'utiliser Football API &nbsp;<i class="fa fa-arrow-down"></i></v-subheader>-->
 							</v-flex>
 							
 							<v-flex xs6>
@@ -148,50 +147,6 @@
 
 		</v-flex>
 
-		<!--<v-flex xs12 sm8 offset-sm2 v-if="selectedCategory.slug === 'football'">
-			<v-card>
-				<v-form>
-					<v-card-title class="primary-title">
-						<v-card-text class="text-md-center">
-							<h3>Créer une liste d'équipes à l'aide de <a href="https://football-api.com/documentation2/#!/Competitions/get_competitions" target="_blank">Football API</a></h3>
-							<p>La requête peut échouer en cas d'absence ou d'invalidité de la clé privée (voir console de debogage)</p>
-							<p>Pour qu'une requête soit acceptée, il faut sélectionner le championnat anglais de Premier League et ne pas avoir une différence de plus de 30 jours entre les deux dates.</p>
-						</v-card-text>
-					</v-card-title>
-					<v-container fluid>
-					    <v-layout row wrap>
-							<v-flex xs6>
-								<v-subheader class="text-xl-center">Compétition</v-subheader>
-							</v-flex>
-							<v-flex xs6 v-if="loadedCompetitions != ''">
-								<v-select
-								  :items="loadedCompetitions"
-								  v-model="selectedCompetition"
-								  label="Sélectionner une compétition"
-								  item-text="name"
-								  item-value="{}"
-								  :autocomplete="true"
-								  single-line
-								></v-select>
-							</v-flex>
-							<v-flex v-else>
-								<v-progress-linear :indeterminate="true" height="2"></v-progress-linear>
-							</v-flex>
-						</v-layout>
-					</v-container>
-					<v-card-text class="text-md-center">
-				  		<v-btn color="info" @click="submitRequestToFootballAPI">submit request to Football API </v-btn>
-    					<v-btn @click="">clear</v-btn>
-    				</v-card-text>
-    				<v-card-actions>
-    					<v-card-text class="text-md-center">
-    						<h3>Voici les résultats de la requête:</h3>
-    						{{ footballAPIRequestResult }}
-    					</v-card-text>
-    				</v-card-actions>
-				</v-form>
-			</v-card>
-		</v-flex>-->
 	</div>
 </template>
 
@@ -215,7 +170,7 @@
 			this.$store.dispatch('events/loadedEvents')
 			this.$store.dispatch('competitions/loadedCompetitions')
 			this.$store.dispatch('countries/loadedCountries')
-			this.$sotre.dispatch('players/loadedPlayers')
+			this.$store.dispatch('players/loadedPlayers')
 		},
 		data () {
 			return {
@@ -288,7 +243,7 @@
 		    	return this.$store.getters['teams/loadedTeams']
 		    },
 			loadedPlayers () {
-				return this.$store.gettes['players/loadedPlayers']
+				return this.$store.getters['players/loadedPlayers']
 			},
 		    loadedEvents () {
 		    	return this.$store.getters['events/loadedEvents']
