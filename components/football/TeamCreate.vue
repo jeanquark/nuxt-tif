@@ -57,6 +57,23 @@
 					</v-flex>
 					
 					<v-flex xs6>
+						<v-subheader class="text-xl-center">Région / Pays</v-subheader>
+					</v-flex>
+					<v-flex xs6>
+						<v-select
+						  :items="loadedCountries"
+						  v-model="selectedCountries"
+						  label="Sélectionner le pays"
+						  item-text="name"
+						  item-value="slug"
+						  :autocomplete="true"
+						  chips
+						  single-line
+						  :return-object="true"
+						></v-select>
+					</v-flex>	
+					
+					<v-flex xs6>
 						<v-subheader>Stade</v-subheader>
 					</v-flex>
 					<v-flex xs6>
