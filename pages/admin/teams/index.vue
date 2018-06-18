@@ -18,7 +18,7 @@
 	      	<h1 class="text-md-center">Equipes</h1>
 	      	<!-- loadedEvents: {{ loadedEvents }} -->
 	      	<br /><br />
-	      	<v-btn color="primary" dark slot="activator" class="mb-2" to="/admin/team/create">Créer une équipe</v-btn>
+	      	<v-btn color="primary" dark slot="activator" class="mb-2" to="/admin/teams/create">Créer une équipe</v-btn>
 			<!-- {{ loadedEvents }} -->
 			<v-card>
 				<template>
