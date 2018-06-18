@@ -181,7 +181,7 @@
 			this.$store.dispatch('countries/loadedCountries')
 			this.$store.dispatch('teams/loadedTeams')
 			this.$store.dispatch('competitions/loadedCompetitions')
-			this.$store.dispatch)'stadiums/loadedStadiums')
+			this.$store.dispatch('stadiums/loadedStadiums')
 		},
 		data () {
 			return {
