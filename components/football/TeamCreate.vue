@@ -35,85 +35,6 @@
 					      label="Slug"
 					    ></v-text-field>
 					</v-flex>
-					
-					<v-flex xs6>
-						<v-subheader class="text-xl-center">Couleur</v-subheader>
-					</v-flex>
-					<v-flex xs6>
-						<v-text-field
-					      v-model="selectedColor"
-					      label="Couleurs de l'équipe"
-					    ></v-text-field>
-					</v-flex>
-					
-					<v-flex xs6>
-						<v-subheader class="text-xl-center">Site internet</v-subheader>
-					</v-flex>
-					<v-flex xs6>
-						<v-text-field
-					      v-model="selectedWebsite"
-					      label="Site internet"
-					    ></v-text-field>
-					</v-flex>
-					
-					<v-flex xs6>
-						<v-subheader>Stade</v-subheader>
-					</v-flex>
-					<v-flex xs6>
-						<v-select
-							:items="loadedStadiums"
-							v-model="selectedStadium" 
-							label="Sélectionner un stade"
-							item-text="name"
-							item-value="{}"
-							:autocomplete="true"
-							single-line
-						>
-						<template slot="item" slot-scope="data">
-							<v-list-tile-content>
-								<v-list-tile-title>
-									<!-- {{ data.item.name }} <small style="color: #ccc;">{{ data.item.city.name }} - {{ data.item.country.name}}</small> -->
-									{{ data.item.name }}
-								</v-list-tile-title>
-							</v-list-tile-content>
-						</template>
-						</v-select>
-					</v-flex>
-					
-					<v-flex xs6 v-if="this.radios === 'countries'">
-						<v-subheader class="text-xl-center">Région / Pays</v-subheader>
-					</v-flex>
-					<v-flex xs6 v-if="this.radios === 'countries'">
-						<v-select
-						  :items="loadedCountries"
-						  v-model="selectedCountries"
-						  label="Sélectionner un pays"
-						  item-text="name"
-						  item-value="slug"
-						  :autocomplete="true"
-						  chips
-						  single-line
-						  :return-object="true"
-						></v-select>
-					</v-flex>
-					
-					<v-flex xs6 v-if="this.radios === 'continents'">
-						<v-subheader class="text-xl-center">Continent(s) hôte(s) de la compétition</v-subheader>
-					</v-flex>
-					<v-flex xs6 v-if="this.radios === 'continents'">
-						<v-select
-						  :items="loadedContinents"
-						  v-model="selectedContinents"
-						  label="Sélectionner un ou plusieurs continent"
-						  item-text="name"
-						  item-value="slug"
-						  :autocomplete="true"
-						  multiple
-						  chips
-						  single-line
-						  :return-object="true"
-						></v-select>
-					</v-flex>
 
 					<v-flex xs6>
 						<v-subheader class="text-xl-center">Type de compétition</v-subheader>
@@ -126,7 +47,25 @@
 					</v-flex>
 
 					<v-flex xs6>
-						<v-subheader class="text-xl-center">Participe à quelles compétitions ?</v-subheader>
+						<v-subheader class="text-xl-center">Pays/Region</v-subheader>
+					</v-flex>
+					<v-flex xs6>
+						<v-select
+						  :items="loadedCountries"
+						  v-model="selectedCountry"
+						  label="Sélectionner un pays"
+						  item-text="name"
+						  item-value="{}"
+						  :autocomplete="true"
+						  single-line
+						></v-select>
+					</v-flex>
+
+				</v-layout>
+
+				<v-layout v-else>
+					<v-flex xs6>
+						<v-subheader class="text-xl-center">Participation à quelle compétition ?</v-subheader>
 					</v-flex>
 					<v-flex xs6>
 						<v-select
@@ -140,9 +79,11 @@
 				          :return-object="true"
 						></v-select>
 					</v-flex>
+				</v-layout>
 
+				<v-layout>
 					<v-flex xs6>
-						<v-subheader class="text-xl-center">Image (drapeau ou blason)</v-subheader>
+						<v-subheader class="text-xl-center">Image</v-subheader>
 					</v-flex>
 					<v-flex xs6>
 						<input type="file" @change="previewImage" accept="image/*" style="padding-top: 15px;">
@@ -156,7 +97,7 @@
 			<v-card-text class="text-md-center">
 		  		<v-btn @click="submitCreateTeam" color="info" :disabled="this.checkTeamSlugUniqueness(this.selectedSlug)">Soumettre</v-btn>
 				<v-btn @click="clearAll" color="warning">Nettoyer</v-btn>
-				<nuxt-link to="/admin/competitions" class="btn">Retour</nuxt-link>
+				<nuxt-link to="/admin/teams" class="btn">Retour</nuxt-link>
 			</v-card-text>
 		</v-form>
 	</v-card>
@@ -175,25 +116,18 @@
 
 		},
 		created () {
-			// this.$store.dispatch('activities/loadedActivities')
-    		// this.$store.dispatch('categories/loadedCategories')
-    		this.$store.dispatch('continents/loadedContinents')
 			this.$store.dispatch('countries/loadedCountries')
 			this.$store.dispatch('teams/loadedTeams')
 			this.$store.dispatch('competitions/loadedCompetitions')
-			this.$store.dispatch('stadiums/loadedStadiums')
 		},
 		data () {
 			return {
 		        selectedTeamType: 'club',
 				radios: 'countries',
-        		selectedContinents: [],
 		        selectedCountries: [],
 		        selectedName: '',
 		        selectedSlug: '',
-				selectedColor: '',
-				selectedStadium: '',
-				selectedWebsite: '',
+		        selectedTeams: [],
 		        imageData: '',
 			    footballAPIRequestResult: '',
 			    loading: false,
@@ -226,14 +160,8 @@
 		    loadedCompetitions () {
 		    	return this.$store.getters['competitions/loadedCompetitions']
 		    },
-		    loadedContinents () {
-		    	return this.$store.getters['continents/loadedContinents']
-		    },
 		    loadedCountries () {
 		    	return this.$store.getters['countries/loadedCountries']
-		    },
-		    loadedStadiums () {
-		    	return this.$store.getters['stadiums/loadedStadiums']
 		    }
 		},
 		methods: {
@@ -254,6 +182,7 @@
 		        this.file = this.$refs.file1.files[0]
 		    },
 			submitCreateTeam () {
+				console.log('submitCreateTeam')
 				console.log(this.checkTeamSlugUniqueness(this.selectedSlug))
 				// return
 
@@ -279,6 +208,7 @@
 						}
 					}
 				}
+				
 				// return
 				const teamData = {
 					activity: {
@@ -289,17 +219,10 @@
 						slug: this.category.slug,
 						name: this.category.name
 					},
-					type: this.selectedTeamType,
-					continents: continents,
+					type: this.selectedCompetitionType,
 					countries: countries,
 			        name: this.selectedName,
 			        slug: this.selectedSlug,
-					color: this.selectedColor,
-					stadiums: {
-						slug: this.category.slug,
-						name: this.category.name
-					},
-					website: this.selectedWebsite,
 			        _created_at: new Date().getTime(),
 			        _updated_at: new Date().getTime()
 				}
@@ -316,7 +239,7 @@
 						console.log('success')
 					    console.log(response.data)
 					    teamData['image'] = response.data
-					    console.log(teamData)
+					    console.log(teanData)
 					    this.$store.dispatch('teams/createTeam', teamData)
 					    return this.$router.push('/admin/teams')
 					}).catch(function (error) {
@@ -347,13 +270,9 @@
         	},
 			clearAll () {
 				this.selectedTeamType = 'club'
-        		this.selectedContinents = []
 		        this.selectedCountries = []
 		        this.selectedName = ''
 		        this.selectedSlug = ''
-				this.selectedColor = ''
-				this.selectedStadium = ''
-				this.selectedWebsite = ''
 		        this.imageData = ''
 			}
 		},
