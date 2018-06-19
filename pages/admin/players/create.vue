@@ -17,7 +17,7 @@
 				<v-form>
 					<v-card-title class="primary-title">
 						<v-card-text class="text-md-center">
-							<h2>Créer une équipe</h2>
+							<h2>Créer un joueur, un sportif</h2>
 						</v-card-text>
 					</v-card-title>
 					<v-container fluid v-if="loadedCategories != ''">
@@ -62,17 +62,17 @@
 				</v-form>
 			</v-card>
 
-			<football-team :activity="selectedActivity" :category="selectedCategory" v-if="selectedCategory.slug === 'football'"></football-team>
+			<football-player :activity="selectedActivity" :category="selectedCategory" v-if="selectedCategory.slug === 'football'"></football-player>
 
 		</v-flex>
 	</div>
 </template>
 
 <script>
-  	import FootballTeam from '~/components/football/TeamCreate'
+  	import FootballPlayer from '~/components/football/PlayerCreate'
 	export default {
 		layout: 'layoutBack',
-		components: { FootballTeam },
+		components: { FootballPlayer },
 		created () {
 			this.$store.dispatch('activities/loadedActivities')
     		this.$store.dispatch('categories/loadedCategories')
@@ -86,14 +86,14 @@
 				      to: '/admin'
 				    },
 				    {
-				      text: 'Teams',
+				      text: 'Players',
 				      disabled: false,
-				      to: '/admin/teams'
+				      to: '/admin/players'
 				    },
 				    {
 				      text: 'Create',
 				      disabled: true,
-				      to: '/admin/teams/create'
+				      to: '/admin/players/create'
 				    }
 				],
 				selectedActivity: '',
