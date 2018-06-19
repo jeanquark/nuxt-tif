@@ -140,7 +140,7 @@
 			<v-card-text class="text-md-center">
 		  		<v-btn @click="submitCreateTeam" color="info" :disabled="this.checkTeamSlugUniqueness(this.selectedSlug)">Soumettre</v-btn>
 				<v-btn @click="clearAll" color="warning">Nettoyer</v-btn>
-				<nuxt-link to="/admin/competitions" class="btn">Retour</nuxt-link>
+				<nuxt-link to="/admin/teams" class="btn">Retour</nuxt-link>
 			</v-card-text>
 		</v-form>
 	</v-card>
@@ -283,9 +283,7 @@
 					color: this.selectedColor,
 					website: this.selectedWebsite,
 					stadiums: this.selectedStadiums,
-					competitions: {
-						[this.selectedCompetition.slug]: true
-					},
+					competition: this.selectedCompetitions,
 			        _created_at: new Date().getTime(),
 			        _updated_at: new Date().getTime()
 				}
