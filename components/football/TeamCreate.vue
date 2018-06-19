@@ -170,7 +170,7 @@
 		        selectedCompetitionType: 'club',
 				radios: 'countries',
         		selectedContinents: [],
-		        selectedCountry: '',
+		        selectedCountries: [],
 		        selectedName: '',
 		        selectedSlug: '',
 				selectedColor: '',
@@ -277,16 +277,13 @@
 						name: this.category.name
 					},
 					type: this.selectedCompetitionType,
-					country: {
-						slug: this.selectedCountry.slug,
-						name: this.selectedCountry.name
-					},
+					country: countries,
 			        name: this.selectedName,
 			        slug: this.selectedSlug,
 					color: this.selectedColor,
 					website: this.selectedWebsite,
 					stadiums: this.selectedStadiums,
-					competitions: this.selectedCompetitions,
+					competition: this.selectedCompetitions,
 			        _created_at: new Date().getTime(),
 			        _updated_at: new Date().getTime()
 				}
