@@ -279,7 +279,10 @@
 					type: this.selectedCompetitionType,
 			        name: this.selectedName,
 			        slug: this.selectedSlug,
-					country: this.selectedCountries,
+					country: {
+						slug: this.selectedCountries.slug,
+						name: this.selectedCountries.name
+					},
 					color: this.selectedColor,
 					website: this.selectedWebsite,
 					stadiums: this.selectedStadiums,
