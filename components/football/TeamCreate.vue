@@ -254,6 +254,18 @@
 				console.log(this.checkTeamSlugUniqueness(this.selectedSlug))
 				// return
 
+				// Organize countries data
+				let countries = {}
+
+				if (this.selectedCountries.length > 0) {
+					for (let country of this.selectedCountries) {
+						// console.log(team)
+						countries[country.slug] = {
+							name: country.name,
+							slug: country.slug,
+						}
+					}
+				}
 				// return
 				const teamData = {
 					activity: {
@@ -264,10 +276,6 @@
 						slug: this.category.slug,
 						name: this.category.name
 					},
-					contries: {
-						slug: this.activity.slug,
-						name: this.activity.name
-					},
 					type: this.selectedCompetitionType,
 					countries: countries,
 			        name: this.selectedName,
@@ -275,7 +283,7 @@
 					color: this.selectedColor,
 					website: this.selectedWebsite,
 					stadiums: this.selectedStadiums,
-					competition: {
+					competitions: {
 						[this.selectedCompetition.slug]: true
 					},
 			        _created_at: new Date().getTime(),
