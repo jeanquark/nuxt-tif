@@ -215,6 +215,9 @@
 		    loadedContinents () {
 		    	return this.$store.getters['continents/loadedContinents']
 		    },
+			loadedStadiums () {
+				return this.$store.getters['stadiums/loadedStadiums']
+			},
 		    loadedCountries () {
 		    	return this.$store.getters['countries/loadedCountries']
 		    },
