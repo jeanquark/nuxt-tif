@@ -165,6 +165,7 @@
 			this.$store.dispatch('countries/loadedCountries')
 			this.$store.dispatch('teams/loadedTeams')
 			this.$store.dispatch('competitions/loadedCompetitions')
+			this.$store.dispatch('stadiums/loadedStadiums')
 		},
 		data () {
 			return {
@@ -174,13 +175,7 @@
 		        selectedCountries: [],
 		        selectedName: '',
 		        selectedSlug: '',
-		        selectedYear: moment().year() + 1,
-		        selectedTeams: [],
-		        selectedTeamsGroup: [],
 		        imageData: '',
-				selectedGroups: false,
-				selectedGroupsNumber: this.selectedGroups ? 2 : 0,
-				selectedGroupsFormat: 'letters',
 			    footballAPIRequestResult: '',
 			    loading: false,
 			    items: [
@@ -226,16 +221,6 @@
 		    }
 		},
 		methods: {
-			convertNumberToLetter (index) {
-				if (this.selectedGroupsFormat === 'letters') {
-					if (index <= 26) {
-						const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-						return alphabet[index]
-					}
-				} else {
-					return index + 1
-				}
-			},
 			checkCompetitionSlugUniqueness (slug) {
 				console.log(slug)
 				let found = false
@@ -257,47 +242,6 @@
 				console.log(this.selectedGroups)
 				console.log(this.checkCompetitionSlugUniqueness(this.selectedSlug))
 				// return
-
-				// Organize teams data
-				let teams = {}
-				if (this.selectedGroups) {
-					console.log('There is groups')
-					let index = 0
-					for (let group of this.selectedTeamsGroup) {
-						// console.log(group)
-						for (let team of group) {
-							teams[team.slug] = {
-								name: team.name,
-								slug: team.slug,
-								group: this.convertNumberToLetter(index),
-								wins: 0,
-								draws: 0,
-								losses: 0,
-								goals_scored: 0,
-								goals_conceded: 0,
-								points: 0
-							}
-						}
-						index++
-					}
-				} else {
-					console.log('There is no  groups')
-					// console.log(this.selectedTeams)
-					for (let team of this.selectedTeams) {
-						// console.log(team)
-						teams[team.slug] = {
-							name: team.name,
-							slug: team.slug,
-							wins: 0,
-							draws: 0,
-							losses: 0,
-							goals_scored: 0,
-							goals_conceded: 0,
-							points: 0
-						}
-					}
-				}
-				console.log(teams)
 
 				// Organize countries and continents data
 				let continents = {}
