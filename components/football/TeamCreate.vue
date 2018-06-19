@@ -138,7 +138,7 @@
 				</v-layout>
 			</v-container>
 			<v-card-text class="text-md-center">
-		  		<v-btn @click="submitCreateCompetition" color="info" :disabled="this.selectedTeams.length === 0 && this.selectedTeamsGroup.length === 0 || this.checkCompetitionSlugUniqueness(this.selectedSlug)">Soumettre</v-btn>
+		  		<v-btn @click="submitCreateTeam" color="info" :disabled="this.selectedTeams.length === 0 && this.selectedTeamsGroup.length === 0 || this.checkCompetitionSlugUniqueness(this.selectedSlug)">Soumettre</v-btn>
 				<v-btn @click="clearAll" color="warning">Nettoyer</v-btn>
 				<nuxt-link to="/admin/competitions" class="btn">Retour</nuxt-link>
 			</v-card-text>
@@ -159,8 +159,6 @@
 
 		},
 		created () {
-			// this.$store.dispatch('activities/loadedActivities')
-    		// this.$store.dispatch('categories/loadedCategories')
     		this.$store.dispatch('continents/loadedContinents')
 			this.$store.dispatch('countries/loadedCountries')
 			this.$store.dispatch('teams/loadedTeams')
@@ -175,6 +173,10 @@
 		        selectedCountries: [],
 		        selectedName: '',
 		        selectedSlug: '',
+				selectedColor: '',
+				selectedWebsite: '',
+				selectedCompetitions: '',
+				selectedStadiums: '',
 		        selectedYear: moment().year() + 1,
 		        selectedTeams: [],
 		        selectedTeamsGroup: [],
@@ -393,6 +395,10 @@
 		        this.selectedCountries = []
 		        this.selectedName = ''
 		        this.selectedSlug = ''
+				this.selectedColor = ''
+				this.selectedWebsite = ''
+				this.selectedStadiums = ''
+				this.selectedCompetitions = ''
 		        this.selectedYear = ''
 		        this.selectedTeams = []
 		        this.selectedTeamsGroup = []
@@ -419,18 +425,6 @@
 		    	console.log('Watch selectedName')
 		    	this.selectedSlug = slugify(this.selectedName)
 		    },
-		    // selectedTeamsGroup () {
-		    // 	console.log(this.selectedTeamsGroup[0][0].slug)
-		    // 	let teamsArray = []
-		    // 	if (this.selectedTeamsGroup) {
-		    // 		for (let group of this.selectedTeamsGroup) {
-		    // 			teamsArray.push(group.map(team => team.slug))
-		    // 		}
-		    // 	}
-		    // 	console.log(teamsArray)
-		    // 	this.teamsArray = teamsArray[0]
-		    // 	return
-		    // }
 		    selectedGroups () {
 		    	if (this.selectedGroups) {
 		    		this.selectedTeams = []
