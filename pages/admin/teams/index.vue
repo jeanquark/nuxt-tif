@@ -15,17 +15,17 @@
 
 	  	<v-flex xs12 sm10 offset-sm1>
 	  		<br /><br />
-	      	<h1 class="text-md-center">Equipes</h1>
+	      	<h1 class="text-md-center">Joueurs / Sportifs</h1>
 	      	<!-- loadedEvents: {{ loadedEvents }} -->
 	      	<br /><br />
-	      	<v-btn color="primary" dark slot="activator" class="mb-2" to="/admin/teams/create">Créer une équipe</v-btn>
+	      	<v-btn color="primary" dark slot="activator" class="mb-2" to="/admin/players/create">Créer un joueur, un sportif</v-btn>
 			<!-- {{ loadedEvents }} -->
 			<v-card>
 				<template>
 				  <v-data-table
 				    v-model="selected"
 				    :headers="headers"
-				    :items="loadedTeams"
+				    :items="loadedPlayers"
 				    select-all
 				    :pagination.sync="pagination"
 				    item-key="name"
@@ -64,11 +64,9 @@
 				        </td>
 				        <td>{{ props.index + 1 }}</td>
 						<td class="text-xs-left">{{ props.item.name }}</td>
-						<td class="text-xs-left">{{ props.item.activity.name }}</td>
 						<td class="text-xs-left">{{ props.item.category.name }}</td>
-						<td class="text-xs-left">{{ props.item.year }}</td>
 						<td class="justify-center layout px-0">
-						  <v-btn icon class="mx-0" :to="'/admin/teams/' + props.item.id" :id="props.item.id" disabled>
+						  <v-btn icon class="mx-0" :to="'/admin/players/' + props.item.id" :id="props.item.id" disabled>
 						    <v-icon color="teal">edit</v-icon>
 						  </v-btn>
 						  <v-btn icon class="mx-0" @click="deleteItem(props.item)">
@@ -83,7 +81,7 @@
 	    </v-flex>
 	    
 	    <br /><br />
-	    <h2 class="text-md-center">Noeud "Teams" dans la base de données:</h2>
+	    <h2 class="text-md-center">Noeud "Players" dans la base de données:</h2>
 	    <br />
 	    <v-flex xs12 sm10 offset-sm1>
 		    <v-card>
@@ -94,7 +92,7 @@
 				<!-- </div> -->
 				<br />
 				<div class="text-xs-center">
-					<v-btn class="btn" :disabled="!changed || loading" @click="updateTeam" color="success"><i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i>Sauver les changements</v-btn>
+					<v-btn class="btn" :disabled="!changed || loading" @click="updatePlayer" color="success"><i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i>Sauver les changements</v-btn>
 				</div>
 				<br />
 				<!-- <div v-if="displayJSON">{{ this.new_action }}</div> -->
@@ -113,7 +111,7 @@
 	    	components: { Confirm },
 	    // },
 	    created () {
-	    	this.$store.dispatch('teams/loadedTeams')
+	    	this.$store.dispatch('players/loadedPlayers')
 	    },
 	    data () {
 	    	return {
@@ -126,8 +124,8 @@
 			          disabled: false
 			        },
 			        {
-			          text: 'Teams',
-			          to: '/admin/teams',
+			          text: 'Players',
+			          to: '/admin/players',
 			          disabled: true
 			        }
 			    ],
@@ -149,8 +147,8 @@
 	    	loading () {
 	    		return this.$store.getters['loading']
 	    	},
-	    	loadedTeams () {
-	    		return this.$store.getters['teams/loadedTeams']
+	    	loadedPlayers () {
+	    		return this.$store.getters['players/loadedPlayers']
 	    	},
 	    	changed () {
 	    		console.log('changed!')
@@ -160,21 +158,21 @@
 		        // return !_.isEqual(this.oldJSON, this.newJSON) ? true : false
 		    },
 		    oldJSON () {
-		    	// return this.loadedTeams
-		    	console.log(typeof this.loadedTeams)
-		    	// if (typeof this.loadedTeams === 'object') {
+		    	// return this.loadedPlayers
+		    	console.log(typeof this.loadedPlayers)
+		    	// if (typeof this.loadedPlayers === 'object') {
 		    		const arrayToObject = (array) =>
 					   	array.reduce((obj, item) => {
 					     	obj[item.slug] = item
 					     	return obj
 					   	},{})
-					   	// const teamObject = arrayToObject(this.loadedTeams)
+					   	// const playerObject = arrayToObject(this.loadedPlayers)
 				// } else {
-				// 	const competitionObject = this.loadedTeams
+				// 	const playerObject = this.loadedPlayers
 				// }
-						const teamObject = arrayToObject(this.loadedTeams.sort((a, b) => a.slug.localeCompare(b.slug)))
-				console.log(teamObject)
-				return teamObject
+						const playerObject = arrayToObject(this.loadedPlayers.sort((a, b) => a.slug.localeCompare(b.slug)))
+				console.log(playerObject)
+				return playerObject
 			}
 	    },
 	    methods: {
@@ -183,7 +181,7 @@
 		        	this.selected = []
 		        } else {
 		        	// this.selected = this.items.slice()
-		        	this.selected = this.loadedTeams.slice()
+		        	this.selected = this.loadedPlayers.slice()
 		        }
 		    },
 		    changeSort (column) {
@@ -198,7 +196,7 @@
 		    	this.$refs.confirm.open('Delete', 'Are you sure you want to delete "' + item.name + '" ?', { color: 'red' }).then((confirm) => {
 		    		console.log(confirm)
 		    		if (confirm) {
-		    			this.$store.dispatch('teams/deleteTeam', item.id)
+		    			this.$store.dispatch('players/deletePlayer', item.id)
 		    		}
 		    	})
 		    },
@@ -206,12 +204,12 @@
 		        // console.log(newJson)
 		        this.newJSON = newJson
 		    },
-		    updateTeam () {
-		        console.log('updateTeam called!')
-		        const teamData = this.newJSON
-		        // teamData['_updated_at'] = new Date().getTime()
-		        this.$store.dispatch('teams/updateTeam', teamData)
-		       	return this.$router.push('/admin/teams')
+		    updatePlayer () {
+		        console.log('updatePlayer called!')
+		        const playerData = this.newJSON
+		        // playerData['_updated_at'] = new Date().getTime()
+		        this.$store.dispatch('players/updatePlayer', playerData)
+		       	return this.$router.push('/admin/players')
 		       	// return this.$router.push('/admin')
 		    },
 		    // toggleJSON() {
