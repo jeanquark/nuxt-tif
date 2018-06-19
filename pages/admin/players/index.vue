@@ -18,7 +18,7 @@
 	      	<h1 class="text-md-center">Joueurs / Sportifs</h1>
 	      	<!-- loadedEvents: {{ loadedEvents }} -->
 	      	<br /><br />
-	      	<v-btn color="primary" dark slot="activator" class="mb-2" to="/admin/player/create">Créer un joueur, un sportif</v-btn>
+	      	<v-btn color="primary" dark slot="activator" class="mb-2" to="/admin/players/create">Créer un joueur, un sportif</v-btn>
 			<!-- {{ loadedEvents }} -->
 			<v-card>
 				<template>
