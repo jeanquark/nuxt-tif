@@ -138,7 +138,7 @@
 				</v-layout>
 			</v-container>
 			<v-card-text class="text-md-center">
-		  		<v-btn @click="submitCreateTeam" color="info" :disabled="this.selectedTeams.length === 0 && this.selectedTeamsGroup.length === 0 || this.checkTeamSlugUniqueness(this.selectedSlug)">Soumettre</v-btn>
+		  		<v-btn @click="submitCreateTeam" color="info" :disabled="this.checkTeamSlugUniqueness(this.selectedSlug)">Soumettre</v-btn>
 				<v-btn @click="clearAll" color="warning">Nettoyer</v-btn>
 				<nuxt-link to="/admin/competitions" class="btn">Retour</nuxt-link>
 			</v-card-text>
@@ -177,13 +177,7 @@
 				selectedWebsite: '',
 				selectedCompetitions: '',
 				selectedStadiums: '',
-		        selectedYear: moment().year() + 1,
-		        selectedTeams: [],
-		        selectedTeamsGroup: [],
 		        imageData: '',
-				selectedGroups: false,
-				selectedGroupsNumber: this.selectedGroups ? 2 : 0,
-				selectedGroupsFormat: 'letters',
 			    footballAPIRequestResult: '',
 			    loading: false,
 			    items: [
@@ -257,7 +251,6 @@
 		    },
 			submitCreateTeam () {
 				console.log('submitCreateTeam')
-				console.log(this.selectedGroups)
 				console.log(this.checkTeamSlugUniqueness(this.selectedSlug))
 				// return
 
