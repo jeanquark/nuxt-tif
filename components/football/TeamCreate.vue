@@ -138,7 +138,7 @@
 				</v-layout>
 			</v-container>
 			<v-card-text class="text-md-center">
-		  		<v-btn @click="submitCreateTeam" color="info" :disabled="this.selectedTeams.length === 0 && this.selectedTeamsGroup.length === 0 || this.checkCompetitionSlugUniqueness(this.selectedSlug)">Soumettre</v-btn>
+		  		<v-btn @click="submitCreateTeam" color="info" :disabled="this.selectedTeams.length === 0 && this.selectedTeamsGroup.length === 0 || this.checkTeamSlugUniqueness(this.selectedSlug)">Soumettre</v-btn>
 				<v-btn @click="clearAll" color="warning">Nettoyer</v-btn>
 				<nuxt-link to="/admin/competitions" class="btn">Retour</nuxt-link>
 			</v-card-text>
@@ -193,14 +193,14 @@
 				      to: '/admin'
 				    },
 				    {
-				      text: 'Competitions',
+				      text: 'Teams',
 				      disabled: false,
-				      to: '/admin/competitions'
+				      to: '/admin/teams'
 				    },
 				    {
 				      text: 'Create',
 				      disabled: true,
-				      to: '/admin/competitions/create'
+				      to: '/admin/teams/create'
 				    }
 				],
 			}
@@ -239,12 +239,12 @@
 					return index + 1
 				}
 			},
-			checkCompetitionSlugUniqueness (slug) {
+			checkTeamSlugUniqueness (slug) {
 				console.log(slug)
 				let found = false
-				for (let competition of this.loadedCompetitions) {
-					console.log(competition)
-				    if (competition.slug === slug) {
+				for (let team of this.loadedCompetitions) {
+					console.log(team)
+				    if (team.slug === slug) {
 				        found = true
 				        break
 				    }
@@ -255,10 +255,10 @@
 		    	console.log('handleFileUpload')
 		        this.file = this.$refs.file1.files[0]
 		    },
-			submitCreateCompetition () {
+			submitCreateTeam () {
 				console.log('submitCreateTeam')
 				console.log(this.selectedGroups)
-				console.log(this.checkCompetitionSlugUniqueness(this.selectedSlug))
+				console.log(this.checkTeamSlugUniqueness(this.selectedSlug))
 				// return
 
 				// Organize teams data
@@ -398,11 +398,11 @@
 				this.selectedColor = ''
 				this.selectedWebsite = ''
 				this.selectedStadiums = ''
-				this.selectedCompetitions = ''
+				this.selectedCompetitions = []
 		        this.selectedYear = ''
 		        this.selectedTeams = []
 		        this.selectedTeamsGroup = []
-		        this.imageData = ''
+		        this.imageData = []
 				this.selectedGroups = false
 				this.selectedGroupsNumber = 2
 				this.selectedGroupsFormat = 'letters'
