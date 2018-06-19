@@ -277,15 +277,13 @@
 						name: this.category.name
 					},
 					type: this.selectedCompetitionType,
-					country: this.selectedCountries,
 			        name: this.selectedName,
 			        slug: this.selectedSlug,
+					country: this.selectedCountries,
 					color: this.selectedColor,
 					website: this.selectedWebsite,
 					stadiums: this.selectedStadiums,
-					competitions: {
-						[this.selectedCompetitions]: true
-					},
+					competitions: this.selectedCompetitions,
 			        _created_at: new Date().getTime(),
 			        _updated_at: new Date().getTime()
 				}
