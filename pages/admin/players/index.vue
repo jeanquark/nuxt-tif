@@ -64,7 +64,6 @@
 				        </td>
 				        <td>{{ props.index + 1 }}</td>
 						<td class="text-xs-left">{{ props.item.name }}</td>
-						<td class="text-xs-left">{{ props.item.activity.name }}</td>
 						<td class="text-xs-left">{{ props.item.category.name }}</td>
 						<td class="justify-center layout px-0">
 						  <v-btn icon class="mx-0" :to="'/admin/players/' + props.item.id" :id="props.item.id" disabled>
