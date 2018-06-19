@@ -148,7 +148,7 @@
 	    	loading () {
 	    		return this.$store.getters['loading']
 	    	},
-	    	loadedTeams () {
+	    	loadedPlayers () {
 	    		return this.$store.getters['players/loadedPlayers']
 	    	},
 	    	changed () {
