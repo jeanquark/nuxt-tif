@@ -295,18 +295,8 @@
 				}
 				console.log(teams)
 
-				// Organize countries and continents data
-				let continents = {}
+				// Organize countries data
 				let countries = {}
-				if (this.selectedContinents.length > 0) {
-					for (let continent of this.selectedContinents) {
-						// console.log(team)
-						continents[continent.slug] = {
-							name: continent.name,
-							slug: continent.slug,
-						}
-					}
-				}
 
 				if (this.selectedCountries.length > 0) {
 					for (let country of this.selectedCountries) {
@@ -318,7 +308,7 @@
 					}
 				}
 				// return
-				const competitionData = {
+				const teamData = {
 					activity: {
 			            slug: this.activity.slug,
 			            name: this.activity.name
@@ -328,19 +318,17 @@
 						name: this.category.name
 					},
 					type: this.selectedCompetitionType,
-					continents: continents,
 					countries: countries,
-					groups: this.selectedGroups,
-					groups_number: this.selectedGroupsNumber,
-					groups_format: this.selectedGroupsFormat,
-					teams: teams,
 			        name: this.selectedName,
 			        slug: this.selectedSlug,
-			        year: this.selectedYear,
+					color: this.selectedColor,
+					website: this.selectedWebsite,
+					stadiums: this.selectedStadiums,
+					competition: this.selectedCompetitions,
 			        _created_at: new Date().getTime(),
 			        _updated_at: new Date().getTime()
 				}
-				console.log(competitionData)
+				console.log(teamData)
 				// return
 
 				// If there is an image, upload the image first and then update competition node
@@ -352,17 +340,17 @@
 					}).then((response) => {
 						console.log('success')
 					    console.log(response.data)
-					    competitionData['image'] = response.data
-					    console.log(competitionData)
-					    this.$store.dispatch('competitions/createCompetition', competitionData)
+					    teamData['image'] = response.data
+					    console.log(teamData)
+					    this.$store.dispatch('teams/createTeam', teamData)
 					    return this.$router.push('/admin/teams')
 					}).catch(function (error) {
 						console.log('error')
 					    console.log(error)
 					})
 				} else {
-					this.$store.dispatch('competitions/createCompetition', competitionData)
-					return this.$router.push('/admin/competitions')
+					this.$store.dispatch('teams/createTeam', teamData)
+					return this.$router.push('/admin/teams')
 				}
 			},
 			previewImage (event) {
@@ -417,13 +405,6 @@
 		    selectedName: function () {
 		    	console.log('Watch selectedName')
 		    	this.selectedSlug = slugify(this.selectedName)
-		    },
-		    selectedGroups () {
-		    	if (this.selectedGroups) {
-		    		this.selectedTeams = []
-		    	} else {
-		    		this.selectedTeamsGroup = []
-		    	}
 		    }
 		}
 	}
