@@ -120,7 +120,6 @@
 						  multiple
 				          chips
 				          :return-object="true"
-						  :disabled="selectedCategory.slug == '' || selectedActivity.slug == ''"
 						></v-select>
 					</v-flex>
 				</v-layout>
@@ -277,8 +276,8 @@
 						slug: this.category.slug,
 						name: this.category.name
 					},
-					country: this.selectedCountries,
 					type: this.selectedCompetitionType,
+					country: this.selectedCountries,
 			        name: this.selectedName,
 			        slug: this.selectedSlug,
 					color: this.selectedColor,
