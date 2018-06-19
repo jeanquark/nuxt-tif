@@ -153,11 +153,12 @@
         		selectedContinents: [],
 		        selectedCountries: [],
 		        selectedName: '',
+				selectedSurname: '',
+				selectedTIFName: '',
+				selectedTeam: '',
 		        selectedSlug: '',
-				selectedColor: '',
 				selectedWebsite: '',
 				selectedCompetitions: '',
-				selectedStadiums: '',
 		        imageData: '',
 			    footballAPIRequestResult: '',
 			    loading: false,
@@ -168,14 +169,14 @@
 				      to: '/admin'
 				    },
 				    {
-				      text: 'Teams',
+				      text: 'players',
 				      disabled: false,
-				      to: '/admin/teams'
+				      to: '/admin/players'
 				    },
 				    {
 				      text: 'Create',
 				      disabled: true,
-				      to: '/admin/teams/create'
+				      to: '/admin/players/create'
 				    }
 				],
 			}
@@ -200,7 +201,7 @@
 		    	return this.$store.getters['countries/loadedCountries']
 		    },
 		    loadedTeams () {
-		    	return this.$store.getters['teams/loadedTeams'].filter(team => (team.type === this.selectedCompetitionType))
+		    	return this.$store.getters['teams/loadedTeams']
 		    }
 		},
 		methods: {
@@ -214,12 +215,12 @@
 					return index + 1
 				}
 			},
-			checkTeamSlugUniqueness (slug) {
+			checkPlayerSlugUniqueness (slug) {
 				console.log(slug)
 				let found = false
-				for (let team of this.loadedCompetitions) {
-					console.log(team)
-				    if (team.slug === slug) {
+				for (let player of this.loadedCompetitions) {
+					console.log(player)
+				    if (player.slug === slug) {
 				        found = true
 				        break
 				    }
@@ -230,16 +231,16 @@
 		    	console.log('handleFileUpload')
 		        this.file = this.$refs.file1.files[0]
 		    },
-			submitCreateTeam () {
-				console.log('submitCreateTeam')
-				console.log(this.checkTeamSlugUniqueness(this.selectedSlug))
+			submitCreatePlayer () {
+				console.log('submitCreatePlayer')
+				console.log(this.checkPlayerSlugUniqueness(this.selectedSlug))
 				// return
 				
 				// Organize countries data
 				let countries = {}
 				if (this.selectedCountries.length > 0) {
 					for (let country of this.selectedCountries) {
-						// console.log(team)
+						// console.log(player)
 						countries[country.slug] = {
 							name: country.name,
 							slug: country.slug,
@@ -247,7 +248,7 @@
 					}
 				}
 				// return
-				const teamData = {
+				const playerData = {
 					activity: {
 			            slug: this.activity.slug,
 			            name: this.activity.name
@@ -256,21 +257,20 @@
 						slug: this.category.slug,
 						name: this.category.name
 					},
-					type: this.selectedCompetitionType,
 			        name: this.selectedName,
+					surname: this.selectedSurname,
+					tifname: this.selectedTIFName,
 			        slug: this.selectedSlug,
 					country: {
 						slug: this.selectedCountries.slug,
 						name: this.selectedCountries.name
 					},
-					color: this.selectedColor,
 					website: this.selectedWebsite,
-					stadiums: this.selectedStadiums,
 					competitions: this.selectedCompetitions,
 			        _created_at: new Date().getTime(),
 			        _updated_at: new Date().getTime()
 				}
-				console.log(teamData)
+				console.log(playerData)
 				// return
 
 				// If there is an image, upload the image first and then update competition node
@@ -282,17 +282,17 @@
 					}).then((response) => {
 						console.log('success')
 					    console.log(response.data)
-					    teamData['image'] = response.data
-					    console.log(teamData)
-					    this.$store.dispatch('teams/createTeam', teamData)
-					    return this.$router.push('/admin/teams')
+					    playerData['image'] = response.data
+					    console.log(playerData)
+					    this.$store.dispatch('players/createPlayer', playerData)
+					    return this.$router.push('/admin/players')
 					}).catch(function (error) {
 						console.log('error')
 					    console.log(error)
 					})
 				} else {
-					this.$store.dispatch('teams/createTeam', teamData)
-					return this.$router.push('/admin/teams')
+					this.$store.dispatch('players/createPlayer', playerData)
+					return this.$router.push('/admin/players')
 				}
 			},
 			previewImage (event) {
@@ -317,18 +317,13 @@
         		this.selectedContinents = []
 		        this.selectedCountries = []
 		        this.selectedName = ''
+				this.selectedSurname = ''
+				this.selectedTIFName = ''
+				this.selectedTeams = ''
 		        this.selectedSlug = ''
-				this.selectedColor = ''
 				this.selectedWebsite = ''
-				this.selectedStadiums = ''
 				this.selectedCompetitions = []
-		        this.selectedYear = ''
-		        this.selectedTeams = []
-		        this.selectedTeamsGroup = []
 		        this.imageData = []
-				this.selectedGroups = false
-				this.selectedGroupsNumber = 2
-				this.selectedGroupsFormat = 'letters'
 			}
 		},
 		watch: {
