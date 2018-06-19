@@ -120,6 +120,7 @@
 						  multiple
 				          chips
 				          :return-object="true"
+						  :disabled="selectedCategory.slug == '' || selectedActivity.slug == ''"
 						></v-select>
 					</v-flex>
 				</v-layout>
@@ -276,6 +277,7 @@
 						slug: this.category.slug,
 						name: this.category.name
 					},
+					country: this.selectedCountries,
 					type: this.selectedCompetitionType,
 			        name: this.selectedName,
 			        slug: this.selectedSlug,
@@ -283,7 +285,7 @@
 					website: this.selectedWebsite,
 					stadiums: this.selectedStadiums,
 					competitions: {
-						[this.selectedCompetitions.slug]: true
+						[this.selectedCompetitions]: true
 					},
 			        _created_at: new Date().getTime(),
 			        _updated_at: new Date().getTime()
