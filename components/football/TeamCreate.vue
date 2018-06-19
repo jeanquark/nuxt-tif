@@ -254,47 +254,6 @@
 				console.log(this.checkTeamSlugUniqueness(this.selectedSlug))
 				// return
 
-				// Organize teams data
-				let teams = {}
-				if (this.selectedGroups) {
-					console.log('There is groups')
-					let index = 0
-					for (let group of this.selectedTeamsGroup) {
-						// console.log(group)
-						for (let team of group) {
-							teams[team.slug] = {
-								name: team.name,
-								slug: team.slug,
-								group: this.convertNumberToLetter(index),
-								wins: 0,
-								draws: 0,
-								losses: 0,
-								goals_scored: 0,
-								goals_conceded: 0,
-								points: 0
-							}
-						}
-						index++
-					}
-				} else {
-					console.log('There is no  groups')
-					// console.log(this.selectedTeams)
-					for (let team of this.selectedTeams) {
-						// console.log(team)
-						teams[team.slug] = {
-							name: team.name,
-							slug: team.slug,
-							wins: 0,
-							draws: 0,
-							losses: 0,
-							goals_scored: 0,
-							goals_conceded: 0,
-							points: 0
-						}
-					}
-				}
-				console.log(teams)
-
 				// Organize countries data
 				let countries = {}
 
