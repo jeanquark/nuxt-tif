@@ -287,7 +287,8 @@
 					website: this.selectedWebsite,
 					stadiums: this.selectedStadiums,
 					competitions: {
-						slug: this.selectedCompetitions.slug
+						slug: this.selectedCompetitions.slug,
+						name: this.selectedCompetitions.name
 					},
 			        _created_at: new Date().getTime(),
 			        _updated_at: new Date().getTime()
