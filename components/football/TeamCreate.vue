@@ -286,10 +286,7 @@
 					color: this.selectedColor,
 					website: this.selectedWebsite,
 					stadiums: this.selectedStadiums,
-					competitions: {
-						slug: this.selectedCompetitions.slug,
-						name: this.selectedCompetitions.name
-					},
+					competitions: this.selectedCompetitions,
 			        _created_at: new Date().getTime(),
 			        _updated_at: new Date().getTime()
 				}
