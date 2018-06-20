@@ -238,6 +238,7 @@
         { icon: 'fa fa-list-ol', text: 'Competitions', to: '/admin/competitions', exact: false },
         { icon: 'fa fa-flag', text: 'Teams', to: '/admin/teams', exact: false },
 		{ icon: 'fa fa-user-plus', text: 'Players', to: '/admin/players', exact: false },
+     { icon: 'fa fa-building', text: 'Stadiums', to: '/admin/stadiums', exact: false },
         { icon: 'fa fa-calendar', text: 'Events', to: '/admin/events', exact: false },
         { icon: 'fa fa-language', text: 'Translation', to: '/admin/translations', exact: false },
         // { icon: 'history', text: 'Placeholder 1', to: '', exact: false },
