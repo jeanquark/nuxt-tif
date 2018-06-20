@@ -32,6 +32,7 @@
 						v-model="search"
 					></v-text-field>
 			    </v-card-title>
+					
 					<v-data-table
 					v-model="selected"
 					:headers="headers"
@@ -63,7 +64,6 @@
 						Your search for "{{ search }}" found no results.
 					</v-alert>
 				</v-data-table>
-				</template>
 			</v-card>
 	    </v-flex>
 	    
