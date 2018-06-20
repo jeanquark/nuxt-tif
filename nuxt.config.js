@@ -91,7 +91,7 @@ module.exports = {
       ],
       loadLanguagesAsync: true,
       langDir: 'lang/',
-      defaultLocale: 'en',
+      defaultLocale: 'fr',
       // parsePages: false,
       routes: {
         about: {
