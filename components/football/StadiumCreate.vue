@@ -1,28 +1,20 @@
 <template>
 	<v-card>
-		<!-- selectedActivity: {{ activity }}<br /><br />
-		selectedCategory: {{ category }}<br /><br />
-		imageData: {{ this.imageData }}<br /><br />
-		selectedGroups: {{ this.selectedGroups }}<br /><br />
-		selectedGroupsNumber: {{ this.selectedGroupsNumber }}<br /><br />
-		selectedTeamsGroup: {{ this.selectedTeamsGroup }}<br /><br />
-		selectedTeams: {{ this.selectedTeams }}<br /><br /> -->
-		<!-- loadedTeams: {{ this.loadedTeams }}<br /><br /> -->
 		<v-form v-cloak>
 			<v-card-title class="primary-title">
 				<v-card-text class="text-md-center">
-					<h2>Equipe de football <i class="fa fa-futbol"></i></h2>
+					<h2>Stade de football <i class="fa fa-futbol"></i></h2>
 				</v-card-text>
 			</v-card-title>
 			<v-container>
 				<v-layout row wrap>
 					<v-flex xs6>
-						<v-subheader class="text-xl-center">Nom de l'équipe</v-subheader>
+						<v-subheader class="text-xl-center">Nom du stade</v-subheader>
 					</v-flex>
 					<v-flex xs6>
 						<v-text-field
 					      v-model="selectedName"
-					      label="Nom de l'équipe"
+					      label="Nom du stade"
 					    ></v-text-field>
 					</v-flex>
 
@@ -33,16 +25,6 @@
 						<v-text-field
 					      v-model="selectedSlug"
 					      label="Slug"
-					    ></v-text-field>
-					</v-flex>
-					
-					<v-flex xs6>
-						<v-subheader class="text-xl-center">Couleurs</v-subheader>
-					</v-flex>
-					<v-flex xs6>
-						<v-text-field
-					      v-model="selectedColor"
-					      label="Couleurs de l'équipe"
 					    ></v-text-field>
 					</v-flex>
 					
