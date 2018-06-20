@@ -15,73 +15,60 @@
 
 	  	<v-flex xs12 sm10 offset-sm1>
 	  		<br /><br />
-	      	<h1 class="text-md-center">Joueurs / Sportifs</h1>
+	      	<h1 class="text-md-center">Equipes</h1>
 	      	<!-- loadedEvents: {{ loadedEvents }} -->
 	      	<br /><br />
-	      	<v-btn color="primary" dark slot="activator" class="mb-2" to="/admin/players/create">Créer un joueur, un sportif</v-btn>
+	      	<v-btn color="primary" dark slot="activator" class="mb-2" to="/admin/teams/create">Créer une équipe</v-btn>
 			<!-- {{ loadedEvents }} -->
 			<v-card>
-				<template>
-				  <v-data-table
-				    v-model="selected"
-				    :headers="headers"
-				    :items="loadedPlayers"
-				    select-all
-				    :pagination.sync="pagination"
-				    item-key="name"
-				    class="elevation-1"
-				  >
-				    <template slot="headers" slot-scope="props">
-				      <tr>
-				        <th>
-				          <v-checkbox
-				            primary
-				            hide-details
-				            @click.native="toggleAll"
-				            :input-value="props.all"
-				            :indeterminate="props.indeterminate"
-				          ></v-checkbox>
-				        </th>
-				        <th
-				          v-for="header in props.headers"
-				          :key="header.text"
-				          :class="['column sortable', pagination.descending ? 'desc' : 'asc', header.value === pagination.sortBy ? 'active' : '', header.align === 'left' ? 'text-xs-left' : '',]"
-				          @click="changeSort(header.value)"
-				        >
-				          <v-icon small>arrow_upward</v-icon>
-				          {{ header.text }}
-				        </th>
-				      </tr>
-				    </template>
-				    <template slot="items" slot-scope="props">
-				      <tr :active="props.selected" @click="props.selected = !props.selected">
-				        <td>
-				          <v-checkbox
-				            primary
-				            hide-details
-				            :input-value="props.selected"
-				          ></v-checkbox>
-				        </td>
-				        <td>{{ props.index + 1 }}</td>
+				<v-card-title>
+					Equipes
+      				<v-spacer></v-spacer>
+					<v-text-field
+						append-icon="search"
+						label="Search"
+						single-line
+						hide-details
+						v-model="search"
+					></v-text-field>
+			    </v-card-title>
+					<v-data-table
+					v-model="selected"
+					:headers="headers"
+					:items="loadedTeams"
+					:search="search"
+					select-all
+					:pagination.sync="pagination"
+					:rows-per-page-items="[10,20,50]"
+					item-key="name"
+					class="elevation-1"
+					>				
+					<template slot="items" slot-scope="props">
+					  <tr :active="props.selected" @click="props.selected = !props.selected">
+						<td>{{ props.index + 1 }}</td>
 						<td class="text-xs-left">{{ props.item.name }}</td>
+						<td class="text-xs-left">{{ props.item.type }}</td>
 						<td class="text-xs-left">{{ props.item.category.name }}</td>
 						<td class="justify-center layout px-0">
-						  <v-btn icon class="mx-0" :to="'/admin/players/' + props.item.id" :id="props.item.id" disabled>
-						    <v-icon color="teal">edit</v-icon>
+						  <v-btn icon class="mx-0" :to="'/admin/teams/' + props.item.id" :id="props.item.id">
+							<v-icon color="teal">edit</v-icon>
 						  </v-btn>
 						  <v-btn icon class="mx-0" @click="deleteItem(props.item)">
-						    <v-icon color="pink">delete</v-icon>
+							<v-icon color="pink">delete</v-icon>
 						  </v-btn>
 						</td>
-				      </tr>
-				    </template>
-				  </v-data-table>
+					  </tr>
+					</template>
+					<v-alert slot="no-results" :value="true" color="error" icon="warning">
+						Your search for "{{ search }}" found no results.
+					</v-alert>
+				</v-data-table>
 				</template>
 			</v-card>
 	    </v-flex>
 	    
 	    <br /><br />
-	    <h2 class="text-md-center">Noeud "Players" dans la base de données:</h2>
+	    <h2 class="text-md-center">Noeud "Teams" dans la base de données:</h2>
 	    <br />
 	    <v-flex xs12 sm10 offset-sm1>
 		    <v-card>
@@ -92,7 +79,7 @@
 				<!-- </div> -->
 				<br />
 				<div class="text-xs-center">
-					<v-btn class="btn" :disabled="!changed || loading" @click="updatePlayer" color="success"><i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i>Sauver les changements</v-btn>
+					<v-btn class="btn" :disabled="!changed || loading" @click="updateTeam" color="success"><i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i>Sauver les changements</v-btn>
 				</div>
 				<br />
 				<!-- <div v-if="displayJSON">{{ this.new_action }}</div> -->
@@ -111,7 +98,7 @@
 	    	components: { Confirm },
 	    // },
 	    created () {
-	    	this.$store.dispatch('players/loadedPlayers')
+	    	this.$store.dispatch('teams/loadedTeams')
 	    },
 	    data () {
 	    	return {
@@ -124,15 +111,16 @@
 			          disabled: false
 			        },
 			        {
-			          text: 'Players',
-			          to: '/admin/players',
+			          text: 'Teams',
+			          to: '/admin/teams',
 			          disabled: true
 			        }
 			    ],
 		        headers: [
 		        	{ text: 'N°', value: 'id', align: 'left', sortable: false },
-		        	{ text: 'Name', value: 'name', align: 'center' },
-					{ text: 'Category', value: 'category', align: 'center' },
+		        	{ text: 'Name', value: 'name', align: 'left' },
+					{ text: 'Type', value: 'type', align: 'left' },
+					{ text: 'Category', value: 'category', align: 'left' },
 					{ text: 'Actions', value: 'actions', sortable: false }
 		        ],
 		        events: '',
@@ -147,8 +135,8 @@
 	    	loading () {
 	    		return this.$store.getters['loading']
 	    	},
-	    	loadedPlayers () {
-	    		return this.$store.getters['players/loadedPlayers']
+	    	loadedTeams () {
+	    		return this.$store.getters['teams/loadedTeams']
 	    	},
 	    	changed () {
 	    		console.log('changed!')
@@ -158,21 +146,21 @@
 		        // return !_.isEqual(this.oldJSON, this.newJSON) ? true : false
 		    },
 		    oldJSON () {
-		    	// return this.loadedPlayers
-		    	console.log(typeof this.loadedPlayers)
-		    	// if (typeof this.loadedPlayers === 'object') {
+		    	// return this.loadedTeams
+		    	console.log(typeof this.loadedTeams)
+		    	// if (typeof this.loadedTeams === 'object') {
 		    		const arrayToObject = (array) =>
 					   	array.reduce((obj, item) => {
 					     	obj[item.slug] = item
 					     	return obj
 					   	},{})
-					   	// const playerObject = arrayToObject(this.loadedPlayers)
+					   	// const teamObject = arrayToObject(this.loadedTeams)
 				// } else {
-				// 	const playerObject = this.loadedPlayers
+				// 	const competitionObject = this.loadedTeams
 				// }
-						const playerObject = arrayToObject(this.loadedPlayers.sort((a, b) => a.slug.localeCompare(b.slug)))
-				console.log(playerObject)
-				return playerObject
+						const teamObject = arrayToObject(this.loadedTeams.sort((a, b) => a.slug.localeCompare(b.slug)))
+				console.log(teamObject)
+				return teamObject
 			}
 	    },
 	    methods: {
@@ -181,7 +169,7 @@
 		        	this.selected = []
 		        } else {
 		        	// this.selected = this.items.slice()
-		        	this.selected = this.loadedPlayers.slice()
+		        	this.selected = this.loadedTeams.slice()
 		        }
 		    },
 		    changeSort (column) {
@@ -196,7 +184,7 @@
 		    	this.$refs.confirm.open('Delete', 'Are you sure you want to delete "' + item.name + '" ?', { color: 'red' }).then((confirm) => {
 		    		console.log(confirm)
 		    		if (confirm) {
-		    			this.$store.dispatch('players/deletePlayer', item.id)
+		    			this.$store.dispatch('teams/deleteTeam', item.id)
 		    		}
 		    	})
 		    },
@@ -204,12 +192,12 @@
 		        // console.log(newJson)
 		        this.newJSON = newJson
 		    },
-		    updatePlayer () {
-		        console.log('updatePlayer called!')
-		        const playerData = this.newJSON
-		        // playerData['_updated_at'] = new Date().getTime()
-		        this.$store.dispatch('players/updatePlayer', playerData)
-		       	return this.$router.push('/admin/players')
+		    updateTeam () {
+		        console.log('updateTeam called!')
+		        const teamData = this.newJSON
+		        // teamData['_updated_at'] = new Date().getTime()
+		        this.$store.dispatch('teams/updateTeam', teamData)
+		       	return this.$router.push('/admin/teams')
 		       	// return this.$router.push('/admin')
 		    },
 		    // toggleJSON() {
