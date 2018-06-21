@@ -46,10 +46,17 @@
 					>				
 					<template slot="items" slot-scope="props">
 					  <tr :active="props.selected" @click="props.selected = !props.selected">
+				        <td>
+				          <v-checkbox
+				            primary
+				            hide-details
+				            :input-value="props.selected"
+				          ></v-checkbox>
+				        </td>
 						<td>{{ props.index + 1 }}</td>
 						<td class="text-xs-left">{{ props.item.name }}</td>
-						<td class="text-xs-left">{{ props.item.type }}</td>
-						<td class="text-xs-left">{{ props.item.category.name }}</td>
+						<td class="text-xs-left">{{ props.item.city.name }}</td>
+						<td class="text-xs-left">{{ props.item.capacity }}</td>
 						<td class="justify-center layout px-0">
 						  <v-btn icon class="mx-0" :to="'/admin/stadiums/' + props.item.id" :id="props.item.id">
 							<v-icon color="teal">edit</v-icon>
