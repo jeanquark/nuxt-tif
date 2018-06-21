@@ -32,19 +32,22 @@
 						<v-subheader class="text-xl-center">Ville / Village</v-subheader>
 					</v-flex>
 					<v-flex xs6>
-						<v-select
-						  :items="loadedCities"
-						  v-model="selectedCities"
-						  label="Sélectionner la ville, le village"
-						  item-text="name"
-						  item-value="slug"
-						  :autocomplete="true"
-						  chips
-						  single-line
-						  :return-object="true"
-						></v-select>
-					</v-flex>	
-															
+						<v-text-field
+					      v-model="selectedCities"
+					      label="Ville dans lequel se trouve le stade"
+					    ></v-text-field>
+					</v-flex>
+
+					<v-flex xs6>
+						<v-subheader class="text-xl-center">Timezone</v-subheader>
+					</v-flex>
+					<v-flex xs6>
+						<v-text-field
+					      v-model="selectedTimezone"
+					      label="Timezone"
+					    ></v-text-field>
+					</v-flex>
+					
 					<v-flex xs6>
 						<v-subheader class="text-xl-center">Région / Pays</v-subheader>
 					</v-flex>
@@ -119,14 +122,14 @@
 		created () {
 			this.$store.dispatch('countries/loadedCountries')
 			this.$store.dispatch('teams/loadedTeams')
-			this.$store.dispatch('cities/loadedCities')
 		},
 		data () {
 			return {
 		        selectedCountries: [],
 		        selectedName: '',
 		        selectedSlug: '',
-				selectedCities: [],
+				selectedCities: '',
+				selectedTimezone: '',
 				selectedWebsite: '',
 				selectedCapacity: '',
 		        imageData: '',
@@ -202,21 +205,7 @@
 					}
 				}
 				// return
-				
-				// Organize cities data
-				let cities = {}
-
-				if (this.selectedCities.length > 0) {
-					for (let cities of this.selectedCities) {
-						// console.log(cities)
-						cities[cities.slug] = {
-							name: cities.name,
-							slug: cities.slug,
-						}
-					}
-				}
-				// return	
-				
+								
 				const stadiumData = {
 					activity: {
 			            slug: this.activity.slug,
@@ -232,9 +221,8 @@
 						slug: this.selectedCountries.slug,
 						name: this.selectedCountries.name
 					},
-					city: {
-						slug: this.selectedCities.slug,
-						name: this.selectedcities.name					},
+					city: this.selectedCities,
+					timezone: this.selectedTimezone,
 					website: this.selectedWebsite,
 					capacity: this.selectedCapacity,
 			        _created_at: new Date().getTime(),
