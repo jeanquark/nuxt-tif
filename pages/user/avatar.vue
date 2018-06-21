@@ -317,6 +317,7 @@
                 progress: 0,
                 currentPage: 1,
                 itemsPerPage: 8,
+                selectedLanguage: ''
             }
         },
         computed: {
