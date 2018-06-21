@@ -46,6 +46,13 @@
 					>				
 					<template slot="items" slot-scope="props">
 					  <tr :active="props.selected" @click="props.selected = !props.selected">
+				        <td>
+				          <v-checkbox
+				            primary
+				            hide-details
+				            :input-value="props.selected"
+				          ></v-checkbox>
+				        </td>
 						<td>{{ props.index + 1 }}</td>
 						<td class="text-xs-left">{{ props.item.name }}</td>
 						<td class="text-xs-left">{{ props.item.type }}</td>
