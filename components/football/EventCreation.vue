@@ -33,6 +33,7 @@
 							  single-line
 							></v-select>
 						</v-flex>
+						
 						<v-flex xs6>
 					      	<v-subheader>Date</v-subheader>
 					    </v-flex>
@@ -60,6 +61,7 @@
 							  </v-date-picker>
 							</v-dialog>
 						</v-flex>
+						
 						<v-flex xs6>
 				      		<v-subheader>Heure</v-subheader>
 				      	</v-flex>
@@ -159,7 +161,8 @@
 </template>
 
 <script>
-	import formattedDate from '~/helpers/dateAndTimeToTimestamp'
+	import dateAndTimeToTimestamp from '~/helpers/dateAndTimeToTimestamp'
+	import timestampToDateAndTime from '~/helpers/timestampToDateAndTime'
 	export default {
 		created () {
 			console.log('created')
