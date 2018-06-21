@@ -195,7 +195,7 @@
 
 				if (this.selectedCountries.length > 0) {
 					for (let country of this.selectedCountries) {
-						// console.log(team)
+						// console.log(country)
 						countries[country.slug] = {
 							name: country.name,
 							slug: country.slug,
@@ -210,14 +210,15 @@
 				if (this.selectedCities.length > 0) {
 					for (let city of this.selectedCities) {
 						// console.log(city)
-						countries[city.slug] = {
+						cities[city.slug] = {
 							name: city.name,
 							slug: city.slug,
 							timezone: city.timezone,
 						}
 					}
 				}
-				// return				
+				// return	
+				
 				const stadiumData = {
 					activity: {
 			            slug: this.activity.slug,
@@ -255,7 +256,7 @@
 					}).then((response) => {
 						console.log('success')
 					    console.log(response.data)
-					    teamData['image'] = response.data
+					    stadiumData['image'] = response.data
 					    console.log(stadiumData)
 					    this.$store.dispatch('stadiums/createStadium', stadiumData)
 					    return this.$router.push('/admin/stadiums')
