@@ -175,8 +175,10 @@
 			return {
 				selectedCompetition: '',
 				// competitions: [],
-				date: null,
-				time: null,
+				// date: '2018-06-14',
+				date: timestampToDateAndTime(this.event.date).date,
+				// time: '12:00',
+				time: timestampToDateAndTime(this.event.date).hours + ':' + timestampToDateAndTime(this.event.date).minutes,
 				// competitionStartDate: null,
 				// competitionEndDate: null,
 				modalDate: false,
@@ -265,7 +267,7 @@
 			            country: this.selectedStadium.country.name,
 			            timezone: this.selectedStadium.timezone
 			        },
-			        date: formattedDate(this.date, this.time),
+			        date: dateAndTimeToTimestamp(this.date, this.time),
 			        localteam_halftime_score: '',
 			        localteam_score: '',
 			        visitorteam_helftime_score: '',
