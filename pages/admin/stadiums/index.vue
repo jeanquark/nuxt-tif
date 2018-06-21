@@ -142,7 +142,7 @@
 	    	loading () {
 	    		return this.$store.getters['loading']
 	    	},
-	    	loadedTeams () {
+	    	loadedStadiums () {
 	    		return this.$store.getters['stadiums/loadedStadiums']
 	    	},
 	    	changed () {
