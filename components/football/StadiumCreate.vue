@@ -38,7 +38,6 @@
 						  label="Sélectionner la ville, le village"
 						  item-text="name"
 						  item-value="slug"
-						  item-value="timezone"
 						  :autocomplete="true"
 						  chips
 						  single-line
@@ -213,7 +212,6 @@
 						cities[cities.slug] = {
 							name: cities.name,
 							slug: cities.slug,
-							timezone: cities.timezone,
 						}
 					}
 				}
@@ -236,9 +234,7 @@
 					},
 					city: {
 						slug: this.selectedCities.slug,
-						name: this.selectedcities.name,
-						timezone: this.selectedcities.timezone
-					},
+						name: this.selectedcities.name					},
 					website: this.selectedWebsite,
 					capacity: this.selectedCapacity,
 			        _created_at: new Date().getTime(),
