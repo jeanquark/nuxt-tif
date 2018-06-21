@@ -225,7 +225,7 @@
 					city: {
 						name: this.selectedCities,
 						slug: this.selectedSlugcity
-					}
+					},
 					timezone: this.selectedTimezone,
 					website: this.selectedWebsite,
 					capacity: this.selectedCapacity,
