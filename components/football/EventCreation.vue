@@ -33,7 +33,6 @@
 							  single-line
 							></v-select>
 						</v-flex>
-						
 						<v-flex xs6>
 					      	<v-subheader>Date</v-subheader>
 					    </v-flex>
@@ -61,7 +60,6 @@
 							  </v-date-picker>
 							</v-dialog>
 						</v-flex>
-						
 						<v-flex xs6>
 				      		<v-subheader>Heure</v-subheader>
 				      	</v-flex>
@@ -161,8 +159,7 @@
 </template>
 
 <script>
-	import dateAndTimeToTimestamp from '~/helpers/dateAndTimeToTimestamp'
-	import timestampToDateAndTime from '~/helpers/timestampToDateAndTime'
+	import formattedDate from '~/helpers/dateAndTimeToTimestamp'
 	export default {
 		created () {
 			console.log('created')
@@ -175,10 +172,8 @@
 			return {
 				selectedCompetition: '',
 				// competitions: [],
-				// date: '2018-06-14',
-				date: timestampToDateAndTime(this.event.date).date,
-				// time: '12:00',
-				time: timestampToDateAndTime(this.event.date).hours + ':' + timestampToDateAndTime(this.event.date).minutes,
+				date: null,
+				time: null,
 				// competitionStartDate: null,
 				// competitionEndDate: null,
 				modalDate: false,
@@ -267,7 +262,7 @@
 			            country: this.selectedStadium.country.name,
 			            timezone: this.selectedStadium.timezone
 			        },
-			        date: dateAndTimeToTimestamp(this.date, this.time),
+			        date: formattedDate(this.date, this.time),
 			        localteam_halftime_score: '',
 			        localteam_score: '',
 			        visitorteam_helftime_score: '',
