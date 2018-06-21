@@ -338,6 +338,17 @@
             },
             totalPages () {
                 return Math.ceil(this.loadedAvatars.length / this.itemsPerPage)
+            },
+            language () {
+                let language = this.$i18n.locale
+                switch(language) {
+                    case 'en':
+                        return 'english'
+                    case 'fr':
+                        return 'français'
+                    case 'de':
+                        return 'deutsch'
+                }
             }
         },
 	    methods: {
