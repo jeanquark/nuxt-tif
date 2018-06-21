@@ -18,8 +18,8 @@
 						<div class="flex-container-modal-MyTeam">
 							<h1>C'est quoi ton pseudo ?</h1>
 						</div>
-						<form v-if="user">
-							<input type="text" name="user.pseudo" placeholder="user.pseudo">
+						<form v-if="loaderUser">
+							<input type="text" name="{{ loadedUser.pseudo }}" placeholder="{{ loadedUser.pseudo }}">
 						</form>
 						<div class="flex-container-modal-Pseudo">
 							<div class="flex-container-modal-Niveau">
