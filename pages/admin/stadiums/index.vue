@@ -119,8 +119,8 @@
 		        headers: [
 		        	{ text: 'N°', value: 'id', align: 'left', sortable: false },
 		        	{ text: 'Name', value: 'name', align: 'left' },
-					{ text: 'Type', value: 'type', align: 'left' },
-					{ text: 'Category', value: 'category', align: 'left' },
+					{ text: 'City', value: 'city', align: 'left' },
+					{ text: 'Capacity', value: 'capacity', align: 'left' },
 					{ text: 'Actions', value: 'actions', sortable: false }
 		        ],
 		        events: '',
