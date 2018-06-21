@@ -129,6 +129,7 @@
 		        selectedName: '',
 		        selectedSlug: '',
 				selectedCities: '',
+				selectedSlugcity: '',
 				selectedTimezone: '',
 				selectedWebsite: '',
 				selectedCapacity: '',
@@ -221,7 +222,10 @@
 						slug: this.selectedCountries.slug,
 						name: this.selectedCountries.name
 					},
-					city: this.selectedCities,
+					city: {
+						name: this.selectedCities,
+						slug: this.selectedSlugcity
+					}
 					timezone: this.selectedTimezone,
 					website: this.selectedWebsite,
 					capacity: this.selectedCapacity,
@@ -274,7 +278,8 @@
 		        this.selectedCountries = []
 		        this.selectedName = ''
 		        this.selectedSlug = ''
-				this.selectedCities = []
+				this.selectedCities = ''
+				this.selectedSlugcity = ''
 				this.selectedCapacity = ''
 				this.selectedWebsite = ''
 		        this.imageData = []
@@ -296,8 +301,11 @@
 		    selectedName: function () {
 		    	console.log('Watch selectedName')
 		    	this.selectedSlug = slugify(this.selectedName)
-		    }
-		}
+		    },
+			selectedCities: function () {
+		    	console.log('Watch selectedCities')
+		    	this.selectedSlugcity = slugify(this.selectedCities)
+		    }		}
 	}
 </script>
 
