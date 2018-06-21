@@ -3,7 +3,7 @@
 		<v-form v-cloak>
 			<v-card-title class="primary-title">
 				<v-card-text class="text-md-center">
-					<h2>Equipe de football <i class="fa fa-futbol"></i></h2>
+					<h2>Stade de football <i class="fa fa-futbol"></i></h2>
 				</v-card-text>
 			</v-card-title>
 			<v-container>
@@ -120,7 +120,7 @@
 		created () {
 			this.$store.dispatch('countries/loadedCountries')
 			this.$store.dispatch('teams/loadedTeams')
-			this.$store.dispatch('stadiums/loadedCities')
+			this.$store.dispatch('cities/loadedCities')
 		},
 		data () {
 			return {
@@ -236,7 +236,7 @@
 					city: {
 						slug: this.selectedCities.slug,
 						name: this.selectedcities.name,
-						timezone: this.selectedcities.name,
+						timezone: this.selectedcities.timezone,
 					},
 					website: this.selectedWebsite,
 					capacity: this.selectedCapacity,
