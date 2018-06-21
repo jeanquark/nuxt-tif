@@ -208,12 +208,12 @@
 				let cities = {}
 
 				if (this.selectedCities.length > 0) {
-					for (let city of this.selectedCities) {
-						// console.log(city)
-						cities[city.slug] = {
-							name: city.name,
-							slug: city.slug,
-							timezone: city.timezone,
+					for (let cities of this.selectedCities) {
+						// console.log(cities)
+						cities[cities.slug] = {
+							name: cities.name,
+							slug: cities.slug,
+							timezone: cities.timezone,
 						}
 					}
 				}
