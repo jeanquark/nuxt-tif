@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div hidden>
 		<nuxt/>
 	</div>
 </template>
@@ -17,7 +17,8 @@
 		    link: [
       			{ rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' },
       			// { rel: 'stylesheet', href: '/css/bootstrap-min.css' },
-      			{ rel: 'stylesheet', href: 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' },
+      			// { rel: 'stylesheet', href: 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' },
+        		{ rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.0.13/css/all.css' },
       			{ rel: 'stylesheet', href: '/css/styles.css' },
 	            { rel: 'stylesheet', href: '/css/styles_768.css' },
 	            { rel: 'stylesheet', href: '/css/styles_1024.css' },
@@ -34,6 +35,11 @@
 	 //          this.loadingPage = false
 	 //        }, 1000)
 	 //    },
+		mounted () {
+		    // https://github.com/nuxt/nuxt.js/issues/22
+		    this.$el.removeAttribute('hidden')
+		    console.log('mounted!')
+		},
 		data () {
 			return {
 				// loadingPage: false,

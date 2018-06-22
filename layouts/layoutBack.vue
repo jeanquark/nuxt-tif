@@ -216,7 +216,7 @@
         { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.0.13/css/all.css' }
       ]
     },
-    middleware: ['auth-check'],
+    middleware: ['admin-check'],
     created() {
         setTimeout(() => {
           // console.log('abc')

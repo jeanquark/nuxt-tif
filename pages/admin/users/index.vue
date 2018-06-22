@@ -43,7 +43,8 @@
 						<td class="text-xs-right">{{ props.item.email }}</td>
 						<td class="text-xs-right">{{ props.item._created_at }}</td>
 						<td class="text-xs-right">{{ props.item._updated_at }}</td> -->
-						<td class="justify-center layout px-0">
+						<!-- <td class="justify-center layout px-0"> -->
+						<td>
 				          <!-- <v-btn icon class="mx-0" @click="editItem(props.item)">
 				            <v-icon color="teal">edit</v-icon>
 				          </v-btn>
@@ -59,10 +60,10 @@
 		Admin<v-icon color="teal">supervisor_account</v-icon>
 	</v-btn> -->
 							<v-btn color="info" @click="updateUserAccount(props.item.email, 'userToAdmin')" v-if="props.item.status != 'admin'">
-								Grant Admin privileges&nbsp;&nbsp;<v-icon color="white">supervisor_account</v-icon>
+								Grant Admin privileges&nbsp;&nbsp;<v-icon color="white">supervisor_account</v-icon>&nbsp;<i :class="{ 'fa fa-spinner fa-spin' : selectedRow === props.item.email}"></i>
 							</v-btn>
 							<v-btn color="warning" @click="updateUserAccount(props.item.email, 'adminToUser')" v-if="props.item.status != 'user'">
-								Revoke Admin privileges&nbsp;&nbsp;<v-icon color="white">supervisor_account</v-icon>
+								Revoke Admin privileges&nbsp;&nbsp;<v-icon color="white">supervisor_account</v-icon>&nbsp;<i :class="{ 'fa fa-spinner fa-spin' : selectedRow === props.item.email}"></i>
 							</v-btn>
 							<v-btn icon class="mx-0" @click="editItem(props.item)">
 								<v-icon color="teal">edit</v-icon>
@@ -118,15 +119,28 @@
 	        		disabled: true
 
 	        	}
-	        ]
+	        ],
+	        selectedRow: '',
     	}
     },
     computed: {
+    	loading () {
+    		return this.$store.getters['loading']
+    	},
     	loadedUsers () {
 	    	return this.$store.getters['users/loadedAllUsers']
-    	}
+    	},
+    	// selectedRow () {
+
+    	// 	return 'gael.manigley@gmail.com'
+    	// }
     },
     methods: {
+    	// loading (rowId) {
+    	// 	// return true
+    	// 	console.log(rowId)
+    	// 	return this.$store.getters['loading']
+    	// },
     	// updateToAdmin () {
     	// 	console.log('click updateToAdmin')
     	// },
@@ -134,11 +148,10 @@
     	// 	console.log('click updateToUser')
     	// }
     	async updateUserAccount(userEmail, action) {
-    		console.log(userEmail)
-    		// console.log(uid)
-    		console.log(action)
-    		// this.$store.dispatch('users/updateUserAccount', {userEmail, action})
-    		this.$store.dispatch('users/updateUserAccount', {userEmail, action})
+    		this.selectedRow = userEmail
+    		this.$store.dispatch('users/updateUserAccount', {userEmail, action}).then(() => {
+    			this.selectedRow = ''
+    		})
     	},
     	// async upgradeUserAccountToAdmin (userEmail) {
     	// 	console.log(userEmail)

@@ -47,7 +47,8 @@ export const state = () => ({
     loadedUser: null,
     loadedAllUsers: [],
     loadedAvatarImages: [],
-    loadedUserTeams: []
+    loadedUserTeams: [],
+    updateUser: null,
 })
 
 export const mutations = {
@@ -64,6 +65,11 @@ export const mutations = {
     setUserTeams (state, payload) {
         console.log('call to setUserTeams mutation')
         state.loadedUserTeams = payload
+    },
+    setUpdateUser (state, payload) {
+        console.log('entering setUpdatedUser mutation')
+        console.log(payload)
+        state.updateUser = payload
     }
 }
 
@@ -90,118 +96,81 @@ export const actions = {
         }
     },
     async updateUserAccount ({commit, state, dispatch}, payload) {
+            // commit('setLoading', true, { root: true })
             console.log('async updateUserAccount')
             try {
-                // admin.auth().getUserByEmail('test3@test.com').then((user) => {
-                //     admin.auth().setCustomUserClaims(user.uid, null)
-                // })
-                console.log(payload)
+                // console.log(payload)
                 const userEmail = payload.userEmail
-                // const uid = payload.uid
                 const action = payload.action
 
-                // // this.$axios.$post('/setCustomClaims', {userEmail: userEmail})
-                // // $.post('/setCustomClaims', {userEmail: userEmail}, (data, status) => {})
-                // // this.$axios({ method: 'post', url: '/setCustomClaims', data: {firstName: 'Fred', lastName: 'Flintstone'}})
-                // // await this.$axios.$post('/setCustomClaims', { userEmail: 'jm.kleger@gmail.com' })
-                // await this.$axios.$post('/setCustomClaims', { userEmail: userEmail, action: action })
-                // // dispatch('updateUser', {status: 'admin'})
-                // console.log('successfully called setCustomClaims ' + action + ' method.')
-                // console.log('called ' + action)
-                // console.log(user2)
-                // const userId = "-L9jQ_OL56RapwI3K1C7"
-                // const user = state.loadedAllUsers.find(user => user.email === userEmail)
-                // console.log(user)
-
-                // if (action == 'userToAdmin') {
-                //     dispatch('updateUser', {status: 'admin', id: user.id})
-                // } else if (action == 'adminToUser') {
-                //     dispatch('updateUser', {status: 'user', id: user.id})
-                // }
-                // this.$toast.success('Successfully updated ' + userEmail + ' account!')
-
-
                 return this.$axios.$post('/setCustomClaims', { userEmail: userEmail, action: action }).then((user) => {
-                    console.log('successfully called setCustomClaims method.')
-                    console.log('called ' + action)
-                    console.log(user)
-
-                    const user2 = state.loadedAllUsers.find(user => user.email === userEmail)
+                    // console.log('successfully called setCustomClaims method.')
+                    // console.log('called ' + action)
+                    // console.log(user)
 
                     if (action == 'userToAdmin') {
-                        dispatch('updateUser', {status: 'admin', id: user2.id})
+                        dispatch('updateUser', {status: 'admin', id: user.uid})
                     } else if (action == 'adminToUser') {
-                        dispatch('updateUser', {status: 'user', id: user2.id})
+                        dispatch('updateUser', {status: 'user', id: user.uid})
                     }
-                    this.$toast.success('Successfully updated account!')
+                    // commit('setLoading', false, { root: true })
                 })
             }
             catch(error) {
                 console.log(error)
             }
     },
-    loadedUser ({commit}) {
-        // const userId = firebase.auth().currentUser.uid
-        // firebase.database().ref('/posts/' + userId).on('value', function (snapshot) {
-        //     console.log(snapshot.val())
-        //     commit('setLoadedUser', snapshot.val())
-        // })
-        console.log('Entering loadedUser')
-        const userId = firebase.auth().currentUser.uid
-        console.log(userId)
-        // console.log(userId)
-        // firebase.database().ref('users/' + userId).on('value')
-        firebase.database().ref('users/' + userId).on('value', function (snapshot) {
-            console.log(snapshot.val())
-            commit('setLoadedUser', snapshot.val())
-            // const user = setUser(snapshot.val())
-            // commit('setUser', user)
-            // const userArray = []
-            // for (const key in snapshot.val()) {
-            //     userArray.push(snapshot.val())
-            // }
-            // commit('setLoadedUser', userArray)
-
-        })
-    },
-    updateUser ({commit}, payload) {
+    async loadedUser ({commit}) {
         try {
+            // const userId = firebase.auth().currentUser.uid
+            // firebase.database().ref('/posts/' + userId).on('value', function (snapshot) {
+            //     console.log(snapshot.val())
+            //     commit('setLoadedUser', snapshot.val())
+            // })
+            console.log('Entering loadedUser')
             const userId = firebase.auth().currentUser.uid
             console.log(userId)
-            console.log(payload)
             // console.log(userId)
-            // let updateObj = payload
-            // console.log(updateObj)
-            // const userId = payload.id
+            // firebase.database().ref('users/' + userId).on('value')
+            firebase.database().ref('users/' + userId).on('value', function (snapshot) {
+                console.log(snapshot.val())
+                // commit('setLoadedUser', snapshot.val())
+                // const user = setUser(snapshot.val())
+                // commit('setUser', user)
+                // const userArray = []
+                // for (const key in snapshot.val()) {
+                //     userArray.push(snapshot.val())
+                // }
+                // commit('setLoadedUser', userArray)
+                const userArray = []
+                for (const key in snapshot.val()) {
+                    userArray.push({ ...snapshot.val()[key], id: key})
+                }
+                // console.log(postsArray)
+                commit('setLoadedUser', userArray)
+
+            })
+        } catch (error) {
+            new Noty({type: 'error', text: 'LoadedUser failed. Error: ' + error, timeout: 5000, theme: 'metroui'}).show()
+            console.log(error)
+        }
+    },
+    async updateUser ({commit}, payload) {
+        try {
+            // console.log(payload)
+            const userId = payload.id
+            // console.log(userId)
             firebase.database().ref('/users/' + userId).update(payload).then((response) => {
-                console.log(response)
-                new Noty({type: 'success', text: 'Modifications effectuées avec succès', timeout: 5000, theme: 'metroui'}).show()
+                new Noty({type: 'success', text: 'Modifications de l\'utilisateur effectuées avec succès', timeout: 5000, theme: 'metroui'}).show()
             }).catch(e => {
                 console.log(e)
             })
 
         } catch(error) {
-            new Noty({type: 'error', text: 'Modifications non effectuées. Erreur: ' + error, timeout: 5000, theme: 'metroui'}).show()
+            new Noty({type: 'error', text: 'Modifications de l\'utilisateur non effectuées. Erreur: ' + error, timeout: 5000, theme: 'metroui'}).show()
             console.log(error)
         }
     },
-    // updateUserAccountToAdmin ({commit}, payload) {
-    //     console.log('async updateUserAccountToAdmin')
-    //     console.log(payload)
-    //     const userEmail = 'jm.kleger@gmail.com'
-    //     this.$axios.$post('/setCustomClaims', {userEmail: userEmail})
-    //     // this.$axios.$get('/setCustomClaims')
-    //       .then(response => {
-    //         console.log('response')
-    //       })
-    //       .catch(e => {
-    //         console.log(e)
-    //       })
-    // },
-    // async checkUserCustomClaim () {
-    //     console.log('checkUserCustomClaim')
-    //     return 'abc'
-    // },
     async signUserIn ({commit}, payload) {
         console.log(payload)
         try {
@@ -415,96 +384,7 @@ export const actions = {
     },
     async loadedUserTeams ({commit, state}) {
         try {
-            const userTeams1 = []
-            const team1 = {
-              "activity" : {
-                "name" : "Sport",
-                "slug" : "sport"
-              },
-              "alpha2" : "UY",
-              "alpha3" : "URY",
-              "capitale" : "Montevideo",
-              "category" : {
-                "name" : "Football",
-                "slug" : "football"
-              },
-              "code" : 858,
-              "competitions" : {
-                "world_cup_2018" : true
-              },
-              "continent_en" : "America",
-              "continent_fr" : "Amérique",
-              "couleur1" : "bleu",
-              "couleur2" : "noir",
-              "couleur3" : "",
-              "flags" : "images/flags/183.jpg",
-              "hymne" : "Orientales, la Patria o la tumba",
-              "hymne_son" : "",
-              "icon" : "images/flags/icon/183.png",
-              "id" : "-LBVgvTA8hEe39qNgaIv",
-              "image" : "uruguay.png",
-              "langue" : "Espagnol",
-              "map" : "images/carte/183.gif",
-              "name" : "Uruguay",
-              "name_fr" : "Uruguay",
-              "slug" : "uruguay",
-              "small_flags" : "images/flags/small_flags/183.jpg"
-            }
-            const team2 = {
-              "activity" : {
-                "name" : "Sport",
-                "slug" : "sport"
-              },
-              "alpha2" : "SE",
-              "alpha3" : "SWE",
-              "capitale" : "Stockholm",
-              "category" : {
-                "name" : "Football",
-                "slug" : "football"
-              },
-              "code" : 752,
-              "competitions" : {
-                "world_cup_2018" : true
-              },
-              "continent_en" : "Europa",
-              "continent_fr" : "Europe",
-              "couleur1" : "jaune",
-              "couleur2" : "bleu",
-              "couleur3" : "",
-              "flags" : "images/flags/161.jpg",
-              "hymne" : "Du gamla, du fria",
-              "hymne_son" : "",
-              "icon" : "images/flags/icon/161.png",
-              "id" : "-LBVgvShxjCtTvfi7X9N",
-              "image" : "sweden.png",
-              "langue" : "Suédois",
-              "map" : "images/carte/161.gif",
-              "name" : "Sweden",
-              "name_fr" : "Suède",
-              "slug" : "sweden",
-              "small_flags" : "images/flags/small_flags/161.jpg"
-            }
-
-            userTeams1.push(team1)
-            userTeams1.push(team2)
-            // commit('setUserTeams', userTeams1)
-            
-            // return userTeams1
-
-            let def = function() {
-                return new Promise(function (resolve, reject) {
-                    setTimeout(() => {
-                        return resolve()
-                    }, 5000)
-                })
-            }
-            def().then(() => {
-                // commit('setUserTeams', userTeams1)
-                console.log('done')
-            })
-
-            // const userId = firebase.auth().currentUser.uid
-            // const userId = state.loadedUser.user_id
+            // const user = this
             const userId = state.loadedUser.id
             // return userId
             console.log(userId)

@@ -1,4 +1,4 @@
-const app = require('express')()
+const app = require('express');
 const axios = require('axios');
 module.exports = { path: '/api', handler: app }
 

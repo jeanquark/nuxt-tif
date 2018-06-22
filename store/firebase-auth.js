@@ -185,15 +185,25 @@ export const actions = {
             commit('setLoading', true, { root: true })
             let authData = await Auth.signInWithPopup(GoogleAuthProvider)
             console.log(authData)
+            // console.log('getIdToken:')
+            // console.log(authData.user.getIdToken())
+            // console.log(authData.user.getIdToken().claims)
+            // console.log(authData.user.getIdToken().claims.admin)
             const userId = authData.user.uid
 
             // Check if user already exists in database
             let user = await firebase.database().ref('/users/' + userId).once('value')
+            // let user = {}
+            // await firebase.database().ref('/users/' + userId).on('value', function(snapshot) {
+            //     user = snapshot.val()
+            // })
+            // console.log(user)
+            // return
             console.log(user.val())
-            const userIsAlreadyRegistered = user.val()
+            const registeredUser = user.val()
 
             // If user does not exists, save new user in database
-            if (!userIsAlreadyRegistered) {
+            if (!registeredUser) {
                 console.log('new user')
                 const newUserKey = userId
                 let user = firebase.database().ref('/users/' + newUserKey).set(buildUserObjectOAuth(authData))
@@ -202,8 +212,8 @@ export const actions = {
             }
 
             // Load user in store
-            commit('users/setLoadedUser', user, { root: true })
-            if (!userIsAlreadyRegistered) {
+            commit('users/setLoadedUser', registeredUser, { root: true })
+            if (!registeredUser) {
                 new Noty({type: 'success', text: this.app.i18n.t('messages.registration.success'), timeout: 5000, theme: 'metroui'}).show()
             } else {
                 new Noty({type: 'success', text: this.app.i18n.t('messages.login.success'), timeout: 5000, theme: 'metroui'}).show()        

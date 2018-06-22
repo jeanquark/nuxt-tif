@@ -24,8 +24,8 @@
 					<div class="columnButton text-right">
 						<div class="quit-box" @click="logout"><i class="fa fa-times"></i></div>					
 					</div>
-					<div class="columnButton text-right">
-						<div class="quit-box"><nuxt-link to="/admin"><i class="fa fa-share-alt"></i></nuxt-link></div>					
+					<div class="columnButton text-right" v-if="loadedUser && loadedUser.status === 'admin' || loadedUser && loadedUser.status === 'user'">
+						<div class="quit-box" @click="goToAdmin"><i class="fa fa-tachometer-alt"></i></div>
 					</div>
 				</div>	
 			
@@ -149,6 +149,9 @@
 			}
 		},
 		methods: {
+			goToAdmin () {
+				this.$router.replace('/admin')
+			},
 			logout() {
 				// return this.$store.dispatch('users/signOut')
 				this.$store.dispatch('firebase-auth/signOut').then(() => {
@@ -170,5 +173,13 @@
         width: 16px;
         height: 16px;
         background-image: url('data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==');
+    }
+    .quit-box {
+    	cursor: pointer;
+    	color: #000;
+    	margin-left: 5px;
+    }
+    .quit-box:hover {
+    	color: #fff;
     }
 </style>

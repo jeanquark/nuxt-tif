@@ -193,6 +193,7 @@ module.exports = {
       { path: '/upload-image', handler: '~/serverMiddleware/uploadImage' },
       { path: '/upload-competition-image', handler: '~/serverMiddleware/uploadCompetitionImage' },
       { path: '/update-translation-file', handler: '~/serverMiddleware/updateTranslationFile' },
+      { path: '/admin', handler: '~/serverMiddleware/auth-admin' },
   ],
   toast: {
     duration: 8000,

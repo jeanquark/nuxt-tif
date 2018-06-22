@@ -203,7 +203,7 @@ module.exports = app.use(function (req, res, next) {
         // admin.auth().getUser(uid).then((user) => {
             console.log(user);
             return admin.auth().setCustomUserClaims(user.uid, {
-              admin: true
+                admin: true
             }).then(() => {
                 console.log(user);
                 // res.send('user');
@@ -238,6 +238,7 @@ module.exports = app.use(function (req, res, next) {
                     // res.send({'user': 'abc'});
                     console.log('ADMINTOUSER');
                     res.send(user);
+                    // console.log(user);
                     // res.end();
                 }).catch((error) => {
                     console.log(error);
