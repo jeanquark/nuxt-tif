@@ -15,9 +15,9 @@ module.exports = app.use(function (req, res, next) {
             admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
                 if (decodedIdToken.admin != true) {
                     console.log('User 2 does not have admin privileges');
-                    // res.redirect('/');
+                    res.redirect('/');
                     // res.end('Unauthorized');
-                    res.end();
+                    // res.end();
                 } else {
                     console.log('User 2 has admin privileges');
                     next();

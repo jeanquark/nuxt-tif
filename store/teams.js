@@ -25,7 +25,7 @@ export const actions = {
 	// Load all teams
 	loadedTeams ({commit}) {
     	firebase.database().ref('/teams/').orderByChild('slug').once('value').then(function (snapshot) {
-	      	console.log(snapshot.val())
+	      	// console.log(snapshot.val())
 	      	const teamsArray = []
 	      	for (const key in snapshot.val()) {
 	        	teamsArray.push({ ...snapshot.val()[key], id: key})
@@ -40,11 +40,29 @@ export const actions = {
     	console.log(payload)
         commit('setLoading', true, { root: true })
 
-        // Generate new unique key
-        const newTeamKey = firebase.database().ref().child('/teams/').push().key
+        // Define key from competition slug
+        const newTeamKey = payload.slug
 
         let updates = {}
         updates['/teams/' + newTeamKey] = payload
+
+        // Update teams in competitions node
+        for (let competition in payload.competitions) {
+            const teamObj = {
+                draws: 0,
+                wins: 0,
+                losses: 0,
+                goals_scored: 0,
+                goals_conceded: 0,
+                points: 0,
+                name: payload.name,
+                slug: payload.slug
+            }
+            console.log(teamObj)
+            console.log(competition)
+            updates['/competitions/' + competition + '/teams/' + newTeamKey] = teamObj
+        }
+        // return
 
         firebase.database().ref().update(updates).then(() => {
             commit('setLoading', false, { root: true })

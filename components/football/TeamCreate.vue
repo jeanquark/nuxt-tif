@@ -1,13 +1,5 @@
 <template>
 	<v-card>
-		<!-- selectedActivity: {{ activity }}<br /><br />
-		selectedCategory: {{ category }}<br /><br />
-		imageData: {{ this.imageData }}<br /><br />
-		selectedGroups: {{ this.selectedGroups }}<br /><br />
-		selectedGroupsNumber: {{ this.selectedGroupsNumber }}<br /><br />
-		selectedTeamsGroup: {{ this.selectedTeamsGroup }}<br /><br />
-		selectedTeams: {{ this.selectedTeams }}<br /><br /> -->
-		<!-- loadedTeams: {{ this.loadedTeams }}<br /><br /> -->
 		<v-form v-cloak>
 			<v-card-title class="primary-title">
 				<v-card-text class="text-md-center">
@@ -57,17 +49,16 @@
 					</v-flex>
 					
 					<v-flex xs6>
-						<v-subheader class="text-xl-center">Région / Pays</v-subheader>
+						<v-subheader class="text-xl-center">Pays</v-subheader>
 					</v-flex>
 					<v-flex xs6>
 						<v-select
 						  :items="loadedCountries"
-						  v-model="selectedCountries"
+						  v-model="selectedCountry"
 						  label="Sélectionner le pays"
 						  item-text="name"
 						  item-value="slug"
 						  :autocomplete="true"
-						  chips
 						  single-line
 						  :return-object="true"
 						></v-select>
@@ -78,18 +69,19 @@
 					</v-flex>
 					<v-flex xs6>
 						<v-select
-							:items="loadedStadiums"
-							v-model="selectedStadiums" 
+							:items="stadiums"
+							v-model="selectedStadium" 
 							label="Sélectionner un stade"
 							item-text="name"
-							item-value="{}"
+							item-value="slug"
 							:autocomplete="true"
 							single-line
+							:return-object="true"
+							:disabled="selectedCountry == ''"
 						>
 							<template slot="item" slot-scope="data">
 								<v-list-tile-content>
 									<v-list-tile-title>
-										<!-- {{ data.item.name }} <small style="color: #ccc;">{{ data.item.city.name }} - {{ data.item.country.name}}</small> -->
 										{{ data.item.name }}
 									</v-list-tile-title>
 								</v-list-tile-content>
@@ -98,29 +90,39 @@
 					</v-flex>
 					
 					<v-flex xs6>
-						<v-subheader class="text-xl-center">Type de compétition</v-subheader>
+						<v-subheader class="text-xl-center">Type de l'équipe</v-subheader>
 					</v-flex>
 					<v-flex xs6>
 						<v-radio-group v-model="selectedCompetitionType" :mandatory="true">
-					      	<v-radio label="Clubs" value="club" color="primary"></v-radio>
-					      	<v-radio label="Équipes nationales" value="national_team" color="primary"></v-radio>
+					      	<v-radio label="Club" value="club" color="primary"></v-radio>
+					      	<v-radio label="Équipe nationale" value="national_team" color="primary"></v-radio>
 					    </v-radio-group>
 					</v-flex>
-					
+
 					<v-flex xs6>
-						<v-subheader class="text-xl-center">Participe à quelle(s) compétition(s) ?</v-subheader>
+						<v-subheader class="text-xl-center">Compétitions auxquelles l'équipe prend part</v-subheader>
 					</v-flex>
 					<v-flex xs6>
 						<v-select
-        				  :items="loadedCompetitions"
-						  v-model="selectedCompetitions"
-						  item-text="name"
-						  item-value="slug"
-						  label="Sélectionner la compétition"
-						  multiple
-				          chips
-				          :return-object="true"
-						></v-select>
+							:items="loadedCompetitions"
+							v-model="selectedCompetitions" 
+							label="Sélectionner une ou plusieurs compétitions"
+							item-text="name"
+							item-value="slug"
+							:autocomplete="true"
+							multiple
+							chips
+							single-line
+							:return-object="true"
+						>
+							<template slot="item" slot-scope="data">
+								<v-list-tile-content>
+									<v-list-tile-title>
+										{{ data.item.name }}
+									</v-list-tile-title>
+								</v-list-tile-content>
+							</template>
+						</v-select>
 					</v-flex>
 				</v-layout>
 
@@ -132,7 +134,6 @@
 						<input type="file" @change="previewImage" accept="image/*" style="padding-top: 15px;">
 						<div class="image-preview" v-if="imageData.length > 0"><br />
 							<img class="preview" :src="imageData" width="100px">
-							<!-- {{ this.imageData }} -->
 						</div>
 					</v-flex>
 				</v-layout>
@@ -159,7 +160,6 @@
 
 		},
 		created () {
-    		this.$store.dispatch('continents/loadedContinents')
 			this.$store.dispatch('countries/loadedCountries')
 			this.$store.dispatch('teams/loadedTeams')
 			this.$store.dispatch('competitions/loadedCompetitions')
@@ -168,18 +168,16 @@
 		data () {
 			return {
 		        selectedCompetitionType: 'club',
-				radios: 'countries',
-        		selectedContinents: [],
-		        selectedCountries: [],
+		        selectedCountry: '',
 		        selectedName: '',
 		        selectedSlug: '',
 				selectedColor: '',
 				selectedWebsite: '',
-				selectedCompetitions: '',
-				selectedStadiums: '',
+				selectedCompetitions: [],
+				selectedStadium: '',
 		        imageData: '',
-			    footballAPIRequestResult: '',
 			    loading: false,
+			    stadiums: [],
 			    items: [
 				    {
 				      text: 'Dashboard',
@@ -209,9 +207,6 @@
 		    loadedCompetitions () {
 		    	return this.$store.getters['competitions/loadedCompetitions']
 		    },
-		    loadedContinents () {
-		    	return this.$store.getters['continents/loadedContinents']
-		    },
 			loadedStadiums () {
 				return this.$store.getters['stadiums/loadedStadiums']
 			},
@@ -219,25 +214,13 @@
 		    	return this.$store.getters['countries/loadedCountries']
 		    },
 		    loadedTeams () {
-		    	return this.$store.getters['teams/loadedTeams'].filter(team => (team.type === this.selectedCompetitionType))
+		    	return this.$store.getters['teams/loadedTeams']
 		    }
 		},
 		methods: {
-			convertNumberToLetter (index) {
-				if (this.selectedGroupsFormat === 'letters') {
-					if (index <= 26) {
-						const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-						return alphabet[index]
-					}
-				} else {
-					return index + 1
-				}
-			},
 			checkTeamSlugUniqueness (slug) {
-				console.log(slug)
 				let found = false
-				for (let team of this.loadedCompetitions) {
-					console.log(team)
+				for (let team of this.loadedTeams) {
 				    if (team.slug === slug) {
 				        found = true
 				        break
@@ -251,22 +234,15 @@
 		    },
 			submitCreateTeam () {
 				console.log('submitCreateTeam')
-				console.log(this.checkTeamSlugUniqueness(this.selectedSlug))
-				// return
 
-				// Organize countries data
-				let countries = {}
-
-				if (this.selectedCountries.length > 0) {
-					for (let country of this.selectedCountries) {
-						// console.log(team)
-						countries[country.slug] = {
-							name: country.name,
-							slug: country.slug,
-						}
+				// Organize competitions data
+				let competitions = {}
+				if (this.selectedCompetitions.length > 0) {
+					for (let competition of this.selectedCompetitions) {
+						competitions[competition.slug] = true
 					}
 				}
-				// return
+
 				const teamData = {
 					activity: {
 			            slug: this.activity.slug,
@@ -276,43 +252,44 @@
 						slug: this.category.slug,
 						name: this.category.name
 					},
-					type: this.selectedCompetitionType,
 			        name: this.selectedName,
 			        slug: this.selectedSlug,
 					country: {
-						slug: this.selectedCountries.slug,
-						name: this.selectedCountries.name
+						slug: this.selectedCountry.slug,
+						name: this.selectedCountry.name
 					},
 					color: this.selectedColor,
 					website: this.selectedWebsite,
-					stadiums: this.selectedStadiums,
-					competitions: this.selectedCompetitions,
+					stadium: {
+						slug: this.selectedStadium.slug,
+						name: this.selectedStadium.name
+					},
+					type: this.selectedCompetitionType,
+					competitions: competitions,
 			        _created_at: new Date().getTime(),
 			        _updated_at: new Date().getTime()
 				}
-				console.log(teamData)
-				// return
 
 				// If there is an image, upload the image first and then update competition node
 				if (this.imageData) {
-					axios.post('/upload-competition-image', {
+					axios.post('/upload-image', {
 					    image: this.imageData,
 					    name: this.selectedSlug,
-					    folder: 'competitions'
+					    folder: 'teams'
 					}).then((response) => {
 						console.log('success')
 					    console.log(response.data)
 					    teamData['image'] = response.data
 					    console.log(teamData)
 					    this.$store.dispatch('teams/createTeam', teamData)
-					    return this.$router.push('/admin/teams')
+					    // return this.$router.push('/admin/teams')
 					}).catch(function (error) {
 						console.log('error')
 					    console.log(error)
 					})
 				} else {
 					this.$store.dispatch('teams/createTeam', teamData)
-					return this.$router.push('/admin/teams')
+					// return this.$router.push('/admin/teams')
 				}
 			},
 			previewImage (event) {
@@ -333,22 +310,14 @@
 	            }
         	},
 			clearAll () {
-				this.selectedCompetitionType = 'club'
-        		this.selectedContinents = []
-		        this.selectedCountries = []
+		        this.selectedCountry = ''
 		        this.selectedName = ''
 		        this.selectedSlug = ''
 				this.selectedColor = ''
 				this.selectedWebsite = ''
-				this.selectedStadiums = ''
+				this.selectedStadium = ''
 				this.selectedCompetitions = []
-		        this.selectedYear = ''
-		        this.selectedTeams = []
-		        this.selectedTeamsGroup = []
 		        this.imageData = []
-				this.selectedGroups = false
-				this.selectedGroupsNumber = 2
-				this.selectedGroupsFormat = 'letters'
 			}
 		},
 		watch: {
@@ -365,8 +334,15 @@
 		        }
 		    },
 		    selectedName: function () {
-		    	console.log('Watch selectedName')
+		    	// console.log('Watch selectedName')
 		    	this.selectedSlug = slugify(this.selectedName)
+		    },
+		    selectedCountry: function () {
+		    	this.stadiums = []
+		    	const country = this.selectedCountry.slug
+		    	this.stadiums = this.loadedStadiums.filter(function (el) {
+		            return el.country.slug === country
+		        })
 		    }
 		}
 	}

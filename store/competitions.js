@@ -24,7 +24,7 @@ export const mutations = {
 export const actions = {
     // Load all competitions
     loadedCompetitions ({commit}) {
-        console.log('loadedCompetitions')
+        // console.log('loadedCompetitions')
         // firebase.database().ref('/competitions/').once('value').then(function (snapshot) {
         firebase.database().ref('/competitions/').on('value', function (snapshot) {
             const competitionsArray = []

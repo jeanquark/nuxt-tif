@@ -25,7 +25,7 @@ export const actions = {
 	// Load all stadiums
 	loadedStadiums ({commit}) {
     	firebase.database().ref('/stadiums/').orderByChild('slug').once('value').then(function (snapshot) {
-	      	console.log(snapshot.val())
+	      	// console.log(snapshot.val())
 	      	const stadiumsArray = []
 	      	for (const key in snapshot.val()) {
 	        	stadiumsArray.push({ ...snapshot.val()[key], id: key})

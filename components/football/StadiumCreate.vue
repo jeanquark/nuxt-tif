@@ -84,6 +84,7 @@
 					      label="Capacité du stade"
 					    ></v-text-field>
 					</v-flex>
+				</v-layout>
 										
 				<v-layout>
 					<v-flex xs6>
@@ -305,7 +306,8 @@
 			selectedCities: function () {
 		    	console.log('Watch selectedCities')
 		    	this.selectedSlugcity = slugify(this.selectedCities)
-		    }		}
+		    }		
+		}
 	}
 </script>
 
