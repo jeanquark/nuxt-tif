@@ -77,6 +77,26 @@
 "contact_form_to": "Destinataire",
 "contact_form_send": "Envoyer"
 },
+       "user-avatar": {
+                        "your_avatar": "Your avatar",
+            "want_to_change_your_mind": "Do you want to change your mind ?",
+            "female": "Woman",
+            "male": "Man",
+            "cancel_all": "Close!",
+            "go_and_validate": "Let's go!",
+            "background": "Background",
+            "clothes": "Clothes",
+            "skin": "Skin",
+            "mouth": "Mouth",
+            "eyes": "Eyes",
+            "face": "Face",
+            "hair": "Hair",
+			"eyebrows": "Eyebrows",
+			"glasses": "Glasses",
+			"accessory": "Accessory",
+			"beard": "Beard",
+			"loading": "Loading"
+},
         "user-preferences": {
           "your_parameters": "Your parameters",
           "info_and_or_help": "Info and/or need help?",

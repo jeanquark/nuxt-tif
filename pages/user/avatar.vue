@@ -36,14 +36,14 @@
 								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'mouth'}" @click="selectBodyPart('mouth')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.mouth') }}</span></div>
 								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'hair'}" @click="selectBodyPart('hair')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.hair') }}</span></div>
 								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'beard'}" @click="selectBodyPart('beard')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.beard') }}</span></div>
-								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'glasses'}" @click="selectBodyPart('glasses')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.glasses') }}</span></div>
-								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'clothes'}" @click="selectBodyPart('clothes')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.clothes') }}</span></div>
-								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'accessory'}" @click="selectBodyPart('accessory')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.accessory') }}</span></div>
+								<!-- <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'glasses'}" @click="selectBodyPart('glasses')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.glasses') }}</span></div> -->
+								 <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'clothes'}" @click="selectBodyPart('clothes')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.clothes') }}</span></div>
+								<!-- <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.bodyPart === 'accessory'}" @click="selectBodyPart('accessory')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.accessory') }}</span></div> -->
 							</div>
                         </div>
                         <!-- Display dummy text while loading -->
                         <div v-if="loadedAvatars.length == 0">
-                            <h1 class="text-center">{{ $t('pages.user-avatar.loading') }}</h1>
+                            <h1 class="loading text-center">{{ $t('pages.user-avatar.loading') }}</h1>
                             <!-- <content-placeholders>
                                 <content-placeholders-heading :img="true" />
                                 <content-placeholders-text :lines="3" />
@@ -134,7 +134,8 @@
 							<h3>loadedAvatars.length: {{ loadedAvatars.length }}</h3><br />
 							<h3>totalPages: {{ totalPages }}</h3><br />
                         </div> -->
-
+						
+						<!--
                         <hr>
                         <div class="d-flex justify-content-center">
                             <paginate
@@ -153,6 +154,8 @@
                             </paginate>
                         </div>
 						<hr>
+						-->
+						
                         <!-- Modal footer -->
                         <div class="modal-footer">
                             <div class="progress" style="width: 50%; margin: 0 auto;" v-if="arr.length > 0">
@@ -313,7 +316,8 @@
                 obj: [],
                 progress: 0,
                 currentPage: 1,
-                itemsPerPage: 14,
+                itemsPerPage: 8,
+                selectedLanguage: ''
             }
         },
         computed: {
@@ -328,13 +332,24 @@
                 return this.avatars.filter(avatar => avatar.gender === this.gender && avatar.type === this.bodyPart).slice(index - this.itemsPerPage, index)
             },
             disabled () {
-                return this.background == '' && this.skin == '' && this.eyes == '' && this.eyebrows == '' && this.mouth == '' && this.hair == '' && this.beard == '' && this.glasses == '' && this.clothes == '' && this.accessory == ''
+                return this.background == '' && this.skin == '' && this.eyes == '' && this.eyebrows == '' && this.mouth == '' && this.hair == '' && this.beard == '' && this.glasses == '' && this.clothes == '' && this.accessory == '' && this.cache == '' && this.thisisfan == ''
             },
             loadedTeams () {
                 return this.$store.getters['teams/loadedTeams']
             },
             totalPages () {
                 return Math.ceil(this.loadedAvatars.length / this.itemsPerPage)
+            },
+            language () {
+                let language = this.$i18n.locale
+                switch(language) {
+                    case 'en':
+                        return 'english'
+                    case 'fr':
+                        return 'français'
+                    case 'de':
+                        return 'deutsch'
+                }
             }
         },
 	    methods: {
@@ -642,4 +657,7 @@
         background-color: orangered;
         border-color: orangered;
     }
+    loading {
+      color: black;
+     }
 </style>

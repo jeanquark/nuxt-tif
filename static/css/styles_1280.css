@@ -1163,7 +1163,7 @@ color: white;
 height: 100%;
 margin: 3px;
 text-align: center;
-font-size: 70%;
+font-size: 100%;
 }
 
 .flex-container-modalAvatar > div.infoBoxGoodies {
@@ -1249,7 +1249,7 @@ color: MediumSlateBlue;
 
 .flex-container-modalMenuAvatar {
 display: flex;
-align-items: stretch;
+flex-direction: column;
 padding: 2px;
 }
 
@@ -1258,10 +1258,10 @@ border: 1px solid darkred;
 background-color: black;
 border-radius: 5px;
 color: white;
-height: 30px;
+width: 100px;
 margin: 3px;
 text-align: center;
-padding-top: 2px;
+padding: 5px;
 }
 
 .flex-container-modalAvatarImg {
@@ -1274,8 +1274,27 @@ padding: 2px;
 
 .flex-container-modalAvatarImg > div {
 border: 1px solid darkred;
-max-width: 19%;
-margin: 2px;
+max-width: 13%;
+margin: 4px;
+border-radius: 5px;
+color: white;
+height: 100%;
+text-align: center;
+font-size: 100%;
+}
+
+.flex-container-modalAvatarImgColor {
+display: flex;
+flex-wrap: wrap;
+align-content: stretch;
+justify-content: center;
+padding: 2px;
+}
+
+.flex-container-modalAvatarImgColor > div {
+border: 1px solid darkred;
+max-width: 9%;
+margin: 4px;
 border-radius: 5px;
 color: white;
 height: 100%;
@@ -1292,6 +1311,7 @@ width: 100%;
 .textModalMenuAvatar {
 position: relative;
 top: 0;
+height: 30px;
 font: normal 120%/1 "bangers", Helvetica, sans-serif;
 }
 
