@@ -113,14 +113,22 @@
     	if (Object.keys(this.$store.getters['users/loadedUserTeams']).length === 0) {
     		this.$store.dispatch('users/loadedUserTeams')
     	}
-    },
+		
+    	if (Object.keys(this.$store.getters['users/loadedTeams']).length === 0) {
+    		this.$store.dispatch('users/loadedTeams')
+    	}
+
+	},
     computed: {
     	loadedCompetitions () {
     		return this.$store.getters['competitions/loadedCompetitions']
     	},
     	loadedUserTeams () {
             return this.$store.getters['users/loadedUserTeams']
-        }
+        },
+		loadedTeams () {
+			return this.$store.getters['users/loadedTeams']
+		}
     }
   }
 </script>
