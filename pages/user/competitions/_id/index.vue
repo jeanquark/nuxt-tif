@@ -3,45 +3,28 @@
         <!-- The Modal OtherTeam -->
         <div id="modalBox">
             <div class="modal-dialog modal-lg">
-                <div class="modal-content-resultats">
-                <!-- <div class="modal-content"> -->
-                    <!-- Modal Header -->
-                    <!-- {{ competition_id }}<br /><br /> -->
-                    <!-- {{ loadedCompetition }}<br /><br /> -->
-                    <!-- {{ loadedTeamsByCompetition }} -->
-                    <!-- {{ loadedTeamsByCompetition[0]['competitions'][this.competition_id] }} -->
-    
+                <div class="modal-content-resultats">   
                     <div class="modal-header">
-                        <span class="modal-title">Compétition en cours <span class="modal-title-Sub">(Les équipes)</span></span>
+                        <span class="modal-title">Compétition en cours<span class="modal-title-Sub"> (Les équipes 123)</span></span>
                         <nuxt-link to="/user/teams">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
                             </button>
                         </nuxt-link>
-                        <!-- {{ this.selectedTeams }}<br /><br /> -->
-                        <!-- {{ this.loadedUserTeams }}<br /><br /> -->
-                        <!-- {{ this.loadedTeamsByCompetition }} -->
-
                     </div><!-- /.modal-header -->
 
                     <!-- Modal body -->
                     <div id="modalBoxContent" class="modal-body">
-                        <!--<div style="color: #000;" v-for="userTeam in loadedUserTeams">
-                            {{ userTeam.name }}
-                        </div> -->
 						<div class="flex-container-modal-MyTeam">
 							<h1>Supporter une nouvelle équipe ?</h1>
 						</div>
 						<div class="flex-container-modal-Title banner text-center">
-							<h2>{{ loadedCompetition.category }}</br>{{ loadedCompetition.name }}</br>{{ loadedCompetition.country }}</br>{{ loadedCompetition.year }}</h2>
+							<h2>{{ loadedCompetition.category.name }}</br>{{ loadedCompetition.name }}</br>{{ loadedCompetition.country }}</br>{{ loadedCompetition.year }}</h2>
 						</div>
 						<div class="flex-container-modal-OtherTeam">
 							<h6>Choisis ton équipe !</h6>
 						</div>
                         <div class="flex-container-modal-OtherTeam-Img">
-                            <!-- <div class="OtherTeam" @click="selectTeam(team.id)">
-                                <img :src="'/images/teams/' + team.image" class="imgModalAvatar" v-bind:class="{active: isActive}" />
-                            </div> -->
                             <div class="OtherTeam"  v-for="team in loadedTeamsByCompetition" style="cursor: pointer;" :class="{active: selectedTeams.findIndex(e => e.id === team.id) != -1}" @click="selectTeam(team)">
                                 <img :src="'/images/teams/' + team.image" class="imgModalAvatar" v-bind:class="{active: isActive}" />
                             </div>
