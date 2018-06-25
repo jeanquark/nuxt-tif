@@ -26,7 +26,7 @@
 								<span v-if="team">
 									<img :src="'/images/teams/' + team.image" class="imgModalAvatar" />
 									<nuxt-link :to="'/user/teams/' + team.slug" class="overlay">
--										<div class="textActivity">Football<br />{{ team.name }}<br /><br />+Infos</div>
+										<div class="textActivity">{{ team.category.name }}<br />{{ team.name }}<br /><br />+Infos</div>
  									</nuxt-link>
 								</span>
 							</div>
@@ -65,7 +65,7 @@
 							<div class="OtherTeam" v-for="competition in loadedCompetitions">
 								<img :src="'/images/competitions/' + competition.image" class="imgModalAvatar"/>
 								<nuxt-link :to="'/competitions/' + competition.slug" class="overlayOtherTeam">
--									<div class="textActivity">{{ competition.name}}<br /> <br /><span v-for="country in competition.countries" v-if="competition.countries">{{ country.name }}</span><br />+Infos</div>
+									<div class="textActivity">{{ competition.category.name}}<br />{{ competition.name}}<br /><span v-for="country in competition.countries" v-if="competition.countries">{{ country.name }}</span><br />+Infos</div>
 								</nuxt-link>
 							</div>
 						</div>
