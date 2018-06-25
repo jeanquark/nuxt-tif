@@ -228,14 +228,153 @@
 </template>
 
 <script>
-    export default {
-        layout: 'layoutFront',
-        data () {
-            return {
-                team_id: this.$route.params.id,
-            }
-        }
-    }
+	export default {
+		layout: 'layoutFront',
+		created () { 
+			this.$store.dispatch('competitions/loadedCompetitions')
+		},
+		data () {
+			return {
+				competition_id: this.$route.params.id,
+				odd: 'odd',
+			}
+		},
+		computed: {
+			loadedCompetition () {
+				return this.$store.getters['competitions/loadedCompetitions'].find(competition => competition.slug === this.competition_id)
+			},
+			loadedCompetitionGroups () {
+				console.log('entering loadedCompetitionGroups')
+				let competition = this.$store.getters['competitions/loadedCompetitions'].find(competition => competition.slug === this.competition_id)
+				console.log(competition)
+				const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+				let groupsArray = []
+				for (let i = 0; i < competition.groups_number; i++) {
+					if (competition.groups_format === 'letters') {
+						groupsArray.push(alphabet[i])
+					} else  {
+						groupsArray.push(i + 1)
+					}
+				}
+				return groupsArray
+				// return [
+				// 	{
+				// 		'name': 'A',
+				// 		'slug': 'a'
+				// 	},
+				// 	{
+				// 		'name': 'E',
+				// 		'slug': 'e'
+				// 	}
+				// ]
+			},
+			loadedCompetitionTeams () {
+				let competition = this.$store.getters['competitions/loadedCompetitions'].find(competition => competition.slug === this.competition_id)
+				console.log(competition.teams)
+				let teamsArray = []
+				for (let team in competition.teams) {
+					console.log(competition.teams[team])
+					teamsArray.push(competition.teams[team])
+				}
+				console.log(teamsArray)
+
+				// let teams = []
+				return teamsArray
+				
+				return [
+					{
+						'name': 'Brazil',
+						'slug': 'brazil',
+						'wins': 1,
+						'points': 6,
+						'group': 'E',
+						'draws': 0,
+						'losses': 0,
+						'goals_scored': 4,
+						'goals_conceded': 1,
+					},
+					{
+						'name': 'Switzerland',
+						'slug': 'switzerland',
+						'wins': 0,
+						'points': 0,
+						'group': 'E',
+						'draws': 0,
+						'losses': 1,
+						'goals_scored': 1,
+						'goals_conceded': 4,
+					},
+					{
+						'name': 'Costa Rica',
+						'slug': 'costa_rica',
+						'wins': 1,
+						'points': 3,
+						'group': 'E',
+						'draws': 0,
+						'losses': 0,
+						'goals_scored': 2,
+						'goals_conceded': 0,
+					},
+					{
+						'name': 'Serbia',
+						'slug': 'serbia',
+						'wins': 0,
+						'points': 0,
+						'group': 'E',
+						'draws': 0,
+						'losses': 1,
+						'goals_scored': 0,
+						'goals_conceded': 2,
+					},
+					{
+						'name': 'Russia',
+						'slug': 'russia',
+						'wins': 1,
+						'points': 3,
+						'group': 'A',
+						'draws': 0,
+						'losses': 0,
+						'goals_scored': 3,
+						'goals_conceded': 0,
+					},
+					{
+						'name': 'Saudi Arabia',
+						'slug': 'saudi_arabia',
+						'wins': 0,
+						'points': 0,
+						'group': 'A',
+						'draws': 0,
+						'losses': 1,
+						'goals_scored': 0,
+						'goals_conceded': 3,
+					},
+					{
+						'name': 'Egypt',
+						'slug': 'egypt',
+						'wins': 0,
+						'points': 1,
+						'group': 'A',
+						'draws': 1,
+						'losses': 0,
+						'goals_scored': 1,
+						'goals_conceded': 1,
+					},
+					{
+						'name': 'Uruguay',
+						'slug': 'uruguay',
+						'wins': 0,
+						'points': 1,
+						'group': 'A',
+						'draws': 1,
+						'losses': 0,
+						'goals_scored': 1,
+						'goals_conceded': 1,
+					},
+				]
+				
+			}
+		}
+	}
 </script>
 
 <style>
