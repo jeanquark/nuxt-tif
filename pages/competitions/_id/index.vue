@@ -19,14 +19,14 @@
 							<h1>Supporter une nouvelle équipe ?</h1>
 						</div>
 						<div class="flex-container-modal-Title banner text-center">
-							<h2>{{ loadedCompetition.category.name }}</br>{{ loadedCompetition.name }}</br>{{ loadedCompetition.countries }}</h2>
+							<h2>{{ loadedCompetition.category.name }}</br>{{ loadedCompetition.name }}</br>{{ loadedCompetition.countries.name }}</h2>
 						</div>
 						<div class="flex-container-modal-OtherTeam">
 							<h6>Choisis ton équipe !</h6>
 						</div>
                         <div class="flex-container-modal-OtherTeam-Img">
                             <div class="OtherTeam"  v-for="team in loadedTeamsByCompetition" style="cursor: pointer;" :class="{active: selectedTeams.findIndex(e => e.id === team.id) != -1}" @click="selectTeam(team)">
-                                <img :src="'/images/teams/' + team.image" class="imgModalAvatar" v-bind:class="{active: isActive}" /><nuxt-link :to="'/teams/' + team.slug" class="overlayOtherTeam"><div class="textActivity" v-if="team">team.category.name</br>{{ team.name }}</br>+Infos</div></nuxt-link>
+                                <img :src="'/images/teams/' + team.image" class="imgModalAvatar" v-bind:class="{active: isActive}" /><nuxt-link :to="'/teams/' + team.slug" class="overlayOtherTeam"><div class="textActivity" v-if="team">{{ team.category.name }}</br>{{ team.name }}</br>+Infos</div></nuxt-link>
                             </div>
                         </div>
                     </div><!-- /#modalBoxContent -->
