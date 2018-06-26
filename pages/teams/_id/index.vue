@@ -56,38 +56,7 @@
 							  </tbody>
 							</table>
 						</div>
-					</div>
-					<div id="modalTitle" class="modal-body" v-if="loadedCompetition.teams" v-for="group of loadedCompetitionGroups">
-						<div>
-							<div class="flex-container-modal-Title banner2 text-center" v-if="loadedCompetition">
-								<h2>Classement - Phase de groupes - Groupe {{ group }}<br />{{ loadedCompetition.name }}</h2>
-							</div>
-							<div class="flex-container-modal-Action">
-								<table class="table tableTextClassement">
-								  	<thead>
-										<tr>
-											<th class="col1 thTif"></th>
-											<th class="col2 thTif"></th>
-											<th class="col3 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Matches joués durant la compétition">MJ</th>
-											<th class="col3 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="But pour / But contre">But</th>
-											<th class="col3 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Nombre de points">Pts</th>
-										</tr>
-								  	</thead>
-								  	<tbody v-for="(team, index) of loadedCompetitionTeams.filter(team => team.group === group).sort((a, b) => a.goals_scored < b.goals_scored).sort((a, b) => a.goals_scored - a.goals_conceded < b.goals_scored - b.goals_conceded).sort((a, b) => a.points < b.points)">
-								  		<tr class="trResultat" :class="[ index % 2 === 0 ? '' : odd]">
-											<td class="tdTif1 text-center">{{ index + 1 }}</td>
-											<td class="tdTif"><a href="autresEquipesDetails.html" class="linkEvent"><img :src="'/images/teams/' + team.slug + '.png'" class="imgModalAgendaFlags"/>{{ team.name }}</a></td>
-											<td class="tdTif1 text-center">{{ team.wins + team.draws + team.losses }}</td>
-											<td class="tdTif1 text-center">{{ team.goals_scored }}:{{ team.goals_conceded}}</td>
-											<td class="tdTif1 text-center">{{ team.points }}</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-					
-					
+					</div>						
 					<div id="modalTitle" class="modal-body">
 						<div class="flex-container-modal-Title banner text-center">
 							<h2>Classement - Phase de groupes - Groupe A</br>Coupe du Monde - 2018 - International</h2>
