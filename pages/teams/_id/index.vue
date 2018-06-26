@@ -15,7 +15,7 @@
 					<!-- Modal body -->
 					<div id="modalBoxContent" class="modal-bodyOtherTeam text-center">
 						<div class="flex-container-modalProfil">
-							<div class="columnProfil"><img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlags"/> <span class="modal-Team-Title">{{ loadedTeams.name }} <i class="fa fa-star" v-bind:class="{active: isActive}"></i></span> <img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlagsRight"/></div>
+							<div class="columnProfil"><img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlags"/> <span class="modal-Team-Title">{{ loadedTeams.name }}</span> <img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlagsRight"/> <span v-for="team in loadedTeamsByCompetition" style="cursor: pointer;" :class="{active: selectedTeams.findIndex(e => e.id === team.id) != -1}" @click="selectTeam(team)"><i class="fa fa-star" v-bind:class="{active: isActive}"></i></span></div>
 						</div>
 						<div class="flex-container-modal-Niveau text-center">
 							<div class="columnProfil"><span class="modal-Team-Activity">{{ loadedTeams.category.name }}</span></div>
@@ -261,6 +261,10 @@
 					<div class="modal-footer">
 					  <a href="competitionsEquipes.html"><button type="button" class="btn btn-danger" data-dismiss="modal">Sortir d'ici !</button></a>
 					  <a href="mesEquipes.html"><button type="button" class="btn btn-warning" data-dismiss="modal">Devenir fan - Coût 3 <i class="fas fa-certificate"></i></button></a>
+                        <button class="btn btn-success" @click="saveTeams">Save</button>
+                        <nuxt-link to="/user/teams">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                        </nuxt-link>
 					</div>
 				  </div>
 				</div>
