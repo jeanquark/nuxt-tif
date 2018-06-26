@@ -15,7 +15,7 @@
 					<!-- Modal body -->
 					<div id="modalBoxContent" class="modal-bodyOtherTeam text-center">
 						<div class="flex-container-modalProfil">
-							<div class="columnProfil"><img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlags"/> <span class="modal-Team-Title">{{ loadedTeams.name }} <span v-for="team in loadedTeamsByCompetition" style="cursor: pointer;" :class="{active: selectedTeams.findIndex(e => e.id === team.id) != -1}" @click="selectTeam(team)"><i class="fa fa-star" v-bind:class="{active: isActive}"></i></span></span> <img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlagsRight"/></div>
+							<div class="columnProfil"><img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlags"/> <span class="modal-Team-Title" style="cursor: pointer;" :class="{active: selectedTeams.findIndex(e => e.id === team.id) != -1}" @click="selectTeam(team)">{{ loadedTeams.name }} <i class="fa fa-star" v-bind:class="{active: isActive}"></i></span> <img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlagsRight"/></div>
 						</div>
 						<div class="flex-container-modal-Niveau text-center">
 							<div class="columnProfil"><span class="modal-Team-Activity">{{ loadedTeams.category.name }}</span></div>
@@ -286,6 +286,8 @@
 				team_id: this.$route.params.id,
 				odd: 'odd',
 				competition_id: this.$route.params.id,
+                isActive: false,
+                selectedTeams: []
 			}
 		},
 		computed: {
@@ -295,6 +297,18 @@
 			loadedTeams () {
 				return this.$store.getters['teams/loadedTeams'].find(team => team.slug === this.team_id)
 			},
+            loadedTeamsByCompetition () {
+                const teams = []
+                const competition_id = this.competition_id
+                this.$store.getters['teams/loadedTeams'].forEach(function (team) {
+                    if (team.competitions) {
+                        if (team['competitions'][competition_id]) {
+                            teams.push(team)
+                        }
+                    }
+                })
+                return teams
+            },
 			loadedCompetition () {
 				return this.$store.getters['competitions/loadedCompetitions'].find(competition => competition.slug === this.competition_id)
 			},
