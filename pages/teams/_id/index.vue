@@ -280,7 +280,20 @@
 		created () { 
 			this.$store.dispatch('teams/loadedTeams')
 			this.$store.dispatch('competitions/loadedCompetitions')
-		},
+			
+            if (Object.keys(this.$store.getters['competitions/loadedCompetitions']).length === 0) {
+                this.$store.dispatch('competitions/loadedCompetitions')
+            }
+            if (Object.keys(this.$store.getters['teams/loadedTeams']).length === 0) {
+                this.$store.dispatch('teams/loadedTeams')
+            }
+            if (Object.keys(this.$store.getters['users/loadedUserTeams']).length === 0) {
+                this.$store.dispatch('users/loadedUserTeams')
+            }
+            for (let team of this.loadedUserTeams) {
+                this.selectedTeams.push(team)
+            }
+        },
 		data () {
 			return {
 				team_id: this.$route.params.id,
