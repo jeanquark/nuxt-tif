@@ -22,7 +22,7 @@
 						</div>
 					</div>
 					<div class="flex-container-modalMenuResultats">
-						<a href="mesEquipesDetailsResultats.html" style="flex-grow: 1" data-toggle="tooltip" data-placement="bottom" title="Calendrier et résultats"><span class="textModalMenuResultats">Résultats/Classements</br>(En cours)</span></a>
+						<nuxt-link :to="'/competitions/' + 'world_cup_2018' + '/standings'" style="flex-grow: 1" data-toggle="tooltip" data-placement="bottom" title="Calendrier et résultats"><span class="textModalMenuResultats">Résultats/Classements</br>(En cours)</span></nuxt-link>						
 						<a href="mesEquipesDetailsStatsTif.html" style="flex-grow: 1" data-toggle="tooltip" data-placement="bottom" title="Classement individuel TIF"><span class="textModalMenuResultats">Stats/Trophées TIF</br>(En cours/archives)</span></a>
 					</div>
 					<div id="modalTitle" class="modal-body">
