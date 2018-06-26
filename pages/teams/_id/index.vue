@@ -7,16 +7,16 @@
 				  <div class="modal-content-resultats">
 					<!-- Modal Header -->
 					<div class="modal-header">
-						<nuxt-link :to="'/competitions/' + competition.slug">
+						<!-- <nuxt-link :to="'/competitions/' + competition.slug">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
 							</button>
-						</nuxt-link>					
+						</nuxt-link> -->				
                 	</div>
 					<!-- Modal body -->
 					<div id="modalBoxContent" class="modal-bodyOtherTeam text-center">
 						<div class="flex-container-modalProfil">
-							<div class="columnProfil"><img src="images/flags/25.png" class="imgModalFlags"/> <span class="modal-Team-Title">Brésil</span> <img src="images/flags/25.png" class="imgModalFlagsRight"/></div>
+							<div class="columnProfil"><img :src="'/images/teams/' + team.image" class="imgModalFlags"/> <span class="modal-Team-Title">Brésil</span> <img :src="'/images/teams/' + team.image" class="imgModalFlagsRight"/></div>
 						</div>
 						<div class="flex-container-modal-Niveau text-center">
 							<div class="columnProfil"><span class="modal-Team-Activity">Football</span></div>
