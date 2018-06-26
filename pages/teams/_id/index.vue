@@ -15,7 +15,7 @@
 					<!-- Modal body -->
 					<div id="modalBoxContent" class="modal-bodyOtherTeam text-center">
 						<div class="flex-container-modalProfil">
-							<div class="columnProfil"><img src="images/flags/25.png" class="imgModalFlags"/> <span class="modal-Team-Title" v-if="loadedUser">{{ loadedUser.pseudo }}</span> <img src="images/flags/25.png" class="imgModalFlagsRight"/></div>
+							<div class="columnProfil"><img src="images/flags/25.png" class="imgModalFlags"/> <span class="modal-Team-Title" v-if="loadedTeams">{{ loadedTeams.slug }}</span> <img src="images/flags/25.png" class="imgModalFlagsRight"/></div>
 						</div>
 						<div class="flex-container-modal-Niveau text-center">
 							<div class="columnProfil"><span class="modal-Team-Activity">Football</span></div>
@@ -279,6 +279,9 @@
 		computed: {
 			loadedUser () {
 				return this.$store.getters['users/loadedUser']
+			},
+			loadedTeam () {
+				return this.$store.getters['teams/loadedTeam']
 			}
 		},
 		methods: {
