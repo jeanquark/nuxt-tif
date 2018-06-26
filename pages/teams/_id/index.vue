@@ -287,7 +287,7 @@
 		computed: {
 			loadedTeams () {
 				return this.$store.getters['teams/loadedTeams'].find(team => team.slug === this.team_id)
-			}
+			},
 			loadedCompetition () {
 				return this.$store.getters['competitions/loadedCompetitions'].find(competition => competition.slug === this.competition_id)
 			},
