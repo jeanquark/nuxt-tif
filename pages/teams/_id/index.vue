@@ -7,10 +7,11 @@
 				  <div class="modal-content-resultats">
 					<!-- Modal Header -->
 					<div class="modal-header">
-					  <span class="modal-title">Pleins d'infos ! <span class="modal-title-Sub">(autres équipes)</span></span>
-						<a href="competitionsEquipes.html"><button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" class="white-text"><i class="fas fa-arrow-circle-left"></i></span>
-                    	</button></a>					
+						<nuxt-link :to="'/competitions/' + competition.slug">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
+							</button>
+						</nuxt-link>					
                 	</div>
 					<!-- Modal body -->
 					<div id="modalBoxContent" class="modal-bodyOtherTeam text-center">
@@ -259,8 +260,10 @@
 					</div>
 					<!-- Modal footer -->
 					<div class="modal-footer">
-					  <a href="competitionsEquipes.html"><button type="button" class="btn btn-danger" data-dismiss="modal">Sortir d'ici !</button></a>
-					  <a href="mesEquipes.html"><button type="button" class="btn btn-warning" data-dismiss="modal">Devenir fan - Coût 3 <i class="fas fa-certificate"></i></button></a>
+                        <nuxt-link :to="'/competitions/' + competition.slug">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                        </nuxt-link>
+                        <button class="btn btn-warning" @click="saveTeams" data-dismiss="modal">Devenir fan - Coût 3 <i class="fas fa-certificate"></i></button>
 					</div>
 				  </div>
 				</div>
@@ -271,9 +274,79 @@
 </template>
 
 <script>
-  export default {
-    layout: 'layoutFront'
-  }
+    export default {
+        layout: 'layoutFront',
+        created () {
+            if (Object.keys(this.$store.getters['competitions/loadedCompetitions']).length === 0) {
+                this.$store.dispatch('competitions/loadedCompetitions')
+            }
+            if (Object.keys(this.$store.getters['teams/loadedTeams']).length === 0) {
+                this.$store.dispatch('teams/loadedTeams')
+            }
+            if (Object.keys(this.$store.getters['users/loadedUserTeams']).length === 0) {
+                this.$store.dispatch('users/loadedUserTeams')
+            }
+            for (let team of this.loadedUserTeams) {
+                this.selectedTeams.push(team)
+            }
+        },
+        data () {
+            return {
+                competition_id: this.$route.params.id,
+                isActive: false,
+                selectedTeams: []
+            }
+        },
+        computed: {
+            loadedCompetition () {
+                return this.$store.getters['competitions/loadedCompetitions'].find(competition => competition.id === this.competition_id)
+            },
+            loadedTeamsByCompetition () {
+                const teams = []
+                const competition_id = this.competition_id
+                this.$store.getters['teams/loadedTeams'].forEach(function (team) {
+                    if (team.competitions) {
+                        if (team['competitions'][competition_id]) {
+                            teams.push(team)
+                        }
+                    }
+                })
+                return teams
+            },
+            loadedUserTeams () {
+                return this.$store.getters['users/loadedUserTeams']
+            }
+        },
+        methods: {
+            selectTeam (team) {
+                // this.isActive = !this.isActive
+                console.log('selectTeam')
+                console.log(team.id)
+                // const selectedTeam = {id: team.id, name: team.name}
+                const selectedTeam = team
+                console.log(selectedTeam)
+                // return
+                // console.log(selectedTeam)
+                const index = this.selectedTeams.findIndex(el => el.id === team.id)
+                console.log('index: ' + index)
+                // if (!this.selectedTeams.includes(selectedTeam)) {
+                if (!this.selectedTeams.find(el => el.id === selectedTeam.id)) {
+                    this.selectedTeams.push(selectedTeam)
+                } else {
+                    this.selectedTeams.splice(index, 1)
+                }
+            },
+            async saveTeams () {
+                console.log('saveTeams')
+                console.log(this.selectedTeams)
+                await this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
+                this.$router.replace('/user/teams')
+            },
+            clear () {
+                this.selectedTeams = []
+            }
+        }
+    }
 </script>
 
 <style>
