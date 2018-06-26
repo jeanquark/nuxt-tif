@@ -15,7 +15,7 @@
 					<!-- Modal body -->
 					<div id="modalBoxContent" class="modal-bodyOtherTeam text-center">
 						<div class="flex-container-modalProfil">
-							<div class="columnProfil"><img src="images/flags/25.png" class="imgModalFlags"/> <span class="modal-Team-Title" v-if="loadedTeams">{{ loadedTeams.name }}</span> <img src="images/flags/25.png" class="imgModalFlagsRight"/></div>
+							<div class="columnProfil"><img src="images/flags/25.png" class="imgModalFlags"/> <span class="modal-Team-Title" v-if="loadedUser">{{ loadedUser.pseudo }}</span> <img src="images/flags/25.png" class="imgModalFlagsRight"/></div>
 						</div>
 						<div class="flex-container-modal-Niveau text-center">
 							<div class="columnProfil"><span class="modal-Team-Activity">Football</span></div>
@@ -273,13 +273,27 @@
 <script>
 	export default {
 		layout: 'layoutFront',
-	    created () {
-	    	this.$store.dispatch('teams/loadedTeams')
-	    },
+		// created () {
+  //           console.log(this.$i18n.t('pages.index.welcome'))
+		// },
 		computed: {
-			loadedTeams () {
-				return this.$store.getters['teams/loadedTeams']
+			loadedUser () {
+				return this.$store.getters['users/loadedUser']
 			}
+		},
+		methods: {
+			goToAdmin () {
+				this.$router.replace('/admin')
+			},
+			logout() {
+				// return this.$store.dispatch('users/signOut')
+				this.$store.dispatch('firebase-auth/signOut').then(() => {
+					// console.log('abc')
+	          		// this.$router.push('/')
+	          		// this.$router.replace({ path: '/' })
+                	this.$router.replace('/')
+	        	})
+	        }
 		}
 	}
 </script>
