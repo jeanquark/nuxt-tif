@@ -279,10 +279,6 @@
 	    },
 	    data () {
 	    	return {
-		        search: '',
-		        selected: [],
-		        events: '',
-		        newJSON: '',
 	    	}
 	    },
 	    computed: {
