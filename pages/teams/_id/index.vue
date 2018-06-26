@@ -15,7 +15,7 @@
 					<!-- Modal body -->
 					<div id="modalBoxContent" class="modal-bodyOtherTeam text-center">
 						<div class="flex-container-modalProfil">
-							<div class="columnProfil"><img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlags"/> <span class="modal-Team-Title" >{{ loadedTeams.name }} <i class="fa fa-star" style="cursor: pointer;" :class="{active: selectedTeams.findIndex(e => e.id === team.id) != -1}" @click="selectTeam(team)"></i></span> <img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlagsRight"/></div>
+							<div class="columnProfil"><img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlags"/> <span class="modal-Team-Title" >{{ loadedTeams.name }} <i class="fa fa-star"></i></span> <img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlagsRight"/></div>
 						</div>
 						<div class="flex-container-modal-Niveau text-center">
 							<div class="columnProfil"><span class="modal-Team-Activity">{{ loadedTeams.category.name }}</span></div>
@@ -304,9 +304,65 @@
 			}
 		},
 		computed: {
-            loadedUserTeams () {
-                return this.$store.getters['users/loadedUserTeams']
-            },
+           loadedUserTeams () {
+                // return this.selectedTeams.push({id: '-LBVgvOsCUALzowK576H', name: 'Argentina'}, {id: '-LBVgvOxY6A_ylDQBOmp', name: 'Australia'}, {id: '-LBVgvR__QJEcYxQ7a7g'})
+                // return this.$store.getters['users/loadedUserTeams']
+                // const abc = [{id: '-LBVgvOsCUALzowK576H'}, {id: '-LBVgvOxY6A_ylDQBOmp'}, {id: '-LBVgvR__QJEcYxQ7a7g'}]
+                // return abc
+                // const userTeams = []
+                // 1) First retrieve all userteam ids
+                const teamIds = this.$store.getters['users/loadedUserTeams']
+                // return teamIds
+                console.log(teamIds)
+                // return teamIds
+
+                // 2) Then get complete team data
+                const teams = []
+                teamIds.forEach((teamId) => {
+                    console.log(teamId)
+                    let abc = this.loadedTeamsByCompetition.find(team => team.id === teamId)
+                    teams.push(abc)
+                })
+                console.log(teams)
+                // for (let teamId in teamIds) {
+                //     console.log(teamId)
+                //     if (teamId.hasOwnProperty()) {
+                //         console.log('abc')
+                //         console.log(lunch[key]); // value (ex. turkey)
+                //     }
+                // }
+                // console.log(teams)
+                // return
+                // console.log(teamIds)
+                // this.loadedTeamsByCompetition.forEach((team) => {
+                //     if (teamIds.find(el => el === team.id)) {
+                //         userTeams.push({id: team.id, name: team.name})
+                //     }
+                // })
+                // console.log(userTeams)
+                // return this.$store.getters['users/loadedUserTeams']
+                // console.log(this.loadedTeamsByCompetition)
+                // let def = this.loadedTeamsByCompetition.filter(el => el.id === '-LBVgvOsCUALzowK576H')
+                // let ghi = teamIds.some(el => this.loadedTeamsByCompetition.includes(el))
+                // console.log(ghi)
+                let def = teams.map(obj => {
+                    let rObj = {}
+                    rObj['id'] = obj.id
+                    rObj['name'] = obj.name
+                    this.selectedTeams.push(rObj)
+                    return rObj
+                })
+                console.log(def)
+                // this.selectedTeams.push(def)
+               return def
+              const abc = [{id: '-LBVgvOsCUALzowK576H', name: 'Argentina'}, {id: '-LBVgvOxY6A_ylDQBOmp', name: 'Australia'}, {id: '-LBVgvR__QJEcYxQ7a7g', name: 'Republic of Korea'}]
+              // this.selectedTeams.push(abc)
+                return abc
+
+           },
+           abc () {
+                return this.selectedTeams.push[{id: '-LBVgvOsCUALzowK576H', name: 'Argentina'}, {id: '-LBVgvOxY6A_ylDQBOmp', name: 'Australia'}, {id: '-LBVgvR__QJEcYxQ7a7g', name: 'Republic of Korea'}]
+             },
 			loadedTeams () {
 				return this.$store.getters['teams/loadedTeams'].find(team => team.slug === this.team_id)
 			},
