@@ -15,7 +15,7 @@
 					<!-- Modal body -->
 					<div id="modalBoxContent" class="modal-bodyOtherTeam text-center">
 						<div class="flex-container-modalProfil">
-							<div class="columnProfil"><img :src="'/images/teams/' + teams.slug + '.png'" class="imgModalFlags"/> <span class="modal-Team-Title">{{ loadedTeams.name }}</span> <img :src="'/images/teams/' + teams.slug + '.png'" class="imgModalFlagsRight"/></div>
+							<div class="columnProfil"><img :src="'/images/teams/' + {{ loadedTeams.slug }} + '.png'" class="imgModalFlags"/> <span class="modal-Team-Title">{{ loadedTeams.name }}</span> <img :src="'/images/teams/' + {{ loadedTeams.slug }} + '.png'" class="imgModalFlagsRight"/></div>
 						</div>
 						<div class="flex-container-modal-Niveau text-center">
 							<div class="columnProfil"><span class="modal-Team-Activity">{{ loadedTeams.category.name }}</span></div>
