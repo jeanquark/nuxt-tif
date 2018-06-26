@@ -57,6 +57,37 @@
 							</table>
 						</div>
 					</div>
+					<div id="modalTitle" class="modal-body" v-if="loadedCompetition.teams" v-for="group of loadedCompetitionGroups">
+						<div>
+							<div class="flex-container-modal-Title banner2 text-center" v-if="loadedCompetition">
+								<h2>Classement - Phase de groupes - Groupe {{ group }}<br />{{ loadedCompetition.name }}</h2>
+							</div>
+							<div class="flex-container-modal-Action">
+								<table class="table tableTextClassement">
+								  	<thead>
+										<tr>
+											<th class="col1 thTif"></th>
+											<th class="col2 thTif"></th>
+											<th class="col3 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Matches joués durant la compétition">MJ</th>
+											<th class="col3 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="But pour / But contre">But</th>
+											<th class="col3 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Nombre de points">Pts</th>
+										</tr>
+								  	</thead>
+								  	<tbody v-for="(team, index) of loadedCompetitionTeams.filter(team => team.group === group).sort((a, b) => a.goals_scored < b.goals_scored).sort((a, b) => a.goals_scored - a.goals_conceded < b.goals_scored - b.goals_conceded).sort((a, b) => a.points < b.points)">
+								  		<tr class="trResultat" :class="[ index % 2 === 0 ? '' : odd]">
+											<td class="tdTif1 text-center">{{ index + 1 }}</td>
+											<td class="tdTif"><a href="autresEquipesDetails.html" class="linkEvent"><img :src="'/images/teams/' + team.slug + '.png'" class="imgModalAgendaFlags"/>{{ team.name }}</a></td>
+											<td class="tdTif1 text-center">{{ team.wins + team.draws + team.losses }}</td>
+											<td class="tdTif1 text-center">{{ team.goals_scored }}:{{ team.goals_conceded}}</td>
+											<td class="tdTif1 text-center">{{ team.points }}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					
+					
 					<div id="modalTitle" class="modal-body">
 						<div class="flex-container-modal-Title banner text-center">
 							<h2>Classement - Phase de groupes - Groupe A</br>Coupe du Monde - 2018 - International</h2>
@@ -281,15 +312,142 @@
     created () {
 
 	},
-    computed: {
-    	loadedCompetitions () {
-    		return this.$store.getters['competitions/loadedCompetitions']
-    	},
-		loadedTeams () {
-			return this.$store.getters['users/loadedTeams']
+		computed: {
+			loadedCompetition () {
+				return this.$store.getters['competitions/loadedCompetitions'].find(competition => competition.slug === this.competition_id)
+			},
+			loadedCompetitionGroups () {
+				console.log('entering loadedCompetitionGroups')
+				let competition = this.$store.getters['competitions/loadedCompetitions'].find(competition => competition.slug === this.competition_id)
+				console.log(competition)
+				const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+				let groupsArray = []
+				for (let i = 0; i < competition.groups_number; i++) {
+					if (competition.groups_format === 'letters') {
+						groupsArray.push(alphabet[i])
+					} else  {
+						groupsArray.push(i + 1)
+					}
+				}
+				return groupsArray
+				// return [
+				// 	{
+				// 		'name': 'A',
+				// 		'slug': 'a'
+				// 	},
+				// 	{
+				// 		'name': 'E',
+				// 		'slug': 'e'
+				// 	}
+				// ]
+			},
+			loadedCompetitionTeams () {
+				let competition = this.$store.getters['competitions/loadedCompetitions'].find(competition => competition.slug === this.competition_id)
+				console.log(competition.teams)
+				let teamsArray = []
+				for (let team in competition.teams) {
+					console.log(competition.teams[team])
+					teamsArray.push(competition.teams[team])
+				}
+				console.log(teamsArray)
+
+				// let teams = []
+				return teamsArray
+				
+				return [
+					{
+						'name': 'Brazil',
+						'slug': 'brazil',
+						'wins': 1,
+						'points': 6,
+						'group': 'E',
+						'draws': 0,
+						'losses': 0,
+						'goals_scored': 4,
+						'goals_conceded': 1,
+					},
+					{
+						'name': 'Switzerland',
+						'slug': 'switzerland',
+						'wins': 0,
+						'points': 0,
+						'group': 'E',
+						'draws': 0,
+						'losses': 1,
+						'goals_scored': 1,
+						'goals_conceded': 4,
+					},
+					{
+						'name': 'Costa Rica',
+						'slug': 'costa_rica',
+						'wins': 1,
+						'points': 3,
+						'group': 'E',
+						'draws': 0,
+						'losses': 0,
+						'goals_scored': 2,
+						'goals_conceded': 0,
+					},
+					{
+						'name': 'Serbia',
+						'slug': 'serbia',
+						'wins': 0,
+						'points': 0,
+						'group': 'E',
+						'draws': 0,
+						'losses': 1,
+						'goals_scored': 0,
+						'goals_conceded': 2,
+					},
+					{
+						'name': 'Russia',
+						'slug': 'russia',
+						'wins': 1,
+						'points': 3,
+						'group': 'A',
+						'draws': 0,
+						'losses': 0,
+						'goals_scored': 3,
+						'goals_conceded': 0,
+					},
+					{
+						'name': 'Saudi Arabia',
+						'slug': 'saudi_arabia',
+						'wins': 0,
+						'points': 0,
+						'group': 'A',
+						'draws': 0,
+						'losses': 1,
+						'goals_scored': 0,
+						'goals_conceded': 3,
+					},
+					{
+						'name': 'Egypt',
+						'slug': 'egypt',
+						'wins': 0,
+						'points': 1,
+						'group': 'A',
+						'draws': 1,
+						'losses': 0,
+						'goals_scored': 1,
+						'goals_conceded': 1,
+					},
+					{
+						'name': 'Uruguay',
+						'slug': 'uruguay',
+						'wins': 0,
+						'points': 1,
+						'group': 'A',
+						'draws': 1,
+						'losses': 0,
+						'goals_scored': 1,
+						'goals_conceded': 1,
+					},
+				]
+				
+			}
 		}
-    }
-  }
+	}
 </script>
 
 <style>
