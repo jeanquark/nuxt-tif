@@ -15,7 +15,7 @@
 					<!-- Modal body -->
 					<div id="modalBoxContent" class="modal-bodyOtherTeam text-center">
 						<div class="flex-container-modalProfil">
-							<div class="columnProfil"><img src="images/flags/25.png" class="imgModalFlags"/> <span class="modal-Team-Title" v-if="loadedTeams">{{ loadedTeams.slug }}</span> <img src="images/flags/25.png" class="imgModalFlagsRight"/></div>
+							<div class="columnProfil" v-for="team in loadedTeamsByCompetition"><img :src="'/images/teams/' + team.image" class="imgModalFlags"/> <span class="modal-Team-Title">{{ {{ team.name }} }}</span> <img src="images/flags/25.png" class="imgModalFlagsRight"/></div>
 						</div>
 						<div class="flex-container-modal-Niveau text-center">
 							<div class="columnProfil"><span class="modal-Team-Activity">Football</span></div>
@@ -271,34 +271,79 @@
 </template>
 
 <script>
-	export default {
-		layout: 'layoutFront',
-		// created () {
-  //           console.log(this.$i18n.t('pages.index.welcome'))
-		// },
-		computed: {
-			loadedUser () {
-				return this.$store.getters['users/loadedUser']
-			},
-			loadedTeam () {
-				return this.$store.getters['teams/loadedTeam']
-			}
-		},
-		methods: {
-			goToAdmin () {
-				this.$router.replace('/admin')
-			},
-			logout() {
-				// return this.$store.dispatch('users/signOut')
-				this.$store.dispatch('firebase-auth/signOut').then(() => {
-					// console.log('abc')
-	          		// this.$router.push('/')
-	          		// this.$router.replace({ path: '/' })
-                	this.$router.replace('/')
-	        	})
-	        }
-		}
-	}
+    export default {
+        layout: 'layoutFront',
+        created () {
+            if (Object.keys(this.$store.getters['competitions/loadedCompetitions']).length === 0) {
+                this.$store.dispatch('competitions/loadedCompetitions')
+            }
+            if (Object.keys(this.$store.getters['teams/loadedTeams']).length === 0) {
+                this.$store.dispatch('teams/loadedTeams')
+            }
+            if (Object.keys(this.$store.getters['users/loadedUserTeams']).length === 0) {
+                this.$store.dispatch('users/loadedUserTeams')
+            }
+            for (let team of this.loadedUserTeams) {
+                this.selectedTeams.push(team)
+            }
+        },
+        data () {
+            return {
+                competition_id: this.$route.params.id,
+                isActive: false,
+                selectedTeams: []
+            }
+        },
+        computed: {
+            loadedCompetition () {
+                return this.$store.getters['competitions/loadedCompetitions'].find(competition => competition.id === this.competition_id)
+            },
+            loadedTeamsByCompetition () {
+                const teams = []
+                const competition_id = this.competition_id
+                this.$store.getters['teams/loadedTeams'].forEach(function (team) {
+                    if (team.competitions) {
+                        if (team['competitions'][competition_id]) {
+                            teams.push(team)
+                        }
+                    }
+                })
+                return teams
+            },
+            loadedUserTeams () {
+                return this.$store.getters['users/loadedUserTeams']
+            }
+        },
+        methods: {
+            selectTeam (team) {
+                // this.isActive = !this.isActive
+                console.log('selectTeam')
+                console.log(team.id)
+                // const selectedTeam = {id: team.id, name: team.name}
+                const selectedTeam = team
+                console.log(selectedTeam)
+                // return
+                // console.log(selectedTeam)
+                const index = this.selectedTeams.findIndex(el => el.id === team.id)
+                console.log('index: ' + index)
+                // if (!this.selectedTeams.includes(selectedTeam)) {
+                if (!this.selectedTeams.find(el => el.id === selectedTeam.id)) {
+                    this.selectedTeams.push(selectedTeam)
+                } else {
+                    this.selectedTeams.splice(index, 1)
+                }
+            },
+            async saveTeams () {
+                console.log('saveTeams')
+                console.log(this.selectedTeams)
+                await this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
+                this.$router.replace('/user/teams')
+            },
+            clear () {
+                this.selectedTeams = []
+            }
+        }
+    }
 </script>
 
 <style>
