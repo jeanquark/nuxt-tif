@@ -261,10 +261,10 @@
 					</div>
 					<!-- Modal footer -->
 					<div class="modal-footer">
-                        <nuxt-link :to="'/competitions/' + competition.slug">
+                        <nuxt-link to="/user/teams">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
                         </nuxt-link>
-                        <button class="btn btn-warning" data-dismiss="modal" @click="saveTeams">Devenir fan - Coût 3 <i class="fas fa-certificate"></i></button>
+					  <a href="mesEquipes.html"><button type="button" class="btn btn-warning" data-dismiss="modal">Devenir fan - Coût 3 <i class="fas fa-certificate"></i></button></a>
 					</div>
 				  </div>
 				</div>
