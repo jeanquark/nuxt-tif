@@ -275,6 +275,7 @@
 		layout: 'layoutFront',
 		created () { 
 			this.$store.dispatch('competitions/loadedCompetitions')
+			this.$store.dispatch('teams/loadedTeams')
 		},
 		data () {
 			return {
@@ -283,6 +284,9 @@
 			}
 		},
 		computed: {
+			loadedTeams () {
+				return this.$store.getters['users/loadedTeams']
+			},
 			loadedCompetition () {
 				return this.$store.getters['competitions/loadedCompetitions'].find(competition => competition.slug === this.competition_id)
 			},
