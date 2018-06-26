@@ -8,9 +8,11 @@
 					<!-- Modal Header -->
 					<div class="modal-header">
 					  <span class="modal-title">Pleins d'infos ! <span class="modal-title-Sub">(autres équipes)</span></span>
-						<a href="competitionsEquipes.html"><button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" class="white-text"><i class="fas fa-arrow-circle-left"></i></span>
-                    	</button></a>					
+						<nuxt-link :to="'/competitions/' + competition.slug">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
+							</button>
+						</nuxt-link>					
                 	</div>
 					<!-- Modal body -->
 					<div id="modalBoxContent" class="modal-bodyOtherTeam text-center">
@@ -259,8 +261,10 @@
 					</div>
 					<!-- Modal footer -->
 					<div class="modal-footer">
-					  <a href="competitionsEquipes.html"><button type="button" class="btn btn-danger" data-dismiss="modal">Sortir d'ici !</button></a>
-					  <a href="mesEquipes.html"><button type="button" class="btn btn-warning" data-dismiss="modal">Devenir fan - Coût 3 <i class="fas fa-certificate"></i></button></a>
+                        <nuxt-link :to="'/competitions/' + competition.slug">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                        </nuxt-link>
+                        <button class="btn btn-warning" data-dismiss="modal" @click="saveTeams">Devenir fan - Coût 3 <i class="fas fa-certificate"></i></button>
 					</div>
 				  </div>
 				</div>
@@ -285,6 +289,9 @@
 			}
 		},
 		computed: {
+            loadedUserTeams () {
+                return this.$store.getters['users/loadedUserTeams']
+            },
 			loadedTeams () {
 				return this.$store.getters['teams/loadedTeams'].find(team => team.slug === this.team_id)
 			},
@@ -421,7 +428,33 @@
 				]
 				
 			}
-		}
+		},
+        methods: {
+            selectTeam (team) {
+                // this.isActive = !this.isActive
+                console.log('selectTeam')
+                console.log(team.id)
+                // const selectedTeam = {id: team.id, name: team.name}
+                const selectedTeam = team
+                console.log(selectedTeam)
+                // return
+                // console.log(selectedTeam)
+                const index = this.selectedTeams.findIndex(el => el.id === team.id)
+                console.log('index: ' + index)
+                // if (!this.selectedTeams.includes(selectedTeam)) {
+                if (!this.selectedTeams.find(el => el.id === selectedTeam.id)) {
+                    this.selectedTeams.push(selectedTeam)
+                } else {
+                    this.selectedTeams.splice(index, 1)
+                }
+            },
+            async saveTeams () {
+                console.log('saveTeams')
+                console.log(this.selectedTeams)
+                await this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
+                this.$router.replace('/user/teams')
+            }
+        }
 	}
 </script>
 <style>
