@@ -273,9 +273,9 @@
 <script>
 	export default {
 		layout: 'layoutFront',
-		created () { 
-			this.$store.dispatch('teams/loadedTeams')
-		},
+	    created () {
+	    	this.$store.dispatch('teams/loadedTeams')
+	    },
 		computed: {
 			loadedTeams () {
 				return this.$store.getters['teams/loadedTeams']
