@@ -4,7 +4,7 @@
 			<!-- The Modal OtherTeamDetail -->
 			<div id="modalBox">
 				<div class="modal-dialog modal-lg">
-				  <div class="modal-content-resultats">
+				  <div class="modal-content-resultats" v-if="loadedCompetition">
 					<!-- Modal Header -->
 					<div class="modal-header">
 					  <span class="modal-title">Pleins d'infos ! <span class="modal-title-Sub">(autres équipes)</span></span>
