@@ -271,11 +271,30 @@
 </template>
 
 <script>
-	export default {
-		layout: 'layoutFront',
-	}
+  	export default {
+	    layout: 'layoutBack',
+	    components: { Confirm },
+	    created () {
+	    	this.$store.dispatch('teams/loadedTeams')
+	    },
+	    data () {
+	    	return {
+		        search: '',
+		        selected: [],
+		        events: '',
+		        newJSON: '',
+	    	}
+	    },
+	    computed: {
+	    	loading () {
+	    		return this.$store.getters['loading']
+	    	},
+	    	loadedTeams () {
+	    		return this.$store.getters['teams/loadedTeams']
+	    	}
+	    }
+  	}
 </script>
-
 <style>
 
 </style>
