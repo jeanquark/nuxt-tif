@@ -15,7 +15,7 @@
 					<!-- Modal body -->
 					<div id="modalBoxContent" class="modal-bodyOtherTeam text-center">
 						<div class="flex-container-modalProfil">
-							<div class="columnProfil"><img src="images/flags/25.png" class="imgModalFlags"/> <span class="modal-Team-Title">Brésil</span> <img src="images/flags/25.png" class="imgModalFlagsRight"/></div>
+							<div class="columnProfil"><img src="images/flags/25.png" class="imgModalFlags"/> <span class="modal-Team-Title" v-if="team">{{ team.name }}</span> <img src="images/flags/25.png" class="imgModalFlagsRight"/></div>
 						</div>
 						<div class="flex-container-modal-Niveau text-center">
 							<div class="columnProfil"><span class="modal-Team-Activity">Football</span></div>
@@ -271,9 +271,25 @@
 </template>
 
 <script>
-    export default {
-        layout: 'layoutFront'
+  export default {
+    layout: 'layoutFront',
+    data () {
+    	return {
+
+    	}
+    },
+    created () {
+
+	},
+    computed: {
+    	loadedCompetitions () {
+    		return this.$store.getters['competitions/loadedCompetitions']
+    	},
+		loadedTeams () {
+			return this.$store.getters['users/loadedTeams']
+		}
     }
+  }
 </script>
 
 <style>
