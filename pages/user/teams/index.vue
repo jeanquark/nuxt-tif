@@ -52,8 +52,6 @@
 						<div class="flex-container-modal-OtherTeam">
 							<h1>Supporter une nouvelle équipe ?</h1>
 						</div>
-					</div>
-					<div id="modalBoxContent" class="modal-body">
 						<div class="flex-container-modal-Title banner text-center">
 							<h2>Compétitions en cours / à venir</h2>
 						</div>
