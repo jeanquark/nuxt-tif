@@ -302,16 +302,17 @@
 </template>
 
 <script>
-  export default {
-    layout: 'layoutFront',
-    data () {
-    	return {
-
-    	}
-    },
-    created () {
-
-	},
+	export default {
+		layout: 'layoutFront',
+		created () { 
+			this.$store.dispatch('competitions/loadedCompetitions')
+		},
+		data () {
+			return {
+				competition_id: this.$route.params.id,
+				odd: 'odd',
+			}
+		},
 		computed: {
 			loadedCompetition () {
 				return this.$store.getters['competitions/loadedCompetitions'].find(competition => competition.slug === this.competition_id)
