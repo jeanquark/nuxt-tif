@@ -8,11 +8,9 @@
 					<!-- Modal Header -->
 					<div class="modal-header">
 					  <span class="modal-title">Pleins d'infos ! <span class="modal-title-Sub">(autres équipes)</span></span>
-						<nuxt-link :to="'/competitions/' + competition.slug">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
-							</button>
-						</nuxt-link>					
+						<a href="competitionsEquipes.html"><button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="white-text"><i class="fas fa-arrow-circle-left"></i></span>
+                    	</button></a>					
                 	</div>
 					<!-- Modal body -->
 					<div id="modalBoxContent" class="modal-bodyOtherTeam text-center">
@@ -261,9 +259,7 @@
 					</div>
 					<!-- Modal footer -->
 					<div class="modal-footer">
-                        <nuxt-link to="/user/teams">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
-                        </nuxt-link>
+					  <a href="competitionsEquipes.html"><button type="button" class="btn btn-danger" data-dismiss="modal">Sortir d'ici !</button></a>
 					  <a href="mesEquipes.html"><button type="button" class="btn btn-warning" data-dismiss="modal">Devenir fan - Coût 3 <i class="fas fa-certificate"></i></button></a>
 					</div>
 				  </div>
