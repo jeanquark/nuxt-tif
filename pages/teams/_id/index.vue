@@ -511,7 +511,7 @@
 			}
 		},
         methods: {
-            selectTeam (team) {
+            async selectTeam (team) {
                 // this.isActive = !this.isActive
                 console.log('selectTeam')
                 console.log(team.id)
@@ -528,7 +528,7 @@
                 } else {
                     this.selectedTeams.splice(index, 1)
                 }
-				await this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
+				        await this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
                 this.$router.replace('/user/teams')
 
             },
