@@ -511,9 +511,11 @@
 			}
 		},
         methods: {
-            async selectTeam (team) {
+            selectTeam (team) {
                 // this.isActive = !this.isActive
+                console.log('saveTeams')
                 console.log('selectTeam')
+                console.log(this.selectedTeams)
                 console.log(team.id)
                 // const selectedTeam = {id: team.id, name: team.name}
                 const selectedTeam = team
@@ -528,15 +530,9 @@
                 } else {
                     this.selectedTeams.splice(index, 1)
                 }
-				        await this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
+				await this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
                 this.$router.replace('/user/teams')
 
-            },
-            async saveTeams () {
-                console.log('saveTeams')
-                console.log(this.selectedTeams)
-                await this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
-                this.$router.replace('/user/teams')
             }
         }
 	}
