@@ -525,18 +525,12 @@
                 console.log('saveTeams')
                 console.log(this.selectedTeams)
                 this.$router.replace('/user/teams')
-                // if (!this.selectedTeams.includes(selectedTeam)) {
+				this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
                 if (!this.selectedTeams.find(el => el.id === selectedTeam.id)) {
                     this.selectedTeams.push(selectedTeam)
                 } else {
                     this.selectedTeams.splice(index, 1)
                 }
-            },
-            async saveTeams () {
-                console.log('saveTeams')
-                console.log(this.selectedTeams)
-                await this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
-                this.$router.replace('/user/teams')
             }
         }
 	}
