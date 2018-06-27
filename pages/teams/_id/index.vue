@@ -524,13 +524,13 @@
                 // console.log(selectedTeam)
                 const index = this.selectedTeams.findIndex(el => el.id === team.id)
                 console.log('index: ' + index)
-                // if (!this.selectedTeams.includes(selectedTeam)) {
+                // if (!this.selectedTeams.includes(selectedTeam))
                 if (!this.selectedTeams.find(el => el.id === selectedTeam.id)) {
                     this.selectedTeams.push(selectedTeam)
                 } else {
                     this.selectedTeams.splice(index, 1)
                 }
-				await this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
+				        await this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
                 this.$router.replace('/user/teams')
 
             }
