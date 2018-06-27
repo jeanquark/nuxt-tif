@@ -378,7 +378,7 @@
             },
 			loadedCompetition () {
 				return this.$store.getters['competitions/loadedCompetitions'].find(competition => competition.slug === this.competition_id)
-			}
+			},
         methods: {
             selectTeam (team) {
                 // this.isActive = !this.isActive
