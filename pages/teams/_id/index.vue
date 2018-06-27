@@ -530,9 +530,9 @@
                 } else {
                     this.selectedTeams.splice(index, 1)
                 }
+				}
 				await this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
                 this.$router.replace('/user/teams')
-				}
             }
         }
 	}
