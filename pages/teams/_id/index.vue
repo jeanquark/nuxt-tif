@@ -379,31 +379,32 @@
 			loadedCompetition () {
 				return this.$store.getters['competitions/loadedCompetitions'].find(competition => competition.slug === this.competition_id)
 			},
-        methods: {
-            selectTeam (team) {
-                // this.isActive = !this.isActive
-                console.log('selectTeam')
-                console.log(team.id)
-                // const selectedTeam = {id: team.id, name: team.name}
-                const selectedTeam = team
-                console.log(selectedTeam)
-                // return
-                // console.log(selectedTeam)
-                const index = this.selectedTeams.findIndex(el => el.id === team.id)
-                console.log('index: ' + index)
-                // if (!this.selectedTeams.includes(selectedTeam)) {
-                if (!this.selectedTeams.find(el => el.id === selectedTeam.id)) {
-                    this.selectedTeams.push(selectedTeam)
-                } else {
-                    this.selectedTeams.splice(index, 1)
-                }
-            },
-            async saveTeams () {
-                console.log('saveTeams')
-                console.log(this.selectedTeams)
-                await this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
-                this.$router.replace('/user/teams')
-            }
+			methods: {
+				selectTeam (team) {
+					// this.isActive = !this.isActive
+					console.log('selectTeam')
+					console.log(team.id)
+					// const selectedTeam = {id: team.id, name: team.name}
+					const selectedTeam = team
+					console.log(selectedTeam)
+					// return
+					// console.log(selectedTeam)
+					const index = this.selectedTeams.findIndex(el => el.id === team.id)
+					console.log('index: ' + index)
+					// if (!this.selectedTeams.includes(selectedTeam)) {
+					if (!this.selectedTeams.find(el => el.id === selectedTeam.id)) {
+						this.selectedTeams.push(selectedTeam)
+					} else {
+						this.selectedTeams.splice(index, 1)
+					}
+				},
+				async saveTeams () {
+					console.log('saveTeams')
+					console.log(this.selectedTeams)
+					await this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
+					this.$router.replace('/user/teams')
+				}
+			}
         }
 	}
 </script>
