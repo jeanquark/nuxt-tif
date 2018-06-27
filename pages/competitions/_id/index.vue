@@ -26,7 +26,7 @@
 						</div>
                         <div class="flex-container-modal-OtherTeam-Img">
                             <div class="OtherTeam" v-for="team in loadedTeamsByCompetition" style="cursor: pointer;" :class="{active: selectedTeams.findIndex(e => e.id === team.id) != -1}" @click="selectTeam(team)">
-                                <img :src="'/images/teams/' + team.image" class="imgModalAvatar" v-bind:class="{active: isActive}" /><div class="overlayOtherTeam"><div class="textActivity" v-if="team">{{ team.category.name }}</br>{{ team.name }}</br>+Infos</div></div>
+                                <img :src="'/images/teams/' + team.image" class="imgModalAvatar" v-bind:class="{active: isActive}" /><nuxt-link :to="'/teams/' + team.slug" class="overlayOtherTeam"><div class="textActivity" v-if="team">{{ team.category.name }}</br>{{ team.name }}</br>+Infos</div></nuxt-link>
                             </div>
                         </div>
                     </div><!-- /#modalBoxContent -->	
