@@ -15,7 +15,7 @@
 					<!-- Modal body -->
 					<div id="modalBoxContent" class="modal-bodyOtherTeam text-center">
 						<div class="flex-container-modalProfil">
-							<div class="columnProfil"><img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlags"/> <span class="modal-Team-Title" @>{{ loadedTeams.name }} <i class="fa fa-star" @click="selectTeam(team)"></i></span> <img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlagsRight"/></div>
+							<div class="columnProfil"><img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlags"/> <span class="modal-Team-Title" @>{{ loadedTeams.name }} <i class="fa fa-star"></i></span> <img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlagsRight"/></div>
 						</div>
 						<div class="flex-container-modal-Niveau text-center">
 							<div class="columnProfil"><span class="modal-Team-Activity">{{ loadedTeams.category.name }}</span></div>
@@ -259,7 +259,7 @@
 					</div>
 					<!-- Modal footer -->
 					<div class="modal-footer">
-                        <button class="btn btn-warning" @click="saveTeams">Devenir fan - Coût 3 <i class="fas fa-certificate"></i></button>
+                        <button class="btn btn-warning" @click="selectTeam">Devenir fan - Coût 3 <i class="fas fa-certificate"></i></button>
                         <nuxt-link to="/user/teams">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
                         </nuxt-link>
@@ -528,6 +528,9 @@
                 } else {
                     this.selectedTeams.splice(index, 1)
                 }
+				await this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
+                this.$router.replace('/user/teams')
+
             },
             async saveTeams () {
                 console.log('saveTeams')
