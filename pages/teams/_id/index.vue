@@ -8,14 +8,14 @@
 					<!-- Modal Header -->
 					<div class="modal-header">
 					  <span class="modal-title">Pleins d'infos ! <span class="modal-title-Sub">(autres équipes)</span></span>
-						<nuxt-link :to="'/competitions/' + competition.slug"><button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<a href="competitionsEquipes.html"><button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="white-text"><i class="fas fa-arrow-circle-left"></i></span>
-                    	</button></nuxt-link>					
+                    	</button></a>					
                 	</div>
 					<!-- Modal body -->
-					<div id="modalBoxContent" class="modal-bodyOtherTeam text-center" v-for="team" style="cursor: pointer;" :class="{active: selectedTeams.findIndex(e => e.id === team.id) != -1}" @click="selectTeam(team)">
+					<div id="modalBoxContent" class="modal-bodyOtherTeam text-center">
 						<div class="flex-container-modalProfil">
-							<div class="columnProfil"><img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlags" v-bind:class="{active: isActive}" /> <span class="modal-Team-Title" >{{ loadedTeams.name }} <i class="fa fa-star" v-bind:class="{active: isActive}"></i></span> <img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlagsRight"/></div>
+							<div class="columnProfil"><img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlags"/> <span class="modal-Team-Title" >{{ loadedTeams.name }} <i class="fa fa-star"></i></span> <img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlagsRight"/></div>
 						</div>
 						<div class="flex-container-modal-Niveau text-center">
 							<div class="columnProfil"><span class="modal-Team-Activity">{{ loadedTeams.category.name }}</span></div>
@@ -260,7 +260,7 @@
 					<!-- Modal footer -->
 					<div class="modal-footer">
                         <button class="btn btn-warning" @click="saveTeams">Devenir fan - Coût 3 <i class="fas fa-certificate"></i></button>
-                        <nuxt-link :to="'/competitions/' + competition.slug">
+                        <nuxt-link to="/user/teams">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
                         </nuxt-link>
 					</div>
@@ -379,40 +379,165 @@
 			loadedCompetition () {
 				return this.$store.getters['competitions/loadedCompetitions'].find(competition => competition.slug === this.competition_id)
 			},
-			methods: {
-				selectTeam (team) {
-					// this.isActive = !this.isActive
-					console.log('selectTeam')
-					console.log(team.id)
-					// const selectedTeam = {id: team.id, name: team.name}
-					const selectedTeam = team
-					console.log(selectedTeam)
-					// return
-					// console.log(selectedTeam)
-					const index = this.selectedTeams.findIndex(el => el.id === team.id)
-					console.log('index: ' + index)
-					// if (!this.selectedTeams.includes(selectedTeam)) {
-					if (!this.selectedTeams.find(el => el.id === selectedTeam.id)) {
-						this.selectedTeams.push(selectedTeam)
-					} else {
-						this.selectedTeams.splice(index, 1)
+			loadedCompetitionGroups () {
+				console.log('entering loadedCompetitionGroups')
+				let competition = this.$store.getters['competitions/loadedCompetitions'].find(competition => competition.slug === this.competition_id)
+				console.log(competition)
+				const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+				let groupsArray = []
+				for (let i = 0; i < competition.groups_number; i++) {
+					if (competition.groups_format === 'letters') {
+						groupsArray.push(alphabet[i])
+					} else  {
+						groupsArray.push(i + 1)
 					}
-				},
-				async saveTeams () {
-					console.log('saveTeams')
-					console.log(this.selectedTeams)
-					await this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
-					this.$router.replace('/user/teams')
 				}
+				return groupsArray
+				// return [
+				// 	{
+				// 		'name': 'A',
+				// 		'slug': 'a'
+				// 	},
+				// 	{
+				// 		'name': 'E',
+				// 		'slug': 'e'
+				// 	}
+				// ]
+			},
+			loadedCompetitionTeams () {
+				let competition = this.$store.getters['competitions/loadedCompetitions'].find(competition => competition.slug === this.competition_id)
+				console.log(competition.teams)
+				let teamsArray = []
+				for (let team in competition.teams) {
+					console.log(competition.teams[team])
+					teamsArray.push(competition.teams[team])
+				}
+				console.log(teamsArray)
+
+				// let teams = []
+				return teamsArray
+				
+				return [
+					{
+						'name': 'Brazil',
+						'slug': 'brazil',
+						'wins': 1,
+						'points': 6,
+						'group': 'E',
+						'draws': 0,
+						'losses': 0,
+						'goals_scored': 4,
+						'goals_conceded': 1,
+					},
+					{
+						'name': 'Switzerland',
+						'slug': 'switzerland',
+						'wins': 0,
+						'points': 0,
+						'group': 'E',
+						'draws': 0,
+						'losses': 1,
+						'goals_scored': 1,
+						'goals_conceded': 4,
+					},
+					{
+						'name': 'Costa Rica',
+						'slug': 'costa_rica',
+						'wins': 1,
+						'points': 3,
+						'group': 'E',
+						'draws': 0,
+						'losses': 0,
+						'goals_scored': 2,
+						'goals_conceded': 0,
+					},
+					{
+						'name': 'Serbia',
+						'slug': 'serbia',
+						'wins': 0,
+						'points': 0,
+						'group': 'E',
+						'draws': 0,
+						'losses': 1,
+						'goals_scored': 0,
+						'goals_conceded': 2,
+					},
+					{
+						'name': 'Russia',
+						'slug': 'russia',
+						'wins': 1,
+						'points': 3,
+						'group': 'A',
+						'draws': 0,
+						'losses': 0,
+						'goals_scored': 3,
+						'goals_conceded': 0,
+					},
+					{
+						'name': 'Saudi Arabia',
+						'slug': 'saudi_arabia',
+						'wins': 0,
+						'points': 0,
+						'group': 'A',
+						'draws': 0,
+						'losses': 1,
+						'goals_scored': 0,
+						'goals_conceded': 3,
+					},
+					{
+						'name': 'Egypt',
+						'slug': 'egypt',
+						'wins': 0,
+						'points': 1,
+						'group': 'A',
+						'draws': 1,
+						'losses': 0,
+						'goals_scored': 1,
+						'goals_conceded': 1,
+					},
+					{
+						'name': 'Uruguay',
+						'slug': 'uruguay',
+						'wins': 0,
+						'points': 1,
+						'group': 'A',
+						'draws': 1,
+						'losses': 0,
+						'goals_scored': 1,
+						'goals_conceded': 1,
+					},
+				]
+				
 			}
+		},
+        methods: {
+            selectTeam (team) {
+                // this.isActive = !this.isActive
+                console.log('selectTeam')
+                console.log(team.id)
+                // const selectedTeam = {id: team.id, name: team.name}
+                const selectedTeam = team
+                console.log(selectedTeam)
+                // return
+                // console.log(selectedTeam)
+                const index = this.selectedTeams.findIndex(el => el.id === team.id)
+                console.log('index: ' + index)
+                // if (!this.selectedTeams.includes(selectedTeam)) {
+                if (!this.selectedTeams.find(el => el.id === selectedTeam.id)) {
+                    this.selectedTeams.push(selectedTeam)
+                } else {
+                    this.selectedTeams.splice(index, 1)
+                }
+            },
+            async saveTeams () {
+                console.log('saveTeams')
+                console.log(this.selectedTeams)
+                await this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
+                this.$router.replace('/user/teams')
+            }
         }
 	}
 </script>
-
 <style>
-    .active {
-        background: orangered;
-        border: 6px solid orangered;
-        /*border: 8px solid red;*/
-    }
+
 </style>
