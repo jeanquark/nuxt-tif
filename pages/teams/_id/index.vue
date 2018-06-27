@@ -14,8 +14,8 @@
                 	</div>
 					<!-- Modal body -->
 					<div id="modalBoxContent" class="modal-bodyOtherTeam text-center">
-						<div class="flex-container-modalProfil">
-							<div class="columnProfil" style="cursor: pointer;" :class="{active: selectedTeams.findIndex(e => e.id === team.id) != -1}" @click="selectTeam(team)"><img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlags"/> <span class="modal-Team-Title" >{{ loadedTeams.name }} <i class="fa fa-star" v-bind:class="{active: isActive}"></i></span> <img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlagsRight"/></div>
+						<div class="flex-container-modalProfil" style="cursor: pointer;" :class="{active: selectedTeams.findIndex(e => e.id === team.id) != -1}" @click="selectTeam(team)">
+							<div class="columnProfil"><img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlags" v-bind:class="{active: isActive}" /> <span class="modal-Team-Title" >{{ loadedTeams.name }} <i class="fa fa-star" v-bind:class="{active: isActive}"></i></span> <img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlagsRight"/></div>
 						</div>
 						<div class="flex-container-modal-Niveau text-center">
 							<div class="columnProfil"><span class="modal-Team-Activity">{{ loadedTeams.category.name }}</span></div>
@@ -534,7 +534,7 @@
             async saveTeams () {
                 console.log('saveTeams')
                 console.log(this.selectedTeams)
-                this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
+                await this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
                 this.$router.replace('/user/teams')
             }
         }
