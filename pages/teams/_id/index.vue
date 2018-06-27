@@ -540,6 +540,11 @@
         }
 	}
 </script>
-<style>
 
+<style>
+    .active {
+        background: orangered;
+        border: 6px solid orangered;
+        /*border: 8px solid red;*/
+    }
 </style>
