@@ -524,7 +524,6 @@
                 console.log('index: ' + index)
                 console.log('saveTeams')
                 console.log(this.selectedTeams)
-                await this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
                 this.$router.replace('/user/teams')
                 // if (!this.selectedTeams.includes(selectedTeam)) {
                 if (!this.selectedTeams.find(el => el.id === selectedTeam.id)) {
