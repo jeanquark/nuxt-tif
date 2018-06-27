@@ -513,9 +513,7 @@
         methods: {
             selectTeam (team) {
                 // this.isActive = !this.isActive
-                console.log('saveTeams')
                 console.log('selectTeam')
-                console.log(this.selectedTeams)
                 console.log(team.id)
                 // const selectedTeam = {id: team.id, name: team.name}
                 const selectedTeam = team
@@ -524,14 +522,21 @@
                 // console.log(selectedTeam)
                 const index = this.selectedTeams.findIndex(el => el.id === team.id)
                 console.log('index: ' + index)
+                console.log('saveTeams')
+                console.log(this.selectedTeams)
+                await this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
+                this.$router.replace('/user/teams')
                 // if (!this.selectedTeams.includes(selectedTeam)) {
                 if (!this.selectedTeams.find(el => el.id === selectedTeam.id)) {
                     this.selectedTeams.push(selectedTeam)
                 } else {
                     this.selectedTeams.splice(index, 1)
                 }
-				}
-				await this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
+            },
+            async saveTeams () {
+                console.log('saveTeams')
+                console.log(this.selectedTeams)
+                await this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
                 this.$router.replace('/user/teams')
             }
         }
