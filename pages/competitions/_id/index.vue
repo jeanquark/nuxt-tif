@@ -25,8 +25,8 @@
 							<h6>Choisis ton équipe !</h6>
 						</div>
                         <div class="flex-container-modal-OtherTeam-Img">
-                            <div class="OtherTeam" v-for="team in loadedTeamsByCompetition">
-                                <img :src="'/images/teams/' + team.image" class="imgModalAvatar"/><nuxt-link :to="'/teams/' + team.slug" class="overlayOtherTeam"><div class="textActivity" v-if="team">{{ team.category.name }}</br>{{ team.name }}</br>+Infos</div></nuxt-link>
+                            <div class="OtherTeam" v-for="team in loadedTeamsByCompetition" style="cursor: pointer;" :class="{active: selectedTeams.findIndex(e => e.id === team.id) != -1}">
+                                <img :src="'/images/teams/' + team.image" class="imgModalAvatar" v-bind:class="{active: isActive}" /><nuxt-link :to="'/teams/' + team.slug" class="overlayOtherTeam"><div class="textActivity" v-if="team">{{ team.category.name }}</br>{{ team.name }}</br>+Infos</div></nuxt-link>
                             </div>
                         </div>
                     </div><!-- /#modalBoxContent -->	
