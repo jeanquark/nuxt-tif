@@ -35,15 +35,15 @@
 								<tr class="borderResultatTermine">
 								  <td class="tdResultat1 text-left"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Suisse</a></td>
 								  <td class="tdResultat text-center"><a href="matchTermine.html" class="linkEvent">Amical</br>27.03.2018</br>0 - 0</br>Terminé</a></td>
-								  <td class="tdResultat1 text-right"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></td>
+								  <td class="tdResultat1 text-right"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
 								</tr>								
 								<tr class="borderResultat">
 								  <td class="tdResultat1 text-left"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Espagne</a></td>
 								  <td class="tdResultat text-center"><a href="matchResultat.html" class="linkEvent">Amical</br>03.06.2018</br>1 - 1</br>En cours</a></td>
-								  <td class="tdResultat1 text-right"><a href="mesEquipesDetails.html" class="linkEvent">Suisse <img src="images/flags/163.png" class="imgModalAgendaFlags"/></td>
+								  <td class="tdResultat1 text-right"><a href="mesEquipesDetails.html" class="linkEvent">Suisse <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
 								</tr>								
 								<tr class="borderResultat">
-								  <td class="tdResultat1 text-left"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Suisse</td>
+								  <td class="tdResultat1 text-left"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Suisse</a></td>
 								  <td class="tdResultat text-center"><a href="matchEncours.html" class="linkEvent">Amical</br>06.06.2018</br>1 - 1</br>En cours</a></td>
 								  <td class="tdResultat1 text-right"><a href="autresEquipesDetails.html" class="linkEvent">Japon <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
 								</tr>
