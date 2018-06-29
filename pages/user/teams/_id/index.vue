@@ -4,106 +4,62 @@
 			<!-- The Modal OtherTeamDetail -->
 			<div id="modalBox">
 				<div class="modal-dialog modal-lg">
-				  <div class="modal-content-resultats">
+				  <div class="modal-content">
 					<!-- Modal Header -->
 					<div class="modal-header">
-					  <span class="modal-title">Pleins d'infos ! <span class="modal-title-Sub">(autres équipes)</span></span>
-						<a href="competitionsEquipes.html"><button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span class="modal-title">Pleins d'infos ! <span class="modal-title-Sub">(Tes équipes)</span></span>
+						<a href="mesEquipes.html"><button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="white-text"><i class="fas fa-arrow-circle-left"></i></span>
                     	</button></a>					
                 	</div>
 					<!-- Modal body -->
 					<div id="modalBoxContent" class="modal-bodyOtherTeam text-center">
 						<div class="flex-container-modalProfil">
-							<div class="columnProfil"><img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlags"/> <span class="modal-Team-Title" @>{{ loadedTeams.name }} <i class="fa fa-star"></i></span> <img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlagsRight"/></div>
+							<div class="columnProfil"><img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlags"/> <span class="modal-Team-Title">{{ loadedTeams.name }}</span> <img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlagsRight"/></div>
 						</div>
 						<div class="flex-container-modal-Niveau text-center">
 							<div class="columnProfil"><span class="modal-Team-Activity">{{ loadedTeams.category.name }}</span></div>
 						</div>
 					</div>
+					<div class="flex-container-modalMenuResultats">
+						<nuxt-link :to="'/competitions/' + 'world_cup_2018' + '/standings'" style="flex-grow: 1" data-toggle="tooltip" data-placement="bottom" title="Calendrier et résultats"><span class="textModalMenuResultats">Résultats/Classements</br>(En cours)</span></nuxt-link>						
+						<a href="mesEquipesDetailsStatsTif.html" style="flex-grow: 1" data-toggle="tooltip" data-placement="bottom" title="Classement individuel TIF"><span class="textModalMenuResultats">Stats/Trophées TIF</br>(En cours/archives)</span></a>
+					</div>
 					<div id="modalTitle" class="modal-body">
-						<div class="flex-container-modal-Title banner text-center">
-							<h2>Calendrier et Résultats</h2>
+						<div class="flex-container-modal-Title banner2 text-center">
+							<h2>Les prochains matches</h2>
 						</div>
 						<div class="flex-container-modal-Action">
 							<table class="table tableText">
 							  <tbody>
 								<tr class="borderResultatTermine">
-								  <td class="tdResultat1 text-left"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</a></td>
+								  <td class="tdResultat1 text-left"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Suisse</a></td>
 								  <td class="tdResultat text-center"><a href="matchTermine.html" class="linkEvent">Amical</br>27.03.2018</br>0 - 0</br>Terminé</a></td>
 								  <td class="tdResultat1 text-right"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></td>
 								</tr>								
 								<tr class="borderResultat">
 								  <td class="tdResultat1 text-left"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Espagne</a></td>
 								  <td class="tdResultat text-center"><a href="matchResultat.html" class="linkEvent">Amical</br>03.06.2018</br>1 - 1</br>En cours</a></td>
-								  <td class="tdResultat1 text-right"><a href="mesEquipesDetails.html" class="linkEvent">Brésil <img src="images/flags/25.png" class="imgModalAgendaFlags"/></td>
+								  <td class="tdResultat1 text-right"><a href="mesEquipesDetails.html" class="linkEvent">Suisse <img src="images/flags/163.png" class="imgModalAgendaFlags"/></td>
 								</tr>								
 								<tr class="borderResultat">
-								  <td class="tdResultat1 text-left"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</td>
+								  <td class="tdResultat1 text-left"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Suisse</td>
 								  <td class="tdResultat text-center"><a href="matchEncours.html" class="linkEvent">Amical</br>06.06.2018</br>1 - 1</br>En cours</a></td>
 								  <td class="tdResultat1 text-right"><a href="autresEquipesDetails.html" class="linkEvent">Japon <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
 								</tr>
 								<tr class="borderResultat">
-								  <td class="tdResultat1 text-left"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</a></td>
+								  <td class="tdResultat1 text-left"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Brésil</a></td>
 								  <td class="tdResultat text-center"><a href="matchAgenda.html" class="linkEvent">CM</br>17.06.2018</br>20:00</br>Agenda</a></td>
-								  <td class="tdResultat1 text-right"><a href="mesEquipesDetails.html" class="linkEvent">Brésil <img src="images/flags/25.png" class="imgModalAgendaFlags"/></a></td>
+								  <td class="tdResultat1 text-right"><a href="mesEquipesDetails.html" class="linkEvent">Suisse <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
 								</tr>
 								<tr class="borderResultat">
 								  <td class="tdResultat1 text-left"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Serbie</a></td>
 								  <td class="tdResultat text-center"><a href="matchAgenda.html" class="linkEvent">CM</br>22.06.2018</br>20:00</br>Agenda</a></td>
-								  <td class="tdResultat1 text-right"><a href="mesEquipesDetails.html" class="linkEvent">Brésil <img src="images/flags/25.png" class="imgModalAgendaFlags"/></a></td>
+								  <td class="tdResultat1 text-right"><a href="mesEquipesDetails.html" class="linkEvent">Suisse <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
 								</tr>
 							  </tbody>
 							</table>
 						</div>
-					</div>
-					<div id="modalTitle" class="modal-body">
-						<div class="flex-container-modal-Title banner text-center">
-							<h2>Classement - Phase de groupes - Groupe A</br>Coupe du Monde - 2018 - International</h2>
-						</div>
-						<div class="flex-container-modal-Action">
-							<table class="table tableTextClassement">
-							  <thead>
-								<tr>
-								  <th class="col1 thTif"></th>
-								  <th class="col2 thTif"></th>
-								  <th class="col3 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Matches joués durant la compétition">MJ</th>
-								  <th class="col3 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="But pour / But contre">But</th>
-								  <th class="col3 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Nombre de points">Pts</th>
-								</tr>
-							  </thead>
-							  <tbody>
-								<tr class="trResultat">
-								  <td class="tdTif1 text-center">1</td>
-								  <td class="tdTif"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Brésil</a></td>
-								  <td class="tdTif1 text-center">0</td>
-								  <td class="tdTif1 text-center">0:0</td>
-								  <td class="tdTif1 text-center">0</td>
-								</tr>
-								<tr class="trResultat">
-								  <td class="tdTif1 text-center">2</td>
-								  <td class="tdTif"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Costa Rica</a></td>
-								  <td class="tdTif1 text-center">0</td>
-								  <td class="tdTif1 text-center">0:0</td>
-								  <td class="tdTif1 text-center">0</td>
-								</tr>
-								<tr class="trResultat">
-								  <td class="tdTif1 text-center">3</td>
-								  <td class="tdTif"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Serbie</a></td>
-								  <td class="tdTif1 text-center">0</td>
-								  <td class="tdTif1 text-center">0:0</td>
-								  <td class="tdTif1 text-center">0</td>
-								</tr>
-								<tr class="trResultat">
-								  <td class="tdTif1 text-center">4</td>
-								  <td class="tdTif"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Suisse</a></td>
-								  <td class="tdTif1 text-center">0</td>
-								  <td class="tdTif1 text-center">0:0</td>
-								  <td class="tdTif1 text-center">0</td>
-								</tr>
-							  </tbody>
-							</table>
-						</div>	
 					</div>
 					<div id="modalTitle" class="modal-body">
 						<div class="flex-container-modal-Title banner2 text-center">
@@ -124,7 +80,7 @@
 							  </thead>
 							  <tbody>
 								<tr class="trResultat1">
-								  <td class="tdTif1 text-center">12</td>
+								  <td class="tdTif1 text-center">1</td>
 								  <td class="tdTif"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Panama</td>
 								  <td class="tdTif1 text-center">0</td>
 								  <td class="tdTif1 text-center">0</td>
@@ -133,7 +89,7 @@
 								  <td class="tdTif1 text-center">0</td>
 								</tr>
 								<tr class="trResultat1">
-								  <td class="tdTif1 text-center">13</td>
+								  <td class="tdTif1 text-center">2</td>
 								  <td class="tdTif"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> France</td>
 								  <td class="tdTif1 text-center">0</td>
 								  <td class="tdTif1 text-center">0</td>
@@ -142,8 +98,8 @@
 								  <td class="tdTif1 text-center">0</td>
 								</tr>
 								<tr class="trResultat1">
-								  <td class="tdTif1 text-center">14</td>
-								  <td class="tdTif"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Brésil</td>
+								  <td class="tdTif1 text-center">3</td>
+								  <td class="tdTif"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Suisse</td>
 								  <td class="tdTif1 text-center">0</td>
 								  <td class="tdTif1 text-center">0</td>
 								  <td class="tdTif1 text-center">0</td>
@@ -151,7 +107,7 @@
 								  <td class="tdTif1 text-center">0</td>
 								</tr>
 								<tr class="trResultat1">
-								  <td class="tdTif1 text-center">15</td>
+								  <td class="tdTif1 text-center">4</td>
 								  <td class="tdTif"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Belgique</td>
 								  <td class="tdTif1 text-center">0</td>
 								  <td class="tdTif1 text-center">0</td>
@@ -160,7 +116,7 @@
 								  <td class="tdTif1 text-center">0</td>
 								</tr>
 								<tr class="trResultat1">
-								  <td class="tdTif1 text-center">16</td>
+								  <td class="tdTif1 text-center">5</td>
 								  <td class="tdTif"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Russie</td>
 								  <td class="tdTif1 text-center">0</td>
 								  <td class="tdTif1 text-center">0</td>
@@ -259,10 +215,7 @@
 					</div>
 					<!-- Modal footer -->
 					<div class="modal-footer">
-                        <button class="btn btn-warning" @click="selectTeam">Devenir fan - Coût 3 <i class="fas fa-certificate"></i></button>
-                        <nuxt-link to="/user/teams">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
-                        </nuxt-link>
+					  <a href="resultat.html"><button type="button" class="btn btn-danger" data-dismiss="modal">Sortir d'ici !</button></a>
 					</div>
 				  </div>
 				</div>
@@ -278,104 +231,18 @@
 		created () { 
 			this.$store.dispatch('teams/loadedTeams')
 			this.$store.dispatch('competitions/loadedCompetitions')
-			
-            if (Object.keys(this.$store.getters['competitions/loadedCompetitions']).length === 0) {
-                this.$store.dispatch('competitions/loadedCompetitions')
-            }
-            if (Object.keys(this.$store.getters['teams/loadedTeams']).length === 0) {
-                this.$store.dispatch('teams/loadedTeams')
-            }
-            if (Object.keys(this.$store.getters['users/loadedUserTeams']).length === 0) {
-                this.$store.dispatch('users/loadedUserTeams')
-            }
-            for (let team of this.loadedUserTeams) {
-                this.selectedTeams.push(team)
-            }
-        },
+		},
 		data () {
 			return {
 				team_id: this.$route.params.id,
 				odd: 'odd',
 				competition_id: this.$route.params.id,
-                isActive: false,
-                selectedTeams: []
 			}
 		},
 		computed: {
-           loadedUserTeams () {
-                // return this.selectedTeams.push({id: '-LBVgvOsCUALzowK576H', name: 'Argentina'}, {id: '-LBVgvOxY6A_ylDQBOmp', name: 'Australia'}, {id: '-LBVgvR__QJEcYxQ7a7g'})
-                // return this.$store.getters['users/loadedUserTeams']
-                // const abc = [{id: '-LBVgvOsCUALzowK576H'}, {id: '-LBVgvOxY6A_ylDQBOmp'}, {id: '-LBVgvR__QJEcYxQ7a7g'}]
-                // return abc
-                // const userTeams = []
-                // 1) First retrieve all userteam ids
-                const teamIds = this.$store.getters['users/loadedUserTeams']
-                // return teamIds
-                console.log(teamIds)
-                // return teamIds
-
-                // 2) Then get complete team data
-                const teams = []
-                teamIds.forEach((teamId) => {
-                    console.log(teamId)
-                    let abc = this.loadedTeamsByCompetition.find(team => team.id === teamId)
-                    teams.push(abc)
-                })
-                console.log(teams)
-                // for (let teamId in teamIds) {
-                //     console.log(teamId)
-                //     if (teamId.hasOwnProperty()) {
-                //         console.log('abc')
-                //         console.log(lunch[key]); // value (ex. turkey)
-                //     }
-                // }
-                // console.log(teams)
-                // return
-                // console.log(teamIds)
-                // this.loadedTeamsByCompetition.forEach((team) => {
-                //     if (teamIds.find(el => el === team.id)) {
-                //         userTeams.push({id: team.id, name: team.name})
-                //     }
-                // })
-                // console.log(userTeams)
-                // return this.$store.getters['users/loadedUserTeams']
-                // console.log(this.loadedTeamsByCompetition)
-                // let def = this.loadedTeamsByCompetition.filter(el => el.id === '-LBVgvOsCUALzowK576H')
-                // let ghi = teamIds.some(el => this.loadedTeamsByCompetition.includes(el))
-                // console.log(ghi)
-                let def = teams.map(obj => {
-                    let rObj = {}
-                    rObj['id'] = obj.id
-                    rObj['name'] = obj.name
-                    this.selectedTeams.push(rObj)
-                    return rObj
-                })
-                console.log(def)
-                // this.selectedTeams.push(def)
-               return def
-              const abc = [{id: '-LBVgvOsCUALzowK576H', name: 'Argentina'}, {id: '-LBVgvOxY6A_ylDQBOmp', name: 'Australia'}, {id: '-LBVgvR__QJEcYxQ7a7g', name: 'Republic of Korea'}]
-              // this.selectedTeams.push(abc)
-                return abc
-
-           },
-           abc () {
-                return this.selectedTeams.push[{id: '-LBVgvOsCUALzowK576H', name: 'Argentina'}, {id: '-LBVgvOxY6A_ylDQBOmp', name: 'Australia'}, {id: '-LBVgvR__QJEcYxQ7a7g', name: 'Republic of Korea'}]
-             },
 			loadedTeams () {
 				return this.$store.getters['teams/loadedTeams'].find(team => team.slug === this.team_id)
 			},
-            loadedTeamsByCompetition () {
-                const teams = []
-                const competition_id = this.competition_id
-                this.$store.getters['teams/loadedTeams'].forEach(function (team) {
-                    if (team.competitions) {
-                        if (team['competitions'][competition_id]) {
-                            teams.push(team)
-                        }
-                    }
-                })
-                return teams
-            },
 			loadedCompetition () {
 				return this.$store.getters['competitions/loadedCompetitions'].find(competition => competition.slug === this.competition_id)
 			},
@@ -509,32 +376,10 @@
 				]
 				
 			}
-		},
-        methods: {
-            selectTeam (team) {
-                // this.isActive = !this.isActive
-                console.log('selectTeam')
-                console.log(team.id)
-                // const selectedTeam = {id: team.id, name: team.name}
-                const selectedTeam = team
-                console.log(selectedTeam)
-                // return
-                // console.log(selectedTeam)
-                const index = this.selectedTeams.findIndex(el => el.id === team.id)
-                console.log('index: ' + index)
-                console.log('saveTeams')
-                console.log(this.selectedTeams)
-                this.$router.replace('/user/teams')
-				this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
-                if (!this.selectedTeams.find(el => el.id === selectedTeam.id)) {
-                    this.selectedTeams.push(selectedTeam)
-                } else {
-                    this.selectedTeams.splice(index, 1)
-                }
-            }
-        }
+		}
 	}
 </script>
+
 <style>
 
 </style>

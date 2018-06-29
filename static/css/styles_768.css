@@ -1394,6 +1394,13 @@
 	}
 	
 	.imgModalFlags {
+		margin-right: 5px;
+		height: 50px;
+		width: 50px;
+	}
+	
+	.imgModalFlagsRight {
+		margin-left: 5px;
 		height: 50px;
 		width: 50px;
 	}

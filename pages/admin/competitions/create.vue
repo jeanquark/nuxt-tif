@@ -63,6 +63,8 @@
 			</v-card>
 
 			<football-competition :activity="selectedActivity" :category="selectedCategory" v-if="selectedCategory.slug === 'football'"></football-competition>
+			<icehockey-competition :activity="selectedActivity" :category="selectedCategory" v-if="selectedCategory.slug === 'icehockey'"></icehockey-competition>
+			<tennis-competition :activity="selectedActivity" :category="selectedCategory" v-if="selectedCategory.slug === 'tennis'"></tennis-competition>
 
 		</v-flex>
 	</div>
@@ -70,9 +72,11 @@
 
 <script>
   	import FootballCompetition from '~/components/football/CompetitionCreate'
+  	import IcehockeyCompetition from '~/components/icehockey/CompetitionCreate'
+  	import TennisCompetition from '~/components/tennis/CompetitionCreate'
 	export default {
 		layout: 'layoutBack',
-		components: { FootballCompetition },
+		components: { FootballCompetition, IcehockeyCompetition, TennisCompetition },
 		created () {
 			this.$store.dispatch('activities/loadedActivities')
     		this.$store.dispatch('categories/loadedCategories')

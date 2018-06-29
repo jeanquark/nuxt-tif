@@ -7,47 +7,74 @@
         <div v-if="error" class="text-center" style="color: red;">{{ $t(error.code) }}</div><br />
 			  <form class="modal-content">
 				<div class="container">
-				  <h1>S'incrire</h1>
-				  <p class="modalInscription">Entre dans la communauté de ThisIsFan.com et commence à encourager tes équipes favorites !</p>
-				  <hr>
-                  <nuxt-link :to="localePath({ name: '/'})" class="close">
-                    <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
-                  </nuxt-link>
-          <div class="group">      
-				    <label for="email"><b>Email</b></label>
-				    <input type="text" v-model="email" placeholder="Enter Email" name="email" required>
-            <span class="highlight"></span>
-            <span class="bar"></span>
-          </div>
+				<h1>S'incrire</h1>
+				<p class="modalInscription">Entre dans la communauté de ThisIsFan.com et commence à encourager tes équipes favorites !</p>
+				<hr>
+				<nuxt-link :to="localePath({ name: '/'})" class="close">
+				<span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
+				</nuxt-link>
+				<div class="group">      
+					<label for="email"><b>Email</b></label>
+					<input type="text" v-model="email" placeholder="Enter Email" name="email" required>
+					<span class="highlight"></span>
+					<span class="bar"></span>
+				</div>
 
-				  <div class="group">      
-            <label for="psw"><b>Password</b></label>
-				    <input type="password" v-model="password" placeholder="Enter Password" name="psw" required>
-            <span class="highlight"></span>
-            <span class="bar"></span>
-          </div>
+				<div class="group">      
+					<label for="psw"><b>Password</b></label>
+					<input type="password" v-model="password" placeholder="Enter Password" name="psw" required>
+					<span class="highlight"></span>
+					<span class="bar"></span>
+				</div>
+				
+				<div class="group">      
+					<label for="pseudo"><b>Pseudo</b></label>
+					<input type="text" v-model="pseudo" placeholder="Your pseudo" name="pseudo" required>
+					<span class="highlight"></span>
+					<span class="bar"></span>
+				</div>
 
+				<div class="group">      
+					<label for="nationality"><b>Nationality</b></label>
+					<input type="text" v-model="nationality" placeholder="Choise your nationality" name="nationality" required>
+					<span class="highlight"></span>
+					<span class="bar"></span>
+				</div>
+
+				<div class="group">      
+					<label for="birth"><b>Year's birth</b></label>
+					<input type="text" v-model="birth" placeholder="Enter your year's birth" name="birth" required>
+					<span class="highlight"></span>
+					<span class="bar"></span>
+				</div>
+				
+				<div class="group">      
+					<label for="language"><b>Language</b></label>
+					<input type="text" v-model="language" placeholder="Choise your language" name="language" required>
+					<span class="highlight"></span>
+					<span class="bar"></span>
+				</div>
+				
+				<div class="group">      
+					<label for="psw-repeat"><b>Répètes ton Password</b></label>
+					<input type="password" v-modal="confirm_password" placeholder="Repeat Password" name="psw-repeat" required>
+					<span class="highlight"></span>
+					<span class="bar"></span>
+				</div>
 				  
-          <div class="group">      
-            <label for="psw-repeat"><b>Répètes ton Password</b></label>
-				    <input type="password" v-modal="confirm_password" placeholder="Repeat Password" name="psw-repeat" required>
-            <span class="highlight"></span>
-            <span class="bar"></span>
-          </div>
-				  
-				  <label>
+				<label>
 					<input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Se souvenir de moi
-				  </label>
+				</label>
 
-				  <p>En validant ton inscription, tu es d'accord avec les <a href="#" style="color:dodgerblue">conditions générales</a> de ThisIsFan.com.</p>
+				<p>En validant ton inscription, tu es d'accord avec les <a href="#" style="color:dodgerblue">conditions générales</a> de ThisIsFan.com.</p>
 
-				  <div class="row button-section">
-				  <div class="col-twelve">
-					<button type="submit" class="button button-primary" style=""  disabled :loading="loading" @click.prevent="signUserUp">Je vais devenir fan ! <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
-					<button type="submit" class="button btn-facebook" disabled><i class="fa fa-facebook"></i> Connecte-toi avec FB</button>
-					<button type="submit" class="button btn-twitter" disabled><i class="fa fa-google"></i> Connecte-toi avec G+</button>
-				  </div>
-				  </div>
+				<div class="row button-section">
+					<div class="col-twelve">
+						<button type="submit" class="button button-primary" style=""  disabled :loading="loading" @click.prevent="signUserUp">Je veux devenir fan ! <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
+						<button type="submit" class="button btn-facebook" disabled><i class="fa fa-facebook"></i> Connecte-toi avec FB</button>
+						<button type="submit" class="button btn-twitter" disabled><i class="fa fa-google"></i> Connecte-toi avec G+</button>
+					</div>
+				</div>
 				  
 				</div>
 			  </form>
@@ -58,6 +85,8 @@
 </template>
 
 <script>
+	import firebase from 'firebase'
+  	import Noty from 'noty'
     export default {
         layout: 'layoutLandingPage',
         head: {
@@ -85,6 +114,10 @@
             return {
                 email: '',
                 password: '',
+				pseudo: '',
+				country: '',
+				year_birth: '',
+				language: '',
                 confirm_password: ''
             }
         },
@@ -102,11 +135,17 @@
                 await this.$store.dispatch('users/signUserUp', {
                     email: this.email,
                     password: this.password,
-                    password_confirm: this.password_confirm
+                    password_confirm: this.password_confirm,
+					pseudo: this.pseudo,
+					nationality: this.nationality,
+					birth: this.birth,
+					language: this.language
                 })
                 this.$router.replace('/home')
-            },
+            }
         }
+		
+		
     }
 </script>
 

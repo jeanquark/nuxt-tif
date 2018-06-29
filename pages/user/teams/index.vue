@@ -25,9 +25,9 @@
 							<div class="OtherTeam" v-for="team in loadedUserTeams">
 								<span v-if="team">
 									<img :src="'/images/teams/' + team.image" class="imgModalAvatar" />
-									<nuxt-link :to="'/teams/' + team.slug" class="overlay">
-										<div class="textActivity">Football<br />{{ team.name }}<br /><br />+Infos</div>
-									</nuxt-link>
+									<nuxt-link :to="'/user/teams/' + team.slug" class="overlay">
+										<div class="textActivity">{{ team.category.name }}<br />{{ team.name }}<br /><br />+Infos</div>
+ 									</nuxt-link>
 								</span>
 							</div>
 						</div>
@@ -47,14 +47,11 @@
 							</div>
 						</div>
 					</div>
-					<div id="modalBoxContent" class="modal-body" v-else>
+					
+					<div id="modalBoxContent" class="modal-body">
 						<div class="flex-container-modal-OtherTeam">
 							<h1>Supporter une nouvelle équipe ?</h1>
 						</div>
-					</div>
-
-
-					<div id="modalBoxContent" class="modal-body">
 						<div class="flex-container-modal-Title banner text-center">
 							<h2>Compétitions en cours / à venir</h2>
 						</div>
@@ -64,8 +61,8 @@
 						<div class="flex-container-modal-OtherTeam-Img" v-if="loadedCompetitions != ''">
 							<div class="OtherTeam" v-for="competition in loadedCompetitions">
 								<img :src="'/images/competitions/' + competition.image" class="imgModalAvatar"/>
-								<nuxt-link :to="'/user/competitions/' + competition.slug" class="overlayOtherTeam">
-									<div class="textActivity">{{ competition.name}}<br /> <br /><span v-for="country in competition.countries" v-if="competition.countries">{{ country.name }}</span><br />+Infos</div>
+								<nuxt-link :to="'/competitions/' + competition.slug" class="overlayOtherTeam">
+									<div class="textActivity">{{ competition.category.name}}<br />{{ competition.name}}<br /><span v-for="country in competition.countries" v-if="competition.countries">{{ country.name }}</span><br />+Infos</div>
 								</nuxt-link>
 							</div>
 						</div>
@@ -114,14 +111,22 @@
     	if (Object.keys(this.$store.getters['users/loadedUserTeams']).length === 0) {
     		this.$store.dispatch('users/loadedUserTeams')
     	}
-    },
+		
+    	if (Object.keys(this.$store.getters['users/loadedTeams']).length === 0) {
+    		this.$store.dispatch('users/loadedTeams')
+    	}
+
+	},
     computed: {
     	loadedCompetitions () {
     		return this.$store.getters['competitions/loadedCompetitions']
     	},
     	loadedUserTeams () {
             return this.$store.getters['users/loadedUserTeams']
-        }
+        },
+		loadedTeams () {
+			return this.$store.getters['users/loadedTeams']
+		}
     }
   }
 </script>
