@@ -66,6 +66,8 @@
 						<td class="text-xs-left">{{ props.item.name }}</td>
 						<td class="text-xs-left">{{ props.item.activity.name }}</td>
 						<td class="text-xs-left">{{ props.item.category.name }}</td>
+						<td class="text-xs-left" v-if="props.item.image"><img :src="'/images/competitions/' + props.item.image" width=60 /></td>
+						<td v-else></td>
 						<td class="text-xs-left">{{ props.item.year }}</td>
 						<td class="justify-center layout px-0">
 						  <v-btn icon class="mx-0" :to="'/admin/competitions/' + props.item.id" :id="props.item.id" disabled>
@@ -119,6 +121,7 @@
 	    // },
 	    created () {
 	    	this.$store.dispatch('competitions/loadedCompetitions')
+	    	this.$store.dispatch('teams/loadedTeams')
 	    },
 	    data () {
 	    	return {
@@ -141,6 +144,7 @@
 		        	{ text: 'Name', value: 'name', align: 'center' },
 					{ text: 'Activity', value: 'activity', align: 'center' },
 					{ text: 'Category', value: 'category', align: 'center' },
+					{ text: 'Image', value: 'image', align: 'center' },
 					{ text: 'Year', value: 'year', align: 'center' },
 					// { text: 'Type', value: 'type' },
 					// { text: 'Time', value: 'time' },
@@ -208,10 +212,10 @@
 		        }
 		    },
 		    deleteItem (item) {
-		    	this.$refs.confirm.open('Delete', 'Are you sure you want to delete "' + item.name + '" ?', { color: 'red' }).then((confirm) => {
-		    		console.log(confirm)
+		    	this.$refs.confirm.open('Delete', 'Are you sure you want to delete competition "' + item.name + '" ?', { color: 'red' }).then((confirm) => {
+		    		// console.log(confirm)
 		    		if (confirm) {
-		    			this.$store.dispatch('competitions/deleteCompetition', item.id)
+		    			this.$store.dispatch('competitions/deleteCompetition', item)
 		    		}
 		    	})
 		    },

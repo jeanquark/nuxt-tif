@@ -84,10 +84,27 @@
 			"contact_form_send": "Senden",
             "contact_form_loading": "Sendevorgang läuft",
             "contact_form_sending": "Deine Nachricht wurde gesendet",
-"contact_tif_mail": "Unser e-mail"
+            "contact_tif_mail": "Unser e-mail",
+            "contact_form_send_success": "Ihre Nachricht wurde erfolgreich abgesandt",
+            "contact_form_send_error": "Ihre Nachricht konnte nicht abgeschickt werden",
+            "contact_form_email_error": "Bitte eine valide E-Mail-Adresse angeben",
+            "contact_form_name_error": "Max. 60 Zeichen",
+            "contact_form_message_error": "Max. 240 Zeichen"
+        },
+        "login": {
+            "title": "Anmeldung",
+            "subtitle": "Fiebern Sie mit Ihrer Mannschaft",
+            "email": "E-mail",
+            "enter_email": "Email Adresse eingeben",
+            "password": "Passwort",
+            "enter_password": "Passwort eingeben",
+            "remember": "Login speichern",
+            "login": "Los!",
+            "facebook_oauth": "Facebook Anmeldung",
+            "google_oauth": "Google Anmeldung"
         },
 		"user-avatar": {
-			            "your_avatar": "Dein Avatar",
+			"your_avatar": "Dein Avatar",
             "want_to_change_your_mind": "Hast du Lust auf Veränderung?",
             "female": "Frau",
             "male": "Mann",
@@ -134,7 +151,6 @@
         },
         "about": "Über uns Seite",
         "blog": "Blog Seite",
-        "login": "Login Seite",
         "admin": "Verwaltung Seite"
     },
     "auth-validation-rules": {

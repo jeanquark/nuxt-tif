@@ -26,7 +26,8 @@ module.exports = app.use(function (req, res, next) {
                 console.log('Error while verifying Firebase ID token:', error)
             })
         } else {
-            res.end();
+            res.redirect('/');
+            // res.end();
         }
     });
 // }

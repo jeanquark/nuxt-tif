@@ -65,6 +65,9 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/toast',
     '@nuxtjs/dotenv',
+    ['nuxt-validate', {
+      lang: 'en',
+    }],
     ['nuxt-i18n', {
       locales: [
         // { code: 'en' },
@@ -183,6 +186,8 @@ module.exports = {
     // { src: '~/plugins/merge-images', ssr: false },
     { src: '~/plugins/vue2-jsoneditor.js', ssr: false },
     // { src: '~/plugins/vue-placeholders.js', ssr: false },
+    { src: '~/plugins/vue-animate-number.js', ssr: false },
+    // { src: '~/plugins/vee-validate.js' },
   ],
   serverMiddleware: [
       '~/serverMiddleware/validateFirebaseIdToken',
@@ -190,10 +195,12 @@ module.exports = {
       { path: '/setCustomClaims', handler: '~/serverMiddleware/setCustomClaims'},
       // '~/serverMiddleware/api.js',
       { path: '/api-football', handler: '~/serverMiddleware/api-football'},
-      { path: '/upload-image', handler: '~/serverMiddleware/uploadImage2' },
-      { path: '/upload-competition-image', handler: '~/serverMiddleware/uploadCompetitionImage' },
+      { path: '/upload-image', handler: '~/serverMiddleware/uploadImage' },
+      // { path: '/upload-competition-image', handler: '~/serverMiddleware/uploadCompetitionImage' },
       { path: '/update-translation-file', handler: '~/serverMiddleware/updateTranslationFile' },
       { path: '/admin', handler: '~/serverMiddleware/auth-admin' },
+      { path: '/delete-image', handler: '~/serverMiddleware/deleteImage' },
+      { path: '/send-email', handler: '~/serverMiddleware/sendEmail' },
   ],
   toast: {
     duration: 8000,

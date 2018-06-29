@@ -72,6 +72,8 @@
                 <div class="col-twelve">
 
                     <h1>{{ $t('pages.index.what_is_TIF_title') }}</h1>
+                    <h1>{{ $t('pages.user-avatar.your_avatar') }}</h1>
+
 
                     <div class="intro-info">
 
@@ -85,8 +87,10 @@
 
             <div class="row button-section">
                 <div class="col-twelve">
-                    <nuxt-link to="/register"><button title="Inscription" class="button stroke smoothscroll">{{ $t('pages.index.sign_up') }}</button></nuxt-link>              
-                    <nuxt-link to="/login"><button title="Connection" class="button button-primary">{{ $t('pages.index.log_in') }}</button></nuxt-link>          
+                    <!-- <nuxt-link to="/register"><button title="Inscription" class="button stroke smoothscroll">{{ $t('pages.index.sign_up') }}</button></nuxt-link>            -->
+                    <nuxt-link :to="localePath({ name: 'register'})"><button title="Inscription" class="button stroke smoothscroll">{{ $t('pages.index.sign_up') }}</button></nuxt-link>           
+                    <!-- <nuxt-link to="/login"><button title="Connection" class="button button-primary">{{ $t('pages.index.log_in') }}</button></nuxt-link>     -->
+                    <nuxt-link :to="localePath({ name: 'login'})"><button title="Connection" class="button button-primary">{{ $t('pages.index.log_in') }}</button></nuxt-link>    
                 </div>          
             </div>
 
@@ -411,7 +415,10 @@
                             </div>
 
                             <h3 class="stat-count">
-                                123456
+                                <span v-if="loadedStatistics.game && loadedStatistics.game.fans">
+                                    {{ this.loadedStatistics.game.fans.value }}
+                                </span>
+                                <!-- <vue-animate-number from="1" :to="loadedStatistics.game.fans.value" v-if="loadedStatistics.game && loadedStatistics.game.fans"></vue-animate-number> -->
                             </h3>
 
                             <h5 class="stat-title">
@@ -427,7 +434,9 @@
                             </div>
 
                             <h3 class="stat-count">
-                                5
+                                <span v-if="loadedStatistics.game && loadedStatistics.game.sports">
+                                    {{ this.loadedStatistics.game.sports.value }}
+                                </span>
                             </h3>
 
                             <h5 class="stat-title">
@@ -443,7 +452,9 @@
                             </div>
 
                             <h3 class="stat-count">
-                                17
+                                <span v-if="loadedStatistics.game && loadedStatistics.game.competitions">
+                                    {{ this.loadedStatistics.game.competitions.value }}
+                                </span>
                             </h3>
 
                             <h5 class="stat-title">
@@ -459,7 +470,9 @@
                             </div>
 
                             <h3 class="stat-count">
-                                250
+                                <span v-if="loadedStatistics.game && loadedStatistics.game.teams">
+                                    {{ this.loadedStatistics.game.teams.value }}
+                                </span>
                             </h3>
 
                             <h5 class="stat-title">
@@ -475,7 +488,9 @@
                             </div>
 
                             <h3 class="stat-count">
-                                1500
+                                <span v-if="loadedStatistics.game && loadedStatistics.game.players">
+                                    {{ this.loadedStatistics.game.players.value }}
+                                </span>
                             </h3>
 
                             <h5 class="stat-title">
@@ -491,7 +506,9 @@
                             </div>
 
                             <h3 class="stat-count">
-                                123456
+                                <span v-if="loadedStatistics.game && loadedStatistics.game.points">
+                                    {{ this.loadedStatistics.game.points.value }}
+                                </span>
                             </h3>
 
                             <h5 class="stat-title">
@@ -525,19 +542,20 @@
                         <fieldset>
 
                             <div class="form-field">
-                                <input name="contactName" type="text" id="contactName" :placeholder="$t('pages.index.contact_form_name')" value="" minlength="2" required="">
+                                <input name="contactName" type="text" id="contactName" :placeholder="$t('pages.index.contact_form_name')" value="" minlength="2" v-model="name" v-validate="'max:60'">
+                                <span class="error" v-show="errors.has('contactName')">{{ $t('pages.index.contact_form_name_error') }}</span>
                             </div>
                             <div class="form-field">
-                               <input name="contactEmail" type="email" id="contactEmail" :placeholder="$t('pages.index.contact_form_email')" value="" required="">
-                            </div>
+                               <input name="contactEmail" type="email" id="contactEmail" :placeholder="$t('pages.index.contact_form_email')" v-model="email" v-validate="'required|email'">
+                               <span class="error" v-show="errors.has('contactEmail')">{{ $t('pages.index.contact_form_email_error') }}</span>
+                            </div>                     
                             <div class="form-field">
-                                <input name="contactSubject" type="text" id="contactSubject" :placeholder="$t('pages.index.contact_form_comment')" value="">
-                            </div>                       
+                                <textarea name="contactMessage" id="contactMessage" :placeholder="$t('pages.index.contact_form_comment')" rows="10" cols="50" v-model="message" v-validate="'max:240'"></textarea>
+                                <span style="color: red;" v-if="message.length > 2"></span>
+                                <span class="error" v-show="errors.has('contactMessage')">{{ $t('pages.index.contact_form_message_error') }}</span>
+                            </div>                 
                             <div class="form-field">
-                                <textarea name="contactMessage" id="contactMessage" :placeholder="$t('pages.index.contact_form_to')" rows="10" cols="50" required=""></textarea>
-                            </div>                      
-                            <div class="form-field">
-                                <button class="submitform">{{ $t('pages.index.contact_form_send') }}</button>
+                                <button class="submitform" @click="sendMessage" :disabled="loading || errors.any()">{{ $t('pages.index.contact_form_send') }} <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
                                 <div id="submit-loader">
                                     <div class="text-loader">{{ $t('pages.index.contact_form_loading') }}</div>                             
                                     <div class="s-loader">
@@ -608,6 +626,9 @@
 
 <script>
     import quickMenu from '~/components/quickMenu'
+    import axios from 'axios'
+    import Noty from 'noty'
+    // import animateNumber from '~/plugins/vue-animate-number'
     export default {
         layout: 'layoutLandingPage',
         head: {
@@ -631,12 +652,14 @@
             ]
         },
         components: {
-          quickMenu
+          quickMenu,
+          // animateNumber
         },
         mounted: () => {
         },
         created () {
             this.$store.dispatch('clearError')
+            this.$store.dispatch('statistics/loadedStatistics')
         },
         data () {
             let that = this
@@ -647,9 +670,11 @@
                 // list: ['/avatar', '/preferences', '/teams'],
                 anchors: ['intro', 'about', 'resume', 'portfolio', 'contact'],
                 color: 'orangered',
-                email: '',
                 password: '',
                 password_confirm: '',
+                name: '',
+                email: '',
+                message: '',
             }
         },
         computed: {
@@ -658,6 +683,9 @@
             },
             error () {
                 return this.$store.getters['error']
+            },
+            loadedStatistics () {
+                return this.$store.getters['statistics/loadedStatistics']
             }
         },
         methods: {
@@ -691,6 +719,30 @@
                 })
                 this.$router.replace('/home')
             },
+            sendMessage () {
+                this.$store.commit('setLoading', true, { root: true })
+                const data = {
+                    "name" : this.name,
+                    "email": this.email,
+                    "message": this.message
+                }
+                console.log(data)
+
+                axios.post('/send-email', {
+                    data: data,
+                }).then((response) => {
+                    console.log('success')
+                    console.log(response)
+                    this.$store.commit('setLoading', false, { root: true })
+                    new Noty({type: 'success', text: this.$t('pages.index.contact_form_send_success'), timeout: 5000, theme: 'metroui'}).show()
+
+                }).catch (function (error) {
+                    this.$store.commit('setLoading', false, { root: true })
+                    console.log('Email could not be sent')
+                    console.log(error)
+                    new Noty({type: 'error', text: this.$t('pages.index.contact_form_send_error'), timeout: 5000, theme: 'metroui'}).show()
+                })
+            }
         }
     }
 </script>
@@ -698,5 +750,11 @@
 <style scoped>
     .active {
         border: 1px solid orangered;
+    }
+    #contact button.submitform:disabled {
+        background: #dddddd;
+    }
+    .error {
+        color: red;
     }
 </style>

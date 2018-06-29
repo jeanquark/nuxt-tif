@@ -37,7 +37,7 @@ export const actions = {
         // })
         try {
             firebase.database().ref('/tasks/').once('value').then(function (snapshot) {
-                console.log(snapshot.val())
+                // console.log(snapshot.val())
                 const tasksArray = []
                 for (const key in snapshot.val()) {
                     tasksArray.push({ ...snapshot.val()[key], id: key})

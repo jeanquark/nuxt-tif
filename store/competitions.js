@@ -1,5 +1,6 @@
 import firebase from 'firebase'
 import Noty from 'noty'
+import axios from 'axios'
 
 export const state = () => ({
     loadedCompetitions: []
@@ -15,10 +16,10 @@ export const mutations = {
     // updateCompetition (state, payload) {
     //     state.loadedCompetitions = payload
     // },
-    deleteCompetition (state, competitionId) {
-        const loadedCompetitions = state.loadedCompetitions
-        state.loadedCompetitions.splice(loadedCompetitions.findIndex(competition => competition.id === competitionId), 1)
-    }
+    // deleteCompetition (state, competitionId) {
+    //     const loadedCompetitions = state.loadedCompetitions
+    //     state.loadedCompetitions.splice(loadedCompetitions.findIndex(competition => competition.id === competitionId), 1)
+    // }
 }
 
 export const actions = {
@@ -43,21 +44,28 @@ export const actions = {
 
     // Create a new competition
     createCompetition ({commit, getters}, payload) {
-        commit('setLoading', true, { root: true })
+        // commit('setLoading', true, { root: true })
         console.log(payload)
-        // return
 
         // Define key from competition slug
         const newCompetitionKey = payload.slug
 
         let updates = {}
+        // Update competition node for each team that is part of the competition
+        for (let team in payload.teams) {
+            updates['/teams/' + team + '/competitions/' + newCompetitionKey] = true
+        }
+        // Update competitions node
         updates['/competitions/' + newCompetitionKey] = payload
 
+
         firebase.database().ref().update(updates).then(() => {
+            commit('setLoading', false, { root: true })
             new Noty({type: 'success', text: 'Competition ' + payload.name + ' enregistrée avec succès!', timeout: 5000, theme: 'metroui'}).show()
         }).catch((error) => {
             console.log(error)
             commit('setError', error, { root: true })
+            commit('setLoading', false, { root: true })
             new Noty({type: 'error', text: 'Competition non enregistrée. Erreur: ' + error, timeout: 5000, theme: 'metroui'}).show()
         })
     },
@@ -72,27 +80,62 @@ export const actions = {
         updates['/competitions/'] = payload
 
         firebase.database().ref().update(updates).then(() => {
-            dispatch('loadedCompetitions');
-            commit('setLoading', false, { root: true})
+            dispatch('loadedCompetitions')
+            commit('setLoading', false, { root: true })
             new Noty({type: 'success', text: 'Competition modifiée avec succès!', timeout: 5000, theme: 'metroui'}).show()
         }).catch((error) => {
             console.log(error)
-            commit('setLoading', false, { root: true})
+            commit('setLoading', false, { root: true })
             commit('setError', error, { root: true })
             new Noty({type: 'error', text: 'Competition non modifiée. Erreur: ' + error, timeout: 5000, theme: 'metroui'}).show()
         })
     },
 
     // Delete a competition
-    deleteCompetition ({commit}, competitionId) {
+    deleteCompetition ({commit, dispatch, rootState}, competition) {
+        console.log(competition)
+        const competitionId = competition.id
         commit('setLoading', true, { root: true })
-        firebase.database().ref('/competitions/' + competitionId).remove().then(() => {
-            commit('deleteCompetition', competitionId)
-            commit('setLoading', false, { root: true })
-            new Noty({type: 'success', text: 'Competition supprimée avec succès!', timeout: 5000, theme: 'metroui'}).show()
+
+        // Get all teams
+        const teams = rootState.teams.loadedTeams
+
+        let updates = {}
+        // Delete competition for each team that is part of the competition in teams node
+        for (let team of teams) {
+            if (team.competitions[competitionId]) {
+                updates['/teams/' + team.slug + '/competitions/' + competitionId] = null                
+            }
+        }
+        // Delete competition in competitions node
+        updates['/competitions/' + competitionId] = null
+
+        firebase.database().ref().update(updates).then(() => {
+            new Noty({type: 'success', text: 'Compétition supprimée avec succès!', timeout: 5000, theme: 'metroui'}).show()
+
+            // Delete image on server
+            axios.post('/delete-image', {
+                name: competition.image,
+                folder: 'competitions'
+            }).then((response) => {
+                // console.log('successfully deleted competition image!')
+                console.log(response.data)
+                commit('setLoading', false, { root: true })
+                if (response.data) {
+                    new Noty({type: 'success', text: 'Image de la competition supprimée avec succès!', timeout: 5000, theme: 'metroui'}).show()
+                } else {
+                    new Noty({type: 'warning', text: 'Aucune image de la competition n\'a été supprimée!', timeout: 5000, theme: 'metroui'}).show()
+                }
+            }).catch(function (error) {
+                console.log('error')
+                console.log(error)
+                commit('setLoading', false, { root: true })
+                new Noty({type: 'error', text: 'L\'image de la competition n\'a pas pu être supprimée!', timeout: 5000, theme: 'metroui'}).show()
+            })
         }).catch((error) => {
             console.log(error)
-            new Noty({type: 'error', text: 'Erreur lors de la suppression de la competition. ' + error, timeout: 5000, theme: 'metroui'}).show()
+            commit('setLoading', false, { root: true })
+            new Noty({type: 'error', text: 'Erreur lors de la suppression de la compétition. ' + error, timeout: 5000, theme: 'metroui'}).show()
         })       
     }
 }

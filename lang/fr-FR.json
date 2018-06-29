@@ -84,10 +84,27 @@
 			"contact_form_send": "Envoyer",
             "contact_form_loading": "Envoi en cours...",
             "contact_form_sending": "Ton message a bien été envoyé !",
-            "contact_tif_mail": "Notre email"
+            "contact_tif_mail": "Notre email",
+            "contact_form_send_success": "Votre message a été envoyé avec succès",
+            "contact_form_send_error": "Votre message n'a pas pu être envoyé",
+            "contact_form_email_error": "Veuillez indiquer une adresse email valide",
+            "contact_form_name_error": "Max. 60 caractères",
+            "contact_form_message_error": "Max. 240 caractères"
+        },
+        "login": {
+            "title": "Se connecter",
+            "subtitle": "Va vite encourager tes équipes favorites",
+            "email": "E-mail",
+            "enter_email": "Entre ton e-mail",
+            "password": "Mot de passe",
+            "enter_password": "Entre ton mot de passe",
+            "remember": "Se souvenir de moi",
+            "login": "Go go go c'est parti!",
+            "facebook_oauth": "Connecte-toi avec Facebook",
+            "google_oauth": "Connecte-toi avec Google"
         },
         "user-avatar": {
-                        "your_avatar": "Ton avatar",
+            "your_avatar": "Ton avatar",
             "want_to_change_your_mind": "Envie de changer de tête ?",
             "female": "Femme",
             "male": "Homme",
@@ -134,7 +151,6 @@
         },
         "about": "Page à propos",
         "blog": "Page du blog",
-        "login": "Page login",
         "admin": "Page admin"
     },
     "auth-validation-rules": {

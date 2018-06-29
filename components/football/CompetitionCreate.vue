@@ -184,9 +184,12 @@
 				</v-layout>
 			</v-container>
 			<v-card-text class="text-md-center">
-		  		<v-btn @click="submitCreateCompetition" color="info" :disabled="this.selectedTeams.length === 0 && this.selectedTeamsGroup.length === 0 || this.checkCompetitionSlugUniqueness(this.selectedSlug)">Soumettre</v-btn>
+		  		<v-btn @click="submitCreateCompetition" color="info" :disabled="this.selectedTeams.length === 0 && this.selectedTeamsGroup.length === 0 || this.checkCompetitionSlugUniqueness(this.selectedSlug + '_' + this.selectedYear) || loading">Soumettre&nbsp;<i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></v-btn>
 				<v-btn @click="clearAll" color="warning">Nettoyer</v-btn>
 				<nuxt-link to="/admin/competitions" class="btn">Retour</nuxt-link>
+				<!-- Display alert messages in case of disabled submit button -->
+		  		<v-alert :value="true" color="error" v-if="checkCompetitionSlugUniqueness(this.selectedSlug + '_' + this.selectedYear)">Une compétition avec ce nom existe déjà!</v-alert>
+		  		<v-alert :value="true" color="error" v-if="selectedTeams.length === 0">Aucune équipe sélectionnée.</v-alert>
 			</v-card-text>
 		</v-form>
 	</v-card>
@@ -228,7 +231,6 @@
 				selectedGroupsNumber: this.selectedGroups ? 2 : 0,
 				selectedGroupsFormat: 'letters',
 			    footballAPIRequestResult: '',
-			    loading: false,
 			    items: [
 				    {
 				      text: 'Dashboard',
@@ -249,6 +251,9 @@
 			}
 		},
 		computed: {
+			loading () {
+				return this.$store.getters['loading']
+			},
 			loadedActivities () {
 		        return this.$store.getters['activities/loadedActivities']
 		    },
@@ -283,8 +288,8 @@
 				console.log(slug)
 				let found = false
 				for (let competition of this.loadedCompetitions) {
-					console.log(competition)
-				    if (competition.slug === slug) {
+					// console.log(competition)
+				    if (competition.slug === slugify(slug)) {
 				        found = true
 				        break
 				    }
@@ -296,10 +301,10 @@
 		        this.file = this.$refs.file1.files[0]
 		    },
 			submitCreateCompetition () {
+        		this.$store.commit('setLoading', true, { root: true })
 				console.log('submitCreateTeam')
 				console.log(this.selectedGroups)
 				console.log(this.checkCompetitionSlugUniqueness(this.selectedSlug))
-				// return
 
 				// Organize teams data
 				let teams = {}
@@ -307,7 +312,6 @@
 					console.log('There is groups')
 					let index = 0
 					for (let group of this.selectedTeamsGroup) {
-						// console.log(group)
 						for (let team of group) {
 							teams[team.slug] = {
 								name: team.name,
@@ -346,8 +350,8 @@
 				let continents = {}
 				let countries = {}
 				if (this.selectedContinents.length > 0) {
+					this.selectedCountries = []
 					for (let continent of this.selectedContinents) {
-						// console.log(team)
 						continents[continent.slug] = {
 							name: continent.name,
 							slug: continent.slug,
@@ -356,8 +360,8 @@
 				}
 
 				if (this.selectedCountries.length > 0) {
+					this.selectedContinents = []
 					for (let country of this.selectedCountries) {
-						// console.log(team)
 						countries[country.slug] = {
 							name: country.name,
 							slug: country.slug,
@@ -378,11 +382,11 @@
 					continents: continents,
 					countries: countries,
 					groups: this.selectedGroups,
-					groups_number: this.selectedGroupsNumber,
-					groups_format: this.selectedGroupsFormat,
+					groups_number: this.selectedGroups ? this.selectedGroupsNumber : '',
+					groups_format: this.selectedGroups ? this.selectedGroupsFormat : '',
 					teams: teams,
-			        name: this.selectedName,
-			        slug: this.selectedSlug,
+			        name: this.selectedName + ' ' + this.selectedYear,
+			        slug: this.selectedSlug + '_' + slugify(this.selectedYear),
 			        year: this.selectedYear,
 			        _created_at: new Date().getTime(),
 			        _updated_at: new Date().getTime()
@@ -392,9 +396,9 @@
 
 				// If there is an image, upload the image first and then update competition node
 				if (this.imageData) {
-					axios.post('/upload-competition-image', {
+					axios.post('/upload-image', {
 					    image: this.imageData,
-					    name: this.selectedSlug,
+					    name: this.selectedSlug + '_' + slugify(this.selectedYear),
 					    folder: 'competitions'
 					}).then((response) => {
 						console.log('success')
@@ -402,7 +406,7 @@
 					    competitionData['image'] = response.data
 					    console.log(competitionData)
 					    this.$store.dispatch('competitions/createCompetition', competitionData)
-					    return this.$router.push('/admin/teams')
+					    return this.$router.push('/admin/competitions')
 					}).catch(function (error) {
 						console.log('error')
 					    console.log(error)

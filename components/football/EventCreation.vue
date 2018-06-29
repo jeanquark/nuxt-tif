@@ -29,8 +29,9 @@
 							  v-model="selectedCompetition"
 							  label="Sélectionner une compétition"
 							  item-text="name"
-							  item-value="{}"
+							  item-value="slug"
 							  single-line
+							  :return-object="true"
 							></v-select>
 						</v-flex>
 						<v-flex xs6>
@@ -98,16 +99,16 @@
 								v-model="selectedStadium" 
 								label="Sélectionner un stade"
 								item-text="name"
-								item-value="{}"
+								item-value="slug"
 								:autocomplete="true"
 								single-line
 								:disabled="selectedCompetition == ''"
+								:return-object="true"
 							>
 								<template slot="item" slot-scope="data">
 							      	<v-list-tile-content>
 							        	<v-list-tile-title>
-							          		<!-- {{ data.item.name }} <small style="color: #ccc;">{{ data.item.city.name }} - {{ data.item.country.name}}</small> -->
-							          		{{ data.item.name }}
+							          		{{ data.item.name }}, {{ data.item.city.name }}
 							        	</v-list-tile-title>
 							      	</v-list-tile-content>
 							    </template>
@@ -126,9 +127,10 @@
 							  v-model="selectedTeam1"
 							  label="Sélectionner l'équipe recevante"
 							  item-text="name"
-							  item-value="{}"
+							  item-value="slug"
 							  single-line
 							  :disabled="selectedCompetition == ''"
+							  :return-object="true"
 							></v-select>
 						</v-flex>
 						<v-flex xs6 class="">
@@ -140,9 +142,10 @@
 							  v-model="selectedTeam2"
 							  label="Sélectionner l'équipe visiteuse"
 							  item-text="name"
-							  item-value="{}"
+							  item-value="slug"
 							  single-line
 							  :disabled="selectedTeam1 == ''"
+							  :return-object="true"
 							></v-select>
 						</v-flex>
 					</v-layout>
@@ -171,17 +174,11 @@
 		data () {
 			return {
 				selectedCompetition: '',
-				// competitions: [],
 				date: null,
 				time: null,
-				// competitionStartDate: null,
-				// competitionEndDate: null,
 				modalDate: false,
         		modalTime: false,
-        		// modalStartDate: false,
-        		// modalEndDate: false,
         		selectedStadium: '',
-        		stadiums: [],
         		selectedTeam1: '',
         		selectedTeam2: '',
 			}
@@ -203,7 +200,11 @@
 		    },
 		    loadedStadiums () {
 		    	if (this.selectedCompetition != '') {
-		    		return this.$store.getters['stadiums/loadedStadiums'].filter(stadium => stadium.country.slug === this.selectedCompetition.country.slug)
+		    		let stadiumsArray = []
+		    		for (let country in this.selectedCompetition.countries) {
+		    			stadiumsArray.push(this.$store.getters['stadiums/loadedStadiums'].filter(stadium => stadium.country.slug === country))
+		    		}
+		    		return [].concat(...stadiumsArray)
 		    	} else {
 		    		return this.$store.getters['stadiums/loadedStadiums']
 		    	}

@@ -5,35 +5,35 @@
             <div v-if="error" class="text-center" style="color: red;">{{ $t(error.code) }}</div><br />
     		<form class="modal-content">
     			<div class="container">
-                    <h1>Se connecter</h1>
-                    <p class="modalInscription">Va vite encourager tes équipes favorites !</p>
-					  <hr>
-					  <nuxt-link :to="localePath({ name: '/'})" class="close">
-						<span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
-					  </nuxt-link>
+                    <h1>{{ $t('pages.login.title') }}</h1>
+                    <p class="modalInscription">{{ $t('pages.login.subtitle') }}</p>
+					    <hr>
+                        <nuxt-link :to="localePath({ name: 'index'})" class="close">
+                            <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
+                        </nuxt-link>
                     <div class="group">
-                        <label for="email"><b>Email</b></label>
-                        <input type="text" v-model="email" placeholder="Enter Email" name="email" required>   
+                        <label for="email"><b>{{ $t('pages.login.email') }}</b></label>
+                        <input type="text" v-model="email" :placeholder="$t('pages.login.enter_email')" name="email" required>   
                         <span class="highlight"></span>
                         <span class="bar"></span>
                     </div>
 
                     <div class="group"> 
-                        <label for="psw"><b>Password</b></label>
-                        <input type="password" v-model="password" placeholder="Enter Password" name="psw" required>
+                        <label for="psw"><b>{{ $t('pages.login.password') }}</b></label>
+                        <input type="password" v-model="password" :placeholder="$t('pages.login.password_email')" name="psw" required>
                         <span class="highlight"></span>
                         <span class="bar"></span>
                     </div>
 
                     <label>
-                        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Se souvenir de moi
+                        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> {{ $t('pages.login.remember') }}
                     </label>
 
                     <div class="row button-section">
                         <div class="col-twelve">
-                            <button type="submit" class="button button-primary" style="" :disabled="loading" :loading="loading" @click.prevent="signUserIn">Go Go Go, c'est parti ! <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
-                            <button type="submit" class="button btn-facebook" @click.prevent="signInWithFacebook" disabled><i class="fa fa-facebook"></i> Connecte-toi avec FB</button>
-                            <button type="submit" class="button btn-twitter" @click.prevent="signInWithGoogle"><i class="fa fa-google"></i> Connecte-toi avec G+</button>
+                            <button type="submit" class="button button-primary" style="" :disabled="loading" :loading="loading" @click.prevent="signUserIn">{{ $t('pages.login.login')}}<i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
+                            <button type="submit" class="button btn-facebook" @click.prevent="signInWithFacebook" disabled><i class="fa fa-facebook"></i> {{ $t('pages.login.facebook_oauth') }}</button>
+                            <button type="submit" class="button btn-twitter" @click.prevent="signInWithGoogle"><i class="fa fa-google"></i> {{ $t('pages.login.google_oauth') }}</button>
                         </div>
                     </div>
     			</div><!-- /.container -->
