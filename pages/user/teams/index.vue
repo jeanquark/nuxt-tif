@@ -61,7 +61,7 @@
 						<div class="flex-container-modal-OtherTeam-Img" v-if="loadedCompetitions != ''">
 							<div class="OtherTeam" v-for="competition in loadedCompetitions">
 								<img :src="'/images/competitions/' + competition.image" class="imgModalAvatar"/>
-								<nuxt-link :to="'/competitions/' + competition.slug" class="overlayOtherTeam">
+								<nuxt-link :to="'/user/competitions/' + competition.slug" class="overlayOtherTeam">
 									<div class="textActivity">{{ competition.category.name}}<br />{{ competition.name}}<br /><span v-for="country in competition.countries" v-if="competition.countries">{{ country.name }}</span><br />+Infos</div>
 								</nuxt-link>
 							</div>
@@ -104,18 +104,17 @@
     	}
     },
     created () {
-    	if (Object.keys(this.$store.getters['competitions/loadedCompetitions']).length === 0) {
+    	// if (Object.keys(this.$store.getters['competitions/loadedCompetitions']).length === 0) {
     		this.$store.dispatch('competitions/loadedCompetitions')
-    	}
+    	// }
 
-    	if (Object.keys(this.$store.getters['users/loadedUserTeams']).length === 0) {
+    	// if (Object.keys(this.$store.getters['users/loadedUserTeams']).length === 0) {
     		this.$store.dispatch('users/loadedUserTeams')
-    	}
+    	// }
 		
-    	if (Object.keys(this.$store.getters['users/loadedTeams']).length === 0) {
+    	// if (Object.keys(this.$store.getters['users/loadedTeams']).length === 0) {
     		this.$store.dispatch('users/loadedTeams')
-    	}
-
+    	// }
 	},
     computed: {
     	loadedCompetitions () {

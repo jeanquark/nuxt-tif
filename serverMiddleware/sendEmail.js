@@ -31,7 +31,7 @@ module.exports = app.use(function (req, res, next) {
         from: req.body.data.name + ' ' + '<' + req.body.data.email + '>', // sender address
         to: 'jeanquark84@gmail.com', // list of receivers
         subject: 'Message from the contact form of www.thisisfan.com', // Subject line
-        html: '<b>' + req.body.data.message + '</b><br /><br />Sent by: ' + req.body.data.name + ' ' + req.body.data.email // html body
+        html: '<b>' + req.body.data.message + '</b><br /><br />Sent by: ' + req.body.data.name + '<br />' + req.body.data.email // html body
     };
 
     // send mail with defined transport object
@@ -41,6 +41,7 @@ module.exports = app.use(function (req, res, next) {
         	let success = false;
             // return console.log(error);
         }
+        console.log(success);
         res.send(success);
     });
 });

@@ -18,8 +18,8 @@
 						<div class="flex-container-modal-MyTeam">
 							<h1>Supporter une nouvelle équipe ?</h1>
 						</div>
-						<div class="flex-container-modal-Title banner text-center">
-							<h2>{{ loadedCompetition.category.name }}</br>{{ loadedCompetition.name }}</br>{{ loadedCompetition.country }}</br>{{ loadedCompetition.year }}</h2>
+						<div class="flex-container-modal-Title banner text-center" v-if="loadedCompetition">
+							<h2>{{ loadedCompetition.category.name }}</br>{{ loadedCompetition.name }}</br>{{ loadedCompetition.country }}</br>{{ loadedCompetition.year }}<br /></h2>
 						</div>
 						<div class="flex-container-modal-OtherTeam">
 							<h6>Choisis ton équipe !</h6>

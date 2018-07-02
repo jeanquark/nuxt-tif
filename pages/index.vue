@@ -550,12 +550,11 @@
                                <span class="error" v-show="errors.has('contactEmail')">{{ $t('pages.index.contact_form_email_error') }}</span>
                             </div>                     
                             <div class="form-field">
-                                <textarea name="contactMessage" id="contactMessage" :placeholder="$t('pages.index.contact_form_comment')" rows="10" cols="50" v-model="message" v-validate="'max:240'"></textarea>
-                                <span style="color: red;" v-if="message.length > 2"></span>
+                                <textarea name="contactMessage" id="contactMessage" :placeholder="$t('pages.index.contact_form_comment')" rows="10" cols="50" v-model="message" v-validate="'required|max:240'"></textarea>
                                 <span class="error" v-show="errors.has('contactMessage')">{{ $t('pages.index.contact_form_message_error') }}</span>
                             </div>                 
                             <div class="form-field">
-                                <button class="submitform" @click="sendMessage" :disabled="loading || errors.any()">{{ $t('pages.index.contact_form_send') }} <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
+                                <button class="submitform" @click="sendEmail" :disabled="loading || errors.any() || !this.email || !this.message">{{ $t('pages.index.contact_form_send') }} <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
                                 <div id="submit-loader">
                                     <div class="text-loader">{{ $t('pages.index.contact_form_loading') }}</div>                             
                                     <div class="s-loader">
@@ -719,7 +718,7 @@
                 })
                 this.$router.replace('/home')
             },
-            sendMessage () {
+            sendEmail () {
                 this.$store.commit('setLoading', true, { root: true })
                 const data = {
                     "name" : this.name,
@@ -728,19 +727,22 @@
                 }
                 console.log(data)
 
+                // await this.$store.dispatch('/sendEmail', {data})
                 axios.post('/send-email', {
                     data: data,
                 }).then((response) => {
                     console.log('success')
                     console.log(response)
                     this.$store.commit('setLoading', false, { root: true })
-                    new Noty({type: 'success', text: this.$t('pages.index.contact_form_send_success'), timeout: 5000, theme: 'metroui'}).show()
+                    // new Noty({type: 'success', text: this.$t('pages.index.contact_form_send_success'), timeout: 5000, theme: 'metroui'}).show()
+                    new Noty({type: 'success', text: 'Email was sent successfully', timeout: 5000, theme: 'metroui'}).show()
 
                 }).catch (function (error) {
                     this.$store.commit('setLoading', false, { root: true })
                     console.log('Email could not be sent')
                     console.log(error)
-                    new Noty({type: 'error', text: this.$t('pages.index.contact_form_send_error'), timeout: 5000, theme: 'metroui'}).show()
+                    // new Noty({type: 'error', text: this.$t('pages.index.contact_form_send_error'), timeout: 5000, theme: 'metroui'}).show()
+                    new Noty({type: 'error', text: 'Email could not be sent', timeout: 5000, theme: 'metroui'}).show()
                 })
             }
         }

@@ -96,29 +96,29 @@ export const actions = {
         }
     },
     async updateUserAccount ({commit, state, dispatch}, payload) {
-            // commit('setLoading', true, { root: true })
-            console.log('async updateUserAccount')
-            try {
-                // console.log(payload)
-                const userEmail = payload.userEmail
-                const action = payload.action
+        // commit('setLoading', true, { root: true })
+        console.log('async updateUserAccount')
+        try {
+            // console.log(payload)
+            const userEmail = payload.userEmail
+            const action = payload.action
 
-                return this.$axios.$post('/setCustomClaims', { userEmail: userEmail, action: action }).then((user) => {
-                    // console.log('successfully called setCustomClaims method.')
-                    // console.log('called ' + action)
-                    // console.log(user)
+            return this.$axios.$post('/setCustomClaims', { userEmail: userEmail, action: action }).then((user) => {
+                // console.log('successfully called setCustomClaims method.')
+                // console.log('called ' + action)
+                // console.log(user)
 
-                    if (action == 'userToAdmin') {
-                        dispatch('updateUser', {status: 'admin', id: user.uid})
-                    } else if (action == 'adminToUser') {
-                        dispatch('updateUser', {status: 'user', id: user.uid})
-                    }
-                    // commit('setLoading', false, { root: true })
-                })
-            }
-            catch(error) {
-                console.log(error)
-            }
+                if (action == 'userToAdmin') {
+                    dispatch('updateUser', {status: 'admin', id: user.uid})
+                } else if (action == 'adminToUser') {
+                    dispatch('updateUser', {status: 'user', id: user.uid})
+                }
+                // commit('setLoading', false, { root: true })
+            })
+        }
+        catch(error) {
+            console.log(error)
+        }
     },
     async loadedUser ({commit}) {
         try {
@@ -384,153 +384,30 @@ export const actions = {
     },
     async loadedUserTeams ({commit, state}) {
         try {
-            // const user = this
             const userId = state.loadedUser.id
-            // return userId
             console.log(userId)
             let userTeamsIds = []
             let userTeams = []
-            // console.log('DEF')
-            // let ghi = function() {
-                // return new Promise(function (resolve, reject) {
-                    // firebase.database().ref('/userTeams').child(userId).on('value', function (snapshot) {
-                    firebase.database().ref('/userTeams').child(userId).once('value', function (snapshot) {
-                        console.log(snapshot.val())
-                        for (const key in snapshot.val()) {
-                            userTeamsIds.push(key)
-                        }
-                        if (userTeamsIds.length > 0) {
-                            userTeamsIds.forEach((teamId) => {
-                                firebase.database().ref('/teams').child(teamId).once('value', function (childSnapshot) {
-                                // firebase.database().ref('/teams').child(userTeamsIds[0]).on('value', function (childSnapshot) {
-                                    userTeams.push(childSnapshot.val())
-                                    // commit('setUserTeams', userTeams)
-                                })
-                            })
-                            // return resolve()
-                            // console.log(userTeams)
-                        }
-
-                    }).then(() => {
-                        console.log(userTeams)
-                        commit('setUserTeams', userTeams)
+            
+            firebase.database().ref('/userTeams').child(userId).once('value', function (snapshot) {
+                console.log(snapshot.val())
+                for (const key in snapshot.val()) {
+                    userTeamsIds.push(key)
+                }
+                console.log(userTeamsIds)
+                if (userTeamsIds.length > 0) {
+                    userTeamsIds.forEach((teamId) => {
+                        firebase.database().ref('/teams').child(teamId).once('value', function (childSnapshot) {
+                            let team = {...childSnapshot.val(), id: childSnapshot.key}
+                            userTeams.push(team)
+                            // userTeams.push(childSnapshot.val())
+                        })
                     })
-                // })
-            // }
-            // ghi().then(() => {
-            //     console.log(userTeams)
-            //     commit('setUserTeams', userTeams)
-            // })
-            // return
-            // setTimeout(() => {
-            //     commit('setUserTeams', userTeams)
-            // }, 3000)
-
-
-
-
-
-            // // return
-            // // const userId = firebase.auth().currentUser.uid
-            // const userId = state.loadedUser.user_id
-            // // firebase.database().ref('/userTeams/').child(userId).on('value')
-            // //     .then(function (snapshot) {
-            // //         // console.log(snapshot.val())
-            // //         const userTeamsArray = []
-            // //         // const userTeamsArray = snapshot.val()
-
-            // //         for (const key in snapshot.val()) {
-            // //             // console.log(key)
-            // //             // userTeamsArray.push({ ...snapshot.val()[key]})
-            // //             // userTeamsArray.push({[key]: snapshot.val()[key]})
-            // //             // for (const teamId in key) {
-            // //             //     userTeamsArray.push({[key]: teamId})
-            // //             // }
-            // //             userTeamsArray.push(key)
-            // //         }
-            // //         // console.log(userTeamsArray)
-            // //         // commit('setUserTeams', userTeamsArray)
-            // //     })
-            // //     .then(function (childSnapshot) {
-
-            // //     })
-            // let userTeamsIds = []
-            // let userTeams = []
-            // let abc = []
-            // // const teamIds = ['-LBVgvOsCUALzowK576H', '-LBVgvR__QJEcYxQ7a7g', '-LBVgvSq8Kukah-OB-ib']
-            // // let promise = new Promise((resolve, reject) => {
-            // firebase.database().ref('userTeams').child(userId).on('value', function (snapshot) {
-            //     console.log(snapshot.val())
-            //     for (const key in snapshot.val()) {
-            //         userTeamsIds.push(key)
-            //     }
-            //     // userTeamsIds.forEach((teamId) => {
-            //     if (userTeamsIds.length > 0) {
-            //         firebase.database().ref('/teams').child(userTeamsIds[0]).on('value', function (childSnapshot) {
-            //         // firebase.database().ref('/teams').child(teamId).on('value', function (childSnapshot) {
-            //             userTeams.push(childSnapshot.val())
-            //             // for (const key in childSnapshot.val()) {
-            //             //     userTeamsIds.push(key)
-            //             //     abc.push(key)
-            //             // }
-            //             commit('setUserTeams', userTeams)
-            //         })
-            //     }
-            //         // commit('setUserTeams', userTeams)
-            //     // })
-            //     // setTimeout(() => {
-            //     //     commit('setUserTeams', userTeams)
-            //     // }, 3000)
-
-            //     // const start = async () => {
-            //     //   await Promise.all(userTeamsIds.map(async teamId => {
-            //     //     // await waitFor(50)
-            //     //     // console.log(num)
-            //     //     firebase.database().ref('/teams').child(teamId).on('value', function (childSnapshot) {
-            //     //         userTeams.push(childSnapshot.val())
-            //     //     })
-            //     //   }))
-            //     //   console.log('Done')
-            //     // }
-            //     // start()
-            //     // commit('setUserTeams', userTeams)
-            //     console.log(userTeamsIds)
-            //     console.log(userTeams)
-            //     // resolve(userTeams)
-            // })
-            // })
-            // .then(() => {
-            //     console.log('abc')
-            //     commit('setUserTeams', userTeams)
-            // })
-
-            // setTimeout(() => {
-            //     commit('setUserTeams', userTeams)
-            // }, 3000)
-            // var p = new Promise(function(resolve, reject) {  
-            //     setTimeout(() => resolve(4), 5000);
-            // })
-            // p.then((res) => {
-            //     console.log('resolved')
-            // })
-
-            // promise.then((res) => {
-            //     console.log('promise resolved')
-            //     console.log(res)
-            //     commit('setUserTeams', res)
-            // })
-
-            // teamIds.forEach((teamId) => {
-                // console.log(teamId)
-                // firebase.database().ref('/teams').child(teamIds[2]).on('value', function (snapshot) {
-                //     userTeams.push(snapshot.val())
-                //     // return userTeams
-                //     commit('setUserTeams', userTeams)
-
-                // })
-            // })
-            // console.log(userTeams)
-            // return userTeams
+                }
+            }).then(() => {
+                console.log(userTeams)
+                commit('setUserTeams', userTeams)
+            })
         } 
         catch(error) {
             console.log(error)
@@ -554,8 +431,6 @@ export const actions = {
                     firebase.database().ref('/teamUsers').child(childSnapshot.key).child(userId).remove()
                 })
             }).then(() => {
-                // console.log('Done')
-                // console.log(teams)
                 // 3) Save each team in userTeams node && user in each teamUsers node
                 if (teams.length > 0) {
                     teams.forEach((team) => {
@@ -565,7 +440,7 @@ export const actions = {
                         new Noty({type: 'success', text: 'You are following ' + team.name + '. Future will tell whether it\'s a wise move or not&#9786;', timeout: 5000, theme: 'metroui'}).show()
                     })
                 } else {
-                    new Noty({type: 'warning', text: 'You are not following any team anymore', timeout: 5000, theme: 'metroui'}).show()
+                    new Noty({type: 'warning', text: 'You are not following any team', timeout: 5000, theme: 'metroui'}).show()
                 }
             }).then(() => {
                 commit('setUserTeams', teams)

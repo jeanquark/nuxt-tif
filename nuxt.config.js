@@ -201,6 +201,7 @@ module.exports = {
       { path: '/admin', handler: '~/serverMiddleware/auth-admin' },
       { path: '/delete-image', handler: '~/serverMiddleware/deleteImage' },
       { path: '/send-email', handler: '~/serverMiddleware/sendEmail' },
+      { path: '/update-user-account', handler: '~/serverMiddleware/updateUserAccount' },
   ],
   toast: {
     duration: 8000,

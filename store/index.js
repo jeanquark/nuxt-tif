@@ -10,7 +10,7 @@
 // export const plugins = [ VueLoading ]
 import firebase from 'firebase'
 import setUser from '../helpers/setUser'
-export const strict = false
+// export const strict = false
 
 export const state = () => ({
     loading: false,
@@ -47,28 +47,28 @@ export const actions = {
 
     async nuxtServerInit ({commit}, {req}) {
         // try {
-            if (req.user) {
-                console.log('Entering nuxtServerInit')
-                console.log(req.user)
-                // commit('users/setUser', req.user, { root: true })
-                const userId = req.user.uid
-                console.log('ABC')
-                console.log(userId)
-                // console.log(userId)
-                const userData = ''
-                // await firebase.database().ref('/users/' + userId).once('value').then(function (snapshot) {
-                await firebase.database().ref('/users/' + userId).on('value', function (snapshot) {
-                    commit('users/setLoadedUser', snapshot.val(), { root: true })
-                    console.log('End of nuxtServerInit')
-                })
-                // const authData = {
-                //   avatar: '',
-                //   email: 'test2@test.com',
-                //   id: 'RHhcGpLRSgRNm1ByOA9j7qASopf1',
-                //   status: 'user'
-                // }
-                // commit('users/setUser', authData, {root: true})
-            }
+        if (req.user) {
+            console.log('Entering nuxtServerInit')
+            console.log(req.user)
+            // commit('users/setUser', req.user, { root: true })
+            const userId = req.user.uid
+            console.log('ABC')
+            console.log(userId)
+            // console.log(userId)
+            const userData = ''
+            // await firebase.database().ref('/users/' + userId).once('value').then(function (snapshot) {
+            await firebase.database().ref('/users/' + userId).on('value', function (snapshot) {
+                commit('users/setLoadedUser', snapshot.val(), { root: true })
+                console.log('End of nuxtServerInit')
+            })
+            // const authData = {
+            //   avatar: '',
+            //   email: 'test2@test.com',
+            //   id: 'RHhcGpLRSgRNm1ByOA9j7qASopf1',
+            //   status: 'user'
+            // }
+            // commit('users/setUser', authData, {root: true})
+        }
         // }
         // catch (e) {
         //     console.log(e)
@@ -79,7 +79,21 @@ export const actions = {
     // },
     clearError ({commit}) {
       commit('clearError')
-    }
+    },
+    // async sendEmail (payload) {
+    //     // commit('setLoading', true, { root: true })
+    //     console.log('async sendEmail')
+    //     try {
+    //         console.log(payload)
+    //         return this.$axios.$post('/send-email', {data: payload}).then((response) => {
+    //             console.log('success')
+    //             console.log(response)
+    //         })
+    //     }
+    //     catch(error) {
+    //         console.log(error)
+    //     }
+    // },
 }
 
 export const getters = {
