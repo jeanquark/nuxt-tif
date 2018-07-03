@@ -139,7 +139,7 @@
 				</v-layout>
 			</v-container>
 			<v-card-text class="text-md-center">
-		  		<v-btn @click="submitCreateTeam" color="info" :disabled="this.checkTeamSlugUniqueness(this.selectedSlug)">Soumettre</v-btn>
+		  		<v-btn @click="submitCreateTeam" color="info" :disabled="this.checkTeamSlugUniqueness(this.selectedSlug) || this.selectedName === '' || this.selectedSlug === ''">Soumettre</v-btn>
 				<v-btn @click="clearAll" color="warning">Nettoyer</v-btn>
 				<nuxt-link to="/admin/teams" class="btn">Retour</nuxt-link>
 			</v-card-text>
@@ -235,6 +235,29 @@
 			submitCreateTeam () {
 				console.log('submitCreateTeam')
 
+				// const data = {
+				// 	"name" : "jm",
+    //                 "email": "jm@gmail.com",
+    //                 "message": "my message"
+    //             }
+				// axios.post('/send-email', {
+    //                 data: data,
+    //             }).then((response) => {
+    //                 new Noty({type: 'success', text: 'Email was sent successfully', timeout: 5000, theme: 'metroui'}).show()
+    //                 console.log('success')
+    //                 console.log(response)
+    //                 this.$store.commit('setLoading', false, { root: true })
+    //                 // new Noty({type: 'success', text: this.$t('pages.index.contact_form_send_success'), timeout: 5000, theme: 'metroui'}).show()
+
+    //             }).catch (function (error) {
+    //                 new Noty({type: 'error', text: 'Email could not be sent', timeout: 5000, theme: 'metroui'}).show()
+    //                 this.$store.commit('setLoading', false, { root: true })
+    //                 console.log('Email could not be sent')
+    //                 console.log(error)
+    //                 // new Noty({type: 'error', text: this.$t('pages.index.contact_form_send_error'), timeout: 5000, theme: 'metroui'}).show()
+    //             })
+    //             return
+
 				// Organize competitions data
 				let competitions = {}
 				if (this.selectedCompetitions.length > 0) {
@@ -255,14 +278,14 @@
 			        name: this.selectedName,
 			        slug: this.selectedSlug,
 					country: {
-						slug: this.selectedCountry.slug,
-						name: this.selectedCountry.name
+						slug: this.selectedCountry ? this.selectedCountry.slug : '',
+						name: this.selectedCountry ? this.selectedCountry.name : ''
 					},
 					color: this.selectedColor,
 					website: this.selectedWebsite,
 					stadium: {
-						slug: this.selectedStadium.slug,
-						name: this.selectedStadium.name
+						slug: this.selectedStadium ? this.selectedStadium.slug : '',
+						name: this.selectedStadium ? this.selectedStadium.name : ''
 					},
 					type: this.selectedCompetitionType,
 					competitions: competitions,

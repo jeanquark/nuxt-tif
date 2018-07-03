@@ -113,7 +113,7 @@
     	// }
 		
     	// if (Object.keys(this.$store.getters['users/loadedTeams']).length === 0) {
-    		this.$store.dispatch('users/loadedTeams')
+    		// this.$store.dispatch('users/loadedTeams')
     	// }
 	},
     computed: {

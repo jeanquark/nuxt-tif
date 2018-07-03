@@ -94,7 +94,8 @@
                 return this.$store.getters['users/loadedUserTeams']
             },
             change () {
-                return !_.isEqual(this.selectedTeams, this.loadedUserTeams)
+                return true
+                // return !_.isEqual(this.selectedTeams, this.loadedUserTeams)
             }
         },
         methods: {
@@ -108,9 +109,8 @@
                 }
             },
             async saveTeams () {
-                // console.log('saveTeams')
-                // console.log(this.selectedTeams)
-                await this.$store.dispatch('users/updateUserTeams', this.selectedTeams)
+                console.log('Click on saveTeams')
+                await this.$store.dispatch('users/updateUserTeams', {selectedTeams: this.selectedTeams, loadedUserTeams: this.loadedUserTeams})
                 this.$router.replace('/user/teams')
             },
             clear () {

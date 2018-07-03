@@ -328,7 +328,7 @@
 						index++
 					}
 				} else {
-					console.log('There is no  groups')
+					console.log('There is no groups')
 					// console.log(this.selectedTeams)
 					for (let team of this.selectedTeams) {
 						// console.log(team)

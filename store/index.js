@@ -10,7 +10,7 @@
 // export const plugins = [ VueLoading ]
 import firebase from 'firebase'
 import setUser from '../helpers/setUser'
-// export const strict = false
+export const strict = false
 
 export const state = () => ({
     loading: false,

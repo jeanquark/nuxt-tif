@@ -3,6 +3,17 @@ const express = require('express'),
 	  bodyParser = require('body-parser')
 	  env = require('dotenv').config();
 
+// const connect = require('connect'), 
+//       express = require('express'),
+//       http = require('http'),
+//       url = require('url'),
+//       bodyParser = require('body-parser'),
+//       path = require('path'),
+//       fs = require('fs'),
+//       jsonfile = require('jsonfile')
+//       nodemailer = require('nodemailer')
+//       env = require('dotenv').config();
+
 const app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -42,6 +53,8 @@ module.exports = app.use(function (req, res, next) {
             // return console.log(error);
         }
         console.log(success);
-        res.send(success);
+        console.log(info);
+        res.send('success');
+        // res.send(obj);
     });
 });

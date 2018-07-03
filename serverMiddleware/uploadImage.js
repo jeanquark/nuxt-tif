@@ -30,7 +30,6 @@ module.exports = app.use(function (req, res, next) {
 	let imageBuffer = decodeBase64Image(data);
 	// console.log(imageBuffer);
 
-    console.log('response from server 1');
     let imageFolder = req.body.folder;
     let imageName = req.body.name;
 

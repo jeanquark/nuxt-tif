@@ -49,15 +49,15 @@
     export default {
         layout: 'layoutFront',
         created () {
-            if (Object.keys(this.$store.getters['competitions/loadedCompetitions']).length === 0) {
+            // if (Object.keys(this.$store.getters['competitions/loadedCompetitions']).length === 0) {
                 this.$store.dispatch('competitions/loadedCompetitions')
-            }
-            if (Object.keys(this.$store.getters['teams/loadedTeams']).length === 0) {
+            // }
+            // if (Object.keys(this.$store.getters['teams/loadedTeams']).length === 0) {
                 this.$store.dispatch('teams/loadedTeams')
-            }
-            if (Object.keys(this.$store.getters['users/loadedUserTeams']).length === 0) {
+            // }
+            // if (Object.keys(this.$store.getters['users/loadedUserTeams']).length === 0) {
                 this.$store.dispatch('users/loadedUserTeams')
-            }
+            // }
             // this.selectedTeams.push({id: '-LBVgvOsCUALzowK576H', name: 'Argentina'}, {id: '-LBVgvOxY6A_ylDQBOmp', name: 'Australia'}, {id: '-LBVgvR__QJEcYxQ7a7g', name: 'Republic of Korea'})
             // this.selectedTeams.push({abc})
                 // console.log(this.$route.params)

@@ -57,6 +57,7 @@ module.exports = {
       // 'vue-nouislider'
       // 'vuex-loading'
       'vue2-jsoneditor',
+      'vue-swal',
     ],
     extractCSS: true,
   },
@@ -181,13 +182,14 @@ module.exports = {
     { src: '~/plugins/vuetify.js', ssr: true },
     { src: '~/plugins/vue-notifications.js', ssr: false },
     // {src: '~/plugins/vue-nouislider.js', ssr: false }
-    { src: '~/plugins/vue-sweetalert2.js', ssr: false },
+    // { src: '~/plugins/vue-sweetalert2.js', ssr: false },
     { src: '~/plugins/vue-fullpage.js', ssr: false },
     // { src: '~/plugins/merge-images', ssr: false },
     { src: '~/plugins/vue2-jsoneditor.js', ssr: false },
     // { src: '~/plugins/vue-placeholders.js', ssr: false },
     { src: '~/plugins/vue-animate-number.js', ssr: false },
     // { src: '~/plugins/vee-validate.js' },
+    { src: '~/plugins/vue-swal.js', ssr: false },
   ],
   serverMiddleware: [
       '~/serverMiddleware/validateFirebaseIdToken',

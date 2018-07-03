@@ -521,7 +521,7 @@
             </div> <!-- /row -->
 
         </section> <!-- /stats -->
-        
+
 
         <!-- contact
         ================================================== -->
@@ -537,8 +537,7 @@
 
             <div class="row contact-form">
                 <div class="col-twelve">
-                    <!-- form -->
-                    <form name="contactForm" id="contactForm" method="post" action="">
+                    <form name="contactForm" id="contactForm">
                         <fieldset>
 
                             <div class="form-field">
@@ -554,7 +553,8 @@
                                 <span class="error" v-show="errors.has('contactMessage')">{{ $t('pages.index.contact_form_message_error') }}</span>
                             </div>                 
                             <div class="form-field">
-                                <button class="submitform" @click="sendEmail" :disabled="loading || errors.any() || !this.email || !this.message">{{ $t('pages.index.contact_form_send') }} <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
+                                <!-- <button @click="sendEmail">Send Email</button> -->
+                                <button class="submitform" @click.prevent="sendEmail" :disabled="loading || errors.any() || !this.email || !this.message">{{ $t('pages.index.contact_form_send') }} <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
                                 <div id="submit-loader">
                                     <div class="text-loader">{{ $t('pages.index.contact_form_loading') }}</div>                             
                                     <div class="s-loader">
@@ -565,7 +565,7 @@
                                 </div>
                             </div>
                         </fieldset>
-                    </form> <!-- Form End -->
+                    </form>
 
                     <!-- contact-warning -->
                     <div id="message-warning"></div>            
@@ -594,7 +594,7 @@
         <!-- footer
         ================================================== -->
 
-       <footer>
+        <footer>
             <div class="row">
                 <div class="col-six tab-full pull-right social">
                     <ul class="footer-social">        
@@ -655,6 +655,7 @@
           // animateNumber
         },
         mounted: () => {
+            // new Noty({type: 'success', text: 'Email was sent successfully', timeout: 5000, theme: 'metroui'}).show()
         },
         created () {
             this.$store.dispatch('clearError')
@@ -727,22 +728,21 @@
                 }
                 console.log(data)
 
-                // await this.$store.dispatch('/sendEmail', {data})
                 axios.post('/send-email', {
                     data: data,
                 }).then((response) => {
+                    // new Noty({type: 'success', text: 'Email was sent successfully', timeout: 5000, theme: 'metroui'}).show()
                     console.log('success')
                     console.log(response)
                     this.$store.commit('setLoading', false, { root: true })
-                    // new Noty({type: 'success', text: this.$t('pages.index.contact_form_send_success'), timeout: 5000, theme: 'metroui'}).show()
-                    new Noty({type: 'success', text: 'Email was sent successfully', timeout: 5000, theme: 'metroui'}).show()
+                    new Noty({type: 'success', text: this.$t('pages.index.contact_form_send_success'), timeout: 5000, theme: 'metroui'}).show()
 
                 }).catch (function (error) {
+                    // new Noty({type: 'error', text: 'Email could not be sent', timeout: 5000, theme: 'metroui'}).show()
                     this.$store.commit('setLoading', false, { root: true })
                     console.log('Email could not be sent')
                     console.log(error)
-                    // new Noty({type: 'error', text: this.$t('pages.index.contact_form_send_error'), timeout: 5000, theme: 'metroui'}).show()
-                    new Noty({type: 'error', text: 'Email could not be sent', timeout: 5000, theme: 'metroui'}).show()
+                    new Noty({type: 'error', text: this.$t('pages.index.contact_form_send_error'), timeout: 5000, theme: 'metroui'}).show()
                 })
             }
         }

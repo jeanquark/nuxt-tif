@@ -4,6 +4,8 @@ import firebase from 'firebase'
 import axios from 'axios'
 import setUser from '../helpers/setUser'
 import Noty from 'noty'
+// import sweetAlert from '~/plugins/vue-sweetalert2.js'
+// import vueSweetAlert from 'vue-sweetalert2'
 // import Router from 'vue-router'
 
 function buildUserObjectOAuth (authData) {
@@ -418,33 +420,84 @@ export const actions = {
         // console.log(payload)
         try {
             const userId = firebase.auth().currentUser.uid
-            const teams = payload
+            // console.log(payload.selectedTeams.length)
+            // return
+            // const teams = payload
+            // firebase.database().ref('/game_parameters/costs/following_new_team').once('value')
+            // .then(function(snapshot) {
+            //     console.log(snapshot.val())
+            //     console.log(snapshot.val().tokens_cost)
+            //     const diff = payload.selectedTeams.length - payload.loadedUserTeams.length
+            //     if (diff > 0) { // If user chose to follow more teams than before
+            //         console.log('User selected more teams than he previously had. Therefore it costs him tokens')
+            //         console.log(diff)
+            //     }
+            // })
+            // sweetAlert('Hello Vue world!!!')
 
-            // 1) First delete all existing team references in userTeams node
-            firebase.database().ref('/userTeams/').child(userId).remove()
-
-            // 2) Then delete all existing user references in teamUsers node
-            firebase.database().ref('/teamUsers/').orderByChild(userId).equalTo(true).once('value', function (snapshot) {
-                // console.log(snapshot.val())
-                snapshot.forEach(function(childSnapshot) {
-                    console.log(childSnapshot.key)
-                    firebase.database().ref('/teamUsers').child(childSnapshot.key).child(userId).remove()
+            const snapshot = await firebase.database().ref('game_parameters/costs/following_new_team').once('value')
+            // console.log(snapshot.val())
+            const tokens_cost = snapshot.val().tokens_cost
+            console.log(tokens_cost)
+            // Check whether user is following more teams than before
+            const diff = payload.selectedTeams.length - payload.loadedUserTeams.length
+            if (diff > 0) { // If user chose to follow more teams than before
+                console.log('User selected more teams than he previously had. Therefore it costs him tokens')
+                console.log(diff)
+                // alert('It will cost you 10 tokens')
+                // this.$swal('Hello word!')
+                return this.$swal({
+                    title: 'Are you sure?',
+                    text: 'You are following ' + diff + ' more teams. This will cost you ' + diff * tokens_cost + ' tokens',
+                    icon: "warning",
+                    buttons: [
+                        'No, cancel it!',
+                        'Yes, I am sure!'
+                    ],
+                    dangerMode: true,
+                }).then(function(isConfirm) {
+                  if (isConfirm) {
+                    swal({
+                      title: 'Shortlisted!',
+                      text: 'Candidates are successfully shortlisted!',
+                      icon: 'success'
+                    }).then(function() {
+                      form.submit(); // <--- submit form programmatically
+                    });
+                  } else {
+                    swal("Cancelled", "Your imaginary file is safe :)", "error");
+                  }
                 })
-            }).then(() => {
-                // 3) Save each team in userTeams node && user in each teamUsers node
-                if (teams.length > 0) {
-                    teams.forEach((team) => {
-                        firebase.database().ref('/userTeams/').child(userId).update({[team.id]: true})
-                        firebase.database().ref('/teamUsers/').child(team.id).update({[userId]: true})
+            }
+            
+            // console.log(firebase.database().ref('/userTeams/').child(userId))
+            // return
 
-                        new Noty({type: 'success', text: 'You are following ' + team.name + '. Future will tell whether it\'s a wise move or not&#9786;', timeout: 5000, theme: 'metroui'}).show()
-                    })
-                } else {
-                    new Noty({type: 'warning', text: 'You are not following any team', timeout: 5000, theme: 'metroui'}).show()
-                }
-            }).then(() => {
-                commit('setUserTeams', teams)
-            })
+            // // 1) First delete all existing team references in userTeams node
+            // firebase.database().ref('/userTeams/').child(userId).remove()
+
+            // // 2) Then delete all existing user references in teamUsers node
+            // firebase.database().ref('/teamUsers/').orderByChild(userId).equalTo(true).once('value', function (snapshot) {
+            //     // console.log(snapshot.val())
+            //     snapshot.forEach(function(childSnapshot) {
+            //         console.log(childSnapshot.key)
+            //         firebase.database().ref('/teamUsers').child(childSnapshot.key).child(userId).remove()
+            //     })
+            // }).then(() => {
+            //     // 3) Save each team in userTeams node && user in each teamUsers node
+            //     if (teams.length > 0) {
+            //         teams.forEach((team) => {
+            //             firebase.database().ref('/userTeams/').child(userId).update({[team.id]: true})
+            //             firebase.database().ref('/teamUsers/').child(team.id).update({[userId]: true})
+
+            //             new Noty({type: 'success', text: 'You are following ' + team.name + '. Future will tell whether it\'s a wise move or not&#9786;', timeout: 5000, theme: 'metroui'}).show()
+            //         })
+            //     } else {
+            //         new Noty({type: 'warning', text: 'You are not following any team', timeout: 5000, theme: 'metroui'}).show()
+            //     }
+            // }).then(() => {
+            //     // commit('setUserTeams', teams)
+            // })
         } 
         catch(error) {
             console.log(error)
