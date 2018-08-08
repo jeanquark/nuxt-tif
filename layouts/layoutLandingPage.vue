@@ -1,6 +1,12 @@
 <template>
-	<div>
-		<nuxt/>
+	<div v-cloak>
+		<div class="loading-page" v-if="loadingPage">
+		    <div class="loader"></div>
+		</div>
+
+		<div v-else>
+			<nuxt/>
+		</div>
 	</div>
 </template>
 
@@ -27,14 +33,22 @@
 		    // ]
 		},
 		middleware: ['unauth-check'],
-		// created() {
-	 //        setTimeout(() => {
-	 //          this.loadingPage = false
-	 //        }, 1000)
-	 //    },
+	 // 	mounted () {
+		//     console.log('layoutLandingPage mounted!')
+		// 	var that = this
+		// 	setTimeout(() => {
+		//     	that.$el.removeAttribute('hidden')
+		// 	}, 1000)
+		//     // this.$el.removeAttribute('hidden')
+		// },
+		created() {
+			setTimeout(() => {
+			  	this.loadingPage = false
+			}, 1000)
+		},
 		data () {
 			return {
-				// loadingPage: false,
+				loadingPage: true,
 				links_en: [
 			        { icon: 'home', name: 'Welcome', to: '/' },
 			        { icon: 'info', name: 'About', to: '/about' },
@@ -73,9 +87,9 @@
             lang() {
 				return this.$i18n.locale
 			},
-			loadingPage () {
-                return this.$store.getters['loadingPage']
-            }
+			// loadingPage () {
+   //              return this.$store.getters['loadingPage']
+   //          }
         },
 		methods: {
 			logout () {
@@ -92,7 +106,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	/* Stackoverflow preview fix, please ignore */
     .navbar-nav {
       flex-direction: row;
@@ -112,4 +126,32 @@
     .isActive {
     	color: red;
     }
+
+    [v-cloak] { display: none }
+
+    .loading-page {
+	  	width: 20px;
+		height: 20px;
+		/*background-color: #000;*/
+		position: absolute;
+		top:0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+    	margin: auto;
+	}
+
+	.loader {
+	    border: 16px solid orangered;
+	    border-top: 16px solid #fff;
+	    border-radius: 50%;
+	    width: 120px;
+	    height: 120px;
+	    animation: spin .5s linear infinite;
+	}
+
+	@keyframes spin {
+	    0% { transform: rotate(0deg); }
+	    100% { transform: rotate(360deg); }
+	}
 </style>

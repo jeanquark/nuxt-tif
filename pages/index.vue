@@ -90,7 +90,7 @@
                     <!-- <nuxt-link to="/register"><button title="Inscription" class="button stroke smoothscroll">{{ $t('pages.index.sign_up') }}</button></nuxt-link>            -->
                     <nuxt-link :to="localePath({ name: 'register'})"><button title="Inscription" class="button stroke smoothscroll">{{ $t('pages.index.sign_up') }}</button></nuxt-link>           
                     <!-- <nuxt-link to="/login"><button title="Connection" class="button button-primary">{{ $t('pages.index.log_in') }}</button></nuxt-link>     -->
-                    <nuxt-link :to="localePath({ name: 'login'})"><button title="Connection" class="button button-primary">{{ $t('pages.index.log_in') }}</button></nuxt-link>    
+                    <nuxt-link :to="localePath({ name: 'login'})"><button title="Connection" class="button button-primary">{{ $t('pages.index.log_in') }}</button></nuxt-link>
                 </div>          
             </div>
 
@@ -630,29 +630,29 @@
     // import animateNumber from '~/plugins/vue-animate-number'
     export default {
         layout: 'layoutLandingPage',
-        head: {
-            script: [
-                // { src: 'https://code.jquery.com/jquery-2.1.3.min.js' },
-                // { src: '/js/modernizr.js' },
-                // { src: '/js/pace.min.js' },
-                // { src: 'https://use.edgefonts.net/bangers.js' },
-                // { src: '/js/plugins.js' },
-                // { src: '/js/main.js '},
-            ],
-            link: [
-                // { rel: 'stylesheet', href: '/css/base.css' },
-                // { rel: 'stylesheet', href: '/css/main.css' },
-                // { rel: 'stylesheet', href: '/css/vendor.css' },
-                { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open%20Sans' },
-            ],
-            css: [
-                // { src: '~/assets/css/main.css', lang: 'css' },
-                // { src: '~/assets/css/base.css', lang: 'css'},
-            ]
-        },
+        // head: {
+        //     script: [
+        //         // { src: 'https://code.jquery.com/jquery-2.1.3.min.js' },
+        //         // { src: '/js/modernizr.js' },
+        //         // { src: '/js/pace.min.js' },
+        //         // { src: 'https://use.edgefonts.net/bangers.js' },
+        //         // { src: '/js/plugins.js' },
+        //         // { src: '/js/main.js '},
+        //     ],
+        //     link: [
+        //         // { rel: 'stylesheet', href: '/css/base.css' },
+        //         // { rel: 'stylesheet', href: '/css/main.css' },
+        //         // { rel: 'stylesheet', href: '/css/vendor.css' },
+        //         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open%20Sans' },
+        //     ],
+        //     css: [
+        //         // { src: '~/assets/css/main.css', lang: 'css' },
+        //         // { src: '~/assets/css/base.css', lang: 'css'},
+        //     ]
+        // },
         components: {
-          quickMenu,
-          // animateNumber
+            quickMenu,
+            // animateNumber
         },
         mounted: () => {
             // new Noty({type: 'success', text: 'Email was sent successfully', timeout: 5000, theme: 'metroui'}).show()

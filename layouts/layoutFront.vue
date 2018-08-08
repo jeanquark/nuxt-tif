@@ -1,11 +1,18 @@
 <template>
-	<div hidden>
-		<nuxt/>
+	<div v-cloak>
+		<div class="loading-page" v-if="loadingPage">
+		    <div class="loader"></div>
+		</div>
+
+		<div v-else>
+			<nuxt/>
+		</div>
 	</div>
 </template>
 
 <script>
 	// import { mapGetters } from 'vuex'
+	import firebase from 'firebase'
 	export default {
 		head: {
 		    script: [
@@ -30,19 +37,49 @@
 		    // ]
 		},
 		middleware: ['auth-check'],
-		// created() {
-	 //        setTimeout(() => {
-	 //          this.loadingPage = false
-	 //        }, 1000)
-	 //    },
-		mounted () {
-		    // https://github.com/nuxt/nuxt.js/issues/22
-		    this.$el.removeAttribute('hidden')
-		    console.log('mounted!')
+		// mounted () {
+		//     console.log('layoutFront mounted!')
+		// 	var that = this
+		// 	setTimeout(() => {
+		//     	that.$el.removeAttribute('hidden')
+		// 	}, 1000)
+		//     // this.$el.removeAttribute('hidden')
+		// },
+		created() {
+			// setTimeout(() => {
+			//   	// console.log('abc')
+			//   	this.loadingPage = false
+			// }, 1000)
+
+	   //      this.$store.dispatch('users/loadedUser').then((user) => {
+	   //      	console.log('LoadedUser is dispatched from layoutFront')
+	   //      	console.log('user: ', user)
+	   //      	let user2 = this.$store.getters['users/loadedUser']
+	   //      	console.log('user2: ', user2)
+	   //      	this.loadingPage = false
+	   // //      	setTimeout(() => {
+				// //   	this.loadingPage = false
+				// // }, 2000)
+	   //      })
+			// if (process.client) {
+			// 	if (!this.loadedUser.level) {
+	  //           	console.log('User level is not defined')
+	  //           	this.$store.dispatch('users/loadedUser')
+	  //           	console.log('firebase.auth().currentUser: ', firebase.auth().currentUser)
+	  //           } else {
+	  //           	console.log('User level: ', this.loadedUser.level)
+	  //           }
+			// }
+			console.log('Entering layoutFront created lifecycle hook')
+			this.$store.dispatch('users/loadedUser').then(response => {
+	        	console.log('LoadedUser is dispatched from layoutFront')
+	        	this.loadingPage = false
+	        })
+			console.log('done')
 		},
 		data () {
 			return {
-				// loadingPage: false,
+				loadingPage: true,
 				links_en: [
 			        { icon: 'home', name: 'Welcome', to: '/' },
 			        { icon: 'info', name: 'About', to: '/about' },
@@ -81,9 +118,9 @@
             lang() {
 				return this.$i18n.locale
 			},
-			loadingPage () {
-                return this.$store.getters['loadingPage']
-            }
+			loadedUser () {
+				return this.$store.getters['users/loadedUser']
+			}
         },
 		methods: {
 			logout () {
@@ -93,28 +130,28 @@
 		      	// })
 		      	this.$store.dispatch('users/signOut').then(() => {
 		        	// alert('Vous allez effacer votre session!')
-		        	this.$router.push('/')
+		        	this.$router.push('/login')
 		      	})
 		    }
 		}
 	}
 </script>
 
-<style>
+<style scoped>
 	/* Stackoverflow preview fix, please ignore */
     .navbar-nav {
-      flex-direction: row;
+      	flex-direction: row;
     }
     
     .nav-link {
-      padding-right: .5rem !important;
-      padding-left: .5rem !important;
+      	padding-right: .5rem !important;
+      	padding-left: .5rem !important;
     }
     
     /* Fixes dropdown menus placed on the right side */
     .ml-auto .dropdown-menu {
-      left: auto !important;
-      right: 0px;
+      	left: auto !important;
+      	right: 0px;
     }
 
     .isActive {
@@ -127,4 +164,32 @@
     span i:hover {
         color: orangered;
     }
+
+    [v-cloak] { display: none }
+
+    .loading-page {
+	  	width: 20px;
+		height: 20px;
+		/*background-color: #000;*/
+		position: absolute;
+		top:0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+    	margin: auto;
+	}
+
+	.loader {
+	    border: 16px solid orangered;
+	    border-top: 16px solid #fff;
+	    border-radius: 50%;
+	    width: 120px;
+	    height: 120px;
+	    animation: spin .5s linear infinite;
+	}
+
+	@keyframes spin {
+	    0% { transform: rotate(0deg); }
+	    100% { transform: rotate(360deg); }
+	}
 </style>

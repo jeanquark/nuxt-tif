@@ -62,7 +62,7 @@
                                     {{ $t('pages.user-preferences.pseudo') }}
                                 </div>
                                 <nuxt-link to="/user/preferences/pseudo" class="columnParametreButton" v-if="loadedUser">
-                                    {{ loadedUser.pseudo }}
+                                    {{ loadedUser.username }}
                                 </nuxt-link>
                             </div>
                             <div class="flex-container-modal-Niveau">
@@ -75,10 +75,34 @@
                             </div>
                             <div class="flex-container-modal-Niveau">
                                 <div class="columnParametreTexte">
-                                    {{ $t('pages.user-preferences.nationality') }}
+                                    {{ $t('pages.user-preferences.country') }}
                                 </div>
                                 <nuxt-link to="/user/preferences/country" class="columnParametreButton" v-if="loadedUser && loadedUser.country">
                                     {{ loadedUser.country.name }}
+                                </nuxt-link>
+                            </div>
+                            <div class="flex-container-modal-Niveau">
+                                <div class="columnParametreTexte">
+                                    Level
+                                </div>
+                                <nuxt-link to="/user/preferences/level" class="columnParametreButton" v-if="loadedUser && loadedUser.level">
+                                    {{ loadedUser.level.value }}
+                                </nuxt-link>
+                            </div>
+                            <div class="flex-container-modal-Niveau">
+                                <div class="columnParametreTexte">
+                                    Tokens
+                                </div>
+                                <nuxt-link to="/user/preferences/tokens" class="columnParametreButton" v-if="loadedUser &&loadedUser.tokens">
+                                    {{ loadedUser.tokens.value }}
+                                </nuxt-link>
+                            </div>
+                            <div class="flex-container-modal-Niveau">
+                                <div class="columnParametreTexte">
+                                    Status
+                                </div>
+                                <nuxt-link to="/user/preferences/status" class="columnParametreButton" v-if="loadedUser &&loadedUser.status">
+                                    {{ loadedUser.status.name }}
                                 </nuxt-link>
                             </div>
                         </div><!-- /.flex-container -->

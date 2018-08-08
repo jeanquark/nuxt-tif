@@ -2,12 +2,12 @@
 	<div class="container-fluid">
 		<!-- Header -->
 
-		<div v-if="loadedUser == ''">
+		<!-- <div v-if="loadedUser == ''">
 			<div style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; z-index: 9999;
 			  background: url('/images/loader.gif') 50% 50% no-repeat rgb(249,249,249);"></div>
-		</div>
+		</div> -->
 		
-		<div v-else v-cloak style="">
+		<div style="">
 			<!-- <h1 class="text-center" style="color: #fff;">Loading...{{ loadedUser }}</h1> -->
 			<div id="header" class="col-12 col-sm-12 col-md-12 col-lg-12 top-fixed">
 				<div class="flex-container-header text-center">
@@ -22,9 +22,11 @@
 					</div>
 
 					<div class="columnButton text-right">
-						<div class="quit-box" @click="logout"><i class="fa fa-times"></i></div>					
+						<div class="quit-box" @click="logout"><i class="fa fa-times"></i></div>
+						<!-- <button @click="increaseTokens">+10 Tokens</button> -->
+						<!-- <button @click="increaseLevel">+10 Level</button>	 -->
 					</div>
-					<div class="columnButton text-right" v-if="loadedUser && loadedUser.status === 'admin' || loadedUser && loadedUser.status === 'user'">
+					<div class="columnButton text-right" v-if="loadedUser && loadedUser.status && loadedUser.status.slug === 'admin'">
 						<div class="quit-box" @click="goToAdmin"><i class="fa fa-tachometer-alt"></i></div>
 					</div>
 				</div>	
@@ -51,6 +53,7 @@
 				<div class="flex-container-teamGoodies">
 				  	<nuxt-link to="user/teams" class="boxShadow" style="flex-grow: 1"><span class="textTitle">{{ $t('your_teams') }}</span></nuxt-link>
 				  	<nuxt-link :to="localePath({name: 'user-inventory'})" class="boxShadow" style="flex-grow: 1"><span class="textTitle">Ton inventaire</span></nuxt-link>
+				  	<nuxt-link to="/tokens" class="boxShadow" style="flex-grow: 1;"><span class="textTitle">Acheter des tokens</span></nuxt-link>
 				</div>
 			</div>
 			<!-- End Team&Goodies du joueur -->
@@ -59,6 +62,7 @@
 			<div id="experience" class="col-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="flex-container-experience">
 				  	<a href="mesActions.html" class="darkred" style="flex-grow: 1"><span class="textXP">XP / Actions</span></a>
+				  	loadedUser: {{ this.loadedUser }}
 				</div>
 			</div>
 			<!-- End Expérience -->
@@ -138,11 +142,18 @@
 </template>
 
 <script>
+	import axios from 'axios'
+	import Noty from 'noty'
 	export default {
 		layout: 'layoutFront',
-		// created () {
-  //           console.log(this.$i18n.t('pages.index.welcome'))
-		// },
+		created () {
+            // if (!this.loadedUser.level) {
+            // 	console.log('User level is not defined')
+            // 	this.$store.dispatch('users/loadedUser')
+            // } else {
+            // 	console.log('User level: ', this.loadedUser.level)
+            // }
+		},
 		computed: {
 			loadedUser () {
 				return this.$store.getters['users/loadedUser']
@@ -160,6 +171,34 @@
 	          		// this.$router.replace({ path: '/' })
                 	this.$router.replace('/')
 	        	})
+	        },
+	        increaseTokens () {
+	        	axios.post('/update-user-tokens', {
+                    tokens: 10,
+                    userId: 'EaCQBRrmLYV6QPPS3JVY1jMMtV62'
+                }).then((response) => {
+                    console.log('success')
+                    console.log(response)
+                    new Noty({type: 'success', text: 'Your tokens were updated to a value of 10', timeout: 5000, theme: 'metroui'}).show()
+                }).catch(function (error) {
+                    console.log('error')
+                    console.log(error)
+                    new Noty({type: 'error', text: 'Could not remove token from your account', timeout: 5000, theme: 'metroui'}).show()
+                })
+	        },
+	        increaseLevel () {
+	        	axios.post('/update-user-level', {
+                    level: 10,
+                    userId: 'EaCQBRrmLYV6QPPS3JVY1jMMtV62'
+                }).then((response) => {
+                    console.log('success')
+                    console.log(response)
+                    new Noty({type: 'success', text: 'Your level was updated to level 10', timeout: 5000, theme: 'metroui'}).show()
+                }).catch(function (error) {
+                    console.log('error')
+                    console.log(error)
+                    new Noty({type: 'error', text: 'Could not update your level', timeout: 5000, theme: 'metroui'}).show()
+                })
 	        }
 		}
 	}

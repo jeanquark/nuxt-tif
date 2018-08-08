@@ -1,0 +1,46 @@
+<template>
+	<div class="row" style="margin-left: 0px; margin-right: 0px;">
+	    <div class="col-lg-3 col-md-4 col-xs-6" v-for="index in total_makeup_shapes" style="padding-right: 5px; padding-left: 5px;" @click="addToMerge({gender: 'female', type: 'makeup', property: 'color', image: 'makeup' + convertTo2Digits(index) + makeup_color + '.png', index: index, layerPosition: 2})">
+            <img :src="'/images/avatars/jm/' + 'female' + '/' + 'makeup' + '/' + 'min_makeup' + convertTo2Digits(index) + '01' + '.png'" class="imgModalAvatar" :class="{active: (makeup_shape === convertTo2Digits(index)) }" style="cursor: pointer;" />
+        </div>
+	</div>
+</template>
+
+<script>
+	export default {
+		props: ['makeup'],
+		data () {
+			return {
+				total_makeup_shapes: 4,
+				// makeup_shape: this.makeup ? this.makeup.match(/\d+/)[0].substr(0, 2) : '01',
+                // makeup_color: this.makeup ? this.makeup.match(/\d+/)[0].substr(2, 4) : '01'
+			}
+		},
+		computed: {
+			makeup_shape () {
+				return this.makeup ? this.makeup.match(/\d+/)[0].substr(0, 2) : '01'
+			},
+			makeup_color () {
+				return this.makeup ? this.makeup.match(/\d+/)[0].substr(2, 4) : '01'
+			}
+		},
+		methods: {
+			convertTo2Digits (index) {
+				return this.$parent.convertTo2Digits(index)
+			},
+			addToMerge (event) {
+				// console.log('onClickButton')
+				// console.log('event: ', event)
+				// this.makeup_shape = this.convertTo2Digits(event.index)
+		      	this.$emit('addToMergeEmitter', event)
+		    }
+		}
+	}
+</script>
+
+<style scoped>
+	.active {
+        background-color: orangered;
+        border: 2px solid red;
+    }
+</style>

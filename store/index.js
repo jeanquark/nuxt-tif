@@ -8,9 +8,15 @@
 
 // import VueLoading from 'vuex-loading'
 // export const plugins = [ VueLoading ]
-import firebase from 'firebase'
+
+
+// import firebase from 'firebase'
+// import { Auth } from '~/plugins/firebase-client-init.js'
+// import admin from 'firebase-admin'
 import setUser from '../helpers/setUser'
+import moment from 'moment'
 export const strict = false
+// import router from '../router'
 
 export const state = () => ({
     loading: false,
@@ -20,18 +26,18 @@ export const state = () => ({
 
 export const mutations = {
     setLoading (state, payload) {
-      state.loading = payload
+        state.loading = payload
     },
     setLoadingPage (state, payload) {
-      state.loadingPage = payload
+        state.loadingPage = payload
     },
     setError (state, payload) {
-      console.log('setError mutation called')
-      console.log(payload)
-      state.error = payload
+        console.log('setError mutation called')
+        console.log(payload)
+        state.error = payload
     },
     clearError (state) {
-      state.error = null
+        state.error = null
     }
 }
 
@@ -45,40 +51,54 @@ export const actions = {
     //     }
     // },
 
-    async nuxtServerInit ({commit}, {req}) {
-        // try {
+    async nuxtServerInit ({commit, dispatch}, {req}) {
+        // // try {
+        // if (req.user) {
+        //     console.log('Entering nuxtServerInit')
+        //     console.log('req.user: ', req.user)
+        //     // commit('users/setUser', req.user, { root: true })
+        //     const userId = req.user.uid
+        //     // console.log('ABC')
+        //     console.log('userId: ', userId)
+        //     // console.log(userId)
+        //     // const userData = ''
+        //     // await firebase.database().ref('/users/' + userId).once('value').then(function (snapshot) {
+        //     await firebase.database().ref('/users/' + userId).on('value', function (snapshot) {
+        //     // await admin.database().ref('/users/' + userId).on('value', function (snapshot) {
+        //         commit('users/setLoadedUser', snapshot.val(), { root: true })
+        //         console.log('End of nuxtServerInit')
+        //     })
+        //     // const authData = {
+        //     //   avatar: '',
+        //     //   email: 'test2@test.com',
+        //     //   id: 'RHhcGpLRSgRNm1ByOA9j7qASopf1',
+        //     //   status: 'user'
+        //     // }
+        //     // commit('users/setUser', authData, {root: true})
+        // }
+        // // }
+        // // catch (e) {
+        // //     console.log(e)
+        // // }
+
+
+        console.log('Entering nuxtServerInit', moment().format("DD-MM-YYYY HH:mm:ss"))
         if (req.user) {
-            console.log('Entering nuxtServerInit')
-            console.log(req.user)
-            // commit('users/setUser', req.user, { root: true })
+            console.log('User is logged in from nuxtServerInit')
             const userId = req.user.uid
-            console.log('ABC')
-            console.log(userId)
-            // console.log(userId)
-            const userData = ''
-            // await firebase.database().ref('/users/' + userId).once('value').then(function (snapshot) {
-            await firebase.database().ref('/users/' + userId).on('value', function (snapshot) {
-                commit('users/setLoadedUser', snapshot.val(), { root: true })
-                console.log('End of nuxtServerInit')
-            })
-            // const authData = {
-            //   avatar: '',
-            //   email: 'test2@test.com',
-            //   id: 'RHhcGpLRSgRNm1ByOA9j7qASopf1',
-            //   status: 'user'
-            // }
-            // commit('users/setUser', authData, {root: true})
+            console.log('userId: ', userId)
+            // dispatch('users/loadedUser', userId, { root: true})
+            commit('users/setLoadedUser', req.user, { root: true })
+            // router.push({'path': '/'})
+        } else {
+            console.log('User is not logged in from nuxtServerInit')
         }
-        // }
-        // catch (e) {
-        //     console.log(e)
-        // }
     },
     // setLoading ({commit, payload}) {
     //   commit('setLoading', payload)
     // },
     clearError ({commit}) {
-      commit('clearError')
+        commit('clearError')
     },
     // async sendEmail (payload) {
     //     // commit('setLoading', true, { root: true })
@@ -98,13 +118,13 @@ export const actions = {
 
 export const getters = {
     loading (state) {
-      return state.loading
+        return state.loading
     },
     loadingPage (state) {
-      return state.loadingPage
+        return state.loadingPage
     },
     error (state) {
-      return state.error
+        return state.error
     }
 }
 

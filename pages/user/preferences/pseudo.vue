@@ -17,22 +17,17 @@
 					<div id="modalBoxContent" class="modal-body">
 						<div class="flex-container-modal-MyTeam">
 							<h1>C'est quoi ton pseudo ?</h1>
+							<!-- loadedUser: {{ loadedUser }}<br /><br /> -->
+							<!-- pseudo: {{ this.username }}<br /><br /> -->
 						</div>
-						<form v-if="user">
-							<input type="text" name="user.pseudo" placeholder="user.pseudo">
+						<form>
+							<input type="text" name="username" placeholder="Ton pseudo" v-model="username">
 						</form>
-						<div class="flex-container-modal-Pseudo">
-							<div class="flex-container-modal-Niveau">
-								<div class="columnParametreButtonPseudo">
-									Attention : tu peux changer ton pseudo, mais sache que tes amis te trouveront plus difficilement ensuite...
-								</div>
-							</div>
-						</div>
 					</div>
 					<!-- Modal footer -->
 					<div class="modal-footer">
 						<nuxt-link to="/user/preferences"><button type="button" class="btn btn-danger" data-dismiss="modal">Annule tout !</button></nuxt-link>
-						<nuxt-link to="/user/preferences"><button type="button" class="btn btn-success" data-dismiss="modal">Allez, valide !</button></nuxt-link>
+						<button type="submit" class="btn btn-success" data-dismiss="modal" @click="editUser">Allez, valide !</button>
 					</div>
 				</div>
 			</div>
@@ -44,21 +39,31 @@
 <script>
 	export default {
 		layout: 'layoutFront',
+		mounted () {
+			this.username = this.$store.getters['users/loadedUser'].username
+		},
+		data () {
+			return {
+				username: ''
+			}
+		},
 		computed: {
-			user () {
+			loadedUser () {
 				return this.$store.getters['users/loadedUser']
 			}
 		},
 		methods: {
-			logout() {
-				// return this.$store.dispatch('users/signOut')
-				this.$store.dispatch('users/signOut').then(() => {
-					// console.log('abc')
-	          		// this.$router.push('/')
-	          		// this.$router.replace({ path: '/' })
-                	this.$router.replace('/')
-	        	})
-	        }
+			editUser () {
+				console.log('Edit User')
+				console.log(this.username)
+				return this.$store.dispatch('users/updateUser', {username: this.username}).then(response => {
+					if (this.$i18n.locale != this.$i18n.defaultLocale) {
+						return this.$router.push('/' + this.$i18n.locale + '/user/preferences')
+					} else {
+						return this.$router.push('/user/preferences')
+					}
+				})
+			},
 		}
 	}
 </script>

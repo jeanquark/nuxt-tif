@@ -14,7 +14,7 @@
 						</nuxt-link>					
 					</div>
 					<!-- Modal body -->
-					<div id="modalBoxContent" class="modal-body" v-if="loadedUserTeams.length > 0">
+					<div id="modalBoxContent" class="modal-body">
 						<div class="flex-container-modal-MyTeam">
 							<h1>Tu supportes {{ loadedUserTeams.length }} équipe(s)...</h1>
 						</div>
@@ -33,16 +33,22 @@
 						</div>
 						<!-- Loading placeholder -->
 						<div class="ph-item" v-else>
-							<div class="col-md-3">
+							<div class="col-md-2">
 						        <div class="ph-picture"></div>
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-2">
 						        <div class="ph-picture"></div>
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-2">
 						        <div class="ph-picture"></div>
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-2">
+						        <div class="ph-picture"></div>
+							</div>
+							<div class="col-md-2">
+						        <div class="ph-picture"></div>
+							</div>
+							<div class="col-md-2">
 						        <div class="ph-picture"></div>
 							</div>
 						</div>
@@ -69,16 +75,22 @@
 						
 						<!-- Loading placeholder -->
 						<div class="ph-item" v-else>
-							<div class="col-md-3">
+							<div class="col-md-2">
 						        <div class="ph-picture"></div>
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-2">
 						        <div class="ph-picture"></div>
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-2">
 						        <div class="ph-picture"></div>
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-2">
+						        <div class="ph-picture"></div>
+							</div>
+							<div class="col-md-2">
+						        <div class="ph-picture"></div>
+							</div>
+							<div class="col-md-2">
 						        <div class="ph-picture"></div>
 							</div>
 						</div>
