@@ -2,8 +2,9 @@ import {Auth, GoogleAuthProvider, FacebookAuthProvider} from '~/plugins/firebase
 import firebase from 'firebase'
 // import admin from 'firebase-admin'
 import axios from 'axios'
-import setUser from '../helpers/setUser'
+// import setUser from '../helpers/setUser'
 import Noty from 'noty'
+import moment from 'moment'
 // import sweetAlert from '~/plugins/vue-sweetalert2.js'
 // import vueSweetAlert from 'vue-sweetalert2'
 // import Router from 'vue-router'
@@ -115,15 +116,30 @@ export const actions = {
                 // console.log(user)
 
                 if (action == 'userToAdmin') {
-                    dispatch('updateUser', {status: 'admin', id: user.uid})
+                    dispatch('updateUser', {
+                        status: {
+                            value: 'admin', 
+                            updated_at: moment().unix()
+                        },
+                        id: user.uid
+                    })
                 } else if (action == 'adminToUser') {
-                    dispatch('updateUser', {status: 'user', id: user.uid})
+                    dispatch('updateUser', {
+                        status: {
+                            value: 'user',
+                            updated_at: moment().unix()
+                        }, 
+                        id: user.uid
+                    })
                 }
                 // commit('setLoading', false, { root: true })
+            }).catch(error => {
+                console.log(error)
             })
         }
         catch(error) {
             console.log(error)
+            throw new Error(error)
         }
     },
     // async loadedUser ({commit}, payload) {
@@ -219,7 +235,8 @@ export const actions = {
     async updateUser ({commit}, payload) {
         try {
             console.log(payload)
-            const userId = firebase.auth().currentUser.uid
+            const userId = payload.id
+            // const userId = firebase.auth().currentUser.uid
             // console.log(userId)
             firebase.database().ref('/users/' + userId).update(payload).then((response) => {
                 new Noty({type: 'success', text: 'Modifications de l\'utilisateur effectuées avec succès', timeout: 5000, theme: 'metroui'}).show()
@@ -338,78 +355,78 @@ export const actions = {
     //         commit('setLoading', false, { root: true })
     //     }
     // },
-    async signUserUp ({commit}, payload) {
-        console.log(payload)
-        commit('setLoading', true, { root: true })
-        try {
-            let authData = await Auth.createUserWithEmailAndPassword(payload.email, payload.password)
-            console.log(authData)
+    // async signUserUp ({commit}, payload) {
+    //     console.log(payload)
+    //     commit('setLoading', true, { root: true })
+    //     try {
+    //         let authData = await Auth.createUserWithEmailAndPassword(payload.email, payload.password)
+    //         console.log(authData)
 
-            // Save user in database
-            const newUserKey = firebase.database().ref().child('/users').push().key
+    //         // Save user in database
+    //         const newUserKey = firebase.database().ref().child('/users').push().key
 
-            authData['status'] = 'user'
-            authData['id'] = newUserKey
+    //         authData['status'] = 'user'
+    //         authData['id'] = newUserKey
 
-            firebase.database().ref('/users/' + newUserKey).set(buildUserObject(authData))
+    //         firebase.database().ref('/users/' + newUserKey).set(buildUserObject(authData))
 
-            // Load user in store
-            commit('setLoadedUser', buildUserObject(authData))
-            // this.$toast.success('Successfully signed up!')
-            commit('setLoading', false, { root: true })
-        } 
-        catch(error) {
-            console.log(error)
-            // commit('setError', error)
-            commit('setError', error, { root: true })
-            commit('setLoading', false, { root: true })
-        }
-    },
-    async signInWithGooglePopup ({commit}) {
-        commit('setLoading', true, { root: true })
-        try {
-            let authData = await Auth.signInWithPopup(GoogleAuthProvider)
-            console.log(authData)
+    //         // Load user in store
+    //         commit('setLoadedUser', buildUserObject(authData))
+    //         // this.$toast.success('Successfully signed up!')
+    //         commit('setLoading', false, { root: true })
+    //     } 
+    //     catch(error) {
+    //         console.log(error)
+    //         // commit('setError', error)
+    //         commit('setError', error, { root: true })
+    //         commit('setLoading', false, { root: true })
+    //     }
+    // },
+    // async signInWithGooglePopup ({commit}) {
+    //     commit('setLoading', true, { root: true })
+    //     try {
+    //         let authData = await Auth.signInWithPopup(GoogleAuthProvider)
+    //         console.log(authData)
 
-            // Save user in database
-            // const newUserKey = firebase.database().ref().child('/users').push().key
-            authData['status'] = 'user'
-            newUserKey = authData['id']
-            console.log(newUserKey)
-            console.log('authData:')
-            console.log(authData)
+    //         // Save user in database
+    //         // const newUserKey = firebase.database().ref().child('/users').push().key
+    //         authData['status'] = 'user'
+    //         newUserKey = authData['id']
+    //         console.log(newUserKey)
+    //         console.log('authData:')
+    //         console.log(authData)
 
-            firebase.database().ref('/users/' + newUserKey).set(buildUserObjectOAuth(authData))
+    //         firebase.database().ref('/users/' + newUserKey).set(buildUserObjectOAuth(authData))
 
-            // Load user in store
-            commit('setLoadedUser', buildUserObject(authData))
-            new Noty({type: 'success', text: 'Utilisateur enregistré avec succès!', timeout: 5000, theme: 'metroui'}).show()
-            commit('setLoading', false, { root: true })
-        } 
-        catch(error) {
-            console.log(error)
-            new Noty({type: 'error', text: 'Utilisateur n\'a pas pu être enregistré', timeout: 5000, theme: 'metroui'}).show()
-            commit('setError', error, { root: true })
-            commit('setLoading', false, { root: true })
-        }
-    },
-    async signInWithFacebookPopup ({commit}) {
-        commit('setLoading', true)
-        let authData = await Auth.signInWithPopup(FacebookAuthProvider)
-        commit('setLoadedUser', buildUserObject(authData))
-        commit('setLoading', false)
-    },
-    async signOut ({commit}) {
-        commit('setLoading', true, { root: true })
-        await Auth.signOut()
-        commit('setLoadedUser', null)
-        commit('setLoading', false, { root: true })
-        // new Noty({type: 'success', text: 'You successfully logged out!', timeout: 5000, theme: 'metroui'}).show()
-        // return redirect('/')
-        // setTimeout(function() {
-        //   commit('setLoadingPage', false, { root: true })
-        // }, 1000)
-    },
+    //         // Load user in store
+    //         commit('setLoadedUser', buildUserObject(authData))
+    //         new Noty({type: 'success', text: 'Utilisateur enregistré avec succès!', timeout: 5000, theme: 'metroui'}).show()
+    //         commit('setLoading', false, { root: true })
+    //     } 
+    //     catch(error) {
+    //         console.log(error)
+    //         new Noty({type: 'error', text: 'Utilisateur n\'a pas pu être enregistré', timeout: 5000, theme: 'metroui'}).show()
+    //         commit('setError', error, { root: true })
+    //         commit('setLoading', false, { root: true })
+    //     }
+    // },
+    // async signInWithFacebookPopup ({commit}) {
+    //     commit('setLoading', true)
+    //     let authData = await Auth.signInWithPopup(FacebookAuthProvider)
+    //     commit('setLoadedUser', buildUserObject(authData))
+    //     commit('setLoading', false)
+    // },
+    // async signOut ({commit}) {
+    //     commit('setLoading', true, { root: true })
+    //     await Auth.signOut()
+    //     commit('setLoadedUser', null)
+    //     commit('setLoading', false, { root: true })
+    //     // new Noty({type: 'success', text: 'You successfully logged out!', timeout: 5000, theme: 'metroui'}).show()
+    //     // return redirect('/')
+    //     // setTimeout(function() {
+    //     //   commit('setLoadingPage', false, { root: true })
+    //     // }, 1000)
+    // },
     // signOut ({commit}) {
     //   commit('setLoading', true, { root: true })
     //   firebase.auth().signOut().then(() => {

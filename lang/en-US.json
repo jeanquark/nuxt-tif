@@ -15,7 +15,7 @@
             "error": "Sorry, user could not be log in successfully"
         },
         "registration": {
-            "success": "Successful registration!",
+            "success": "Successful registration! Welcome on board, we wish you a pleasant game experience!",
             "error": "Sorry, user could not be registered successfully"
         }
     },

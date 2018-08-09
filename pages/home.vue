@@ -2,12 +2,12 @@
 	<div class="container-fluid">
 		<!-- Header -->
 
-		<!-- <div v-if="loadedUser == ''">
+		<div v-if="!loadedUser">
 			<div style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; z-index: 9999;
 			  background: url('/images/loader.gif') 50% 50% no-repeat rgb(249,249,249);"></div>
-		</div> -->
+		</div>
 		
-		<div style="">
+		<div v-else v-cloak>
 			<!-- <h1 class="text-center" style="color: #fff;">Loading...{{ loadedUser }}</h1> -->
 			<div id="header" class="col-12 col-sm-12 col-md-12 col-lg-12 top-fixed">
 				<div class="flex-container-header text-center">
@@ -26,7 +26,7 @@
 						<!-- <button @click="increaseTokens">+10 Tokens</button> -->
 						<!-- <button @click="increaseLevel">+10 Level</button>	 -->
 					</div>
-					<div class="columnButton text-right" v-if="loadedUser && loadedUser.status && loadedUser.status.slug === 'admin'">
+					<div class="columnButton text-right" v-if="loadedUser && loadedUser.status && loadedUser.status.value === 'admin'">
 						<div class="quit-box" @click="goToAdmin"><i class="fa fa-tachometer-alt"></i></div>
 					</div>
 				</div>	

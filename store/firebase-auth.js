@@ -1,67 +1,67 @@
 import {Auth, GoogleAuthProvider, FacebookAuthProvider} from '~/plugins/firebase-client-init.js'
 import firebase from 'firebase'
 import axios from 'axios'
-import setUser from '../helpers/setUser'
+// import setUser from '../helpers/setUser'
 import Noty from 'noty'
 import moment from 'moment'
 // import i18n from 'vue-i18n'
 
-function buildUserObject (payload) {
-    // let { email, displayName, uid, photoURL, pseudo, country, year_birth, language } = authData.user
-    // let user = {}
-    // user['email'] = email
-    // user['name'] = displayName
-    // user['uid'] = uid
-    // user['picture'] = photoURL
-    // user['isAdmin'] = authData.isAdmin
-    // user['pseudo'] = pseudo
-    // user['country'] = country
-    // user['year_birth'] = year_birth
-    // user['language'] = language
-    // return user
-    // let { email, uid } = authData.user
-    let user = {}
-    user.id = payload.id,
-    user.email = payload.email,
-    user.username = payload.username,
-    user.country = {
-        name: payload.country.name,
-        slug: payload.country.slug
-    },
-    user.language = {
-        name: payload.language.name,
-        slug: payload.language.slug
-    },
-    user.level = {
-        value: 1,
-        updated_at: moment().unix()
-    },
-    user.tokens = {
-        value: 10,
-        udpated_at: moment().unix()
-    },
-    user.status = {
-        value: 'user',
-        updated_at: moment().unix()
-    },
-    user._created_at = moment().unix(),
-    user._updated_at = moment().unix()
+// function buildUserObject (payload) {
+//     // let { email, displayName, uid, photoURL, pseudo, country, year_birth, language } = authData.user
+//     // let user = {}
+//     // user['email'] = email
+//     // user['name'] = displayName
+//     // user['uid'] = uid
+//     // user['picture'] = photoURL
+//     // user['isAdmin'] = authData.isAdmin
+//     // user['pseudo'] = pseudo
+//     // user['country'] = country
+//     // user['year_birth'] = year_birth
+//     // user['language'] = language
+//     // return user
+//     // let { email, uid } = authData.user
+//     let user = {}
+//     user.id = payload.id,
+//     user.email = payload.email,
+//     user.username = payload.username,
+//     user.country = {
+//         name: payload.country.name,
+//         slug: payload.country.slug
+//     },
+//     user.language = {
+//         name: payload.language.name,
+//         slug: payload.language.slug
+//     },
+//     user.level = {
+//         value: 1,
+//         updated_at: moment().unix()
+//     },
+//     user.tokens = {
+//         value: 10,
+//         udpated_at: moment().unix()
+//     },
+//     user.status = {
+//         value: 'user',
+//         updated_at: moment().unix()
+//     },
+//     user._created_at = moment().unix(),
+//     user._updated_at = moment().unix()
 
 
-    // user['id'] = uid
-    // // user['status'] = 'user'
-    // user['status'] = {
-    //     name: 'User',
-    //     slug: 'user'
-    // }
-    // user['tokens'] = {
-    //     value: 10
-    // },
-    // user['level'] = {
-    //     value: 1
-    // }
-    return user
-}
+//     // user['id'] = uid
+//     // // user['status'] = 'user'
+//     // user['status'] = {
+//     //     name: 'User',
+//     //     slug: 'user'
+//     // }
+//     // user['tokens'] = {
+//     //     value: 10
+//     // },
+//     // user['level'] = {
+//     //     value: 1
+//     // }
+//     return user
+// }
 
 export const state = () => ({
 
@@ -109,6 +109,7 @@ export const actions = {
             // commit('../errors/setError', error)
             // this.$store.commit('errors/setError', error)
             commit('setError', error, { root: true })
+            return 
         }
     },
     // async signUserIn ({commit, dispatch}, payload) {
@@ -223,14 +224,64 @@ export const actions = {
         // console.log(payload)
         // return
         commit('setLoading', true, { root: true })
+
+        // // Check if user email is already registered
+        // // const user = await firebase.database().ref('/users').child(payload.email).once('value')
+        // // console.log('user: ', user)
+        // // return
+        // Auth.createUserWithEmailAndPassword(payload.email, payload.password).catch(function(error) {
+        //   // Handle Errors here.
+        //   var errorCode = error.code;
+        //   var errorMessage = error.message;
+        //   // ...
+        //   console.log(error)
+        // });
+
         try {
             let authData = await Auth.createUserWithEmailAndPassword(payload.email, payload.password)
-            console.log(authData)
-            const newUserKey = authData.uid
-            payload['id'] = newUserKey
+            // Auth.createUserWithEmailAndPassword(payload.email, payload.password)
+            console.log('authData: ', authData)
+            const userId = authData.uid
+            console.log('userId: ', userId)
+            // Add user id to payload
+            payload['id'] = userId
             console.log('payload: ', payload)
-            const newUser = buildUserObject(payload)
-            console.log('newUser: ', newUser)
+
+            return axios.post('/register-new-user', {
+                type: 'form',
+                data: payload
+            }).then((response) => {
+                console.log('success')
+                console.log(response)
+                commit('users/setLoadedUser', response.data, { root: true })
+                commit('setLoading', false, { root: true })
+                new Noty({type: 'success', text: 'You\'ve just registered successfully', timeout: 5000, theme: 'metroui'}).show()
+            }).catch(function (error) {
+                console.log('error: ', error)
+                commit('setLoading', false, { root: true })
+                new Noty({type: 'error', text: 'Sorry, an error occured during your registration process.', timeout: 5000, theme: 'metroui'}).show()
+            })
+        }
+        catch(error) {
+            // new Noty({type: 'error', text: this.app.i18n.t('messages.login.error'), timeout: 5000, theme: 'metroui'}).show()
+            console.log(error)
+            if (error.code === 'auth/email-already-in-use') {
+                new Noty({type: 'error', text: error.message, timeout: 5000, theme: 'metroui'}).show()
+            }
+            // return
+            // new Noty({type: 'error', text: error, timeout: 5000, theme: 'metroui'}).show()
+            // commit('setError', error, { root: true })
+            commit('setLoading', false, { root: true })
+            // return response()->json({code: 500, message: 'error'});
+            // return response.status(500)
+            throw new Error(error)
+        }
+
+            // const newUserKey = authData.uid
+            // payload['id'] = newUserKey
+            // console.log('payload: ', payload)
+            // const newUser = buildUserObject(payload)
+            // console.log('newUser: ', newUser)
             // // return
 
             // // Save user in database
@@ -248,71 +299,96 @@ export const actions = {
 
 
 
-            axios.post('/register-new-user', {
-                payload,
-            }).then((response) => {
-                console.log('success')
-                console.log(response)
-                commit('setLoading', false, { root: true })
-                new Noty({type: 'success', text: 'You\'ve just registered successfully', timeout: 5000, theme: 'metroui'}).show()
-            }).catch(function (error) {
-                console.log('error')
-                console.log(error)
-                commit('setLoading', false, { root: true })
-                new Noty({type: 'error', text: 'Sorry, an error occured during your registration process.', timeout: 5000, theme: 'metroui'}).show()
-            })
-        } 
-        catch(error) {
-            console.log(error)
-            // commit('setError', error)
-            commit('setError', error, { root: true })
-            commit('setLoading', false, { root: true })
-        }
+            
+        // } 
+        // catch(error) {
+        //     console.log(error)
+        //     // commit('setError', error)
+        //     commit('setError', error, { root: true })
+        //     commit('setLoading', false, { root: true })
+        // }
     },
+    // async signInWithGooglePopup ({commit}) {
+    //     try {
+    //         commit('setLoading', true, { root: true })
+    //         let authData = await Auth.signInWithPopup(GoogleAuthProvider)
+    //         console.log(authData)
+    //         // console.log('getIdToken:')
+    //         // console.log(authData.user.getIdToken())
+    //         // console.log(authData.user.getIdToken().claims)
+    //         // console.log(authData.user.getIdToken().claims.admin)
+    //         const userId = authData.user.uid
+
+    //         // Check if user already exists in database
+    //         let user = await firebase.database().ref('/users/' + userId).once('value')
+    //         // let user = {}
+    //         // await firebase.database().ref('/users/' + userId).on('value', function(snapshot) {
+    //         //     user = snapshot.val()
+    //         // })
+    //         // console.log(user)
+    //         // return
+    //         console.log(user.val())
+    //         const registeredUser = user.val()
+
+    //         // If user does not exists, save new user in database
+    //         if (!registeredUser) {
+    //             console.log('new user')
+    //             const newUserKey = userId
+    //             let user = firebase.database().ref('/users/' + newUserKey).set(buildUserObjectOAuth(authData))
+    //         } else {
+    //             console.log('user already registered')
+    //         }
+
+    //         // Load user in store
+    //         commit('users/setLoadedUser', registeredUser, { root: true })
+    //         if (!registeredUser) {
+    //             new Noty({type: 'success', text: this.app.i18n.t('messages.registration.success'), timeout: 5000, theme: 'metroui'}).show()
+    //         } else {
+    //             new Noty({type: 'success', text: this.app.i18n.t('messages.login.success'), timeout: 5000, theme: 'metroui'}).show()        
+    //         }
+    //         // new Noty({type: 'success', text: i18n.t('pages.index.welcome'), timeout: 5000, theme: 'metroui'}).show()
+    //         commit('setLoading', false, { root: true })
+    //         console.log('signInWithGooglePopup done')
+    //     } 
+    //     catch(error) {
+    //         console.log(error)
+    //         new Noty({type: 'error', text: this.app.i18n.t('messages.login.error'), timeout: 5000, theme: 'metroui'}).show()
+    //         commit('setError', error, { root: true })
+    //         commit('setLoading', false, { root: true })
+    //     }
+    // },
     async signInWithGooglePopup ({commit}) {
         try {
             commit('setLoading', true, { root: true })
             let authData = await Auth.signInWithPopup(GoogleAuthProvider)
-            console.log(authData)
-            // console.log('getIdToken:')
-            // console.log(authData.user.getIdToken())
-            // console.log(authData.user.getIdToken().claims)
-            // console.log(authData.user.getIdToken().claims.admin)
             const userId = authData.user.uid
 
             // Check if user already exists in database
-            let user = await firebase.database().ref('/users/' + userId).once('value')
-            // let user = {}
-            // await firebase.database().ref('/users/' + userId).on('value', function(snapshot) {
-            //     user = snapshot.val()
-            // })
-            // console.log(user)
-            // return
-            console.log(user.val())
-            const registeredUser = user.val()
+            const snapshot = await firebase.database().ref('/users/' + userId).once('value')
+            const registeredUser = snapshot.val()
 
-            // If user does not exists, save new user in database
+            // If user does not exists, save user data in database at the user node
             if (!registeredUser) {
-                console.log('new user')
-                const newUserKey = userId
-                let user = firebase.database().ref('/users/' + newUserKey).set(buildUserObjectOAuth(authData))
+                return axios.post('/register-new-user', {
+                    type: 'oauth',
+                    data: authData,
+                }).then((response) => {
+                    // Load newly registered user in store
+                    commit('users/setLoadedUser', response.data, { root: true })
+                    commit('setLoading', false, { root: true })
+                    new Noty({type: 'success', text: this.app.i18n.t('messages.registration.success'), timeout: 10000, theme: 'metroui'}).show()
+                }).catch(function (error) {
+                    commit('setLoading', false, { root: true })
+                    new Noty({type: 'error', text: 'Sorry, an error occured during your registration process.', timeout: 5000, theme: 'metroui'}).show()
+                })
             } else {
-                console.log('user already registered')
-            }
-
-            // Load user in store
-            commit('users/setLoadedUser', registeredUser, { root: true })
-            if (!registeredUser) {
-                new Noty({type: 'success', text: this.app.i18n.t('messages.registration.success'), timeout: 5000, theme: 'metroui'}).show()
-            } else {
+                // Load user in store
+                commit('users/setLoadedUser', registeredUser, { root: true })
+                commit('setLoading', false, { root: true })
                 new Noty({type: 'success', text: this.app.i18n.t('messages.login.success'), timeout: 5000, theme: 'metroui'}).show()        
             }
-            // new Noty({type: 'success', text: i18n.t('pages.index.welcome'), timeout: 5000, theme: 'metroui'}).show()
-            commit('setLoading', false, { root: true })
-            console.log('signInWithGooglePopup done')
         } 
         catch(error) {
-            console.log(error)
             new Noty({type: 'error', text: this.app.i18n.t('messages.login.error'), timeout: 5000, theme: 'metroui'}).show()
             commit('setError', error, { root: true })
             commit('setLoading', false, { root: true })
@@ -322,14 +398,11 @@ export const actions = {
         try {
             commit('setLoading', true, { root: true })
             let authData = await Auth.signInWithPopup(FacebookAuthProvider)
-            console.log('authData: ', authData)
             const userId = authData.user.uid
 
             // Check if user already exists in database
             const snapshot = await firebase.database().ref('/users/' + userId).once('value')
-            // return
             const registeredUser = snapshot.val()
-            console.log('registeredUser: ', registeredUser);
 
             // If user does not exists, save user data in database at the user node
             if (!registeredUser) {
@@ -337,42 +410,22 @@ export const actions = {
                     type: 'oauth',
                     data: authData,
                 }).then((response) => {
-                    console.log('success')
-                    // console.log('response: ', response)
-                    console.log('response data: ', response.data)
-
                     // Load newly registered user in store
                     commit('users/setLoadedUser', response.data, { root: true })
-                    // new Noty({type: 'success', text: 'You\'re now registered', timeout: 115000, theme: 'metroui'}).show()
                     commit('setLoading', false, { root: true })
-                    new Noty({type: 'success', text: this.app.i18n.t('messages.registration.success'), timeout: 15000, theme: 'metroui'}).show()
+                    new Noty({type: 'success', text: this.app.i18n.t('messages.registration.success'), timeout: 10000, theme: 'metroui'}).show()
                 }).catch(function (error) {
-                    console.log('error')
-                    console.log(error)
                     commit('setLoading', false, { root: true })
-                    new Noty({type: 'error', text: 'Sorry, an error occured during your registration process.', timeout: 115000, theme: 'metroui'}).show()
+                    new Noty({type: 'error', text: 'Sorry, an error occured during your registration process.', timeout: 5000, theme: 'metroui'}).show()
                 })
             } else {
-                console.log('User is already registered')
-
                 // Load user in store
                 commit('users/setLoadedUser', registeredUser, { root: true })
                 commit('setLoading', false, { root: true })
                 new Noty({type: 'success', text: this.app.i18n.t('messages.login.success'), timeout: 5000, theme: 'metroui'}).show()        
             }
-
-            // Load user in store
-            // commit('users/setLoadedUser', registeredUser, { root: true })
-            // if (!registeredUser) {
-            //     new Noty({type: 'success', text: this.app.i18n.t('messages.registration.success'), timeout: 5000, theme: 'metroui'}).show()
-            // } else {
-            //     new Noty({type: 'success', text: this.app.i18n.t('messages.login.success'), timeout: 5000, theme: 'metroui'}).show()        
-            // }
-            // commit('setLoading', false, { root: true })
-            // console.log('signInWithFacebookPopup done')
         } 
         catch(error) {
-            console.log(error)
             new Noty({type: 'error', text: this.app.i18n.t('messages.login.error'), timeout: 5000, theme: 'metroui'}).show()
             commit('setError', error, { root: true })
             commit('setLoading', false, { root: true })

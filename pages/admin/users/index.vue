@@ -14,7 +14,6 @@
 	  	<v-flex xs12 sm10 offset-sm1>
 	  		<br /><br />
 	      	<h1 class="text-md-center">Users</h1>
-	      	<!-- loadedEvents: {{ loadedEvents }} -->
 	      	<br /><br />
 	      	<v-btn color="primary" dark slot="activator" class="mb-2" to="/admin/events/create">Add a User</v-btn>
 			<v-card>
@@ -37,32 +36,12 @@
 					<template slot="items" slot-scope="props">
 						<td>{{ props.item.id }}</td>
 						<td>{{ props.item.email }}</td>
-						<td>{{ props.item.status }}</td>
-						<!-- <td class="text-xs-right">{{ props.item.firstname }}</td>
-						<td class="text-xs-right">{{ props.item.lastname }}</td>
-						<td class="text-xs-right">{{ props.item.email }}</td>
-						<td class="text-xs-right">{{ props.item._created_at }}</td>
-						<td class="text-xs-right">{{ props.item._updated_at }}</td> -->
-						<!-- <td class="justify-center layout px-0"> -->
+						<td>{{ props.item.status.value }}</td>
 						<td>
-				          <!-- <v-btn icon class="mx-0" @click="editItem(props.item)">
-				            <v-icon color="teal">edit</v-icon>
-				          </v-btn>
-				          <v-btn icon class="mx-0" @click="deleteItem(props.item)">
-				            <v-icon color="pink">delete</v-icon>
-				          </v-btn> -->
-				          
-				          <!-- <v-btn @click="checkUserCustomClaim()">
-				          	Check user status
-				          </v-btn> -->
-
-	<!-- <v-btn icon class="mx-0" @click="updateUserAccount(props.item.email, 'userToAdmin')">
-		Admin<v-icon color="teal">supervisor_account</v-icon>
-	</v-btn> -->
-							<v-btn color="info" @click="updateUserAccount(props.item.email, 'userToAdmin')" v-if="props.item.status != 'admin'">
+							<v-btn color="info" @click="updateUserAccount(props.item.email, 'userToAdmin')" v-if="props.item.status && props.item.status.value != 'admin'">
 								Grant Admin privileges&nbsp;&nbsp;<v-icon color="white">supervisor_account</v-icon>&nbsp;<i :class="{ 'fa fa-spinner fa-spin' : selectedRow === props.item.email}"></i>
 							</v-btn>
-							<v-btn color="warning" @click="updateUserAccount(props.item.email, 'adminToUser')" v-if="props.item.status != 'user'">
+							<v-btn color="warning" @click="updateUserAccount(props.item.email, 'adminToUser')" v-if="props.item.status && props.item.status.value != 'user'">
 								Revoke Admin privileges&nbsp;&nbsp;<v-icon color="white">supervisor_account</v-icon>&nbsp;<i :class="{ 'fa fa-spinner fa-spin' : selectedRow === props.item.email}"></i>
 							</v-btn>
 							<v-btn icon class="mx-0" @click="editItem(props.item)">
@@ -129,29 +108,17 @@
     	},
     	loadedUsers () {
 	    	return this.$store.getters['users/loadedAllUsers']
-    	},
-    	// selectedRow () {
-
-    	// 	return 'gael.manigley@gmail.com'
-    	// }
+    	}
     },
     methods: {
-    	// loading (rowId) {
-    	// 	// return true
-    	// 	console.log(rowId)
-    	// 	return this.$store.getters['loading']
-    	// },
-    	// updateToAdmin () {
-    	// 	console.log('click updateToAdmin')
-    	// },
-    	// updateToUser () {
-    	// 	console.log('click updateToUser')
-    	// }
     	async updateUserAccount(userEmail, action) {
     		this.selectedRow = userEmail
     		this.$store.dispatch('users/updateUserAccount', {userEmail, action}).then(() => {
     			this.selectedRow = ''
-    		})
+    		}).catch(error => {
+    			this.selectedRow = ''
+ 				console.log('error: ', error)
+			})
     	},
     	// async upgradeUserAccountToAdmin (userEmail) {
     	// 	console.log(userEmail)

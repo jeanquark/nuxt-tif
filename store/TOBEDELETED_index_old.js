@@ -13,7 +13,7 @@
 import firebase from 'firebase'
 // import { Auth } from '~/plugins/firebase-client-init.js'
 // import admin from 'firebase-admin'
-import setUser from '../helpers/setUser'
+// import setUser from '../helpers/setUser'
 export const strict = false
 
 export const state = () => ({

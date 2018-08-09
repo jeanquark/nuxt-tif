@@ -205,7 +205,7 @@ module.exports = app.use(function (req, res, next) {
             return admin.auth().setCustomUserClaims(user.uid, {
                 admin: true
             }).then(() => {
-                console.log(user);
+                console.log('user: ', user);
                 // res.send('user');
                 console.log('USERTOADMIN');
                 res.send(user);
@@ -232,7 +232,7 @@ module.exports = app.use(function (req, res, next) {
         console.log(action);
         return admin.auth().getUserByEmail(userEmail).then((user) => {
         // admin.auth().getUser(uid).then((user) => {
-            console.log(user);
+            console.log('user: ', user);
             return admin.auth().setCustomUserClaims(user.uid, null)
                 .then(() => {
                     // res.send({'user': 'abc'});

@@ -13,8 +13,6 @@
 			return {
 				total_skin_colors: 10,
 				gender1: this.gender,
-				// skin_shape: this.skin ? this.skin.match(/\d+/)[0].substr(0, 2) : '01',
-                // skin_color: this.skin ? this.skin.match(/\d+/)[0].substr(2, 4) : '01'
 			}
 		},
 		computed: {
@@ -30,9 +28,6 @@
 				return this.$parent.convertTo2Digits(index)
 			},
 			addToMerge (event) {
-				// console.log('onClickButton')
-				// console.log('event: ', event)
-				// this.skin_color = this.convertTo2Digits(event.index)
 		      	this.$emit('addToMergeEmitter', event)
 		    }
 		}

@@ -30,7 +30,7 @@
 
 					<div class="group">      
 						<label for="psw-repeat"><b>Repeat Password</b></label>
-						<input type="password" v-model="form.confirm_password" placeholder="Repeat Password" name="confirm_password" data-vv-as="password" v-validate="'required|confirmed:password'">
+						<input type="password" v-model="form.confirm_password" placeholder="Repeat Password" name="confirm_password" data-vv-as="repeat password" v-validate="'required|confirmed:password'">
 						<span class="highlight"></span>
 						<span class="bar"></span>
 						<span class="error">{{ errors.first('confirm_password') }}</span>
@@ -85,8 +85,8 @@
 					<div class="row button-section">
 						<div class="col-twelve">
 							<button type="submit" class="button button-primary" :loading="loading" :disabled="disabled" @click.prevent="signUserUp">Je veux devenir fan ! <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
-							<button type="submit" class="button btn-facebook"><i class="fa fa-facebook"></i> Connecte-toi avec FB</button>
-							<button type="submit" class="button btn-google"><i class="fa fa-google"></i> Connecte-toi avec G+</button>
+							<button class="button btn-facebook" @click.prevent="signUpWithFacebook"><i class="fa fa-facebook"></i> Connecte-toi avec FB</button>
+							<button class="button btn-google" @click.prevent="signUpWithGoogle"><i class="fa fa-google"></i> Connecte-toi avec G+</button>
 						</div>
 					</div>
 				</div><!-- /.container -->
@@ -154,15 +154,62 @@
         methods: {
             async signUserUp () {
                 console.log('signUserUp')
-                // await this.$store.dispatch('users/signUserUp', {
-                await this.$store.dispatch('firebase-auth/signUserUp', {
-                    email: this.form.email,
-                    password: this.form.password,
-					username: this.form.username,
-					country: this.form.country,
-					birthyear: this.form.birthyear,
-					language: this.form.language
+     //            await this.$store.dispatch('firebase-auth/signUserUp', {
+     //                email: this.form.email,
+     //                password: this.form.password,
+					// username: this.form.username,
+					// country: this.form.country,
+					// birthyear: this.form.birthyear,
+					// language: this.form.language
+     //            })
+     //            if (this.$i18n.locale != 'en') {
+     //                console.log('done')
+     //                // this.$router.replace('/' + this.$i18n.locale + '/home')
+     //            } else {
+     //                console.log('done')
+     //                // this.$router.replace('/home')
+     //            }
+     		// 	this.$store.dispatch('firebase-auth/signUserUp', this.form)
+     		// 		.then((response) => {
+     		// 			console.log('response: ', response)
+	     	// 			if (this.$i18n.locale != 'en') {
+	     	// 				this.$router.replace('/' + this.$i18n.locale + '/home')
+	     	// 			} else {
+							// this.$router.replace('/home')
+	     	// 			}
+	     	// 		}).catch(error => {
+	     	// 			console.log('error: ', error)
+     		// 		})
+     			await this.$store.dispatch('firebase-auth/signUserUp', this.form)
+     			if (this.$i18n.locale != 'en') {
+ 					this.$router.replace('/' + this.$i18n.locale + '/home')
+ 				} else {
+					this.$router.replace('/home')
+ 				}
+     			// console.log('abc: ', abc)
+     			// if (abc != 'undefined') {
+	     		// 	if (this.$i18n.locale != 'en') {
+	       //              this.$router.replace('/' + this.$i18n.locale + '/home')
+	       //          } else {
+	       //              this.$router.replace('/home')
+	       //          }
+	       //      }
+            },
+            async signUpWithFacebook () {
+                console.log('signUpWithFacebook')
+                return this.$store.dispatch('firebase-auth/signInWithFacebookPopup').then(() => {
+                    if (this.$i18n.locale != 'en') {
+                        console.log('done')
+                        this.$router.replace('/' + this.$i18n.locale + '/home')
+                    } else {
+                        console.log('done')
+                        this.$router.replace('/home')
+                    }
                 })
+            },
+            async signUpWithGoogle () {
+                console.log('signUpWithGoogle')
+                await this.$store.dispatch('firebase-auth/signInWithGooglePopup')
                 if (this.$i18n.locale != 'en') {
                     console.log('done')
                     this.$router.replace('/' + this.$i18n.locale + '/home')
@@ -170,7 +217,7 @@
                     console.log('done')
                     this.$router.replace('/home')
                 }
-            }
+            },
         },
 		watch: {
 

@@ -12,8 +12,6 @@
 		data () {
 			return {
 				total_makeup_shapes: 4,
-				// makeup_shape: this.makeup ? this.makeup.match(/\d+/)[0].substr(0, 2) : '01',
-                // makeup_color: this.makeup ? this.makeup.match(/\d+/)[0].substr(2, 4) : '01'
 			}
 		},
 		computed: {
@@ -29,9 +27,6 @@
 				return this.$parent.convertTo2Digits(index)
 			},
 			addToMerge (event) {
-				// console.log('onClickButton')
-				// console.log('event: ', event)
-				// this.makeup_shape = this.convertTo2Digits(event.index)
 		      	this.$emit('addToMergeEmitter', event)
 		    }
 		}

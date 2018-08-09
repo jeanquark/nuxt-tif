@@ -15,7 +15,7 @@
             "error": "L'utilisateur n'a pas pu se connecter avec succès"
         },
         "registration": {
-            "success": "L'utilisateur s'est enregistré avec succès!",
+            "success": "L'utilisateur s'est enregistré avec succès! Bienvenue à bord, nous vous souhaitons une belle expérience de jeu",
             "error": "L'utilisateur n'a pas pu être enregistré avec succès"
         }
     },

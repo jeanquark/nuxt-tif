@@ -18,24 +18,15 @@
 
                     <div class="flex-container-modal-MyTeam">
                         <h1>{{ $t('pages.user-avatar.want_to_change_your_mind') }}</h1>
-                        <!-- avatars: {{ this.avatars }}<br /><br /> -->
                         <p style="color: #000;">
                             <!-- loadedUser: {{ this.loadedUser }}<br /><br /> -->
                             <!-- gender: {{ this.gender }}<br /><br /> -->
-                            <!--gender1: {{ this.gender1 }}<br /><br />
-                            type: {{ this.type }}<br /><br />
-                            arrayOfImagesToMerge: {{ this.arrayOfImagesToMerge }}<br /><br />
-                            temp: {{ this.temp }}<br /><br />
-                            background_color: {{ this.background_color }}<br /><br />
-                            background_shape: {{ this.background_shape }}<br /><br />
-                            skin: {{ this.skin }}<br /><br />
-                            skin_shape: {{ this.skin_shape }}<br /><br />
-                            skin_color: {{ this.skin_color }}<br /><br />
-                            beard_shape: {{ this.beard_shape }}<br /><br />
-                            beard_color: {{ this.beard_color }}<br /><br />
-                            makeup: {{ this.makeup }}<br /><br />
-                            makeup_shape: {{ this.makeup_shape }}<br /><br />
-                            makeup_color: {{ this.makeup_color }}<br /><br />-->
+                            <!-- type: {{ this.type }}<br /><br /> -->
+                            <!-- background: {{ this.background }}<br /><br /> -->
+                            <!-- skin: {{ this.skin }}<br /><br /> -->
+                            <!-- makeup: {{ this.makeup }}<br /><br /> -->
+                            <!-- beard: {{ this.beard }}<br /><br /> -->
+                            <!-- arrayOfImagesToMerge: {{ this.arrayOfImagesToMerge }}<br /><br /> -->
                         </p>
                     </div>
                     <div class="flex-container-modalAvatar" style="color: #000;" v-cloak>
@@ -54,11 +45,9 @@
                             </div>
                         </div><!-- /.flex-container-modalAvatar -->
 
-                        <div class="row text-center text-lg-left" style="height: 300px; border: 2px solid red; margin-left: 0px; margin-right: 0px;">
+                        <div class="row text-center text-lg-left" style="height: 300px; margin-left: 0px; margin-right: 0px;">
                             <!-- Left colum (shape) -->
-                            <div class="col-sm-6" style="border: 2px solid green; overflow-y: auto;">
-                                <h4 class="text-center" style="color: #000;">Shape</h4>
-
+                            <div class="col-sm-6" style="border: 1px solid orangered; padding: 10px; overflow-y: auto;">
                                 <background-shape v-if="this.type === 'background'" :background="this.background" @addToMergeEmitter="addToMerge"></background-shape>
 
                                 <skin-shape v-if="this.type === 'skin'" :gender="this.gender" :skin="this.skin" @addToMergeEmitter="addToMerge"></skin-shape>
@@ -70,9 +59,7 @@
 
 
                             <!-- Right column (color) -->
-                            <div class="col-sm-6" style="border: 2px solid orange; overflow-y: auto;">
-                                <h4 class="text-center" style="color: #000;">Color</h4>
-
+                            <div class="col-sm-6" style="border: 1px solid orangered; padding: 10px; overflow-y: auto;">
                                 <background-color v-if="this.type === 'background'" :background="background" @addToMergeEmitter="addToMerge"></background-color>
 
                                 <skin-color v-if="this.type === 'skin'" :gender="this.gender" :skin="skin" @addToMergeEmitter="addToMerge"></skin-color>
@@ -129,37 +116,11 @@
         },
         created () {
             if (process.client) {
-                console.log('Entering created lifecycle hook')
-                // const avatarsArray = []
-                // firebase.database().ref('avatars2').once('value', function (snapshot) {
-                //     for (const key in snapshot.val()) {
-                //         avatarsArray.push({...snapshot.val()[key]})
-                //     }
-                // })
-                // this.avatars = avatarsArray
-                // console.log('avararsArray: ', avatarsArray)
-                // console.log('user avatar: ', this.$store.getters['users/loadedUser'])
-
                 if (this.$store.getters['users/loadedUser'].avatar) {
-                    // console.log('avatar')
-                    const array = this.$store.getters['users/loadedUser'].avatar.image.split('_')
-                    this.arr = array
-                    console.log('array: ', array)
+                    const array = this.$store.getters['users/loadedUser'].avatar.name.split('_')
+
+                    // Ensure there are at least 5 layers in the image (including userId and gender)
                     if (array.length >= 5) {
-                        console.log('array is larger than 5')
-                        // this.gender = array[1]
-                        // this.background = array[2]
-                        // this.background_shape = this.background ? this.background.match(/\d+/)[0].substr(0, 2) : '01'
-                        // this.background_color = this.background ? this.background.match(/\d+/)[0].substr(2, 4) : '001'
-                        // this.skin = array[3]
-                        // this.skin_shape = this.skin ? this.skin.match(/\d+/)[0].substr(0, 2) : '01'
-                        // this.skin_color = this.skin ? this.skin.match(/\d+/)[0].substr(2, 4) : '01'
-                        // this.makeup = array[4]
-                        // this.makeup_shape = this.makeup ? this.makeup.match(/\d+/)[0].substr(0, 2) : '01'
-                        // this.makeup_color = this.makeup ? this.makeup.match(/\d+/)[0].substr(2, 4) : '01'
-                        // this.beard = array[4]
-                        // this.beard_shape = this.beard ? this.beard.match(/\d+/)[0].substr(0, 2) : '01'
-                        // this.beard_color = this.beard ? this.beard.match(/\d+/)[0].substr(2, 4) : '01'
                         this.gender = array[1]
                         this.background = array[2]
                         this.skin = array[3]
@@ -180,52 +141,29 @@
                             ]
                         }
                     }
+                } else {
+                    // User has no avatar registered. Build a default avatar image
+                    this.gender = 'female'
+                    this.background = 'background01001'
+                    this.skin = 'skin0101'
+                    this.makeup = 'makeup0101'
+                    this.arrayOfImagesToMerge = [
+                        '/images/avatars/jm/unisex/background/' + this.background + '.png',
+                        '/images/avatars/jm/female/skin/' + this.skin + '.png',
+                        '/images/avatars/jm/female/makeup/' + this.makeup + '.png',
+                    ]
                 }
-                // if (this.gender === 'female') {
-                //     this.arrayOfImagesToMerge = [
-                //         '/images/avatars/jm/unisex/background/background_shape' + this.background_shape + '_color' + this.background_color + '.png',
-                //         '/images/avatars/jm/female/skin/skin_shape' + this.skin_shape + '_color' + this.skin_color + '.png',
-                //         '/images/avatars/jm/female/makeup/makeup_shape' + this.makeup_shape + '_color' + this.makeup_color + '.png',
-                //     ]
-                // } else if (this.gender === 'male') {
-                //     this.arrayOfImagesToMerge = [
-                //         '/images/avatars/jm/unisex/background/background_shape' + this.background_shape + '_color' + this.background_color + '.png',
-                //         '/images/avatars/jm/male/skin/skin_shape' + this.skin_shape + '_color' + this.skin_color + '.png',
-                //         '/images/avatars/jm/male/beard/beard_shape' + this.beard_shape + '_color' + this.beard_color + '.png'
-                //     ]
-                // }
 
+                // Call mergeImages method to build the image
                 this.mergeImages()
             }
         },
         data () {
             return {
                 avatars: [],
-                // count: 80,
-                // gender: 'female',
-                type: 'background',
-                // total_background_shapes: 3,
-                // total_background_colors: 10,
-                // background_shape: '01',
-                // background_color: '001',
-                // total_skin_shapes: 3,
-                // total_skin_colors: 10,
-                // skin: '',
-                // skin_shape: '01',
-                // skin_color: '01',
-                // total_beard_shapes: 3,
-                // total_beard_colors: 3,
-                // beard_shape: '01',
-                // beard_color: '01',
-                // total_makeup_shapes: 3,
-                // total_makeup_colors: 3,
-                // makeup: '',
-                // makeup_shape: '01',
-                // makeup_color: '01',
-                arrayOfImagesToMerge: Array(2),
-                // temp: [],
-                // arr: [],
                 gender: '',
+                type: 'background',
+                arrayOfImagesToMerge: Array(2),
                 background: '',
                 skin: '',
                 makeup: '',
@@ -236,52 +174,34 @@
         computed: {
             loadedUser () {
                 return this.$store.getters['users/loadedUser']
-            },
-            loadedAvatars () {
-                return this.avatars
-                    // return this.avatars.filter(avatar => avatar.gender === this.gender)
             }
         },
         methods: {
+            // Convert single digit number (2) to 2 digits number (02)
+            convertTo2Digits (index) {
+                if (index.toString().length < 2) {
+                    return '0' + index
+                }
+                return index.toString()
+            },
+
+            // Convert single digit number (4) or double digit number (04) to 3 digits number (004)
+            convertTo3Digits (index) {
+                if (index.toString().length === 1) {
+                    return '00' + index
+                } else if (index.toString().length === 2) {
+                    return '0' + index
+                }
+                return index.toString()
+            },
+
+            // Select different types (background, skin...) on the right column
+            selectType (type) {
+                this.type = type
+            },
+
+            // Select a gender (male or female) on the left column. When user changes gender, makeup properties are replaced by beard properties and vice-versa (for example 'makeup0103' becomes 'beard0103'). This is why it is important to maintain the same number of forms and colors for both properties.
             selectGender (selectedGender) {
-                // this.gender = gender
-                // if (gender === 'female') {
-                //     this.makeup_shape = this.beard_shape
-                //     this.makeup_color = this.beard_color
-                //     this.beard_shape = ''
-                //     this.beard_color = ''
-                // } else if (gender === 'male') {
-                //     this.beard_shape = this.makeup_shape
-                //     this.beard_color = this.makeup_color
-                //     this.makeup_shape = ''
-                //     this.makeup_color = ''
-                // }
-                // if (gender === 'female' && this.type === 'beard') {
-                //     this.type = 'makeup'
-                // }
-                // if (gender === 'male' && this.type === 'makeup') {
-                //     this.type = 'beard'
-                // }
-                // // this.addToMerge()
-
-                // if (gender === 'female') {
-                //     for (let i = 0; i < this.temp.length; i++) {
-                //         this.temp[i] = this.temp[i].replace('male', 'female')
-                //         this.temp[i] = this.temp[i].replace('beard', 'makeup')
-                //         this.temp[i] = this.temp[i].replace('beard_shape', 'makeup_shape')
-                //         this.temp[i] = this.temp[i].replace('beard_color', 'makeup_color')
-                //     }
-                // }
-                // if (gender === 'male') {
-                //     for (let i = 0; i < this.temp.length; i++) {
-                //         this.temp[i] = this.temp[i].replace('female', 'male')
-                //         this.temp[i] = this.temp[i].replace('makeup', 'beard')
-                //         this.temp[i] = this.temp[i].replace('makeup_shape', 'beard_shape')
-                //         this.temp[i] = this.temp[i].replace('makeup_color', 'beard_color')
-                //     }
-                // }
-                // this.mergeImages()
-
                 this.gender = selectedGender
                 if (selectedGender === 'female') {
                     if (this.type === 'beard') {
@@ -289,7 +209,6 @@
                     }
                     for (let i = 0; i < this.arrayOfImagesToMerge.length; i++) {
                         this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace('male', 'female')
-                        // this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace('beard', 'makeup')
                         this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/beard/g, 'makeup')
                     }
                 }
@@ -302,134 +221,46 @@
                         this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/makeup/g, 'beard')
                     }
                 }
-                console.log('arrayofImagesToMerge: ', this.arrayOfImagesToMerge)
+                // console.log('arrayofImagesToMerge: ', this.arrayOfImagesToMerge)
 
+                // Don't forget to merge the images to see the result of the changes 
                 this.mergeImages()
             },
-            selectType (type) {
-                this.type = type
-            },
-            saveImage () {
-                console.log('saveImage')
-            },
-            // addToMerge(gender, type, property, image, index, layerPosition) {
-            //     /* Avatar image is a result of merged layers. Ordering of layers is important:
-            //         1.1 background shape
-            //         1.2 background color
-            //         2   skin color
-            //         3.1 beard shape
-            //         3.2 beard color
-            //         */
-            //         console.log('Call addToMerge method')
-            //     // this.name = name
-            //     // if (name.includes('background')) {
-            //     //     if (name.includes('background_form')) {
-            //     //         // Retrieve backgroundform integer in string
-            //     //         this.backgroundform = this.name.match(/\d+/)[0]
-            //     //     }
-            //     //     if (name.includes('background_color')) {
-            //     //         // Retrieve backgroundcolor integer in string
-            //     //         this.backgroundcolor = this.name.match(/\d+/)[0]
-            //     //     }
-            //     //     this.background = 'background' + this.backgroundform + this.backgroundcolor
-            //     //     image = this.background + '.png'
-            //     // } else if (name.includes('skin')) {
-            //     //     if (name.includes('skin_form')) {
-            //     //         // Retrieve skinform integer in string
-            //     //         this.skinform = this.name.match(/\d+/)[0]
-            //     //     }
-            //     //     if (name.includes('skin_color')) {
-            //     //         // Retrieve skincolor integer in string
-            //     //         this.skincolor = this.name.match(/\d+/)[0]
-            //     //     }
-            //     //     this.skin = 'skin' + this.skinform + this.skincolor
-            //     //     image = this.skin + '.png'
-            //     // }
-            //     console.log('gender: ', gender)
-            //     console.log('type: ', type)
-            //     console.log('property: ', property)
-            //     console.log('image: ', image)
-            //     console.log('index: ', index)
-            //     if (type === 'background' && property === 'shape') {
-            //         this.background_shape = this.convertTo2Digits(index)
-            //     } else if (type === 'background' && property === 'color') {
-            //         this.background_color = this.convertTo3Digits(index)
-            //     }
-            //     if (type === 'skin' && property === 'shape') {
-            //         this.skin_shape = this.convertTo2Digits(index)
-            //     } else if (type === 'skin' && property === 'color') {
-            //         this.skin_color = this.convertTo2Digits(index)
-            //     }
-            //     if (type === 'beard' && property === 'shape') {
-            //         this.beard_shape = this.convertTo2Digits(index)
-            //     } else if (type === 'beard' && property === 'color') {
-            //         this.beard_color = this.convertTo2Digits(index)
-            //     }
-            //     if (type === 'makeup' && property === 'shape') {
-            //         this.makeup_shape = this.convertTo2Digits(index)
-            //     } else if (type === 'makeup' && property === 'color') {
-            //         this.makeup_color = this.convertTo2Digits(index)
-            //     }
-            //     // return
-            //     this.arrayOfImagesToMerge[layerPosition] = '/images/avatars/jm/' + gender + '/' + type + '/' + image
-            //     console.log('arrayOfImagesToMerge: ', this.arrayOfImagesToMerge)
 
-
-
-            //     // return
-            //     this.mergeImages()
-            // },
+            // Define the array of images that need to be merged into one. There are different layers and the upper layer covers what's underneath it. For example, the skin covers the background, and the makeup covers the skin
             addToMerge (payload) {
-                console.log('Call to addMergeFromChild method in parent')
-                // this.gender = payload.gender
+                // console.log('Call to addMergeFromChild method in parent')
                 if (payload.type === 'background') {
-                    // console.log('define background2')
-                    this.background = payload.image
+                    // Remove file extension (.png) of the image
+                    this.background = payload.image.replace(/\.[^/.]+$/, "")
                 }
                 if (payload.type === 'skin') {
-                    // console.log('define skin2')
-                    this.skin = payload.image
+                    this.skin = payload.image.replace(/\.[^/.]+$/, "")
                 }
                 if (payload.type === 'makeup') {
-                    // console.log('define makeup2')
-                    this.makeup = payload.image
+                    this.makeup = payload.image.replace(/\.[^/.]+$/, "")
                 }
                 if (payload.type === 'beard') {
-                    // console.log('define beard')
-                    this.beard = payload.image
+                    this.beard = payload.image.replace(/\.[^/.]+$/, "")
                 }
-                // this.arr[2] = 'background01001'
-                // console.log('arr: ', this.arr)
-                // console.log('payload: ', payload)
-                // console.log('gender: ', payload.gender)
-                // console.log('type: ', payload.type)
-                // console.log('property: ', payload.property)
-                // console.log('index: ', payload.index)
-                console.log('image: ', payload.image)
-                // console.log('image2: ', payload.image2)
-                console.log('background2: ', this.background2)
+                
                 const layerPosition = payload.layerPosition
                 const gender = payload.gender
                 const type = payload.type
-                const property = payload.property
                 const image = payload.image
-                const index = payload.index
-                // const image2 = payload.image2
 
                 this.arrayOfImagesToMerge[layerPosition] = '/images/avatars/jm/' + gender + '/' + type + '/' + image
-                console.log('arrayOfImagesToMerge: ', this.arrayOfImagesToMerge)
 
                 this.mergeImages()
             },
+
+            // Merge the array of images. Each array element represents a property (gender, background, skin...)
             mergeImages() {
-                // Build an array of image paths from the object
-                console.log('Call mergeImages method')
-                
+                // Clean the array of images to remove empty values (for example when a user does not select a property)
                 this.cleanedArrayOfImagesToMerge = []
                 for (let i of this.arrayOfImagesToMerge) {
                     i && this.cleanedArrayOfImagesToMerge.push(i)
                 }
-                console.log('Cleaned arrayOfImagesToMerge: ', this.cleanedArrayOfImagesToMerge)
 
                 if (process.browser) {
                     mergeImages(this.cleanedArrayOfImagesToMerge)
@@ -438,66 +269,69 @@
                         )
                 }
             },
-            convertTo2Digits (index) {
-                if (index.toString().length < 2) {
-                    return '0' + index
-                }
-                return index.toString()
-            },
-            convertTo3Digits (index) {
-                if (index.toString().length === 1) {
-                    return '00' + index
-                } else if (index.toString().length === 2) {
-                    return '0' + index
-                }
-                return index.toString()
-            },
-            // Click on save image button
-            saveImage () {
-                console.log('Click saveImage method')
-                // const userId = firebase.auth().currentUser.uid
-                // let image_name = ''
-                // if (this.gender === 'female') {
-                //     image_name = userId + '_' + this.gender + '_background' + this.background_shape + this.background_color + '_skin' + this.skin_shape + this.skin_color  + '_makeup' + this.makeup_shape + this.makeup_color
-                // } else if (this.gender === 'male') {
-                //     image_name = userId + '_gender' + this.gender + '_background' + this.background_shape + this.background_color + '_skin' + this.skin_shape + this.skin_color + '_beard' + this.beard_shape + this.beard_color
-                // }
-                // console.log(image_name)
-                // return
-            },
             
+            // Save the image in Firebase Cloud Storage and the image name in Firebase database at the user node location
+            saveImage () {
+                const userId = firebase.auth().currentUser.uid
+                const now = moment().unix()
+
+                let imageName = ''
+                if (this.gender === 'female') {
+                    imageName = userId + '_female_' + this.background + '_' + this.skin + '_' + this.makeup
+                } 
+                if (this.gender === 'male') {
+                    imageName = userId + '_male_' + this.background + '_' + this.skin + '_' + this.beard
+                }
+
+                const storageRef = firebase.storage().ref('/images/avatars/' + imageName)
+                const image = this.$refs.mergedImage.src
+
+                let uploadTask = storageRef.putString(image, 'data_url')
+
+                uploadTask.on('state_changed', (snapshot) => {
+                    // Observe state change events such as progress, pause, and resume. Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                    this.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    switch (snapshot.state) {
+                        case firebase.storage.TaskState.PAUSED: // or 'paused'
+                        console.log('Upload is paused')
+                        break
+                        case firebase.storage.TaskState.RUNNING: // or 'running'
+                        console.log('Upload is running')
+                        break
+                    }
+                }, (error) => {
+                    // Handle unsuccessful uploads
+                    console.log(error)
+                    new Noty({type: 'error', text: 'An error occured and your avatar could not be uploaded to our database. Please try again later.', timeout: 5000, theme: 'metroui'}).show()
+                }, () => {
+                    // Delete old avatar if it exists
+                    if (this.loadedUser && this.loadedUser.avatar) {
+                        var oldImageRef = firebase.storage().ref('/images/avatars/' + this.loadedUser.avatar.name)
+                        oldImageRef.delete().then(function() {
+                            console.log('Successfully deleted old image')
+                        }).catch(function(error) {
+                            console.log('An error occured and the old image could not be deleted:')
+                            console.log(error)
+                        })
+                    }
+
+                    // Handle successful uploads on complete
+                    firebase.database().ref('/users/' + userId + '/avatar').set({
+                        name: uploadTask.snapshot.metadata.name,
+                        url: uploadTask.snapshot.downloadURL,
+                        updated_at: now,
+                    })
+                    new Noty({type: 'success', text: 'Successfully uploaded image!', timeout: 5000, theme: 'metroui'}).show()
+                    // return this.$router.push('/')
+                })
+            }
         }
     }
 </script>
 
 <style scoped>
-    [v-cloak] > * { display:none; }
-    [v-cloak]::before { 
-        content: " ";
-        display: block;
-        width: 16px;
-        height: 16px;
-        background-image: url('data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==');
-    }
     .active {
         background-color: orangered;
         border: 2px solid red;
-    }
-    .pagination {
-        margin: 0;
-        padding: 0;
-    }
-    .page-link {
-        font-size: 12px !important;
-        font-color: orangered;
-        /*background: orangered;*/
-        /*border-color: orangered;*/
-    }
-    .page-item {
-        color: #ffffff;
-    }
-    .page-item.active .page-link {
-        background-color: orangered;
-        border-color: orangered;
     }
   </style>
