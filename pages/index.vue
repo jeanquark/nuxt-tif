@@ -751,7 +751,7 @@
 
 <style scoped>
     .active {
-        border: 1px solid orangered;
+        /*border: 1px solid orangered;*/
     }
     #contact button.submitform:disabled {
         background: #dddddd;
