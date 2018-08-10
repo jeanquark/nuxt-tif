@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 
 function buildUserObject (payload) {
     let user = {}
-    // user.id = payload.id,
+    user.id = payload.id,
     user.email = payload.email,
     user.username = payload.username ? payload.username : '',
     user.country = {
@@ -44,7 +44,7 @@ function buildUserObject (payload) {
 
 function buildUserObjectOAuth (payload) {
     let user = {}
-    // user.id = payload.uid,
+    user.id = payload.uid,
     user.email = payload.email,
     user.username = '',
     user.country = {
@@ -80,7 +80,7 @@ module.exports = app.use(function (req, res, next) {
 
         let newUser = {};
         if (req.body && req.body.data && req.body.type === 'oauth') {
-            newUser = buildUserObjectOAuth(req.body.data.user);
+            newUser = buildUserObjectOAuth(req.body.data);
         } else if (req.body && req.body.data && req.body.type === 'form') {
             newUser = buildUserObject(req.body.data);
         }

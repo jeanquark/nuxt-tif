@@ -26,8 +26,9 @@ export const actions = {
         } 
         catch(error) {
             console.log(error)
+            commit('setLoading', false, { root: true })
             commit('setError', error, { root: true })
-            return 
+            throw new Error(error)
         }
     },
     
@@ -35,12 +36,13 @@ export const actions = {
         commit('setLoading', true, { root: true })
         try {
             let authData = await Auth.createUserWithEmailAndPassword(payload.email, payload.password)
-            // console.log('authData: ', authData)
+            console.log('authData: ', authData)
+            console.log('authData.uid: ', authData.uid)
             const userId = authData.uid
 
             // Add user id to payload
             payload['id'] = userId
-            // console.log('payload: ', payload)
+            console.log('payload: ', payload)
 
             return axios.post('/register-new-user', {
                 type: 'form',
@@ -71,7 +73,10 @@ export const actions = {
         try {
             commit('setLoading', true, { root: true })
             let authData = await Auth.signInWithPopup(GoogleAuthProvider)
+            console.log('authData: ', authData)
+            console.log('authData.user: ', authData.user)
             const userId = authData.user.uid
+            console.log('userId: ', userId)
 
             // Check if user already exists in database
             const snapshot = await firebase.database().ref('/users/' + userId).once('value')
@@ -81,7 +86,7 @@ export const actions = {
             if (!registeredUser) {
                 return axios.post('/register-new-user', {
                     type: 'oauth',
-                    data: authData,
+                    data: authData.user,
                 }).then((response) => {
                     // Load newly registered user in store
                     commit('users/setLoadedUser', response.data, { root: true })
@@ -108,7 +113,10 @@ export const actions = {
         try {
             commit('setLoading', true, { root: true })
             let authData = await Auth.signInWithPopup(FacebookAuthProvider)
+            console.log('authData: ', authData)
+            console.log('authData.user: ', authData.user)
             const userId = authData.user.uid
+            console.log('userId: ', userId)
 
             // Check if user already exists in database
             const snapshot = await firebase.database().ref('/users/' + userId).once('value')
@@ -118,7 +126,7 @@ export const actions = {
             if (!registeredUser) {
                 return axios.post('/register-new-user', {
                     type: 'oauth',
-                    data: authData,
+                    data: authData.user,
                 }).then((response) => {
                     // Load newly registered user in store
                     commit('users/setLoadedUser', response.data, { root: true })
