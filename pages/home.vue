@@ -23,8 +23,6 @@
 
 					<div class="columnButton text-right">
 						<div class="quit-box" @click="logout"><i class="fa fa-times"></i></div>
-						<!-- <button @click="increaseTokens">+10 Tokens</button> -->
-						<!-- <button @click="increaseLevel">+10 Level</button>	 -->
 					</div>
 					<div class="columnButton text-right" v-if="loadedUser && loadedUser.status && loadedUser.status.value === 'admin'">
 						<div class="quit-box" @click="goToAdmin"><i class="fa fa-tachometer-alt"></i></div>
@@ -62,7 +60,7 @@
 			<div id="experience" class="col-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="flex-container-experience">
 				  	<a href="mesActions.html" class="darkred" style="flex-grow: 1"><span class="textXP">XP / Actions</span></a>
-				  	loadedUser: {{ this.loadedUser }}
+				  	<!-- loadedUser: {{ this.loadedUser }} -->
 				</div>
 			</div>
 			<!-- End Expérience -->

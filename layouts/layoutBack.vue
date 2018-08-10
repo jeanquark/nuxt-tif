@@ -223,7 +223,7 @@
 				this.$router.push('/home')
 			},
 			logout () {
-				this.$store.dispatch('users/signOut').then(() => {
+				this.$store.dispatch('firebase-auth/signOut').then(() => {
 					// alert('Vous allez effacer votre session!')
 					this.$router.push('/')
 

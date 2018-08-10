@@ -1,5 +1,6 @@
 <template>
 	<div>
+		selectedRow: {{ selectedRow}}
 		<v-breadcrumbs divider="/">
 	  		<v-breadcrumbs-item
 		        v-for="link in links"
@@ -36,15 +37,17 @@
 					<template slot="items" slot-scope="props">
 						<td>{{ props.item.id }}</td>
 						<td>{{ props.item.email }}</td>
-						<td>{{ props.item.status.value }}</td>
+						<td v-if="props.item.level">{{ props.item.level.value }}</td>
+						<td v-if="props.item.status">{{ props.item.status.value }}</td>
+						<td>{{ props.item._created_at | moment('DD MMM YYYY') }}</td>
 						<td>
-							<v-btn color="info" @click="updateUserAccount(props.item.email, 'userToAdmin')" v-if="props.item.status && props.item.status.value != 'admin'">
+							<v-btn color="info" @click="updateUserAccount(props.item, 'userToAdmin')" v-if="props.item.status && props.item.status.value != 'admin'">
 								Grant Admin privileges&nbsp;&nbsp;<v-icon color="white">supervisor_account</v-icon>&nbsp;<i :class="{ 'fa fa-spinner fa-spin' : selectedRow === props.item.email}"></i>
 							</v-btn>
-							<v-btn color="warning" @click="updateUserAccount(props.item.email, 'adminToUser')" v-if="props.item.status && props.item.status.value != 'user'">
+							<v-btn color="warning" @click="updateUserAccount(props.item, 'adminToUser')" v-if="props.item.status && props.item.status.value != 'user'">
 								Revoke Admin privileges&nbsp;&nbsp;<v-icon color="white">supervisor_account</v-icon>&nbsp;<i :class="{ 'fa fa-spinner fa-spin' : selectedRow === props.item.email}"></i>
 							</v-btn>
-							<v-btn icon class="mx-0" @click="editItem(props.item)">
+							<v-btn icon class="mx-0" disabled @click="editItem(props.item)">
 								<v-icon color="teal">edit</v-icon>
 							</v-btn>
 							<v-btn icon class="mx-0" @click="deleteItem(props.item)">
@@ -78,10 +81,11 @@
 		            value: 'id'
 		        },
 		        { text: 'E-mail', value: 'email' },
-				{ text: 'Statut', value: 'status' },
+		        { text: 'Niveau', value: 'level.value' },
+				{ text: 'Statut', value: 'status.value' },
 				// { text: 'Nom', value: 'lastname' },
 				// { text: 'E-mail', value: 'email' },
-				// { text: 'Date de création', value: '_created_at' },
+				{ text: 'Date de création', value: '_created_at' },
 				// { text: 'Dernière modification', value: '_updated_at' }
 				{ text: 'Actions', sortable: false }
 	        ],
@@ -111,13 +115,15 @@
     	}
     },
     methods: {
-    	async updateUserAccount(userEmail, action) {
-    		this.selectedRow = userEmail
-    		this.$store.dispatch('users/updateUserAccount', {userEmail, action}).then(() => {
+    	async updateUserAccount(user, action) {
+    		console.log('user: ', user)
+    		// return
+    		this.selectedRow = user.email
+    		this.$store.dispatch('users/updateUserAccount', {user, action}).then(() => {
     			this.selectedRow = ''
     		}).catch(error => {
-    			this.selectedRow = ''
  				console.log('error: ', error)
+    			this.selectedRow = ''
 			})
     	},
     	// async upgradeUserAccountToAdmin (userEmail) {

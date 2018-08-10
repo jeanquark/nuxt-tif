@@ -18,38 +18,19 @@
 						<div class="flex-container-modal-MyTeam">
 							<h1>Tu supportes {{ loadedUserTeams.length }} équipe(s)...</h1>
 						</div>
-						<div class="flex-container-modal-Title banner2 text-center">
-							<h2>Tes équipes</h2>
-						</div>
-						<div class="flex-container-MesEquipes" v-if="loadedUserTeams != ''">
-							<div class="OtherTeam" v-for="team in loadedUserTeams">
-								<span v-if="team">
-									<img :src="'/images/teams/' + team.image" class="imgModalAvatar" />
-									<nuxt-link :to="'/user/teams/' + team.slug" class="overlay">
-										<div class="textActivity">{{ team.category.name }}<br />{{ team.name }}<br /><br />+Infos</div>
- 									</nuxt-link>
-								</span>
+						<div v-if="loadedUserTeams.length > 0">
+							<div class="flex-container-modal-Title banner2 text-center">
+								<h2>Tes équipes</h2>
 							</div>
-						</div>
-						<!-- Loading placeholder -->
-						<div class="ph-item" v-else>
-							<div class="col-md-2">
-						        <div class="ph-picture"></div>
-							</div>
-							<div class="col-md-2">
-						        <div class="ph-picture"></div>
-							</div>
-							<div class="col-md-2">
-						        <div class="ph-picture"></div>
-							</div>
-							<div class="col-md-2">
-						        <div class="ph-picture"></div>
-							</div>
-							<div class="col-md-2">
-						        <div class="ph-picture"></div>
-							</div>
-							<div class="col-md-2">
-						        <div class="ph-picture"></div>
+							<div class="flex-container-MesEquipes">
+								<div class="OtherTeam" v-for="team in loadedUserTeams">
+									<span v-if="team">
+										<img v-lazy="'/images/teams/' + team.image" class="imgModalAvatar" />
+										<nuxt-link :to="'/user/teams/' + team.slug" class="overlay">
+											<div class="textActivity">{{ team.category.name }}<br />{{ team.name }}<br /><br />+Infos</div>
+	 									</nuxt-link>
+									</span>
+								</div>
 							</div>
 						</div>
 					</div>

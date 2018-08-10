@@ -192,7 +192,7 @@ module.exports = app.use(function (req, res, next) {
     const userEmail = req.body.userEmail;
     // const uid = req.body.uid;
     // console.log(action);
-    console.log(userEmail);
+    console.log('userEmail: ', userEmail);
     // console.log(uid);
     // res.send('user');
 
