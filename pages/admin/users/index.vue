@@ -1,6 +1,5 @@
 <template>
 	<div>
-		selectedRow: {{ selectedRow}}
 		<v-breadcrumbs divider="/">
 	  		<v-breadcrumbs-item
 		        v-for="link in links"

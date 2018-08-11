@@ -3,8 +3,7 @@
 		
 		<!-- The Modal Pseudo -->
 		<div class="modalBox" style="padding: 50px;">
-    		<div v-if="error" class="text-center" style="color: red;">{{ $t(error.code) }}</div><br />
-		  	<form class="modal-content">
+		  	<form class="modal-content" style="padding: 30px;">
 				<div class="">
 					<h1>S'incrire</h1>
 					<p class="modalInscription">Entre dans la communauté de ThisIsFan.com et commence à encourager tes équipes favorites !</p>
@@ -12,6 +11,7 @@
                         <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
                     </nuxt-link>
 					<br /><hr><br />
+    				<div v-if="error" class="text-center" style="color: red;">{{ $t(error.code) }}</div><br />
 					<div class="group">      
 						<label for="email"><b>Email</b></label>
 						<input type="text" v-model="form.email" placeholder="Enter Email" name="email" v-validate="'required|email'">
@@ -47,7 +47,6 @@
 					<div class="group">      
 						<label for="country"><b>Country</b></label>
 						<select class="custom-select" v-model="form.country" name="country">
-							<option selected>Select your country</option>
 						 	<option :value="country" v-for="country in loadedCountries">{{ country.name }}</option>
 						</select>
 						<span class="highlight"></span>
@@ -57,7 +56,6 @@
 					<div class="group">      
 						<label for="birthyear"><b>Birth year</b></label>
 						<select class="custom-select" v-model="form.birthyear" name="birthyear">
-							<option selected>Select your birthyear</option>
 						 	<option :value="birthyear" v-for="birthyear in birthyears">{{ birthyear }}</option>
 						</select>
 						<span class="highlight"></span>
@@ -67,7 +65,6 @@
 					<div class="group">      
 						<label for="language"><b>Prefered Language</b></label>
 						<select class="custom-select" v-model="form.language" name="language">
-							<option selected>Choose your prefered language to interact with the application</option>
 						 	<option :value="language" v-for="language in languages">{{ language.name }}</option>
 						</select>
 						<span class="highlight"></span>

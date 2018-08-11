@@ -2,15 +2,15 @@
     <div class="container-fluid">		
     	<!-- The Modal Pseudo -->
     	<div class="modalBox">
-            <div v-if="error" class="text-center" style="color: red;">{{ $t(error.code) }}</div><br />
-    		<form class="modal-content">
-    			<div class="container">
+    		<form class="modal-content" style="padding: 30px;">
+    			<div class="">
                     <h1>{{ $t('pages.login.title') }}</h1>
                     <p class="modalInscription">{{ $t('pages.login.subtitle') }}</p>
 					<hr>
                     <nuxt-link :to="localePath({ name: 'index'})" class="close">
                         <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
                     </nuxt-link>
+                    <div v-if="error" class="text-center" style="color: red;">{{ $t(error.message) }}</div><br />
                     <div class="group">
                         <label for="email"><b>{{ $t('pages.login.email') }}</b></label>
                         <input type="text" v-model="email" :placeholder="$t('pages.login.enter_email')" name="email" required>   

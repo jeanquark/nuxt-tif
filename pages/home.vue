@@ -7,7 +7,7 @@
 			  background: url('/images/loader.gif') 50% 50% no-repeat rgb(249,249,249);"></div>
 		</div> -->
 		
-		<div v-if="loadedUser.level && loadedUser.level.value" v-cloak>
+		<div v-if="loadedUser && loadedUser.level && loadedUser.level.value" v-cloak>
 			<!-- <h1 class="text-center" style="color: #fff;">Loading...{{ loadedUser }}</h1> -->
 			<div id="header" class="col-12 col-sm-12 col-md-12 col-lg-12 top-fixed">
 				<div class="flex-container-header text-center">
