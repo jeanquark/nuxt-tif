@@ -5,7 +5,7 @@
 		<div class="modalBox" style="padding: 50px;">
     		<div v-if="error" class="text-center" style="color: red;">{{ $t(error.code) }}</div><br />
 		  	<form class="modal-content">
-				<div class="container">
+				<div class="">
 					<h1>S'incrire</h1>
 					<p class="modalInscription">Entre dans la communauté de ThisIsFan.com et commence à encourager tes équipes favorites !</p>
 					<nuxt-link :to="localePath({ name: 'index'})" class="close">
