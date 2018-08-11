@@ -1,69 +1,98 @@
 <template>
-	<div class="container">
-        <div class="row justify-content-center">
-            <div class="col-6" style="margin-top: 50px;">
-                <form>
-                	<h3 class="text-center">Register</h3>
-    				<div v-if="error" class="text-center" style="color: red;">{{ $t(error.code) }}</div><br />
-                    <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" class="form-control" placeholder="Enter email" name="email" v-validate="'required|email'" v-model="form.email">
-                        <span class="highlight"></span>
+	<div class="container-fluid">
+		
+		<!-- The Modal Pseudo -->
+		<div class="modalBox" style="padding: 50px;">
+    		<div v-if="error" class="text-center" style="color: red;">{{ $t(error.code) }}</div><br />
+		  	<form class="modal-content">
+				<div class="container">
+					<h1>S'incrire</h1>
+					<p class="modalInscription">Entre dans la communauté de ThisIsFan.com et commence à encourager tes équipes favorites !</p>
+					<nuxt-link :to="localePath({ name: 'index'})" class="close">
+                        <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
+                    </nuxt-link>
+					<br /><hr><br />
+					<div class="group">      
+						<label for="email"><b>Email</b></label>
+						<input type="text" v-model="form.email" placeholder="Enter Email" name="email" v-validate="'required|email'">
+						<span class="highlight"></span>
 						<span class="bar"></span>
 						<span class="error">{{ errors.first('email') }}</span>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" placeholder="Password" name="password" v-validate="'required|min:6'" v-model="form.password">
-                        <span class="highlight"></span>
+					</div>
+
+					<div class="group">      
+						<label for="psw"><b>Password</b></label>
+						<input type="password" v-model="form.password" placeholder="Enter Password" name="password" ref="password" v-validate="'required|min:6'">
+						<span class="highlight"></span>
 						<span class="bar"></span>
 						<span class="error">{{ errors.first('password') }}</span>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" placeholder="Repeat Password" name="confirm_password" data-vv-as="repeat password" v-validate="'required|confirmed:password'" v-model="form.confirm_password">
-                        <span class="highlight"></span>
+					</div>
+
+					<div class="group">      
+						<label for="psw-repeat"><b>Repeat Password</b></label>
+						<input type="password" v-model="form.confirm_password" placeholder="Repeat Password" name="confirm_password" data-vv-as="repeat password" v-validate="'required|confirmed:password'">
+						<span class="highlight"></span>
 						<span class="bar"></span>
 						<span class="error">{{ errors.first('confirm_password') }}</span>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Username</label>
-                        <input type="email" class="form-control" placeholder="Your username" name="username" v-validate="'required|min:2|max:32'" v-model="form.username">
-                        <span class="highlight"></span>
+					</div>
+					
+					<div class="group">      
+						<label for="username"><b>Pseudo</b></label>
+						<input type="text" v-model="form.username" placeholder="Your pseudo" name="username" v-validate="'required|min:2|max:32'">
+						<span class="highlight"></span>
 						<span class="bar"></span>
 						<span class="error">{{ errors.first('username') }}</span>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Country</label>
-                        <select class="custom-select" name="country" v-model="form.country">
+					</div>
+
+					<div class="group">      
+						<label for="country"><b>Country</b></label>
+						<select class="custom-select" v-model="form.country" name="country">
+							<option selected>Select your country</option>
 						 	<option :value="country" v-for="country in loadedCountries">{{ country.name }}</option>
 						</select>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Birth year</label>
-                        <select class="custom-select" name="birthyear" v-model="form.birthyear">
+						<span class="highlight"></span>
+						<span class="bar"></span>
+					</div>
+
+					<div class="group">      
+						<label for="birthyear"><b>Birth year</b></label>
+						<select class="custom-select" v-model="form.birthyear" name="birthyear">
+							<option selected>Select your birthyear</option>
 						 	<option :value="birthyear" v-for="birthyear in birthyears">{{ birthyear }}</option>
 						</select>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Prefered language</label>
-                        <select class="custom-select" name="language" v-model="form.language">
+						<span class="highlight"></span>
+						<span class="bar"></span>
+					</div>
+					
+					<div class="group">      
+						<label for="language"><b>Prefered Language</b></label>
+						<select class="custom-select" v-model="form.language" name="language">
+							<option selected>Choose your prefered language to interact with the application</option>
 						 	<option :value="language" v-for="language in languages">{{ language.name }}</option>
 						</select>
-                    </div>
-                    <button type="submit" class="btn btn-primary" :loading="loading" :disabled="disabled" @click.prevent="signUserUp">Register <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>&nbsp;&nbsp;
-                    <nuxt-link to="/" class="btn btn-light">Back</nuxt-link>
-                </form>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-4 text-center" style="margin-top: 50px;">
-                <button class="btn btn-google" @click.prevent="signUpWithGoogle">Google Sign up</button>&nbsp;&nbsp;
-                <button class="btn btn-facebook" @click.prevent="signUpWithFacebook">Facebook Sign up</button>
-                <br /><br />
-            </div>
-        </div>
-    </div>
+						<span class="highlight"></span>
+						<span class="bar"></span>
+					</div>
+					  
+					<label>
+						<input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Se souvenir de moi
+					</label>
+
+					<p>En validant ton inscription, tu es d'accord avec les <a href="#" style="color:dodgerblue">conditions générales</a> de ThisIsFan.com.</p>
+					<!-- errors: {{ errors }}<br /><br /> -->
+					<!-- disabled: {{ disabled }}<br /><br > -->
+
+					<div class="row button-section">
+						<div class="col-twelve">
+							<button type="submit" class="button button-primary" :loading="loading" :disabled="disabled" @click.prevent="signUserUp">Je veux devenir fan ! <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
+							<button class="button btn-facebook" @click.prevent="signUpWithFacebook"><i class="fa fa-facebook"></i> Connecte-toi avec FB</button>
+							<button class="button btn-google" @click.prevent="signUpWithGoogle"><i class="fa fa-google"></i> Connecte-toi avec G+</button>
+						</div>
+					</div>
+				</div><!-- /.container -->
+			</form>
+		</div><!-- /.modalBox -->
+	</div><!-- /.container-fluid -->
 </template>
 
 <script>
@@ -125,13 +154,46 @@
         methods: {
             async signUserUp () {
                 console.log('signUserUp')
-
+     //            await this.$store.dispatch('firebase-auth/signUserUp', {
+     //                email: this.form.email,
+     //                password: this.form.password,
+					// username: this.form.username,
+					// country: this.form.country,
+					// birthyear: this.form.birthyear,
+					// language: this.form.language
+     //            })
+     //            if (this.$i18n.locale != 'en') {
+     //                console.log('done')
+     //                // this.$router.replace('/' + this.$i18n.locale + '/home')
+     //            } else {
+     //                console.log('done')
+     //                // this.$router.replace('/home')
+     //            }
+     		// 	this.$store.dispatch('firebase-auth/signUserUp', this.form)
+     		// 		.then((response) => {
+     		// 			console.log('response: ', response)
+	     	// 			if (this.$i18n.locale != 'en') {
+	     	// 				this.$router.replace('/' + this.$i18n.locale + '/home')
+	     	// 			} else {
+							// this.$router.replace('/home')
+	     	// 			}
+	     	// 		}).catch(error => {
+	     	// 			console.log('error: ', error)
+     		// 		})
      			await this.$store.dispatch('firebase-auth/signUserUp', this.form)
      			if (this.$i18n.locale != 'en') {
  					this.$router.replace('/' + this.$i18n.locale + '/home')
  				} else {
 					this.$router.replace('/home')
  				}
+     			// console.log('abc: ', abc)
+     			// if (abc != 'undefined') {
+	     		// 	if (this.$i18n.locale != 'en') {
+	       //              this.$router.replace('/' + this.$i18n.locale + '/home')
+	       //          } else {
+	       //              this.$router.replace('/home')
+	       //          }
+	       //      }
             },
             async signUpWithFacebook () {
                 console.log('signUpWithFacebook')

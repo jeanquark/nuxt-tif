@@ -1,61 +1,37 @@
 <template>
     <div class="container">
-        <div class="row" style="margin-bottom: 50px;">
-            <div class="col-md-12 text-center">
-                <h3>{{ $t('login') }}</h3>
-                <br /><br />
-                <h4 class="">{{ $t('render') }}: <span class="render-result">{{renderSource}}</span></h4>
-                <button id="" class="btn btn-warning" @click="reloadPage"> {{ $t('reload') }}</button>
+        <div class="row justify-content-center">
+            <div class="col-4" style="margin-top: 50px;">
+                <div v-if="error" class="text-center" style="color: red;">{{ $t(error.message) }}</div><br />
+                <form>
+                    <h3 class="text-center">Login</h3>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" name="email" placeholder="Enter email" v-model="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" placeholder="Password" v-model="password">
+                    </div>   
+                    <button type="submit" class="btn btn-primary" :disabled="loading" :loading="loading" @click.prevent="signUserIn">Login <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>&nbsp;&nbsp;
+                    <nuxt-link to="/" class="btn btn-light">Back</nuxt-link>
+                </form>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-3 col-sm-12">
+        <div class="row justify-content-center">
+            <div class="col-4 text-center" style="margin-top: 50px;">
+                <button class="btn btn-google" @click.prevent="googleSignUpPopup">Google Sign in</button>&nbsp;&nbsp;
+                <button class="btn btn-facebook" @click.prevent="facebookSignUpPopup">Facebook Sign in</button>
             </div>
-            <div class="col-md-6 col-sm-12">
-                <!-- <div v-if="error" style="color: red;">{{ error.message }}</div><br /> -->
-                <!-- {{ error }} -->
-                <div v-if="error" class="text-center" style="color: red;">{{ $t(error.code) }}</div><br />
-                <form>
-                    <div class="form-group">
-                        <label for="email">{{ $t('email_address') }}:</label>
-                        <input type="email" class="form-control" id="email" v-bind:placeholder="$t('email_address')" v-model="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">{{ $t('password') }}:</label>
-                        <input type="password" class="form-control" id="passwrod" v-bind:placeholder="$t('password')" v-model="password">
-                    </div>
-                    <button type="submit" class="btn btn-primary" :disabled="loading1" :loading="loading1" @click.prevent="signUserIn">Login <i v-bind:class="{'fa fa-spinner fa-spin' : loading1}"></i></button>&nbsp;&nbsp;
-                    <button type="submit" class="btn btn-success" :disabled="loading2" :loading="loading2" @click.prevent="signUserUp">{{ $t('register') }} <i v-bind:class="{'fa fa-spinner fa-spin' : loading2}"></i></button>
-                </form>
-                <br />
-                <hr>
-                <br />
-                <div class="text-center">
-                    <button type="button" class="btn btn-danger" @click="googleSignUpPopup">Google sign in</button>&nbsp;&nbsp;
-                    <button type="button" class="btn btn-primary" @click="facebookSignUpPopup">Facebook sign in</button>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-12">
-            </div>
-        </div><!-- /.row -->
-    </div><!-- /.container -->
+        </div>
+    </div>
 </template>
 
 <script>
-    // import { vueLoading } from 'vuex-loading'
     export default {
-        layout: 'layoutFront',
-        middleware: ['unauth-check'],
-        asyncData () {
-            return {
-                renderSource: process.static ? 'static' : (process.server ? 'serveur' : 'client')
-            }
-        },
+        layout: 'layoutLandingPage',
         data () {
             return {
-                // loading: true,
-                loading1: false,
-                loading2: false,
                 email: '',
                 password: ''
             }
@@ -64,72 +40,111 @@
             loading () {
                 return this.$store.getters['loading']
             },
-            registerLoading () {
-                return this.$store.getters['loading']
-            },
-            error() {
-                // return this.$store.getters.error
+            error () {
                 return this.$store.getters['error']
             }
         },
         methods: {
-            reloadPage () {
-                window.location.reload()
-            },
-            async googleSignUpPopup () {
-                await this.$store.dispatch('users/signInWithGooglePopup')
-                if (this.$i18n.locale != 'en') {
-                    this.$router.replace('/' + this.$i18n.locale + '/admin')
-                } else {
-                    this.$router.replace('/admin')
-                }
-            },
-            async facebookSignUpPopup () {
-                await this.$store.dispatch('users/signInWithFacebookPopup')
-                if (this.$i18n.locale != 'en') {
-                    this.$router.replace('/' + this.$i18n.locale + '/admin')
-                } else {
-                    this.$router.replace('/admin')
-                }
-            },
             async signUserIn () {
-                this.loading1 = true
                 console.log('signUserIn')
-                // this.$store.dispatch('setLoading', true);
-                // await this.$store.dispatch('signUserIn', {
-                await this.$store.dispatch('users/signUserIn', {
+                this.$store.dispatch('firebase-auth/signUserIn', {
                     email: this.email,
                     password: this.password
+                }).then(() => {
+                    if (this.$i18n.locale != 'en') {
+                        console.log('done')
+                        this.$router.replace('/' + this.$i18n.locale + '/home')
+                    } else {
+                        console.log('done')
+                        this.$router.replace('/home')
+                    }
+                }).catch(error => {
+                    console.log('error: ', error)
                 })
-                this.loading1 = false
-                this.$router.replace('/admin')
-                // if (this.$i18n.locale != 'en') {
-                //     this.$router.replace('/' + this.$i18n.locale + '/admin')
-                // } else {
-                //     this.$router.replace('/admin')
-                // }
+                
             },
-            async signUserUp () {
-                this.loading2 = true
-                // await this.$store.dispatch('signUserUp', {
-                await this.$store.dispatch('users/signUserUp', {
-                    email: this.email,
-                    password: this.password
-                })
-                this.loading2 = false
-                // setTimeout(function(loading2) {
-                //     this.loading2 = false
-                // }, 3000)
+            async signInWithGoogle () {
+                console.log('signInWithGoogle')
+                await this.$store.dispatch('firebase-auth/signInWithGooglePopup')
                 if (this.$i18n.locale != 'en') {
-                    this.$router.replace('/' + this.$i18n.locale + '/admin')
+                    console.log('done')
+                    this.$router.replace('/' + this.$i18n.locale + '/home')
                 } else {
-                    this.$router.replace('/admin')
+                    console.log('done')
+                    this.$router.replace('/home')
                 }
+            },
+            async signInWithFacebook () {
+                console.log('signInWithFacebook')
+                return this.$store.dispatch('firebase-auth/signInWithFacebookPopup').then(() => {
+                    if (this.$i18n.locale != 'en') {
+                        console.log('done')
+                        this.$router.replace('/' + this.$i18n.locale + '/home')
+                    } else {
+                        console.log('done')
+                        this.$router.replace('/home')
+                    }
+                })
             }
         }
     }
 </script>
 
 <style scoped>
-
+    input[type="text"] {
+        font-family: 'Comic Sans MS';
+        font-weight: 900;
+        font-style: italic;
+        font-stretch: ultra-condensed;
+    }
+    input[type="text"]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        font-family: 'bangers';
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+    }
+    input[type="text"]::-moz-placeholder { /* Firefox 19+ */
+        font-family: 'bangers';
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+    }
+    input[type="text"]:-ms-input-placeholder { /* IE 10+ */
+        font-family: 'bangers';
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+    }
+    input[type="text"]:-moz-placeholder { /* Firefox 18- */
+        font-family: 'bangers';
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+    }
+    .button-primary {
+        color: #fff;
+    }
+    .button-primary:hover {
+        background-color: #000;
+    }
+    .button-primary:disabled {
+        background-color: #d8d8d8;
+        color: #fff;
+    }
+    .btn-facebook {
+        background-color: #3c5a99;
+        color: #fff;
+    }
+    .btn-facebook:hover {
+        background-color: #6180c1;
+        cursor: pointer;
+    }
+    .btn-google {
+        background-color: #d6492f;
+        color: #fff;
+    }
+    .btn-google:hover {
+        background-color: #e3816f;
+        cursor: pointer;
+    }
 </style>
