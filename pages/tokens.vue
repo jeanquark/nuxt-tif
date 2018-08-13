@@ -16,8 +16,9 @@
           				</div>
 					  	<div class="row">
 					  		<div class="col-sm">
-						    	<div class="card">
-								  	<img class="card-img-top" v-lazy="'/images/tokens.png'" alt="Card image cap">
+						    	<div class="card" v-lazy-container="{ selector: 'img' }">
+								  	<!-- <img class="card-img-top" v-lazy="'/images/tokens.png'" alt="Card image cap"> -->
+								  	<img class="card-img-top" data-src="/images/tokens.png" data-loading="/images/tokens-loader.png" alt="Card image cap">
 								  	<div class="card-body">
 									    <h5 class="card-title text-center">50 TOKENS</h5>
 									    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>

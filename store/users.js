@@ -238,7 +238,7 @@ export const actions = {
             const user_tokens = state.loadedUser.tokens.value
             console.log('user_tokens: ', user_tokens)
 
-            if (user_tokens < total_tokens_cost) {
+            if (user_tokens < Math.abs(total_tokens_cost)) {
                 new Noty({type: 'warning', text: 'You don\'t have enouph tokens to follow more teams', timeout: 5000, theme: 'metroui'}).show()
                 return
             }
