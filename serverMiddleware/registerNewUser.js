@@ -33,6 +33,46 @@ function buildUserObject (payload) {
         value: 10,
         udpated_at: moment().unix()
     },
+	user.dollarFan = {
+		value: 500,
+		udpated_at: moment().unix()
+	},
+	user.action = {
+		value: 0,
+		udpated_at: moment().unix()
+	},
+	user.skillStrength = {
+		value: 1,
+		udpated_at: moment().unix()
+	},
+	user.skillEndurance = {
+		value: 1,
+		udpated_at: moment().unix()
+	},
+	user.skillMental = {
+		value: 1,
+		udpated_at: moment().unix()
+	},
+	user.skillIntelligence = {
+		value: 1,
+		udpated_at: moment().unix()
+	},
+	user.skillCreativity = {
+		value: 1,
+		udpated_at: moment().unix()
+	},
+	user.skillAuthority = {
+		value: 1,
+		udpated_at: moment().unix()
+	},
+	user.skillSpiel = {
+		value: 1,
+		udpated_at: moment().unix()
+	},
+	user.skillSocial = {
+		value: 1,
+		udpated_at: moment().unix()
+	},
     user.status = {
         value: 'user',
         updated_at: moment().unix()
@@ -63,6 +103,46 @@ function buildUserObjectOAuth (payload) {
         value: 10,
         udpated_at: moment().unix()
     },
+	user.dollarFan = {
+		value: 500,
+		udpated_at: moment().unix()
+	},
+	user.action = {
+		value: 0,
+		udpated_at: moment().unix()
+	},
+	user.skillStrength = {
+		value: 1,
+		udpated_at: moment().unix()
+	},
+	user.skillEndurance = {
+		value: 1,
+		udpated_at: moment().unix()
+	},
+	user.skillMental = {
+		value: 1,
+		udpated_at: moment().unix()
+	},
+	user.skillIntelligence = {
+		value: 1,
+		udpated_at: moment().unix()
+	},
+	user.skillCreativity = {
+		value: 1,
+		udpated_at: moment().unix()
+	},
+	user.skillAuthority = {
+		value: 1,
+		udpated_at: moment().unix()
+	},
+	user.skillSpiel = {
+		value: 1,
+		udpated_at: moment().unix()
+	},
+	user.skillSocial = {
+		value: 1,
+		udpated_at: moment().unix()
+	},
     user.status = {
         value: 'user',
         updated_at: moment().unix()
