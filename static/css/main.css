@@ -1588,7 +1588,7 @@ header .logo a {
 .button-section .button {
 	width: 250px;
 }
-.button-section [class*="col-"] .button:first-child {
+.button-section [class*="col-"] {
 	margin-right: 4rem;
 }
 
