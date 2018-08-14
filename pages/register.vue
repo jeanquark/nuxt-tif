@@ -82,8 +82,8 @@
 					<div class="row button-section">
 						<div class="col-twelve">
 							<button type="submit" class="button button-primary" :loading="loading" :disabled="disabled" @click.prevent="signUserUp">Je veux devenir fan ! <i v-bind:class="{'fa fa-spinner fa-spin' : loading}"></i></button>
-							<button class="button btn-facebook" @click.prevent="signUpWithFacebook"><i class="fa fa-facebook"></i> Connecte-toi avec FB</button>
-							<button class="button btn-google" @click.prevent="signUpWithGoogle"><i class="fa fa-google"></i> Connecte-toi avec G+</button>
+							<button class="button btn-facebook" @click.prevent="signUpWithFacebook"><i class="fa fa-facebook"></i> S'inscrire avec FB</button>
+							<button class="button btn-google" @click.prevent="signUpWithGoogle"><i class="fa fa-google"></i> S'inscrire avec G+</button>
 						</div>
 					</div>
 				</div><!-- /.container -->

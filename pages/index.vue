@@ -87,12 +87,9 @@
 
             <div class="row button-section">
                 <div class="col-twelve">
-                    <!-- <nuxt-link to="/register"><button title="Inscription" class="button stroke smoothscroll">{{ $t('pages.index.sign_up') }}</button></nuxt-link>            -->
-                    <nuxt-link :to="localePath({ name: 'register'})"><button title="Inscription" class="button stroke smoothscroll">{{ $t('pages.index.sign_up') }}</button></nuxt-link>           
-                    <!-- <nuxt-link to="/login"><button title="Connection" class="button button-primary">{{ $t('pages.index.log_in') }}</button></nuxt-link>     -->
-                    <nuxt-link :to="localePath({ name: 'login'})"><button title="Connection" class="button button-primary">{{ $t('pages.index.log_in') }}</button></nuxt-link>
 					<button type="submit" class="button btn-facebook" @click.prevent="signInWithFacebook" :disabled="loading"><i class="fa fa-facebook"></i> {{ $t('pages.login.facebook_oauth') }}</button>
 					<button type="submit" class="button btn-google" @click.prevent="signInWithGoogle"><i class="fa fa-google"></i> {{ $t('pages.login.google_oauth') }}</button>
+                    <nuxt-link :to="localePath({ name: 'register'})"><button title="Inscription" class="button stroke smoothscroll">{{ $t('pages.index.sign_up') }}</button></nuxt-link>           
                 </div>          
             </div>
 
@@ -392,8 +389,9 @@
 
                     <div class="row button-section">
 						<div class="col-twelve">
-							<nuxt-link to="/register"><button title="Inscription" class="button stroke smoothscroll">{{ $t('pages.index.sign_up') }}</button></nuxt-link>              
-							<nuxt-link to="/login"><button title="Connection" class="button button-primary">{{ $t('pages.index.log_in') }}</button></nuxt-link>          
+							<button type="submit" class="button btn-facebook" @click.prevent="signInWithFacebook" :disabled="loading"><i class="fa fa-facebook"></i> {{ $t('pages.login.facebook_oauth') }}</button>
+							<button type="submit" class="button btn-google" @click.prevent="signInWithGoogle"><i class="fa fa-google"></i> {{ $t('pages.login.google_oauth') }}</button>
+							<nuxt-link :to="localePath({ name: 'register'})"><button title="Inscription" class="button stroke smoothscroll">{{ $t('pages.index.sign_up') }}</button></nuxt-link>           
 						</div>          
                     </div>
 
