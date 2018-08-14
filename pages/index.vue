@@ -89,7 +89,7 @@
                 <div class="col-twelve">
 					<button type="submit" class="button btn-facebook" @click.prevent="signInWithFacebook" :disabled="loading"><i class="fa fa-facebook"></i> {{ $t('pages.login.facebook_oauth') }}</button>
 					<button type="submit" class="button btn-google" @click.prevent="signInWithGoogle"><i class="fa fa-google"></i> {{ $t('pages.login.google_oauth') }}</button>
-                    <nuxt-link :to="localePath({ name: 'register'})"><button title="Inscription" class="button stroke smoothscroll">{{ $t('pages.index.sign_up') }}</button></nuxt-link>           
+					<button type="submit" class="button stroke smoothscroll" @click.prevent="localePath({ name: 'register'})">{{ $t('pages.index.sign_up') }}</button>         
                 </div>          
             </div>
 
@@ -391,7 +391,7 @@
 						<div class="col-twelve">
 							<button type="submit" class="button btn-facebook" @click.prevent="signInWithFacebook" :disabled="loading"><i class="fa fa-facebook"></i> {{ $t('pages.login.facebook_oauth') }}</button>
 							<button type="submit" class="button btn-google" @click.prevent="signInWithGoogle"><i class="fa fa-google"></i> {{ $t('pages.login.google_oauth') }}</button>
-							<nuxt-link :to="localePath({ name: 'register'})"><button title="Inscription" class="button stroke smoothscroll">{{ $t('pages.index.sign_up') }}</button></nuxt-link>           
+							<button type="submit" class="button stroke smoothscroll" @click.prevent="localePath({ name: 'register'})">{{ $t('pages.index.sign_up') }}</button>         
 						</div>          
                     </div>
 
