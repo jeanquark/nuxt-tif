@@ -9,7 +9,7 @@
 		</p> -->
 
 	    <div class="col-lg-3 col-md-4 col-xs-6" v-for="index in total_background_shapes" style="padding-right: 5px; padding-left: 5px;" @click="addToMerge({gender: 'unisex', type: 'background', property: 'shape', image: 'background' + convertTo2Digits(index) + background_color + '.png', index: index, layerPosition: 0})">
-	        <img v-lazy="'/images/avatars/jm/' + 'unisex' + '/' + 'background' + '/' + 'background' + convertTo2Digits(index) + '001.png'" class="imgModalAvatar" :class="{active: (background_shape === convertTo2Digits(index)) }" style="cursor: pointer;" />
+	        <img v-lazy="'/images/avatars/jm/unisex/background/shape/backgroundShape' + convertTo2Digits(index) + '001.png'" class="imgModalAvatar" :class="{active: (background_shape === convertTo2Digits(index)) }" style="cursor: pointer;" />
 	    </div>
 	</div>
 </template>
@@ -19,7 +19,7 @@
 		props: ['background'],
 		data () {
 			return {
-				total_background_shapes: 3,
+				total_background_shapes: 4,
 			}
 		},
 		computed: {
