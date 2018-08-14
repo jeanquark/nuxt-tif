@@ -19,7 +19,7 @@
 		props: ['background'],
 		data () {
 			return {
-				total_background_shapes: 3,
+				total_background_shapes: 4,
 			}
 		},
 		computed: {
