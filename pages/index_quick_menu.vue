@@ -333,7 +333,7 @@ lightenColor (hex, amt) {
     }
 </script>
 
-<style lang="less">
+<style scoped>
   body {
     margin: 0;
   }

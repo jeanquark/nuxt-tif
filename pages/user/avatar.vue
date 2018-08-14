@@ -20,7 +20,7 @@
                         <h1>{{ $t('pages.user-avatar.want_to_change_your_mind') }}</h1>
                         <p style="color: #000;">
                             <!-- loadedUser: {{ this.loadedUser }}<br /><br /> -->
-                            <!-- gender: {{ this.gender }}<br /><br /> -->
+                            gender: {{ this.gender }}<br /><br />
                             <!-- type: {{ this.type }}<br /><br /> -->
                             <!-- background: {{ this.background }}<br /><br /> -->
                             <!-- skin: {{ this.skin }}<br /><br /> -->
@@ -206,18 +206,20 @@
                 if (selectedGender === 'female') {
                     if (this.type === 'beard') {
                         this.type = 'makeup'
+                        this.makeup = this.beard.replace('beard', 'makeup')
                     }
                     for (let i = 0; i < this.arrayOfImagesToMerge.length; i++) {
-                        this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace('male', 'female')
+                        this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/male/g, 'female')
                         this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/beard/g, 'makeup')
                     }
                 }
                 if (selectedGender === 'male') {
                     if (this.type === 'makeup') {
                         this.type = 'beard'
+                        this.beard = 'beard' + this.makeup.replace('makeup', 'beard')
                     }
                     for (let i = 0; i < this.arrayOfImagesToMerge.length; i++) {
-                        this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace('female', 'male')
+                        this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/female/g, 'male')
                         this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/makeup/g, 'beard')
                     }
                 }
@@ -229,7 +231,8 @@
 
             // Define the array of images that need to be merged into one. There are different layers and the upper layer covers what's underneath it. For example, the skin covers the background, and the makeup covers the skin
             addToMerge (payload) {
-                // console.log('Call to addMergeFromChild method in parent')
+                console.log('Call to addMergeFromChild method in parent')
+                console.log('payload: ', payload)
                 if (payload.type === 'background') {
                     // Remove file extension (.png) of the image
                     this.background = payload.image.replace(/\.[^/.]+$/, "")
