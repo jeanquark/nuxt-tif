@@ -26,7 +26,7 @@
             </div> 
         </header> -->  
 
-        <quick-menu :menu-count="count" :icon-class="icons" :backgroundColor="color" @clicked="onClickChild" style="cursor: pointer; z-index: 10;"></quick-menu>
+        <!--<quick-menu :menu-count="count" :icon-class="icons" :backgroundColor="color" @clicked="onClickChild" style="cursor: pointer; z-index: 10;"></quick-menu>-->
         
         <!-- intro section
         ================================================== -->
@@ -152,7 +152,7 @@
                         <div class="timeline-block">
 
                             <div class="timeline-ico">
-                                <i class="fa fa-chart-bar fa-2x"></i>
+                                <i class="fa fa-angle-double-up fa-2x"></i>
                             </div>
 
                             <div class="timeline-header">
@@ -200,7 +200,7 @@
                         <div class="timeline-block">
 
                             <div class="timeline-ico">
-                                <i class="fa fa-money-bill fa-2x"></i>
+                                <i class="fa fa-dollar-sign fa-2x"></i>
                             </div>
 
                             <div class="timeline-header">
@@ -770,9 +770,6 @@
 </script>
 
 <style scoped>
-	html {
-		font-size: 10px;
-	}
     .active {
         /*border: 1px solid orangered;*/
     }
