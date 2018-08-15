@@ -72,7 +72,7 @@ html, body {
 body {
 	background: #151515;
 	font-family: "bangers", serif;
-	font-size: 1.7rem;
+	font-size: 10px;
 	line-height: 3rem;
 	color: #6e6e6e;
 }
@@ -1586,7 +1586,7 @@ header .logo a {
 	text-align: center;
 }
 .button-section .button {
-	width: 250px;
+	width: 300px;
 }
 .button-section [class*="col-"] {
 	margin-right: 4rem;
