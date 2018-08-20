@@ -69,7 +69,7 @@ module.exports = {
 		],
 		// extractCSS: true,
 		extractCSS: {
-			allChunks: true      
+			// allChunks: true      
 		}
   	},
  	modules: [
