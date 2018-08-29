@@ -48,7 +48,7 @@
                             
                             <span class="OtherTeam2" style="border: 1px dashed orange;">
                                 <p style="color: #000; text-align: center;">
-                                    08:00 - 10:00 {{ slots.slot1.length }}
+                                    08:00 - 10:00
                                     <button class="btn btn-sm btn-default" @click="removeSlot('slot1')" v-if="slots.slot1 && slots.slot1.length >= 1"><i class="fas fa-times"></i></button>
                                 </p>
                                 <draggable :options="{group:{ name:'user-actions' }}" :move="onMove" @change="onChange($event, 'slot1')" v-model="slots.slot1">
@@ -199,7 +199,6 @@
 
     export default {
         layout: 'layoutFront',
-        name: "hello",
         components: {
             draggable
         },
