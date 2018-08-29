@@ -17,6 +17,7 @@ export const state = () => ({
     loadedAvatarImages: [],
     loadedUserTeams: [],
     updateUser: null,
+    loadedUserActions: []
 })
 
 export const mutations = {
@@ -37,6 +38,9 @@ export const mutations = {
     setUpdateUser (state, payload) {
         // console.log('entering setUpdatedUser mutation')
         state.updateUser = payload
+    },
+    setUserActions (state, payload) {
+        state.loadedUserActions = payload
     }
 }
 
@@ -143,26 +147,26 @@ export const actions = {
             console.log(error)
         }
     },
-    async signUserIn ({commit}, payload) {
-        try {
-            let authData = await Auth.signInWithEmailAndPassword(payload.email, payload.password)
-            // console.log(authData)
-            const userId = authData.uid
-            // First set loadedUser with temporary data from firebase auth
-            commit('setLoadedUser', authData)
-            commit('setLoading', false, { root: true })
-            // Then asynchronously update loadedUser object with data from user node
-            firebase.database().ref('/users/' + userId).on('value', function (snapshot) {
-                commit('setLoadedUser', snapshot.val())
-                console.log('loadedUser done')
-            })
-            console.log(userId)
-        } 
-        catch(error) {
-            console.log(error)
-            commit('setError', error, { root: true })
-        }
-    },
+    // async signUserIn ({commit}, payload) {
+    //     try {
+    //         let authData = await Auth.signInWithEmailAndPassword(payload.email, payload.password)
+    //         // console.log(authData)
+    //         const userId = authData.uid
+    //         // First set loadedUser with temporary data from firebase auth
+    //         commit('setLoadedUser', authData)
+    //         commit('setLoading', false, { root: true })
+    //         // Then asynchronously update loadedUser object with data from user node
+    //         firebase.database().ref('/users/' + userId).on('value', function (snapshot) {
+    //             commit('setLoadedUser', snapshot.val())
+    //             console.log('loadedUser done')
+    //         })
+    //         console.log(userId)
+    //     } 
+    //     catch(error) {
+    //         console.log(error)
+    //         commit('setError', error, { root: true })
+    //     }
+    // },
 
     async loadedAvatarImages ({commit}) {
         try {
@@ -353,7 +357,48 @@ export const actions = {
             console.log(error)
             return error
         })
-    }
+    },
+
+    async loadedUserActions ({commit, state, dispatch}, payload) {
+        return new Promise((resolve, reject) => {
+            try {
+                const userId = firebase.auth().currentUser.uid
+                firebase.database().ref('/userActions/' + userId).on('value', function (snapshot) {
+                    const userActions = []
+                    for (const key in snapshot.val()) {
+                        userActions.push({ ...snapshot.val()[key], id: key})
+                    }
+                    commit('setUserActions', userActions)
+                    resolve(userActions)
+                })
+
+            } 
+            catch(error) {
+                console.log(error)
+                new Noty({type: 'error', text: 'User actions not found', timeout: 5000, theme: 'metroui'}).show()
+                commit('setError', error, { root: true })
+                commit('setLoading', false, { root: true })
+                reject(error)
+            }
+        })
+    },
+
+    async updateUserActions ({commit}, payload) {
+        try {
+            const userId = firebase.auth().currentUser.uid
+            console.log('payload: ', payload)
+            firebase.database().ref('/userActions/' + userId + '/' + payload.today).update(payload.slots).then((response) => {
+                new Noty({type: 'success', text: 'Actions updated successfully updated!', timeout: 5000, theme: 'metroui'}).show()
+            }).catch(error => {
+                new Noty({type: 'error', text: 'Sorry, your actions for the day could not be updated. ', timeout: 5000, theme: 'metroui'}).show()
+                console.log(error)
+            })
+
+        } catch(error) {
+            new Noty({type: 'error', text: 'Sorry, your actions for the day could not be updated', timeout: 5000, theme: 'metroui'}).show()
+            console.log(error)
+        }
+    },
 }
 
 export const getters = {
@@ -368,5 +413,8 @@ export const getters = {
     },
     loadedUserTeams (state) {
         return state.loadedUserTeams
+    },
+    loadedUserActions (state) {
+        return state.loadedUserActions
     }
 }

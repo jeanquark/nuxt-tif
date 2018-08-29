@@ -45,6 +45,7 @@
     "vue-quick-menu": "^1.0.7",
     "vue-swal": "^0.1.0",
     "vue2-jsoneditor": "^1.0.5",
+    "vuedraggable": "^2.16.0",
     "vuejs-paginate": "^1.9.3",
     "vuetify": "^1.0.19",
     "vuex-loading": "^0.2.6",

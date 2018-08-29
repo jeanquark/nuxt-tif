@@ -42,7 +42,7 @@ export const actions = {
             console.log('userId: ', userId)
             // dispatch('users/loadedUser', userId, { root: true})
             commit('users/setLoadedUser', req.user, { root: true })
-            // router.push({'path': '/'})
+            this.$router.push({'path': 'home'})
         } else {
             console.log('User is not logged in from nuxtServerInit')
         }

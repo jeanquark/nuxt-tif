@@ -204,6 +204,7 @@ module.exports = {
   		// { src: '~/plugins/vue-sweetalert2', ssr: false },
   		{ src: '~/plugins/paypal.js', ssr: false },
   		{ src: '~/plugins/vue-lazyload.js', ssr: false },
+  		{ src: '~/plugins/vue-drag-drop.js', ssr: false },
     ],
   	serverMiddleware: [
 		'~/serverMiddleware/validateFirebaseIdToken',

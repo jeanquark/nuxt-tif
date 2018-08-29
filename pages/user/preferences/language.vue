@@ -68,8 +68,14 @@
 	    		console.log(language)
 				this.$store.dispatch('users/updateUser', {language: language})
 				console.log(this.$i18n)
+
 				// return this.$router.push(localePath({ name: 'user-preferences'}))
 				// return this.$router.push(this.$i18n.localePath({ name: 'user-preferences'}))
+
+				// Update Vue-Moment language
+
+				this.$moment.locale(language)
+
 				if (this.$i18n.locale != this.$i18n.defaultLocale) {
 					return this.$router.push('/' + this.$i18n.locale + '/user/preferences')
 				} else {

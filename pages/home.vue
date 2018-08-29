@@ -59,7 +59,7 @@
 			<!-- Expérience -->
 			<div id="experience" class="col-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="flex-container-experience">
-				  	<a href="mesActions.html" class="darkred" style="flex-grow: 1"><span class="textXP">XP / Actions</span></a>
+				  	<nuxt-link to="user/actions" class="darkred" style="flex-grow: 1"><span class="textXP">XP / Actions</span></nuxt-link>
 				  	<!-- loadedUser: {{ this.loadedUser }} -->
 				</div>
 			</div>
