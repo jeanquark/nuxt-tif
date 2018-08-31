@@ -16,10 +16,9 @@
 	  	<v-flex xs12 sm10 offset-sm1>
 	  		<br /><br />
 	      	<h1 class="text-md-center">Events</h1>
-	      	<!-- loadedEvents: {{ loadedEvents }} -->
 	      	<br /><br />
 	      	<v-btn color="primary" dark slot="activator" class="mb-2" to="/admin/events/create">Add an Event</v-btn>
-			<!-- {{ loadedEvents }} -->
+	      	<v-btn color="warning" dark class="mb-2" to="/admin/events/create-multiple">Add multiple events from API</v-btn>
 			<v-card>
 				<v-card-title>
 					Events

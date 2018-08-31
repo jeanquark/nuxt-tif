@@ -1,5 +1,44 @@
 import firebase from 'firebase'
 import Noty from 'noty'
+import axios from 'axios'
+import moment from 'moment'
+
+// let events = {
+            //     '100_vs_101_on_31-08-2018': {
+            //         homeTeam: {
+            //             id: 100,
+            //             name: 'Neuchâtel Xamax'
+            //         },
+            //         awayTeam: {
+            //             id: 101,
+            //             name: 'FC Sion'
+            //         },
+            //         score: {
+            //             winner: 'homeTeam',
+            //             fullTime: {
+            //                 homeTeam: 3,
+            //                 awayTeam: 1
+            //             }
+            //         }
+            //     },
+            //     '102_vs_103_on_31-08-2018': {
+            //         homeTeam: {
+            //             id: 102,
+            //             name: 'Lausanne Sport'
+            //         },
+            //         awayTeam: {
+            //             id: 103,
+            //             name: 'FC Basel'
+            //         },
+            //         score: {
+            //             winner: 'DRAW',
+            //             fullTime: {
+            //                 homeTeam: 2,
+            //                 awayTeam: 2
+            //             }
+            //         }
+            //     }
+            // }
 
 export const state = () => ({
     loadedEvents: [],
@@ -139,32 +178,32 @@ export const actions = {
                 updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/goals_scored'] = oldVisitorTeamData.goals_scored + payload.visitorteam_score
                 updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/goals_conceded'] = oldVisitorTeamData.goals_conceded + payload.localteam_score
             // Visitorteam won
-            } else if (payload.localteam_score < payload.visitorteam_score ) {
-                console.log('visitorteam won')
-                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/wins'] = oldVisitorTeamData.wins + 1
-                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/goals_scored'] = oldVisitorTeamData.goals_scored + payload.visitorteam_score
-                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/goals_conceded'] = oldVisitorTeamData.goals_conceded + payload.localteam_score
-                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/points'] = oldVisitorTeamData.points + 3
+        } else if (payload.localteam_score < payload.visitorteam_score ) {
+            console.log('visitorteam won')
+            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/wins'] = oldVisitorTeamData.wins + 1
+            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/goals_scored'] = oldVisitorTeamData.goals_scored + payload.visitorteam_score
+            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/goals_conceded'] = oldVisitorTeamData.goals_conceded + payload.localteam_score
+            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/points'] = oldVisitorTeamData.points + 3
 
-                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/losses'] = oldLocalTeamData.losses + 1
-                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/goals_scored'] = oldLocalTeamData.goals_scored + payload.localteam_score
-                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/goals_conceded'] = oldLocalTeamData.goals_conceded + payload.visitorteam_score
+            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/losses'] = oldLocalTeamData.losses + 1
+            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/goals_scored'] = oldLocalTeamData.goals_scored + payload.localteam_score
+            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/goals_conceded'] = oldLocalTeamData.goals_conceded + payload.visitorteam_score
             // Draw and no penalties
-            } else if (payload.localteam_score === payload.visitorteam_score && !payload.penalty_shootout) {
-                console.log('draw')
-                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/draws'] = oldLocalTeamData.draws + 1
-                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/goals_scored'] = oldLocalTeamData.goals_scored + payload.localteam_score
-                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/goals_conceded'] = oldLocalTeamData.goals_conceded + payload.visitorteam_score
-                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/points'] = oldLocalTeamData.points + 1
+        } else if (payload.localteam_score === payload.visitorteam_score && !payload.penalty_shootout) {
+            console.log('draw')
+            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/draws'] = oldLocalTeamData.draws + 1
+            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/goals_scored'] = oldLocalTeamData.goals_scored + payload.localteam_score
+            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/goals_conceded'] = oldLocalTeamData.goals_conceded + payload.visitorteam_score
+            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.localteam.slug + '/points'] = oldLocalTeamData.points + 1
 
-                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/draws'] = oldVisitorTeamData.draws + 1
-                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/goals_scored'] = oldVisitorTeamData.goals_scored + payload.visitorteam_score
-                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/goals_conceded'] = oldVisitorTeamData.goals_conceded + payload.localteam_score
-                updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/points'] = oldVisitorTeamData.points + 1
+            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/draws'] = oldVisitorTeamData.draws + 1
+            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/goals_scored'] = oldVisitorTeamData.goals_scored + payload.visitorteam_score
+            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/goals_conceded'] = oldVisitorTeamData.goals_conceded + payload.localteam_score
+            updates['/competitions/' + payload.competition.slug + '/teams/' + payload.visitorteam.slug + '/points'] = oldVisitorTeamData.points + 1
             // Draw and penalties
-            } else if (payload.localteam_score === payload.visitorteam_score && payload.penalty_shootout) {
+        } else if (payload.localteam_score === payload.visitorteam_score && payload.penalty_shootout) {
 
-            }
+        }
 
             // console.log(payload.localteam_score)
             // console.log(payload.visitorteam_score)
@@ -174,7 +213,7 @@ export const actions = {
             //     console.log(snapshot.val())
             //     const oldLocalTeamData = snapshot.val()
             //     console.log(payload)
-      
+
             //     try {
             //         firebase.database().ref().update(updates)
             //             new Noty({type: 'success', text: 'Le résultat a été mis à jour.', timeout: 5000, theme: 'metroui'}).show()
@@ -189,7 +228,7 @@ export const actions = {
 
             try {
                 firebase.database().ref().update(updates)
-                    new Noty({type: 'success', text: 'Le classement pour le match ' + payload.name + ' a été mis à jour.', timeout: 5000, theme: 'metroui'}).show()
+                new Noty({type: 'success', text: 'Le classement pour le match ' + payload.name + ' a été mis à jour.', timeout: 5000, theme: 'metroui'}).show()
             } catch(error) {
                 new Noty({type: 'error', text: 'Le classement n\'a pas pu être mis à jour. Erreur: ' + error, timeout: 5000, theme: 'metroui'}).show()
                 console.log(error)
@@ -210,13 +249,57 @@ export const actions = {
             new Noty({type: 'error', text: 'Le résultat n\'a pas pu être mis à jour. Erreur: ' + error, timeout: 5000, theme: 'metroui'}).show()
             console.log(error)
         }
-      
+
+    },
+
+    async createMultipleEvents ({commit}, payload) {
+        commit('setLoading', true, { root: true })
+        // console.log('payload: ', payload)
+        // return
+
+        let url = ''
+        if (payload.competition.id === 'all') { // All competitions
+            url = 'https://api.football-data.org/v2/matches?dateFrom=' + payload.startDate + '&&dateTo=' + payload.endDate
+        } else {
+            url = 'https://api.football-data.org/v2/competitions/' + payload.competition.id + '/matches?dateFrom=' + payload.startDate + '&&dateTo=' + payload.endDate
+        }
+
+
+        // console.log('url: ', url)
+        // return
+
+        try {
+            const response = await axios.get(url, {
+                headers: {'X-Auth-Token': '3b3cd98fb2c441c9a9dff5a212a9e5f3'}
+            })
+
+            let events = {}
+
+            for (let match of response.data.matches) {
+                // console.log('Match: ', match)
+                const date = moment(match.utcDate).format('DD-MM-YYYY')
+                const id = match.homeTeam.id + '_vs_' + match.awayTeam.id + '_on_' + date
+                events[id] = match
+            }
+            // console.log('events: ', events)
+            
+            let updates = {}
+            updates['/events_new2/'] = events
+
+            const snapshot = await firebase.database().ref().update(updates)
+            commit('setLoading', false, { root: true })
+            console.log('snapshot: ', snapshot)
+            new Noty({type: 'success', text: 'Changements dans le noeud "events_new2" effectués avec succès!', timeout: 5000, theme: 'metroui'}).show()
+        } catch(error) {
+            commit('setLoading', false, { root: true })
+            new Noty({type: 'error', text: 'Sorry, an error occured while sending your api request.', timeout: 5000, theme: 'metroui'}).show()
+        }
     },
 
     // Delete an event
     deleteEvent ({commit}, eventId) {
         commit('setLoading', true, { root: true })
-          firebase.database().ref('/events_new/' + eventId).remove().then(() => {
+        firebase.database().ref('/events_new/' + eventId).remove().then(() => {
             // commit('deleteEvent', eventId)
             commit('setLoading', false, { root: true })
             new Noty({type: 'success', text: 'Événement supprimé avec succès!', timeout: 5000, theme: 'metroui'}).show()

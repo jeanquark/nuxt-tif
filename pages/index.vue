@@ -405,7 +405,7 @@
         <!-- stats Section
         ================================================== -->
         <section id="stats" class="count-up">
-
+            <div v-observe-visibility="{ callback: visibilityChanged, throttle: 1000 }"></div>
             <div class="row">
                 <div class="col-twelve">
                     <div class="block-1-6 block-s-1-3 block-tab-1-2 block-mob-full stats-list">
@@ -415,10 +415,17 @@
                             </div>
 
                             <h3 class="stat-count">
-                                <span v-if="loadedStatistics.game && loadedStatistics.game.fans">
-                                    {{ this.loadedStatistics.game.fans.value }}
-                                </span>
-                                <!-- <vue-animate-number from="1" :to="loadedStatistics.game.fans.value" v-if="loadedStatistics.game && loadedStatistics.game.fans"></vue-animate-number> -->
+                                <!-- <span v-if="loadedStatistics.game && loadedStatistics.game.fans"> -->
+                                    <!-- {{ this.loadedStatistics.game.fans.value }} -->
+                                <!-- </span> -->
+                                <animate-number 
+                                    from="0" 
+                                    :to="loadedStatistics.game.fans.value" 
+                                    :duration="loadedStatistics.game.fans.value * 100"
+                                    mode="manual"
+                                    ref="fansStats"
+                                    v-if="loadedStatistics.game && loadedStatistics.game.fans">
+                                </animate-number>
                             </h3>
 
                             <h5 class="stat-title">
@@ -434,9 +441,17 @@
                             </div>
 
                             <h3 class="stat-count">
-                                <span v-if="loadedStatistics.game && loadedStatistics.game.sports">
+                                <!-- <span v-if="loadedStatistics.game && loadedStatistics.game.sports">
                                     {{ this.loadedStatistics.game.sports.value }}
-                                </span>
+                                </span> -->
+                                <animate-number 
+                                    from="0" 
+                                    :to="loadedStatistics.game.sports.value" 
+                                    :duration="loadedStatistics.game.sports.value * 100"
+                                    mode="manual"
+                                    ref="sportsStats"
+                                    v-if="loadedStatistics.game && loadedStatistics.game.sports">
+                                </animate-number>
                             </h3>
 
                             <h5 class="stat-title">
@@ -452,9 +467,17 @@
                             </div>
 
                             <h3 class="stat-count">
-                                <span v-if="loadedStatistics.game && loadedStatistics.game.competitions">
+                                <!-- <span v-if="loadedStatistics.game && loadedStatistics.game.competitions">
                                     {{ this.loadedStatistics.game.competitions.value }}
-                                </span>
+                                </span> -->
+                                <animate-number 
+                                    from="0" 
+                                    :to="loadedStatistics.game.competitions.value" 
+                                    :duration="loadedStatistics.game.competitions.value * 100"
+                                    mode="manual"
+                                    ref="competitionsStats"
+                                    v-if="loadedStatistics.game && loadedStatistics.game.competitions">
+                                </animate-number>
                             </h3>
 
                             <h5 class="stat-title">
@@ -470,9 +493,17 @@
                             </div>
 
                             <h3 class="stat-count">
-                                <span v-if="loadedStatistics.game && loadedStatistics.game.teams">
+                                <!-- <span v-if="loadedStatistics.game && loadedStatistics.game.teams">
                                     {{ this.loadedStatistics.game.teams.value }}
-                                </span>
+                                </span> -->
+                                <animate-number 
+                                    from="0" 
+                                    :to="loadedStatistics.game.teams.value" 
+                                    duration="2000"
+                                    mode="manual"
+                                    ref="teamsStats"
+                                    v-if="loadedStatistics.game && loadedStatistics.game.teams">
+                                </animate-number>
                             </h3>
 
                             <h5 class="stat-title">
@@ -488,9 +519,17 @@
                             </div>
 
                             <h3 class="stat-count">
-                                <span v-if="loadedStatistics.game && loadedStatistics.game.players">
+                                <!-- <span v-if="loadedStatistics.game && loadedStatistics.game.players">
                                     {{ this.loadedStatistics.game.players.value }}
-                                </span>
+                                </span> -->
+                                <animate-number 
+                                    from="0" 
+                                    :to="loadedStatistics.game.players.value" 
+                                    :duration="loadedStatistics.game.players.value * 100"
+                                    mode="manual"
+                                    ref="playersStats"
+                                    v-if="loadedStatistics.game && loadedStatistics.game.players">
+                                </animate-number>
                             </h3>
 
                             <h5 class="stat-title">
@@ -506,9 +545,17 @@
                             </div>
 
                             <h3 class="stat-count">
-                                <span v-if="loadedStatistics.game && loadedStatistics.game.points">
+                                <!-- <span v-if="loadedStatistics.game && loadedStatistics.game.points">
                                     {{ this.loadedStatistics.game.points.value }}
-                                </span>
+                                </span> -->
+                                <animate-number 
+                                    from="0" 
+                                    :to="loadedStatistics.game.points.value" 
+                                    :duration="loadedStatistics.game.points.value * 100"
+                                    mode="manual"
+                                    ref="pointsStats"
+                                    v-if="loadedStatistics.game && loadedStatistics.game.points">
+                                </animate-number>
                             </h3>
 
                             <h5 class="stat-title">
@@ -627,7 +674,7 @@
     import quickMenu from '~/components/quickMenu'
     import axios from 'axios'
     import Noty from 'noty'
-    // import animateNumber from '~/plugins/vue-animate-number'
+    // import vueAnimateNumber from '~/plugins/vue-animate-number'
     export default {
         layout: 'layoutLandingPage',
         head: {
@@ -652,7 +699,7 @@
         },
         components: {
             quickMenu,
-            // animateNumber
+            // vueAnimateNumber
         },
         mounted: () => {
             // new Noty({type: 'success', text: 'Email was sent successfully', timeout: 5000, theme: 'metroui'}).show()
@@ -675,6 +722,7 @@
                 name: '',
                 email: '',
                 message: '',
+                animationHasStarted: false
             }
         },
         computed: {
@@ -764,6 +812,24 @@
                     console.log(error)
                     new Noty({type: 'error', text: this.$t('pages.index.contact_form_send_error'), timeout: 5000, theme: 'metroui'}).show()
                 })
+            },
+            visibilityChanged (isVisible, entry) {
+                if (isVisible && !this.animationHasStarted) {
+                    this.startAnimate()
+                    this.animationHasStarted = true
+                }
+                // console.log('isVisible: ', isVisible)
+                // console.log('entry: ', entry)
+            },
+            startAnimate () {
+                console.log('Start animate!')
+                // this.$refs.myNum.start()
+                this.$refs.fansStats.start()
+                this.$refs.sportsStats.start()
+                this.$refs.competitionsStats.start()
+                this.$refs.teamsStats.start()
+                this.$refs.playersStats.start()
+                this.$refs.pointsStats.start()
             }
         }
     }

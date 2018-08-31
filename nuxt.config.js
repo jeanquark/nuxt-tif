@@ -206,6 +206,7 @@ module.exports = {
   		{ src: '~/plugins/vue-lazyload.js', ssr: false },
   		// { src: '~/plugins/vue-drag-drop.js', ssr: false },
   		{ src: '~/plugins/vue-draggable.js', ssr: false },
+  		{ src: '~/plugins/vue-observe-visibility', ssr: false },
     ],
   	serverMiddleware: [
 		'~/serverMiddleware/validateFirebaseIdToken',
