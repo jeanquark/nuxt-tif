@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div id="app">
 		<h3 v-if="this.loading">Call the API for next week matches...</h3>
 		<h4 v-if="!this.loading">Done!</h4>
 	</div>
@@ -10,7 +10,7 @@
 	import axios from 'axios'
 	import moment from 'moment'
 	export default {
-		layout: 'layoutFront',
+		// layout: 'layoutFront',
 		created () {
 			// loading = true
 			const startDate = moment().format('YYYY-MM-DD')

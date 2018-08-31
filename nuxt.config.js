@@ -225,6 +225,7 @@ module.exports = {
   		{ path: '/update-user-level', handler: '~/serverMiddleware/updateUserLevel' },
   		{ path: '/register-new-user', handler: '~/serverMiddleware/registerNewUser' },
   		{ path: '/update-user-status', handler: '~/serverMiddleware/updateUserStatus' },
+  		{ path: '/api/fetch-next-week-matches', handler: '~/serverMiddleware/api-fetchNextWeekMatches' }
   	],
   	toast: {
 		duration: 8000,
