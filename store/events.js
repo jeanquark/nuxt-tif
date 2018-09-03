@@ -65,11 +65,12 @@ export const mutations = {
 export const actions = {
     // Load all events
     loadedEvents ({commit}) {
-        firebase.database().ref('/events_new/').orderByChild('date').on('value', function (snapshot) {
+        firebase.database().ref('/events_new2/').on('value', function (snapshot) {
             const eventsArray = []
             for (const key in snapshot.val()) {
                 eventsArray.push({ ...snapshot.val()[key], id: key})
             }
+
             commit('setEvents', eventsArray)
         })
     },

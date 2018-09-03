@@ -78,7 +78,7 @@
 			<!-- Evénement -->
 			<div id="event" class="col-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="flex-container-event">
-				  	<a href="mesEvent.html" class="darkturquoise" style="flex-grow: 1"><span class="textEvent">Event</span></a>
+				  	<nuxt-link to="/user/events" class="darkturquoise" style="flex-grow: 1"><span class="textEvent">Events</span></nuxt-link>
 				</div>
 			</div>
 			<!-- End Evénement -->
@@ -112,23 +112,23 @@
 					<div id="dock">
 						<ul>
 							<li>
-								<a href="fanshop.html"><img src="/images/menuShop.png">
+								<a href="fanshop.html"><img src="/images/menuShop.png"></a>
 								<span class="textMenu">FanShop</span></a>
 							</li>
 							<li>
-								<a href="collection.html"><img src="/images/menuCollection.png">
+								<a href="collection.html"><img src="/images/menuCollection.png"></a>
 								<span class="textMenu">Collection</span></a>
 							</li>
 							<li id="active">
-								<a href="index.html"><img src="/images/menuHome.png">
+								<a href="index.html"><img src="/images/menuHome.png"></a>
 								<span class="textMenu">ThisIsFan</span></a>
 							</li>
 							<li>
-								<a href="social.html"><img src="/images/menuSocial.png">
+								<a href="social.html"><img src="/images/menuSocial.png"></a>
 								<span class="textMenu">Social</span></a>
 							</li>
 							<li>
-								<a href="resultat.html"><img src="/images/menuResultat.png">
+								<a href="resultat.html"><img src="/images/menuResultat.png"></a>
 								<span class="textMenu">Résultat</span></a>
 							</li>
 						</ul>
