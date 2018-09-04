@@ -38,7 +38,7 @@
 					<nuxt-link to="/user/avatar" class="boxShadow" style="flex-basis: 60px" v-if="loadedUser && loadedUser.avatar"><img :src="loadedUser.avatar.url" class="imgAvatar"/></nuxt-link>
 					<nuxt-link to="/user/avatar" class="boxShadow" style="flex-basis: 60px" v-else><img src="/images/avatar.png" class="imgAvatar"/></nuxt-link>
 					<nuxt-link to="/user" class="boxShadow flex-container-modalProfil" style="flex-grow: 1">
-						<div class="columnProfil"><img src="/images/163.png" class="imgModalProprieteFlags"/> <span class="modal-Propriete" v-if="loadedUser">{{ loadedUser.username }}</span> <span class="modal-ProprietePlace boxShadow"><img src="/images/cup.png" class="imgModalProprieteCup"/> 1863ème</span></div>
+						<div class="columnProfil"><img src="/images/163.png" class="imgModalProprieteFlags"/> <span class="modal-Propriete" v-if="loadedUser"> {{ loadedUser.username }} </span> <span class="modal-ProprietePlace boxShadow"><img src="/images/cup.png" class="imgModalProprieteCup"/> 1863ème</span></div>
 					</nuxt-link>
 					<nuxt-link :to="localePath({name: 'user-preferences'})" class="boxShadow" style="flex-basis: 60px"><img src="/images/parametre.png" class="imgParametre"/></nuxt-link>
 				</div>

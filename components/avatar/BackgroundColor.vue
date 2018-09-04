@@ -19,7 +19,7 @@
 		props: ['background'],
 		data () {
 			return {
-				total_background_colors: 10,
+				total_background_colors: 144,
 			}
 		},
 		computed: {
