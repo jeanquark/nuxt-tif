@@ -53,7 +53,7 @@
                                 <div class="columnParametreTexte">
                                     {{ $t('pages.user-preferences.languages') }}
                                 </div>
-                                <nuxt-link :to="localePath({name: 'user-preferences-language'})" class="columnParametreButton">
+                                <nuxt-link :to="localePath({name: 'user-preferences-language'})" class="columnParametreButton" v-if="loadedUser">
                                     {{ this.language }}
                                 </nuxt-link>
                             </div>
