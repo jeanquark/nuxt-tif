@@ -12,13 +12,13 @@
 			<div id="header" class="col-12 col-sm-12 col-md-12 col-lg-12 top-fixed">
 				<div class="flex-container-header text-center">
 					<div class="column">
-						<div class="level-box"><i class="fa fa-star"></i> Niv. 1 - <i class="fa fa-angle-double-up"></i> 1 / 10</div>						
+						<div class="level-box" v-if="loadedUser && loadedUser.level"><i class="fa fa-star"></i> Niv. {{ loadedUser.level.value }} - <i class="fa fa-angle-double-up"></i> 1 / 10</div>						
 					</div>
 					<div class="column">
-						<div class="dollar-box"><i class="fa fa-dollar-sign"></i> 500</div>						
+						<div class="dollar-box" v-if="loadedUser &&loadedUser.dollarFan"><i class="fa fa-dollar-sign"></i> {{ loadedUser.dollarFan.value }}</div>						
 					</div>
 					<div class="column">
-						<div class="token-box"><i class="fa fa-certificate"></i> 5</div>					
+						<div class="token-box" v-if="loadedUser &&loadedUser.tokens"><i class="fa fa-certificate"></i> {{ loadedUser.tokens.value }}</div>					
 					</div>
 
 					<div class="columnButton text-right">
