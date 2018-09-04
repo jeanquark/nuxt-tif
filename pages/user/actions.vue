@@ -146,6 +146,67 @@
                                     </transition-group>
                                 </draggable>
                             </span>
+							
+							<span class="OtherTeam2" style="border: 1px dashed orange;">
+                                <p style="color: #000; text-align: center;">
+                                    18:00 - 20:00
+                                    <button class="btn btn-sm btn-default" @click="removeSlot('slot6')" v-if="slots.slot6 && slots.slot6.length >= 1"><i class="fas fa-times"></i></button>
+                                </p>
+                                <draggable :options="{group:{ name:'user-actions' }}" :move="onMove" @change="onChange($event, 'slot6')" v-model="slots.slot6">
+                                    <transition-group name="no" class="list-group">
+                                        <div key="slot6" v-if="slots.slot6 && slots.slot6.length < 1">
+                                            <img src="/images/actions/actionXP.jpg" class="imgModalAvatar" />
+                                        </div>
+                                        <div class="list-group-item" v-for="(element, index) in slots.slot6" :key="index" style="color: #000; border: 1px solid red; margin: 0px 0px;" v-else>
+                                            <span v-if="element">
+                                                <img :src="'/images/actions/' + element.image" class="imgModalAvatar" />
+                                                {{ element.name }}
+                                            </span>
+                                        </div>
+                                    </transition-group>
+                                </draggable>
+                            </span>
+
+							<span class="OtherTeam2" style="border: 1px dashed orange;">
+                                <p style="color: #000; text-align: center;">
+                                    20:00 - 22:00
+                                    <button class="btn btn-sm btn-default" @click="removeSlot('slot7')" v-if="slots.slot7 && slots.slot7.length >= 1"><i class="fas fa-times"></i></button>
+                                </p>
+                                <draggable :options="{group:{ name:'user-actions' }}" :move="onMove" @change="onChange($event, 'slot7')" v-model="slots.slot7">
+                                    <transition-group name="no" class="list-group">
+                                        <div key="slot7" v-if="slots.slot5 && slots.slot7.length < 1">
+                                            <img src="/images/actions/actionXP.jpg" class="imgModalAvatar" />
+                                        </div>
+                                        <div class="list-group-item" v-for="(element, index) in slots.slot7" :key="index" style="color: #000; border: 1px solid red; margin: 0px 0px;" v-else>
+                                            <span v-if="element">
+                                                <img :src="'/images/actions/' + element.image" class="imgModalAvatar" />
+                                                {{ element.name }}
+                                            </span>
+                                        </div>
+                                    </transition-group>
+                                </draggable>
+                            </span>
+
+							<span class="OtherTeam2" style="border: 1px dashed orange;">
+                                <p style="color: #000; text-align: center;">
+                                    22:00 - 00:00
+                                    <button class="btn btn-sm btn-default" @click="removeSlot('slot8')" v-if="slots.slot8 && slots.slot8.length >= 1"><i class="fas fa-times"></i></button>
+                                </p>
+                                <draggable :options="{group:{ name:'user-actions' }}" :move="onMove" @change="onChange($event, 'slot8')" v-model="slots.slot8">
+                                    <transition-group name="no" class="list-group">
+                                        <div key="slot8" v-if="slots.slot8 && slots.slot8.length < 1">
+                                            <img src="/images/actions/actionXP.jpg" class="imgModalAvatar" />
+                                        </div>
+                                        <div class="list-group-item" v-for="(element, index) in slots.slot8" :key="index" style="color: #000; border: 1px solid red; margin: 0px 0px;" v-else>
+                                            <span v-if="element">
+                                                <img :src="'/images/actions/' + element.image" class="imgModalAvatar" />
+                                                {{ element.name }}
+                                            </span>
+                                        </div>
+                                    </transition-group>
+                                </draggable>
+                            </span>
+
                         </div>
 
 
