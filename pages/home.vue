@@ -12,13 +12,13 @@
 			<div id="header" class="col-12 col-sm-12 col-md-12 col-lg-12 top-fixed">
 				<div class="flex-container-header text-center">
 					<div class="column">
-						<div class="level-box" v-if="loadedUser && loadedUser.level"><i class="fa fa-star"></i> Niv. {{ loadedUser.level.value }} - <i class="fa fa-angle-double-up"></i> 1 / 10</div>						
+						<div class="level-box" v-if="loadedUser"><i class="fa fa-star"></i> Niv. {{ loadedUser.level.value }} - <i class="fa fa-angle-double-up"></i> {{ loadedUser.action.value }} / 10</div>						
 					</div>
 					<div class="column">
-						<div class="dollar-box" v-if="loadedUser &&loadedUser.dollarFan"><i class="fa fa-dollar-sign"></i> {{ loadedUser.dollarFan.value }}</div>						
+						<div class="dollar-box" v-if="loadedUser && loadedUser.dollarFan"><i class="fa fa-dollar-sign"></i> {{ loadedUser.dollarFan.value }}</div>						
 					</div>
 					<div class="column">
-						<div class="token-box" v-if="loadedUser &&loadedUser.tokens"><i class="fa fa-certificate"></i> {{ loadedUser.tokens.value }}</div>					
+						<div class="token-box" v-if="loadedUser && loadedUser.tokens"><i class="fa fa-certificate"></i> {{ loadedUser.tokens.value }}</div>					
 					</div>
 
 					<div class="columnButton text-right">
@@ -38,7 +38,7 @@
 					<nuxt-link to="/user/avatar" class="boxShadow" style="flex-basis: 60px" v-if="loadedUser && loadedUser.avatar"><img :src="loadedUser.avatar.url" class="imgAvatar"/></nuxt-link>
 					<nuxt-link to="/user/avatar" class="boxShadow" style="flex-basis: 60px" v-else><img src="/images/avatar.png" class="imgAvatar"/></nuxt-link>
 					<nuxt-link to="/user" class="boxShadow flex-container-modalProfil" style="flex-grow: 1">
-						<div class="columnProfil"><img src="/images/163.png" class="imgModalProprieteFlags"/> <span class="modal-Propriete" v-if="loadedUser">{{ loadedUser.pseudo }}</span> <span class="modal-ProprietePlace boxShadow"><img src="/images/cup.png" class="imgModalProprieteCup"/> 1863ème</span></div>
+						<div class="columnProfil"><img src="/images/163.png" class="imgModalProprieteFlags"/> <span class="modal-Propriete" v-if="loadedUser">{{ loadedUser.username }}</span> <span class="modal-ProprietePlace boxShadow"><img src="/images/cup.png" class="imgModalProprieteCup"/> 1863ème</span></div>
 					</nuxt-link>
 					<nuxt-link :to="localePath({name: 'user-preferences'})" class="boxShadow" style="flex-basis: 60px"><img src="/images/parametre.png" class="imgParametre"/></nuxt-link>
 				</div>
@@ -155,6 +155,9 @@
 		computed: {
 			loadedUser () {
 				return this.$store.getters['users/loadedUser']
+			},
+			loadedLevel () {
+				return this.$store.getters['level/loadedLevel']
 			}
 		},
 		methods: {
