@@ -119,8 +119,10 @@
             "hair": "Cheveux",
 			"eyebrows": "Sourcils",
 			"glasses": "Lunettes",
-			"accessory": "Accessoirs",
+			"accessories": "Accessoirs",
 			"beard": "Barbe",
+			"tattoo": "Tattoo",
+			"makeup": "Maquillage",
 			"loading": "Chargement en cours"
         },
         "user-preferences": {

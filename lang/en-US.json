@@ -110,8 +110,10 @@
             "hair": "Hair",
 			"eyebrows": "Eyebrows",
 			"glasses": "Glasses",
-			"accessory": "Accessory",
+			"accessories": "Accessories",
 			"beard": "Beard",
+			"tattoo": "Tattoo",
+			"makeup" : "Makeup",
 			"loading": "Loading"
         },
         "user-preferences": {
