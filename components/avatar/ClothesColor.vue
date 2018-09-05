@@ -28,7 +28,7 @@
 				return this.clothes ? this.clothes.match(/\d+/)[0].substr(0, 2) : '01'
 			},
 			clothes_color () {
-				return this.clothes ? this.clothes.match(/\d+/)[0].substr(2, 4) : '01'
+				return this.clothes ? this.clothes.match(/\d+/)[0].substr(2, 4) : '001'
 			}
 		},
 		methods: {
