@@ -192,7 +192,7 @@
                     const array = this.$store.getters['users/loadedUser'].avatar.name.split('_')
 
                     // Ensure there are at least 12 layers in the image (including userId and gender)
-                    if (array.length >= 128) {
+                    if (array.length >= 12) {
                         this.gender = array[1]
                         this.background = array[2]
                         this.skin = array[3]
@@ -214,7 +214,7 @@
                                 '/images/avatars/jm/female/eyes/' + this.eyes + '.png',
                                 '/images/avatars/jm/female/eyebrows/' + this.eyebrows + '.png',
 								'/images/avatars/jm/female/mouth/' + this.mouth + '.png',
-								'/images/avatars/jm/female/hair/' + this.hait + '.png',
+								'/images/avatars/jm/female/hair/' + this.hair + '.png',
                                 '/images/avatars/jm/female/makeup/' + this.makeup + '.png',
 								'/images/avatars/jm/female/accessories/' + this.accessories + '.png',
 								'/images/avatars/gm/female/clothes/' + this.clothes + '.png',
@@ -228,7 +228,7 @@
                                 '/images/avatars/jm/male/eyes/' + this.eyes + '.png',
                                 '/images/avatars/jm/male/eyebrows/' + this.eyebrows + '.png',
 								'/images/avatars/jm/male/mouth/' + this.mouth + '.png',
-								'/images/avatars/jm/male/hair/' + this.hait + '.png',
+								'/images/avatars/jm/male/hair/' + this.hair + '.png',
                                 '/images/avatars/jm/male/beard/' + this.beard + '.png',
 								'/images/avatars/jm/male/accessories/' + this.accessories + '.png',
 								'/images/avatars/gm/male/clothes/' + this.clothes + '.png',
@@ -259,7 +259,7 @@
                 avatars: [],
                 gender: '',
                 type: 'background',
-                arrayOfImagesToMerge: Array(2),
+                arrayOfImagesToMerge: Array(12),
                 background: '',
                 skin: '',
 				tattooFemale: '',
