@@ -20,7 +20,7 @@
 		props: ['gender', 'skin'],
 		data () {
 			return {
-				total_skin_colors: 10,
+				total_skin_colors: 33,
 			}
 		},
 		computed: {
