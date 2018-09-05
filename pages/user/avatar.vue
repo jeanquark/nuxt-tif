@@ -316,14 +316,6 @@
                         this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/male/g, 'female')
                         this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/beard/g, 'makeup')
                     }
-                    if (this.type === 'tattooMale') {
-                        this.type = 'tattooFemale'
-                        this.tattooFemale = this.tattooMale.replace('tattooMale', 'tattooFemale')
-                    }
-                    for (let i = 0; i < this.arrayOfImagesToMerge.length; i++) {
-                        this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/male/g, 'female')
-                        this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/tattooMale/g, 'tattooFemale')
-                    }
                 }
                 if (selectedGender === 'male') {
                     if (this.type === 'makeup') {
@@ -334,6 +326,19 @@
                         this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/female/g, 'male')
                         this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/makeup/g, 'beard')
                     }
+                }
+								
+                if (selectedGender === 'female') {
+                    if (this.type === 'tattooMale') {
+                        this.type = 'tattooFemale'
+                        this.tattooFemale = this.tattooMale.replace('tattooMale', 'tattooFemale')
+                    }
+                    for (let i = 0; i < this.arrayOfImagesToMerge.length; i++) {
+                        this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/male/g, 'female')
+                        this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/tattooMale/g, 'tattooFemale')
+                    }
+                }
+                if (selectedGender === 'male') {
                     if (this.type === 'tattooFemale') {
                         this.type = 'tattooMale'
                         this.tattooMale = 'tattooMale' + this.tattooFemale.replace('tattooFemale', 'tattooMale')
@@ -342,7 +347,8 @@
                         this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/female/g, 'male')
                         this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/tattooFemale/g, 'tattooMale')
                     }
-                }								
+                }
+								
                 // console.log('arrayofImagesToMerge: ', this.arrayOfImagesToMerge)
 
                 // Don't forget to merge the images to see the result of the changes 
