@@ -11,7 +11,7 @@
 		props: ['gender', 'eyebrows'],
 		data () {
 			return {
-				total_eyebrows_shapes: 9,
+				total_eyebrows_shapes: 17,
 			}
 		},
 		computed: {

@@ -20,7 +20,7 @@
 		props: ['gender', 'eyebrows'],
 		data () {
 			return {
-				total_eyebrows_colors: 54,
+				total_eyebrows_colors: 45,
 			}
 		},
 		computed: {
