@@ -61,6 +61,8 @@
                                 <skin-shape v-if="this.type === 'skin'" :gender="this.gender" :skin="this.skin" @addToMergeEmitter="addToMerge"></skin-shape>
 								
                                 <eyes-shape v-if="this.type === 'eyes'" :gender="this.gender" :eyes="this.eyes" @addToMergeEmitter="addToMerge"></eyes-shape>
+								
+                                <eyebrows-shape v-if="this.type === 'eyebrows'" :gender="this.gender" :eyebrows="this.eyebrows" @addToMergeEmitter="addToMerge"></eyebrows-shape>
 
                                 <makeup-shape v-if="this.type === 'makeup'" :makeup="this.makeup" @addToMergeEmitter="addToMerge"></makeup-shape>                            
 
@@ -79,6 +81,8 @@
                                 <skin-color v-if="this.type === 'skin'" :gender="this.gender" :skin="skin" @addToMergeEmitter="addToMerge"></skin-color>
 								
                                 <eyes-color v-if="this.type === 'eyes'" :gender="this.gender" :eyes="eyes" @addToMergeEmitter="addToMerge"></eyes-color>
+								
+                                <eyebrows-color v-if="this.type === 'eyebrows'" :gender="this.gender" :eyebrows="eyebrows" @addToMergeEmitter="addToMerge"></eyebrows-color>
 
                                 <makeup-color v-if="this.type === 'makeup'" :makeup="this.makeup" @addToMergeEmitter="addToMerge"></makeup-color>
 
@@ -120,6 +124,8 @@
     import SkinColor from '~/components/avatar/SkinColor.vue'
     import EyesShape from '~/components/avatar/EyesShape.vue'
     import EyesColor from '~/components/avatar/EyesColor.vue'
+    import EyebrowsShape from '~/components/avatar/EyebrowsShape.vue'
+    import EyebrowsColor from '~/components/avatar/EyebrowsColor.vue'
     import TattooFemaleShape from '~/components/avatar/TattooFemaleShape.vue'
     import TattooFemaleColor from '~/components/avatar/TattooFemaleColor.vue'
     import TattooMaleShape from '~/components/avatar/TattooMaleShape.vue'
@@ -141,6 +147,8 @@
 			TattooMaleColor,
 			EyesShape,
 			EyesColor,
+			EyebrowsShape,
+			EyebrowsColor,
             MakeupShape,
             MakeupColor,
             BeardShape,
@@ -151,22 +159,24 @@
                 if (this.$store.getters['users/loadedUser'].avatar) {
                     const array = this.$store.getters['users/loadedUser'].avatar.name.split('_')
 
-                    // Ensure there are at least 7 layers in the image (including userId and gender)
-                    if (array.length >= 7) {
+                    // Ensure there are at least 8 layers in the image (including userId and gender)
+                    if (array.length >= 8) {
                         this.gender = array[1]
                         this.background = array[2]
                         this.skin = array[3]
 						this.tattooFemale = array[4]
 						this.tattooMale = array[4]
 						this.eyes = array[5]
-                        this.makeup = array[6]
-                        this.beard = array[6]
+						this.eyebrows = array[6]
+                        this.makeup = array[7]
+                        this.beard = array[7]
                         if (this.gender === 'female') {
                             this.arrayOfImagesToMerge = [
                                 '/images/avatars/jm/unisex/background/' + this.background + '.png',
                                 '/images/avatars/jm/female/skin/' + this.skin + '.png',
 								'/images/avatars/gm/female/tattooFemale/' + this.tattooFemale + '.png',
                                 '/images/avatars/jm/female/eyes/' + this.eyes + '.png',
+                                '/images/avatars/jm/female/eyebrows/' + this.eyebrows + '.png',
                                 '/images/avatars/jm/female/makeup/' + this.makeup + '.png',
                             ]
                         }
@@ -176,6 +186,7 @@
                                 '/images/avatars/jm/male/skin/' + this.skin + '.png',
 								'/images/avatars/gm/male/tattooMale/' + this.tattooMale + '.png',
                                 '/images/avatars/jm/male/eyes/' + this.eyes + '.png',
+                                '/images/avatars/jm/male/eyebrows/' + this.eyebrows + '.png',
                                 '/images/avatars/jm/male/beard/' + this.beard + '.png',
                             ]
                         }
@@ -210,6 +221,7 @@
 				tattooFemale: '',
 				tattooMale: '',
 				eyes: '',
+				eyebrows: '',
                 makeup: '',
                 beard: '',
                 progress: 0
@@ -293,6 +305,9 @@
                 if (payload.type === 'eyes') {
                     this.eyes = payload.image.replace(/\.[^/.]+$/, "")
                 }
+                if (payload.type === 'eyebrows') {
+                    this.eyebrows = payload.image.replace(/\.[^/.]+$/, "")
+                }
                 if (payload.type === 'makeup') {
                     this.makeup = payload.image.replace(/\.[^/.]+$/, "")
                 }
@@ -333,10 +348,10 @@
 
                 let imageName = ''
                 if (this.gender === 'female') {
-                    imageName = userId + '_female_' + this.background + '_' + this.skin + '_' + this.tattooFemale + '_' + this.eyes + '_' + this.makeup
+                    imageName = userId + '_female_' + this.background + '_' + this.skin + '_' + this.tattooFemale + '_' + this.eyes + '_' + this.eyebrows + '_' + this.makeup
                 } 
                 if (this.gender === 'male') {
-                    imageName = userId + '_male_' + this.background + '_' + this.skin + '_' + this.tattooMale + '_' + this.eyes + '_' + this.beard
+                    imageName = userId + '_male_' + this.background + '_' + this.skin + '_' + this.tattooMale + '_' + this.eyes + '_' + this.eyebrows + '_' + this.beard
                 }
 
                 const storageRef = firebase.storage().ref('/images/avatars/' + imageName)
