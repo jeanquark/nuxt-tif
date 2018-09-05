@@ -46,8 +46,7 @@
                                 <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'hair'}" @click="selectType('hair')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.hair') }}</span></div>
                                 <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'makeup' || this.type === 'beard'}" @click="selectType('makeup')" v-if="this.gender === 'female'"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.makeup') }}</span></div>
                                 <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'beard' || this.type === 'makeup'}" @click="selectType('beard')" v-if="this.gender === 'male'"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.beard') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'tattooFemale' || this.type === 'tattooFemale'}" @click="selectType('tattooFemale')" v-if="this.gender === 'female'"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.tattoo') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'tattooMale' || this.type === 'tattooMale'}" @click="selectType('tattooMale')" v-if="this.gender === 'male'"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.tattoo') }}</span></div>
+                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'tattoo' || this.type === 'tattoo'}" @click="selectType('tattoo')" v-if="this.gender === 'female'"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.tattoo') }}</span></div>
 								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'accessories'}" @click="selectType('accessories')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.accessories') }}</span></div>
                                 <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'clothes'}" @click="selectType('clothes')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.clothes') }}</span></div>
 							</div>
@@ -60,9 +59,7 @@
 
                                 <skin-shape v-if="this.type === 'skin'" :gender="this.gender" :skin="this.skin" @addToMergeEmitter="addToMerge"></skin-shape>
 								
-								<tattooFemale-shape v-if="this.type === 'tattooFemale'" :tattooFemale="this.tattooFemale" @addToMergeEmitter="addToMerge"></tattooFemale-shape>                            
-
-                                <tattooMale-shape v-if="this.type === 'tattooMale'" :tattooMale="this.tattooMale" @addToMergeEmitter="addToMerge"></tattooMale-shape>  
+								<tattoo-shape v-if="this.type === 'tattoo'" :tattoo="this.tattoo" @addToMergeEmitter="addToMerge"></tattoo-shape>                            
 								
                                 <eyes-shape v-if="this.type === 'eyes'" :gender="this.gender" :eyes="this.eyes" @addToMergeEmitter="addToMerge"></eyes-shape>
 								
@@ -88,9 +85,7 @@
 
                                 <skin-color v-if="this.type === 'skin'" :gender="this.gender" :skin="skin" @addToMergeEmitter="addToMerge"></skin-color>
 								
-                                <tattooFemale-color v-if="this.type === 'tattooFemale'" :tattooFemale="this.tattooFemale" @addToMergeEmitter="addToMerge"></tattooFemale-color>
-
-                                <tattooMale-color v-if="this.type === 'tattooMale'" :tattooMale="this.tattooMale" @addToMergeEmitter="addToMerge"></tattooMale-color>
+                                <tattoo-color v-if="this.type === 'tattoo'" :tattoo="this.tattoo" @addToMergeEmitter="addToMerge"></tattoo-color>
 								
                                 <eyes-color v-if="this.type === 'eyes'" :gender="this.gender" :eyes="eyes" @addToMergeEmitter="addToMerge"></eyes-color>
 								
@@ -138,10 +133,8 @@
     import BackgroundColor from '~/components/avatar/BackgroundColor.vue'
     import SkinShape from '~/components/avatar/SkinShape.vue'
     import SkinColor from '~/components/avatar/SkinColor.vue'
-    import TattooFemaleShape from '~/components/avatar/TattooFemaleShape.vue'
-    import TattooFemaleColor from '~/components/avatar/TattooFemaleColor.vue'
-    import TattooMaleShape from '~/components/avatar/TattooMaleShape.vue'
-    import TattooMaleColor from '~/components/avatar/TattooMaleColor.vue'
+    import TattooShape from '~/components/avatar/TattooShape.vue'
+    import TattooColor from '~/components/avatar/TattooColor.vue'
     import EyesShape from '~/components/avatar/EyesShape.vue'
     import EyesColor from '~/components/avatar/EyesColor.vue'
     import EyebrowsShape from '~/components/avatar/EyebrowsShape.vue'
@@ -165,10 +158,8 @@
             BackgroundColor,
             SkinShape,
             SkinColor,
-			TattooFemaleShape,
-			TattooFemaleColor,
-			TattooMaleShape,
-			TattooMaleColor,
+			TattooShape,
+			TattooColor,
 			EyesShape,
 			EyesColor,
 			EyebrowsShape,
@@ -196,8 +187,7 @@
                         this.gender = array[1]
                         this.background = array[2]
                         this.skin = array[3]
-						this.tattooFemale = array[4]
-						this.tattooMale = array[4]
+						this.tattoo = array[4]
 						this.eyes = array[5]
 						this.eyebrows = array[6]
 						this.mouth = array[7]
@@ -210,7 +200,7 @@
                             this.arrayOfImagesToMerge = [
                                 '/images/avatars/jm/unisex/background/' + this.background + '.png',
                                 '/images/avatars/jm/female/skin/' + this.skin + '.png',
-								'/images/avatars/gm/female/tattooFemale/' + this.tattooFemale + '.png',
+								'/images/avatars/gm/female/tattoo/' + this.tattoo + '.png',
                                 '/images/avatars/jm/female/eyes/' + this.eyes + '.png',
                                 '/images/avatars/jm/female/eyebrows/' + this.eyebrows + '.png',
 								'/images/avatars/jm/female/mouth/' + this.mouth + '.png',
@@ -224,7 +214,7 @@
                             this.arrayOfImagesToMerge = [
                                 '/images/avatars/jm/unisex/background/' + this.background + '.png',
                                 '/images/avatars/jm/male/skin/' + this.skin + '.png',
-								'/images/avatars/gm/male/tattooMale/' + this.tattooMale + '.png',
+								'/images/avatars/gm/male/tattoo/' + this.tattoo + '.png',
                                 '/images/avatars/jm/male/eyes/' + this.eyes + '.png',
                                 '/images/avatars/jm/male/eyebrows/' + this.eyebrows + '.png',
 								'/images/avatars/jm/male/mouth/' + this.mouth + '.png',
@@ -262,8 +252,7 @@
                 arrayOfImagesToMerge: Array(2),
                 background: '',
                 skin: '',
-				tattooFemale: '',
-				tattooMale: '',
+				tattoo: '',
 				eyes: '',
 				eyebrows: '',
 				mouth: '',
@@ -326,29 +315,7 @@
                         this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/female/g, 'male')
                         this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/makeup/g, 'beard')
                     }
-                }
-								
-                if (selectedGender === 'female') {
-                    if (this.type === 'tattooMale') {
-                        this.type = 'tattooFemale'
-                        this.tattooFemale = this.tattooMale.replace('tattooMale', 'tattooFemale')
-                    }
-                    for (let i = 0; i < this.arrayOfImagesToMerge.length; i++) {
-                        this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/male/g, 'female')
-                        this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/tattooMale/g, 'tattooFemale')
-                    }
-                }
-                if (selectedGender === 'male') {
-                    if (this.type === 'tattooFemale') {
-                        this.type = 'tattooMale'
-                        this.tattooMale = 'tattooMale' + this.tattooFemale.replace('tattooFemale', 'tattooMale')
-                    }
-                    for (let i = 0; i < this.arrayOfImagesToMerge.length; i++) {
-                        this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/female/g, 'male')
-                        this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/tattooFemale/g, 'tattooMale')
-                    }
-                }
-								
+                }								
                 // console.log('arrayofImagesToMerge: ', this.arrayOfImagesToMerge)
 
                 // Don't forget to merge the images to see the result of the changes 
@@ -366,11 +333,8 @@
                 if (payload.type === 'skin') {
                     this.skin = payload.image.replace(/\.[^/.]+$/, "")
                 }
-                if (payload.type === 'tattooFemale') {
-                    this.tattooFemale = payload.image.replace(/\.[^/.]+$/, "")
-                }
-                if (payload.type === 'tattooMale') {
-                    this.tattooMale = payload.image.replace(/\.[^/.]+$/, "")
+                if (payload.type === 'tattoo') {
+                    this.tattoo = payload.image.replace(/\.[^/.]+$/, "")
                 }
                 if (payload.type === 'eyes') {
                     this.eyes = payload.image.replace(/\.[^/.]+$/, "")
@@ -430,10 +394,10 @@
 
                 let imageName = ''
                 if (this.gender === 'female') {
-                    imageName = userId + '_female_' + this.background + '_' + this.skin + '_' + this.tattooFemale + '_' + this.eyes + '_' + this.eyebrows + '_' + this.mouth + '_' + this.hair + '_' + this.makeup + '_' + this.accessories + '_' + this.clothes
+                    imageName = userId + '_female_' + this.background + '_' + this.skin + '_' + this.tattoo + '_' + this.eyes + '_' + this.eyebrows + '_' + this.mouth + '_' + this.hair + '_' + this.makeup + '_' + this.accessories + '_' + this.clothes
                 } 
                 if (this.gender === 'male') {
-                    imageName = userId + '_male_' + this.background + '_' + this.skin + '_' + this.tattooMale + '_' + this.eyes + '_' + this.eyebrows + '_' + this.mouth + '_' + this.hair + '_' + this.beard + '_' + this.accessories + '_' + this.clothes
+                    imageName = userId + '_male_' + this.background + '_' + this.skin + '_' + this.tattoo + '_' + this.eyes + '_' + this.eyebrows + '_' + this.mouth + '_' + this.hair + '_' + this.beard + '_' + this.accessories + '_' + this.clothes
                 }
 
                 const storageRef = firebase.storage().ref('/images/avatars/' + imageName)
