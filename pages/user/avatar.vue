@@ -259,7 +259,7 @@
                 avatars: [],
                 gender: '',
                 type: 'background',
-                arrayOfImagesToMerge: Array(12),
+                arrayOfImagesToMerge: Array(2),
                 background: '',
                 skin: '',
 				tattooFemale: '',
