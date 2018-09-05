@@ -8,7 +8,7 @@
 			beard_color: {{ this.beard_color }}<br /><br />
 		</p> -->
 
-	    <div class="col-lg-3 col-md-4 col-xs-6" v-for="index in total_beard_shapes" style="padding-right: 5px; padding-left: 5px;" @click="addToMerge({gender: 'male', type: 'beard', property: 'color', image: 'beard' + convertTo2Digits(index) + beard_color + '.png', index: index, layerPosition: 2})">
+	    <div class="col-lg-3 col-md-4 col-xs-6" v-for="index in total_beard_shapes" style="padding-right: 5px; padding-left: 5px;" @click="addToMerge({gender: 'male', type: 'beard', property: 'color', image: 'beard' + convertTo2Digits(index) + beard_color + '.png', index: index, layerPosition: 7})">
             <img :src="'/images/avatars/jm/' + 'male' + '/' + 'beard' + '/' + 'min_beard' + convertTo2Digits(index) + '01' + '.png'" class="imgModalAvatar" :class="{active: (beard_shape === convertTo2Digits(index)) }" style="cursor: pointer;" />
         </div>
 	</div>
