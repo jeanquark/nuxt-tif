@@ -46,7 +46,7 @@
                                 <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'hair'}" @click="selectType('hair')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.hair') }}</span></div>
                                 <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'makeup' || this.type === 'beard'}" @click="selectType('makeup')" v-if="this.gender === 'female'"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.makeup') }}</span></div>
                                 <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'beard' || this.type === 'makeup'}" @click="selectType('beard')" v-if="this.gender === 'male'"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.beard') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'tattoo' || this.type === 'tattoo'}" @click="selectType('tattoo')" v-if="this.gender === 'female'"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.tattoo') }}</span></div>
+                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'tattoo'}" @click="selectType('tattoo')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.tattoo') }}</span></div>
 								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'accessories'}" @click="selectType('accessories')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.accessories') }}</span></div>
                                 <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'clothes'}" @click="selectType('clothes')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.clothes') }}</span></div>
 							</div>
@@ -59,7 +59,7 @@
 
                                 <skin-shape v-if="this.type === 'skin'" :gender="this.gender" :skin="this.skin" @addToMergeEmitter="addToMerge"></skin-shape>
 								
-								<tattoo-shape v-if="this.type === 'tattoo'" :tattoo="this.tattoo" @addToMergeEmitter="addToMerge"></tattoo-shape>                            
+								<tattoo-shape v-if="this.type === 'tattoo'" gender="this.gender" :tattoo="this.tattoo" @addToMergeEmitter="addToMerge"></tattoo-shape>                            
 								
                                 <eyes-shape v-if="this.type === 'eyes'" :gender="this.gender" :eyes="this.eyes" @addToMergeEmitter="addToMerge"></eyes-shape>
 								
@@ -85,7 +85,7 @@
 
                                 <skin-color v-if="this.type === 'skin'" :gender="this.gender" :skin="skin" @addToMergeEmitter="addToMerge"></skin-color>
 								
-                                <tattoo-color v-if="this.type === 'tattoo'" :tattoo="this.tattoo" @addToMergeEmitter="addToMerge"></tattoo-color>
+                                <tattoo-color v-if="this.type === 'tattoo'" :gender="this.gender" :tattoo="this.tattoo" @addToMergeEmitter="addToMerge"></tattoo-color>
 								
                                 <eyes-color v-if="this.type === 'eyes'" :gender="this.gender" :eyes="eyes" @addToMergeEmitter="addToMerge"></eyes-color>
 								
@@ -200,28 +200,28 @@
                             this.arrayOfImagesToMerge = [
                                 '/images/avatars/jm/unisex/background/' + this.background + '.png',
                                 '/images/avatars/jm/female/skin/' + this.skin + '.png',
-								'/images/avatars/gm/female/tattoo/' + this.tattoo + '.png',
+								'/images/avatars/jm/female/tattoo/' + this.tattoo + '.png',
                                 '/images/avatars/jm/female/eyes/' + this.eyes + '.png',
                                 '/images/avatars/jm/female/eyebrows/' + this.eyebrows + '.png',
 								'/images/avatars/jm/female/mouth/' + this.mouth + '.png',
 								'/images/avatars/jm/female/hair/' + this.hair + '.png',
                                 '/images/avatars/jm/female/makeup/' + this.makeup + '.png',
 								'/images/avatars/jm/female/accessories/' + this.accessories + '.png',
-								'/images/avatars/gm/female/clothes/' + this.clothes + '.png',
+								'/images/avatars/jm/female/clothes/' + this.clothes + '.png',
                             ]
                         }
                         if (this.gender === 'male') {
                             this.arrayOfImagesToMerge = [
                                 '/images/avatars/jm/unisex/background/' + this.background + '.png',
                                 '/images/avatars/jm/male/skin/' + this.skin + '.png',
-								'/images/avatars/gm/male/tattoo/' + this.tattoo + '.png',
+								'/images/avatars/jm/male/tattoo/' + this.tattoo + '.png',
                                 '/images/avatars/jm/male/eyes/' + this.eyes + '.png',
                                 '/images/avatars/jm/male/eyebrows/' + this.eyebrows + '.png',
 								'/images/avatars/jm/male/mouth/' + this.mouth + '.png',
 								'/images/avatars/jm/male/hair/' + this.hair + '.png',
                                 '/images/avatars/jm/male/beard/' + this.beard + '.png',
 								'/images/avatars/jm/male/accessories/' + this.accessories + '.png',
-								'/images/avatars/gm/male/clothes/' + this.clothes + '.png',
+								'/images/avatars/jm/male/clothes/' + this.clothes + '.png',
                             ]
                         }
                     }
@@ -236,7 +236,7 @@
                         '/images/avatars/jm/unisex/background/' + this.background + '.png',
                         '/images/avatars/jm/female/skin/' + this.skin + '.png',
                         '/images/avatars/jm/female/eyes/' + this.eyes + '.png',
-                        '/images/avatars/jm/female/makeup/' + this.makeup + '.png',
+                        '/images/avatars/jm/female/mouth/' + this.mouth + '.png',
                     ]
                 }
 
