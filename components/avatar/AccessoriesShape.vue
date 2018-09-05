@@ -11,7 +11,7 @@
 		props: ['gender', 'accessories'],
 		data () {
 			return {
-				total_accessories_shapes: 0,
+				total_accessories_shapes: 1,
 			}
 		},
 		computed: {

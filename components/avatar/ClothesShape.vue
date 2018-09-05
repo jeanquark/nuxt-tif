@@ -11,7 +11,7 @@
 		props: ['gender', 'clothes'],
 		data () {
 			return {
-				total_clothes_shapes: 0,
+				total_clothes_shapes: 1,
 			}
 		},
 		computed: {

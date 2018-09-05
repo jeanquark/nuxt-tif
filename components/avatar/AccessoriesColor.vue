@@ -20,7 +20,7 @@
 		props: ['gender', 'accessories'],
 		data () {
 			return {
-				total_accessories_colors: 0,
+				total_accessories_colors: 10,
 			}
 		},
 		computed: {
