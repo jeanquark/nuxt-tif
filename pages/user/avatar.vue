@@ -182,8 +182,8 @@
                 if (this.$store.getters['users/loadedUser'].avatar) {
                     const array = this.$store.getters['users/loadedUser'].avatar.name.split('_')
 
-                    // Ensure there are at least 13 layers in the image (including userId and gender)
-                    if (array.length >= 13) {
+                    // Ensure there are at least 12 layers in the image (including userId and gender)
+                    if (array.length >= 12) {
                         this.gender = array[1]
                         this.background = array[2]
                         this.skin = array[3]
@@ -249,7 +249,7 @@
                 avatars: [],
                 gender: '',
                 type: 'background',
-                arrayOfImagesToMerge: Array(13),
+                arrayOfImagesToMerge: Array(11),
                 background: '',
                 skin: '',
 				tattoo: '',
