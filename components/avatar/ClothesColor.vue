@@ -33,7 +33,7 @@
 		},
 		methods: {
 			convertTo2Digits (index) {
-				return this.$parent.convertTo2Digits(index)
+				return this.$parent.convertTo3Digits(index)
 			},
 			addToMerge (event) {
 		      	this.$emit('addToMergeEmitter', event)
