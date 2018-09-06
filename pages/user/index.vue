@@ -14,16 +14,18 @@
                         </nuxt-link>                    
                     </div>
                     <!-- Modal body -->
+
                     <div id="modalBoxContentProfil" class="modal-bodyProfil text-center">
                         <div class="flex-container-modalProfil text-center">
-                            <div class="columnProfil"><img src="/images/flags/163.png" class="imgModalFlags"/></div>
-                            <div class="columnProfil"><span class="modal-Profil">Fan1234567</span> <span class="modal-Age">(20)</span></div>
-                            <div class="columnProfil"><img src="/images/avatar/avatarNeutre.png" class="imgModalAvatarProfil"/></div>
+                            <div class="columnProfil"><img src="163.png" class="imgModalFlags"/>
+                            <span class="modal-Profil">Fan1234567</span> <span class="modal-Age">(20)</span>
+                            <img src="avatar.png" class="imgModalAvatarProfil"/></div>
                         </div>
                         <div class="flex-container-modal-Niveau-Classement text-center">
-                            <div class="columnProfil"><img src="/images/cup.png" class="imgModalCup"/> <span class="modal-Place">1234567ème</span> <img src="/images/cup.png" class="imgModalCup"/></div>
+                            <div class="columnProfil"><img src="cup.png" class="imgModalCup"/> <span class="modal-Place" v-if="loadedUser">{{ loadedUser.username }}</span> <img src="cup.png" class="imgModalCup"/></div>
                         </div>
-                    </div>
+                    </div>  
+
                     <div id="modalTitle" class="modal-body">
                         <div class="flex-container-modal-Title banner2 text-center">
                             <h2>Niveau / PF / Competences</h2>
