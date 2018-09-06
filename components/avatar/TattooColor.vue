@@ -11,7 +11,7 @@
 		props: ['gender', 'tattoo'],
 		data () {
 			return {
-				total_tattoo_colors: 10,
+				total_tattoo_colors: 1,
 			}
 		},
 		computed: {
