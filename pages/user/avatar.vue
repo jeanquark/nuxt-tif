@@ -231,7 +231,7 @@
                     this.background = 'background01001'
                     this.skin = 'skin0101'
 					this.eyes = 'eyes0101'
-                    this.makeup = 'makeup0101'
+					this.mouth = 'mouth0101'
                     this.arrayOfImagesToMerge = [
                         '/images/avatars/jm/unisex/background/' + this.background + '.png',
                         '/images/avatars/jm/female/skin/' + this.skin + '.png',
@@ -249,7 +249,7 @@
                 avatars: [],
                 gender: '',
                 type: 'background',
-                arrayOfImagesToMerge: Array(2),
+                arrayOfImagesToMerge: Array(11),
                 background: '',
                 skin: '',
 				tattoo: '',
@@ -449,6 +449,6 @@
 <style scoped>
     .active {
         background-color: orangered;
-        border: 2px solid red;
+        border: 1px solid red;
     }
   </style>
