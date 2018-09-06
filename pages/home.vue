@@ -87,7 +87,7 @@
 			<div id="footer" class="col-12 col-sm-12 col-md-12 col-lg-12">
 				<!-- News -->
 				<div id="news" class="col-12 col-sm-12 col-md-12 col-lg-12">
-					<div class="flex-container-news">
+					<div class="flex-container-news" v-if="loadedNews.length > 0">
 					  	<nuxt-link to="/boxNews" class="flex-contrainer-column" style="flex-grow: 1">
 							<div class="DodgerBlue" style="flex-grow: 1"><span class="newsTitle">NEWS</span></div>
 							<div style="flex-grow: 1"><img src="/images/newsCompetition.png" class="imgNews"/></div>
@@ -158,6 +158,9 @@
 			},
 			loadedLevel () {
 				return this.$store.getters['level/loadedLevel']
+			},
+			loadedNews () {
+				return this.$store.getters['news/loadedNews']
 			}
 		},
 		methods: {
