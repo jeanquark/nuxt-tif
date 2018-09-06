@@ -10,7 +10,7 @@
 		</p> -->
 
 	    <div class="col-lg-3 col-md-4 col-xs-6" v-for="index in total_accessories_colors" style="padding-right: 5px; padding-left: 5px;" @click="addToMerge({gender: gender, type: 'accessories', property: 'color', image: 'accessories' + accessories_shape + convertTo2Digits(index) + '.png', index: index, layerPosition: 8})">
-            <img :src="'/images/avatars/jm/' + gender + '/' + 'accessories' + '/' + 'colors' + '/accessoriesColor' + convertTo2Digits(index) + '.png'" class="imgModalAvatar" :class="{active: (accessories_color === convertTo2Digits(index)) }" style="cursor: pointer;" />
+            <img :src="'/images/avatars/jm/' + gender + '/' + 'accessories' + '/' + 'colors' + '/accessoriesColor' + convertTo3Digits(index) + '.png'" class="imgModalAvatar" :class="{active: (accessories_color === convertTo3Digits(index)) }" style="cursor: pointer;" />
         </div>
 	</div>
 </template>
@@ -28,7 +28,7 @@
 				return this.accessories ? this.accessories.match(/\d+/)[0].substr(0, 2) : '01'
 			},
 			accessories_color () {
-				return this.accessories ? this.accessories.match(/\d+/)[0].substr(2, 4) : '01'
+				return this.accessories ? this.accessories.match(/\d+/)[0].substr(2, 4) : '001'
 			}
 		},
 		methods: {
