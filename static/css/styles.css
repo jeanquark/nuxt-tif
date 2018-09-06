@@ -70,6 +70,26 @@ margin-left: -5px;
 z-index: 1;
 }
 
+.quit-box {
+display: inline-block;
+-webkit-box-sizing: content-box;
+-moz-box-sizing: content-box;
+box-sizing: content-box;
+padding: 5px 5px 5px 5px;
+overflow: hidden;
+border: none;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+font: normal 120%/1 "bangers", Helvetica, sans-serif;
+color: rgba(0,0,0,1);
+text-align: center;
+-o-text-overflow: ellipsis;
+text-overflow: ellipsis;
+background: dodgerblue;
+-webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.5) ;
+box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.5) ;
+}
+
 .top-fixed {
 position: fixed;
 top: 0;
