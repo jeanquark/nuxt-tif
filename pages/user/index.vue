@@ -22,7 +22,7 @@
                             <img src="avatar.png" class="imgModalAvatarProfil"/></div>
                         </div>
                         <div class="flex-container-modal-Niveau-Classement text-center">
-                            <div class="columnProfil"><img src="cup.png" class="imgModalCup"/> <span class="modal-Place" v-if="loadedUser">{{ loadedUser.username }}</span> <img src="cup.png" class="imgModalCup"/></div>
+                            <div class="columnProfil"><img src="cup.png" class="imgModalCup"/> <span class="modal-Place">{{ loadedUser.username }}</span> <img src="cup.png" class="imgModalCup"/></div>
                         </div>
                     </div>  
 
@@ -62,8 +62,8 @@
                                 <div class="columnNiveauTexte">
                                     Force
                                 </div>
-                                <div class="columnNiveauNumber">
-                                    1
+                                <div class="columnNiveauNumber" v-if="loadedUser">
+                                    {{ loadedUser.skillStrength.value }}
                                 </div>
                             </div>
                             <div class="flex-container-modal-Niveau">
@@ -73,8 +73,8 @@
                                 <div class="columnNiveauTexte">
                                     Endurance
                                 </div>
-                                <div class="columnNiveauNumber">
-                                    1
+                                <div class="columnNiveauNumber" v-if="loadedUser">
+                                    {{ loadedUser.skillEndurance.value }}
                                 </div>
                             </div>
                             <div class="flex-container-modal-Niveau">
@@ -84,8 +84,8 @@
                                 <div class="columnNiveauTexte">
                                     Intelligence
                                 </div>
-                                <div class="columnNiveauNumber">
-                                    1
+                                <div class="columnNiveauNumber" v-if="loadedUser">
+                                    {{ loadedUser.skillIntelligence.value }}
                                 </div>
                             </div>
                             <div class="flex-container-modal-Niveau">
@@ -95,8 +95,8 @@
                                 <div class="columnNiveauTexte">
                                     Social
                                 </div>
-                                <div class="columnNiveauNumber">
-                                    1
+                                <div class="columnNiveauNumber" v-if="loadedUser">
+                                    {{ loadedUser.skillSocial.value }}
                                 </div>
                             </div>
                             <div class="flex-container-modal-Niveau">
@@ -106,8 +106,8 @@
                                 <div class="columnNiveauTexte">
                                     Autorité
                                 </div>
-                                <div class="columnNiveauNumber">
-                                    1
+                                <div class="columnNiveauNumber" v-if="loadedUser">
+                                    {{ loadedUser.skillAutority.value }}
                                 </div>
                             </div>
                             <div class="flex-container-modal-Niveau">
@@ -117,8 +117,8 @@
                                 <div class="columnNiveauTexte">
                                     Baratin
                                 </div>
-                                <div class="columnNiveauNumber">
-                                    1
+                                <div class="columnNiveauNumber" v-if="loadedUser">
+                                    {{ loadedUser.skillSpiel.value }}
                                 </div>
                             </div>
                             <div class="flex-container-modal-Niveau">
@@ -128,8 +128,8 @@
                                 <div class="columnNiveauTexte">
                                     Créativité
                                 </div>
-                                <div class="columnNiveauNumber">
-                                    1
+                                <div class="columnNiveauNumber" v-if="loadedUser">
+                                    {{ loadedUser.skillCreativity.value }}
                                 </div>
                             </div>
                             <div class="flex-container-modal-Niveau">
@@ -139,8 +139,8 @@
                                 <div class="columnNiveauTexte">
                                     Mental
                                 </div>
-                                <div class="columnNiveauNumber">
-                                    1
+                                <div class="columnNiveauNumber" v-if="loadedUser">
+                                    {{ loadedUser.skillMental.value }}
                                 </div>
                             </div>
                         </div>  
@@ -256,6 +256,17 @@
 <script>
   export default {
     layout: 'layoutFront',
+    computed: {
+            loadedUser () {
+                return this.$store.getters['users/loadedUser']
+            },
+            loadedLevel () {
+                return this.$store.getters['level/loadedLevel']
+            },
+            loadedNews () {
+                return this.$store.getters['news/loadedNews']
+            }
+        }
   }
 </script>
 

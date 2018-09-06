@@ -3,28 +3,6 @@
 
         <!-- header 
         ================================================== -->
-        <!--<header>   
-            <div class="row">
-                <div class="top-bar">
-                    <a class="menu-toggle" href="#"><span>Menu</span></a>
-
-                    <div class="logo">
-                        <nuxt-link to="/">ThisIsFan.com</nuxt-link>
-                    </div>              
-
-                    <nav id="main-nav-wrap">
-                        <ul class="main-navigation">
-                            <li class="current"><a class="smoothscroll"  href="#intro" title="">Home</a></li>
-                            <li><a class="smoothscroll"  href="#about" title="">Qu'est-ce c'est ?</a></li>
-                            <li><a class="smoothscroll"  href="#resume" title="">En savoir un peu plus...</a></li>
-                            <li><a class="smoothscroll"  href="#portfolio" title="">En images</a></li>
-                            <li><a class="smoothscroll"  href="#services" title="">En résumé</a></li>                 
-                            <li><a class="smoothscroll"  href="#contact" title="">Contact</a></li>  
-                        </ul>
-                    </nav>          
-                </div>         
-            </div> 
-        </header> -->  
 
         <quick-menu :menu-count="count" :icon-class="icons" :backgroundColor="color" @clicked="onClickChild" style="cursor: pointer; z-index: 10;"></quick-menu>
         
