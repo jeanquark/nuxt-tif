@@ -1,6 +1,6 @@
 <template>
 	<div class="row" style="margin-left: 0px; margin-right: 0px;">
-	    <div class="col-lg-3 col-md-4 col-xs-6" v-for="index in total_tattoo_colors" style="padding-right: 5px; padding-left: 5px;" @click="addToMerge({gender: gender, type: 'tattoo', property: 'color', image: 'tattoo' + tattoo_shape + convertTo2Digits(index) + '.png', index: index, layerPosition: 9})">
+	    <div class="col-lg-3 col-md-4 col-xs-6" v-for="index in total_tattoo_colors" style="padding-right: 5px; padding-left: 5px;" @click="addToMerge({gender: gender, type: 'tattoo', property: 'color', image: 'tattoo' + tattoo_shape + convertTo3Digits(index) + '.png', index: index, layerPosition: 9})">
             <img :src="'/images/avatars/jm/' + gender + '/' + 'tattoo' + '/' + 'colors' + '/tattooColor' + convertTo3Digits(index) + '.png'" class="imgModalAvatar" :class="{active: (tattoo_color === convertTo3Digits(index)) }" style="cursor: pointer;" />
         </div>
 	</div>
@@ -11,7 +11,7 @@
 		props: ['gender', 'tattoo'],
 		data () {
 			return {
-				total_tattoo_colors: 217,
+				total_tattoo_colors: 10,
 			}
 		},
 		computed: {
