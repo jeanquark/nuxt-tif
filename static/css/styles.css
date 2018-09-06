@@ -1,7 +1,5 @@
 /* Style par défaut (écran de bureau) - Résolution 1400x1050 */
 
-@media only screen and (min-width: 1281px) {
-
 body, html {
 width: 100%;
 color: #ffffff;
@@ -67,9 +65,9 @@ vertical-align: middle;
 
 #header {
 max-width: 1000px;
+justify-content: center;
+margin-left: -5px;
 z-index: 1;
-width: 100%;
-padding: 0;
 }
 
 .top-fixed {
@@ -80,41 +78,13 @@ top: 0;
 .flex-container-header {
 max-width: 100%;
 display: flex;
-justify-content: center;
-padding: 0;
-margin-right: 15px;
-margin-left: 5px;
+margin-bottom: 0;
 }
 
 .column {
-padding: 0;
-padding-top: 10px;
-width: 100%;
-}
-
-.columnButton {
-padding: 0;
-padding-top: 10px;
-}	
-
-.quit-box {
-display: inline-block;
--webkit-box-sizing: content-box;
--moz-box-sizing: content-box;
-box-sizing: content-box;
-padding: 5px 5px 5px 5px;
-overflow: hidden;
-border: none;
--webkit-border-radius: 5px;
-border-radius: 5px;
-font: normal 120%/1 "bangers", Helvetica, sans-serif;
-color: rgba(0,0,0,1);
-text-align: center;
--o-text-overflow: ellipsis;
-text-overflow: ellipsis;
-background: dodgerblue;
--webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.5) ;
-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.5) ;
+margin: 10px;
+flex-grow: 1;
+flex-shrink: 1;
 }
 
 .level-box {
@@ -122,7 +92,7 @@ display: inline-block;
 -webkit-box-sizing: content-box;
 -moz-box-sizing: content-box;
 box-sizing: content-box;
-width: 92%;
+width: 100%;
 padding: 5px 5px 5px 5px;
 overflow: hidden;
 border: none;
@@ -154,7 +124,7 @@ display: inline-block;
 -webkit-box-sizing: content-box;
 -moz-box-sizing: content-box;
 box-sizing: content-box;
-width: 92%;
+width: 100%;
 padding: 5px 5px 5px 5px;
 overflow: hidden;
 border: none;
@@ -186,7 +156,7 @@ display: inline-block;
 -webkit-box-sizing: content-box;
 -moz-box-sizing: content-box;
 box-sizing: content-box;
-width: 92%;
+width: 100%;
 padding: 5px 5px 5px 5px;
 overflow: hidden;
 border: none;
@@ -252,35 +222,35 @@ text-decoration: none;
 }
 
 .imgModalProprieteCup {
-height: 30px;
-width: 30px;
+height: 40px;
+width: 40px;
 }
 
 .imgModalProprieteCupNo {
-height: 30px;
-width: 30px;
+height: 40px;
+width: 40px;
 filter: grayscale(100%);
 }
 
 .imgModalProprieteFlags {
 position: relative;
 top: 6px;
-height: 55px;
-width: 55px;
+height: 80px;
+width: 80px;
 }
 
 .imgModalAgendaFlags {
 position: relative;
 top: 0;
-height: 45px;
-width: 45px;
+height: 50px;
+width: 50px;
 }
 
 .imgModalEvent1Flags {
 position: relative;
 top: 0;
-height: 90px;
-width: 90px;
+height: 100px;
+width: 100px;
 }
 
 .imgModalProprieteFlagsNo {
@@ -334,7 +304,7 @@ padding: 2px;
 border: 1px solid orangered;
 border-radius: 5px;
 color: white;
-height: 80px;
+height: 100px;
 margin: 3px;
 text-align: center;
 font-size: 100%;
@@ -606,7 +576,7 @@ padding: 2px;
 border: 1px solid orangered;
 border-radius: 5px;
 color: white;
-height: 60px;
+height: 80px;
 margin: 3px;
 text-align: center;
 font-size: 100%;
@@ -616,7 +586,7 @@ font-size: 100%;
 border: 1px solid LightGray;
 border-radius: 5px;
 color: LightGray;
-height: 60px;
+height: 80px;
 margin: 3px;
 text-align: center;
 font-size: 100%;
@@ -628,7 +598,7 @@ text-decoration: none;
 
 .textTitle {
 position: relative;
-top: 13px;
+top: 23px;
 font: normal 200%/1 "bangers", Helvetica, sans-serif;
 text-shadow: 2px 2px 1px rgba(255,255,255,0.5);
 }
@@ -646,7 +616,7 @@ padding-left: 0;
 
 .textXP {
 position: relative;
-top: 13px;
+top: 23px;
 font: normal 200%/1 "bangers", Helvetica, sans-serif;
 text-shadow: 2px 2px 1px rgba(255,255,255,0.5) ;
 }	
@@ -668,7 +638,7 @@ border: 1px solid darkred;
 background-color: darkred;
 border-radius: 5px;
 color: white;
-height: 60px;
+height: 80px;
 text-align: center;
 font-size: 100%;
 }
@@ -677,7 +647,7 @@ font-size: 100%;
 border: 1px solid LightGray;
 border-radius: 5px;
 color: LightGray;
-height: 60px;
+height: 80px;
 text-align: center;
 font-size: 100%;
 }
@@ -810,7 +780,7 @@ padding-left: 0;
 
 .textEvent {
 position: relative;
-top: 13px;
+top: 23px;
 font: normal 200%/1 "bangers", Helvetica, sans-serif;
 text-shadow: 2px 2px 1px rgba(255,255,255,0.5) ;
 }	
@@ -826,7 +796,7 @@ border: 1px solid darkturquoise;
 background-color: darkturquoise;
 border-radius: 5px;
 color: white;
-height: 60px;
+height: 80px;
 margin: 3px;
 text-align: center;
 font-size: 100%;
@@ -836,7 +806,7 @@ font-size: 100%;
 border: 1px solid LightGray;
 border-radius: 5px;
 color: LightGray;
-height: 60px;
+height: 80px;
 margin: 3px;
 text-align: center;
 font-size: 100%;
@@ -881,7 +851,7 @@ border: 1px solid DodgerBlue;
 background-color: white;
 border-radius: 5px;
 color: white;
-height: 120px;
+height: 180px;
 margin: 3px;
 text-align: center;
 font-size: 100%;
@@ -893,7 +863,7 @@ border: 1px solid lightgrey;
 background-color: lightgrey;
 border-radius: 5px;
 color: lightgrey;
-height: 120px;
+height: 180px;
 margin: 3px;
 text-align: center;
 font-size: 100%;
@@ -927,12 +897,12 @@ color: white;
 }
 
 .imgNews {
-max-height: 95px;
+max-height: 150px;
 width: auto;
 }
 
 .imgNewsNo {
-max-height: 95px;
+max-height: 150px;
 width: auto;
 filter: grayscale(100%);
 }
@@ -940,7 +910,7 @@ filter: grayscale(100%);
 /* Menu */
 
 #dock-container {
-height: 70px;
+height: 80px;
 padding: 0;
 margin: 0;
 bottom: 0;
@@ -972,8 +942,8 @@ margin-bottom: 0;
 }
 
 #dock-container li img {
-width: 48px;
-height: 48px;
+width: 58px;
+height: 58px;
 -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.7, transparent), to(rgba(255,255,255,.5)));
 -webkit-transition: all 0.3s;
 -webkit-transform-origin: 50% 100%;
@@ -1163,14 +1133,7 @@ color: white;
 height: 100%;
 margin: 3px;
 text-align: center;
-}
-  
-.flex-container-modalAvatar > div.no-border {
-border: none;
-}
-  
-.imgAvatarUser {
-	width: 100%;
+font-size: 70%;
 }
 
 .flex-container-modalAvatar > div.infoBoxGoodies {
@@ -1256,7 +1219,7 @@ color: MediumSlateBlue;
 
 .flex-container-modalMenuAvatar {
 display: flex;
-flex-direction: column;
+align-items: stretch;
 padding: 2px;
 }
 
@@ -1265,10 +1228,10 @@ border: 1px solid darkred;
 background-color: black;
 border-radius: 5px;
 color: white;
-width: 100px;
+height: 30px;
 margin: 3px;
 text-align: center;
-padding: 5px;
+padding-top: 2px;
 }
 
 .flex-container-modalAvatarImg {
@@ -1281,27 +1244,8 @@ padding: 2px;
 
 .flex-container-modalAvatarImg > div {
 border: 1px solid darkred;
-max-width: 13%;
-margin: 4px;
-border-radius: 5px;
-color: white;
-height: 100%;
-text-align: center;
-font-size: 100%;
-}
-
-.flex-container-modalAvatarImgColor {
-display: flex;
-flex-wrap: wrap;
-align-content: stretch;
-justify-content: center;
-padding: 2px;
-}
-
-.flex-container-modalAvatarImgColor > div {
-border: 1px solid darkred;
-max-width: 9%;
-margin: 4px;
+max-width: 16%;
+margin: 2px;
 border-radius: 5px;
 color: white;
 height: 100%;
@@ -1927,6 +1871,28 @@ margin: 2px;
 text-decoration: none;
 }
 
+.flex-container-modal-Goodies-Img2 {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+margin-top: 10px;
+margin-bottom: 10px;
+}
+
+.flex-container-modal-Goodies-Img2 > span {
+border: 1px solid orangered;
+width: 16%;
+border-radius: 5px;
+color: white;
+text-align: center;
+padding: 2px;
+margin: 2px;
+}
+
+.flex-container-modal-Goodies-Img2 > a:hover {
+text-decoration: none;
+}
+
 .borderMatchAgenda {
 display: flex;
 flex-wrap: wrap;
@@ -1966,8 +1932,7 @@ margin-bottom: 10px;
 
 .flex-container-modal-XPAction-Img > span {
 border: 1px solid darkred;
-width: 23%;
-max-width: 120px;
+width: 24%;
 border-radius: 5px;
 color: white;
 text-align: center;
@@ -1988,8 +1953,7 @@ margin-top: 10px;
 
 .flex-container-modal-Event4 > span {
 border: 1px solid darkturquoise;
-width: 23%;
-max-width: 120px;
+width: 24%;
 border-radius: 5px;
 color: white;
 text-align: center;
@@ -1998,6 +1962,27 @@ margin: 2px;
 }
 
 .flex-container-modal-Event4 > a:hover {
+text-decoration: none;
+}
+
+.flex-container-modal-Event41 {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+margin-top: 10px;
+}
+
+.flex-container-modal-Event41 > span {
+border: 1px solid darkturquoise;
+width: 16%;
+border-radius: 5px;
+color: white;
+text-align: center;
+padding: 2px;
+margin: 2px;
+}
+
+.flex-container-modal-Event41 > a:hover {
 text-decoration: none;
 }
 
@@ -2181,7 +2166,7 @@ text-align: center;
 
 .textEventCountry {
 color: #ffffff;
-font: normal 120%/1 "bangers", Helvetica, sans-serif;
+font: normal 150%/1 "bangers", Helvetica, sans-serif;
 position: absolute;
 top: 25%;
 left: 50%;
@@ -2204,6 +2189,18 @@ text-align: center;
 .textActivity {
 color: #ffffff;
 font: normal 100%/1 "bangers", Helvetica, sans-serif;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+-ms-transform: translate(-50%, -50%);
+text-align: center;
+margin: 0;
+}
+
+.textGoodies {
+color: #ffffff;
+font: normal 140%/1 "bangers", Helvetica, sans-serif;
 position: absolute;
 top: 50%;
 left: 50%;
@@ -2710,19 +2707,17 @@ font: normal 100%/1 "bangers", Helvetica, sans-serif;
 
 .tableTextEvent {
 color: #000000;
-font: normal 100%/1 "bangers", Helvetica, sans-serif;
+font: normal 120%/1 "bangers", Helvetica, sans-serif;
 }
 
 .tableTextClassement {
 color: #000000;
-font: normal 140%/1 "bangers", Helvetica, sans-serif;
+font: normal 120%/1 "bangers", Helvetica, sans-serif;
 }
 
 table .tdEvent {
 padding-left: 10px;
 padding-right: 10px;
-padding-top: 8px;
-padding-bottom: 5px;
 margin: 0;
 font-weight: normal;
 width: 28%;
@@ -2733,8 +2728,6 @@ border: none;
 table .tdEvent1 {
 padding-left: 10px;
 padding-right: 10px;
-padding-top: 14px;
-padding-bottom: 5px;
 margin: 0;
 font-weight: normal;
 width: 8%;
@@ -2745,8 +2738,6 @@ border: none;
 table .tdEvent2 {
 padding-left: 10px;
 padding-right: 10px;
-padding-top: 14px;
-padding-bottom: 5px;
 margin: 0;
 font-weight: normal;
 width: 28%;
@@ -2839,7 +2830,7 @@ padding-right: 10px;
 margin: 0;
 font-weight: normal;
 width: 20%;
-font: normal 100%/1 "bangers", Helvetica, sans-serif;
+font: normal 80%/1 "bangers", Helvetica, sans-serif;
 border: none;
 }
 
@@ -2847,11 +2838,10 @@ table .tdResultat1 {
 width: 40%;
 padding-left: 10px;
 padding-right: 10px;
-padding-top: 10px;
 margin: 0;
 font-weight: normal;
 color: #000000;
-font: normal 150%/1 "bangers", Helvetica, sans-serif;
+font: normal 120%/1 "bangers", Helvetica, sans-serif;
 border: none;
 }
 
@@ -2863,7 +2853,7 @@ padding-top: 15px;
 margin: 0;
 font-weight: normal;
 color: #000000;
-font: normal 110%/1 "bangers", Helvetica, sans-serif;
+font: normal 120%/1 "bangers", Helvetica, sans-serif;
 border: none;
 }
 
@@ -2893,16 +2883,22 @@ color: green;
 
 .boxGreen {
 background-color: green;
-padding: 20px;
+padding: 30px;
 text-align: center;
 margin: 5px;
+width: 35%;
+border-radius: 5px;
+font: normal 120%/1 "bangers", Helvetica, sans-serif;
 }
 
 .boxOrangered {
 background-color: orangered;
-padding: 20px;
+padding: 30px;
 text-align: center;
-color: white;
+margin: 5px;
+width: 35%;
+border-radius: 5px;
+font: normal 120%/1 "bangers", Helvetica, sans-serif;
 }
 
 .modal-footer-event {
@@ -2979,21 +2975,21 @@ width: 100%;
 margin: 0;
 padding: 0;
 color: #ffffff;
-font: normal 80%/1 "bangers", Helvetica, sans-serif;
+font: normal 100%/1 "bangers", Helvetica, sans-serif;
 text-shadow: 2px 2px 1px rgba(255,255,255,0.25) ;
 }
 
 .imgModalMatchFlags {
 position: relative;
-height: 50px;
-width: 50px;
+height: 75px;
+width: 75px;
 }	
 
 .flex-container-match {
 display: flex;
 width: 100%;
 flex: row;
-align-items: center;
+align-content: center;
 margin: 0;
 padding: 5px;
 background: rgba(1,1,1,0.5) !important;
@@ -3003,14 +2999,14 @@ color: #fff;
 .flex-container-match > div {
 display: flex;
 flex: row;
-align-items: center;
-width: 31%;
+align-content: center;
+width: 100%;
 }
 
 .flex-container-match-flagMatch {
 display: flex;
 flex: row;
-height: 50px;
+height: 75px;
 align-items: center;
 justify-content: center;
 width: 100%;
@@ -3021,6 +3017,7 @@ margin-bottom: 10px;
 .flagMatch {
 flex-grow: 1;
 text-align: center;
+width: 50%;
 }
 
 .scorePF {
@@ -3040,7 +3037,7 @@ margin: 5px;
 .statutMatch {
 background-color: green;
 border-radius: 3px;
-width: 70%;
+width: 100%;
 margin: 3px;
 padding: 3px;
 flex-grow: 2;
@@ -3076,38 +3073,69 @@ text-shadow: 2px 2px 1px rgba(0,0,0,0.25);
 .flex-container-teamMatch {
 display: flex;
 flex: row;
-height: 50px;
 align-items: center;
 justify-content: center;
 width: 100%;
-margin-top: 10px;
 margin-bottom: 10px;
 }
 
 .teamMatch {
 flex-grow: 2;
-width: 100%;
-height: 30px;
+width: 75%;
 flex-grow: 1;
 text-align: center;
 color: #000000;
-font: normal 120%/1 "bangers", Helvetica, sans-serif;
+font: normal 150%/1 "bangers", Helvetica, sans-serif;
 text-shadow: 2px 2px 1px rgba(0,0,0,0.25);
-padding: 5px;
-padding-top: 7px;
+padding: 10px;
+margin: 5px;
+margin-bottom: 0;
+background: rgba(1,1,1,0.5) !important;
+color: #fff;
+border-radius: 3px;
+}
+
+.matchInfo {
+flex-grow: 1;
+width: 100%;
+flex-grow: 1;
+color: #000000;
+font: normal 80%/1 "bangers", Helvetica, sans-serif;
+text-shadow: 2px 2px 1px rgba(0,0,0,0.25);
+padding: 10px;
+padding-left: 40px;
+margin-top: 0;
 margin: 5px;
 background: rgba(1,1,1,0.5) !important;
 color: #fff;
+border-radius: 3px;
+}
+
+.matchInfoRight {
+flex-grow: 1;
+width: 100%;
+flex-grow: 1;
+color: #000000;
+font: normal 80%/1 "bangers", Helvetica, sans-serif;
+text-shadow: 2px 2px 1px rgba(0,0,0,0.25);
+padding: 10px;
+padding-right: 40px;
+text-align: right;
+margin-top: 0;
+margin: 5px;
+background: rgba(1,1,1,0.5) !important;
+color: #fff;
+border-radius: 3px;
 }
 
 .scoreReal {
 border-radius: 3px;
-width: 50%;
-margin: 3px;
-padding: 3px;
+width: 30%;
+margin: 5px;
+padding: 10px;
 flex-grow: 1;
 text-align: center;
-font: normal 80%/1 "bangers", Helvetica, sans-serif;
+font: normal 100%/1 "bangers", Helvetica, sans-serif;
 text-shadow: 2px 2px 1px rgba(0,0,0,0.25);
 background: rgba(1,1,1,0.5) !important;
 color: #fff;
@@ -3368,6 +3396,7 @@ margin: 2px;
 display: flex;
 flex-wrap: wrap;
 justify-content: center;
+margin-bottom: 10px;
 }
 
 .flex-container-modal-FanShop-Goodies-small > div {
@@ -3389,7 +3418,7 @@ margin-bottom: 10px;
 .flex-container-modal-FanShop-Goodies-No > a {
 border: 1px solid MediumSlateBlue;
 background-color: Gainsboro;
-width: 31%;
+width: 16%;
 border-radius: 5px;
 text-align: center;
 padding: 2px;
@@ -3665,7 +3694,7 @@ color: white;
 background-color: orangered;
 border-radius: 5px;
 padding: 5px;
-font: normal 80%/1 "bangers", Helvetica, sans-serif;
+font: normal 100%/1 "bangers", Helvetica, sans-serif;
 text-align: center;
 margin-bottom: 0;
 margin-top: 5px;
@@ -3676,7 +3705,7 @@ color: white;
 background-color: orangered;
 border-radius: 5px;
 padding: 5px;
-font: normal 80%/1 "bangers", Helvetica, sans-serif;
+font: normal 100%/1 "bangers", Helvetica, sans-serif;
 text-align: center;
 margin-bottom: 0;
 }
@@ -4011,4 +4040,3 @@ border-width: 0 5px 5px;
 border-bottom-color: #000;
 }
 
-}
