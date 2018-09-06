@@ -70,6 +70,11 @@ margin-left: -5px;
 z-index: 1;
 }
 
+.columnButton {
+padding: 0;
+padding-top: 10px;
+}	
+
 .quit-box {
 display: inline-block;
 -webkit-box-sizing: content-box;
