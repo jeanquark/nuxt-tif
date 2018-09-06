@@ -88,22 +88,22 @@
 				<!-- News -->
 				<div id="news" class="col-12 col-sm-12 col-md-12 col-lg-12">
 					<div class="flex-container-news">
-					  	<a href="boxNews.html" class="flex-contrainer-column" style="flex-grow: 1">
+					  	<nuxt-link to="/boxNews" class="flex-contrainer-column" style="flex-grow: 1">
 							<div class="DodgerBlue" style="flex-grow: 1"><span class="newsTitle">NEWS</span></div>
 							<div style="flex-grow: 1"><img src="/images/newsCompetition.png" class="imgNews"/></div>
-					  	</a>
-					  	<a href="boxNews.html" class="flex-contrainer-column" style="flex-grow: 1">
+					  	</nuxt-link>
+					  	<nuxt-link to="/boxNews" class="flex-contrainer-column" style="flex-grow: 1">
 							<div class="DodgerBlue" style="flex-grow: 1"><span class="newsTitle">NEWS</span></div>
 							<div style="flex-grow: 1"><img src="/images/newsTif.png" class="imgNews"/></div>
-					  	</a>
-					  	<a href="boxNews.html" class="flex-contrainer-column" style="flex-grow: 1">
+					  	</nuxt-link>
+					  	<nuxt-link to="/boxNews" class="flex-contrainer-column" style="flex-grow: 1">
 							<div class="DodgerBlue" style="flex-grow: 1"><span class="newsTitle">NEWS</span></div>
 							<div style="flex-grow: 1"><img src="/images/newsEvent.png" class="imgNews"/></div>
-					  	</a>
-					  	<a href="boxNews.html" class="flex-contrainer-column" style="flex-grow: 1">
+					  	</nuxt-link>
+					  	<nuxt-link to="/boxNews" class="flex-contrainer-column" style="flex-grow: 1">
 							<div class="DodgerBlue" style="flex-grow: 1"><span class="newsTitle">NEWS</span></div>
 							<div style="flex-grow: 1"><img src="/images/newsGoodies.png" class="imgNews"/></div>
-					  	</a>
+					  	</nuxt-link>
 					</div>
 				</div>
 				<!-- End News -->
