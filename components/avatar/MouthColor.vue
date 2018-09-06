@@ -1,14 +1,5 @@
 <template>
 	<div class="row" style="margin-left: 0px; margin-right: 0px;">
-
-		<!-- <p style="color: #000;">
-			total_mouth_colors: {{ this.total_mouth_colors }}<br /><br />
-			mouth: {{ mouth }}<br /><br />
-			mouth_shape: {{ this.mouth_shape }}<br /><br />
-			mouth_color: {{ this.mouth_color }}<br /><br />
-			gender: {{ this.gender }}<br /><br />
-		</p> -->
-
 	    <div class="col-lg-3 col-md-4 col-xs-6" v-for="index in total_mouth_colors" style="padding-right: 5px; padding-left: 5px;" @click="addToMerge({gender: gender, type: 'mouth', property: 'color', image: 'mouth' + mouth_shape + convertTo2Digits(index) + '.png', index: index, layerPosition: 5})">
             <img :src="'/images/avatars/jm/' + gender + '/' + 'mouth' + '/' + 'colors' + '/mouthColor' + convertTo2Digits(index) + '.png'" class="imgModalAvatar" :class="{active: (mouth_color === convertTo2Digits(index)) }" style="cursor: pointer;" />
         </div>
