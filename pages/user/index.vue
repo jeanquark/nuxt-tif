@@ -18,11 +18,11 @@
                     <div id="modalBoxContentProfil" class="modal-bodyProfil text-center">
                         <div class="flex-container-modalProfil text-center">
                             <div class="columnProfil"><img src="163.png" class="imgModalFlags"/>
-                            <span class="modal-Profil">Fan1234567</span> <span class="modal-Age">(20)</span>
+                            <span class="modal-Profil" v-if="loadedUser">{{ loadedUser.username }}</span> <span class="modal-Age">(20)</span>
                             <img src="avatar.png" class="imgModalAvatarProfil"/></div>
                         </div>
                         <div class="flex-container-modal-Niveau-Classement text-center">
-                            <div class="columnProfil"><img src="cup.png" class="imgModalCup"/> <span class="modal-Place">{{ loadedUser.username }}</span> <img src="cup.png" class="imgModalCup"/></div>
+                            <div class="columnProfil"><img src="cup.png" class="imgModalCup"/> <span class="modal-Place" v-if="loadedUser">{{ loadedUser.username }}</span> <img src="cup.png" class="imgModalCup"/></div>
                         </div>
                     </div>  
 
