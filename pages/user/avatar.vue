@@ -25,10 +25,10 @@
                             <!-- background: {{ this.background }}<br /><br /> -->
                             <!-- skin: {{ this.skin }}<br /><br /> -->
                             <!-- tattoo: {{ this.tattoo }}<br /><br /> -->
-                            makeup: {{ this.makeup }}<br /><br />
-                            beard: {{ this.beard }}<br /><br />
+                            <!-- makeup: {{ this.makeup }}<br /><br /> -->
+                            <!-- beard: {{ this.beard }}<br /><br /> -->
                             <!-- clothes: {{ this.clothes }}<br /><br /> -->
-                            arrayOfImagesToMerge: {{ this.arrayOfImagesToMerge }}<br /><br />
+                            <!-- arrayOfImagesToMerge: {{ this.arrayOfImagesToMerge }}<br /><br /> -->
                         </p>
                     </div>
                     <div class="flex-container-modalAvatar" style="color: #000;" v-cloak>
