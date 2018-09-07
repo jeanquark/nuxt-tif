@@ -1,6 +1,12 @@
 <template>
 	<div class="row" style="margin-left: 0px; margin-right: 0px;">
-	    <div class="col-lg-3 col-md-4 col-xs-6" v-for="index in total_beard_shapes" style="padding-right: 5px; padding-left: 5px;" @click="addToMerge({gender: 'male', type: 'beard', property: 'color', image: 'beard' + convertTo2Digits(index) + beard_color + '.png', index: index, layerPosition: 7})">
+		<!-- <p style="color: #000;">
+			total_beard_shapes: {{ this.total_beard_shapes }}<br /><br />
+			beard: {{ beard }}<br /><br />
+			beard_shape: {{ this.beard_shape }}<br /><br />
+			beard_color: {{ this.beard_color }}<br /><br />
+		</p> -->
+	    <div class="col-lg-3 col-md-4 col-xs-6" v-for="index in total_beard_shapes" style="padding-right: 5px; padding-left: 5px;" @click="addToMerge({gender: 'male', type: 'beard', image: 'beard' + convertTo2Digits(index) + beard_color + '.png', index: index, layerPosition: 7})">
             <img :src="'/images/avatars/jm/' + 'male' + '/' + 'beard' + '/' + 'min_beard' + convertTo2Digits(index) + '01' + '.png'" class="imgModalAvatar" :class="{active: (beard_shape === convertTo2Digits(index)) }" style="cursor: pointer;" />
         </div>
 	</div>

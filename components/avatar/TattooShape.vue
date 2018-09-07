@@ -1,7 +1,13 @@
 <template>
 	<div class="row" style="margin-left: 0px; margin-right: 0px;">
-	    <div class="col-lg-3 col-md-4 col-xs-6" v-for="index in total_tattoo_shapes" style="padding-right: 5px; padding-left: 5px;" @click="addToMerge({gender: gender1, type: 'tattoo', property: 'color', image: 'tattoo' + convertTo2Digits(index) + tattoo_color + '.png', index: index, layerPosition: 9})">
-            <img :src="'/images/avatars/jm/' + gender1 + '/' + 'tattoo' + '/' + 'min_tattoo' + convertTo2Digits(index) + '001.png'" class="imgModalAvatar" :class="{active: (tattoo_shape === convertTo2Digits(index)) }" style="cursor: pointer;" />
+		<p style="color: #000;">
+			total_tattoo_shapes: {{ this.total_tattoo_shapes }}<br /><br />
+			tattoo: {{ tattoo }}<br /><br />
+			tattoo_shape: {{ this.tattoo_shape }}<br /><br />
+			tattoo_color: {{ this.tattoo_color }}<br /><br />
+		</p>
+	    <div class="col-lg-3 col-md-4 col-xs-6" v-for="index in total_tattoo_shapes" style="padding-right: 5px; padding-left: 5px;" @click="addToMerge({gender: gender1, type: 'tattoo', image: 'tattoo' + convertTo2Digits(index) + tattoo_color + '.png', index: index, layerPosition: 2})">
+            <img :src="'/images/avatars/jm/' + gender1 + '/' + 'tattoo' + '/' + 'min_tattoo' + convertTo2Digits(index) + '01.png'" class="imgModalAvatar" :class="{active: (tattoo_shape === convertTo2Digits(index)) }" style="cursor: pointer;" />
         </div>
 	</div>
 </template>
@@ -11,7 +17,7 @@
 		props: ['gender', 'tattoo'],
 		data () {
 			return {
-				total_tattoo_shapes: 1,
+				total_tattoo_shapes: 2,
 			}
 		},
 		computed: {
@@ -22,7 +28,7 @@
 				return this.tattoo ? this.tattoo.match(/\d+/)[0].substr(0, 2) : '01'
 			},
 			tattoo_color () {
-				return this.tattoo ? this.tattoo.match(/\d+/)[0].substr(2, 4) : '001'
+				return this.tattoo ? this.tattoo.match(/\d+/)[0].substr(2, 4) : '01'
 			}
 		},
 		methods: {

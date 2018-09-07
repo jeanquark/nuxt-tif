@@ -383,7 +383,7 @@
         <!-- stats Section
         ================================================== -->
         <section id="stats" class="count-up">
-            <div v-observe-visibility="{ callback: visibilityChanged, throttle: 1000 }"></div>
+            <div v-observe-visibility="{ callback: visibilityChanged, throttle: 500 }"></div>
             <div class="row">
                 <div class="col-twelve">
                     <div class="block-1-6 block-s-1-3 block-tab-1-2 block-mob-full stats-list">

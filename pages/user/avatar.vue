@@ -18,16 +18,18 @@
 
                     <div class="flex-container-modal-MyTeam">
                         <h1>{{ $t('pages.user-avatar.want_to_change_your_mind') }}</h1>
-                        <!-- <p style="color: #000;"> -->
+                        <p style="color: #000;">
                             <!-- loadedUser: {{ this.loadedUser }}<br /><br /> -->
                             <!-- gender: {{ this.gender }}<br /><br /> -->
                             <!-- type: {{ this.type }}<br /><br /> -->
                             <!-- background: {{ this.background }}<br /><br /> -->
                             <!-- skin: {{ this.skin }}<br /><br /> -->
-                            <!-- makeup: {{ this.makeup }}<br /><br /> -->
-                            <!-- beard: {{ this.beard }}<br /><br /> -->
-                            <!-- arrayOfImagesToMerge: {{ this.arrayOfImagesToMerge }}<br /><br /> -->
-                        <!-- </p> -->
+                            <!-- tattoo: {{ this.tattoo }}<br /><br /> -->
+                            makeup: {{ this.makeup }}<br /><br />
+                            beard: {{ this.beard }}<br /><br />
+                            <!-- clothes: {{ this.clothes }}<br /><br /> -->
+                            arrayOfImagesToMerge: {{ this.arrayOfImagesToMerge }}<br /><br />
+                        </p>
                     </div>
                     <div class="flex-container-modalAvatar" style="color: #000;" v-cloak>
                             <div class="flex-container-modalMenuAvatar no-border">
@@ -59,8 +61,7 @@
 
                                 <skin-shape v-if="this.type === 'skin'" :gender="this.gender" :skin="this.skin" @addToMergeEmitter="addToMerge"></skin-shape>
 								
-								<tattoo-shape v-if="this.type === 'tattoo'" gender="this.gender" :tattoo="this.tattoo" @addToMergeEmitter="addToMerge"></tattoo-shape>                            
-								
+								<tattoo-shape v-if="this.type === 'tattoo'" :gender="this.gender" :tattoo="this.tattoo" @addToMergeEmitter="addToMerge"></tattoo-shape>                            
                                 <eyes-shape v-if="this.type === 'eyes'" :gender="this.gender" :eyes="this.eyes" @addToMergeEmitter="addToMerge"></eyes-shape>
 								
                                 <eyebrows-shape v-if="this.type === 'eyebrows'" :gender="this.gender" :eyebrows="this.eyebrows" @addToMergeEmitter="addToMerge"></eyebrows-shape>
@@ -181,7 +182,7 @@
             if (process.client) {
                 if (this.$store.getters['users/loadedUser'].avatar) {
                     const array = this.$store.getters['users/loadedUser'].avatar.name.split('_')
-
+                    console.log('array: ', array)
                     // Ensure there are at least 12 layers in the image (including userId and gender)
                     if (array.length >= 12) {
                         this.gender = array[1]
@@ -230,13 +231,25 @@
                     this.gender = 'female'
                     this.background = 'background01001'
                     this.skin = 'skin0101'
+                    this.tattoo = 'tattoo0101'
 					this.eyes = 'eyes0101'
+                    this.eyebrows = 'eyebrows0101'
 					this.mouth = 'mouth0101'
+                    this.hair = 'hair0101'
+                    this.makeup = 'makeup0101'
+                    this.accessories = 'accessories0101'
+                    this.clothes = 'clothes01001'
                     this.arrayOfImagesToMerge = [
                         '/images/avatars/jm/unisex/background/' + this.background + '.png',
                         '/images/avatars/jm/female/skin/' + this.skin + '.png',
+                        '/images/avatars/jm/female/tattoo/' + this.tattoo + '.png',
                         '/images/avatars/jm/female/eyes/' + this.eyes + '.png',
+                        '/images/avatars/jm/female/eyebrows/' + this.eyebrows + '.png',
                         '/images/avatars/jm/female/mouth/' + this.mouth + '.png',
+                        '/images/avatars/jm/female/hair/' + this.hair + '.png',
+                        '/images/avatars/jm/female/makeup/' + this.makeup + '.png',
+                        '/images/avatars/jm/female/accessories/' + this.accessories + '.png',
+                        '/images/avatars/jm/female/clothes/' + this.clothes + '.png',
                     ]
                 }
 
@@ -293,7 +306,7 @@
                 this.type = type
             },
 
-            // Select a gender (male or female) on the left column. When user changes gender, makeup properties are replaced by beard properties and vice-versa (for example 'makeup0103' becomes 'beard0103'). This is why it is important to maintain the same number of forms and colors for both properties.
+            // Select a gender (male or female) on the left column. When user switches gender, makeup properties are replaced by beard properties and vice-versa (for example 'makeup0103' becomes 'beard0103'). This is why it is important to maintain the same number of forms and colors for both properties.
             selectGender (selectedGender) {
                 this.gender = selectedGender
                 if (selectedGender === 'female') {
@@ -302,8 +315,10 @@
                         this.makeup = this.beard.replace('beard', 'makeup')
                     }
                     for (let i = 0; i < this.arrayOfImagesToMerge.length; i++) {
-                        this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/male/g, 'female')
-                        this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/beard/g, 'makeup')
+                        if (this.arrayOfImagesToMerge[i]) { 
+                            this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/male/g, 'female')
+                            this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/beard/g, 'makeup')
+                        }
                     }
                 }
                 if (selectedGender === 'male') {
@@ -312,8 +327,10 @@
                         this.beard = 'beard' + this.makeup.replace('makeup', 'beard')
                     }
                     for (let i = 0; i < this.arrayOfImagesToMerge.length; i++) {
-                        this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/female/g, 'male')
-                        this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/makeup/g, 'beard')
+                        if (this.arrayOfImagesToMerge[i]) {
+                            this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/female/g, 'male')
+                            this.arrayOfImagesToMerge[i] = this.arrayOfImagesToMerge[i].replace(/makeup/g, 'beard')
+                        }
                     }
                 }								
                 // console.log('arrayofImagesToMerge: ', this.arrayOfImagesToMerge)
