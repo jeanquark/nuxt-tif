@@ -1249,7 +1249,7 @@ color: MediumSlateBlue;
 
 .flex-container-modalMenuAvatar {
 display: flex;
-flex-direction: column;
+align-items: stretch;
 padding: 2px;
 }
 
