@@ -57,7 +57,7 @@
 
                         <div class="row text-center text-lg-left" style="height: 100px; margin-left: 0px; margin-right: 0px;">
                             <!-- Left colum (shape) -->
-                            <div style="border-bottom: 1px solid orangered; padding: 10px; overflow-y: auto;">
+                            <div style="border-bottom: 1px solid orangered; padding: 10px; overflow-x: auto; width: 90px;">
                                 <background-shape v-if="this.type === 'background'" :background="this.background" @addToMergeEmitter="addToMerge"></background-shape>
 
                                 <skin-shape v-if="this.type === 'skin'" :gender="this.gender" :skin="this.skin" @addToMergeEmitter="addToMerge"></skin-shape>
@@ -83,7 +83,7 @@
 
                         <div class="row text-center text-lg-left" style="height: 100px; margin-left: 0px; margin-right: 0px;">
                             <!-- Right column (color) -->
-                            <div style="padding: 10px; overflow-y: auto;">
+                            <div style="padding: 10px; overflow-x: auto; width: 90px;">
                                 <background-color v-if="this.type === 'background'" :background="background" @addToMergeEmitter="addToMerge"></background-color>
 
                                 <skin-color v-if="this.type === 'skin'" :gender="this.gender" :skin="skin" @addToMergeEmitter="addToMerge"></skin-color>
