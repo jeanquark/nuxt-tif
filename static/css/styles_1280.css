@@ -1179,7 +1179,7 @@ font: normal 120%/1 "bangers", Helvetica, sans-serif;
 .imgModalAvatar {
 position: relative;
 height: auto;
-max-width: 100%;
+max-width: 50%;
 border-radius: 5px;
 }
 
