@@ -32,15 +32,19 @@
                         </p>
                     </div>
 					
-                    <div class="flex-container-modalAvatar" style="color: #000;" v-cloak>
-						<div class="flex-container-modalMenuAvatar no-border">
+                    <div class="flex-container-modalAvatar text-center" style="color: #000;" v-cloak>
+						<div class="flex-container-modalMenuAvatar">
 							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'female'}" @click="selectGender('female')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.female') }}</span></div>
 							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'male'}" @click="selectGender('male')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.male') }}</span></div>
 						</div>
+					</div>
 
+                    <div class="flex-container-modalAvatar text-center" style="color: #000;" v-cloak>
                         <div class="imgAvatarUser" style="color: #000;"><img src="" ref="mergedImage" class="imgModalAvatar" /></div>
-
-						<div class="flex-container-modalMenuAvatar no-border">
+                    </div>
+					
+					<div class="flex-container-modalAvatar text-center" style="color: #000;" v-cloak>
+						<div class="flex-container-modalMenuAvatar">
 							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'background'}" @click="selectType('background')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.background') }}</span></div>
 							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'skin'}" @click="selectType('skin')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.skin') }}</span></div>
 							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'eyes'}" @click="selectType('eyes')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.eyes') }}</span></div>
@@ -55,7 +59,7 @@
 						</div>
                     </div><!-- /.flex-container-modalAvatar -->
 
-                        <div class="row text-center" style="height: 100px; margin-left: 0px; margin-right: 0px;">
+                        <div class="row text-center" style="height: 150px; margin-left: 0px; margin-right: 0px;">
                             <!-- Left colum (shape) -->
                             <div style="border-bottom: 1px solid orangered; padding: 10px; overflow-x: auto;">
                                 <background-shape v-if="this.type === 'background'" :background="this.background" @addToMergeEmitter="addToMerge"></background-shape>
@@ -81,7 +85,7 @@
 							</div><!-- /left column -->
 						</div>
 
-                        <div class="row text-center" style="height: 100px; margin-left: 0px; margin-right: 0px;">
+                        <div class="row text-center" style="height: 150px; margin-left: 0px; margin-right: 0px;">
                             <!-- Right column (color) -->
                             <div style="padding: 10px; overflow-x: auto;">
                                 <background-color v-if="this.type === 'background'" :background="background" @addToMergeEmitter="addToMerge"></background-color>
