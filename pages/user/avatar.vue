@@ -31,32 +31,33 @@
                             <!-- arrayOfImagesToMerge: {{ this.arrayOfImagesToMerge }}<br /><br /> -->
                         </p>
                     </div>
+					
                     <div class="flex-container-modalAvatar" style="color: #000;" v-cloak>
-                            <div class="flex-container-modalMenuAvatar no-border">
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'female'}" @click="selectGender('female')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.female') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'male'}" @click="selectGender('male')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.male') }}</span></div>
-                            </div>
+						<div class="flex-container-modalMenuAvatar no-border">
+							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'female'}" @click="selectGender('female')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.female') }}</span></div>
+							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'male'}" @click="selectGender('male')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.male') }}</span></div>
+						</div>
 
-                            <div class="imgAvatarUser" style="color: #000;"><img src="" ref="mergedImage" class="imgModalAvatar" /></div>
+                        <div class="imgAvatarUser" style="color: #000;"><img src="" ref="mergedImage" class="imgModalAvatar" /></div>
 
-                            <div class="flex-container-modalMenuAvatar no-border">
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'background'}" @click="selectType('background')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.background') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'skin'}" @click="selectType('skin')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.skin') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'eyes'}" @click="selectType('eyes')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.eyes') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'eyebrows'}" @click="selectType('eyebrows')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.eyebrows') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'mouth'}" @click="selectType('mouth')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.mouth') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'hair'}" @click="selectType('hair')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.hair') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'makeup' || this.type === 'beard'}" @click="selectType('makeup')" v-if="this.gender === 'female'"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.makeup') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'beard' || this.type === 'makeup'}" @click="selectType('beard')" v-if="this.gender === 'male'"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.beard') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'tattoo'}" @click="selectType('tattoo')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.tattoo') }}</span></div>
-								<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'accessories'}" @click="selectType('accessories')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.accessories') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'clothes'}" @click="selectType('clothes')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.clothes') }}</span></div>
-							</div>
-                        </div><!-- /.flex-container-modalAvatar -->
+						<div class="flex-container-modalMenuAvatar no-border">
+							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'background'}" @click="selectType('background')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.background') }}</span></div>
+							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'skin'}" @click="selectType('skin')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.skin') }}</span></div>
+							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'eyes'}" @click="selectType('eyes')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.eyes') }}</span></div>
+							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'eyebrows'}" @click="selectType('eyebrows')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.eyebrows') }}</span></div>
+							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'mouth'}" @click="selectType('mouth')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.mouth') }}</span></div>
+							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'hair'}" @click="selectType('hair')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.hair') }}</span></div>
+							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'makeup' || this.type === 'beard'}" @click="selectType('makeup')" v-if="this.gender === 'female'"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.makeup') }}</span></div>
+							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'beard' || this.type === 'makeup'}" @click="selectType('beard')" v-if="this.gender === 'male'"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.beard') }}</span></div>
+							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'tattoo'}" @click="selectType('tattoo')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.tattoo') }}</span></div>
+							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'accessories'}" @click="selectType('accessories')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.accessories') }}</span></div>
+							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'clothes'}" @click="selectType('clothes')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.clothes') }}</span></div>
+						</div>
+                    </div><!-- /.flex-container-modalAvatar -->
 
-                        <div class="row text-center text-lg-left" style="height: 300px; margin-left: 0px; margin-right: 0px;">
+                        <div class="row text-center text-lg-left" style="height: 100px; margin-left: 0px; margin-right: 0px;">
                             <!-- Left colum (shape) -->
-                            <div class="col-sm-6" style="border: 1px solid orangered; padding: 10px; overflow-y: auto;">
+                            <div style="border-bottom: 1px solid orangered; padding: 10px; overflow-y: auto;">
                                 <background-shape v-if="this.type === 'background'" :background="this.background" @addToMergeEmitter="addToMerge"></background-shape>
 
                                 <skin-shape v-if="this.type === 'skin'" :gender="this.gender" :skin="this.skin" @addToMergeEmitter="addToMerge"></skin-shape>
@@ -77,11 +78,12 @@
                                 <accessories-shape v-if="this.type === 'accessories'" :gender="this.gender" :accessories="this.accessories" @addToMergeEmitter="addToMerge"></accessories-shape>
 
                                 <clothes-shape v-if="this.type === 'clothes'" :gender="this.gender" :clothes="this.clothes" @addToMergeEmitter="addToMerge"></clothes-shape>
-							</div><!-- /.col-sm-6 -->
+							</div><!-- /left column -->
+						</div>
 
-
+                        <div class="row text-center text-lg-left" style="height: 100px; margin-left: 0px; margin-right: 0px;">
                             <!-- Right column (color) -->
-                            <div class="col-sm-6" style="border: 1px solid orangered; padding: 10px; overflow-y: auto;">
+                            <div style="padding: 10px; overflow-y: auto;">
                                 <background-color v-if="this.type === 'background'" :background="background" @addToMergeEmitter="addToMerge"></background-color>
 
                                 <skin-color v-if="this.type === 'skin'" :gender="this.gender" :skin="skin" @addToMergeEmitter="addToMerge"></skin-color>
@@ -103,7 +105,7 @@
                                 <accessories-color v-if="this.type === 'accessories'" :gender="this.gender" :accessories="accessories" @addToMergeEmitter="addToMerge"></accessories-color>
 
                                 <clothes-color v-if="this.type === 'clothes'" :gender="this.gender" :clothes="clothes" @addToMergeEmitter="addToMerge"></clothes-color>
-							</div><!-- /.col-sm-6 -->
+							</div><!-- /right column -->
                         </div>
                         
                         <br />
