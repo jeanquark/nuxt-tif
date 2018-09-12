@@ -1149,17 +1149,21 @@ padding-left: 5px;
 display: flex;
 align-items: stretch;
 padding: 2px;
-text-align: center;
 }
 
 .flex-container-modalAvatar > div {
-border: 1px solid darkred;
 border-radius: 5px;
 color: white;
 height: 100%;
 margin: 3px;
 text-align: center;
 font-size: 100%;
+}
+
+.imgAvatarUser {
+border: 1px solid darkred;
+width: 80%;
+border-radius: 5px;
 }
 
 .flex-container-modalAvatar > div.infoBoxGoodies {

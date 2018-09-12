@@ -1150,22 +1150,6 @@ padding-right: 5px;
 padding-left: 5px;
 }
 
-.flex-container-modalAvatar {
-display: flex;
-align-items: stretch;
-padding: 2px;
-}
-
-.flex-container-modalAvatar > div {
-border: 1px solid darkred;
-border-radius: 5px;
-color: white;
-height: 100%;
-margin: 3px;
-text-align: center;
-font-size: 100%;
-}
-
 .flex-container-modalAvatar > div.infoBoxGoodies {
 border: none;
 border-radius: 5px;
@@ -1306,13 +1290,6 @@ font-size: 100%;
 position: relative;
 height: auto;
 width: 100%;
-}
-
-.textModalMenuAvatar {
-position: relative;
-top: 0;
-height: 30px;
-font: normal 120%/1 "bangers", Helvetica, sans-serif;
 }
 
 /* Modal Mon profil */
