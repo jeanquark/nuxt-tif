@@ -33,7 +33,7 @@
                     </div>
 					
                     <div class="flex-container-modalAvatar center" v-cloak>
-                        <div class="imgAvatarUser"><img src="" ref="mergedImage" class="imgModalAvatarGd" /></div>
+                        <div><img src="" ref="mergedImage" class="imgModalAvatarGd" /></div>
                     </div>
 					
                     <div class="flex-container-modalAvatar center" v-cloak>
@@ -59,7 +59,7 @@
 						</div>
                     </div><!-- /.flex-container-modalAvatar -->
 
-					<div class="flex-container-modalAvatar text-center" style="height: 100px; margin-left: 0px; margin-right: 0px;">
+					<div class="flex-container-modalAvatar">
 						<!-- Left colum (shape) -->
 						<div style="overflow-x: scroll;">
 							<background-shape v-if="this.type === 'background'" :background="this.background" @addToMergeEmitter="addToMerge"></background-shape>
@@ -85,7 +85,7 @@
 						</div><!-- /left column -->
 					</div>
 
-					<div class="flex-container-modalAvatar text-center" style="height: 100px; margin-left: 0px; margin-right: 0px;">
+					<div class="flex-container-modalAvatar">
 						<!-- Right column (color) -->
 						<div style="overflow-x: scroll;">
 							<background-color v-if="this.type === 'background'" :background="background" @addToMergeEmitter="addToMerge"></background-color>
