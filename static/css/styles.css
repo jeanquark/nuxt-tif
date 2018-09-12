@@ -1203,6 +1203,32 @@ width: 100%;
 margin-bottom: 5px;
 }
 
+.flex-container-modal-avatar-shape {
+display: flex;
+align-items: stretch;
+padding: 2px;
+}
+
+.flex-container-modal-avatar-shape > div {
+color: white;
+text-align: center;
+width: 100%;
+margin-bottom: 5px;
+}
+
+.flex-container-modal-avatar-color {
+display: flex;
+align-items: stretch;
+padding: 2px;
+}
+
+.flex-container-modal-avatar-color > div {
+color: white;
+text-align: center;
+width: 100%;
+margin-bottom: 5px;
+}
+
 .imgAvatarUser {
 border: 1px solid darkred;
 width: 80%;
