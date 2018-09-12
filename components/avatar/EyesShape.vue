@@ -1,6 +1,6 @@
 <template>
-	<div class="row" style="margin-left: 0px; margin-right: 0px;">
-	    <div class="col-lg-3 col-md-4 col-xs-6" v-for="index in total_eyes_shapes" style="padding-right: 5px; padding-left: 5px;" @click="addToMerge({gender: gender1, type: 'eyes', property: 'color', image: 'eyes' + convertTo2Digits(index) + eyes_color + '.png', index: index, layerPosition: 3})">
+	<div class="flex-container-modalAvatarImg">
+	    <div v-for="index in total_eyes_shapes" @click="addToMerge({gender: gender1, type: 'eyes', property: 'color', image: 'eyes' + convertTo2Digits(index) + eyes_color + '.png', index: index, layerPosition: 3})">
             <img :src="'/images/avatars/jm/' + gender1 + '/' + 'eyes' + '/' + 'eyes' + convertTo2Digits(index) + '01' + '.png'" class="imgModalAvatar" :class="{active: (eyes_shape === convertTo2Digits(index)) }" style="cursor: pointer;" />
         </div>
 	</div>

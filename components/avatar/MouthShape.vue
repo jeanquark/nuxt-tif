@@ -1,6 +1,6 @@
 <template>
-	<div class="row" style="margin-left: 0px; margin-right: 0px;">
-	    <div class="col-lg-3 col-md-4 col-xs-6" v-for="index in total_mouth_shapes" style="padding-right: 5px; padding-left: 5px;" @click="addToMerge({gender: gender1, type: 'mouth', property: 'color', image: 'mouth' + convertTo2Digits(index) + mouth_color + '.png', index: index, layerPosition: 5})">
+	<div class="flex-container-modalAvatarImg">
+	    <div v-for="index in total_mouth_shapes" @click="addToMerge({gender: gender1, type: 'mouth', property: 'color', image: 'mouth' + convertTo2Digits(index) + mouth_color + '.png', index: index, layerPosition: 5})">
             <img :src="'/images/avatars/jm/' + gender1 + '/' + 'mouth' + '/' + 'mouth' + convertTo2Digits(index) + '01' + '.png'" class="imgModalAvatar" :class="{active: (mouth_shape === convertTo2Digits(index)) }" style="cursor: pointer;" />
         </div>
 	</div>

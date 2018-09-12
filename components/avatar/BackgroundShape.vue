@@ -1,5 +1,5 @@
 <template>
-	<div class="row" style="margin-left: 0px; margin-right: 0px;">
+	<div class="flex-container-modalAvatarImg">
 		
 		<!-- <p style="color: #000;">
 			total_background_shapes: {{ this.total_background_shapes }}<br /><br />
@@ -8,7 +8,7 @@
 			background_color: {{ this.background_color }}<br /><br />
 		</p> -->
 
-	    <div class="col-lg-3 col-md-4 col-xs-6" v-for="index in total_background_shapes" style="padding-right: 5px; padding-left: 5px;" @click="addToMerge({gender: 'unisex', type: 'background', property: 'shape', image: 'background' + convertTo2Digits(index) + background_color + '.png', index: index, layerPosition: 0})">
+	    <div v-for="index in total_background_shapes" @click="addToMerge({gender: 'unisex', type: 'background', property: 'shape', image: 'background' + convertTo2Digits(index) + background_color + '.png', index: index, layerPosition: 0})">
 	        <img v-lazy="'/images/avatars/jm/unisex/background/shape/backgroundShape' + convertTo2Digits(index) + '001.png'" class="imgModalAvatar" :class="{active: (background_shape === convertTo2Digits(index)) }" style="cursor: pointer;" />
 	    </div>
 	</div>

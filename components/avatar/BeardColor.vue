@@ -1,6 +1,6 @@
 <template>
-	<div class="row" style="margin-left: 0px; margin-right: 0px;">
-	    <div class="col-lg-3 col-md-4 col-xs-6" v-for="index in total_beard_colors" style="padding-right: 5px; padding-left: 5px;" @click="addToMerge({gender: 'male', type: 'beard', image: 'beard' + beard_shape + convertTo2Digits(index) + '.png', index: index, layerPosition: 7})">
+	<div class="flex-container-modalAvatarImg">
+	    <div v-for="index in total_beard_colors" @click="addToMerge({gender: 'male', type: 'beard', image: 'beard' + beard_shape + convertTo2Digits(index) + '.png', index: index, layerPosition: 7})">
             <img :src="'/images/avatars/jm/' + 'male' + '/' + 'beard' + '/' + 'colors' + '/beardColor' +convertTo2Digits(index) + '.png'" class="imgModalAvatar" :class="{active: (beard_color === convertTo2Digits(index)) }" style="cursor: pointer;" />
         </div>
 	</div>
