@@ -1158,10 +1158,9 @@ padding: 2px;
 border-radius: 5px;
 color: white;
 height: 100%;
-margin: 3px;
 text-align: center;
 font-size: 100%;
-max-width: 100%;
+width: 100%;
 }
 
 .imgAvatarUser {
