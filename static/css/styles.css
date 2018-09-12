@@ -1155,12 +1155,52 @@ padding: 2px;
 }
 
 .flex-container-modalAvatar > div {
-border-radius: 5px;
 color: white;
-height: 100%;
 text-align: center;
-font-size: 100%;
+}
+
+.flex-container-modal-avatar-img-gd {
+display: flex;
+align-items: stretch;
+padding: 2px;
+}
+
+.flex-container-modal-avatar-img-gd > div {
+color: white;
+text-align: center;
+margin-bottom: 10px;
+}
+
+.imgModalAvatarGd {
+max-width: 75%;
+border-radius: 5px;
+border: 1px solid darkred;
+}
+
+.flex-container-modal-avatar-gender {
+display: flex;
+align-items: stretch;
+padding: 2px;
+}
+
+.flex-container-modal-avatar-gender > div {
+color: white;
+text-align: center;
 width: 100%;
+margin-bottom: 5px;
+}
+
+.flex-container-modal-avatar-menu {
+display: flex;
+align-items: stretch;
+padding: 2px;
+}
+
+.flex-container-modal-avatar-menu > div {
+color: white;
+text-align: center;
+width: 100%;
+margin-bottom: 5px;
 }
 
 .imgAvatarUser {
@@ -1177,12 +1217,6 @@ margin-left: 10px;
 margin-right: 10px;
 text-align: center;
 font: normal 120%/1 "bangers", Helvetica, sans-serif;
-}
-
-.imgModalAvatarGd {
-max-width: 70%;
-border-radius: 5px;
-border: 1px solid darkred;
 }
 
 .imgModalAvatar {

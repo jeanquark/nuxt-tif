@@ -2,12 +2,6 @@
 
 @media only screen and (min-width: 1025px) and (max-width: 1399px) {
 
-.container-fluid {
-max-width: 1000px;
-padding: 0;
-margin: 0 auto;
-}
-
 .boxShadow {
 -moz-box-shadow: inset 0px 0px 5px 2px #FF4500;
 -webkit-box-shadow: inset 0px 0px 5px 2px #FF4500;
@@ -1094,15 +1088,6 @@ margin: 5px;
 padding: 5px;
 background-color: WHITESMOKE;
 border-radius: 5px;
-}
-
-#modalBox {
-width: 100%;
-margin-top: 0;
-margin-left: auto;
-margin-right: auto;
-padding-right: 0;
-padding-left: 0;
 }
 
 #modalBoxContent {
