@@ -32,19 +32,19 @@
                         </p>
                     </div>
 					
-                    <div class="flex-container-modalAvatar" style="color: #000;" v-cloak>
-                        <div class="imgAvatarUser" style="color: #000;"><img src="" ref="mergedImage" class="imgModalAvatarGd" /></div>
+                    <div class="flex-container-modalAvatar center" v-cloak>
+                        <div class="imgAvatarUser"><img src="" ref="mergedImage" class="imgModalAvatarGd" /></div>
                     </div>
 					
-                    <div class="flex-container-modalAvatar no-border" style="color: #000;" v-cloak>
+                    <div class="flex-container-modalAvatar center" v-cloak>
 						<div class="flex-container-modalMenuAvatar">
 							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'female'}" @click="selectGender('female')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.female') }}</span></div>
 							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'male'}" @click="selectGender('male')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.male') }}</span></div>
 						</div>
 					</div>
 					
-					<div class="flex-container-modalAvatar no-border" style="color: #000;" v-cloak>
-						<div class="flex-container-modalMenuAvatar" style="overflow-x: scroll;">
+					<div class="flex-container-modalAvatar center" v-cloak>
+						<div class="flex-container-modalMenuAvatar">
 							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'background'}" @click="selectType('background')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.background') }}</span></div>
 							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'skin'}" @click="selectType('skin')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.skin') }}</span></div>
 							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'eyes'}" @click="selectType('eyes')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.eyes') }}</span></div>
@@ -61,7 +61,7 @@
 
 					<div class="flex-container-modalAvatar text-center" style="height: 100px; margin-left: 0px; margin-right: 0px;">
 						<!-- Left colum (shape) -->
-						<div style="border-bottom: 1px solid orangered; padding: 10px; overflow-x: auto;">
+						<div style="overflow-x: scroll;">
 							<background-shape v-if="this.type === 'background'" :background="this.background" @addToMergeEmitter="addToMerge"></background-shape>
 
 							<skin-shape v-if="this.type === 'skin'" :gender="this.gender" :skin="this.skin" @addToMergeEmitter="addToMerge"></skin-shape>
@@ -87,7 +87,7 @@
 
 					<div class="flex-container-modalAvatar text-center" style="height: 100px; margin-left: 0px; margin-right: 0px;">
 						<!-- Right column (color) -->
-						<div style="padding: 10px; overflow-x: auto;">
+						<div style="overflow-x: scroll;">
 							<background-color v-if="this.type === 'background'" :background="background" @addToMergeEmitter="addToMerge"></background-color>
 
 							<skin-color v-if="this.type === 'skin'" :gender="this.gender" :skin="skin" @addToMergeEmitter="addToMerge"></skin-color>
