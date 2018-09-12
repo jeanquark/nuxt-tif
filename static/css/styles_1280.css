@@ -2,14 +2,6 @@
 
 @media only screen and (min-width: 1025px) and (max-width: 1399px) {
 
-body, html {
-width: 100%;
-color: #ffffff;
-background-color: #000000;
-background-image: url(../images/bg.png);
-font-size: 100%;
-}
-
 .container-fluid {
 max-width: 1000px;
 padding: 0;
@@ -1031,25 +1023,6 @@ padding: 2px;
 
 /* Modal Avatar */
 
-.modal-content {
-position: relative;
-display: -webkit-box;
-display: -ms-flexbox;
-display: flex;
--webkit-box-orient: vertical;
--webkit-box-direction: normal;
--ms-flex-direction: column;
-flex-direction: column;
-width: 100%;
-pointer-events: auto;
-background-color: LightSlateGray;
-background-clip: padding-box;
-border: 2px solid black;
-border-radius: .3rem;
-outline: 0;
-padding: 5px;
-}
-
 .modal-header {
 display: -webkit-box;
 display: -ms-flexbox;
@@ -1249,25 +1222,6 @@ padding: 5px;
 }
 
 .flex-container-modalAvatarImg {
-display: flex;
-flex-wrap: wrap;
-align-content: stretch;
-justify-content: center;
-padding: 2px;
-}
-
-.flex-container-modalAvatarImg > div {
-border: 1px solid darkred;
-max-width: 13%;
-margin: 4px;
-border-radius: 5px;
-color: white;
-height: 100%;
-text-align: center;
-font-size: 100%;
-}
-
-.flex-container-modalAvatarImgColor {
 display: flex;
 flex-wrap: wrap;
 align-content: stretch;
@@ -3130,10 +3084,6 @@ justify-content: left;
 .right {
 justify-content: right;
 text-align: right;
-}
-
-.center {
-justify-content: center;
 }
 
 .modal-body-match {

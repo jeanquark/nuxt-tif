@@ -6,6 +6,9 @@ color: #ffffff;
 background-color: #000000;
 background-image: url(../images/bg.png);
 font-size: 100%;
+font-family: "bangers", Helvetica, sans-serif;
+line-height: 1.5;
+margin: 0;
 }
 
 .container-fluid {
@@ -1158,6 +1161,7 @@ height: 100%;
 margin: 3px;
 text-align: center;
 font-size: 100%;
+max-width: 100%;
 }
 
 .imgAvatarUser {
@@ -1177,10 +1181,9 @@ font: normal 120%/1 "bangers", Helvetica, sans-serif;
 }
 
 .imgModalAvatarGd {
-position: relative;
-height: auto;
-max-width: 60%;
+max-width: 70%;
 border-radius: 5px;
+border: 1px solid darkred;
 }
 
 .imgModalAvatar {
@@ -1277,7 +1280,6 @@ display: flex;
 flex-wrap: wrap;
 align-content: stretch;
 justify-content: center;
-padding: 2px;
 }
 
 .flex-container-modalAvatarImg > div {
