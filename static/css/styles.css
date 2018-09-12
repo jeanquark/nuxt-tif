@@ -1181,6 +1181,9 @@ border: 1px solid darkred;
 display: flex;
 align-items: stretch;
 padding: 2px;
+max-width: 100%;
+margin-left: 5px;
+margin-right: 5px;
 }
 
 .flex-container-modal-avatar-gender > div {
@@ -1194,6 +1197,9 @@ margin-bottom: 5px;
 display: flex;
 align-items: stretch;
 padding: 2px;
+max-width: 100%;
+margin-left: 5px;
+margin-right: 5px;
 }
 
 .flex-container-modal-avatar-menu > div {
@@ -1207,6 +1213,10 @@ margin-bottom: 5px;
 display: flex;
 align-items: stretch;
 padding: 2px;
+max-width: 100%;
+margin-left: 5px;
+margin-right: 5px;
+margin-bottom: 10px;
 }
 
 .flex-container-modal-avatar-shape > div {
@@ -1223,6 +1233,7 @@ padding: 2px;
 max-width: 100%;
 margin-left: 5px;
 margin-right: 5px;
+margin-bottom: 10px;
 }
 
 .flex-container-modal-avatar-color > div {
@@ -1339,7 +1350,6 @@ border: 1px solid darkred;
 background-color: black;
 border-radius: 5px;
 color: white;
-width: 100px;
 margin: 3px;
 text-align: center;
 padding: 5px;
