@@ -1133,13 +1133,6 @@ text-align: center;
 font: normal 120%/1 "bangers", Helvetica, sans-serif;
 }
 
-.imgModalAvatar {
-position: relative;
-height: auto;
-max-width: 50%;
-border-radius: 5px;
-}
-
 .flex-container-BoxGoodies {
 display: flex;
 align-items: stretch;
@@ -1220,15 +1213,7 @@ margin: 3px;
 text-align: center;
 padding: 5px;
 }
-
-.flex-container-modalAvatarImg {
-display: flex;
-flex-wrap: wrap;
-align-content: stretch;
-justify-content: center;
-padding: 2px;
-}
-
+	
 .flex-container-modalAvatarImgColor > div {
 border: 1px solid darkred;
 max-width: 9%;

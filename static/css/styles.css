@@ -1187,12 +1187,15 @@ border: 1px solid darkred;
 }
 
 .imgModalAvatar {
-position: relative;
-height: auto;
-max-width: 50%;
+width: 100%;
 border-radius: 5px;
 }
 
+.scrolling-wrapper {
+	overflow-x: scroll;
+	overflow-y: hidden;
+	white-space: nowrap;
+}
 
 .flex-container-BoxGoodies {
 display: flex;
