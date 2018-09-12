@@ -59,9 +59,9 @@
 						</div>
                     </div><!-- /.flex-container-modalAvatar -->
 
-					<div class="flex-container-modalAvatar">
+					<div class="flex-container-modalAvatar scrolling-wrapper">
 						<!-- Left colum (shape) -->
-						<div style="overflow-x: scroll;">
+						<div>
 							<background-shape v-if="this.type === 'background'" :background="this.background" @addToMergeEmitter="addToMerge"></background-shape>
 
 							<skin-shape v-if="this.type === 'skin'" :gender="this.gender" :skin="this.skin" @addToMergeEmitter="addToMerge"></skin-shape>
@@ -85,9 +85,9 @@
 						</div><!-- /left column -->
 					</div>
 
-					<div class="flex-container-modalAvatar">
+					<div class="flex-container-modalAvatar scrolling-wrapper">
 						<!-- Right column (color) -->
-						<div style="overflow-x: scroll;">
+						<div>
 							<background-color v-if="this.type === 'background'" :background="background" @addToMergeEmitter="addToMerge"></background-color>
 
 							<skin-color v-if="this.type === 'skin'" :gender="this.gender" :skin="skin" @addToMergeEmitter="addToMerge"></skin-color>
