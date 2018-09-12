@@ -1,7 +1,6 @@
 <template>
-	<div class="flex-container-modalAvatarImg">
-		
-		<!-- <p style="color: #000;">
+	<div>
+		<!-- <p>
 			total_background_shapes: {{ this.total_background_shapes }}<br /><br />
 			background: {{ background }}<br /><br />
 			background_shape: {{ this.background_shape }}<br /><br />
