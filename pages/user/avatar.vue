@@ -32,18 +32,18 @@
                         </p>
                     </div>
 					
-                    <div class="flex-container-modalAvatar center" v-cloak>
+                    <div class="flex-container-modal-avatar-img-gd center" v-cloak>
                         <div><img src="" ref="mergedImage" class="imgModalAvatarGd" /></div>
                     </div>
 					
-                    <div class="flex-container-modalAvatar center" v-cloak>
+                    <div class="flex-container-modal-avatar-gender center" v-cloak>
 						<div class="flex-container-modalMenuAvatar">
 							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'female'}" @click="selectGender('female')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.female') }}</span></div>
 							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'male'}" @click="selectGender('male')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.male') }}</span></div>
 						</div>
 					</div>
 					
-					<div class="flex-container-modalAvatar center" v-cloak>
+					<div class="flex-container-modal-avatar-menu scrolling-wrapper center" v-cloak>
 						<div class="flex-container-modalMenuAvatar">
 							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'background'}" @click="selectType('background')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.background') }}</span></div>
 							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'skin'}" @click="selectType('skin')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.skin') }}</span></div>
@@ -59,7 +59,7 @@
 						</div>
                     </div><!-- /.flex-container-modalAvatar -->
 
-					<div class="flex-container-modalAvatar center">
+					<div class="flex-container-modal-avatar-shape scrolling-wrapper center">
 						<!-- Left colum (shape) -->
 						<div class="flex-container-modalMenuAvatar">
 							<background-shape v-if="this.type === 'background'" :background="this.background" @addToMergeEmitter="addToMerge"></background-shape>
@@ -85,9 +85,9 @@
 						</div><!-- /left column -->
 					</div>
 
-					<div class="flex-container-modalAvatar center">
+					<div class="flex-container-modal-avatar-color scrolling-wrapper center">
 						<!-- Right column (color) -->
-						<div>
+						<div class="flex.container-modalMenuAvatar">
 							<background-color v-if="this.type === 'background'" :background="background" @addToMergeEmitter="addToMerge"></background-color>
 
 							<skin-color v-if="this.type === 'skin'" :gender="this.gender" :skin="skin" @addToMergeEmitter="addToMerge"></skin-color>
