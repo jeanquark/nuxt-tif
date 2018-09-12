@@ -1,5 +1,5 @@
 <template>
-	<div class="flex-container-modalAvatarImg">
+	<div class="flex-container-modal-avatar-shape">
 	    <div v-for="index in total_hair_shapes" @click="addToMerge({gender: gender1, type: 'hair', property: 'color', image: 'hair' + convertTo2Digits(index) + hair_color + '.png', index: index, layerPosition: 6})">
             <img :src="'/images/avatars/jm/' + gender1 + '/' + 'hair' + '/' + 'hair' + convertTo2Digits(index) + '01' + '.png'" class="imgModalAvatar" :class="{active: (hair_shape === convertTo2Digits(index)) }" style="cursor: pointer;" />
         </div>

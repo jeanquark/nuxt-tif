@@ -1,6 +1,6 @@
 <template>
-	<div class="flex-container-modalAvatarImg">
-		<!-- <p style="color: #000;">
+	<div class="flex-container-modal-avatar-shape">
+		<!-- <p>
 			total_beard_shapes: {{ this.total_beard_shapes }}<br /><br />
 			beard: {{ beard }}<br /><br />
 			beard_shape: {{ this.beard_shape }}<br /><br />

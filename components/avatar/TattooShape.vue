@@ -1,6 +1,6 @@
 <template>
-	<div class="flex-container-modalAvatarImg">
-		<!-- <p style="color: #000;">
+	<div class="flex-container-modal-avatar-shape">
+		<!-- <p>
 			total_tattoo_shapes: {{ this.total_tattoo_shapes }}<br /><br />
 			tattoo: {{ tattoo }}<br /><br />
 			tattoo_shape: {{ this.tattoo_shape }}<br /><br />
