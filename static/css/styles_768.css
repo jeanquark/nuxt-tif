@@ -60,12 +60,14 @@ font-size: 70%;
 }
 
 #experience {
-margin-top: 35px;
+margin-top: 25px;
 }
 
 .flex-container-teamGoodies > a {
 height: 40px;
 font-size: 70%;
+margin-left: 3px;
+margin-right: 3px;
 }
 
 .flex-container-experience > a {
@@ -79,23 +81,23 @@ font-size: 70%;
 }
 
 .flex-container-news > a {
-height: 120px;
+height: 90px;
 }
 
 .imgModalProprieteFlags {
-top: 12px;
+top: 8px;
 height: 30px;
 width: 30px;
 }
 
 .modal-Propriete {
-top: 15px;
+top: 10px;
 font: normal 120%/1 "bangers", Helvetica, sans-serif;
 }
 
 .modal-ProprietePlace {
 margin-left: 10px;
-top: 15px;
+top: 10px;
 font: normal 120%/1 "bangers", Helvetica, sans-serif;
 }
 
@@ -116,6 +118,18 @@ font: normal 180%/1 "bangers", Helvetica, sans-serif;
 
 .imgNews {
 max-height: 70px;
+}
+
+.flex-container-localisation2 > a {
+height: 100px;
+}
+
+#proprieteJoueur {
+margin-top: 35px;
+}
+
+.columnProfil {
+margin: 3px;
 }
 
 /* Menu */

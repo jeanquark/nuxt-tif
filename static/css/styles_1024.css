@@ -59,7 +59,7 @@ height: 70px;
 font-size: 70%;
 }
 #experience {
-margin-top: 30px;
+margin-top: 50px;
 }
 
 .flex-container-teamGoodies > a {
@@ -79,17 +79,17 @@ height: 120px;
 }
 
 .imgModalProprieteFlags {
-top: 4px;
+top: 0;
 height: 60px;
 width: 60px;
 }
 
 .modal-Propriete {
-top: 8px;
+top: 3px;
 }
 
 .modal-ProprietePlace {
-top: 8px;
+top: 3px;
 }
 
 .textTitle {
@@ -109,6 +109,10 @@ font: normal 180%/1 "bangers", Helvetica, sans-serif;
 
 .imgNews {
 max-height: 95px;
+}
+
+#proprieteJoueur {
+margin-top: 35px;
 }
 
 /* Menu */
