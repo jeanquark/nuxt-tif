@@ -36,55 +36,86 @@ width: 100%;
 padding: 0;
 }
 
+.level-box {
+font: normal 80%/1 "bangers", Helvetica, sans-serif;
+}
+
+.dollar-box {
+font: normal 80%/1 "bangers", Helvetica, sans-serif;
+}
+
+.token-box {
+font: normal 80%/1 "bangers", Helvetica, sans-serif;
+}
+
+.quit-box {
+font: normal 80%/1 "bangers", Helvetica, sans-serif;
+}
+
 /* Page Home */
 
 .flex-container-playerPropriety > a {
-    height: 80px;
+height: 60px;
+font-size: 70%;
 }
+
 #experience {
-    margin-top: 30px;
+margin-top: 35px;
 }
 
 .flex-container-teamGoodies > a {
-    height: 60px;
+height: 40px;
+font-size: 70%;
 }
 
 .flex-container-experience > a {
-    height: 60px;
+height: 50px;
+font-size: 70%;
 }
 
 .flex-container-event > a {
-    height: 60px;
+height: 50px;
+font-size: 70%;
 }
 
 .flex-container-news > a {
-    height: 120px;
+height: 120px;
 }
 
 .imgModalProprieteFlags {
-    top: 4px;
-    height: 60px;
-    width: 60px;
+top: 12px;
+height: 30px;
+width: 30px;
 }
 
 .modal-Propriete {
-    top: 8px;
+top: 15px;
+font: normal 120%/1 "bangers", Helvetica, sans-serif;
 }
 
 .modal-ProprietePlace {
-    top: 8px;
+margin-left: 10px;
+top: 15px;
+font: normal 120%/1 "bangers", Helvetica, sans-serif;
 }
 
 .textTitle {
-    top: 14px;
+top: 11px;
+font: normal 150%/1 "bangers", Helvetica, sans-serif;
 }
 
 .textXP {
-    top: 14px;
+top: 13px;
+font: normal 180%/1 "bangers", Helvetica, sans-serif;
 }
 
 .textEvent {
-    top: 14px;
+top: 13px;
+font: normal 180%/1 "bangers", Helvetica, sans-serif;
+}
+
+.imgNews {
+max-height: 70px;
 }
 
 /* Menu */
@@ -133,7 +164,7 @@ height: 48px;
 -webkit-transform: scale(1.65);
 margin: 0 0.5em;
 }
-	
+
 #dock-container li:hover + li img, #dock-container li.prev img {
 -webkit-transform: scale(1);
 margin: 0 0;
@@ -168,7 +199,7 @@ color: #fff;
 font: normal 90%/1 "bangers", Helvetica, sans-serif;
 padding: 2px;
 }
-	
+
 #dock-container li:hover span {
 display: block;
 color: #fff;
@@ -180,7 +211,7 @@ padding: 2px;
 }
 
 /* Page des avatars */
-	
+
 .flex-container-modal-avatar-title h1 {
 font: normal 120%/1 "bangers", Helvetica, sans-serif;
 }

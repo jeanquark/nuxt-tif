@@ -71,6 +71,10 @@ font: normal 100%/1 "bangers", Helvetica, sans-serif;
     top: 14px;
 }
 
+.imgNews {
+    max-height: 95px;
+}
+
 /* Menu */
 
 #dock-container {
