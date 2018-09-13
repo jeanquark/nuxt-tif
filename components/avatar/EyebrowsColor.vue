@@ -1,7 +1,14 @@
 <template>
-	<div class="flex-container-modalAvatarImg">
+	<div class="flex-container-modal-avatar-color no-margin">
+		<!-- <p>
+			total_eyebrows_colors: {{ this.total_eyebrows_colors }}<br /><br />
+			eyebrows: {{ eyebrows }}<br /><br />
+			eyebrows_shape: {{ this.eyebrows_shape }}<br /><br />
+			eyebrows_color2: {{ this.eyebrows_color2 }}<br /><br />
+		</p> -->
+
 	    <div v-for="index in total_eyebrows_colors" @click="addToMerge({gender: gender, type: 'eyebrows', property: 'color', image: 'eyebrows' + eyebrows_shape + convertTo2Digits(index) + '.png', index: index, layerPosition: 4})">
-            <img :src="'/images/avatars/jm/' + gender + '/' + 'eyebrows' + '/' + 'colors' + '/eyebrowsColor' + convertTo2Digits(index) + '.png'" class="imgModalAvatar" :class="{active: (eyebrows_color === convertTo2Digits(index)) }" style="cursor: pointer;" />
+            <img :src="'/images/avatars/jm/' + gender + '/' + 'eyebrows' + '/' + 'colors' + '/eyebrowsColor' + convertTo2Digits(index) + '.png'" class="imgModalAvatarColor" :class="{active: (eyebrows_color === convertTo2Digits(index)) }" style="cursor: pointer;" />
         </div>
 	</div>
 </template>

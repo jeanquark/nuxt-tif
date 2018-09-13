@@ -1,7 +1,14 @@
 <template>
-	<div class="flex-container-modalAvatarImg">
+	<div class="flex-container-modal-avatar-color no-margin">
+		<!-- <p>
+			total_makeup_colors: {{ this.total_makeup_colors }}<br /><br />
+			makeup: {{ makeup }}<br /><br />
+			makeup_shape: {{ this.makeup_shape }}<br /><br />
+			makeup_color2: {{ this.makeup_color2 }}<br /><br />
+		</p> -->
+
 	    <div v-for="index in total_makeup_colors" @click="addToMerge({gender: 'female', type: 'makeup', image: 'makeup' + makeup_shape + convertTo2Digits(index) + '.png', index: index, layerPosition: 7})">
-            <img :src="'/images/avatars/jm/' + 'female' + '/' + 'makeup' + '/' + 'colors' + '/makeupColor' +convertTo2Digits(index) + '.png'" class="imgModalAvatar" :class="{active: (makeup_color === convertTo2Digits(index)) }" style="cursor: pointer;" />
+            <img :src="'/images/avatars/jm/' + 'female' + '/' + 'makeup' + '/' + 'colors' + '/makeupColor' +convertTo2Digits(index) + '.png'" class="imgModalAvatarColor" :class="{active: (makeup_color === convertTo2Digits(index)) }" style="cursor: pointer;" />
         </div>
 	</div>
 </template>

@@ -1,7 +1,14 @@
 <template>
-	<div class="flex-container-modalAvatarImg">
+	<div class="flex-container-modal-avatar-color no-margin">
+		<!-- <p>
+			total_clothes_colors: {{ this.total_clothes_colors }}<br /><br />
+			clothes: {{ clothes }}<br /><br />
+			clothes_shape: {{ this.clothes_shape }}<br /><br />
+			clothes_color2: {{ this.clothes_color2 }}<br /><br />
+		</p> -->
+
 	    <div v-for="index in total_clothes_colors" @click="addToMerge({gender: gender, type: 'clothes', property: 'color', image: 'clothes' + clothes_shape + convertTo3Digits(index) + '.png', index: index, layerPosition: 9})">
-            <img :src="'/images/avatars/jm/' + gender + '/' + 'clothes' + '/' + 'colors' + '/clothesColor' + convertTo3Digits(index) + '.png'" class="imgModalAvatar" :class="{active: (clothes_color === convertTo3Digits(index)) }" style="cursor: pointer;" />
+            <img :src="'/images/avatars/jm/' + gender + '/' + 'clothes' + '/' + 'colors' + '/clothesColor' + convertTo3Digits(index) + '.png'" class="imgModalAvatarColor" :class="{active: (clothes_color === convertTo3Digits(index)) }" style="cursor: pointer;" />
         </div>
 	</div>
 </template>
