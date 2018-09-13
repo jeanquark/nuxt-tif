@@ -1243,6 +1243,10 @@ width: 100%;
 margin-bottom: 5px;
 }
 
+.no-margin {
+	margin: 0;
+}
+
 .imgAvatarUser {
 border: 1px solid darkred;
 width: 80%;
@@ -1260,13 +1264,16 @@ font: normal 120%/1 "bangers", Helvetica, sans-serif;
 }
 
 .imgModalAvatar {
+border: 1px solid darkred;
 width: 100px;
 border-radius: 5px;
+margin: 2px;
 }
 
 .imgModalAvatarColor {
 width: 50px;
 border-radius: 5px;
+margin: 1px;
 }
 
 .scrolling-wrapper {
