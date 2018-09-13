@@ -37,14 +37,14 @@
                     </div>
 					
                     <div class="flex-container-modal-avatar-gender center" v-cloak>
-						<div class="flex-container-modalMenuAvatar">
+						<div class="flex-container-modal-box-avatar">
 							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'female'}" @click="selectGender('female')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.female') }}</span></div>
 							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'male'}" @click="selectGender('male')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.male') }}</span></div>
 						</div>
 					</div>
 					
 					<div class="flex-container-modal-avatar-menu scrolling-wrapper center" v-cloak>
-						<div class="flex-container-modalMenuAvatar">
+						<div class="flex-container-modal-box-avatar">
 							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'background'}" @click="selectType('background')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.background') }}</span></div>
 							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'skin'}" @click="selectType('skin')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.skin') }}</span></div>
 							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'eyes'}" @click="selectType('eyes')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.eyes') }}</span></div>
@@ -112,7 +112,6 @@
 						</div><!-- /right column -->
 					</div>
                         
-					<br />
 					<!-- Modal footer -->
 					<div class="modal-footer">
 						<div class="progress" style="width: 50%; margin: 0 auto;" v-if="arrayOfImagesToMerge.length > 0">
