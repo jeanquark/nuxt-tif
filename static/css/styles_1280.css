@@ -2,6 +2,75 @@
 
 @media only screen and (min-width: 1025px) and (max-width: 1399px) {
 
+/* Header */
+
+.level-box {
+font: normal 100%/1 "bangers", Helvetica, sans-serif;
+}
+
+.dollar-box {
+font: normal 100%/1 "bangers", Helvetica, sans-serif;
+}
+
+.token-box {
+font: normal 100%/1 "bangers", Helvetica, sans-serif;
+}
+
+.quit-box {
+font: normal 100%/1 "bangers", Helvetica, sans-serif;
+}
+	
+/* Page Home */
+
+.flex-container-playerPropriety > a {
+    height: 80px;
+}
+#experience {
+    margin-top: 30px;
+}
+
+.flex-container-teamGoodies > a {
+    height: 60px;
+}
+
+.flex-container-experience > a {
+    height: 60px;
+}
+
+.flex-container-event > a {
+    height: 60px;
+}
+
+.flex-container-news > a {
+    height: 120px;
+}
+
+.imgModalProprieteFlags {
+    top: 4px;
+    height: 60px;
+    width: 60px;
+}
+
+.modal-Propriete {
+    top: 8px;
+}
+
+.modal-ProprietePlace {
+    top: 8px;
+}
+
+.textTitle {
+    top: 14px;
+}
+
+.textXP {
+    top: 14px;
+}
+
+.textEvent {
+    top: 14px;
+}
+
 /* Menu */
 
 #dock-container {
