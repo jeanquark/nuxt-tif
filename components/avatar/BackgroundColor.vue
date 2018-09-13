@@ -1,5 +1,5 @@
 <template>
-	<div class="flex-container-modal-avatar-color">
+	<div class="flex-container-modal-avatar-color no-margin">
 		<!-- <p>
 			total_background_colors: {{ this.total_background_colors }}<br /><br />
 			background: {{ background }}<br /><br />

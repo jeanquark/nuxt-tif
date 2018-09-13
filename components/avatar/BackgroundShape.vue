@@ -1,5 +1,5 @@
 <template>
-	<div class="flex-container-modal-avatar-shape">
+	<div class="flex-container-modal-avatar-shape no-margin">
 		<!-- <p>
 			total_background_shapes: {{ this.total_background_shapes }}<br /><br />
 			background: {{ background }}<br /><br />
