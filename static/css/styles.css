@@ -1027,7 +1027,7 @@ font: normal 120%/1 "bangers", Helvetica, sans-serif;
 padding: 2px;
 }
 
-/* Modal Avatar */
+/* Page des Avatars */
 
 .modal-content {
 position: relative;
@@ -1216,7 +1216,6 @@ padding: 2px;
 max-width: 100%;
 margin-left: 5px;
 margin-right: 5px;
-margin-bottom: 10px;
 }
 
 .flex-container-modal-avatar-shape > div {
@@ -1233,7 +1232,6 @@ padding: 2px;
 max-width: 100%;
 margin-left: 5px;
 margin-right: 5px;
-margin-bottom: 10px;
 }
 
 .flex-container-modal-avatar-color > div {
@@ -1244,7 +1242,8 @@ margin-bottom: 5px;
 }
 
 .no-margin {
-	margin: 0;
+margin-left: 0;
+margin-right: 0;
 }
 
 .imgAvatarUser {
@@ -1346,13 +1345,13 @@ border-radius: 5px;
 color: MediumSlateBlue;
 }
 
-.flex-container-modalMenuAvatar {
+.flex-container-modal-box-avatar {
 display: flex;
 align-items: stretch;
 padding: 2px;
 }
 
-.flex-container-modalMenuAvatar > div {
+.flex-container-modal-box-avatar > div {
 border: 1px solid darkred;
 background-color: black;
 border-radius: 5px;
