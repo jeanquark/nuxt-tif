@@ -61,7 +61,7 @@
 
 					<div class="flex-container-modal-avatar-shape scrolling-wrapper center">
 						<!-- Left colum (shape) -->
-						<div class="flex-container-modalMenuAvatar">
+						<div>
 							<background-shape v-if="this.type === 'background'" :background="this.background" @addToMergeEmitter="addToMerge"></background-shape>
 
 							<skin-shape v-if="this.type === 'skin'" :gender="this.gender" :skin="this.skin" @addToMergeEmitter="addToMerge"></skin-shape>
@@ -87,7 +87,7 @@
 
 					<div class="flex-container-modal-avatar-color scrolling-wrapper center">
 						<!-- Right column (color) -->
-						<div class="flex.container-modalMenuAvatar">
+						<div>
 							<background-color v-if="this.type === 'background'" :background="background" @addToMergeEmitter="addToMerge"></background-color>
 
 							<skin-color v-if="this.type === 'skin'" :gender="this.gender" :skin="skin" @addToMergeEmitter="addToMerge"></skin-color>
