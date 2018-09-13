@@ -81,22 +81,22 @@ font-size: 70%;
 }
 
 .flex-container-news > a {
-height: 90px;
+height: 95px;
 }
 
 .imgModalProprieteFlags {
-top: 8px;
+top: 10px;
 height: 30px;
 width: 30px;
 }
 
 .modal-Propriete {
-top: 10px;
+top: 12px;
 font: normal 120%/1 "bangers", Helvetica, sans-serif;
 }
 
 .modal-ProprietePlace {
-margin-left: 10px;
+margin-left: 12px;
 top: 10px;
 font: normal 120%/1 "bangers", Helvetica, sans-serif;
 }
@@ -130,6 +130,15 @@ margin-top: 35px;
 
 .columnProfil {
 margin: 3px;
+}
+
+.newsTitle {
+font: normal 90%/1 "bangers", Helvetica, sans-serif;
+}
+
+.imgModalProprieteCup {
+height: 30px;
+width: 30px;
 }
 
 /* Menu */
@@ -224,11 +233,13 @@ font: normal 90%/1 "bangers", Helvetica, sans-serif;
 padding: 2px;
 }
 
-/* Page des avatars */
+/* Titre de toutes les box */
 
-.flex-container-modal-avatar-title h1 {
+.flex-container-modal-box-title h1 {
 font: normal 120%/1 "bangers", Helvetica, sans-serif;
 }
+
+/* Page des avatars */
 
 .flex-container-modal-avatar-img-gd > div {
 margin-bottom: 5px;
@@ -255,6 +266,25 @@ font: normal 100%/1 "bangers", Helvetica, sans-serif;
 }
 
 .textModalMenuAvatar {
+font: normal 100%/1 "bangers", Helvetica, sans-serif;
+}
+
+/* Page des paramètres */
+
+.columnParametreTexte {
+padding-top: 5px;
+width: 50%;
+font: normal 100%/1 "bangers", Helvetica, sans-serif;
+}
+
+.columnParametreButton {
+padding-top: 5px;
+width: 50%;
+font: normal 100%/1 "bangers", Helvetica, sans-serif;
+}
+
+.columnParametreButtonGd {
+padding-top: 5px;
 font: normal 100%/1 "bangers", Helvetica, sans-serif;
 }
 

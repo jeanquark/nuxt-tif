@@ -115,6 +115,10 @@ max-height: 95px;
 margin-top: 35px;
 }
 
+.newsTitle {
+    font: normal 100%/1 "bangers", Helvetica, sans-serif;
+}
+
 /* Menu */
 
 #dock-container {
@@ -207,11 +211,13 @@ font: normal 90%/1 "bangers", Helvetica, sans-serif;
 padding: 2px;
 }
 
-/* Page des avatars */
+/* Titre de toutes les box */
 
-.flex-container-modal-avatar-title h1 {
+.flex-container-modal-box-title h1 {
 font: normal 120%/1 "bangers", Helvetica, sans-serif;
 }
+
+/* Page des avatars */
 
 .flex-container-modal-avatar-img-gd > div {
 margin-bottom: 5px;

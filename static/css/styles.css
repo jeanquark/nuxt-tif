@@ -1148,13 +1148,17 @@ padding-right: 5px;
 padding-left: 5px;
 }
 
-.flex-container-modal-avatar-title h1 {
+/* Titre de toutes les box */
+
+.flex-container-modal-box-title h1 {
 text-align: center;
 color: #000000;
 font: normal 150%/1 "bangers", Helvetica, sans-serif;
 text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 margin-top: 10px;
 }
+
+/* Page des avatars */
 
 .flex-container-modalAvatar {
 display: flex;
@@ -1671,7 +1675,6 @@ font: normal 140%/1 "bangers", Helvetica, sans-serif;
 /* Paramètres */
 
 .flex-container-modal-Parametre {
-margin-top: 5px;
 display: flex;
 flex-wrap: wrap;
 justify-content: center;
