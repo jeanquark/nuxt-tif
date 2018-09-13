@@ -13,7 +13,7 @@
                     </div>
                     <!-- Modal body -->
                     <div id="modalBoxContent" class="modal-body">
-                        <div class="flex-container-modal-MyTeam">
+                        <div class="flex-container-modal-box-title">
                             <h1>{{ $t('pages.user-preferences.info_and_or_help') }}</h1>
                         </div>
                         <div class="flex-container-modal-Parametre">
@@ -106,8 +106,6 @@
                                 </nuxt-link>
                             </div>
                         </div><!-- /.flex-container -->
-                    </div><!-- /.modal-body -->
-                    <div id="modalAvatar" class="modal-body">
                         <div class="flex-container-modal-Parametre">
                             <div class="flex-container-modal-Niveau">
                                 <nuxt-link to="#" class="columnParametreButtonGd">
