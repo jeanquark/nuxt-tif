@@ -16,7 +16,7 @@
                 <!-- Modal body -->
                 <div id="modalBoxContent" class="modal-body">
 
-                    <div class="flex-container-modal-avatar-title">
+                    <div class="flex-container-modal-box-title">
                         <h1>{{ $t('pages.user-avatar.want_to_change_your_mind') }}</h1>
                         <p style="color: #000;">
                             <!-- loadedUser: {{ this.loadedUser }}<br /><br /> -->
