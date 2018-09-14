@@ -355,6 +355,7 @@ text-decoration: none;
 .imgAvatar {
 max-height: 100%;
 width: auto;
+border-radius: 5px;
 }
 
 .imgAvatarNo {
@@ -1763,8 +1764,8 @@ border-radius: 0 5px 5px 0;
 padding-top: 3px;
 width: 100%;
 text-align: center;
-color: #ffffff;
-background-color: orangered;
+color: #000000;
+background-color: white;
 font: normal 140%/1 "bangers", Helvetica, sans-serif;
 }
 
@@ -1808,7 +1809,7 @@ text-align: center;
 .loginmodal-container h1 {
 text-align: center;
 color: #000000;
-font: normal 160%/1 "bangers", Helvetica, sans-serif;
+font: normal 140%/1 "bangers", Helvetica, sans-serif;
 text-shadow: 2px 2px 1px rgba(0,0,0,0.5) ;
 }
 
@@ -1817,7 +1818,7 @@ width: 90%;
 margin-top: 10px;
 height: 44px;
 color: #000000;
-font: normal 160%/1 "bangers", Helvetica, sans-serif;
+font: normal 140%/1 "bangers", Helvetica, sans-serif;
 text-shadow: 2px 2px 1px rgba(0,0,0,0.5) ;
 text-align: center;
 margin-bottom: 10px;

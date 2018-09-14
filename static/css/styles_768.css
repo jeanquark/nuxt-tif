@@ -272,19 +272,28 @@ font: normal 100%/1 "bangers", Helvetica, sans-serif;
 /* Page des paramètres */
 
 .columnParametreTexte {
-padding-top: 5px;
+padding-top: 7px;
 width: 50%;
 font: normal 100%/1 "bangers", Helvetica, sans-serif;
 }
 
 .columnParametreButton {
-padding-top: 5px;
+padding-top: 7px;
 width: 50%;
 font: normal 100%/1 "bangers", Helvetica, sans-serif;
 }
 
 .columnParametreButtonGd {
-padding-top: 5px;
+padding-top: 7px;
+font: normal 100%/1 "bangers", Helvetica, sans-serif;
+}
+
+.columnParametreButtonLangue {
+padding-top: 7px;
+font: normal 100%/1 "bangers", Helvetica, sans-serif;
+}
+
+.loginmodal-container input[type=text] {
 font: normal 100%/1 "bangers", Helvetica, sans-serif;
 }
 
