@@ -106,7 +106,9 @@
                                 </nuxt-link>
                             </div>
                         </div><!-- /.flex-container -->
-                        <div class="flex-container-modal-Parametre">
+					</div>
+                    <div id="modalBoxContent" class="modal-body">
+						<div class="flex-container-modal-Parametre">
                             <div class="flex-container-modal-Niveau">
                                 <nuxt-link to="#" class="columnParametreButtonGd">
                                     {{ $t('pages.user-preferences.help-assistance') }}

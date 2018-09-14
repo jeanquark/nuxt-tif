@@ -6,15 +6,15 @@
 			  <div class="modal-content">
 				<!-- Modal Header -->
 				<div class="modal-header">
-				  <span class="modal-title">Ton Année de Naissance <span class="modal-title-Sub">(Tes Paramètres)</span></span>
-					<nuxt-link to="/user/preferences"><button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
-					</button></nuxt-link>					
+					<span class="modal-title">{{ $t('pages.user-preferences-birth.birth')}} <span class="modal-title-Sub">({{ $t('pages.user-preferences-birth.your_parameters') }})</span></span>
+					<nuxt-link :to="localePath({ name: 'user-preferences'})" class="close">
+						<span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
+					</nuxt-link>
 				</div>
 				<!-- Modal body -->
 				<div id="modalBoxContent" class="modal-body">
-					<div class="flex-container-modal-MyTeam">
-						<h1>T'es né quand ?</h1>
+					<div class="flex-container-modal-box-title">
+						<h1>{{ $t('pages.user-preferences-birth.birth')}}</h1>
 					</div>
 					<div class="flex-container-modal-Birth">
 						<div class="flex-container-modal-Niveau">
@@ -476,8 +476,9 @@
 				</div>
 				<!-- Modal footer -->
 				<div class="modal-footer">
-					<nuxt-link to="/user/preferences"><button type="button" class="btn btn-danger" data-dismiss="modal">Annule tout !</button></nuxt-link>
-					<nuxt-link to="/user/preferences"><button type="button" class="btn btn-success" data-dismiss="modal">Allez, valide !</button></nuxt-link>
+					<button type="button" class="btn btn-success" data-dismiss="modal" @click="">{{ $t('pages.user-preferences-birth.go_and_validate') }}</button>
+					<nuxt-link :to="localePath({name: 'user-preferences'})"><button type="button" class="btn btn-danger" data-dismiss="modal">{{ $t('pages.user-preferences-birth.cancel_all') }}</button></nuxt-link>
+					<!-- <nuxt-link to="/user/preferences"><button type="button" class="btn btn-success" data-dismiss="modal">Allez, valide !</button></nuxt-link> -->
 				</div>
 			</div>
 			</div>

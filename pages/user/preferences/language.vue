@@ -13,7 +13,7 @@
 				</div>
 				<!-- Modal body -->
 				<div id="modalBoxContent" class="modal-body">
-					<div class="flex-container-modal-MyTeam">
+					<div class="flex-container-modal-box-title">
 						<h1>{{ $t('pages.user-preferences-language.how_do_you_speak') }}</h1>
 					</div>
 					<div class="flex-container-modal-Parametre">
@@ -48,7 +48,7 @@
 
 <style scoped>
 	.active {
-		background-color: LightSlateGray;
+		background-color: orangered;
 	}
 </style>
 

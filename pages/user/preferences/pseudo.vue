@@ -4,30 +4,29 @@
 		<div id="modalBox">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content loginmodal-container">
-					<!-- Modal Header -->
-					<div class="modal-header">
-					  	<span class="modal-title">Ton pseudo <span class="modal-title-Sub">(Tes Paramètres)</span></span>
-						<nuxt-link to="/user/preferences">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
-							</button>
-						</nuxt-link>					
-					</div>
-					<!-- Modal body -->
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<span class="modal-title">{{ $t('pages.user-preferences-pseudo.pseudo')}} <span class="modal-title-Sub">({{ $t('pages.user-preferences-pseudo.your_parameters') }})</span></span>
+					<nuxt-link :to="localePath({ name: 'user-preferences'})" class="close">
+						<span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
+					</nuxt-link>
+				</div>
+				<!-- Modal body -->					
 					<div id="modalBoxContent" class="modal-body">
-						<div class="flex-container-modal-MyTeam">
-							<h1>C'est quoi ton pseudo ?</h1>
+						<div class="flex-container-modal-box-title">
+							<h1>{{ $t('pages.user-preferences-pseudo.change_pseudo') }}</h1>
 							<!-- loadedUser: {{ loadedUser }}<br /><br /> -->
 							<!-- pseudo: {{ this.username }}<br /><br /> -->
 						</div>
 						<form>
-							<input type="text" name="username" placeholder="Ton pseudo" v-model="username">
+							<input type="text" name="username" placeholder="{{ $t('pages.user-preferences-pseudo.your_pseudo') }}" v-model="username">
 						</form>
 					</div>
 					<!-- Modal footer -->
 					<div class="modal-footer">
-						<nuxt-link to="/user/preferences"><button type="button" class="btn btn-danger" data-dismiss="modal">Annule tout !</button></nuxt-link>
-						<button type="submit" class="btn btn-success" data-dismiss="modal" @click="editUser">Allez, valide !</button>
+						<button type="button" class="btn btn-success" data-dismiss="modal" @click="editUser">{{ $t('pages.user-preferences-pseudo.go_and_validate') }}</button>
+						<nuxt-link :to="localePath({name: 'user-preferences'})"><button type="button" class="btn btn-danger" data-dismiss="modal">{{ $t('pages.user-preferences-pseudo.cancel_all') }}</button></nuxt-link>
+						<!-- <nuxt-link to="/user/preferences"><button type="button" class="btn btn-success" data-dismiss="modal">Allez, valide !</button></nuxt-link> -->
 					</div>
 				</div>
 			</div>
