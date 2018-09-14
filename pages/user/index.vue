@@ -257,14 +257,8 @@
     computed: {
             loadedUser () {
                 return this.$store.getters['users/loadedUser']
-            },
-            loadedLevel () {
-                return this.$store.getters['level/loadedLevel']
-            },
-            loadedNews () {
-                return this.$store.getters['news/loadedNews']
             }
-        }
+		}
   }
 </script>
 
