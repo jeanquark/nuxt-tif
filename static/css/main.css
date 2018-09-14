@@ -47,12 +47,12 @@
  * ------------------------------------------------------------------- 
  */
 html {
-	font-size: 10px;
+	font-size: 14px;
 }
 
 @media only screen and (max-width:1024px) {
 	html {
-		font-size: 9.411764705882353px;
+		font-size: 12px;
 	}
 }
 @media only screen and (max-width:768px) {
@@ -72,7 +72,7 @@ html, body {
 body {
 	background: #151515;
 	font-family: "bangers", serif;
-	font-size: 10px;
+	font-size: 14px;
 	line-height: 3rem;
 	color: #6e6e6e;
 }
@@ -1587,9 +1587,6 @@ header .logo a {
 }
 .button-section .button {
 	width: 300px;
-}
-.button-section [class*="col-"] {
-	margin-right: 4rem;
 }
 
 /**
