@@ -142,6 +142,21 @@
           "cancel_all": "Cancel all!",
           "go_and_validate": "Go and validate!"
         },
+		"user-preferences-pseudo": {
+		  "pseudo": "Pseudo",
+          "your_parameters": "Your parameters",
+		  "change_pseudo": "Do you want to change your pseudo",
+		  "your_pseudo": "Your pseudo",
+          "cancel_all": "Cancel all!",
+          "go_and_validate": "Go and validate!"
+		},
+		"user-preferences-birth": {
+		  "birth": "Birth",
+          "your_parameters": "Your parameters",
+		  "change_birth": "Select your birthyear",
+          "cancel_all": "Cancel all!",
+          "go_and_validate": "Go and validate!"
+		},
         "about": "About Page",
         "blog": "Blog Page",
         "admin": "Admin Page"
