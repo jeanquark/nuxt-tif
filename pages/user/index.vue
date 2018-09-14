@@ -6,23 +6,21 @@
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <span class="modal-title">Ton profil</span>
-                        <nuxt-link to="/home">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
-                            </button>
-                        </nuxt-link>                    
+                        <span class="modal-title">{{ $t('pages.user-profil.your_profil') }}</span>
+                        <nuxt-link :to="localePath({ name: 'home'})" class="close">
+                            <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
+                        </nuxt-link>     
                     </div>
                     <!-- Modal body -->
 
                     <div id="modalBoxContentProfil" class="modal-bodyProfil text-center">
                         <div class="flex-container-modalProfil text-center">
                             <div class="columnProfil"><img src="163.png" class="imgModalFlags"/>
-                            <span class="modal-Profil" v-if="loadedUser">{{ loadedUser.username }}</span> <span class="modal-Age">(20)</span>
+                            <span class="modal-Profil">{{ loadedUser.username }}</span> <span class="modal-Age">(20)</span>
                             <img src="avatar.png" class="imgModalAvatarProfil"/></div>
                         </div>
                         <div class="flex-container-modal-Niveau-Classement text-center">
-                            <div class="columnProfil"><img src="cup.png" class="imgModalCup"/> <span class="modal-Place" v-if="loadedUser">{{ loadedUser.username }}</span> <img src="cup.png" class="imgModalCup"/></div>
+                            <div class="columnProfil"><img src="cup.png" class="imgModalCup"/> <span class="modal-Place">{{ loadedUser.username }}</span> <img src="cup.png" class="imgModalCup"/></div>
                         </div>
                     </div>  
 
@@ -62,7 +60,7 @@
                                 <div class="columnNiveauTexte">
                                     Force
                                 </div>
-                                <div class="columnNiveauNumber" v-if="loadedUser">
+                                <div class="columnNiveauNumber">
                                     {{ loadedUser.skillStrength.value }}
                                 </div>
                             </div>
@@ -73,7 +71,7 @@
                                 <div class="columnNiveauTexte">
                                     Endurance
                                 </div>
-                                <div class="columnNiveauNumber" v-if="loadedUser">
+                                <div class="columnNiveauNumber">
                                     {{ loadedUser.skillEndurance.value }}
                                 </div>
                             </div>
@@ -84,7 +82,7 @@
                                 <div class="columnNiveauTexte">
                                     Intelligence
                                 </div>
-                                <div class="columnNiveauNumber" v-if="loadedUser">
+                                <div class="columnNiveauNumber">
                                     {{ loadedUser.skillIntelligence.value }}
                                 </div>
                             </div>
@@ -95,7 +93,7 @@
                                 <div class="columnNiveauTexte">
                                     Social
                                 </div>
-                                <div class="columnNiveauNumber" v-if="loadedUser">
+                                <div class="columnNiveauNumber">
                                     {{ loadedUser.skillSocial.value }}
                                 </div>
                             </div>
@@ -106,7 +104,7 @@
                                 <div class="columnNiveauTexte">
                                     Autorité
                                 </div>
-                                <div class="columnNiveauNumber" v-if="loadedUser">
+                                <div class="columnNiveauNumber">
                                     {{ loadedUser.skillAutority.value }}
                                 </div>
                             </div>
@@ -117,7 +115,7 @@
                                 <div class="columnNiveauTexte">
                                     Baratin
                                 </div>
-                                <div class="columnNiveauNumber" v-if="loadedUser">
+                                <div class="columnNiveauNumber">
                                     {{ loadedUser.skillSpiel.value }}
                                 </div>
                             </div>
@@ -128,7 +126,7 @@
                                 <div class="columnNiveauTexte">
                                     Créativité
                                 </div>
-                                <div class="columnNiveauNumber" v-if="loadedUser">
+                                <div class="columnNiveauNumber">
                                     {{ loadedUser.skillCreativity.value }}
                                 </div>
                             </div>
@@ -139,7 +137,7 @@
                                 <div class="columnNiveauTexte">
                                     Mental
                                 </div>
-                                <div class="columnNiveauNumber" v-if="loadedUser">
+                                <div class="columnNiveauNumber">
                                     {{ loadedUser.skillMental.value }}
                                 </div>
                             </div>
