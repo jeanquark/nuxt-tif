@@ -15,7 +15,7 @@
 					<!-- Modal body -->
 					<div id="modalBoxContentProfil" class="modal-bodyProfil text-center">
 						<div class="flex-container-modalProfil text-center">
-							<div class="columnProfil"><img src="/images/163.png" class="imgModalProprieteFlags"/><span class="modal-Profil" v-if="loadedUser">{{ loadedUser.username }}</span> <span class="modal-Age">(20)</span><img src="avatar.png" class="imgModalAvatarProfil"/></div>
+							<div class="columnProfil"><img src="/images/163.png" class="imgModalProprieteFlags"/><span class="modal-Profil" v-if="loadedUser">{{ loadedUser.username }}</span> <span class="modal-Age">(20)</span><span v-if="loadedUser && loadedUser.avatar"><img :src="loadedUser.avatar.url" class="imgAvatar"/></span></div>
 						</div>
 						<div class="flex-container-modal-Niveau-Classement text-center">
 							<div class="columnProfil"><img src="/images/cup.png" class="imgModalProprieteCup"/> <span class="modal-Place">1234567ème</span> <img src="/images/cup.png" class="imgModalProprieteCup"/></div>
