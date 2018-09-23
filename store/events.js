@@ -42,12 +42,16 @@ import moment from 'moment'
 
 export const state = () => ({
     loadedEvents: [],
+    loadedEventUsers: [],
     loadedLiveEvents: []
 })
 
 export const mutations = {
     setEvents(state, payload) {
         state.loadedEvents = payload
+    },
+    setEventUsers(state, payload) {
+        state.loadedEventUsers = payload
     },
     setLiveEvents(state, payload) {
         state.loadedLiveEvents = payload
@@ -64,16 +68,59 @@ export const mutations = {
 
 export const actions = {
     // Load all events
-    loadedEvents ({commit}) {
-        firebase.database().ref('/events_new2/').on('value', function (snapshot) {
-            const eventsArray = []
-            for (const key in snapshot.val()) {
-                eventsArray.push({ ...snapshot.val()[key], id: key})
-            }
+    // loadedEvents ({commit}) {
+    //     firebase.database().ref('/events_new2/').on('value', function (snapshot) {
+    //         const eventsArray = []   
+    //         for (const key in snapshot.val()) {
+    //             eventsArray.push({ ...snapshot.val()[key], id: key})
+    //         }
 
-            commit('setEvents', eventsArray)
+    //         commit('setEvents', eventsArray)
+    //         console.log('eventsArray: ', eventsArray)
+            
+    //     })
+    //     return eventsArray
+    // },
+
+    async loadedEvents ({commit}) {
+        return new Promise((resolve, reject) => {
+            try {
+                firebase.database().ref('/events_new2/').on('value', function (snapshot) {
+                    const eventsArray = []
+                    for (const key in snapshot.val()) {
+                        eventsArray.push({ ...snapshot.val()[key], id: key})
+                    }
+                    commit('setEvents', eventsArray)
+                    resolve(eventsArray)
+                })
+
+            } 
+            catch(error) {
+                console.log(error)
+                new Noty({type: 'error', text: 'Events not found', timeout: 5000, theme: 'metroui'}).show()
+                commit('setError', error, { root: true })
+                commit('setLoading', false, { root: true })
+                reject(error)
+            }
         })
     },
+
+    loadedEventUsers ({commit}, payload) {
+        try {
+            // console.log('payload: ', payload)
+            firebase.database().ref('/eventUsers/').child(payload.id).on('value', function (snapshot) {
+                const usersArray = []
+                for (const key in snapshot.val()) {
+                    usersArray.push({ ...snapshot.val()[key]})
+                }
+                // console.log(postsArray)
+                commit('setEventUsers', usersArray)
+            })
+        } catch(error) {
+            console.log(error)
+        }
+    },
+
     loadedLiveEvents ({commit}) {
         try {
             firebase.database().ref('/events_new/').orderByChild('status').equalTo('live').on('value', function (snapshot) {
@@ -312,10 +359,13 @@ export const actions = {
 }
 
 export const getters = {
-    loadedEvents(state) {
+    loadedEvents (state) {
         return state.loadedEvents
     },
-    loadedLiveEvents(state) {
+    loadedEventUsers (state) {
+        return state.loadedEventUsers
+    },
+    loadedLiveEvents (state) {
         return state.loadedLiveEvents
     }
 }

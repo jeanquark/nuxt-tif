@@ -19,7 +19,7 @@
 							<!-- pseudo: {{ this.username }}<br /><br /> -->
 						</div>
 						<form>
-							<input type="text" name="username" placeholder="{{ $t('pages.user-preferences-pseudo.your_pseudo') }}" v-model="username">
+							<input type="text" name="username" placeholder="$t('pages.user-preferences-pseudo.your_pseudo')" v-model="username">
 						</form>
 					</div>
 					<!-- Modal footer -->

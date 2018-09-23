@@ -225,7 +225,17 @@ module.exports = {
   		{ path: '/update-user-level', handler: '~/serverMiddleware/updateUserLevel' },
   		{ path: '/register-new-user', handler: '~/serverMiddleware/registerNewUser' },
   		{ path: '/update-user-status', handler: '~/serverMiddleware/updateUserStatus' },
-  		{ path: '/api/fetch-next-week-matches', handler: '~/serverMiddleware/api-fetchNextWeekMatches' }
+  		// { path: '/api/fetch-next-week-matches', handler: '~/serverMiddleware/api-fetchNextWeekMatches' },
+  		// { path: '/api/fetch-next-premier-league-matches', handler: '~/serverMiddleware/api-fetchNextPremierLeagueMatches' },
+  		// { path: '/api/fetch-next-champions-league-matches', handler: '~/serverMiddleware/api-fetchNextChampionsLeagueMatches' },
+  		// { path: '/api/fetch-next-europa-league-matches', handler: '~/serverMiddleware/api-fetchNextEuropaLeagueMatches' },
+  		// { path: '/api/fetch-live-premier-league-matches', handler: '~/serverMiddleware/api-fetchLivePremierLeagueMatches' },
+  		// { path: '/api/fetch-live-matches', handler: '~/serverMiddleware/api-fetchLiveMatches' },
+  		{ path: '/api/fetch-next-champions-league-matches', handler: '~/serverMiddleware/api/fetchNextChampionsLeagueMatches' },
+  		{ path: '/api/fetch-next-europa-league-matches', handler: '~/serverMiddleware/api/fetchNextEuropaLeagueMatches' },
+  		{ path: '/api/fetch-next-premier-league-matches', handler: '~/serverMiddleware/api/fetchNextPremierLeagueMatches' },
+  		{ path: '/api/fetch-live-actions', handler: '~/serverMiddleware/api/fetchLiveActions' },
+  		{ path: '/api/fetch-live-score', handler: '~/serverMiddleware/api/fetchLiveScore' },
   	],
   	toast: {
 		duration: 8000,

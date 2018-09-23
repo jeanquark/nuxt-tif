@@ -399,6 +399,36 @@ export const actions = {
             console.log(error)
         }
     },
+
+    async updateUserEvents ({commit, getters}, payload) {
+            const userId = firebase.auth().currentUser.uid
+            console.log('payload: ', payload)
+            // console.log('team: ', team)
+            // return
+            // firebase.database().ref('/userEvents/').child(userId).update({[payload.id]: true})
+            const user = getters.loadedUser
+            console.log('user: ', user)
+            // return
+            const userObject = {
+                username: user.username ? user.username : '',
+                avatar: user.avatar ? user.avatar.url : '',
+                country: user.country ? user.country : '',
+                level: user.level ? user.level : '',
+                supported_team: payload.team
+            }
+            console.log('userObject: ', userObject)
+            let updates = {}
+            updates['/userEvents/' + userId + '/' + payload.event.id] = true
+            updates['/eventUsers/' + payload.event.id + '/' + userId] = userObject
+
+            try {
+                firebase.database().ref().update(updates)
+                new Noty({type: 'success', text: 'User events successfully updated.', timeout: 5000, theme: 'metroui'}).show()
+            } catch(error) {
+                new Noty({type: 'error', text: 'Sorry, an error occured and the user events could not be updated', timeout: 5000, theme: 'metroui'}).show()
+                console.log(error)
+            }
+    },
 }
 
 export const getters = {
