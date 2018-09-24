@@ -368,6 +368,8 @@ export const actions = {
                     for (const key in snapshot.val()) {
                         userActions.push({ ...snapshot.val()[key], id: key})
                     }
+                    console.log('userActions: ', userActions)
+                    // const userActions = snapshot.val()
                     commit('setUserActions', userActions)
                     resolve(userActions)
                 })
@@ -385,10 +387,55 @@ export const actions = {
 
     async updateUserActions ({commit}, payload) {
         try {
+            console.log('Entering updateUserActions')
             const userId = firebase.auth().currentUser.uid
             console.log('payload: ', payload)
+
+            // const arr = [
+            //     {
+            //         name: 'ballboy',
+            //         value: 1,
+            //     },
+            //     {
+            //         name: 'ballboy',
+            //         value: 1,
+            //     },
+            //     {
+            //         name: 'security_guard',
+            //         value: 3
+            //     }
+            // ]
+
+            for (let action of payload.array) {
+                console.log(action.name)
+                console.log(action.value)
+                var ref = firebase.database().ref('userActions/' + userId + '/cards/' + action.name)
+                ref.transaction(function(count) {
+                    return (count || 0) + action.value
+                })
+            }
+
+            // return
+
+            // var ref = firebase.database().ref('userActions/' + userId + '/cards/ballboy')
+            // ref.transaction(function(count) {
+            //     // If node/clicks has never been set, currentRank will be `null`.
+            //     return (count || 0) + 1
+            // });
+
+            // return
+            // let updates = {}
+            // updates['/userActions/' + userId + '/' + payload.today] = payload.slots
+            // updates['/userActions/' + userId + '/cards'] = postData
+
+
+            // return firebase.database().ref().update(updates)
+
+
+
+            // return
             firebase.database().ref('/userActions/' + userId + '/' + payload.today).update(payload.slots).then((response) => {
-                new Noty({type: 'success', text: 'Actions updated successfully updated!', timeout: 5000, theme: 'metroui'}).show()
+                new Noty({type: 'success', text: 'Daily actions successfully updated!', timeout: 5000, theme: 'metroui'}).show()
             }).catch(error => {
                 new Noty({type: 'error', text: 'Sorry, your actions for the day could not be updated. ', timeout: 5000, theme: 'metroui'}).show()
                 console.log(error)

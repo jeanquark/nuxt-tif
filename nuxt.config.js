@@ -225,7 +225,9 @@ module.exports = {
   		{ path: '/update-user-level', handler: '~/serverMiddleware/updateUserLevel' },
   		{ path: '/register-new-user', handler: '~/serverMiddleware/registerNewUser' },
   		{ path: '/update-user-status', handler: '~/serverMiddleware/updateUserStatus' },
-  		{ path: '/api/fetch-next-week-matches', handler: '~/serverMiddleware/api-fetchNextWeekMatches' }
+  		{ path: '/api/fetch-next-week-matches', handler: '~/serverMiddleware/api-fetchNextWeekMatches' },
+  		{ path: '/api/fetch-live-matches', handler: '~/serverMiddleware/api-fetchLiveMatches' },
+  		{ path: '/api/fetch-next-premier-league-matches', handler: '~/serverMiddleware/api-fetchNextPremierLeagueMatches' }
   	],
   	toast: {
 		duration: 8000,

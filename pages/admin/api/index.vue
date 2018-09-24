@@ -103,6 +103,7 @@
 				  		<v-btn color="primary" dark slot="activator" class="mb-2" :loading="loading" @click="sendAPIRequest">
 		            		Envoyer la requête
 		            	</v-btn>
+		            	<v-btn color="secondary" @click="sendAPIRequestToLiveScoreAPI">Envoyer la requête vers LiveScore API</v-btn>
 					</v-card-text>
 				</v-form>
 			</v-card>
@@ -240,6 +241,18 @@
 	                this.$store.commit('setLoading', false, { root: true })
 	                new Noty({type: 'error', text: 'Sorry, an error occured while sending your api request.', timeout: 5000, theme: 'metroui'}).show()
 	            })
+			},
+			sendAPIRequestToLiveScoreAPI () {
+				const url = 'http://livescore-api.com/api-client/scores/live.json?key=hPPVj3bOcU4MTC6a&secret=EUl5JwsFuxpgkjnB9dwshHgtClgwXnHB'
+				axios.get(url, {
+					headers: {
+						"Access-Control-Allow-Origin": "http://127.0.0.1:3000"
+				      	// 'Access-Control-Allow-Origin': '*',
+				      	// 'Content-Type': 'application/json',
+				    }, 
+				}).then((response) => {
+					console.log(response)
+				})
 			}
 		}
 	}
