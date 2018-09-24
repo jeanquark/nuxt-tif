@@ -14,7 +14,7 @@
             	</div>
 				<!-- Modal body -->
 				<div id="modalBoxContent" class="modal-body">
-					<div class="flex-container-modal-MyTeam">
+					<div class="flex-container-modal-box-title">
 						<h1>Tous les événements du jour</h1>
 						<p style="color: #000;">
 							<!-- loadedEvents: {{ loadedEvents }}<br /><br /> -->
