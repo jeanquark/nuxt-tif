@@ -141,6 +141,12 @@
     	// }
 	},
     computed: {
+		loadedUser () {
+			return this.$store.getters['users/loadedUser']
+		},
+		loadedLevel () {
+			return this.$store.getters['level/loadedLevel']
+		},
     	loadedCompetitions () {
     		return this.$store.getters['competitions/loadedCompetitions']
     	},
