@@ -20,6 +20,12 @@
 					<div class="column">
 						<div class="token-box" v-if="loadedUser && loadedUser.tokens"><i class="fa fa-certificate"></i> {{ loadedUser.tokens.value }}</div>					
 					</div>
+					<div class="columnButton text-right">
+						<div class="quit-box" @click="logout"><i class="fa fa-times"></i></div>
+					</div>
+					<div class="columnButton text-right" v-if="loadedUser && loadedUser.status && loadedUser.status.value === 'admin'">
+						<div class="quit-box" @click="goToAdmin"><i class="fa fa-tachometer-alt"></i></div>
+					</div>
 				</div>	
 			
 			</div><!-- End Header -->
@@ -40,7 +46,7 @@
 					<div class="flex-container-MesEquipes">
 						<div class="OtherTeam" v-for="team in loadedUserTeams">
 							<span v-if="team">
-								<img v-lazy="'/images/teams/' + team.image" class="imgModalFlags" />
+								<img v-lazy="'/images/teams/' + team.image" class="imgModalFlagTeam" />
 								<nuxt-link :to="'/user/teams/' + team.slug" class="overlay">
 									<div class="textActivity">{{ team.category.name }}<br />{{ team.name }}<br /><br />+Infos</div>
 								</nuxt-link>
@@ -54,7 +60,7 @@
 					</div>
 					<div class="flex-container-modal-OtherTeam-Img" v-if="loadedCompetitions != ''">
 						<div class="OtherTeam" v-for="competition in loadedCompetitions">
-							<img :src="'/images/competitions/' + competition.image" class="imgModalFlags"/>
+							<img :src="'/images/competitions/' + competition.image" class="imgModalFlagTeam"/>
 							<nuxt-link :to="'/user/competitions/' + competition.slug" class="overlayOtherTeam">
 								<div class="textActivity">{{ competition.category.name}}<br />{{ competition.name}}<br /><span v-for="country in competition.countries" v-if="competition.countries">{{ country.name }}</span><br />+Infos</div>
 							</nuxt-link>
@@ -99,17 +105,17 @@
 								<a href="collection.html"><img src="/images/menuCollection.png"></a>
 								<span class="textMenu">Collection</span></a>
 							</li>
-							<li id="active">
-								<a href="index.html"><img src="/images/menuHome.png"></a>
+							<li>
+								<nuxt-link to="/home"><img src="/images/menuHome.png"></next-link>
 								<span class="textMenu">ThisIsFan</span></a>
 							</li>
 							<li>
 								<a href="social.html"><img src="/images/menuSocial.png"></a>
 								<span class="textMenu">Social</span></a>
 							</li>
-							<li>
-								<a href="resultat.html"><img src="/images/menuResultat.png"></a>
-								<span class="textMenu">Résultat</span></a>
+							<li id="active">
+								<nuxt-link to="/results"><img src="/images/menuResultat.png"></next-link>
+								<span class="textMenu">Résultats</span></a>
 							</li>
 						</ul>
 					</div><!-- /#dock -->
