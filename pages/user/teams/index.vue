@@ -15,7 +15,7 @@
 					</div>
 					<!-- Modal body -->
 					<div id="modalBoxContent" class="modal-body">
-						<div class="flex-container-modal-MyTeam">
+						<div class="flex-container-modal-box-title">
 							<h1>Tu supportes {{ loadedUserTeams.length }} équipe(s)...</h1>
 						</div>
 						<div v-if="loadedUserTeams.length > 0">
@@ -25,7 +25,7 @@
 							<div class="flex-container-MesEquipes">
 								<div class="OtherTeam" v-for="team in loadedUserTeams">
 									<span v-if="team">
-										<img v-lazy="'/images/teams/' + team.image" class="imgModalAvatar" />
+										<img v-lazy="'/images/teams/' + team.image" class="imgModalFlags" />
 										<nuxt-link :to="'/user/teams/' + team.slug" class="overlay">
 											<div class="textActivity">{{ team.category.name }}<br />{{ team.name }}<br /><br />+Infos</div>
 	 									</nuxt-link>
@@ -47,7 +47,7 @@
 						</div>
 						<div class="flex-container-modal-OtherTeam-Img" v-if="loadedCompetitions != ''">
 							<div class="OtherTeam" v-for="competition in loadedCompetitions">
-								<img :src="'/images/competitions/' + competition.image" class="imgModalAvatar"/>
+								<img :src="'/images/competitions/' + competition.image" class="imgModalFlags"/>
 								<nuxt-link :to="'/user/competitions/' + competition.slug" class="overlayOtherTeam">
 									<div class="textActivity">{{ competition.category.name}}<br />{{ competition.name}}<br /><span v-for="country in competition.countries" v-if="competition.countries">{{ country.name }}</span><br />+Infos</div>
 								</nuxt-link>
