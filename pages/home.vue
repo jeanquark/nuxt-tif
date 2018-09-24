@@ -128,7 +128,7 @@
 								<span class="textMenu">Social</span></a>
 							</li>
 							<li>
-								<nuxt-link to="/results"><img src="/images/menuResultat.png"></next-link>
+								<nuxt-link to="/results"><img src="/images/menuResultat.png"></nuxt-link>
 								<span class="textMenu">Résultats</span></a>
 							</li>
 						</ul>

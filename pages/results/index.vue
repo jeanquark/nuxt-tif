@@ -106,7 +106,7 @@
 								<span class="textMenu">Collection</span></a>
 							</li>
 							<li>
-								<nuxt-link to="/home"><img src="/images/menuHome.png"></next-link>
+								<nuxt-link to="/home"><img src="/images/menuHome.png"></nuxt-link>
 								<span class="textMenu">ThisIsFan</span></a>
 							</li>
 							<li>
@@ -114,7 +114,7 @@
 								<span class="textMenu">Social</span></a>
 							</li>
 							<li id="active">
-								<nuxt-link to="/results"><img src="/images/menuResultat.png"></next-link>
+								<nuxt-link to="/results"><img src="/images/menuResultat.png"></nuxt-link>
 								<span class="textMenu">Résultats</span></a>
 							</li>
 						</ul>
