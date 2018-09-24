@@ -128,8 +128,8 @@
 								<span class="textMenu">Social</span></a>
 							</li>
 							<li>
-								<a href="resultat.html"><img src="/images/menuResultat.png"></a>
-								<span class="textMenu">Résultat</span></a>
+								<nuxt-link to="/results"><img src="/images/menuResultat.png"></next-link>
+								<span class="textMenu">Résultats</span></a>
 							</li>
 						</ul>
 					</div><!-- /#dock -->
