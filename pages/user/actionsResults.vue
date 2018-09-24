@@ -17,8 +17,8 @@
 						<div class="flex-container-modal-BigTitle">
 							<h1>Résumé des actions du jour</h1>
 							<p style="color: #000;">
-								loadedUserActions: {{ loadedUserActions }} <br /><br />
-								loadedUserActionsCards: {{ loadedUserActionsCards }} <br /><br />
+								<!-- loadedUserActions: {{ loadedUserActions }} <br /><br /> -->
+								<!-- loadedUserActionsCards: {{ loadedUserActionsCards }} <br /><br /> -->
 							</p>
 						</div>
 						<!--<div class="flex-container-BoxGoodies">
@@ -45,8 +45,7 @@
 
 					<!-- Modal footer -->
 					<div class="modal-footer">
-					  	<a href="mesActions.html"><button type="button" class="btn btn-danger" data-dismiss="modal">C'est pas pour moi !</button></a>
-					  	<a href="mesActions.html"><button type="button" class="btn btn-success" data-dismiss="modal" @click="updateUserActions">J'y vais, je me lance !</button></a>
+					  	<nuxt-link to="/home"><button type="button" class="btn btn-success" data-dismiss="modal">Retour à l'accueil</button></nuxt-link>
 					</div>
                 </div>
             </div>
@@ -76,8 +75,10 @@
 		},
 		methods: {
 			updateUserActions () {
+				console.log('updateUserActions')
+				return
 				this.$store.dispatch('users/updateUserActions', data).then(() => {
-                    this.$router.push('/user/actionsDetails')
+                    this.$router.push('/user/actions')
                 })
 			}
 		}

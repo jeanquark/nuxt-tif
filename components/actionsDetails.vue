@@ -20,7 +20,7 @@
 								<!-- slots: {{ slots }}<br /><br /> -->
 								<!-- loadedUserActions: {{ loadedUserActions }}<br /><br /> -->
 								<!-- loadedUserActionsCards: {{ loadedUserActionsCards }}<br /><br /> -->
-								cards: {{ cards }}<br /><br />
+								<!-- cards: {{ cards }}<br /><br /> -->
 							</p>
 						</div>
 						<!--<div class="flex-container-BoxGoodies">
@@ -40,7 +40,7 @@
 									<p>Nombre d'utilisation total de cette action: {{ loadedUserActionsCards[card.id] + card.occurences }}</p>
 								</div>
 								
-
+								<br />
 								<p class="boxText-70"><span class="darkredText">Attention:</span></br>
 									A chaque fois que tu utilises cette carte, tu te rapproches du niveau supérieur de cette action (donc, plus de $fans, plus de PC...)
 								</p>
@@ -51,7 +51,7 @@
 					<!-- Modal footer -->
 					<div class="modal-footer">
 					  	<a href="mesActions.html"><button type="button" class="btn btn-danger" data-dismiss="modal">C'est pas pour moi !</button></a>
-					  	<a href="mesActions.html"><button type="button" class="btn btn-success" data-dismiss="modal" @click="updateUserActions">J'y vais, je me lance !</button></a>
+					  	<button type="button" class="btn btn-success" data-dismiss="modal" @click="updateUserActions">J'y vais, je me lance 2 !</button>
 					</div>
                 </div>
             </div>
@@ -151,6 +151,7 @@
                 			const object2 = {
 	                			id: data.id,
 	                			name: data.name,
+	                			slug: data.slug,
 	                			physical_gain: data.gain_physical,
 	                			social_gain: data.gain_social,
 	                			special_gain: data.gain_special,
@@ -174,8 +175,15 @@
 		},
 		methods: {
 			updateUserActions () {
+				console.log('updateUserActions')
+				// console.log('slots: ', this.slots)
+				let data = {}
+				data['array'] = this.cards
+				data['today'] = this.$moment().format('DD-MM-YYYY')
+				console.log('data: ', data)
+				// return
 				this.$store.dispatch('users/updateUserActions', data).then(() => {
-                    this.$router.push('/user/actionsDetails')
+                    this.$router.push('/user/actionsResults')
                 })
 			}
 		}

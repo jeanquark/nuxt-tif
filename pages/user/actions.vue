@@ -250,8 +250,8 @@
 
                         <!-- Modal footer -->
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-success" data-dismiss="modal" @click="updateUserActions" :disabled="!changed || disabled">Poursuivre vers la page de confirmation</button>
                             <nuxt-link :to="localePath({name: 'home'})"><button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button></nuxt-link>
+                            <button type="button" class="btn btn-success" data-dismiss="modal" @click="updateUserActions" :disabled="!changed || disabled">Poursuivre vers la page de confirmation</button>
                         </div>
 
                     </div><!-- /.modal-content -->
