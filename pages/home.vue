@@ -51,7 +51,7 @@
 				<div class="flex-container-teamGoodies">
 				  	<nuxt-link to="user/teams" class="boxShadow" style="flex-grow: 1"><span class="textTitle">{{ $t('your_teams') }}</span></nuxt-link>
 				  	<nuxt-link :to="localePath({name: 'user-inventory'})" class="boxShadow" style="flex-grow: 1"><span class="textTitle">Ton inventaire</span></nuxt-link>
-				  	<nuxt-link to="/tokens" class="boxShadow" style="flex-grow: 1;"><span class="textTitle">Acheter des tokens</span></nuxt-link>
+				  	<!-- <nuxt-link to="/tokens" class="boxShadow" style="flex-grow: 1;"><span class="textTitle">Acheter des tokens</span></nuxt-link> -->
 				</div>
 			</div>
 			<!-- End Team&Goodies du joueur -->
@@ -59,7 +59,7 @@
 			<!-- Expérience -->
 			<div id="experience" class="col-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="flex-container-experience">
-				  	<nuxt-link to="user/actions" class="darkred" style="flex-grow: 1"><span class="textXP">XP / Actions</span></nuxt-link>
+				  	<nuxt-link to="user/actions" class="darkred" style="flex-grow: 1"><span class="textXP">Agenda du jour (XP)</span></nuxt-link>
 				  	<!-- loadedUser: {{ this.loadedUser }} -->
 				</div>
 			</div>
@@ -78,7 +78,7 @@
 			<!-- Evénement -->
 			<div id="event" class="col-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="flex-container-event">
-				  	<nuxt-link to="/user/events" class="darkturquoise" style="flex-grow: 1"><span class="textEvent">Events</span></nuxt-link>
+				  	<nuxt-link to="/user/events" class="darkturquoise" style="flex-grow: 1"><span class="textEvent">Evénements du jour</span></nuxt-link>
 				</div>
 			</div>
 			<!-- End Evénement -->
@@ -117,7 +117,7 @@
 							</li>
 							<li>
 								<a href="collection.html"><img src="/images/menuCollection.png"></a>
-								<span class="textMenu">Collection</span></a>
+								<span class="textMenu">Ta collection</span></a>
 							</li>
 							<li id="active">
 								<a href="index.html"><img src="/images/menuHome.png"></a>
@@ -125,7 +125,7 @@
 							</li>
 							<li>
 								<a href="social.html"><img src="/images/menuSocial.png"></a>
-								<span class="textMenu">Social</span></a>
+								<span class="textMenu">Tes amis</span></a>
 							</li>
 							<li>
 								<nuxt-link to="/results"><img src="/images/menuResultat.png"></nuxt-link>
