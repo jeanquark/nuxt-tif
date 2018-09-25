@@ -43,7 +43,20 @@
 							<h2>Toutes les compétitions (en cours et à venir)</h2>
 						</div>
 						<div class="flex-container-modal-OtherTeam">
-							<h6>Choisis ton sport</h6>
+							<h6>Dans quel sport ?</h6>
+						</div>
+						<div class="flex-container-modal-OtherTeam-Img">
+							<div class="OtherTeam">
+								<img :src="'/images/competitions/' + competition.image" class="imgModalFlagTeam"/>
+								<img :src="'/images/competitions/' + competition.image" class="imgModalFlagTeam"/>
+								<img :src="'/images/competitions/' + competition.image" class="imgModalFlagTeam"/>
+								<img :src="'/images/competitions/' + competition.image" class="imgModalFlagTeam"/>
+								<img :src="'/images/competitions/' + competition.image" class="imgModalFlagTeam"/>
+								<img :src="'/images/competitions/' + competition.image" class="imgModalFlagTeam"/>
+							</div>
+						</div>
+						<div class="flex-container-modal-OtherTeam">
+							<h6>Dans quel pays ?</h6>
 						</div>
 						<div class="flex-container-modal-OtherTeam-Img" v-if="loadedCompetitions != ''">
 							<div class="OtherTeam" v-for="competition in loadedCompetitions">
