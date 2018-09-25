@@ -34,7 +34,7 @@
 			<div class="pxBottom">
 				<div id="resultatHeader">
 					<div class="flex-container-Resultat">
-						<span class="resultatTitle">Résultats et classements</span>
+						<span class="resultatTitle">Tous les résultats</span>
 					</div>
 				</div>
 				<div v-if="loadedUserTeams.length > 0">
@@ -56,7 +56,7 @@
 				</div>
 				<div>
 					<div class="flex-container-modal-Title banner text-center">
-						<h2>Compétitions en cours</h2>
+						<h2>Toutes les compétitions</h2>
 					</div>
 					<div class="flex-container-modal-OtherTeam-Img" v-if="loadedCompetitions != ''">
 						<div class="OtherTeam" v-for="competition in loadedCompetitions">
