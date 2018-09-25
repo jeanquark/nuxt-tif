@@ -47,12 +47,12 @@
 						</div>
 						<div class="flex-container-modal-OtherTeam-Img">
 							<div class="OtherTeam">
-								<img :src="'/images/competitions/' + competition.image" class="imgModalFlagTeam"/>
-								<img :src="'/images/competitions/' + competition.image" class="imgModalFlagTeam"/>
-								<img :src="'/images/competitions/' + competition.image" class="imgModalFlagTeam"/>
-								<img :src="'/images/competitions/' + competition.image" class="imgModalFlagTeam"/>
-								<img :src="'/images/competitions/' + competition.image" class="imgModalFlagTeam"/>
-								<img :src="'/images/competitions/' + competition.image" class="imgModalFlagTeam"/>
+								<img src="/images/competitions/football.png" class="imgModalFlagTeam"/>
+								<img src="/images/competitions/football.png" class="imgModalFlagTeam"/>
+								<img src="/images/competitions/football.png" class="imgModalFlagTeam"/>
+								<img src="/images/competitions/football.png" class="imgModalFlagTeam"/>
+								<img src="/images/competitions/football.png" class="imgModalFlagTeam"/>
+								<img src="/images/competitions/football.png" class="imgModalFlagTeam"/>
 							</div>
 						</div>
 						<div class="flex-container-modal-OtherTeam">
