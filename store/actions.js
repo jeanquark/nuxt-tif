@@ -12,7 +12,7 @@ export const mutations = {
 
 export const actions = {
 	loadedActions ({commit}) {
-    	return firebase.database().ref('/actions/').once('value').then(function (snapshot) {
+    	return firebase.database().ref('/actionsDiary/').once('value').then(function (snapshot) {
 	      	const actionsArray = []
 	      	for (const key in snapshot.val()) {
 	        	actionsArray.push({ ...snapshot.val()[key], id: key})

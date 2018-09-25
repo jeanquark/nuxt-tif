@@ -52,8 +52,7 @@
                             <div class="flex-container-modal-XPAction-Img">
                                 
                                 <span class="OtherTeam2" style="border: 1px dashed orange;">
-                                    <p style="color: #000; text-align: center;">
-                                        08:00 - 10:00
+                                    <p style="color: #000; text-align: center;">                                        08:00 - 10:00
                                         <button class="btn btn-sm btn-default" @click="removeSlot('slot1')" v-if="slots.slot1 && slots.slot1.length >= 1"><i class="fas fa-times"></i></button>
                                     </p>
                                     <draggable :options="{group:{ name:'user-actions' }}" :move="onMove" @change="onChange($event, 'slot1')" v-model="slots.slot1">
@@ -74,7 +73,6 @@
                                 
                                 <span class="OtherTeam2" style="border: 1px dashed orange;">
                                     <p style="color: #000; text-align: center;">
-                                        10:00 - 12:00
                                         <button class="btn btn-sm btn-default" @click="removeSlot('slot2')" v-if="slots.slot2 && slots.slot2.length >= 1"><i class="fas fa-times"></i></button>
                                     </p>
                                     <draggable :options="{group:{ name:'user-actions' }}" :move="onMove" @change="onChange($event, 'slot2')" v-model="slots.slot2">
@@ -94,7 +92,6 @@
 
                                 <span class="OtherTeam2" style="border: 1px dashed orange;">
                                     <p style="color: #000; text-align: center;">
-                                        12:00 - 14:00
                                         <button class="btn btn-sm btn-default" @click="removeSlot('slot3')" v-if="slots.slot1 && slots.slot3.length >= 1"><i class="fas fa-times"></i></button>
                                     </p>
                                     <draggable :options="{group:{ name:'user-actions' }}" :move="onMove" @change="onChange($event, 'slot3')" v-model="slots.slot3">
@@ -114,7 +111,6 @@
 
                                 <span class="OtherTeam2" style="border: 1px dashed orange;">
                                     <p style="color: #000; text-align: center;">
-                                        14:00 - 16:00
                                         <button class="btn btn-sm btn-default" @click="removeSlot('slot4')" v-if="slots.slot4 && slots.slot4.length >= 1"><i class="fas fa-times"></i></button>
                                     </p>
                                     <draggable :options="{group:{ name:'user-actions' }}" :move="onMove" @change="onChange($event, 'slot4')" v-model="slots.slot4">
@@ -134,7 +130,6 @@
                                 
                                 <span class="OtherTeam2" style="border: 1px dashed orange;">
                                     <p style="color: #000; text-align: center;">
-                                        16:00 - 18:00
                                         <button class="btn btn-sm btn-default" @click="removeSlot('slot5')" v-if="slots.slot5 && slots.slot5.length >= 1"><i class="fas fa-times"></i></button>
                                     </p>
                                     <draggable :options="{group:{ name:'user-actions' }}" :move="onMove" @change="onChange($event, 'slot5')" v-model="slots.slot5">
@@ -154,7 +149,6 @@
     							
     							<span class="OtherTeam2" style="border: 1px dashed orange;">
                                     <p style="color: #000; text-align: center;">
-                                        18:00 - 20:00
                                         <button class="btn btn-sm btn-default" @click="removeSlot('slot6')" v-if="slots.slot6 && slots.slot6.length >= 1"><i class="fas fa-times"></i></button>
                                     </p>
                                     <draggable :options="{group:{ name:'user-actions' }}" :move="onMove" @change="onChange($event, 'slot6')" v-model="slots.slot6">
@@ -174,7 +168,6 @@
 
     							<span class="OtherTeam2" style="border: 1px dashed orange;">
                                     <p style="color: #000; text-align: center;">
-                                        20:00 - 22:00
                                         <button class="btn btn-sm btn-default" @click="removeSlot('slot7')" v-if="slots.slot7 && slots.slot7.length >= 1"><i class="fas fa-times"></i></button>
                                     </p>
                                     <draggable :options="{group:{ name:'user-actions' }}" :move="onMove" @change="onChange($event, 'slot7')" v-model="slots.slot7">
@@ -194,7 +187,6 @@
 
     							<span class="OtherTeam2" style="border: 1px dashed orange;">
                                     <p style="color: #000; text-align: center;">
-                                        22:00 - 00:00
                                         <button class="btn btn-sm btn-default" @click="removeSlot('slot8')" v-if="slots.slot8 && slots.slot8.length >= 1"><i class="fas fa-times"></i></button>
                                     </p>
                                     <draggable :options="{group:{ name:'user-actions' }}" :move="onMove" @change="onChange($event, 'slot8')" v-model="slots.slot8">
@@ -335,7 +327,7 @@
         },
         computed: {
             loadedActions () {
-                return this.$store.getters['actions/loadedActions'].filter(action => (action.type === 'job')).filter(action => (action.min_level === 1))
+                return this.$store.getters['actions/loadedActions'].filter(action => (action.type === 'job')).filter(action => (action.user_level_min === 1))
             },
             loadedUserActions () {
                 const today = this.$moment().format('DD-MM-YYYY')
