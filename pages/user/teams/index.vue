@@ -40,10 +40,7 @@
 							<h1>Supporter une nouvelle équipe ?</h1>
 						</div>
 						<div class="flex-container-modal-Title banner text-center">
-							<h2>Compétitions en cours / à venir</h2>
-						</div>
-						<div class="flex-container-modal-OtherTeam">
-							<h6>Choisis ta compétition</h6>
+							<h2>Toutes les compétitions(en cours et à venir)</h2>
 						</div>
 						<div class="flex-container-modal-OtherTeam-Img" v-if="loadedCompetitions != ''">
 							<div class="OtherTeam" v-for="competition in loadedCompetitions">
