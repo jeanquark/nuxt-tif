@@ -52,7 +52,7 @@
 						<div class="flex-container-modal-Niveau-PF">
 							<div class="flex-container-modal-Niveau">
 								<div class="columnNiveauImg">
-									<i class="fas fa-dumbbell"></i>							
+									<i class="fas fa-dumbbell fa-2x"></i>							
 								</div>
 								<div class="columnNiveauTexte">
 									Force
@@ -63,7 +63,7 @@
 							</div>
 							<div class="flex-container-modal-Niveau">
 								<div class="columnNiveauImg">
-									<i class="fab fa-creative-commons-sampling"></i>						
+									<i class="fab fa-creative-commons-sampling fa-2x"></i>						
 								</div>
 								<div class="columnNiveauTexte">
 									Endurance
@@ -74,7 +74,7 @@
 							</div>
 							<div class="flex-container-modal-Niveau">
 								<div class="columnNiveauImg">
-									<i class="fas fa-brain"></i>							
+									<i class="fas fa-brain fa-2x"></i>							
 								</div>
 								<div class="columnNiveauTexte">
 									Intelligence
@@ -85,7 +85,7 @@
 							</div>
 							<div class="flex-container-modal-Niveau">
 								<div class="columnNiveauImg">
-									<i class="fas fa-users"></i>						
+									<i class="fas fa-users fa-2x"></i>						
 								</div>
 								<div class="columnNiveauTexte">
 									Social
@@ -96,7 +96,7 @@
 							</div>
 							<div class="flex-container-modal-Niveau">
 								<div class="columnNiveauImg">
-									<i class="fas fa-gavel"></i>						
+									<i class="fas fa-gavel fa-2x"></i>						
 								</div>
 								<div class="columnNiveauTexte">
 									Autorité
@@ -107,7 +107,7 @@
 							</div>
 							<div class="flex-container-modal-Niveau">
 								<div class="columnNiveauImg">
-									<i class="fas fa-comments-dollar"></i>							
+									<i class="fas fa-comments-dollar fa-2x"></i>							
 								</div>
 								<div class="columnNiveauTexte">
 									Baratin
@@ -118,7 +118,7 @@
 							</div>
 							<div class="flex-container-modal-Niveau">
 								<div class="columnNiveauImg">
-									<i class="fas fa-palette"></i>							
+									<i class="fas fa-palette fa-2x"></i>							
 								</div>
 								<div class="columnNiveauTexte">
 									Créativité
@@ -129,7 +129,7 @@
 							</div>
 							<div class="flex-container-modal-Niveau">
 								<div class="columnNiveauImg">
-									<i class="fas fa-chart-line"></i>						
+									<i class="fas fa-chart-line fa-2x"></i>						
 								</div>
 								<div class="columnNiveauTexte">
 									Mental
