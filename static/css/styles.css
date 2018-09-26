@@ -262,7 +262,7 @@ filter: grayscale(100%);
 }
 
 .imgModalProprieteFlags {
-top: 6px;
+margin-top: 4px;
 height: 80px;
 width: 80px;
 }
