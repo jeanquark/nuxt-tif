@@ -206,12 +206,6 @@
 	        }
 		}
 	}
-	
-	$(document).ready(function(){
-		$('.level-box').tooltip({title: "<p class='infoBoxLevel'>Le <span class='orangered'>niveau du fan</span> est important dans le calcul des points de ferveur que tu vas rapporter à tes équipes préférées lors des \"Events\".</br></br> Pour augmenter ton niveau, il faut que tu effectues des actions (XP/Action et Event).</p>", html: true, placement: "bottom"}); 
-		$('.dollar-box').tooltip({title: "<p class='infoBoxDollar'>Les <span class='lawngreen'>$fans</span> servent à acheter des Goodies, à participer à des Event et à effectuer des actions (XP).</br></br> Vous pouvez en gagner en travaillant, grâce au bon plan et bien d'autres actions (XP).</p>", html: true, placement: "bottom"}); 
-		$('.token-box').tooltip({title: "<p class='infoBoxToken'>Les <span class='gold'>Tokens</span> servent à acheter des Goodies spéciaux, à réaliser des actions spécifiques, à devenir fan d'autres équipes.</br></br> Vous pouvez en gagner grâce à vos équipes favorites et des actions spéciales.</p>", html: true, placement: "bottom"}); 
-	});
 </script>
 
 <style scoped>
