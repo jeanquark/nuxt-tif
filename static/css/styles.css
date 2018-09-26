@@ -425,7 +425,7 @@ position: relative;
 border-right: 1px solid black;
 border-radius: 5px 0 0 5px;
 margin: 0;
-padding: 0;
+padding-top: 3px;
 width: 15%;
 background-color: red;
 text-align: center;
