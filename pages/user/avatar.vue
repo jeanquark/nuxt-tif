@@ -59,7 +59,7 @@
 						</div>
                     </div><!-- /.flex-container-modalAvatar -->
 
-					<div class="flex-container-modal-avatar-shape scrolling-wrapper center">
+					<div id="style-2" class="flex-container-modal-avatar-shape scrolling-wrapper center">
 						<!-- Left colum (shape) -->
 						<div>
 							<background-shape v-if="this.type === 'background'" :background="this.background" @addToMergeEmitter="addToMerge"></background-shape>
@@ -85,7 +85,7 @@
 						</div><!-- /left column -->
 					</div>
 
-					<div class="flex-container-modal-avatar-color scrolling-wrapper center">
+					<div id="style-2" class="flex-container-modal-avatar-color scrolling-wrapper center">
 						<!-- Right column (color) -->
 						<div>
 							<background-color v-if="this.type === 'background'" :background="background" @addToMergeEmitter="addToMerge"></background-color>
