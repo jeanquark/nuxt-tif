@@ -425,10 +425,79 @@ position: relative;
 border-right: 1px solid black;
 border-radius: 5px 0 0 5px;
 margin: 0;
-padding-top: 3px;
+padding: 0;
 width: 15%;
 background-color: red;
 text-align: center;
+}
+
+.columnNiveauDollarFan {
+position: relative;
+border-right: 1px solid black;
+border-radius: 5px 0 0 5px;
+margin: 0;
+padding: 0;
+width: 15%;
+background-color: rgba(124,252,0,1);
+color: black;
+text-align: center;
+}
+
+.columnNiveauToken {
+position: relative;
+border-right: 1px solid black;
+border-radius: 5px 0 0 5px;
+margin: 0;
+padding: 0;
+width: 15%;
+background-color: yellow;
+color: black;
+text-align: center;
+}
+
+.columnNiveauTexte {
+position: relative;
+padding-top: 6px;
+padding-left: 10px;
+width: 60%;
+color: #000000;
+font: normal 120%/1 "bangers", Helvetica, sans-serif;
+}
+
+.columnNiveauNumber {
+border-left: 1px solid black;
+position: relative;
+border-radius: 0 5px 5px 0;
+padding-top: 6px;
+width: 25%;
+text-align: center;
+color: white;
+background-color: red;
+font: normal 120%/1 "bangers", Helvetica, sans-serif;
+}
+
+.columnNiveauNumberDollarFan {
+border-left: 1px solid black;
+position: relative;
+border-radius: 0 5px 5px 0;
+padding-top: 6px;
+width: 25%;
+text-align: center;
+background-color: rgba(124,252,0,1);
+color: black;
+font: normal 120%/1 "bangers", Helvetica, sans-serif;
+}
+
+.columnNiveauNumberToken {
+border-left: 1px solid black;
+position: relative;
+border-radius: 0 5px 5px 0;
+padding-top: 6px;
+width: 25%;
+text-align: center;
+background-color: yellow;
+color: black;
+font: normal 120%/1 "bangers", Helvetica, sans-serif;
 }
 
 .columnNiveauTexte {
@@ -1944,11 +2013,6 @@ color: orangered;
 font: normal 120%/1 "bangers", Helvetica, sans-serif;
 padding: 10px;
 margin-top: 10px;
-}
-
-.table td, .table th {
-padding: .75rem;
-vertical-align: top;
 }
 
 .flex-container-modal-OtherTeam h5 {
@@ -4245,12 +4309,124 @@ border-bottom-color: #000;
 .accordion:after {
     content: '\02795'; /* Unicode character for "plus" sign (+) */
     font-size: 13px;
-    margin: 5px;
+    margin: 3px;
+	margin-top: 5px;
 }
 
 .active:after {
     content: "\2796"; /* Unicode character for "minus" sign (-) */
     font-size: 13px;
-    margin: 5px;
+    margin: 3px;
+	margin-top: 5px;
 }
 
+.palmaresBox {
+position: relative;
+width: 150px;
+height: 150px;
+float: left;
+}
+
+.detailsPalmaresBox {
+    width: 100%;
+    height: 100%;
+    float: left;
+    border: 1px solid #fff;
+    background: #2c323d;
+}
+
+.anneePalmaresBox {
+    color: #c9d0de;
+    position: absolute;
+    bottom: 5px;
+    left: 8%;
+    z-index: 3;
+    font-family: 'interstateregular';
+    font-size: 15px;
+    text-align: center;
+    width: 84%;
+}
+
+.palmares {
+    display: block;
+    width: 100%;
+}
+
+.detailsPalmaresBox .titrecompet {
+    color: #c9d0de;
+    position: absolute;
+    top: 5px;
+    left: 0;
+    height: 50px;
+    z-index: 2;
+    text-transform: uppercase;
+	font: normal 80%/1 "bangers", Helvetica, sans-serif;
+    text-align: center;
+    width: 100%;
+}
+
+.anneePalmares {
+    color: #c9d0de;
+    position: absolute;
+    bottom: 5px;
+    left: 8%;
+    z-index: 3;
+    text-transform: uppercase;
+	font: normal 80%/1 "bangers", Helvetica, sans-serif;
+    text-align: center;
+    width: 84%;
+}
+
+.palmaresBox .nbcompet {
+    color: #FFF;
+    position: absolute;
+    top: 35px;
+    left: 0;
+    z-index: 1;
+    text-transform: uppercase;
+	font: normal 400%/1 "bangers", Helvetica, sans-serif;
+    text-align: center;
+    width: 100%;
+}
+
+.tdTitleMatchEnd {
+padding-top: 5px;
+padding-bottom: 5px;
+margin: 5px;
+text-align: center;
+font-weight: normal;
+font: normal 100%/1 "bangers", Helvetica, sans-serif;
+color: black;
+border: none;
+}
+
+table .tdScore {
+margin: 0;
+font-weight: normal;
+width: 13%;
+font: normal 80%/1 "bangers", Helvetica, sans-serif;
+border: none;
+vertical-align: middle;
+}
+
+table .tdScore1 {
+width: 32%;
+font-weight: normal;
+color: #000000;
+font: normal 110%/1 "bangers", Helvetica, sans-serif;
+border: none;
+vertical-align: middle;
+}
+
+table .tdScore2 {
+width: 10%;
+font-weight: normal;
+color: #000000;
+font: normal 140%/1 "bangers", Helvetica, sans-serif;
+border: none;
+}
+
+.table td, .table th {
+padding: 0;
+vertical-align: middle;
+}
