@@ -15,7 +15,7 @@
 					<!-- Modal body -->
 					<div id="modalBoxContentProfil" class="modal-bodyProfil text-center">
 						<div class="flex-container-modalProfil text-center">
-							<div class="columnProfil"><img src="/images/163.png" class="imgModalProprieteFlags"/><span class="modal-Profil" v-if="loadedUser">{{ loadedUser.username }}</span> <span class="modal-Age"> (20) </span><span v-if="loadedUser && loadedUser.avatar"><img :src="loadedUser.avatar.url" class="imgModalAvatarProfil"/></span></div>
+							<div class="columnProfil"><img src="/images/163.png" class="imgModalProprieteFlags2"/><span class="modal-Profil" v-if="loadedUser"> {{ loadedUser.username }}</span> <span class="modal-Age"> (20) </span><span v-if="loadedUser && loadedUser.avatar"><img :src="loadedUser.avatar.url" class="imgModalAvatarProfil"/></span></div>
 						</div>
 						<div class="flex-container-modal-Niveau-Classement text-center">
 							<div class="columnProfil"><img src="/images/cup.png" class="imgModalProprieteCup"/> <span class="modal-Place">1234567ème</span> <img src="/images/cup.png" class="imgModalProprieteCup"/></div>
@@ -52,7 +52,7 @@
 						<div class="flex-container-modal-Niveau-PF">
 							<div class="flex-container-modal-Niveau">
 								<div class="columnNiveauImg">
-									<i class="fas fa-star"></i>							
+									<i class="fas fa-dumbbell"></i>							
 								</div>
 								<div class="columnNiveauTexte">
 									Force
@@ -63,7 +63,7 @@
 							</div>
 							<div class="flex-container-modal-Niveau">
 								<div class="columnNiveauImg">
-									<i class="fas fa-star"></i>							
+									<i class="fab fa-creative-commons-sampling"></i>						
 								</div>
 								<div class="columnNiveauTexte">
 									Endurance
@@ -74,7 +74,7 @@
 							</div>
 							<div class="flex-container-modal-Niveau">
 								<div class="columnNiveauImg">
-									<i class="fas fa-star"></i>							
+									<i class="fas fa-brain"></i>							
 								</div>
 								<div class="columnNiveauTexte">
 									Intelligence
@@ -85,7 +85,7 @@
 							</div>
 							<div class="flex-container-modal-Niveau">
 								<div class="columnNiveauImg">
-									<i class="fas fa-star"></i>							
+									<i class="fas fa-users"></i>						
 								</div>
 								<div class="columnNiveauTexte">
 									Social
@@ -96,7 +96,7 @@
 							</div>
 							<div class="flex-container-modal-Niveau">
 								<div class="columnNiveauImg">
-									<i class="fas fa-star"></i>							
+									<i class="fas fa-gavel"></i>						
 								</div>
 								<div class="columnNiveauTexte">
 									Autorité
@@ -107,7 +107,7 @@
 							</div>
 							<div class="flex-container-modal-Niveau">
 								<div class="columnNiveauImg">
-									<i class="fas fa-star"></i>							
+									<i class="fas fa-comments-dollar"></i>							
 								</div>
 								<div class="columnNiveauTexte">
 									Baratin
@@ -118,7 +118,7 @@
 							</div>
 							<div class="flex-container-modal-Niveau">
 								<div class="columnNiveauImg">
-									<i class="fas fa-star"></i>							
+									<i class="fas fa-palette"></i>							
 								</div>
 								<div class="columnNiveauTexte">
 									Créativité
@@ -129,7 +129,7 @@
 							</div>
 							<div class="flex-container-modal-Niveau">
 								<div class="columnNiveauImg">
-									<i class="fas fa-star"></i>							
+									<i class="fas fa-chart-line"></i>						
 								</div>
 								<div class="columnNiveauTexte">
 									Mental
