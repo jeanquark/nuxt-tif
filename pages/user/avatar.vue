@@ -8,10 +8,11 @@
                     <div class="modal-header text-center">
                         <span class="modal-title">{{ $t('pages.user-avatar.your_avatar')}}</span>
                         <nuxt-link to="/home">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
-                        </button>
-                    </nuxt-link>         
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
+                            </button>
+                        </nuxt-link>
+                    </div><!-- /.modal-header -->  
                 </div>
                 <!-- Modal body -->
                 <div id="modalBoxContent" class="modal-body">
