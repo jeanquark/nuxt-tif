@@ -23,7 +23,7 @@
 					</div>
 					<div id="modalTitle" class="modal-body">
 						<div class="flex-container-modal-Title banner2 text-center">
-							<h2>Niveau / PF / Competences</h2>
+							<h2>Niveau / PF / Competences / $fans / Tokens</h2>
 						</div>
 						<div class="flex-container-Niveau-Header">
 							<div class="column1">
@@ -138,16 +138,28 @@
 									{{ loadedUser.skillMental.value }}
 								</div>
 							</div>
-						</div>	
+						</div>
+						<div class="flex-container-Niveau-Header text-center">
+							<div class="column1">
+								<span class="PF-Team-box">
+									<div class="dollar-box" v-if="loadedUser && loadedUser.dollarFan"><i class="fa fa-dollar-sign"></i> {{ loadedUser.dollarFan.value }}</div>						
+								</span>						
+							</div>
+							<div class="column1">
+								<span class="PF-Team-box">
+									<div class="token-box" v-if="loadedUser && loadedUser.tokens"><i class="fa fa-certificate"></i> {{ loadedUser.tokens.value }}</div>					
+								</span>						
+							</div>
+						</div>
 					</div>
 					<div id="modalTitle" class="modal-body">
 						<div class="flex-container-modal-Title banner2 text-center">
-							<h2>Statistiques "Actions"</h2>
+							<h2>Statistiques "Action Cards"</h2>
 						</div>
 						<div class="flex-container-modal-Action">
 							<div class="flex-container-modal-Niveau">
 								<div class="columnActionTexte">
-									Nombre de cartes "Action" débloquées
+									Nombre de cartes "Action Diary" débloquées
 								</div>
 								<div class="columnActionNumber">
 									12 / 50
@@ -155,7 +167,7 @@
 							</div>
 							<div class="flex-container-modal-Niveau">
 								<div class="columnActionTexte">
-									Nombre de cartes "Event" débloquées
+									Nombre de cartes "Action Event" débloquées
 								</div>
 								<div class="columnActionNumber">
 									5 / 50
@@ -163,7 +175,7 @@
 							</div>
 							<div class="flex-container-modal-Niveau">
 								<div class="columnActionTexte">
-									Nombre de cartes "Goodies" achetées
+									Nombre de cartes "Action Inventory" achetées
 								</div>
 								<div class="columnActionNumber">
 									0
@@ -171,7 +183,7 @@
 							</div>
 							<div class="flex-container-modal-Niveau">
 								<div class="columnActionTexte">
-									Nombre de cartes "Spéciales" achetées
+									Nombre de cartes "Special Action" achetées
 								</div>
 								<div class="columnActionNumber">
 									0
