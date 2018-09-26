@@ -252,6 +252,7 @@ text-decoration: none;
 .imgModalProprieteCup {
 height: 40px;
 width: 40px;
+margin-left: 5px;
 }
 
 .imgModalProprieteCupNo {
@@ -261,10 +262,16 @@ filter: grayscale(100%);
 }
 
 .imgModalProprieteFlags {
-position: relative;
 top: 6px;
 height: 80px;
 width: 80px;
+}
+
+.imgModalProprieteFlags2 {
+top: 6px;
+height: 80px;
+width: 80px;
+margin-right: 10px;
 }
 
 .imgModalAgendaFlags {
