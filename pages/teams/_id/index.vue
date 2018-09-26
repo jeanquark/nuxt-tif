@@ -135,14 +135,14 @@
 								  <td class="tdScore text-left"><a href="matchTermine.html" class="linkEvent">27.03.2018</br>20:00</a></td>
 								  <td class="tdScore1 text-center"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</a></td>
 								  <td class="tdScore2 text-center">2 - 2</td>
-								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></td>
+								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
 								  <td class="tdScore text-right"><a href="matchTermine.html" class="linkEvent">Match amical</a></td>
 								</tr>								
 								<tr class="borderResultat">
 								  <td class="tdScore text-left"><a href="matchTermine.html" class="linkEvent">27.03.2018</br>20:00</a></td>
 								  <td class="tdScore1 text-center"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</a></td>
 								  <td class="tdScore2 text-center">2 - 2</td>
-								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></td>
+								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
 								  <td class="tdScore text-right"><a href="matchTermine.html" class="linkEvent">Match amical</br>27.03.2018</a></td>
 								</tr>								
 							  </tbody>
@@ -156,14 +156,14 @@
 								  <td class="tdScore text-left"><a href="matchTermine.html" class="linkEvent">27.03.2018</br>20:00</a></td>
 								  <td class="tdScore1 text-center"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</a></td>
 								  <td class="tdScore2 text-center">2 - 2</td>
-								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></td>
+								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
 								  <td class="tdScore text-right"><a href="matchTermine.html" class="linkEvent">Match amical</a></td>
 								</tr>								
 								<tr class="borderResultat">
 								  <td class="tdScore text-left"><a href="matchTermine.html" class="linkEvent">27.03.2018</br>20:00</a></td>
 								  <td class="tdScore1 text-center"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</a></td>
 								  <td class="tdScore2 text-center">2 - 2</td>
-								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></td>
+								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
 								  <td class="tdScore text-right"><a href="matchTermine.html" class="linkEvent">Match amical</br>27.03.2018</a></td>
 								</tr>								
 							  </tbody>
@@ -177,14 +177,14 @@
 								  <td class="tdScore text-left"><a href="matchTermine.html" class="linkEvent">27.03.2018</br>20:00</a></td>
 								  <td class="tdScore1 text-center"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</a></td>
 								  <td class="tdScore2 text-center">2 - 2</td>
-								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></td>
+								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
 								  <td class="tdScore text-right"><a href="matchTermine.html" class="linkEvent">Match amical</a></td>
 								</tr>								
 								<tr class="borderResultat">
 								  <td class="tdScore text-left"><a href="matchTermine.html" class="linkEvent">27.03.2018</br>20:00</a></td>
 								  <td class="tdScore1 text-center"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</a></td>
 								  <td class="tdScore2 text-center">2 - 2</td>
-								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></td>
+								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
 								  <td class="tdScore text-right"><a href="matchTermine.html" class="linkEvent">Match amical</br>27.03.2018</a></td>
 								</tr>								
 							  </tbody>
