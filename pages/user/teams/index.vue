@@ -36,11 +36,8 @@
 					</div>
 					
 					<div id="modalBoxContent" class="modal-body">
-						<div class="flex-container-modal-OtherTeam">
-							<h1>Supporter une nouvelle équipe, un(e) athlète ?</h1>
-						</div>
 						<div class="flex-container-modal-Title banner text-center">
-							<h2>Toutes les compétitions (en cours et à venir)</h2>
+							<h2>Supporter une nouvelle équipe, un(e) athlète ?</h2>
 						</div>
 						<div class="flex-container-modal-OtherTeam">
 							<h6>Dans quel sport ?</h6>
