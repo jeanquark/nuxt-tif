@@ -4345,7 +4345,16 @@ border-bottom-color: #000;
 	margin-top: 5px;
  }
 
- .palmaresBox {
+.palmaresBox {
+position: relative;
+width: 150px;
+height: 150px;
+float: left;
+margin-bottom: 10px;
+margin-top: 10px;
+}
+
+.palmaresTifBox {
 position: relative;
 width: 150px;
 height: 150px;
@@ -4375,6 +4384,14 @@ margin-top: 10px;
 }
 
 .detailsStatBox {
+    width: 100%;
+    height: 100%;
+    float: left;
+    border: 1px solid #fff;
+    background: #2c323d;
+}
+
+.detailsStatTifBox {
     width: 100%;
     height: 100%;
     float: left;
@@ -4413,6 +4430,19 @@ margin-top: 10px;
     width: 100%;
 }
 
+.detailsStatTifBox .titrecompet {
+    color: #c9d0de;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    height: 50px;
+    z-index: 2;
+    text-transform: uppercase;
+    font: normal 100%/1 "bangers", Helvetica, sans-serif;
+    text-align: center;
+    width: 100%;
+}
+
 .anneePalmares {
     color: #c9d0de;
     position: absolute;
@@ -4425,6 +4455,18 @@ margin-top: 10px;
     width: 84%;
 }
 
+.classementStatTif {
+    color: #c9d0de;
+    position: absolute;
+    bottom: 10px;
+    left: 8%;
+    z-index: 3;
+    text-transform: uppercase;
+    font: normal 150%/1 "bangers", Helvetica, sans-serif;
+    text-align: center;
+    width: 84%;
+}
+
 .palmaresBox .nbcompet {
     color: #FFF;
     position: absolute;
@@ -4433,6 +4475,18 @@ margin-top: 10px;
     z-index: 1;
     text-transform: uppercase;
 	font: normal 400%/1 "bangers", Helvetica, sans-serif;
+    text-align: center;
+    width: 100%;
+}
+
+.palmaresTifBox .nbcompet {
+    color: #FFF;
+    position: absolute;
+    top: 25px;
+    left: 0;
+    z-index: 1;
+    text-transform: uppercase;
+    font: normal 400%/1 "bangers", Helvetica, sans-serif;
     text-align: center;
     width: 100%;
 }
@@ -4461,6 +4515,18 @@ margin-top: 10px;
     width: 100%;
 }
 
+.palmaresTifBox .nbstats {
+    color: #FFF;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    z-index: 1;
+    text-transform: uppercase;
+    font: normal 200%/1 "bangers", Helvetica, sans-serif;
+    text-align: center;
+    width: 100%;
+}
+
 .tdTitleMatchEnd {
 padding-top: 5px;
 padding-bottom: 5px;
@@ -4474,7 +4540,6 @@ border: none;
 
 .tdTitleClassementCompet {
 padding-top: 10px;
-padding-bottom: 10px;
 margin: 5px;
 text-align: center;
 font-weight: normal;
