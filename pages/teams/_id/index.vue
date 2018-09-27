@@ -8,52 +8,42 @@
 				<!-- Modal Header -->
 				<div class="modal-header">
 				  <span class="modal-title">Pleins d'infos ! <span class="modal-title-Sub">(autres équipes)</span></span>
-					<a href="competitionsEquipes.html">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    	<span aria-hidden="true" class="white-text"><i class="fas fa-arrow-circle-left"></i></span>
-                		</button>
-                	</a>					
+					<a href="competitionsEquipes.html"><button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text"><i class="fas fa-arrow-circle-left"></i></span>
+                	</button></a>					
             	</div>
 				<!-- Modal body -->
 				<div id="modalBoxContent" class="modal-bodyOtherTeam text-center">
 					<div class="flex-container-modalProfil">
-						<div class="columnProfil"><img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlags"/> <span class="modal-Team-Title" @>{{ loadedTeams.name }} <i class="fa fa-star"></i></span> <img :src="'/images/teams/' + loadedTeams.slug + '.png'" class="imgModalFlagsRight"/></div>
+						<div class="columnProfil"><img src="images/flags/25.png" class="imgModalFlags"/> <span class="modal-Team-Title">Brésil</span> <img src="images/flags/25.png" class="imgModalFlagsRight"/></div>
 					</div>
 					<div class="flex-container-modal-Niveau text-center">
-						<div class="columnProfil"><span class="modal-Team-Activity">{{ loadedTeams.category.name }}</span></div>
+						<div class="columnProfil"><span class="modal-Team-Activity">Football</span></div>
 					</div>
 				</div>
 				<div id="modalTitle" class="modal-body">
-					<div class="flex-container-modal-Title banner text-center accordion">
+					<div class="flex-container-modal-Title banner text-center accordion2">
 						<h2>Info</h2>
 					</div>
 					<div class="panel">
 						<div class="flex-container-modal-Action">
 							<table class="table tableText">
 							  <tbody>
-								<tr class="borderResultatTermine">
-								  <td class="tdInfo text-left">Nom de l'équipe :</td>
-								  <td class="tdInfo1 text-left">Brésil</td>
-								  <td class="tdInfo text-left">Entraîneur :</td>
-								  <td class="tdInfo1 text-left">Prénom nom</td>
+								<tr class="borderInfo">
+								  <td class="tdInfo text-left">Nom de l'équipe : Brésil</td>
+								  <td class="tdInfo text-left">Entraîneur : Prénom Nom</td>
 								</tr>								
-								<tr class="borderResultat">
-								  <td class="tdInfo text-left">Fondation :</td>
-								  <td class="tdInfo1 text-left">Prénom nom</td>
-								  <td class="tdInfo text-left">Fondation :</td>
-								  <td class="tdInfo1 text-left">1970</td>
+								<tr class="borderInfo">
+								  <td class="tdInfo text-left">Président : Prénom Nom</td>
+								  <td class="tdInfo text-left">Fondation : 1970</td>
 								</tr>								
-								<tr class="borderResultat">
-								  <td class="tdInfo text-left">Site internet :</td>
-								  <td class="tdInfo1 text-left">www.psg.fr</td>
-								  <td class="tdInfo text-left">Couleur :</td>
-								  <td class="tdInfo1 text-left">Bleu et rouge</td>
+								<tr class="borderInfo">
+								  <td class="tdInfo text-left">Site internet : www.psg.fr</td>
+								  <td class="tdInfo text-left">Couleur : bleu et rouge</td>
 								</tr>
-								<tr class="borderResultat">
-								  <td class="tdInfo text-left">Stade :</td>
-								  <td class="tdInfo1 text-left">Parc des Princes</td>
-								  <td class="tdInfo text-left">Capacité :</td>
-								  <td class="tdInfo1 text-left">123456 places</td>
+								<tr class="borderInfo">
+								  <td class="tdInfo text-left">Stade : Parc des Princes</td>
+								  <td class="tdInfo text-left">Capacité : 123456 places</td>
 								</tr>
 							  </tbody>
 							</table>
@@ -61,7 +51,7 @@
 					</div>
 				</div>
 				<div id="modalTitle" class="modal-body">
-					<div class="flex-container-modal-Title banner text-center accordion">
+					<div class="flex-container-modal-Title banner text-center accordion2">
 						<h2>Palmarès</h2>
 					</div>
 					<div class="panel">
@@ -123,7 +113,7 @@
 					</div>
 				</div>
 				<div id="modalTitle" class="modal-body">
-					<div class="flex-container-modal-Title banner text-center accordion">
+					<div class="flex-container-modal-Title banner text-center accordion2">
 						<h2>Calendrier et Résultats</h2>
 					</div>
 					<div class="panel">
@@ -135,14 +125,14 @@
 								  <td class="tdScore text-left"><a href="matchTermine.html" class="linkEvent">27.03.2018</br>20:00</a></td>
 								  <td class="tdScore1 text-center"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</a></td>
 								  <td class="tdScore2 text-center">2 - 2</td>
-								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
+								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></td>
 								  <td class="tdScore text-right"><a href="matchTermine.html" class="linkEvent">Match amical</a></td>
 								</tr>								
 								<tr class="borderResultat">
 								  <td class="tdScore text-left"><a href="matchTermine.html" class="linkEvent">27.03.2018</br>20:00</a></td>
 								  <td class="tdScore1 text-center"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</a></td>
 								  <td class="tdScore2 text-center">2 - 2</td>
-								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
+								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></td>
 								  <td class="tdScore text-right"><a href="matchTermine.html" class="linkEvent">Match amical</br>27.03.2018</a></td>
 								</tr>								
 							  </tbody>
@@ -156,14 +146,14 @@
 								  <td class="tdScore text-left"><a href="matchTermine.html" class="linkEvent">27.03.2018</br>20:00</a></td>
 								  <td class="tdScore1 text-center"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</a></td>
 								  <td class="tdScore2 text-center">2 - 2</td>
-								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
+								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></td>
 								  <td class="tdScore text-right"><a href="matchTermine.html" class="linkEvent">Match amical</a></td>
 								</tr>								
 								<tr class="borderResultat">
 								  <td class="tdScore text-left"><a href="matchTermine.html" class="linkEvent">27.03.2018</br>20:00</a></td>
 								  <td class="tdScore1 text-center"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</a></td>
 								  <td class="tdScore2 text-center">2 - 2</td>
-								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
+								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></td>
 								  <td class="tdScore text-right"><a href="matchTermine.html" class="linkEvent">Match amical</br>27.03.2018</a></td>
 								</tr>								
 							  </tbody>
@@ -177,14 +167,14 @@
 								  <td class="tdScore text-left"><a href="matchTermine.html" class="linkEvent">27.03.2018</br>20:00</a></td>
 								  <td class="tdScore1 text-center"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</a></td>
 								  <td class="tdScore2 text-center">2 - 2</td>
-								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
+								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></td>
 								  <td class="tdScore text-right"><a href="matchTermine.html" class="linkEvent">Match amical</a></td>
 								</tr>								
 								<tr class="borderResultat">
 								  <td class="tdScore text-left"><a href="matchTermine.html" class="linkEvent">27.03.2018</br>20:00</a></td>
 								  <td class="tdScore1 text-center"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</a></td>
 								  <td class="tdScore2 text-center">2 - 2</td>
-								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
+								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></td>
 								  <td class="tdScore text-right"><a href="matchTermine.html" class="linkEvent">Match amical</br>27.03.2018</a></td>
 								</tr>								
 							  </tbody>
@@ -193,216 +183,544 @@
 					</div>
 				</div>
 				<div id="modalTitle" class="modal-body">
-					<div class="flex-container-modal-Title banner text-center">
-						<h2>Classement - Phase de groupes - Groupe A</br>Coupe du Monde - 2018 - International</h2>
+					<div class="flex-container-modal-Title banner text-center accordion2">
+						<h2>Classement</h2>
 					</div>
-					<div class="flex-container-modal-Action">
-						<table class="table tableTextClassement">
-						  <thead>
-							<tr>
-							  <th class="col1 thTif"></th>
-							  <th class="col2 thTif"></th>
-							  <th class="col3 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Matches joués durant la compétition">MJ</th>
-							  <th class="col3 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="But pour / But contre">But</th>
-							  <th class="col3 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Nombre de points">Pts</th>
-							</tr>
-						  </thead>
-						  <tbody>
-							<tr class="trResultat">
-							  <td class="tdTif1 text-center">1</td>
-							  <td class="tdTif"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Brésil</a></td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0:0</td>
-							  <td class="tdTif1 text-center">0</td>
-							</tr>
-							<tr class="trResultat">
-							  <td class="tdTif1 text-center">2</td>
-							  <td class="tdTif"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Costa Rica</a></td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0:0</td>
-							  <td class="tdTif1 text-center">0</td>
-							</tr>
-							<tr class="trResultat">
-							  <td class="tdTif1 text-center">3</td>
-							  <td class="tdTif"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Serbie</a></td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0:0</td>
-							  <td class="tdTif1 text-center">0</td>
-							</tr>
-							<tr class="trResultat">
-							  <td class="tdTif1 text-center">4</td>
-							  <td class="tdTif"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Suisse</a></td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0:0</td>
-							  <td class="tdTif1 text-center">0</td>
-							</tr>
-						  </tbody>
-						</table>
-					</div>	
+					<div class="panel">
+						<div class="flex-container-modal-Action">
+							<h6 class="tdTitleClassementCompet">Titre de la compétition en cours</h6>
+							<table class="table tableTextClassement">
+							  <thead>
+								<tr>
+								  <th class="col1 thTif"></th>
+								  <th class="col2 thTif"></th>
+								  <th class="col3 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Matches joués">MJ</th>
+								  <th class="col3 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Gagné">G</th>
+								  <th class="col3 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Match nul">N</th>
+								  <th class="col3 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Perdu">P</th>
+								  <th class="col3 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="But pour / But contre">But</th>
+								  <th class="col3 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Différence de but">Diff.</th>
+								  <th class="col3 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Nombre de points">Pts</th>
+								</tr>
+							  </thead>
+							  <tbody>
+								<tr class="borderResultat blue">
+								  <td class="tdTif1 text-center">1</td>
+								  <td class="tdTif"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Brésil</a></td>
+								  <td class="tdTif1 text-center">28</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">100:100</td>
+								  <td class="tdTif1 text-center">+50</td>
+								  <td class="tdTif1 text-center">100</td>
+								</tr>
+								<tr class="borderResultat">
+								  <td class="tdTif1 text-center">2</td>
+								  <td class="tdTif"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Costa Rica</a></td>
+								  <td class="tdTif1 text-center">28</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">100:100</td>
+								  <td class="tdTif1 text-center">+50</td>
+								  <td class="tdTif1 text-center">100</td>
+								</tr>
+								<tr class="borderResultat">
+								  <td class="tdTif1 text-center">3</td>
+								  <td class="tdTif"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Serbie</a></td>
+								  <td class="tdTif1 text-center">28</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">100:100</td>
+								  <td class="tdTif1 text-center">+50</td>
+								  <td class="tdTif1 text-center">100</td>
+								</tr>
+								<tr class="borderResultat">
+								  <td class="tdTif1 text-center">4</td>
+								  <td class="tdTif"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Suisse</a></td>
+								  <td class="tdTif1 text-center">28</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">100:100</td>
+								  <td class="tdTif1 text-center">+50</td>
+								  <td class="tdTif1 text-center">100</td>
+								</tr>
+								<tr class="borderResultat">
+								  <td class="tdTif1 text-center">5</td>
+								  <td class="tdTif"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Costa Rica</a></td>
+								  <td class="tdTif1 text-center">28</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">100:100</td>
+								  <td class="tdTif1 text-center">+50</td>
+								  <td class="tdTif1 text-center">100</td>
+								</tr>
+								<tr class="borderResultat">
+								  <td class="tdTif1 text-center">6</td>
+								  <td class="tdTif"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Serbie</a></td>
+								  <td class="tdTif1 text-center">28</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">100:100</td>
+								  <td class="tdTif1 text-center">+50</td>
+								  <td class="tdTif1 text-center">100</td>
+								</tr>
+								<tr class="borderResultat">
+								  <td class="tdTif1 text-center">7</td>
+								  <td class="tdTif"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Suisse</a></td>
+								  <td class="tdTif1 text-center">28</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">100:100</td>
+								  <td class="tdTif1 text-center">+50</td>
+								  <td class="tdTif1 text-center">100</td>
+								</tr>
+								<tr class="borderResultat">
+								  <td class="tdTif1 text-center">8</td>
+								  <td class="tdTif"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Costa Rica</a></td>
+								  <td class="tdTif1 text-center">28</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">100:100</td>
+								  <td class="tdTif1 text-center">+50</td>
+								  <td class="tdTif1 text-center">100</td>
+								</tr>
+								<tr class="borderResultat">
+								  <td class="tdTif1 text-center">9</td>
+								  <td class="tdTif"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Serbie</a></td>
+								  <td class="tdTif1 text-center">28</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">100:100</td>
+								  <td class="tdTif1 text-center">+50</td>
+								  <td class="tdTif1 text-center">100</td>
+								</tr>
+								<tr class="borderResultat">
+								  <td class="tdTif1 text-center">10</td>
+								  <td class="tdTif"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Suisse</a></td>
+								  <td class="tdTif1 text-center">28</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">14</td>
+								  <td class="tdTif1 text-center">100:100</td>
+								  <td class="tdTif1 text-center">+50</td>
+								  <td class="tdTif1 text-center">100</td>
+								</tr>
+							  </tbody>
+							</table>
+						</div>
+					</div>
 				</div>
 				<div id="modalTitle" class="modal-body">
-					<div class="flex-container-modal-Title banner2 text-center">
-						<h2>Classement "TIF"</br> Coupe du Monde - 2018 - International</h2>
+					<div class="flex-container-modal-Title banner text-center accordion2">
+						<h2>Statistiques</h2>
 					</div>
-					<div class="flex-container-modal-Action">
-						<table class="table tableTextClassement">
-						  <thead>
-							<tr>
-							  <th class="col1 thTif"></th>
-							  <th class="col2 thTif"></th>
-							  <th class="col4 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Matches joués durant la compétition">MJ</th>
-							  <th class="col4 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Moyenne fan/match ayant participé à la compétition">MFans</th>
-							  <th class="col4 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Total fan ayant participé à la compétition">TFans</th>
-							  <th class="col4 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Moyenne PF/match remporté par les fans durant la compétition">MPF</th>
-							  <th class="col4 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Total PF remporté par les fans durant la compétition">TPF</th>
-							</tr>
-						  </thead>
-						  <tbody>
-							<tr class="trResultat1">
-							  <td class="tdTif1 text-center">12</td>
-							  <td class="tdTif"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Panama</td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0</td>
-							</tr>
-							<tr class="trResultat1">
-							  <td class="tdTif1 text-center">13</td>
-							  <td class="tdTif"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> France</td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0</td>
-							</tr>
-							<tr class="trResultat1">
-							  <td class="tdTif1 text-center">14</td>
-							  <td class="tdTif"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Brésil</td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0</td>
-							</tr>
-							<tr class="trResultat1">
-							  <td class="tdTif1 text-center">15</td>
-							  <td class="tdTif"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Belgique</td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0</td>
-							</tr>
-							<tr class="trResultat1">
-							  <td class="tdTif1 text-center">16</td>
-							  <td class="tdTif"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Russie</td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0</td>
-							  <td class="tdTif1 text-center">0</td>
-							</tr>
-						  </tbody>
-						</table>
-					</div>	
+					<div class="panel">
+						<h6 class="tdTitleClassementCompet">Titre de la compétition en cours</h6>
+						<div class="palmares">
+							<div class="palmaresBox">
+								<div class="detailsStatBox">
+									<span class="titrecompet"><span class="LimeGreenText">but marqués</span></span>
+									<span class="nbstats">6</span>
+								</div>
+							</div>
+						</div>
+						<div class="palmares">
+							<div class="palmaresBox">
+								<div class="detailsStatBox">
+									<span class="titrecompet"><span class="indianredText">buts encaissés</span></span>
+									<span class="nbstats">6</span>
+								</div>
+							</div>
+						</div>
+						<div class="palmares">
+							<div class="palmaresBox">
+								<div class="detailsStatBox">
+									<span class="titrecompet">matches</span>
+									<span class="nbstats">6</span>
+								</div>
+							</div>
+						</div>
+						<div class="palmares">
+							<div class="palmaresBox">
+								<div class="detailsStatBox">
+									<span class="titrecompet"><span class="yellowText">cartons jaunes</span></span>
+									<span class="nbstats">6</span>
+								</div>
+							</div>
+						</div>
+						<div class="palmares">
+							<div class="palmaresBox">
+								<div class="detailsStatBox">
+									<span class="titrecompet redText"><span class="redText">cartons rouges</span></span>
+									<span class="nbstats">6</span>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div id="modalTitle" class="modal-body">
-					<div class="flex-container-modal-Title banner2 text-center">
-						<h2>Statistiques "TIF"</br> Coupe du Monde - 2018 - International <span class="modal-title-Sub">(classements provisoires)</span></h2>
-						
+					<div class="flex-container-modal-Title banner2 text-center accordion">
+						<h2>Classement "TIF"</h2>
 					</div>
-					<div class="flex-container-modal-Action">
-						<div class="flex-container-modal-Niveau">
-							<div class="columnClassementTexte">
-								Moyenne de PF / match
-							</div>
-							<div class="columnClassementNumber2">
-								0.00
-							</div>
-							<div class="columnClassement2">
-								1er
+					<div class="panel">
+						<div class="flex-container-modal-Action">
+							<h6 class="tdTitleClassementCompet">Titre de la compétition en cours</h6>
+							<table class="table tableTextClassement">
+							  <thead>
+								<tr>
+								  <th class="col1 thTif"></th>
+								  <th class="col5 thTif"></th>
+								  <th class="col4 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Matches joués durant la compétition">MJ</th>
+								  <th class="col4 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Moyenne fan/match ayant participé à la compétition">MFans</th>
+								  <th class="col4 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Total fan ayant participé à la compétition">TFans</th>
+								  <th class="col4 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Moyenne PF/match remporté par les fans durant la compétition">MPF</th>
+								  <th class="col4 thTif text-center" data-toggle="tooltip" data-placement="bottom" title="Total PF remporté par les fans durant la compétition">TPF</th>
+								</tr>
+							  </thead>
+							  <tbody>
+								<tr class="trResultat1">
+								  <td class="tdTif1 text-center">1</td>
+								  <td class="tdTif"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Panama</td>
+								  <td class="tdTif1 text-center">20</td>
+								  <td class="tdTif1 text-center">10456.15</td>
+								  <td class="tdTif1 text-center">1123123</td>
+								  <td class="tdTif1 text-center">20456.15</td>
+								  <td class="tdTif1 text-center">1123123.15</td>
+								</tr>
+								<tr class="trResultat1">
+								  <td class="tdTif1 text-center">2</td>
+								  <td class="tdTif"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> France</td>
+								  <td class="tdTif1 text-center">20</td>
+								  <td class="tdTif1 text-center">10456.15</td>
+								  <td class="tdTif1 text-center">1123123</td>
+								  <td class="tdTif1 text-center">20456.15</td>
+								  <td class="tdTif1 text-center">1123123.15</td>
+								</tr>
+								<tr class="trResultat1 orangeredTr">
+								  <td class="tdTif1 text-center">3</td>
+								  <td class="tdTif"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Brésil</td>
+								  <td class="tdTif1 text-center">20</td>
+								  <td class="tdTif1 text-center">10456.15</td>
+								  <td class="tdTif1 text-center">1123123</td>
+								  <td class="tdTif1 text-center">20456.15</td>
+								  <td class="tdTif1 text-center">1123123.15</td>
+								</tr>
+								<tr class="trResultat1">
+								  <td class="tdTif1 text-center">4</td>
+								  <td class="tdTif"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Belgique</td>
+								  <td class="tdTif1 text-center">20</td>
+								  <td class="tdTif1 text-center">10456.15</td>
+								  <td class="tdTif1 text-center">1123123</td>
+								  <td class="tdTif1 text-center">20456.15</td>
+								  <td class="tdTif1 text-center">1123123.15</td>
+								</tr>
+								<tr class="trResultat1">
+								  <td class="tdTif1 text-center">5</td>
+								  <td class="tdTif"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Russie</td>
+								  <td class="tdTif1 text-center">20</td>
+								  <td class="tdTif1 text-center">10456.15</td>
+								  <td class="tdTif1 text-center">1123123</td>
+								  <td class="tdTif1 text-center">20456.15</td>
+								  <td class="tdTif1 text-center">1123123.15</td>
+								</tr>
+								<tr class="trResultat1">
+								  <td class="tdTif1 text-center">6</td>
+								  <td class="tdTif"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Panama</td>
+								  <td class="tdTif1 text-center">20</td>
+								  <td class="tdTif1 text-center">10456.15</td>
+								  <td class="tdTif1 text-center">1123123</td>
+								  <td class="tdTif1 text-center">20456.15</td>
+								  <td class="tdTif1 text-center">1123123.15</td>
+								</tr>
+								<tr class="trResultat1">
+								  <td class="tdTif1 text-center">7</td>
+								  <td class="tdTif"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> France</td>
+								  <td class="tdTif1 text-center">20</td>
+								  <td class="tdTif1 text-center">10456.15</td>
+								  <td class="tdTif1 text-center">1123123</td>
+								  <td class="tdTif1 text-center">20456.15</td>
+								  <td class="tdTif1 text-center">1123123.15</td>
+								</tr>
+								<tr class="trResultat1">
+								  <td class="tdTif1 text-center">8</td>
+								  <td class="tdTif"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Brésil</td>
+								  <td class="tdTif1 text-center">20</td>
+								  <td class="tdTif1 text-center">10456.15</td>
+								  <td class="tdTif1 text-center">1123123</td>
+								  <td class="tdTif1 text-center">20456.15</td>
+								  <td class="tdTif1 text-center">1123123.15</td>
+								</tr>
+								<tr class="trResultat1">
+								  <td class="tdTif1 text-center">9</td>
+								  <td class="tdTif"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Belgique</td>
+								  <td class="tdTif1 text-center">20</td>
+								  <td class="tdTif1 text-center">10456.15</td>
+								  <td class="tdTif1 text-center">1123123</td>
+								  <td class="tdTif1 text-center">20456.15</td>
+								  <td class="tdTif1 text-center">1123123.15</td>
+								</tr>
+								<tr class="trResultat1">
+								  <td class="tdTif1 text-center">10</td>
+								  <td class="tdTif"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Russie</td>
+								  <td class="tdTif1 text-center">20</td>
+								  <td class="tdTif1 text-center">10456.15</td>
+								  <td class="tdTif1 text-center">1123123</td>
+								  <td class="tdTif1 text-center">20456.15</td>
+								  <td class="tdTif1 text-center">1123123.15</td>
+								</tr>
+							  </tbody>
+							</table>
+						</div>	
+					</div>
+				</div>
+				<div id="modalTitle" class="modal-body">
+					<div class="flex-container-modal-Title banner2 text-center accordion">
+						<h2>Statistiques "TIF"</h2>
+					</div>
+					<div class="panel">
+						<h6 class="tdTitleClassementCompet">Titre de la compétition en cours</h6>
+						<div class="palmares">
+							<div class="palmaresTifBox">
+								<div class="detailsStatTifBox">
+									<span class="titrecompet">PF/Match</br>Moyenne</span></span>
+									<span class="nbstats">85123.15</span>
+								</div>
+								<div class="classementStatTif">
+									4ème
+								</div>
 							</div>
 						</div>
-						<div class="flex-container-modal-Niveau">
-							<div class="columnClassementTexte">
-								Total de PF durant la compétition
-							</div>
-							<div class="columnClassementNumber2">
-								0.00
-							</div>
-							<div class="columnClassement2">
-								1er
-							</div>
-						</div>
-						<div class="flex-container-modal-Niveau">
-							<div class="columnClassementTexte">
-								Nombre de fans
-							</div>
-							<div class="columnClassementNumber2">
-								1
-							</div>
-							<div class="columnClassement2">
-								1er
+						<div class="palmares">
+							<div class="palmaresTifBox">
+								<div class="detailsStatTifBox">
+									<span class="titrecompet">PF/Match</br>Total</span></span>
+									<span class="nbstats">8512300.15</span>
+								</div>
+								<div class="classementStatTif">
+									4ème
+								</div>
 							</div>
 						</div>
-						<div class="flex-container-modal-Niveau">
-							<div class="columnClassementTexte">
-								Moyenne de fans par match
-							</div>
-							<div class="columnClassementNumber2">
-								0
-							</div>
-							<div class="columnClassement2">
-								1er
+						<div class="palmares">
+							<div class="palmaresBox">
+								<div class="detailsStatBox">
+									<span class="titrecompet">matches</span>
+									<span class="nbstats">6</span>
+								</div>
 							</div>
 						</div>
-						<div class="flex-container-modal-Niveau">
-							<div class="columnClassementTexte">
-								Total fans durant la compétition
-							</div>
-							<div class="columnClassementNumber2">
-								0.00
-							</div>
-							<div class="columnClassement2">
-								1er
-							</div>
-						</div>
-						<div class="flex-container-modal-Niveau">
-							<div class="columnClassementTexte">
-								Nb d'actions "Event" réalisées
-							</div>
-							<div class="columnClassementNumber2">
-								0.00
-							</div>
-							<div class="columnClassement2">
-								1er
+						<div class="palmares">
+							<div class="palmaresTifBox">
+								<div class="detailsStatTifBox">
+									<span class="titrecompet">Fan/Match</br>Moyenne</span></span>
+									<span class="nbstats">200000.15</span>
+								</div>
+								<div class="classementStatTif">
+									4ème
+								</div>
 							</div>
 						</div>
-						<div class="flex-container-modal-Niveau">
-							<div class="columnClassementTexte">
-								Nb d'actions "Collectives" réalisées
-							</div>
-							<div class="columnClassementNumber2">
-								0.00
-							</div>
-							<div class="columnClassement2">
-								1er
+						<div class="palmares">
+							<div class="palmaresTifBox">
+								<div class="detailsStatTifBox">
+									<span class="titrecompet">Fan/Match</br>Total</span></span>
+									<span class="nbstats">2000000</span>
+								</div>
+								<div class="classementStatTif">
+									4ème
+								</div>
 							</div>
 						</div>
-					</div>	
+						<h6 class="tdTitleClassementCompet">Toutes compétitions confondues</h6>
+						<div class="palmares">
+							<div class="palmaresTifBox">
+								<div class="detailsStatTifBox">
+									<span class="titrecompet">PF/Match</br>Moyenne</span></span>
+									<span class="nbstats">85123.15</span>
+								</div>
+								<div class="classementStatTif">
+									4ème
+								</div>
+							</div>
+						</div>
+						<div class="palmares">
+							<div class="palmaresTifBox">
+								<div class="detailsStatTifBox">
+									<span class="titrecompet">PF/Match</br>Total</span></span>
+									<span class="nbstats">8512300.15</span>
+								</div>
+								<div class="classementStatTif">
+									4ème
+								</div>
+							</div>
+						</div>
+						<div class="palmares">
+							<div class="palmaresBox">
+								<div class="detailsStatBox">
+									<span class="titrecompet">matches</span>
+									<span class="nbstats">60</span>
+								</div>
+							</div>
+						</div>
+						<div class="palmares">
+							<div class="palmaresTifBox">
+								<div class="detailsStatTifBox">
+									<span class="titrecompet">Fan/Match</br>Moyenne</span></span>
+									<span class="nbstats">200000.15</span>
+								</div>
+								<div class="classementStatTif">
+									4ème
+								</div>
+							</div>
+						</div>
+						<div class="palmares">
+							<div class="palmaresTifBox">
+								<div class="detailsStatTifBox">
+									<span class="titrecompet">Fan/Match</br>Total</span></span>
+									<span class="nbstats">2000000</span>
+								</div>
+								<div class="classementStatTif">
+									4ème
+								</div>
+							</div>
+						</div>
+						<div class="palmares">
+							<div class="palmaresTifBox">
+								<div class="detailsStatTifBox">
+									<span class="titrecompet">Action</br>Collective</span></span>
+									<span class="nbstats">126</span>
+								</div>
+								<div class="classementStatTif">
+									4ème
+								</div>
+							</div>
+						</div>
+						<div class="palmares">
+							<div class="palmaresTifBox">
+								<div class="detailsStatTifBox">
+									<span class="titrecompet">Goodies</br>Nb vendus</span></span>
+									<span class="nbstats">8512300.15</span>
+								</div>
+								<div class="classementStatTif">
+									4ème
+								</div>
+							</div>
+						</div>
+						<div class="palmares">
+							<div class="palmaresTifBox">
+								<div class="detailsStatTifBox">
+									<span class="titrecompet">Trophées</br>Total</span></span>
+									<span class="nbstats">34</span>
+								</div>
+								<div class="classementStatTif">
+									4ème
+								</div>
+							</div>
+						</div>
+						<div class="palmares">
+							<div class="palmaresTifBox">
+								<div class="detailsStatTifBox">
+									<span class="titrecompet">Recette</br>Goodies</span></span>
+									<span class="nbstats">20000$</span>
+								</div>
+								<div class="classementStatTif">
+									4ème
+								</div>
+							</div>
+						</div>
+						<div class="palmares">
+							<div class="palmaresTifBox">
+								<div class="detailsStatTifBox">
+									<span class="titrecompet">Recette</br>Matches</span></span>
+									<span class="nbstats">200000$</span>
+								</div>
+								<div class="classementStatTif">
+									4ème
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="modalTitle" class="modal-body">
+					<div class="flex-container-modal-Title banner2 text-center accordion">
+						<h2>Palmarès "TIF"</h2>
+					</div>
+					<div class="panel">
+						<div class="palmares">
+							<div class="palmaresBox">
+								<div class="detailsPalmaresBox">
+									<span class="titrecompet">Titre de la compétition</br>Nom du trophée</span>
+									<span class="imgPalmaresCup"><img src="images/cup/cup.png" class="imgModalPalmaresCup"/></span>
+								</div>
+								<div class="anneePalmares">
+									1920. 1928, 1965, 1974, 2000, 2012
+								</div>
+							</div>
+						</div>
+						<div class="palmares">
+							<div class="palmaresBox">
+								<div class="detailsPalmaresBox">
+									<span class="titrecompet">Titre de la compétition</br>Nom du trophée</span>
+									<span class="imgPalmaresCup"><img src="images/cup/cup.png" class="imgModalPalmaresCup"/></span>
+								</div>
+								<div class="anneePalmares">
+									1920. 1928, 1965, 1974, 2000, 2012
+								</div>
+							</div>
+						</div>
+						<div class="palmares">
+							<div class="palmaresBox">
+								<div class="detailsPalmaresBox">
+									<span class="titrecompet">Titre de la compétition</br>Nom du trophée</span>
+									<span class="imgPalmaresCup"><img src="images/cup/cup.png" class="imgModalPalmaresCup"/></span>
+								</div>
+								<div class="anneePalmares">
+									1920. 1928, 1965, 1974, 2000, 2012
+								</div>
+							</div>
+						</div>
+						<div class="palmares">
+							<div class="palmaresBox">
+								<div class="detailsPalmaresBox">
+									<span class="titrecompet">Titre de la compétition</br>Nom du trophée</span>
+									<span class="imgPalmaresCup"><img src="images/cup/cup.png" class="imgModalPalmaresCup"/></span>
+								</div>
+								<div class="anneePalmares">
+									1920. 1928, 1965, 1974, 2000, 2012
+								</div>
+							</div>
+						</div>
+						<div class="palmares">
+							<div class="palmaresBox">
+								<div class="detailsPalmaresBox">
+									<span class="titrecompet">Titre de la compétition</br>Nom du trophée</span>
+									<span class="imgPalmaresCup"><img src="images/cup/cup.png" class="imgModalPalmaresCup"/></span>
+								</div>
+								<div class="anneePalmares">
+									1920. 1928, 1965, 1974, 2000, 2012
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<!-- Modal footer -->
 				<div class="modal-footer">
-                    <button class="btn btn-warning" @click="selectTeam">Devenir fan - Coût 3 <i class="fas fa-certificate"></i></button>
-                    <nuxt-link to="/user/teams">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
-                    </nuxt-link>
+				  <a href="competitionsEquipes.html"><button type="button" class="btn btn-danger" data-dismiss="modal">Sortir d'ici !</button></a>
+				  <a href="mesEquipes.html"><button type="button" class="btn btn-warning" data-dismiss="modal">Devenir fan - Coût 3 <i class="fas fa-certificate"></i></button></a>
 				</div>
 			  </div>
 			</div>
 		</div>
-		<!-- End Modal OtherTeamDetail -->					
+		<!-- End Modal OtherTeamDetail -->
 	</div>
 </template>
 
@@ -669,6 +987,39 @@
         }
 	}
 </script>
+
+<script>
+		var acc = document.getElementsByClassName("accordion");
+		var i;
+
+		for (i = 0; i < acc.length; i++) {
+		  acc[i].addEventListener("click", function() {
+			this.classList.toggle("active1");
+			var panel = this.nextElementSibling;
+			if (panel.style.maxHeight){
+			  panel.style.maxHeight = null;
+			} else {
+			  panel.style.maxHeight = panel.scrollHeight + "px";
+			} 
+		  });
+		}	
+
+		var acc = document.getElementsByClassName("accordion2");
+		var i;
+
+		for (i = 0; i < acc.length; i++) {
+		  acc[i].addEventListener("click", function() {
+			this.classList.toggle("active1");
+			var panel = this.nextElementSibling;
+			if (panel.style.maxHeight){
+			  panel.style.maxHeight = null;
+			} else {
+			  panel.style.maxHeight = panel.scrollHeight + "px";
+			} 
+		  });
+		}		
+		</script>
+
 <style>
 
 </style>
