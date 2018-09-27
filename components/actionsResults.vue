@@ -17,9 +17,9 @@
 						<div class="flex-container-modal-BigTitle">
 							<h1>Resumé des actions du jour</h1>
 							<p style="color: #000;">
-								slots: {{ slots }}<br /><br />
-								loadedUserActions: {{ loadedUserActions }}<br /><br />
-								loadedUserActionsCards: {{ loadedUserActionsCards }}<br /><br />
+								<!-- slots: {{ slots }}<br /><br /> -->
+								<!-- loadedUserActions: {{ loadedUserActions }}<br /><br /> -->
+								<!-- loadedUserActionsCards: {{ loadedUserActionsCards }}<br /><br /> -->
 								<!-- cards: {{ cards }}<br /><br /> -->
 							</p>
 						</div>

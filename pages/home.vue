@@ -35,7 +35,11 @@
 			<div id="proprieteJoueur" class="col-12 col-sm-12 col-md-12 col-lg-12">
 
 				<div class="flex-container-playerPropriety">
-					<nuxt-link to="/user/avatar" class="boxShadow" style="flex-basis: 60px" v-if="loadedUser && loadedUser.avatar"><span v-tooltip="'Salut Gaël!'"><img :src="loadedUser.avatar.url" class="imgAvatar"/></span></nuxt-link>
+					<nuxt-link to="/user/avatar" class="boxShadow" style="flex-basis: 60px" v-if="loadedUser && loadedUser.avatar">
+						<span v-tooltip="'Salut Gaël!'">
+							<img :src="loadedUser.avatar.url" class="imgAvatar"/>
+						</span>
+					</nuxt-link>
 					<nuxt-link to="/user/avatar" class="boxShadow" style="flex-basis: 60px" v-else><img src="/images/avatar.png" class="imgAvatar"/></nuxt-link>
 					<nuxt-link to="/user" class="boxShadow flex-container-modalProfil" style="flex-grow: 1">
 						<div class="columnProfil"><img src="/images/163.png" class="imgModalProprieteFlags"/> <span class="modal-Propriete" v-if="loadedUser"> {{ loadedUser.username }} </span> <span class="modal-ProprietePlace boxShadow"><img src="/images/cup.png" class="imgModalProprieteCup"/> 1863ème</span></div>

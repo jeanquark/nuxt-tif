@@ -16,9 +16,9 @@
 					<div id="modalBoxContent" class="modal-body">
 						<h1>Resumé des actions du jour {{ this.today }}</h1>
 						<p style="color: #000;">
-							loadedUserActions: {{ loadedUserActions }} <br /><br />
+							<!-- loadedUserActions: {{ loadedUserActions }} <br /><br /> -->
 							<!-- loadedUserActionsCards: {{ loadedUserActionsCards }} <br /><br /> -->
-							slots: {{ slots }}<br /><br />
+							<!-- slots: {{ slots }}<br /><br /> -->
 						</p>
 						<div class="row" style="margin: 0px 0px;">
 							<div class="col-sm-6 col-md-3" v-for="(element, index) in loadedUserActions" :key="index" style="border: 1px solid blue;">
@@ -55,7 +55,8 @@
 		},
 		computed: {
 			loadedUserActions () {
-				const today = this.$moment().format('DD-MM-YYYY')
+				// const today = this.$moment().format('DD-MM-YYYY')
+				const today = this.$moment().format('YYYY-MM-DD')
 				return this.$store.getters['users/loadedUserActions'].find(action => (action.id === today))
 			},
 			loadedUserActionsCards () {

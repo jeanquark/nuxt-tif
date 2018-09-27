@@ -42,8 +42,8 @@
                                     <!-- {{ this.$moment.locale('fr') }} -->
                                     <!-- loadedUserActions[0800-1000]: {{ loadedUserActions[0]['0800-1000'].name }}<br /><br /> -->
                                     <!-- changed: {{ changed }}<br /><br /> -->
-                                    slots: {{ slots }}<br /><br />
-                                    oldSlots: {{ oldSlots }}<br /><br />
+                                    <!-- slots: {{ slots }}<br /><br /> -->
+                                    <!-- oldSlots: {{ oldSlots }}<br /><br /> -->
                                 </p>
                             </div>
                             <div class="flex-container-modal-OtherTeam">
@@ -284,10 +284,12 @@
                         .filter(action => (action.type === 'job'))
                         .filter(action => (action.min_level === level.value))
                 })
+                this.loading = false
             } else {
                 this.jobs = this.$store.getters['actions/loadedActions']
                     .filter(action => (action.type === 'job'))
                     .filter(action => (action.min_level === level.value))
+                this.loading = false
             }
 
             if (this.$store.getters['users/loadedUserActions'].length < 1) {
@@ -409,6 +411,7 @@
                             'id': this.slots['slot' + i][0].id,
                             'slug': this.slots['slot' + i][0].slug,                            
                             'name': this.slots['slot' + i][0].name,
+                            'image': this.slots['slot' + i][0].image,
                             'value': 1,
                             'physical_gain': 100
                         })
