@@ -4287,7 +4287,20 @@ border-bottom-color: #000;
     outline: none;
     transition: 0.4s;
 	background: orangered;
+	background-image: radial-gradient(transparent 30%, rgba(0, 0, 0, 0.2));
     border: 0 solid rgba(0,0,0,0.2);
+    color: #ffffff;
+}
+
+.accordion2 {
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+	background: #08b;
+	background-image: radial-gradient(transparent 30%, rgba(0, 0, 0, 0.2));    
+	border: 0 solid rgba(0,0,0,0.2);
     color: #ffffff;
 }
 
@@ -4295,6 +4308,11 @@ border-bottom-color: #000;
 .active, .accordion:hover {
     background-color: #fff;
 	color: orangered;
+}
+
+.active, .accordion2:hover {
+    background-color: #fff;
+	color: #08b;
 }
 
 /* Style the accordion panel. Note: hidden by default */
@@ -4313,18 +4331,27 @@ border-bottom-color: #000;
 	margin-top: 5px;
 }
 
-.active:after {
-    content: "\2796"; /* Unicode character for "minus" sign (-) */
+.accordion2:after {
+    content: '\02795'; /* Unicode character for "plus" sign (+) */
     font-size: 13px;
     margin: 3px;
 	margin-top: 5px;
 }
 
-.palmaresBox {
+.active1:after {
+    content: "\2796"; /* Unicode character for "minus" sign (-) */
+    font-size: 13px;
+    margin: 3px;
+	margin-top: 5px;
+ }
+
+ .palmaresBox {
 position: relative;
 width: 150px;
 height: 150px;
 float: left;
+margin-bottom: 10px;
+margin-top: 10px;
 }
 
 .detailsPalmaresBox {
@@ -4347,6 +4374,14 @@ float: left;
     width: 84%;
 }
 
+.detailsStatBox {
+    width: 100%;
+    height: 100%;
+    float: left;
+    border: 1px solid #fff;
+    background: #2c323d;
+}
+
 .palmares {
     display: block;
     width: 100%;
@@ -4361,6 +4396,19 @@ float: left;
     z-index: 2;
     text-transform: uppercase;
 	font: normal 80%/1 "bangers", Helvetica, sans-serif;
+    text-align: center;
+    width: 100%;
+}
+
+.detailsStatBox .titrecompet {
+    color: #c9d0de;
+    position: absolute;
+    top: 25px;
+    left: 0;
+    height: 50px;
+    z-index: 2;
+    text-transform: uppercase;
+	font: normal 100%/1 "bangers", Helvetica, sans-serif;
     text-align: center;
     width: 100%;
 }
@@ -4389,6 +4437,30 @@ float: left;
     width: 100%;
 }
 
+.palmaresBox .imgPalmaresCup {
+    color: #FFF;
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    text-transform: uppercase;
+	font: normal 400%/1 "bangers", Helvetica, sans-serif;
+    text-align: center;
+    width: 100%;
+	top: 35px;
+}
+
+.palmaresBox .nbstats {
+    color: #FFF;
+    position: absolute;
+    top: 55px;
+    left: 0;
+    z-index: 1;
+    text-transform: uppercase;
+	font: normal 400%/1 "bangers", Helvetica, sans-serif;
+    text-align: center;
+    width: 100%;
+}
+
 .tdTitleMatchEnd {
 padding-top: 5px;
 padding-bottom: 5px;
@@ -4396,6 +4468,17 @@ margin: 5px;
 text-align: center;
 font-weight: normal;
 font: normal 100%/1 "bangers", Helvetica, sans-serif;
+color: black;
+border: none;
+}
+
+.tdTitleClassementCompet {
+padding-top: 10px;
+padding-bottom: 10px;
+margin: 5px;
+text-align: center;
+font-weight: normal;
+font: normal 140%/1 "bangers", Helvetica, sans-serif;
 color: black;
 border: none;
 }
@@ -4429,4 +4512,37 @@ border: none;
 .table td, .table th {
 padding: 0;
 vertical-align: middle;
+}
+
+.blue, .blue a{
+background-color: #08b;
+color: #fff;	
+}
+
+.orangeredTr, .orangeredTr a{
+background-color: orangered;
+color: #fff;	
+}
+
+.yellowText {
+color: yellow;
+}
+
+.redText {
+color: red;
+}
+
+.LimeGreenText {
+color: LimeGreen;
+}
+
+.indianredText {
+color: indianred;
+}
+
+.imgModalPalmaresCup {
+position: relative;
+top: 0;
+height: 80px;
+width: 80px;
 }
