@@ -24,39 +24,172 @@
 					</div>
 				</div>
 				<div id="modalTitle" class="modal-body">
-					<div class="flex-container-modal-Title banner text-center">
+					<div class="flex-container-modal-Title banner text-center accordion">
+						<h2>Info</h2>
+					</div>
+					<div class="panel">
+						<div class="flex-container-modal-Action">
+							<table class="table tableText">
+							  <tbody>
+								<tr class="borderResultatTermine">
+								  <td class="tdInfo text-left">Nom de l'équipe :</td>
+								  <td class="tdInfo1 text-left">Brésil</td>
+								  <td class="tdInfo text-left">Entraîneur :</td>
+								  <td class="tdInfo1 text-left">Prénom nom</td>
+								</tr>								
+								<tr class="borderResultat">
+								  <td class="tdInfo text-left">Fondation :</td>
+								  <td class="tdInfo1 text-left">Prénom nom</td>
+								  <td class="tdInfo text-left">Fondation :</td>
+								  <td class="tdInfo1 text-left">1970</td>
+								</tr>								
+								<tr class="borderResultat">
+								  <td class="tdInfo text-left">Site internet :</td>
+								  <td class="tdInfo1 text-left">www.psg.fr</td>
+								  <td class="tdInfo text-left">Couleur :</td>
+								  <td class="tdInfo1 text-left">Bleu et rouge</td>
+								</tr>
+								<tr class="borderResultat">
+								  <td class="tdInfo text-left">Stade :</td>
+								  <td class="tdInfo1 text-left">Parc des Princes</td>
+								  <td class="tdInfo text-left">Capacité :</td>
+								  <td class="tdInfo1 text-left">123456 places</td>
+								</tr>
+							  </tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div id="modalTitle" class="modal-body">
+					<div class="flex-container-modal-Title banner text-center accordion">
+						<h2>Palmarès</h2>
+					</div>
+					<div class="panel">
+						<div class="palmares">
+							<div class="palmaresBox">
+								<div class="detailsPalmaresBox">
+									<span class="titrecompet">Titre de la compétition</span>
+									<span class="nbcompet">6</span>
+								</div>
+								<div class="anneePalmares">
+									1920. 1928, 1965, 1974, 2000, 2012
+								</div>
+							</div>
+						</div>
+						<div class="palmares">
+							<div class="palmaresBox">
+								<div class="detailsPalmaresBox">
+									<span class="titrecompet">Titre de la compétition</span>
+									<span class="nbcompet">6</span>
+								</div>
+								<div class="anneePalmares">
+									1920. 1928, 1965, 1974, 2000, 2012
+								</div>
+							</div>
+						</div>
+						<div class="palmares">
+							<div class="palmaresBox">
+								<div class="detailsPalmaresBox">
+									<span class="titrecompet">Titre de la compétition</span>
+									<span class="nbcompet">6</span>
+								</div>
+								<div class="anneePalmares">
+									1920. 1928, 1965, 1974, 2000, 2012
+								</div>
+							</div>
+						</div>
+						<div class="palmares">
+							<div class="palmaresBox">
+								<div class="detailsPalmaresBox">
+									<span class="titrecompet">Titre de la compétition</span>
+									<span class="nbcompet">6</span>
+								</div>
+								<div class="anneePalmares">
+									1920. 1928, 1965, 1974, 2000, 2012
+								</div>
+							</div>
+						</div>
+						<div class="palmares">
+							<div class="palmaresBox">
+								<div class="detailsPalmaresBox">
+									<span class="titrecompet">Titre de la compétition</span>
+									<span class="nbcompet">6</span>
+								</div>
+								<div class="anneePalmares">
+									1920. 1928, 1965, 1974, 2000, 2012
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="modalTitle" class="modal-body">
+					<div class="flex-container-modal-Title banner text-center accordion">
 						<h2>Calendrier et Résultats</h2>
 					</div>
-					<div class="flex-container-modal-Action">
-						<table class="table tableText">
-						  <tbody>
-							<tr class="borderResultatTermine">
-							  <td class="tdResultat1 text-left"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</a></td>
-							  <td class="tdResultat text-center"><a href="matchTermine.html" class="linkEvent">Amical</br>27.03.2018</br>0 - 0</br>Terminé</a></td>
-							  <td class="tdResultat1 text-right"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
-							</tr>								
-							<tr class="borderResultat">
-							  <td class="tdResultat1 text-left"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Espagne</a></td>
-							  <td class="tdResultat text-center"><a href="matchResultat.html" class="linkEvent">Amical</br>03.06.2018</br>1 - 1</br>En cours</a></td>
-							  <td class="tdResultat1 text-right"><a href="mesEquipesDetails.html" class="linkEvent">Brésil <img src="images/flags/25.png" class="imgModalAgendaFlags"/></a></td>
-							</tr>								
-							<tr class="borderResultat">
-							  <td class="tdResultat1 text-left"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</a></td>
-							  <td class="tdResultat text-center"><a href="matchEncours.html" class="linkEvent">Amical</br>06.06.2018</br>1 - 1</br>En cours</a></td>
-							  <td class="tdResultat1 text-right"><a href="autresEquipesDetails.html" class="linkEvent">Japon <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
-							</tr>
-							<tr class="borderResultat">
-							  <td class="tdResultat1 text-left"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</a></td>
-							  <td class="tdResultat text-center"><a href="matchAgenda.html" class="linkEvent">CM</br>17.06.2018</br>20:00</br>Agenda</a></td>
-							  <td class="tdResultat1 text-right"><a href="mesEquipesDetails.html" class="linkEvent">Brésil <img src="images/flags/25.png" class="imgModalAgendaFlags"/></a></td>
-							</tr>
-							<tr class="borderResultat">
-							  <td class="tdResultat1 text-left"><a href="autresEquipesDetails.html" class="linkEvent"><img src="images/flags/163.png" class="imgModalAgendaFlags"/> Serbie</a></td>
-							  <td class="tdResultat text-center"><a href="matchAgenda.html" class="linkEvent">CM</br>22.06.2018</br>20:00</br>Agenda</a></td>
-							  <td class="tdResultat1 text-right"><a href="mesEquipesDetails.html" class="linkEvent">Brésil <img src="images/flags/25.png" class="imgModalAgendaFlags"/></a></td>
-							</tr>
-						  </tbody>
-						</table>
+					<div class="panel">
+						<div class="flex-container-modal-Action">
+							<h6 class="tdTitleMatchEnd">Match terminé</h6>
+							<table class="table tableText">
+							  <tbody>
+								<tr class="borderResultat">
+								  <td class="tdScore text-left"><a href="matchTermine.html" class="linkEvent">27.03.2018</br>20:00</a></td>
+								  <td class="tdScore1 text-center"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</a></td>
+								  <td class="tdScore2 text-center">2 - 2</td>
+								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
+								  <td class="tdScore text-right"><a href="matchTermine.html" class="linkEvent">Match amical</a></td>
+								</tr>								
+								<tr class="borderResultat">
+								  <td class="tdScore text-left"><a href="matchTermine.html" class="linkEvent">27.03.2018</br>20:00</a></td>
+								  <td class="tdScore1 text-center"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</a></td>
+								  <td class="tdScore2 text-center">2 - 2</td>
+								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
+								  <td class="tdScore text-right"><a href="matchTermine.html" class="linkEvent">Match amical</br>27.03.2018</a></td>
+								</tr>								
+							  </tbody>
+							</table>
+						</div>
+						<div class="flex-container-modal-Action">
+							<h6 class="tdTitleMatchEnd">Match en cours</h6>
+							<table class="table tableText">
+							  <tbody>
+								<tr class="borderResultat">
+								  <td class="tdScore text-left"><a href="matchTermine.html" class="linkEvent">27.03.2018</br>20:00</a></td>
+								  <td class="tdScore1 text-center"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</a></td>
+								  <td class="tdScore2 text-center">2 - 2</td>
+								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
+								  <td class="tdScore text-right"><a href="matchTermine.html" class="linkEvent">Match amical</a></td>
+								</tr>								
+								<tr class="borderResultat">
+								  <td class="tdScore text-left"><a href="matchTermine.html" class="linkEvent">27.03.2018</br>20:00</a></td>
+								  <td class="tdScore1 text-center"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</a></td>
+								  <td class="tdScore2 text-center">2 - 2</td>
+								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
+								  <td class="tdScore text-right"><a href="matchTermine.html" class="linkEvent">Match amical</br>27.03.2018</a></td>
+								</tr>								
+							  </tbody>
+							</table>
+						</div>
+						<div class="flex-container-modal-Action">
+							<h6 class="tdTitleMatchEnd">Match à venir</h6>
+							<table class="table tableText">
+							  <tbody>
+								<tr class="borderResultat">
+								  <td class="tdScore text-left"><a href="matchTermine.html" class="linkEvent">27.03.2018</br>20:00</a></td>
+								  <td class="tdScore1 text-center"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</a></td>
+								  <td class="tdScore2 text-center">2 - 2</td>
+								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
+								  <td class="tdScore text-right"><a href="matchTermine.html" class="linkEvent">Match amical</a></td>
+								</tr>								
+								<tr class="borderResultat">
+								  <td class="tdScore text-left"><a href="matchTermine.html" class="linkEvent">27.03.2018</br>20:00</a></td>
+								  <td class="tdScore1 text-center"><a href="mesEquipesDetails.html" class="linkEvent"><img src="images/flags/25.png" class="imgModalAgendaFlags"/> Brésil</a></td>
+								  <td class="tdScore2 text-center">2 - 2</td>
+								  <td class="tdScore1 text-center"><a href="autresEquipesDetails.html" class="linkEvent">Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/></a></td>
+								  <td class="tdScore text-right"><a href="matchTermine.html" class="linkEvent">Match amical</br>27.03.2018</a></td>
+								</tr>								
+							  </tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 				<div id="modalTitle" class="modal-body">

@@ -1,6 +1,11 @@
 <template>
-    <div>
-        <actions-details :slots="slots" v-if="confirm"></actions-details>
+    <div v-if="!loading">
+        <!-- See details of today actions (no modification possible) -->
+        <actions-details :slots="slots" v-if="seeDetails"></actions-details>
+
+        <!-- See results of actions just taken -->
+        <actions-results :slots="slots" v-else-if="seeResults"></actions-results>
+
         <div class="container-fluid" v-else>
             <!-- The Modal Goodies -->
             <div id="modalBox">
@@ -37,8 +42,8 @@
                                     <!-- {{ this.$moment.locale('fr') }} -->
                                     <!-- loadedUserActions[0800-1000]: {{ loadedUserActions[0]['0800-1000'].name }}<br /><br /> -->
                                     <!-- changed: {{ changed }}<br /><br /> -->
-                                    <!-- slots: {{ slots }}<br /><br /> -->
-                                    <!-- oldSlots: {{ oldSlots }}<br /><br /> -->
+                                    slots: {{ slots }}<br /><br />
+                                    oldSlots: {{ oldSlots }}<br /><br />
                                 </p>
                             </div>
                             <div class="flex-container-modal-OtherTeam">
@@ -241,7 +246,7 @@
                         <!-- Modal footer -->
                         <div class="modal-footer">
                             <nuxt-link :to="localePath({name: 'home'})"><button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button></nuxt-link>
-                            <button type="button" class="btn btn-success" data-dismiss="modal" @click="updateUserActions" :disabled="!changed || disabled">Poursuivre vers la page de confirmation</button>
+                            <button type="button" class="btn btn-success" data-dismiss="modal" @click="updateUserActions" :disabled="!changed || disabled">Confirmer mes choix</button>
                         </div>
 
                     </div><!-- /.modal-content -->
@@ -255,39 +260,63 @@
     import draggable from 'vuedraggable'
     import moment from 'vue-moment'
     import actionsDetails from '~/components/actionsDetails.vue'
+    import actionsResults from '~/components/actionsResults.vue'
 
     export default {
         name: 'Actions',
         layout: 'layoutFront',
         components: {
             actionsDetails,
+            actionsResults,
             draggable
         },
         created () {
+            // this.loading = true
+            // this.today = this.$moment().format('DD-MM-YYYY')
+            this.today = this.$moment().format('YYYY-MM-DD')
             const level = this.$store.getters['users/loadedUser'].level
             console.log('level: ', level)
-            this.$store.dispatch('actions/loadedActions').then((response) => {
-                this.jobs = response.filter(action => (action.type === 'job')).filter(action => (action.min_level === level.value))
-            })
-            this.$store.dispatch('users/loadedUserActions').then((response) => {
-                console.log('response: ', response)
-                this.today = this.$moment().format('DD-MM-YYYY')
-                const userActions = response.find(response => (response.id === this.today))
-                // console.log('userActions: ', userActions)
+            if (this.$store.getters['actions/loadedActions'].length < 1) {
+                this.$store.dispatch('actions/loadedActions').then((response) => {
+                    this.jobs = response
+                        .filter(action => (action.type === 'job'))
+                        .filter(action => (action.min_level === level.value))
+                })
+            } else {
+                this.jobs = this.$store.getters['actions/loadedActions']
+                    .filter(action => (action.type === 'job'))
+                    .filter(action => (action.min_level === level.value))
+            }
+
+            if (this.$store.getters['users/loadedUserActions'].length < 1) {
+                this.$store.dispatch('users/loadedUserActions').then((response) => {
+                    console.log('response: ', response)
+                    // this.today = this.$moment().format('YYYY-MM-DD')
+                    const userActions = response.find(response => (response.id === this.today))
+                    // console.log('userActions: ', userActions)
+                    if (userActions) {
+                        this.disabled = true
+                        this.seeDetails = true
+                        if (userActions['0800-1000']) this.slots.slot1.push(userActions['0800-1000'])
+                        if (userActions['1000-1200']) this.slots.slot2.push(userActions['1000-1200'])
+                        if (userActions['1200-1400']) this.slots.slot3.push(userActions['1200-1400'])
+                        if (userActions['1400-1600']) this.slots.slot4.push(userActions['1400-1600'])
+                        if (userActions['1600-1800']) this.slots.slot5.push(userActions['1600-1800'])
+                        if (userActions['1800-2000']) this.slots.slot6.push(userActions['1800-2000'])
+                        if (userActions['2000-2200']) this.slots.slot7.push(userActions['2000-2200'])
+                        if (userActions['2200-0000']) this.slots.slot8.push(userActions['2200-0000'])
+                    }
+                    this.oldSlots = _.clone(this.slots)
+                    this.cards = response.find(action => (action.id === 'cards'))
+                    this.loading = false
+                })
+            } else {
+                const userActions = this.$store.getters['users/loadedUserActions'].find(action => (action.id === this.today))
                 if (userActions) {
-                    this.disabled = true
-                    if (userActions['0800-1000']) this.slots.slot1.push(userActions['0800-1000'])
-                    if (userActions['1000-1200']) this.slots.slot2.push(userActions['1000-1200'])
-                    if (userActions['1200-1400']) this.slots.slot3.push(userActions['1200-1400'])
-                    if (userActions['1400-1600']) this.slots.slot4.push(userActions['1400-1600'])
-                    if (userActions['1600-1800']) this.slots.slot5.push(userActions['1600-1800'])
-                    if (userActions['1800-2000']) this.slots.slot6.push(userActions['1800-2000'])
-                    if (userActions['2000-2200']) this.slots.slot7.push(userActions['2000-2200'])
-                    if (userActions['2200-0000']) this.slots.slot8.push(userActions['2200-0000'])
+                    this.seeDetails = true
+                    this.loading = false
                 }
-                this.oldSlots = _.clone(this.slots)
-                this.cards = response.find(action => (action.id === 'cards'))
-            })
+            }
         },
         data() {
             return {
@@ -320,7 +349,10 @@
                 // delayedDragging: false,
                 today: '',
                 disabled: false,
-                confirm: false
+                confirm: false,
+                seeResults: false,
+                seeDetails: false,
+                loading: true
             };
         },
         computed: {
@@ -365,122 +397,31 @@
                 }
             },
             async updateUserActions () {
-                console.log(this.slots)
-                // console.log(Object.entries(this.slots))
-                // for (let i = 0; i < Object.keys(this.slots).length; i++) {
-                //     console.log(this.slots.slot1)
-                // }
-                // return
-
-                const arr = [
-                    {
-                        name: 'ballboy',
-                        value: 1,
-                    },
-                    {
-                        name: 'ballboy',
-                        value: 1,
-                    },
-                    {
-                        name: 'security_guard',
-                        value: 3
-                    }
-                ]
-
-                // const abc = arr.reduce(function(rv, x) {
-                //     (rv[x['name']] = rv[x['name']] || []).push(x)
-                //     return rv
-                // }, {})
-
-                // console.log(abc)
-                // return
                 const data = {}
                 data.today = this.today
-                data.slots = {
-                    '0800-1000': this.slots.slot1[0] ? {
-                        name: this.slots.slot1[0]['name'],
-                        image: this.slots.slot1[0]['image']
-                    } : {},
-                    '1000-1200': this.slots.slot2[0] ? {
-                        name: this.slots.slot2[0]['name'],
-                        image: this.slots.slot2[0]['image']
-                    } : {},
-                    '1200-1400': this.slots.slot3[0] ? {
-                        name: this.slots.slot3[0]['name'],
-                        image: this.slots.slot3[0]['image']
-                    } : {},
-                    '1400-1600': this.slots.slot4[0] ? {
-                        name: this.slots.slot4[0]['name'],
-                        image: this.slots.slot4[0]['image']
-                    } : {},
-                    '1600-1800': this.slots.slot5[0] ? {
-                        name: this.slots.slot5[0]['name'],
-                        image: this.slots.slot5[0]['image']
-                    } : {},
-                    '1800-2000': this.slots.slot6[0] ? {
-                        name: this.slots.slot6[0]['name'],
-                        image: this.slots.slot6[0]['image']
-                    } : {},
-                    '2000-2200': this.slots.slot7[0] ? {
-                        name: this.slots.slot7[0]['name'], 
-                        image: this.slots.slot7[0]['image']
-                    } : {},
-                    '2200-0000': this.slots.slot8[0] ? {
-                        name: this.slots.slot8[0]['name'],
-                        image: this.slots.slot8[0]['image']
-                    } : {}
-                }
-                // foreach(this.slots as )
-                console.log('data.slots: ', data.slots)
-                // console.log(this.slots.slot6[0])
-                // const abc = this.slots.slot6[0]
-                // console.log('abc: ', abc)
+
                 let array = []
                 for (let i = 1; i < 9; i++) {
                     if (this.slots['slot' + i].length > 0) {
                         array.push({
-                            'name': this.slots['slot' + i][0].id,
-                            'value': 1
+                            'id': this.slots['slot' + i][0].id,
+                            'slug': this.slots['slot' + i][0].slug,                            
+                            'name': this.slots['slot' + i][0].name,
+                            'value': 1,
+                            'physical_gain': 100
                         })
                     }
                 }
                 console.log('array: ', array)
                 data.array = array
+                console.log('data: ', data)
 
-                // this.$swal({
-                //     title: "Etes-vous sûr",
-                //     text: "Une fois confirmés, les choix de la journée ne peuvent plus être changés ;-)",
-                //     icon: "warning",
-                //     buttons: true,
-                //     dangerMode: true,
-                // })
-                // .then((proceed) => {
-                //     if (proceed) {
-                //         this.$store.dispatch('users/updateUserActions', data).then(() => {
-                //             this.$router.push('/user/actionsDetails')
-                //         })
-                //         // this.$router.replace('/user/actionsDetails')
-                //         // this.$swal("Succès! Votre planning pour la journée a bien été enregistré!", {
-                //             // icon: "success",
-                //         // })
-                //     } else {
-                //         this.$swal("Aucune sauvegarde effectuée, vous pouvez encore faire des changements!")
-                //     }
-                // })
-                this.confirm = true
-                return
-                this.$router.push('/user/actionsDetails')
+                const abc = await this.$store.dispatch('users/updateUserActions', data)
 
-
-                // return
-                // console.log('updateUserActions')
-                // const data = {}
-                // data.today = this.today
-                
-                // console.log(data)
-                // // return
-                // await this.$store.dispatch('users/updateUserActions', data)
-                // console.log('Done!')
+                console.log('abc: ', abc)
+                this.slots = abc
+                this.seeResults = true
+                return 
             },
             removeSlot(slot) {
                 this.slots[slot] = []

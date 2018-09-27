@@ -252,6 +252,7 @@ text-decoration: none;
 .imgModalProprieteCup {
 height: 40px;
 width: 40px;
+margin-left: 5px;
 }
 
 .imgModalProprieteCupNo {
@@ -261,10 +262,16 @@ filter: grayscale(100%);
 }
 
 .imgModalProprieteFlags {
-position: relative;
+margin-top: 4px;
+height: 80px;
+width: 80px;
+}
+
+.imgModalProprieteFlags2 {
 top: 6px;
 height: 80px;
 width: 80px;
+margin-right: 10px;
 }
 
 .imgModalAgendaFlags {
@@ -422,6 +429,75 @@ padding: 0;
 width: 15%;
 background-color: red;
 text-align: center;
+}
+
+.columnNiveauDollarFan {
+position: relative;
+border-right: 1px solid black;
+border-radius: 5px 0 0 5px;
+margin: 0;
+padding: 0;
+width: 15%;
+background-color: rgba(124,252,0,1);
+color: black;
+text-align: center;
+}
+
+.columnNiveauToken {
+position: relative;
+border-right: 1px solid black;
+border-radius: 5px 0 0 5px;
+margin: 0;
+padding: 0;
+width: 15%;
+background-color: yellow;
+color: black;
+text-align: center;
+}
+
+.columnNiveauTexte {
+position: relative;
+padding-top: 6px;
+padding-left: 10px;
+width: 60%;
+color: #000000;
+font: normal 120%/1 "bangers", Helvetica, sans-serif;
+}
+
+.columnNiveauNumber {
+border-left: 1px solid black;
+position: relative;
+border-radius: 0 5px 5px 0;
+padding-top: 6px;
+width: 25%;
+text-align: center;
+color: white;
+background-color: red;
+font: normal 120%/1 "bangers", Helvetica, sans-serif;
+}
+
+.columnNiveauNumberDollarFan {
+border-left: 1px solid black;
+position: relative;
+border-radius: 0 5px 5px 0;
+padding-top: 6px;
+width: 25%;
+text-align: center;
+background-color: rgba(124,252,0,1);
+color: black;
+font: normal 120%/1 "bangers", Helvetica, sans-serif;
+}
+
+.columnNiveauNumberToken {
+border-left: 1px solid black;
+position: relative;
+border-radius: 0 5px 5px 0;
+padding-top: 6px;
+width: 25%;
+text-align: center;
+background-color: yellow;
+color: black;
+font: normal 120%/1 "bangers", Helvetica, sans-serif;
 }
 
 .columnNiveauTexte {
@@ -1296,7 +1372,6 @@ border-radius: 5px;
 }
 
 .scrolling-wrapper {
-overflow-x: scroll;
 overflow-y: hidden;
 white-space: nowrap;
 }
@@ -1938,11 +2013,6 @@ color: orangered;
 font: normal 120%/1 "bangers", Helvetica, sans-serif;
 padding: 10px;
 margin-top: 10px;
-}
-
-.table td, .table th {
-padding: .75rem;
-vertical-align: top;
 }
 
 .flex-container-modal-OtherTeam h5 {
@@ -3661,8 +3731,8 @@ border: 1px solid MediumSlateBlue;
 
 .progress {
 text-align: center;
-margin-bottom: 5px;
-height: 20px;
+margin-bottom: 20px;
+height: 10px;
 font: normal 100%/1 "bangers", Helvetica, sans-serif;
 }
 
@@ -4185,3 +4255,178 @@ border-width: 0 5px 5px;
 border-bottom-color: #000;
 }
 
+/* Scroll bar */
+
+#style-1::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+#style-1::-webkit-scrollbar
+{
+	height: 10px;
+	background-color: #F5F5F5;
+}
+
+#style-1::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
+}
+
+/* Accordion */
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+	background: orangered;
+    border: 0 solid rgba(0,0,0,0.2);
+    color: #ffffff;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .accordion:hover {
+    background-color: #fff;
+	color: orangered;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.accordion:after {
+    content: '\02795'; /* Unicode character for "plus" sign (+) */
+    font-size: 13px;
+    margin: 3px;
+	margin-top: 5px;
+}
+
+.active:after {
+    content: "\2796"; /* Unicode character for "minus" sign (-) */
+    font-size: 13px;
+    margin: 3px;
+	margin-top: 5px;
+}
+
+.palmaresBox {
+position: relative;
+width: 150px;
+height: 150px;
+float: left;
+}
+
+.detailsPalmaresBox {
+    width: 100%;
+    height: 100%;
+    float: left;
+    border: 1px solid #fff;
+    background: #2c323d;
+}
+
+.anneePalmaresBox {
+    color: #c9d0de;
+    position: absolute;
+    bottom: 5px;
+    left: 8%;
+    z-index: 3;
+    font-family: 'interstateregular';
+    font-size: 15px;
+    text-align: center;
+    width: 84%;
+}
+
+.palmares {
+    display: block;
+    width: 100%;
+}
+
+.detailsPalmaresBox .titrecompet {
+    color: #c9d0de;
+    position: absolute;
+    top: 5px;
+    left: 0;
+    height: 50px;
+    z-index: 2;
+    text-transform: uppercase;
+	font: normal 80%/1 "bangers", Helvetica, sans-serif;
+    text-align: center;
+    width: 100%;
+}
+
+.anneePalmares {
+    color: #c9d0de;
+    position: absolute;
+    bottom: 5px;
+    left: 8%;
+    z-index: 3;
+    text-transform: uppercase;
+	font: normal 80%/1 "bangers", Helvetica, sans-serif;
+    text-align: center;
+    width: 84%;
+}
+
+.palmaresBox .nbcompet {
+    color: #FFF;
+    position: absolute;
+    top: 35px;
+    left: 0;
+    z-index: 1;
+    text-transform: uppercase;
+	font: normal 400%/1 "bangers", Helvetica, sans-serif;
+    text-align: center;
+    width: 100%;
+}
+
+.tdTitleMatchEnd {
+padding-top: 5px;
+padding-bottom: 5px;
+margin: 5px;
+text-align: center;
+font-weight: normal;
+font: normal 100%/1 "bangers", Helvetica, sans-serif;
+color: black;
+border: none;
+}
+
+table .tdScore {
+margin: 0;
+font-weight: normal;
+width: 13%;
+font: normal 80%/1 "bangers", Helvetica, sans-serif;
+border: none;
+vertical-align: middle;
+}
+
+table .tdScore1 {
+width: 32%;
+font-weight: normal;
+color: #000000;
+font: normal 110%/1 "bangers", Helvetica, sans-serif;
+border: none;
+vertical-align: middle;
+}
+
+table .tdScore2 {
+width: 10%;
+font-weight: normal;
+color: #000000;
+font: normal 140%/1 "bangers", Helvetica, sans-serif;
+border: none;
+}
+
+.table td, .table th {
+padding: 0;
+vertical-align: middle;
+}

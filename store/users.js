@@ -387,11 +387,39 @@ export const actions = {
 
     async updateUserActions ({commit}, payload) {
         try {
-            console.log('Entering updateUserActions')
+            // console.log('Entering updateUserActions')
+            // console.log('payload: ', payload)
             const userId = firebase.auth().currentUser.uid
-            console.log('payload: ', payload)
 
-            for (let action of payload.array) {
+            // Format data
+            let array = []
+            for (let slot of payload.array) {
+                console.log('slot2: ', slot)
+                const name = slot.name
+                console.log('name: ', name)
+                
+                const object = array.find((slot) => {
+                    return slot.name === name
+                })
+                if (!object) {
+                    const object = {
+                        id: slot.id,
+                        name: slot.name,
+                        slug: slot.slug,
+                        physical_gain: slot.physical_gain,
+                        // social_gain: data.gain_social,
+                        // special_gain: data.gain_special,
+                        occurences: 1
+                    }
+                    array.push(object)
+                } else {
+                    object.occurences += 1
+                    object.physical_gain += slot.physical_gain
+                }
+            }
+
+            // Update card occurences
+            for (let action of array) {
                 console.log(action.id)
                 console.log('action: ', action)
                 console.log('occurences: ', action.occurences)
@@ -401,12 +429,17 @@ export const actions = {
                 })
             }
 
-            firebase.database().ref('/userActions/' + userId + '/' + payload.today).update(payload.array).then((response) => {
+            // Update userActions node in database
+            try {
+                await firebase.database().ref('/userActions/' + userId + '/' + payload.today).set(payload.array)
                 new Noty({type: 'success', text: 'Daily actions successfully updated!', timeout: 5000, theme: 'metroui'}).show()
-            }).catch(error => {
+                console.log('array: ', array)
+                return array
+            }
+            catch(error) {
                 new Noty({type: 'error', text: 'Sorry, your actions for the day could not be updated. ', timeout: 5000, theme: 'metroui'}).show()
                 console.log(error)
-            })
+            }
 
         } catch(error) {
             new Noty({type: 'error', text: 'Sorry, your actions for the day could not be updated', timeout: 5000, theme: 'metroui'}).show()

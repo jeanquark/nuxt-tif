@@ -43,7 +43,7 @@
 						</div>
 					</div>
 					
-					<div class="flex-container-modal-avatar-menu scrolling-wrapper center" v-cloak>
+					<div id="style-1" class="flex-container-modal-avatar-menu scrolling-wrapper center" v-cloak>
 						<div class="flex-container-modal-box-avatar">
 							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'background'}" @click="selectType('background')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.background') }}</span></div>
 							<div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'skin'}" @click="selectType('skin')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.skin') }}</span></div>
@@ -59,7 +59,7 @@
 						</div>
                     </div><!-- /.flex-container-modalAvatar -->
 
-					<div class="flex-container-modal-avatar-shape scrolling-wrapper center">
+					<div id="style-1" class="flex-container-modal-avatar-shape scrolling-wrapper center">
 						<!-- Left colum (shape) -->
 						<div>
 							<background-shape v-if="this.type === 'background'" :background="this.background" @addToMergeEmitter="addToMerge"></background-shape>
@@ -85,7 +85,7 @@
 						</div><!-- /left column -->
 					</div>
 
-					<div class="flex-container-modal-avatar-color scrolling-wrapper center">
+					<div id="style-1" class="flex-container-modal-avatar-color scrolling-wrapper center">
 						<!-- Right column (color) -->
 						<div>
 							<background-color v-if="this.type === 'background'" :background="background" @addToMergeEmitter="addToMerge"></background-color>
@@ -114,7 +114,7 @@
                         
 					<!-- Modal footer -->
 					<div class="modal-footer">
-						<div class="progress" style="width: 50%; margin: 0 auto;" v-if="arrayOfImagesToMerge.length > 0">
+						<div class="progress" style="width: 50%; margin-top: 20px;" v-if="arrayOfImagesToMerge.length > 0">
 							<div class="progress-bar bg-success" role="progressbar" :style="{width: progress + '%'}" :aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100"></div>
 						</div>
 					</div>
