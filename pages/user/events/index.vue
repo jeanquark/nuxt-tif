@@ -28,23 +28,41 @@
 					</div>
 					<div class="flex-container-modal-Action">
 						<table class="table tableText">
-						  <tbody>
-							<tr class="borderResultat" v-for="event of userEvents">
-							  <td class="tdResultat1 text-left"><a href="mesEquipesDetails.html" class="linkEvent"><img :src="'/images/teams/' + event.home_team.slug + '.png'" class="imgModalAgendaFlags"/> {{ event.home_team.name }}</a></td>
-							  <td class="tdResultat text-center">
-							  		<nuxt-link :to="'/user/events/' + event.id" class="linkEvent">
-							  			Football</br>
-							  			<span v-if="event.competition">{{ event.competition.name }}<br /></span>
-							  			<span v-if="event.round">{{ event.round }}<br /></span>
-							  			{{ event.date }} {{ event.time }}<br />
-							  			<!-- {{ event.timestamp | moment("subtract", "1 hours") }}</br> -->
-							  			{{ convertToLocaltime(event.timestamp) }}</br>
-							  			{{ event.score }}</br>{{ event.status }}
-							  		</nuxt-link></td>
-							  </td>
-							  <td class="tdResultat1 text-right"><a href="autresEquipesDetails.html" class="linkEvent">{{ event.visitor_team.name }} <img :src="'/images/teams/' + event.visitor_team.slug + '.png'" class="imgModalAgendaFlags"/></a></td>
-							</tr>	
-						  </tbody>
+						  	<tbody>
+								<tr class="borderResultat" v-for="event of userEvents">
+								  	<td class="tdResultat1 text-left" style="width: 30%;">
+								  		<a href="mesEquipesDetails.html" class="linkEvent"><img :src="'/images/teams/' + event.home_team.slug + '.png'" class="imgModalAgendaFlags"/> {{ event.home_team.name }}</a>
+								  	</td>
+								  	<td style="width: 10%;">
+								  		<transition name="fade" mode="out-in" :duration="{ enter: 3000, leave: 2000 }">
+											<span class="" style="float: right; border: 1px solid orange; padding: 15px;" :key="getHomeTeamScore(event.score)" v-if="event.status === 'IN PLAY'">
+								  				{{ getHomeTeamScore(event.score) }}
+								  			</span>
+								  		</transition>
+								  	</td>
+								  	<td class="tdResultat text-center" style="width: 20%;">
+								  		<nuxt-link :to="'/user/events/' + event.id" class="linkEvent">
+								  			Football</br>
+								  			<span v-if="event.competition">{{ event.competition.name }}<br /></span>
+								  			<!-- <span v-if="event.round">{{ event.round }}<br /></span> -->
+								  			{{ event.date }} {{ event.time }}<br />
+								  			<!-- {{ event.timestamp | moment("subtract", "1 hours") }}</br> -->
+								  			{{ convertToLocaltime(event.timestamp) }}</br>
+								  			{{ event.score }}</br>{{ event.status }}
+								  		</nuxt-link></td>
+								  	</td>
+								  	<td style="width: 10%;">
+								  		<transition name="fade" mode="out-in" :duration="{ enter: 3000, leave: 2000 }">
+											<span class="" style="float: left; border: 1px solid orange; padding: 15px;" :key="getVisitorTeamScore(event.score)" v-if="event.status === 'IN PLAY'">
+								  				{{ getVisitorTeamScore(event.score) }}
+								  			</span>
+								  		</transition>
+								  	</td>
+								  	<td class="tdResultat1 text-right" style="width: 30%;">
+								  		<a href="autresEquipesDetails.html" class="linkEvent">{{ event.visitor_team.name }} <img :src="'/images/teams/' + event.visitor_team.slug + '.png'" class="imgModalAgendaFlags"/></a>
+								  	</td>
+								</tr>	
+						  	</tbody>
 						</table>
 					</div>
 					<div class="flex-container-modal-Title banner text-center">
@@ -54,7 +72,17 @@
 						<table class="table tableText">
 						  <tbody>
 							<tr class="borderResultat" v-for="event of events">
-							  	<td class="tdResultat1 text-left"><a href="autresEquipesDetails.html" class="linkEvent"><img :src="'/images/teams/' + event.home_team.slug + '.png'" class="imgModalAgendaFlags"/> {{ event.home_team.name }}</a></td>
+							  	<td class="tdResultat1 text-left" style="">
+							  		<a href="autresEquipesDetails.html" class="linkEvent"><img :src="'/images/teams/' + event.home_team.slug + '.png'" class="imgModalAgendaFlags"/> {{ event.home_team.name }}</a>
+							  		<transition name="fade" mode="out-in" :duration="{ enter: 3000, leave: 2000 }">
+							  			<!-- <span style="color: #000;" :key="event.score" v-if="show">{{ event.location }}</span> -->
+							  			<!-- <p v-if="show" style="animation-duration: 3s">Hello!</p> -->
+							  			<span class="" style="float: right; border: 1px solid orange; padding: 15px;" :key="event.score" v-if="event.status === 'IN PLAY'">
+							  				{{ getHomeTeamScore(event.score) }}
+							  			</span>
+							  		</transition>
+							  	</td>
+							  	<!-- <td v-if="event.status === 'IN PLAY'"></td> -->
 							  	<td class="tdResultat text-center">
 							  		<nuxt-link :to="'/user/events/' + event.id" class="linkEvent">
 							  			Football</br>
@@ -65,7 +93,10 @@
 							  			{{ convertToLocaltime(event.timestamp) }}</br>
 							  			{{ event.score }}</br>{{ event.status }}
 							  		</nuxt-link></td>
-							  <td class="tdResultat1 text-right"><a href="autresEquipesDetails.html" class="linkEvent">{{ event.visitor_team.name }} <img :src="'/images/teams/' + event.visitor_team.slug + '.png'" class="imgModalAgendaFlags"/></a></td>
+							  	<td class="tdResultat1 text-right">
+							  		<span class="" style="float: left; border: 1px solid orange; padding: 15px;" v-if="event.status === 'IN PLAY'">{{ getVisitorTeamScore(event.score) }}</span>
+							  		<a href="autresEquipesDetails.html" class="linkEvent">{{ event.visitor_team.name }} <img :src="'/images/teams/' + event.visitor_team.slug + '.png'" class="imgModalAgendaFlags"/></a>
+							  	</td>
 							</tr>	
 							
 						  </tbody>
@@ -85,6 +116,7 @@
 
 <script>
 	import moment from 'moment'
+	// import 'vue2-animate/dist/vue2-animate.min.css'
 	export default {
 		layout: 'layoutFront',
 		async created () {
@@ -125,11 +157,13 @@
 			// }
 			// console.log('userEvents: ', this.userEvents)
 			// console.log('events: ', this.events)
+			console.log(moment('2018-09-28 19:30:00').utc().format('X'))
 		},
 		data () {
 			return {
 				// events: [],
 				// userEvents: []
+				show: true
 			}
 		},
 		computed: {
@@ -161,6 +195,15 @@
 				} else {
 					return moment.unix(timestamp).subtract(utcDiff, 'minutes').format("HH:mm")
 				}
+			},
+			getHomeTeamScore (score) {
+				return score.substring(0, 2)
+				const array = score.split()
+				let obj
+				return array
+			},
+			getVisitorTeamScore (score) {
+				return score.slice(-2)
 			}
 		}
 	}
@@ -173,4 +216,31 @@
 	.red-color {
 		color: red;
 	}
+	.fade-enter-active, .fade-leave-active {
+	  transition: opacity 5s;
+	  background-color: yellow;
+	}
+	.fade-enter, .fade-leave-to {
+	  opacity: 0;
+	}
+
+	/*.fade-enter {
+        opacity: 0;
+        background-color: orange;
+    }
+    .fade-leave {
+     }
+    .fade-enter-active {
+        transition-property: opacity;
+        transition-duration: 3s;
+        transition-delay: 2s;
+    }
+    .fade-leave-active {
+     }
+    .fade-enter-to {
+        background-color: orange;
+    }
+    .fade-leave-to {
+        
+    }*/
 </style>

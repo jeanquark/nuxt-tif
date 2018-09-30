@@ -45,6 +45,7 @@
 						<div class="columnProfil"><img src="/images/163.png" class="imgModalProprieteFlags"/> <span class="modal-Propriete" v-if="loadedUser"> {{ loadedUser.username }} </span> <span class="modal-ProprietePlace boxShadow"><img src="/images/cup.png" class="imgModalProprieteCup"/> 1863ème</span></div>
 					</nuxt-link>
 					<nuxt-link :to="localePath({name: 'user-preferences'})" class="boxShadow" style="flex-basis: 60px"><img src="/images/parametre.png" class="imgParametre"/></nuxt-link>
+					<nuxt-link to="/team">Team</nuxt-link>
 				</div>
 
 			</div>
@@ -90,7 +91,7 @@
 			<!-- footer -->
 			<div id="footer" class="col-12 col-sm-12 col-md-12 col-lg-12">
 				<!-- News -->
-				<div id="news" class="col-12 col-sm-12 col-md-12 col-lg-12">
+				<!-- <div id="news" class="col-12 col-sm-12 col-md-12 col-lg-12">
 					<div class="flex-container-news">
 					  	<nuxt-link to="/boxNews" class="flex-contrainer-column" style="flex-grow: 1">
 							<div class="DodgerBlue" style="flex-grow: 1"><span class="newsTitle">NEWS</span></div>
@@ -109,7 +110,7 @@
 							<div style="flex-grow: 1"><img src="/images/newsGoodies.png" class="imgNews"/></div>
 					  	</nuxt-link>
 					</div>
-				</div>
+				</div> -->
 				<!-- End News -->
 							
 				<div id="dock-container">

@@ -57,12 +57,11 @@
                             <div class="flex-container-modal-XPAction-Img">
                                 
                                 <span class="OtherTeam2" style="border: 1px dashed orange;">
-                                    <p style="color: #000; text-align: center;">                                        08:00 - 10:00
+                                    <p style="color: #000; text-align: center;">
                                         <button class="btn btn-sm btn-default" @click="removeSlot('slot1')" v-if="slots.slot1 && slots.slot1.length >= 1"><i class="fas fa-times"></i></button>
                                     </p>
                                     <draggable :options="{group:{ name:'user-actions' }}" :move="onMove" @change="onChange($event, 'slot1')" v-model="slots.slot1">
                                         <transition-group name="no" class="list-group">
-
                                             <div key="slot1" v-if="slots.slot1 && slots.slot1.length < 1">
                                                 <img src="/images/actions/actionXP.jpg" class="imgModalAvatar" />
                                             </div>
@@ -222,7 +221,6 @@
                                 <div id="resultatBoxFlags" class="resultatBody">
                                     <!-- <div class="flex-container-modal-action-xp-small" style=""> -->
                                     <div class="" style="">
-
                                         <draggable class="" element="div" v-model="jobs" :options="{group:{ name:'user-actions',  pull:'clone', put:false }}" :move="onMove" @start="isDragging=true" @end="isDragging=false">
                                             <transition-group id="abc" type="transition" :name="'flip-list'" style="display: flex; flex-wrap: wrap;">
                                                 <div class="def" v-for="job in jobs" :key="job.name" style="border: 1px dashed orange; margin: 0px;">
