@@ -12,8 +12,6 @@
                                 <span aria-hidden="true" class="white-text"><i class="fa fa-arrow-circle-left"></i></span>
                             </button>
                         </nuxt-link>
-                    </div>
-                </div>
                 <!-- Modal body -->
                 <div id="modalBoxContent" class="modal-body">
 
