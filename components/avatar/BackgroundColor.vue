@@ -1,15 +1,21 @@
 <template>
 	<div class="flex-container-modal-avatar-color no-margin">
-		<!-- <p>
-			total_background_colors: {{ this.total_background_colors }}<br /><br />
+		<p>
+			<!-- total_background_colors: {{ this.total_background_colors }}<br /><br />
 			background: {{ background }}<br /><br />
 			background_shape: {{ this.background_shape }}<br /><br />
-			background_color2: {{ this.background_color2 }}<br /><br />
-		</p> -->
+			background_color: {{ this.background_color }}<br /><br /> -->
+		</p>
 
-        <div v-for="index in total_background_colors" @click="addToMerge({gender: 'unisex', type: 'background', property: 'color', image: 'background' + background_shape + convertTo3Digits(index) + '.png', index: index, layerPosition: 0})">
+        <!-- <div v-for="index in total_background_colors" @click="addToMerge({gender: 'unisex', type: 'background', property: 'color', image: 'background' + background_shape + convertTo3Digits(index) + '.png', index: index, layerPosition: 0})">
             <img v-lazy="'/images/avatars/jm/unisex/background/colors/backgroundColor' + convertTo3Digits(index) + '.png'" class="imgModalAvatarColor" :class="{active: (background_color === convertTo3Digits(index)) }" style="cursor: pointer;" />
-        </div>
+        </div> -->
+
+        <carousel-3d :width="200" :height="200" :startIndex="background_color - 1">
+          	<slide v-for="(index, i) in total_background_colors" :index="i" :key="i">
+            	<img v-lazy="'/images/avatars/jm/unisex/background/colors/backgroundColor' + convertTo3Digits(index) + '.png'" class="imgModalAvatarColor" :class="{active: (background_color === convertTo3Digits(index)) }" style="cursor: pointer;" @click="addToMerge({gender: 'unisex', type: 'background', property: 'color', image: 'background' + background_shape + convertTo3Digits(index) + '.png', index: index, layerPosition: 0})" />
+          	</slide>
+    	</carousel-3d>
 	</div>
 </template>
 

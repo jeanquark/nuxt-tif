@@ -25,10 +25,42 @@
 					</div>
 					<div class="flex-container-modal-Title banner2 text-center">
 						<h2>Mes équipes <span class="infoEvent"><i class="infoTesEquipes fas fa-info-circle"></i></span></h2>
+
 					</div>
 					<div class="flex-container-modal-Action">
 						<table class="table tableText">
 						  	<tbody>
+						  		<!-- Loading placeholder -->
+								<div class="ph-item" v-for="n in 2" v-if="!userEvents">
+									<div class="ph-col-2">
+										<div class="ph-avatar"></div>
+									</div>
+									<div>
+										<div class="ph-row">
+											<div class="ph-col-4 empty"></div>
+											<div class="ph-col-4 big"></div>
+											<div class="ph-col-4 empty"></div>
+										</div>
+										<div class="ph-row">
+											<div class="ph-col-4 empty"></div>
+											<div class="ph-col-4"></div>
+											<div class="ph-col-4 empty"></div>
+										</div>
+										<div class="ph-row">
+											<div class="ph-col-4 empty"></div>
+											<div class="ph-col-4"></div>
+											<div class="ph-col-4 empty"></div>
+										</div>
+										<div class="ph-row">
+											<div class="ph-col-4 empty"></div>
+											<div class="ph-col-4"></div>
+											<div class="ph-col-4 empty"></div>
+										</div>
+									</div>
+									<div class="ph-col-2">
+										<div class="ph-avatar"></div>
+									</div>
+								</div>
 								<tr class="borderResultat" v-for="event of userEvents">
 								  	<td class="tdResultat1 text-left" style="width: 30%;">
 								  		<a href="mesEquipesDetails.html" class="linkEvent"><img :src="'/images/teams/' + event.home_team.slug + '.png'" class="imgModalAgendaFlags"/> {{ event.home_team.name }}</a>
@@ -45,7 +77,7 @@
 								  			Football</br>
 								  			<span v-if="event.competition">{{ event.competition.name }}<br /></span>
 								  			<!-- <span v-if="event.round">{{ event.round }}<br /></span> -->
-								  			{{ event.date }} {{ event.time }}<br />
+								  			{{ event.date }}<br />
 								  			<!-- {{ event.timestamp | moment("subtract", "1 hours") }}</br> -->
 								  			{{ convertToLocaltime(event.timestamp) }}</br>
 								  			{{ event.score }}</br>{{ event.status }}
@@ -68,6 +100,37 @@
 					<div class="flex-container-modal-Title banner text-center">
 						<h2>Tous les autres évenements du jour <span class="infoOtherEvent"><i class="infoTesEquipes fas fa-info-circle"></i></span></h2>
 					</div>
+					<!-- Loading placeholder -->
+					<div class="ph-item" v-for="n in 4" v-if="!userEvents">
+						<div class="ph-col-2">
+							<div class="ph-avatar"></div>
+						</div>
+						<div>
+							<div class="ph-row">
+								<div class="ph-col-4 empty"></div>
+								<div class="ph-col-4 big"></div>
+								<div class="ph-col-4 empty"></div>
+							</div>
+							<div class="ph-row">
+								<div class="ph-col-4 empty"></div>
+								<div class="ph-col-4"></div>
+								<div class="ph-col-4 empty"></div>
+							</div>
+							<div class="ph-row">
+								<div class="ph-col-4 empty"></div>
+								<div class="ph-col-4"></div>
+								<div class="ph-col-4 empty"></div>
+							</div>
+							<div class="ph-row">
+								<div class="ph-col-4 empty"></div>
+								<div class="ph-col-4"></div>
+								<div class="ph-col-4 empty"></div>
+							</div>
+						</div>
+						<div class="ph-col-2">
+							<div class="ph-avatar"></div>
+						</div>
+					</div>
 					<div class="flex-container-modal-Action">
 						<table class="table tableText">
 						  <tbody>
@@ -75,26 +138,26 @@
 							  	<td class="tdResultat1 text-left" style="">
 							  		<a href="autresEquipesDetails.html" class="linkEvent"><img :src="'/images/teams/' + event.home_team.slug + '.png'" class="imgModalAgendaFlags"/> {{ event.home_team.name }}</a>
 							  		<transition name="fade" mode="out-in" :duration="{ enter: 3000, leave: 2000 }">
-							  			<!-- <span style="color: #000;" :key="event.score" v-if="show">{{ event.location }}</span> -->
-							  			<!-- <p v-if="show" style="animation-duration: 3s">Hello!</p> -->
-							  			<span class="" style="float: right; border: 1px solid orange; padding: 15px;" :key="event.score" v-if="event.status === 'IN PLAY'">
+							  			<span class="" style="float: right; padding: 15px;" :key="getHomeTeamScore(event.score)" v-if="event.status === 'IN PLAY'">
 							  				{{ getHomeTeamScore(event.score) }}
 							  			</span>
 							  		</transition>
 							  	</td>
-							  	<!-- <td v-if="event.status === 'IN PLAY'"></td> -->
 							  	<td class="tdResultat text-center">
 							  		<nuxt-link :to="'/user/events/' + event.id" class="linkEvent">
 							  			Football</br>
 							  			<span v-if="event.competition">{{ event.competition.name }}<br /></span>
-							  			<span v-if="event.round">{{ event.round }}<br /></span>
-							  			{{ event.date }} {{ event.time }}<br />
-							  			<!-- {{ event.timestamp | moment("subtract", "1 hours") }}</br> -->
+							  			<span v-if="event.round">{{ event.round.name }}<br /></span>
+							  			{{ event.date }}<br />
 							  			{{ convertToLocaltime(event.timestamp) }}</br>
-							  			{{ event.score }}</br>{{ event.status }}
+							  			<span :class="[event.status === 'IN PLAY' ? 'in_play' : '']">{{ event.status }}</span>
 							  		</nuxt-link></td>
 							  	<td class="tdResultat1 text-right">
-							  		<span class="" style="float: left; border: 1px solid orange; padding: 15px;" v-if="event.status === 'IN PLAY'">{{ getVisitorTeamScore(event.score) }}</span>
+							  		<transition name="fade" mode="out-in" :duration="{ enter: 3000, leave: 2000 }">
+							  			<span class="" style="float: left; padding: 15px;" :key="getVisitorTeamScore(event.score)" v-if="event.status === 'IN PLAY'">
+							  				{{ getVisitorTeamScore(event.score) }}
+							  			</span>
+							  		</transition>
 							  		<a href="autresEquipesDetails.html" class="linkEvent">{{ event.visitor_team.name }} <img :src="'/images/teams/' + event.visitor_team.slug + '.png'" class="imgModalAgendaFlags"/></a>
 							  	</td>
 							</tr>	
@@ -187,8 +250,8 @@
 		},
 		methods: {
 			convertToLocaltime (timestamp) {
-				// const utcDiff = new Date().getTimezoneOffset()
-				const utcDiff = '60'
+				const utcDiff = new Date().getTimezoneOffset()
+				// const utcDiff = '60'
 				console.log('utcDiff: ', utcDiff)
 				if (utcDiff > 0) {
 					return moment.unix(timestamp).add(utcDiff, 'minutes').format("HH:mm")
@@ -197,12 +260,11 @@
 				}
 			},
 			getHomeTeamScore (score) {
+				if (!score) return
 				return score.substring(0, 2)
-				const array = score.split()
-				let obj
-				return array
 			},
 			getVisitorTeamScore (score) {
+				if (!score) return
 				return score.slice(-2)
 			}
 		}
@@ -243,4 +305,31 @@
     .fade-leave-to {
         
     }*/
+
+    /* In play flash animation */
+    .in_play {
+    	color: green;
+    	-webkit-animation: flash linear 1s infinite;
+		animation: flash linear 1s infinite;
+    }
+    @-webkit-keyframes flash {
+		0% { opacity: 1; } 
+		50% { opacity: .1; } 
+		100% { opacity: 1; }
+	}
+	@keyframes flash {
+		0% { opacity: 1; } 
+		50% { opacity: .1; } 
+		100% { opacity: 1; }
+	}
+    .ph-row {
+    	margin-bottom: 0px;
+    }
+    .ph-item {
+    	margin-bottom: 0px;
+    	padding: 5px 15px;
+    }
+    .ph-avatar {
+    	margin-bottom: 0px;
+    }
 </style>

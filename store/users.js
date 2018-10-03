@@ -185,6 +185,58 @@ export const actions = {
             commit('setLoading', false, { root: true })
         }
     },
+    async updateAvatarImage ({commit, getters}, payload) {
+        console.log('updateAvatarImage')
+        console.log('payload: ', payload.snapshot.metadata)
+        console.log('loadedUser: ', getters.loadedUser)
+        const avatarObj = {
+            name: payload.snapshot.metadata.name,
+            url: payload.snapshot.metadata.downloadURLs[0],
+            updated_at: moment().unix()
+        }
+        console.log('avatarObj: ', avatarObj)
+        // return
+
+        // return new Promise((resolve, reject) => {
+            try {
+                // 1) First delete old avatar image if it exists
+                if (getters.loadedUser && getters.loadedUser.avatar) {
+                    var oldImageRef = firebase.storage().ref('/images/avatars/' + getters.loadedUser.avatar.name)
+                    oldImageRef.delete().then(function() {
+                        console.log('Successfully deleted old image')
+                    }).catch(function(error) {
+                        console.log('An error occured and the old image could not be deleted:')
+                        console.log(error)
+                    })
+                }
+
+                // 2) Then retrieve all user events
+                const userId = firebase.auth().currentUser.uid
+                let userEvents = []
+                const snapshot = await firebase.database().ref('/userEvents/' + userId).once('value')
+                console.log('snapshot.val(): ', snapshot.val())
+                for (let event in snapshot.val()) {
+                    console.log(event)
+                    userEvents.push(event)
+                }
+                // 3) For each event the user takes part, change the avatar name
+                let updates = {}
+                for (let event of userEvents) {
+                    console.log('event: ', event)
+                    updates['/eventUsers/' + event + '/' + userId + '/avatar'] = avatarObj.url
+                }
+
+                // 4) Finally, update user node
+                updates['/users/' + userId + '/avatar'] = avatarObj
+
+                await firebase.database().ref().update(updates)
+            }
+            catch(error) {
+                console.log('error: ', error)
+                throw error
+            }
+        // }
+    },
     async loadedUserTeams ({commit, state}) {
         try {
             // console.log('Entering loadedUserTeams action')
@@ -448,33 +500,33 @@ export const actions = {
     },
 
     async updateUserEvents ({commit, getters}, payload) {
-            const userId = firebase.auth().currentUser.uid
-            console.log('payload: ', payload)
-            // console.log('team: ', team)
-            // return
-            // firebase.database().ref('/userEvents/').child(userId).update({[payload.id]: true})
-            const user = getters.loadedUser
-            console.log('user: ', user)
-            // return
-            const userObject = {
-                username: user.username ? user.username : '',
-                avatar: user.avatar ? user.avatar.url : '',
-                country: user.country ? user.country : '',
-                level: user.level ? user.level : '',
-                supported_team: payload.team
-            }
-            console.log('userObject: ', userObject)
-            let updates = {}
-            updates['/userEvents/' + userId + '/' + payload.event.id] = true
-            updates['/eventUsers/' + payload.event.id + '/' + userId] = userObject
+        const userId = firebase.auth().currentUser.uid
+        console.log('payload: ', payload)
+        // console.log('team: ', team)
+        // return
+        // firebase.database().ref('/userEvents/').child(userId).update({[payload.id]: true})
+        const user = getters.loadedUser
+        console.log('user: ', user)
+        // return
+        const userObject = {
+            username: user.username ? user.username : '',
+            avatar: user.avatar ? user.avatar.url : '',
+            country: user.country ? user.country : '',
+            level: user.level ? user.level : '',
+            supported_team: payload.team
+        }
+        console.log('userObject: ', userObject)
+        let updates = {}
+        updates['/userEvents/' + userId + '/' + payload.event.id] = true
+        updates['/eventUsers/' + payload.event.id + '/' + userId] = userObject
 
-            try {
-                firebase.database().ref().update(updates)
-                new Noty({type: 'success', text: 'User events successfully updated.', timeout: 5000, theme: 'metroui'}).show()
-            } catch(error) {
-                new Noty({type: 'error', text: 'Sorry, an error occured and the user events could not be updated', timeout: 5000, theme: 'metroui'}).show()
-                console.log(error)
-            }
+        try {
+            firebase.database().ref().update(updates)
+            new Noty({type: 'success', text: 'User events successfully updated.', timeout: 5000, theme: 'metroui'}).show()
+        } catch(error) {
+            new Noty({type: 'error', text: 'Sorry, an error occured and the user events could not be updated', timeout: 5000, theme: 'metroui'}).show()
+            console.log(error)
+        }
     },
 }
 

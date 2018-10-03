@@ -209,6 +209,7 @@ module.exports = {
   		{ src: '~/plugins/vue-observe-visibility.js', ssr: false },
   		{ src: '~/plugins/vue-tooltip.js', ssr: false },
   		// { src: '~/plugins/vue-animate.js', ssr: false },
+  		{ src: '~/plugins/vue-carousel-3d.js', ssr: false },
     ],
   	serverMiddleware: [
 		'~/serverMiddleware/validateFirebaseIdToken',
@@ -238,6 +239,7 @@ module.exports = {
   		{ path: '/api/fetch-next-premier-league-matches', handler: '~/serverMiddleware/api/fetchNextPremierLeagueMatches' },
   		{ path: '/api/fetch-live-actions', handler: '~/serverMiddleware/api/fetchLiveActions' },
   		{ path: '/api/fetch-live-score', handler: '~/serverMiddleware/api/fetchLiveScore' },
+  		{ path: '/move-old-events', handler: '~/serverMiddleware/moveOldEvents' },
   	],
   	toast: {
 		duration: 8000,

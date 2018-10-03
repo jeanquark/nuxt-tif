@@ -1,9 +1,12 @@
 const express = require('express'),
       moment = require('moment'),
       axios = require('axios'),
-      admin = require('firebase-admin')
+      admin = require('firebase-admin'),
       // slugify1 = require('../helpers/slugify')
-      slugifyFunction = require('../../helpers/slugify');
+      slugifyFunction = require('../../helpers/slugify'),
+      getRoundData = require('../../helpers/api/rounds'),
+      getLeagueData = require('../../helpers/api/leagues'),
+      getTeamData = require('../../helpers/api/teams');
 
 const app = express();
 
@@ -77,39 +80,38 @@ module.exports = app.use(function (req, res, next) {
         axios.all([getChampionsLeagueGroupAMatches(), getChampionsLeagueGroupBMatches(), getChampionsLeagueGroupCMatches(), getChampionsLeagueGroupDMatches(), getChampionsLeagueGroupEMatches(), getChampionsLeagueGroupFMatches(), getChampionsLeagueGroupGMatches(), getChampionsLeagueGroupHMatches()]).then(axios.spread(function (groupA, groupB, groupC, groupD, groupE, groupF, groupG, groupH) {
 
             let matches = groupA.data.data.fixtures.concat(groupB.data.data.fixtures).concat(groupC.data.data.fixtures).concat(groupD.data.data.fixtures).concat(groupE.data.data.fixtures).concat(groupF.data.data.fixtures).concat(groupG.data.data.fixtures).concat(groupH.data.data.fixtures)
-            console.log('matches: ', matches)
+            // console.log('matches: ', matches)
             let events = {}
             let updates = {}
             for (let match of matches) {
-                // console.log('Match: ', match)
-                const home_slug = slugifyFunction.slugify(match.home_name)
-                const visitor_slug = slugifyFunction.slugify(match.away_name)
-                // console.log('home_slug: ', home_slug)
-                // console.log('visitor_slug: ', visitor_slug)
-                const id = match.date + '_' + home_slug + '_vs_' + visitor_slug
+                // const home_slug = slugifyFunction.slugify(match.home_name)
+                // const visitor_slug = slugifyFunction.slugify(match.away_name)
                 const date_time = match.date + ' ' + match.time
-                match.livescore_api_id = match.id
-                match.timestamp = moment(date_time).format('X')
 
-                match.competition = {
-                    id: match.league_id,
-                    name: 'Champion\'s League',
-                    slug: 'champions_league'
-                }
-                match.round = rounds[match.round] ? rounds[match.round] : match.round
+                const leagueData = getLeagueData.league(parseInt(match.league_id)) ? getLeagueData.league(parseInt(match.league_id)) : {id: match.league_id}
+                // console.log('leagueData: ', leagueData)
+                // console.log('leagueData object?: ', Object.keys(leagueData).length != 0 && leagueData.constructor === Object)
+                // console.log('test: ', getLeagueData.league(parseInt(match.league_id)) ? 'yes' : 'no')
 
-                match.home_team = {
-                    id: match.home_id,
-                    name: match.home_name,
-                    slug: home_slug,
-                }
-                match.visitor_team = {
-                    id: match.away_id,
-                    name: match.away_name,
-                    slug: visitor_slug,
-                }
-                // events[id] = match
-                updates['/events_new2/' + id] = match
+                const homeTeamData = getTeamData.team(parseInt(match.home_id)) ? getTeamData.team(parseInt(match.home_id)) : {id: match.home_id, name: match.home_name, slug: slugifyFunction.slugify(match.home_name)}
+                // console.log('homeTeamData: ', homeTeamData)
+                const visitorTeamData = getTeamData.team(parseInt(match.away_id)) ? getTeamData.team(parseInt(match.away_id)) : {id: match.away_id, name: match.away_name, slug: slugifyFunction.slugify(match.away_name)}
+                // console.log('visitorTeamData: ', visitorTeamData)
+
+                const roundData = getRoundData.round(match.round) ? getRoundData.round(match.round) : match.round
+
+                const id = match.date + '_' + match.home_id + '_vs_' + match.away_id
+
+                updates['/events_new2/' + id + '/id'] = id
+                updates['/events_new2/' + id + '/livescore_api_id'] = match.id
+                updates['/events_new2/' + id + '/date'] = match.date
+                updates['/events_new2/' + id + '/time'] = match.time
+                updates['/events_new2/' + id + '/timestamp'] = moment(date_time).utc().format('X')
+                updates['/events_new2/' + id + '/competition'] = leagueData
+                updates['/events_new2/' + id + '/location'] = match.location
+                updates['/events_new2/' + id + '/round'] = roundData
+                updates['/events_new2/' + id + '/home_team'] = homeTeamData
+                updates['/events_new2/' + id + '/visitor_team'] = visitorTeamData
             }
 
             admin.database().ref().update(updates).then((snapshot) => {

@@ -38,6 +38,7 @@
     "nuxt-i18n": "^2.10.0",
     "nuxt-validate": "^0.1.1",
     "vue-animate-number": "^0.4.2",
+    "vue-carousel-3d": "^0.1.23",
     "vue-directive-tooltip": "^1.4.5",
     "vue-lazyload": "^1.2.6",
     "vue-moment": "^3.2.0",

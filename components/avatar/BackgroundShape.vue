@@ -7,9 +7,15 @@
 			background_color: {{ this.background_color }}<br /><br />
 		</p> -->
 
-	    <div v-for="index in total_background_shapes" @click="addToMerge({gender: 'unisex', type: 'background', property: 'shape', image: 'background' + convertTo2Digits(index) + background_color + '.png', index: index, layerPosition: 0})">
+	    <!-- <div v-for="index in total_background_shapes" @click="addToMerge({gender: 'unisex', type: 'background', property: 'shape', image: 'background' + convertTo2Digits(index) + background_color + '.png', index: index, layerPosition: 0})">
 	        <img v-lazy="'/images/avatars/jm/unisex/background/shape/backgroundShape' + convertTo2Digits(index) + '001.png'" class="imgModalAvatar" :class="{active: (background_shape === convertTo2Digits(index)) }" style="cursor: pointer;" />
-	    </div>
+	    </div> -->
+
+	    <carousel-3d :width="200" :height="200" :startIndex="background_shape - 1">
+          	<slide v-for="(index, i) in total_background_shapes" :index="i" :key="i">
+            	<img v-lazy="'/images/avatars/jm/unisex/background/shape/backgroundShape' + convertTo2Digits(index) + '001.png'" class="imgModalAvatar" :class="{active: (background_shape === convertTo2Digits(index)) }" style="cursor: pointer;" @click="addToMerge({gender: 'unisex', type: 'background', property: 'shape', image: 'background' + convertTo2Digits(index) + background_color + '.png', index: index, layerPosition: 0})" />
+          	</slide>
+    	</carousel-3d>
 	</div>
 </template>
 
@@ -34,6 +40,7 @@
 				return this.$parent.convertTo2Digits(index)
 			},
 			addToMerge (avatarData) {
+				console.log('addToMerge')
 		      	this.$emit('addToMergeEmitter', avatarData)
 		    }
 		}

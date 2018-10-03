@@ -25,38 +25,42 @@
                             <!-- background: {{ this.background }}<br /><br /> -->
                             <!-- skin: {{ this.skin }}<br /><br /> -->
                             <!-- tattoo: {{ this.tattoo }}<br /><br /> -->
-                            makeup: {{ this.makeup }}<br /><br />
-                            beard: {{ this.beard }}<br /><br />
+                            <!-- makeup: {{ this.makeup }}<br /><br /> -->
+                            <!-- beard: {{ this.beard }}<br /><br /> -->
                             <!-- clothes: {{ this.clothes }}<br /><br /> -->
-                            arrayOfImagesToMerge: {{ this.arrayOfImagesToMerge }}<br /><br />
+                            <!-- arrayOfImagesToMerge: {{ this.arrayOfImagesToMerge }}<br /><br /> -->
                         </p>
                     </div>
-                    <div class="flex-container-modalAvatar" style="color: #000;" v-cloak>
-                            <div class="flex-container-modalMenuAvatar no-border">
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'female'}" @click="selectGender('female')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.female') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'male'}" @click="selectGender('male')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.male') }}</span></div>
-                            </div>
 
-                            <div class="imgAvatarUser" style="color: #000;"><img src="" ref="mergedImage" class="imgModalAvatar" /></div>
+                    <div class="row" style="color: #000;" v-cloak>
+                        <div class="col-md-3">
+                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'female'}" @click="selectGender('female')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.female') }}</span></div>
+                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.gender === 'male'}" @click="selectGender('male')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.male') }}</span></div>
+                        </div>
 
-                            <div class="flex-container-modalMenuAvatar no-border">
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'background'}" @click="selectType('background')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.background') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'skin'}" @click="selectType('skin')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.skin') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'eyes'}" @click="selectType('eyes')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.eyes') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'eyebrows'}" @click="selectType('eyebrows')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.eyebrows') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'mouth'}" @click="selectType('mouth')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.mouth') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'hair'}" @click="selectType('hair')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.hair') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'makeup' || this.type === 'beard'}" @click="selectType('makeup')" v-if="this.gender === 'female'"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.makeup') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'beard' || this.type === 'makeup'}" @click="selectType('beard')" v-if="this.gender === 'male'"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.beard') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'tattoo'}" @click="selectType('tattoo')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.tattoo') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'accessories'}" @click="selectType('accessories')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.accessories') }}</span></div>
-                                <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'clothes'}" @click="selectType('clothes')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.clothes') }}</span></div>
-                            </div>
-                        </div><!-- /.flex-container-modalAvatar -->
+                        <div class="col-md-5" style="color: #000; text-align: center;"><img src="" ref="mergedImage" class="text-center" style="border: 1px solid darkred; border-radius: 5px;" width="90%" /></div>
+
+                        <div class="col-md-4">
+                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'background'}" @click="selectType('background')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.background') }}</span></div>
+                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'skin'}" @click="selectType('skin')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.skin') }}</span></div>
+                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'eyes'}" @click="selectType('eyes')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.eyes') }}</span></div>
+                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'eyebrows'}" @click="selectType('eyebrows')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.eyebrows') }}</span></div>
+                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'mouth'}" @click="selectType('mouth')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.mouth') }}</span></div>
+                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'hair'}" @click="selectType('hair')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.hair') }}</span></div>
+                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'makeup' || this.type === 'beard'}" @click="selectType('makeup')" v-if="this.gender === 'female'"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.makeup') }}</span></div>
+                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'beard' || this.type === 'makeup'}" @click="selectType('beard')" v-if="this.gender === 'male'"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.beard') }}</span></div>
+                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'tattoo'}" @click="selectType('tattoo')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.tattoo') }}</span></div>
+                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'accessories'}" @click="selectType('accessories')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.accessories') }}</span></div>
+                            <div style="flex-grow: 1; cursor: pointer;" :class="{active: this.type === 'clothes'}" @click="selectType('clothes')"><span class="textModalMenuAvatar">{{ $t('pages.user-avatar.clothes') }}</span></div>
+                        </div>
+                    </div><!-- /.flex-container-modalAvatar -->
 
                         <div class="row text-center text-lg-left" style="height: 300px; margin-left: 0px; margin-right: 0px;">
                             <!-- Left colum (shape) -->
-                            <div class="col-sm-6" style="border: 1px solid orangered; padding: 10px; overflow-y: auto;">
+                            <div class="col-sm-6" style="border: 1px solid orangered; padding: 10px; overflow-y: auto;" v-if="showCarousel">
+
+
+
                                 <background-shape v-if="this.type === 'background'" :background="this.background" @addToMergeEmitter="addToMerge"></background-shape>
 
                                 <skin-shape v-if="this.type === 'skin'" :gender="this.gender" :skin="this.skin" @addToMergeEmitter="addToMerge"></skin-shape>
@@ -113,6 +117,17 @@
                                 <div class="progress-bar bg-success" role="progressbar" :style="{width: progress + '%'}" :aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
+
+
+<div v-if="showCarousel">
+    <carousel-3d>
+        <slide v-for="n in 10" :key="n" :index="n">
+            Slide {{ n }}
+        </slide>
+    </carousel-3d>
+</div>
+
+
                         <div class="modal-footer">
                             <button class="btn btn-success" data-dismiss="modal" @click="saveImage">{{ $t('pages.user-avatar.go_and_validate') }}</button>
                             <nuxt-link to="/home"><button type="button" class="btn btn-danger" data-dismiss="modal">{{ $t('pages.user-avatar.cancel_all') }}</button></nuxt-link>
@@ -129,6 +144,7 @@
     import firebase from 'firebase'
     import moment from 'moment'
     import Noty from 'noty'
+    // import { Carousel3d, Slide } from 'vue-carousel-3d'
     import mergeImages from 'merge-images'
     import BackgroundShape from '~/components/avatar/BackgroundShape.vue'
     import BackgroundColor from '~/components/avatar/BackgroundColor.vue'
@@ -155,6 +171,8 @@
     export default {
         layout: 'layoutFront',
         components: {
+            // Carousel3d,
+            // Slide,
             BackgroundShape,
             BackgroundColor,
             SkinShape,
@@ -257,6 +275,9 @@
                 this.mergeImages()
             }
         },
+        mounted () {
+            this.showCarousel = true
+        },
         data () {
             return {
                 avatars: [],
@@ -274,7 +295,9 @@
                 beard: '',
                 accessories: '',
                 clothes: '',
-                progress: 0
+                progress: 0,
+                showCarousel: false,
+                slides: 2,
             }
         },
         computed: {
@@ -438,6 +461,17 @@
                     console.log(error)
                     new Noty({type: 'error', text: 'An error occured and your avatar could not be uploaded to our database. Please try again later.', timeout: 5000, theme: 'metroui'}).show()
                 }, () => {
+                    // console.log('imageName: ', imageName)
+                    console.log('uploadTask: ', uploadTask)
+                    return this.$store.dispatch('users/updateAvatarImage', uploadTask).then(() => {
+                        new Noty({type: 'success', text: 'Successfully uploaded image!', timeout: 5000, theme: 'metroui'}).show()
+                    }).catch((error) => {
+                        console.log('error: ', error)
+                        // new Noty({type: 'error', text: 'Image could not be save on database...', timeout: 5000, theme: 'metroui'}).show()
+                    })
+
+
+
                     // Delete old avatar if it exists
                     if (this.loadedUser && this.loadedUser.avatar) {
                         var oldImageRef = firebase.storage().ref('/images/avatars/' + this.loadedUser.avatar.name)
@@ -455,6 +489,17 @@
                         url: uploadTask.snapshot.downloadURL,
                         updated_at: now,
                     })
+                    // Update avatar image in eventUsers node
+
+                    // 1) First retrive all user events
+                    // let userEvents = []
+                    // firebase.database().ref('/usersEvents/' + userId).once('value')
+                    //     .then(function (snapshot) {
+                    //         userEvents.push(snapshot.val())
+                    //     })
+                    //     .then(
+                    //         )
+
                     new Noty({type: 'success', text: 'Successfully uploaded image!', timeout: 5000, theme: 'metroui'}).show()
                     // return this.$router.push('/')
                 })
