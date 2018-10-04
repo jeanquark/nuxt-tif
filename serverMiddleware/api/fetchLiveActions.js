@@ -35,7 +35,7 @@ module.exports = app.use(async function (req, res, next) {
             const id = today + '_' + match.home_team.id + '_vs_' + match.visitor_team.id
             console.log('id: ', id)
 
-            let url = 'http://livescore-api.com/api-client/scores/events.json?key=' + api_key + '&secret=' + api_secret + '&id=' + match.id
+            let url = 'http://livescore-api.com/api-client/scores/events.json?key=' + api_key + '&secret=' + api_secret + '&id=' + match.livescore_api_id
 
             axios.get(url).then((response) => {
                 // console.log('response: ', response)

@@ -21,6 +21,7 @@
 								<div class="center text-center">{{ loadedEvent.date }}</br>{{ loadedEvent.time }}</div>
 								<p style="color: #000;">
 									<!-- loadedEvent: {{ loadedEvent }}<br /><br /> -->
+									<!-- loadedEvent.events: {{ loadedEvent.events }}<br /><br /> -->
 									<!-- eventUsers: {{ loadedEventUsers }}<br /><br /> -->
 								</p>
 							</div>
@@ -41,7 +42,7 @@
 							<div class="flex-container-teamMatch">
 								<div class="matchInfo" v-if="loadedEvent.events">
 									<transition-group name="fade" tag="div" :duration="{ enter: 4000, leave: 3000 }">
-										<div v-for="event in loadedEvent.events" :key="event.id" class="" v-if="event">
+										<div v-for="event in loadedEvent.events" :key="event.time" class="" v-if="event">
 											<p v-if="event.home_away === 'h'">
 												<img :src="'/images/' + event.event + '.png'" width="20" />&nbsp;
 												{{ event.event }}&nbsp;-&nbsp;{{ event.time }}min&nbsp;-&nbsp;{{ event.player }}
@@ -51,7 +52,7 @@
 								</div>
 								<div class="matchInfoRight" v-if="loadedEvent.events">
 									<transition-group name="fade" tag="div" :duration="{ enter: 4000, leave: 3000 }">
-										<div v-for="event in loadedEvent.events" :key="event.id" v-if="event">
+										<div v-for="event in loadedEvent.events" :key="event.time" v-if="event">
 											<p v-if="event.home_away === 'a'" :key="event.time">
 												<img :src="'/images/' + event.event + '.png'" width="20" />&nbsp;{{ event.event }}&nbsp;-&nbsp;{{ event.time }}min&nbsp;-&nbsp;{{ event.player }}
 											</p>
