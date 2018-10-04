@@ -14,17 +14,15 @@
 	            	</div>
 
 					<!-- Modal body -->
-					<div id="modalBoxContent" class="matchBox" v-if="loadedEvent.home_team && loadedEvent.visitor_team">
+					<div id="modalBoxContent" class="matchBox" v-if="loadedEvent && loadedEvent.home_team && loadedEvent.visitor_team">
 						<div class="resumeMatch">
 							<div class="flex-container-match">
 								<div class="left">Competition id</br>{{ loadedEvent.league_id }}</div>
 								<div class="center text-center">{{ loadedEvent.date }}</br>{{ loadedEvent.time }}</div>
-								<!-- <div class="right">Match de groupes</br>Groupe A</div> -->
-								<!-- <p style="color: #000;">
-									loadedEvent: {{ loadedEvent }}<br /><br />
-									eventUsers: {{ loadedEventUsers }}<br /><br />
-									loadedEvent2: {{ loadedEvent2('h') }}<br /><br />
-								</p> -->
+								<p style="color: #000;">
+									<!-- loadedEvent: {{ loadedEvent }}<br /><br /> -->
+									<!-- eventUsers: {{ loadedEventUsers }}<br /><br /> -->
+								</p>
 							</div>
 							<div class="flex-container-match-flagMatch">
 								<div class="flagMatch"><img :src="'/images/teams/' + loadedEvent.home_team.slug + '.png'" class="imgModalMatchFlags"/></div>
@@ -41,29 +39,24 @@
 								<div class="teamMatch center">{{ loadedEvent.visitor_team.name }}</div>
 							</div>
 							<div class="flex-container-teamMatch">
-								<div class="matchInfo">
-									<span if="loadedEvent.events">
-										<!-- {{ this.homeEvents }} -->
-										<div v-for="event in loadedEvent.events">
+								<div class="matchInfo" v-if="loadedEvent.events">
+									<transition-group name="fade" tag="div" :duration="{ enter: 4000, leave: 3000 }">
+										<div v-for="event in loadedEvent.events" :key="event.id" class="" v-if="event">
 											<p v-if="event.home_away === 'h'">
+												<img :src="'/images/' + event.event + '.png'" width="20" />&nbsp;
 												{{ event.event }}&nbsp;-&nbsp;{{ event.time }}min&nbsp;-&nbsp;{{ event.player }}
 											</p>
 										</div>
-										<!-- <ul v-for="event in loadedEvent.events">
-											<li v-if="event.home_away === 'h'">{{ event }}</li>
-										</ul> -->
-										<!-- {{ loadedEvent.events }} -->
-										<!-- {{ loadedEvent.events.filter(event => (event.home_away === 'h')) }} -->
-									</span>
+									</transition-group>
 								</div>
-								<div class="matchInfoRight">
-									<div v-for="event in loadedEvent.events">
-										<p v-if="event.home_away === 'a'">
-											{{ event.event }}&nbsp;-&nbsp;{{ event.time }}min&nbsp;-&nbsp;{{ event.player }}
-										</p>
-									</div>
-									<!-- But : 12e - Buteur no 1</br> -->
-									<!-- Carton jaune : 25e - Joueur no 12 -->
+								<div class="matchInfoRight" v-if="loadedEvent.events">
+									<transition-group name="fade" tag="div" :duration="{ enter: 4000, leave: 3000 }">
+										<div v-for="event in loadedEvent.events" :key="event.id" v-if="event">
+											<p v-if="event.home_away === 'a'" :key="event.time">
+												<img :src="'/images/' + event.event + '.png'" width="20" />&nbsp;{{ event.event }}&nbsp;-&nbsp;{{ event.time }}min&nbsp;-&nbsp;{{ event.player }}
+											</p>
+										</div>
+									</transition-group>
 								</div>
 							</div>
 							<div class="flex-container-match-tonScore">
@@ -72,10 +65,10 @@
 							<div class="flex-container-match-barreProgression">
 								<div class="barreProgression center">Barre de progression du score</br>
 									<div class="progress">
-										<div class="progress-bar blue" role="progressbar" style="width:45%">
+										<div class="progress-bar blue" role="progressbar" style="width:45%" v-if="loadedEvent.home_team">
 										{{ loadedEvent.home_team.name }}
 										</div>
-										<div class="progress-bar red" role="progressbar" style="width:55%">
+										<div class="progress-bar red" role="progressbar" style="width:55%" v-if="loadedEvent.visitor_team">
 										{{ loadedEvent.visitor_team.name }}
 										</div>
 									</div> 								
@@ -83,7 +76,7 @@
 							</div>
 						</div>
 					</div>
-					<div id="modalTitle" class="modal-body-match" v-if="event.home_team">
+					<div id="modalTitle" class="modal-body-match" v-if="event && event.home_team">
 						<event-home v-if="page === 'eventHome'" :event="event" v-on:page="page = 'eventTeam'"></event-home>
 						<event-team v-if="page === 'eventTeam'" :event="event" v-on:page="page ='eventHome'"></event-team>
 					</div>
@@ -158,5 +151,13 @@
 	}
 	.red-color {
 		color: red;
+	}
+	/* Vuejs transitions */
+	.fade-enter-active, .fade-leave-active {
+	  transition: opacity 5s;
+	  background-color: yellow;
+	}
+	.fade-enter, .fade-leave-to {
+	  opacity: 0;
 	}
 </style>

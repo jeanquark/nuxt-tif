@@ -12,7 +12,7 @@
 			<div id="header" class="col-12 col-sm-12 col-md-12 col-lg-12 top-fixed">
 				<div class="flex-container-header text-center">
 					<div class="column">
-						<div class="level-box" v-if="loadedUser && loadedUser.level"><i class="fa fa-star"></i> Niv. {{ loadedUser.level.value }} - <i class="fa fa-angle-double-up"></i> <span v-if="loadedUser.action">{{ loadedUser.action.value }} / 10</span></div>						
+						<div class="level-box" v-if="loadedUser && loadedUser.level"><i class="fa fa-star"></i> Niv. {{ loadedUser.level.value }} - <i class="fa fa-angle-double-up"></i> <span v-if="loadedUser.action">{{ loadedUser.action.value }} / 10</span></div>
 					</div>
 					<div class="column">
 						<div class="dollar-box" v-if="loadedUser && loadedUser.dollarFan"><i class="fa fa-dollar-sign"></i> {{ loadedUser.dollarFan.value }}</div>						
@@ -37,7 +37,8 @@
 				<div class="flex-container-playerPropriety">
 					<nuxt-link to="/user/avatar" class="boxShadow" style="flex-basis: 60px" v-if="loadedUser && loadedUser.avatar">
 						<span v-tooltip="'Salut Gaël!'">
-							<img :src="loadedUser.avatar.url" class="imgAvatar"/>
+							<!-- <img :src="loadedUser.avatar.url" class="imgAvatar"/> -->
+							<img v-lazy="loadedUser.avatar.url" class="imgAvatar"/>
 						</span>
 					</nuxt-link>
 					<nuxt-link to="/user/avatar" class="boxShadow" style="flex-basis: 60px" v-else><img src="/images/avatar.png" class="imgAvatar"/></nuxt-link>

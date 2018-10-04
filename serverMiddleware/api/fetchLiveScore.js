@@ -6,15 +6,15 @@ const express = require('express'),
       env = require('dotenv').config();
 
 const app = express();
+const api_key = process.env.LIVESCORE_API_KEY
+const api_secret = process.env.LIVESCORE_API_SECRET
 
-// console.log('Livescore API key: ', process.env.API_LIVESCORE_KEY)
-
-// To be run every hour
+// To be run every minute
 module.exports = app.use(async function (req, res, next) {
     try {
-        const leaguesArray = ['25', '74', '114', '73', '46', '12', '139', '86', '9', '174', '175', '176', '177', '232', '233', '234', '235']
+        const leaguesArray = ['25', '74', '114', '73', '46', '12', '139', '86', '9', '174', '175', '176', '177', '232', '233', '234', '235', '236', '237', '238', '239', '240', '241', '242', '243', '244', '245', '246', '247']
 
-        const url = 'http://livescore-api.com/api-client/scores/live.json?key=OcregGOthrL9mbll&secret=QypmqmYAOLUmrWrf8SuoziSQKDZ6PksF'
+        const url = 'http://livescore-api.com/api-client/scores/live.json?key=' + api_key + '&secret=' + api_secret
         axios.get(url).then((response) => {
             // console.log('response: ', response)
             const today = moment().format('YYYY-MM-DD')

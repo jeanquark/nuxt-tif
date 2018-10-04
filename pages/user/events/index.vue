@@ -27,40 +27,12 @@
 						<h2>Mes équipes <span class="infoEvent"><i class="infoTesEquipes fas fa-info-circle"></i></span></h2>
 
 					</div>
+
+					<!-- Loading placeholder -->
+
 					<div class="flex-container-modal-Action">
 						<table class="table tableText">
 						  	<tbody>
-						  		<!-- Loading placeholder -->
-								<div class="ph-item" v-for="n in 2" v-if="!userEvents">
-									<div class="ph-col-2">
-										<div class="ph-avatar"></div>
-									</div>
-									<div>
-										<div class="ph-row">
-											<div class="ph-col-4 empty"></div>
-											<div class="ph-col-4 big"></div>
-											<div class="ph-col-4 empty"></div>
-										</div>
-										<div class="ph-row">
-											<div class="ph-col-4 empty"></div>
-											<div class="ph-col-4"></div>
-											<div class="ph-col-4 empty"></div>
-										</div>
-										<div class="ph-row">
-											<div class="ph-col-4 empty"></div>
-											<div class="ph-col-4"></div>
-											<div class="ph-col-4 empty"></div>
-										</div>
-										<div class="ph-row">
-											<div class="ph-col-4 empty"></div>
-											<div class="ph-col-4"></div>
-											<div class="ph-col-4 empty"></div>
-										</div>
-									</div>
-									<div class="ph-col-2">
-										<div class="ph-avatar"></div>
-									</div>
-								</div>
 								<tr class="borderResultat" v-for="event of userEvents">
 								  	<td class="tdResultat1 text-left" style="width: 30%;">
 								  		<a href="mesEquipesDetails.html" class="linkEvent"><img :src="'/images/teams/' + event.home_team.slug + '.png'" class="imgModalAgendaFlags"/> {{ event.home_team.name }}</a>
@@ -76,11 +48,10 @@
 								  		<nuxt-link :to="'/user/events/' + event.id" class="linkEvent">
 								  			Football</br>
 								  			<span v-if="event.competition">{{ event.competition.name }}<br /></span>
-								  			<!-- <span v-if="event.round">{{ event.round }}<br /></span> -->
+								  			<span v-if="event.round">{{ event.round.name }}<br /></span>
 								  			{{ event.date }}<br />
-								  			<!-- {{ event.timestamp | moment("subtract", "1 hours") }}</br> -->
 								  			{{ convertToLocaltime(event.timestamp) }}</br>
-								  			{{ event.score }}</br>{{ event.status }}
+								  			<span :class="[event.status === 'IN PLAY' ? 'in_play' : '']">{{ event.status }}</span>
 								  		</nuxt-link></td>
 								  	</td>
 								  	<td style="width: 10%;">
@@ -101,7 +72,7 @@
 						<h2>Tous les autres évenements du jour <span class="infoOtherEvent"><i class="infoTesEquipes fas fa-info-circle"></i></span></h2>
 					</div>
 					<!-- Loading placeholder -->
-					<div class="ph-item" v-for="n in 4" v-if="!userEvents">
+					<div class="ph-item" v-for="n in 4" v-if="events.length < 1">
 						<div class="ph-col-2">
 							<div class="ph-avatar"></div>
 						</div>
@@ -136,9 +107,9 @@
 						  <tbody>
 							<tr class="borderResultat" v-for="event of events">
 							  	<td class="tdResultat1 text-left" style="">
-							  		<a href="autresEquipesDetails.html" class="linkEvent"><img :src="'/images/teams/' + event.home_team.slug + '.png'" class="imgModalAgendaFlags"/> {{ event.home_team.name }}</a>
+							  		<a href="autresEquipesDetails.html" class="linkEvent"><img :src="'/images/teams/' + event.home_team.slug + '.png'" class="imgModalAgendaFlags"/> {{ event.home_team.slug }}</a>
 							  		<transition name="fade" mode="out-in" :duration="{ enter: 3000, leave: 2000 }">
-							  			<span class="" style="float: right; padding: 15px;" :key="getHomeTeamScore(event.score)" v-if="event.status === 'IN PLAY'">
+							  			<span class="" style="float: right; padding: 15px;" :key="getHomeTeamScore(event.score)" v-if="event.status === 'IN PLAY' || 'FINISHED'">
 							  				{{ getHomeTeamScore(event.score) }}
 							  			</span>
 							  		</transition>
@@ -154,11 +125,11 @@
 							  		</nuxt-link></td>
 							  	<td class="tdResultat1 text-right">
 							  		<transition name="fade" mode="out-in" :duration="{ enter: 3000, leave: 2000 }">
-							  			<span class="" style="float: left; padding: 15px;" :key="getVisitorTeamScore(event.score)" v-if="event.status === 'IN PLAY'">
+							  			<span class="" style="float: left; padding: 15px;" :key="getVisitorTeamScore(event.score)" v-if="event.status === 'IN PLAY' || 'FINISHED'">
 							  				{{ getVisitorTeamScore(event.score) }}
 							  			</span>
 							  		</transition>
-							  		<a href="autresEquipesDetails.html" class="linkEvent">{{ event.visitor_team.name }} <img :src="'/images/teams/' + event.visitor_team.slug + '.png'" class="imgModalAgendaFlags"/></a>
+							  		<a href="autresEquipesDetails.html" class="linkEvent">{{ event.visitor_team.slug }} <img :src="'/images/teams/' + event.visitor_team.slug + '.png'" class="imgModalAgendaFlags"/></a>
 							  	</td>
 							</tr>	
 							
@@ -278,6 +249,7 @@
 	.red-color {
 		color: red;
 	}
+	/* Vuejs transitions*/
 	.fade-enter-active, .fade-leave-active {
 	  transition: opacity 5s;
 	  background-color: yellow;

@@ -1,98 +1,75 @@
 const express = require('express'),
       moment = require('moment'),
       axios = require('axios'),
-      admin = require('firebase-admin')
-      // slugify1 = require('../helpers/slugify')
-      slugifyFunction = require('../../helpers/slugify');
+      admin = require('firebase-admin'),
+      slugifyFunction = require('../../helpers/slugify'),
+      getRoundData = require('../../helpers/api/rounds'),
+      getLeagueData = require('../../helpers/api/leagues'),
+      getTeamData = require('../../helpers/api/teams'),
+      env = require('dotenv').config();
 
 const app = express();
-
+const api_key = process.env.LIVESCORE_API_KEY
+const api_secret = process.env.LIVESCORE_API_SECRET
 
 function getEuropaLeagueGroupAMatches () {
-    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=OcregGOthrL9mbll&secret=QypmqmYAOLUmrWrf8SuoziSQKDZ6PksF&league=236'
+    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=' + api_key + '&secret=' + api_secret + '&league=236'
     return axios.get(url)
 }
 
 function getEuropaLeagueGroupBMatches () {
-    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=OcregGOthrL9mbll&secret=QypmqmYAOLUmrWrf8SuoziSQKDZ6PksF&league=237'
+    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=' + api_key + '&secret=' + api_secret + '&league=237'
     return axios.get(url)
 }
 
 function getEuropaLeagueGroupCMatches () {
-    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=OcregGOthrL9mbll&secret=QypmqmYAOLUmrWrf8SuoziSQKDZ6PksF&league=238'
+    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=' + api_key + '&secret=' + api_secret + '&league=238'
     return axios.get(url)
 }
 
 function getEuropaLeagueGroupDMatches () {
-    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=OcregGOthrL9mbll&secret=QypmqmYAOLUmrWrf8SuoziSQKDZ6PksF&league=239'
+    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=' + api_key + '&secret=' +api_secret + '&league=239'
     return axios.get(url)
 }
 
 function getEuropaLeagueGroupEMatches () {
-    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=OcregGOthrL9mbll&secret=QypmqmYAOLUmrWrf8SuoziSQKDZ6PksF&league=240'
+    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=' + api_key + '&secret=' +api_secret + '&league=240'
     return axios.get(url)
 }
 
 function getEuropaLeagueGroupFMatches () {
-    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=OcregGOthrL9mbll&secret=QypmqmYAOLUmrWrf8SuoziSQKDZ6PksF&league=241'
+    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=' + api_key + '&secret=' +api_secret + '&league=241'
     return axios.get(url)
 }
 
 function getEuropaLeagueGroupGMatches () {
-    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=OcregGOthrL9mbll&secret=QypmqmYAOLUmrWrf8SuoziSQKDZ6PksF&league=242'
+    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=' + api_key + '&secret=' +api_secret + '&league=242'
     return axios.get(url)
 }
 
 function getEuropaLeagueGroupHMatches () {
-    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=OcregGOthrL9mbll&secret=QypmqmYAOLUmrWrf8SuoziSQKDZ6PksF&league=243'
+    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=' + api_key + '&secret=' +api_secret + '&league=243'
     return axios.get(url)
 }
 
 function getEuropaLeagueGroupIMatches () {
-    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=OcregGOthrL9mbll&secret=QypmqmYAOLUmrWrf8SuoziSQKDZ6PksF&league=244'
+    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=' + api_key + '&secret=' +api_secret + '&league=244'
     return axios.get(url)
 }
-
 
 function getEuropaLeagueGroupJMatches () {
-    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=OcregGOthrL9mbll&secret=QypmqmYAOLUmrWrf8SuoziSQKDZ6PksF&league=245'
+    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=' + api_key + '&secret=' +api_secret + '&league=245'
     return axios.get(url)
 }
-
 
 function getEuropaLeagueGroupKMatches () {
-    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=hPPVj3bOcU4MTC6a&secret=EUl5JwsFuxpgkjnB9dwshHgtClgwXnHB&league=246'
+    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=' + api_key + '&secret=' + api_secret + '&league=246'
     return axios.get(url)
 }
-
 
 function getEuropaLeagueGroupLMatches () {
-    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=hPPVj3bOcU4MTC6a&secret=EUl5JwsFuxpgkjnB9dwshHgtClgwXnHB&league=247'
+    const url = 'http://livescore-api.com/api-client/fixtures/matches.json?key=' + api_key + '&secret=' + api_secret + '&league=247'
     return axios.get(url)
-}
-
-
-const rounds = {
-    'GS': {
-        'id': 'GS',
-        'name': 'Group stage',
-        'slug': 'group_stage'
-    },
-    'QF': {
-        'id': 'QF',
-        'name': 'Quarter Final',
-        'slug': 'quarter_final'
-    },
-    'SF': {
-        'id': 'SF',
-        'name': 'Semi Final',
-        'slug': 'semi_final'
-    },
-    'F': {
-        'id': 'F',
-        'name': 'Final',
-        'slug': 'final'
-    }
 }
 
 // To be run once a day
@@ -105,39 +82,28 @@ module.exports = app.use(function (req, res, next) {
             let events = {}
             let updates = {}
             for (let match of matches) {
-                // console.log('Match: ', match)
-                const home_slug = slugifyFunction.slugify(match.home_name)
-                const visitor_slug = slugifyFunction.slugify(match.away_name)
-                // console.log('home_slug: ', home_slug)
-                // console.log('visitor_slug: ', visitor_slug)
-                const id = match.date + '_' + home_slug + '_vs_' + visitor_slug
                 const date_time = match.date + ' ' + match.time
-                match.timestamp = moment(date_time).format('X')
+                const leagueData = getLeagueData.league(parseInt(match.league_id)) ? getLeagueData.league(parseInt(match.league_id)) : {id: match.league_id}
+                const homeTeamData = getTeamData.team(parseInt(match.home_id)) ? getTeamData.team(parseInt(match.home_id)) : {id: match.home_id, name: match.home_name, slug: slugifyFunction.slugify(match.home_name)}
+                const visitorTeamData = getTeamData.team(parseInt(match.away_id)) ? getTeamData.team(parseInt(match.away_id)) : {id: match.away_id, name: match.away_name, slug: slugifyFunction.slugify(match.away_name)}
+                const roundData = getRoundData.round(match.round) ? getRoundData.round(match.round) : match.round
 
-                match.competition = {
-                    id: match.league_id,
-                    name: 'Europa League',
-                    slug: 'europa_league'
-                }
-                match.round = rounds[match.round] ? rounds[match.round] : match.round
+                const id = match.date + '_' + match.home_id + '_vs_' + match.away_id
 
-                match.home_team = {
-                    id: match.home_id,
-                    name: match.home_name,
-                    slug: home_slug,
-                }
-                match.visitor_team = {
-                    id: match.away_id,
-                    name: match.away_name,
-                    slug: visitor_slug,
-                }
-                // events[id] = match
-                updates['/events_new2/' + id] = match
+                updates['/events_new2/' + id + '/id'] = id
+                updates['/events_new2/' + id + '/livescore_api_id'] = match.id
+                updates['/events_new2/' + id + '/date'] = match.date
+                updates['/events_new2/' + id + '/time'] = match.time
+                updates['/events_new2/' + id + '/timestamp'] = moment(date_time).utc().format('X')
+                updates['/events_new2/' + id + '/competition'] = leagueData
+                updates['/events_new2/' + id + '/location'] = match.location
+                updates['/events_new2/' + id + '/round'] = roundData
+                updates['/events_new2/' + id + '/home_team'] = homeTeamData
+                updates['/events_new2/' + id + '/visitor_team'] = visitorTeamData
             }
 
             admin.database().ref().update(updates).then((snapshot) => {
                 console.log('Successfully updated firebase database with new events')
-                // console.log(slugify1.slugify('F.C Zurich'))
             }).catch((error) => {
                 console.log('Firebase error: ', error)
             })

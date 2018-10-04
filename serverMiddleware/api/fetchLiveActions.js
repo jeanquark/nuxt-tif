@@ -2,43 +2,18 @@ const express = require('express'),
       moment = require('moment'),
       axios = require('axios'),
       admin = require('firebase-admin')
-      slugifyFunction = require('../../helpers/slugify');
+      slugifyFunction = require('../../helpers/slugify')
+      env = require('dotenv').config();
 
 const app = express();
+const api_key = process.env.LIVESCORE_API_KEY
+const api_secret = process.env.LIVESCORE_API_SECRET
 
 // Fetch all events that are about to start
-// const today = moment().subtract(1, 'day').format('YYYY-MM-DD');
 const today = moment().format('YYYY-MM-DD');
 console.log('today: ', today);
-// const startTime = moment().utc().unix();
-// const endTime = moment().add(3, 'hours').unix();
-// console.log('startTime: ', startTime)
-// console.log('endTime: ', endTime)
 
-const rounds = {
-    'GS': {
-        'id': 'GS',
-        'name': 'Group stage',
-        'slug': 'group_stage'
-    },
-    'QF': {
-        'id': 'QF',
-        'name': 'Quarter Final',
-        'slug': 'quarter_final'
-    },
-    'SF': {
-        'id': 'SF',
-        'name': 'Semi Final',
-        'slug': 'semi_final'
-    },
-    'F': {
-        'id': 'F',
-        'name': 'Final',
-        'slug': 'final'
-    }
-}
-
-// To be run every hour
+// To be run every minute
 module.exports = app.use(async function (req, res, next) {
     try {
         const todayMatches = await admin.database().ref('/events_new2').orderByChild('date').equalTo(today).once('value').then((snapshot) => {
@@ -60,7 +35,7 @@ module.exports = app.use(async function (req, res, next) {
             const id = today + '_' + match.home_team.id + '_vs_' + match.visitor_team.id
             console.log('id: ', id)
 
-            let url = 'http://livescore-api.com/api-client/scores/events.json?key=OcregGOthrL9mbll&secret=QypmqmYAOLUmrWrf8SuoziSQKDZ6PksF&id=' + match.id
+            let url = 'http://livescore-api.com/api-client/scores/events.json?key=' + api_key + '&secret=' + api_secret + '&id=' + match.id
 
             axios.get(url).then((response) => {
                 // console.log('response: ', response)
