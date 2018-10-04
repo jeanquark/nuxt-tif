@@ -35,11 +35,11 @@
 						  	<tbody>
 								<tr class="borderResultat" v-for="event of userEvents">
 								  	<td class="tdResultat1 text-left" style="width: 30%;">
-								  		<a href="mesEquipesDetails.html" class="linkEvent"><img :src="'/images/teams/' + event.home_team.slug + '.png'" class="imgModalAgendaFlags"/> {{ event.home_team.name }}</a>
+								  		<a href="mesEquipesDetails.html" class="linkEvent"><img v-lazy="'/images/teams/' + event.home_team.slug + '.png'" class="imgModalAgendaFlags"/> {{ event.home_team.name }}</a>
 								  	</td>
 								  	<td style="width: 10%;">
 								  		<transition name="fade" mode="out-in" :duration="{ enter: 3000, leave: 2000 }">
-											<span class="" style="float: right; border: 1px solid orange; padding: 15px;" :key="getHomeTeamScore(event.score)" v-if="event.status === 'IN PLAY'">
+											<span class="" style="float: right; padding: 15px;" :key="getHomeTeamScore(event.score)" v-if="event.status === 'IN PLAY' || 'FINISHED'">
 								  				{{ getHomeTeamScore(event.score) }}
 								  			</span>
 								  		</transition>
@@ -56,13 +56,13 @@
 								  	</td>
 								  	<td style="width: 10%;">
 								  		<transition name="fade" mode="out-in" :duration="{ enter: 3000, leave: 2000 }">
-											<span class="" style="float: left; border: 1px solid orange; padding: 15px;" :key="getVisitorTeamScore(event.score)" v-if="event.status === 'IN PLAY'">
+											<span class="" style="float: left; padding: 15px;" :key="getVisitorTeamScore(event.score)" v-if="event.status === 'IN PLAY' || 'FINISHED'">
 								  				{{ getVisitorTeamScore(event.score) }}
 								  			</span>
 								  		</transition>
 								  	</td>
 								  	<td class="tdResultat1 text-right" style="width: 30%;">
-								  		<a href="autresEquipesDetails.html" class="linkEvent">{{ event.visitor_team.name }} <img :src="'/images/teams/' + event.visitor_team.slug + '.png'" class="imgModalAgendaFlags"/></a>
+								  		<a href="autresEquipesDetails.html" class="linkEvent">{{ event.visitor_team.name }} <img v-lazy="'/images/teams/' + event.visitor_team.slug + '.png'" class="imgModalAgendaFlags"/></a>
 								  	</td>
 								</tr>	
 						  	</tbody>
@@ -107,7 +107,7 @@
 						  <tbody>
 							<tr class="borderResultat" v-for="event of events">
 							  	<td class="tdResultat1 text-left" style="">
-							  		<a href="autresEquipesDetails.html" class="linkEvent"><img :src="'/images/teams/' + event.home_team.slug + '.png'" class="imgModalAgendaFlags"/> {{ event.home_team.slug }}</a>
+							  		<a href="autresEquipesDetails.html" class="linkEvent"><img v-lazy="'/images/teams/' + event.home_team.slug + '.png'" class="imgModalAgendaFlags"/> {{ event.home_team.name }}</a>
 							  		<transition name="fade" mode="out-in" :duration="{ enter: 3000, leave: 2000 }">
 							  			<span class="" style="float: right; padding: 15px;" :key="getHomeTeamScore(event.score)" v-if="event.status === 'IN PLAY' || 'FINISHED'">
 							  				{{ getHomeTeamScore(event.score) }}
@@ -129,7 +129,7 @@
 							  				{{ getVisitorTeamScore(event.score) }}
 							  			</span>
 							  		</transition>
-							  		<a href="autresEquipesDetails.html" class="linkEvent">{{ event.visitor_team.slug }} <img :src="'/images/teams/' + event.visitor_team.slug + '.png'" class="imgModalAgendaFlags"/></a>
+							  		<a href="autresEquipesDetails.html" class="linkEvent">{{ event.visitor_team.name }} <img v-lazy="'/images/teams/' + event.visitor_team.slug + '.png'" class="imgModalAgendaFlags"/></a>
 							  	</td>
 							</tr>	
 							
