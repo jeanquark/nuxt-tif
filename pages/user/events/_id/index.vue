@@ -44,7 +44,8 @@
 									<transition-group name="fade" tag="div" :duration="{ enter: 4000, leave: 3000 }">
 										<div v-for="event in loadedEvent.events" :key="event.time" class="" v-if="event">
 											<p v-if="event.home_away === 'h'">
-												<img :src="'/images/' + event.event + '.png'" width="20" />&nbsp;
+												<!-- {{ event.event.toLowerCase() }} -->
+												<img :src="'/images/' + event.event.toLowerCase() + '.png'" width="20" />&nbsp;
 												{{ event.event }}&nbsp;-&nbsp;{{ event.time }}min&nbsp;-&nbsp;{{ event.player }}
 											</p>
 										</div>
@@ -54,7 +55,7 @@
 									<transition-group name="fade" tag="div" :duration="{ enter: 4000, leave: 3000 }">
 										<div v-for="event in loadedEvent.events" :key="event.time" v-if="event">
 											<p v-if="event.home_away === 'a'" :key="event.time">
-												<img :src="'/images/' + event.event + '.png'" width="20" />&nbsp;{{ event.event }}&nbsp;-&nbsp;{{ event.time }}min&nbsp;-&nbsp;{{ event.player }}
+												<img :src="'/images/' + event.event.toLowerCase() + '.png'" width="20" />&nbsp;{{ event.event }}&nbsp;-&nbsp;{{ event.time }}min&nbsp;-&nbsp;{{ event.player }}
 											</p>
 										</div>
 									</transition-group>
