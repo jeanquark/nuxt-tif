@@ -277,8 +277,8 @@ margin-right: 10px;
 .imgModalAgendaFlags {
 position: relative;
 top: 0;
-height: 50px;
-width: 50px;
+height: 40px;
+width: 40px;
 }
 
 .imgModalEvent1Flags {
@@ -2918,6 +2918,7 @@ border-top: none;
 .tableText {
 color: #000000;
 font: normal 100%/1 "bangers", Helvetica, sans-serif;
+margin: 20px;
 }
 
 .tableTextEvent {
@@ -4561,7 +4562,7 @@ table .tdScore1 {
 width: 32%;
 font-weight: normal;
 color: #000000;
-font: normal 110%/1 "bangers", Helvetica, sans-serif;
+font: normal 100%/1 "bangers", Helvetica, sans-serif;
 border: none;
 vertical-align: middle;
 }
@@ -4570,7 +4571,7 @@ table .tdScore2 {
 width: 10%;
 font-weight: normal;
 color: #000000;
-font: normal 140%/1 "bangers", Helvetica, sans-serif;
+font: normal 120%/1 "bangers", Helvetica, sans-serif;
 border: none;
 }
 
