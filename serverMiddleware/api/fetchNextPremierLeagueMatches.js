@@ -60,8 +60,8 @@ function getSwedishLeagueMatches () {
 // To be run once a day
 module.exports = app.use(function (req, res, next) {
     try {
-        axios.all([getPremierLeagueMatches(), getLaLigaMatches(), getBundesligaMatches(), getSerieAMatches(), getLigue1Matches(), getSuperLeagueMatches(), getGreekSuperLeagueMatches(), getIsraelianLeagueMatches()]).then(axios.spread(function (premierLeague, laLiga, bundesliga, seriea, ligue1, superLeague, greekSuperLeague, israelianLeague) {
-            let matches = premierLeague.data.data.fixtures.concat(laLiga.data.data.fixtures).concat(bundesliga.data.data.fixtures).concat(seriea.data.data.fixtures).concat(ligue1.data.data.fixtures).concat(superLeague.data.data.fixtures).concat(greekSuperLeague.data.data.fixtures).concat(israelianLeague.data.data.fixtures)
+        axios.all([getPremierLeagueMatches(), getLaLigaMatches(), getBundesligaMatches(), getSerieAMatches(), getLigue1Matches(), getSuperLeagueMatches()]).then(axios.spread(function (premierLeague, laLiga, bundesliga, seriea, ligue1, superLeague) {
+            let matches = premierLeague.data.data.fixtures.concat(laLiga.data.data.fixtures).concat(bundesliga.data.data.fixtures).concat(seriea.data.data.fixtures).concat(ligue1.data.data.fixtures).concat(superLeague.data.data.fixtures)
             console.log('matches: ', matches)
             let events = {}
             let updates = {}

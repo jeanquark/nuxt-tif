@@ -39,7 +39,7 @@
 								  	</td>
 								  	<td style="width: 10%;">
 								  		<transition name="fade" mode="out-in" :duration="{ enter: 3000, leave: 2000 }">
-											<span class="" style="float: right; padding: 15px;" :key="getHomeTeamScore(event.score)" v-if="event.status === 'IN PLAY' || event.status === 'FINISHED'">
+											<span class="" style="float: right; padding: 15px;" :key="getHomeTeamScore(event.score)" v-if="event.status === 'IN PLAY' || event.status === 'HALF TIME BREAK' || event.status === 'ADDED TIME' || event.status === 'FINISHED'">
 								  				{{ getHomeTeamScore(event.score) }}
 								  			</span>
 								  		</transition>
@@ -48,15 +48,15 @@
 								  		<nuxt-link :to="'/user/events/' + event.id" class="linkEvent">
 								  			Football</br>
 								  			<span v-if="event.competition">{{ event.competition.name }}<br /></span>
-								  			<span v-if="event.round">{{ event.round.name }}<br /></span>
+								  			<span v-if="event.round && event.round.name">{{ event.round.name }}<br /></span>
 								  			{{ event.date }}<br />
 								  			{{ convertToLocaltime(event.timestamp) }}</br>
-								  			<span :class="[event.status === 'IN PLAY' ? 'in_play' : '']">{{ event.status }}</span>
+								  			<span :class="[event.status === 'IN PLAY' || event.status === 'ADDED TIME' ? 'in_play' : '']">{{ event.status }}</span>
 								  		</nuxt-link></td>
 								  	</td>
 								  	<td style="width: 10%;">
 								  		<transition name="fade" mode="out-in" :duration="{ enter: 3000, leave: 2000 }">
-											<span class="" style="float: left; padding: 15px;" :key="getVisitorTeamScore(event.score)" v-if="event.status === 'IN PLAY' || event.status === 'FINISHED'">
+											<span class="" style="float: left; padding: 15px;" :key="getVisitorTeamScore(event.score)" v-if="event.status === 'IN PLAY' || event.status === 'HALF TIME BREAK' || event.status === 'ADDED TIME' || event.status === 'FINISHED'">
 								  				{{ getVisitorTeamScore(event.score) }}
 								  			</span>
 								  		</transition>
@@ -104,36 +104,35 @@
 					</div>
 					<div class="flex-container-modal-Action">
 						<table class="table tableText">
-						  <tbody>
-							<tr class="borderResultat" v-for="event of events">
-							  	<td class="tdResultat1 text-left" style="">
-							  		<a href="autresEquipesDetails.html" class="linkEvent"><img v-lazy="'/images/teams/' + event.home_team.slug + '.png'" class="imgModalAgendaFlags"/> {{ event.home_team.name }}</a>
-							  		<transition name="fade" mode="out-in" :duration="{ enter: 3000, leave: 2000 }">
-							  			<span class="" style="float: right; padding: 15px;" :key="getHomeTeamScore(event.score)" v-if="event.status === 'IN PLAY' || event.status === 'FINISHED'">
-							  				{{ getHomeTeamScore(event.score) }}
-							  			</span>
-							  		</transition>
-							  	</td>
-							  	<td class="tdResultat text-center">
-							  		<nuxt-link :to="'/user/events/' + event.id" class="linkEvent">
-							  			Football</br>
-							  			<span v-if="event.competition">{{ event.competition.name }}<br /></span>
-							  			<span v-if="event.round">{{ event.round.name }}<br /></span>
-							  			{{ event.date }}<br />
-							  			{{ convertToLocaltime(event.timestamp) }}</br>
-							  			<span :class="[event.status === 'IN PLAY' ? 'in_play' : '']">{{ event.status }}</span>
-							  		</nuxt-link></td>
-							  	<td class="tdResultat1 text-right">
-							  		<transition name="fade" mode="out-in" :duration="{ enter: 3000, leave: 2000 }">
-							  			<span class="" style="float: left; padding: 15px;" :key="getVisitorTeamScore(event.score)" v-if="event.status === 'IN PLAY' || event.status === 'FINISHED'">
-							  				{{ getVisitorTeamScore(event.score) }}
-							  			</span>
-							  		</transition>
-							  		<a href="autresEquipesDetails.html" class="linkEvent">{{ event.visitor_team.name }} <img v-lazy="'/images/teams/' + event.visitor_team.slug + '.png'" class="imgModalAgendaFlags"/></a>
-							  	</td>
-							</tr>	
-							
-						  </tbody>
+						  	<tbody>
+								<tr class="borderResultat" v-for="event of events">
+								  	<td class="tdResultat1 text-left" style="">
+								  		<a href="autresEquipesDetails.html" class="linkEvent"><img v-lazy="'/images/teams/' + event.home_team.slug + '.png'" class="imgModalAgendaFlags"/> {{ event.home_team.name }}</a>
+								  		<transition name="fade" mode="out-in" :duration="{ enter: 3000, leave: 2000 }">
+								  			<span class="" style="float: right; padding: 15px;" :key="getHomeTeamScore(event.score)" v-if="event.status === 'IN PLAY' || event.status === 'HALF TIME BREAK' || event.status === 'ADDED TIME' || event.status === 'FINISHED'">
+								  				{{ getHomeTeamScore(event.score) }}
+								  			</span>
+								  		</transition>
+								  	</td>
+								  	<td class="tdResultat text-center">
+								  		<nuxt-link :to="'/user/events/' + event.id" class="linkEvent">
+								  			Football</br>
+								  			<span v-if="event.competition">{{ event.competition.name }}<br /></span>
+								  			<span v-if="event.round && event.round.name">{{ event.round.name }}<br /></span>
+								  			{{ event.date }}<br />
+								  			{{ convertToLocaltime(event.timestamp) }}</br>
+								  			<span :class="[event.status === 'IN PLAY' || event.status === 'ADDED TIME' ? 'in_play' : '']">{{ event.status }}</span>
+								  		</nuxt-link></td>
+								  	<td class="tdResultat1 text-right">
+								  		<transition name="fade" mode="out-in" :duration="{ enter: 3000, leave: 2000 }">
+								  			<span class="" style="float: left; padding: 15px;" :key="getVisitorTeamScore(event.score)" v-if="event.status === 'IN PLAY' || event.status === 'HALF TIME BREAK' || event.status === 'ADDED TIME' || event.status === 'FINISHED'">
+								  				{{ getVisitorTeamScore(event.score) }}
+								  			</span>
+								  		</transition>
+								  		<a href="autresEquipesDetails.html" class="linkEvent">{{ event.visitor_team.name }} <img v-lazy="'/images/teams/' + event.visitor_team.slug + '.png'" class="imgModalAgendaFlags"/></a>
+								  	</td>
+								</tr>	
+						  	</tbody>
 						</table>
 					</div>
 				</div>
