@@ -108,7 +108,7 @@
 					<div class="flex-container-modal-Action">
 						<table class="table tableText">
 						  	<tbody>
-								<tr class="borderResultat" v-for="event of userEvents">
+								<tr class="borderResultat" v-for="event of events">
 									<td class="tdScore text-left">
 										<nuxt-link :to="'/user/events/' " event.id" class="linkEvent">
 											{{ event.date }}</br>
