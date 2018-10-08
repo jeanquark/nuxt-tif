@@ -20,6 +20,8 @@
 							<!-- loadedEvents: {{ loadedEvents }}<br /><br /> -->
 							<!-- loadedUserTeamsEvents: {{ loadedUserTeamsEvents }}<br /><br /> -->
 							<!-- userEvents: {{ userEvents }}<br /><br /> -->
+							<!-- userTeams: {{ userTeams }}<br /><br /> -->
+							<!-- userTeamsIds: {{ userTeamsIds }}<br /><br /> -->
 							<!-- events: {{ events }}<br /><br /> -->
 						</p>
 					</div>
@@ -184,6 +186,9 @@
 			if (this.$store.getters['events/loadedEvents'].length < 1) {
 				await this.$store.dispatch('events/loadedEvents')
 			}
+			if (this.$store.getters['users/loadedUserTeams'].length < 1) {
+				await this.$store.dispatch('users/loadedUserTeams')
+			}
 
 			// const todayEvents = this.$store.getters['events/loadedEvents']
 			// 	.filter(event => (event.date === today))
@@ -211,21 +216,34 @@
 			}
 		},
 		computed: {
+			userTeams () {
+				return this.$store.getters['users/loadedUserTeams']
+			},
+			userTeamsIds () {
+				const userTeamsIds = []
+				const userTeams = this.$store.getters['users/loadedUserTeams']
+				userTeams.forEach((team) => {
+					userTeamsIds.push(parseInt(team.livescore_api_id))
+				})
+				return userTeamsIds
+			},
 			userEvents () {
 				const today = moment().format('YYYY-MM-DD')
-				const userTeamIds = ["17", "20", "5", "6", "7", "0"]
+				// const userTeamIds = [17, "20", "5", "6", "7", "0"]
+				const userTeamsIds = this.userTeamsIds
 				return this.$store.getters['events/loadedEvents']
 					.filter(event => (event.date === today))
-					.filter(event => (userTeamIds.includes(event.home_team.id) || userTeamIds.includes(event.visitor_team.id)))
+					.filter(event => (userTeamsIds.includes(event.home_team.id) || userTeamsIds.includes(event.visitor_team.id)))
 					.sort((a, b) => a.timestamp - b.timestamp)
 			},
 			events () {
 				const today = moment().format('YYYY-MM-DD')
-				const userTeamIds = ["17", "20", "5", "6", "7", "0"]
+				// const userTeamIds = ["17", "20", "5", "6", "7", "0"]
+				const userTeamsIds = this.userTeamsIds
 				return this.$store.getters['events/loadedEvents']
 					.filter(event => (event.date === today))
-					.filter(event => (!userTeamIds.includes(event.home_team.id)))
-					.filter(event => (!userTeamIds.includes(event.visitor_team.id)))
+					.filter(event => (!userTeamsIds.includes(event.home_team.id) && !userTeamsIds.includes(event.visitor_team.id)))
+					// .filter(event => (!userTeamsIds.includes(event.visitor_team.id)))
 					.sort((a, b) => a.timestamp - b.timestamp)
 			}
 		},

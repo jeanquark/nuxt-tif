@@ -71,11 +71,13 @@ module.exports = app.use(function (req, res, next) {
 
                 const id = match.date + '_' + match.home_id + '_vs_' + match.away_id
 
+                if (match.time.length === 8) {
+                    updates['/events_new2/' + id + '/timestamp'] = moment(date_time).format('X')
+                }
                 updates['/events_new2/' + id + '/id'] = id
                 updates['/events_new2/' + id + '/livescore_api_id'] = match.id
                 updates['/events_new2/' + id + '/date'] = match.date
                 updates['/events_new2/' + id + '/time'] = match.time
-                updates['/events_new2/' + id + '/timestamp'] = moment(date_time).utc().format('X')
                 updates['/events_new2/' + id + '/competition'] = leagueData
                 updates['/events_new2/' + id + '/location'] = match.location
                 updates['/events_new2/' + id + '/round'] = roundData

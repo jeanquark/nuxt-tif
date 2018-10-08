@@ -148,6 +148,7 @@
 <script>
 	import axios from 'axios'
 	import Noty from 'noty'
+	import moment from 'moment'
 	export default {
 		layout: 'layoutFront',
 		created () {
@@ -157,6 +158,11 @@
             // } else {
             // 	console.log('User level: ', this.loadedUser.level)
             // }
+            const date = '2018-10-08'
+            const time = '17:30:00'
+            console.log(time.length === 8 ? 'yes' : 'no')
+            const date_time = date + ' ' + time
+            console.log(moment(date_time).format('X'))
 		},
 		computed: {
 			loadedUser () {

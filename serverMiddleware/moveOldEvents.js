@@ -19,14 +19,14 @@ module.exports = app.use(async function (req, res, next) {
         const snapshot = await admin.database().ref('events_new2').orderByChild('timestamp').startAt('1').endAt(yesterday.toString()).once('value');
         // console.log('snapshot: ', snapshot);
         const response = Object.assign({}, snapshot.val());
-        console.log('response: ', response);
+        // console.log('response: ', response);
 
 
         // 2) Add those events to the events_old node
         let updates = {};
         for (let event in response) {
             console.log('event: ', event);
-            console.log(response[event]);
+            // console.log(response[event]);
             updates['/events_old/' + event] = response[event];
             // Remove those events from events node:
             updates['/events_new2/' + event] = null;

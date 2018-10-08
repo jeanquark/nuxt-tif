@@ -294,21 +294,21 @@ export const actions = {
             const user_tokens = state.loadedUser.tokens.value
             console.log('user_tokens: ', user_tokens)
 
-            if (user_tokens < Math.abs(total_tokens_cost)) {
-                // new Noty({type: 'warning', text: 'Sorry, but you don\'t have enouph tokens to follow more teams. Get your tokens <nuxt-link to="/tokens">here</nuxt-link>', timeout: 5000, theme: 'metroui'}).show()
-                this.$swal({
-                    type: 'warning',
-                    title: 'Oh no!',
-                    text: 'Sorry, but you don\'t have enouph tokens to follow more teams.',
-                    buttons: ['Get tokens', true],
-                })
-                .then((remain) => {
-                    if (!remain) {
-                        this.$router.push('/tokens')
-                    }
-                })
-                return
-            }
+            // if (user_tokens < Math.abs(total_tokens_cost)) {
+            //     // new Noty({type: 'warning', text: 'Sorry, but you don\'t have enouph tokens to follow more teams. Get your tokens <nuxt-link to="/tokens">here</nuxt-link>', timeout: 5000, theme: 'metroui'}).show()
+            //     this.$swal({
+            //         type: 'warning',
+            //         title: 'Oh no!',
+            //         text: 'Sorry, but you don\'t have enouph tokens to follow more teams.',
+            //         buttons: ['Get tokens', true],
+            //     })
+            //     .then((remain) => {
+            //         if (!remain) {
+            //             this.$router.push('/tokens')
+            //         }
+            //     })
+            //     return
+            // }
 
             let customText = ''
             if (teams_diff > 0) {
