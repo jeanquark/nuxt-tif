@@ -33,7 +33,7 @@ module.exports = app.use(async function (req, res, next) {
         }
         
         admin.database().ref().update(updates).then((snapshot) => {
-            console.log('Successfully updated firebase database with new events');
+            console.log('Successfully remove old events from database');
         }).catch((error) => {
             console.log('Firebase error: ', error);
         })

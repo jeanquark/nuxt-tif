@@ -1,5 +1,5 @@
 <template>
-	<div class="flex-container-modal-avatar-shape no-margin">
+	<div class="">
 		<!-- <p>
 			total_background_shapes: {{ this.total_background_shapes }}<br /><br />
 			background: {{ background }}<br /><br />
@@ -12,7 +12,7 @@
 	    </div> -->
 
 	    <carousel-3d :width="200" :height="200" :startIndex="background_shape - 1">
-          	<slide v-for="(index, i) in total_background_shapes" :index="i" :key="i">
+          	<slide v-for="(index, i) in total_background_shapes" :index="i" :key="i" >
             	<img v-lazy="'/images/avatars/jm/unisex/background/shape/backgroundShape' + convertTo2Digits(index) + '001.png'" class="imgModalAvatar" :class="{active: (background_shape === convertTo2Digits(index)) }" style="cursor: pointer;" @click="addToMerge({gender: 'unisex', type: 'background', property: 'shape', image: 'background' + convertTo2Digits(index) + background_color + '.png', index: index, layerPosition: 0})" />
           	</slide>
     	</carousel-3d>
@@ -24,7 +24,7 @@
 		props: ['background'],
 		data () {
 			return {
-				total_background_shapes: 4,
+				total_background_shapes: 4
 			}
 		},
 		computed: {
@@ -50,6 +50,22 @@
 <style scoped>
 	.active {
         background-color: orangered;
-        border: 2px solid red;
+        border: 2px solid orangered;
+    }
+    .imgModalAvatar {
+    	margin: 0px;
+    }
+    .carousel-3d-slide {
+    	position: absolute;
+        opacity: 0;
+        top: 0;
+        border: none;
+        background-size: cover;
+        background-color: #fff;
+        display: block;
+        margin: 0;
+    }
+    .carousel-3d-slide img {
+        background-color: #fff;
     }
 </style>

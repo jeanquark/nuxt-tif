@@ -1,4 +1,4 @@
-<template>
+<template lang="html">
   <div class="loading-page" v-if="loading">
     <p>Loading...</p>
   </div>
@@ -10,10 +10,10 @@ export default {
     loading: false
   }),
   methods: {
-    start() {
+    start () {
       this.loading = true
     },
-    finish() {
+    finish () {
       this.loading = false
     }
   }
@@ -22,12 +22,14 @@ export default {
 
 <style scoped>
 .loading-page {
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-  height: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: rgba(255, 255, 255, 0.8);
   text-align: center;
+  padding-top: 200px;
   font-size: 30px;
   font-family: sans-serif;
 }

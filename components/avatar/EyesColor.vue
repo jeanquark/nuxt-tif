@@ -7,9 +7,15 @@
 			eyes_color2: {{ this.eyes_color2 }}<br /><br />
 		</p> -->
 
-	    <div v-for="index in total_eyes_colors" @click="addToMerge({gender: gender, type: 'eyes', property: 'color', image: 'eyes' + eyes_shape + convertTo2Digits(index) + '.png', index: index, layerPosition: 3})">
+	    <!-- <div v-for="index in total_eyes_colors" @click="addToMerge({gender: gender, type: 'eyes', property: 'color', image: 'eyes' + eyes_shape + convertTo2Digits(index) + '.png', index: index, layerPosition: 3})">
             <img :src="'/images/avatars/jm/' + gender + '/' + 'eyes' + '/' + 'colors' + '/eyesColor' + convertTo2Digits(index) + '.png'" class="imgModalAvatarColor" :class="{active: (eyes_color === convertTo2Digits(index)) }" style="cursor: pointer;" />
-        </div>
+        </div> -->
+
+        <carousel-3d :width="200" :height="200" :startIndex="eyes_color - 1">
+          	<slide v-for="(index, i) in total_eyes_colors" :index="i" :key="i">
+            	<img v-lazy="'/images/avatars/jm/' + gender + '/eyes/colors/eyesColor' + convertTo2Digits(index) + '.png'" class="imgModalAvatarColor" :class="{active: (eyes_color === convertTo2Digits(index)) }" style="cursor: pointer;" @click="addToMerge({gender: gender, type: 'eyes', image: 'eyes' + eyes_shape + convertTo2Digits(index) + '.png', index: index, layerPosition: 3})" />
+          	</slide>
+    	</carousel-3d>
 	</div>
 </template>
 

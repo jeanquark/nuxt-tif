@@ -90,7 +90,7 @@ export const actions = {
                 }).then((response) => {
                     // Load newly registered user in store
                     commit('users/setLoadedUser', response.data, { root: true })
-                    commit('setLoading', false, { root: true })
+                    // commit('setLoading', false, { root: true })
                     new Noty({type: 'success', text: this.app.i18n.t('messages.registration.success'), timeout: 10000, theme: 'metroui'}).show()
                 }).catch(function (error) {
                     commit('setLoading', false, { root: true })
@@ -100,7 +100,7 @@ export const actions = {
                 // Load user in store
                 commit('users/setLoadedUser', registeredUser, { root: true })
                 commit('setLoading', false, { root: true })
-                new Noty({type: 'success', text: this.app.i18n.t('messages.login.success'), timeout: 5000, theme: 'metroui'}).show()        
+                // new Noty({type: 'success', text: this.app.i18n.t('messages.login.success'), timeout: 5000, theme: 'metroui'}).show()        
             }
         } 
         catch(error) {

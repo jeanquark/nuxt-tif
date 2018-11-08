@@ -43,12 +43,16 @@ import moment from 'moment'
 export const state = () => ({
     loadedEvents: [],
     loadedEventUsers: [],
-    loadedLiveEvents: []
+    loadedLiveEvents: [],
+    loadedCompetitionEvents: []
 })
 
 export const mutations = {
     setEvents(state, payload) {
         state.loadedEvents = payload
+    },
+    setCompetitionEvents (state, payload) {
+        state.loadedCompetitionEvents = payload
     },
     setEventUsers(state, payload) {
         state.loadedEventUsers = payload
@@ -103,6 +107,63 @@ export const actions = {
                 reject(error)
             }
         })
+    },
+
+    loadedCompetitionEvents ({commit}, payload) {
+        // console.log('payload: ', payload)
+        const competitionId = parseInt(payload.livescore_api_id)
+        console.log('competitionId: ', competitionId)
+        if (competitionId) {
+            try {
+                firebase.database().ref('/events_new2/')
+                    .orderByChild('competition_id')
+                    .equalTo(competitionId)
+                    // .orderByChild('date')
+                    // .endAt('2018-11-20')
+                    .limitToFirst(10)
+                    .on('value', function (snapshot) {
+                        const eventsArray = []
+                        for (const key in snapshot.val()) {
+                            eventsArray.push({ ...snapshot.val()[key], id: key})
+                        }
+                        console.log('eventsArray: ', eventsArray)
+                        commit('setCompetitionEvents', eventsArray)
+                        return eventsArray
+                    })
+            }
+            catch(error) {
+                console.log(error)
+                new Noty({type: 'error', text: 'Events not found', timeout: 5000, theme: 'metroui'}).show()
+                commit('setError', error, { root: true })
+                commit('setLoading', false, { root: true })
+                return error
+            }
+        }
+        
+        // return new Promise((resolve, reject) => {
+        //     try {
+        //         firebase.database().ref('/events_new2/')
+        //             .orderByChild('competition_id')
+        //             .equalTo(46)
+        //             .limitToLast(2)
+        //             .on('value', function (snapshot) {
+        //                 const eventsArray = []
+        //                 for (const key in snapshot.val()) {
+        //                     eventsArray.push({ ...snapshot.val()[key], id: key})
+        //                 }
+        //                 commit('setCompetitionEvents', eventsArray)
+        //                 resolve(eventsArray)
+        //             })
+
+        //     } 
+        //     catch(error) {
+        //         console.log(error)
+        //         new Noty({type: 'error', text: 'Events not found', timeout: 5000, theme: 'metroui'}).show()
+        //         commit('setError', error, { root: true })
+        //         commit('setLoading', false, { root: true })
+        //         reject(error)
+        //     }
+        // })
     },
 
     loadedEventUsers ({commit}, payload) {
@@ -361,6 +422,9 @@ export const actions = {
 export const getters = {
     loadedEvents (state) {
         return state.loadedEvents
+    },
+    loadedCompetitionEvents (state) {
+        return state.loadedCompetitionEvents
     },
     loadedEventUsers (state) {
         return state.loadedEventUsers

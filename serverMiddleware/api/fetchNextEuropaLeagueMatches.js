@@ -98,6 +98,7 @@ module.exports = app.use(function (req, res, next) {
                 updates['/events_new2/' + id + '/date'] = match.date
                 updates['/events_new2/' + id + '/time'] = match.time
                 updates['/events_new2/' + id + '/competition'] = leagueData
+                updates['/events_new2/' + id + '/competition_id'] = leagueData.id
                 updates['/events_new2/' + id + '/location'] = match.location
                 updates['/events_new2/' + id + '/round'] = roundData
                 updates['/events_new2/' + id + '/home_team'] = homeTeamData

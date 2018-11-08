@@ -57,9 +57,7 @@
 
                         <div class="row text-center text-lg-left" style="height: 300px; margin-left: 0px; margin-right: 0px;">
                             <!-- Left colum (shape) -->
-                            <div class="col-sm-6" style="border: 1px solid orangered; padding: 10px; overflow-y: auto;" v-if="showCarousel">
-
-
+                            <div class="col-sm-12 col-md-6" style="border: 1px solid orangered; padding: 10px; overflow-y: auto;" v-if="showCarousel">
 
                                 <background-shape v-if="this.type === 'background'" :background="this.background" @addToMergeEmitter="addToMerge"></background-shape>
 
@@ -85,7 +83,7 @@
 
 
                             <!-- Right column (color) -->
-                            <div class="col-sm-6" style="border: 1px solid orangered; padding: 10px; overflow-y: auto;">
+                            <div class="col-sm-12 col-md-6" style="border: 1px solid orangered; padding: 10px; overflow-y: auto;">
                                 <background-color v-if="this.type === 'background'" :background="background" @addToMergeEmitter="addToMerge"></background-color>
 
                                 <skin-color v-if="this.type === 'skin'" :gender="this.gender" :skin="skin" @addToMergeEmitter="addToMerge"></skin-color>
@@ -511,6 +509,28 @@
 <style scoped>
     .active {
         background-color: orangered;
-        border: 1px solid red;
+        border: 3px solid green;
+    }
+    /*.carousel-3d-slide {
+        position: absolute;
+        opacity: 0;
+        visibility: hidden;
+        overflow: hidden;
+        top: 0;
+        border-radius: 1px;
+        border-color: #000;
+        border-color: rgba(0, 0, 0, 0.4);
+        border-style: solid;
+        background-size: cover;
+        background-color: orangered;
+        display: block;
+        margin: 0;
+    }*/
+    .carousel-3d-slide {
+        height: auto !important;
+        background-color: rgba(0, 0, 0, 0.25) !important;
+    }
+    .carousel-3d-slide img {
+        background-color: #fff;
     }
   </style>

@@ -21,25 +21,35 @@
 						<div class="token-box" v-if="loadedUser && loadedUser.tokens"><i class="fa fa-certificate"></i> {{ loadedUser.tokens.value }}</div>					
 					</div>
 					<div class="columnButton text-right">
-						<div class="quit-box" @click="logout"><i class="fa fa-times"></i></div>
+						<div class="quit-box"><i class="fa fa-times"></i></div>
 					</div>
 					<div class="columnButton text-right" v-if="loadedUser && loadedUser.status && loadedUser.status.value === 'admin'">
-						<div class="quit-box" @click="goToAdmin"><i class="fa fa-tachometer-alt"></i></div>
+						<div class="quit-box"><i class="fa fa-tachometer-alt"></i></div>
 					</div>
 				</div>	
 			
-			</div><!-- End Header -->
+			</div><!-- /#header -->
 			
 			<!-- Content -->
 			<div class="pxBottom">
 				<div id="resultatHeader">
 					<div class="flex-container-Resultat">
 						<span class="resultatTitle">Tous les résultats</span>
+						<!-- loadedUserTeams: {{ loadedUserTeams }}<br /><br /> -->
+						<!-- loadedCompetitions: {{ loadedCompetitions }}<br /><br /> -->
+						<!-- loadedCountries: {{ loadedCountries }}<br /><br /> -->
+						<!-- selectedActivity: {{ selectedActivity }}<br /><br /> -->
+						<!-- selectedCategory: {{ selectedCategory }}<br /><br /> -->
+						<!-- selectedCountry: {{ selectedCountry }}<br /><br /> -->
+						<!-- selectedCompetition: {{ selectedCompetition }}<br /><br /> -->
+						<!-- loadedCompetitionResults: {{ loadedCompetitionResults }}<br /><br /> -->
+						<!-- loadedCountryCompetitions: {{ loadedCountryCompetitions('france') }}<br /><br /> -->
+						<!-- selectedCompetitionId: {{ selectedCompetitionId }}<br /><br /> -->
 					</div>
 				</div>
-				<div v-if="loadedUserTeams.length > 0">
+				<!--<div v-if="loadedUserTeams.length > 0">
 					<div class="flex-container-modal-Title banner2 text-center">
-						<h2>Tes équipes</h2>
+						<h2>Mes équipes</h2>
 					</div>
 				</div>
 				<div id="resultatBoxFlags" class="resultatBody">
@@ -54,20 +64,18 @@
 						</div>
 					</div>
 				</div>
+
+
 				<div>
 					<div class="flex-container-modal-Title banner text-center">
-						<h2>Toutes les compétitions</h2>
+						<h2>Principales compétitions</h2>
 					</div>
-					<div class="flex-container-modal-OtherTeam-Img" v-if="loadedCompetitions != ''">
-						<div class="OtherTeam" v-for="competition in loadedCompetitions">
-							<img :src="'/images/competitions/' + competition.image" class="imgModalFlagTeam"/>
-							<nuxt-link :to="'/user/competitions/' + competition.slug" class="overlayOtherTeam">
-								<div class="textActivity">{{ competition.category.name}}<br />{{ competition.name}}<br /><span v-for="country in competition.countries" v-if="competition.countries">{{ country.name }}</span><br />+Infos</div>
-							</nuxt-link>
+					<div class="flex-container-modal-OtherTeam-Img" v-if="loadedMainCompetitions != ''">
+						<div class="OtherTeam" v-for="competition in loadedMainCompetitions" style="background: #fff; cursor: pointer;" @click="selectCompetition(competition.slug)">
+							<img :src="'/images/competitions/' + competition.image" class="imgModalFlagTeam" />
 						</div>
 					</div>
 					
-					<!-- Loading placeholder -->
 					<div class="ph-item" v-else>
 						<div class="col-md-2">
 							<div class="ph-picture"></div>
@@ -89,11 +97,245 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<!-- End Content -->
+
+				<div v-if="selectedCompetition != ''">
+					<div class="flex-container-modal-Title banner text-center">
+						<h2>Derniers résultats</h2>
+					</div>
+					<div class="flex-container-modal-OtherTeam-Img" style="background: #fff;">
+						<table class="table tableText">
+						  	<tbody>
+								<tr class="borderResultatTermine" style="padding: 10px;">
+								  	<td class="tdResultat1 text-left">
+								  		<a href="mesEquipesDetails.html" class="linkEvent">
+								  			<img src="images/flags/163.png" class="imgModalAgendaFlags"/> Suisse
+								  		</a>
+								  	</td>
+								  	<td class="tdResultat text-center">
+								  		<a href="matchTermine.html" class="linkEvent">
+								  			Groupe A</br>27.03.2018</br>0 - 0</br>Terminé
+								  		</a>
+								  	</td>
+								  	<td class="tdResultat1 text-right">
+								  		<a href="autresEquipesDetails.html" class="linkEvent">
+								  			Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/>
+								  		</a>
+								  	</td>
+								</tr>
+								<tr class="borderResultatTermine">
+								  	<td class="tdResultat1 text-left">
+								  		<a href="mesEquipesDetails.html" class="linkEvent">
+								  			<img src="images/flags/163.png" class="imgModalAgendaFlags"/> Suisse
+								  		</a>
+								  	</td>
+								  	<td class="tdResultat text-center">
+								  		<a href="matchTermine.html" class="linkEvent">
+								  			Groupe A</br>27.03.2018</br>0 - 0</br>Terminé
+								  		</a>
+								  	</td>
+								  	<td class="tdResultat1 text-right">
+								  		<a href="autresEquipesDetails.html" class="linkEvent">
+								  			Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/>
+								  		</a>
+								  	</td>
+								</tr>
+								<tr class="borderResultatTermine">
+								  	<td class="tdResultat1 text-left">
+								  		<a href="mesEquipesDetails.html" class="linkEvent">
+								  			<img src="images/flags/163.png" class="imgModalAgendaFlags"/> Suisse
+								  		</a>
+								  	</td>
+								  	<td class="tdResultat text-center">
+								  		<a href="matchTermine.html" class="linkEvent">
+								  			Groupe A</br>27.03.2018</br>0 - 0</br>Terminé
+								  		</a>
+								  	</td>
+								  	<td class="tdResultat1 text-right">
+								  		<a href="autresEquipesDetails.html" class="linkEvent">
+								  			Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/>
+								  		</a>
+								  	</td>
+								</tr>
+								<tr class="borderResultatTermine">
+								  	<td class="tdResultat1 text-left">
+								  		<a href="mesEquipesDetails.html" class="linkEvent">
+								  			<img src="images/flags/163.png" class="imgModalAgendaFlags"/> Suisse
+								  		</a>
+								  	</td>
+								  	<td class="tdResultat text-center">
+								  		<a href="matchTermine.html" class="linkEvent">
+								  			Groupe A</br>27.03.2018</br>0 - 0</br>Terminé
+								  		</a>
+								  	</td>
+								  	<td class="tdResultat1 text-right">
+								  		<a href="autresEquipesDetails.html" class="linkEvent">
+								  			Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/>
+								  		</a>
+								  	</td>
+								</tr>
+								<tr class="borderResultatTermine">
+								  	<td class="tdResultat1 text-left">
+								  		<a href="mesEquipesDetails.html" class="linkEvent">
+								  			<img src="images/flags/163.png" class="imgModalAgendaFlags"/> Suisse
+								  		</a>
+								  	</td>
+								  	<td class="tdResultat text-center">
+								  		<a href="matchTermine.html" class="linkEvent">
+								  			Groupe A</br>27.03.2018</br>0 - 0</br>Terminé
+								  		</a>
+								  	</td>
+								  	<td class="tdResultat1 text-right">
+								  		<a href="autresEquipesDetails.html" class="linkEvent">
+								  			Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/>
+								  		</a>
+								  	</td>
+								</tr>	
+						  	</tbody>
+						</table>
+					</div>
+				</div>-->
+				
+
+				<div class="flex-container-modal-Title banner text-center">
+					<h2>Choisissez une activité</h2>
+				</div>
+				<div class="flex-container-modal-OtherTeam-Img">
+					<div class="OtherTeam" v-for="activity in loadedActivities" :class="[selectedActivity === activity.slug ? 'active' : 'inactive']">
+						<img :src="'images/activities/' + 'default' + '.png'" class="imgModalAvatar" />
+						<div class="overlayOtherTeam" style="cursor: pointer;" @click="selectedActivity = activity.slug">
+							<div class="textActivity">{{ activity.name }}</br></br></br></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="flex-container-modal-Title banner text-center">
+					<h2>Choisissez une catégorie</h2>
+				</div>
+				<div class="flex-container-modal-OtherTeam-Img">
+					<div class="OtherTeam" v-for="category in loadedCategories" :class="[selectedCategory === category.slug ? 'active' : 'inactive']">
+						<img :src="'images/categories/' + 'default' + '.png'" class="imgModalAvatar"/>
+						<div class="overlayOtherTeam" style="cursor: pointer;" @click="selectedCategory = category.slug">
+							<div class="textActivity">{{ category.name }}</br></br></br></div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="flex-container-modal-Title banner text-center" style="cursor: pointer;">
+					<h2>Principales compétitions</h2>
+				</div>
+				<div class="flex-container-modal-OtherTeam-Img">
+					<div class="OtherTeam" v-for="competition in loadedMainCompetitions" :class="[selectedCompetition.slug === competition.slug ? 'active' : 'inactive']">
+						<img :src="'images/competitions/' + competition.image" class="imgModalAvatar" />
+						<div class="overlayOtherTeam" style="cursor: pointer;" @click="fetchCompetitionResults(competition)">
+							<div class="textActivity">{{ competition.name }}</br></br></br></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="flex-container-modal-Title banner text-center" style="cursor: pointer;" v-if="selectedCompetition.groups">
+					<h2>Groupes</h2>
+				</div>
+				<div class="flex-container-modal-OtherTeam-Img" v-if="selectedCompetition.groups">
+					<div class="OtherTeam" v-for="competition in selectedCompetition.groups" :class="[selectedGroup === competition.slug ? 'active' : 'inactive']" style="color: #000; cursor: pointer;" @click="fetchCompetitionResults(competition)">
+						<span>{{ competition.name }}</span>
+					</div>
+				</div>
+
+
+				<!-- <div class="flex-container-modal-Title banner text-center" style="cursor: pointer;" @click="showCountries = !showCountries">
+					<h2>Compétitions par pays<i :class="[showCountries ? 'fas fa-chevron-up' : 'fas fa-chevron-down']" style="float: right;"></i></h2>
+				</div>
+				<vue-slide-up-down :active="showCountries" :duration="1000">
+					<div class="flex-container-modal-OtherTeam-Img">
+						<div class="OtherTeam" v-for="country in loadedCountries" :class="[selectedCountry === country.slug ? 'active' : '']">
+							<img :src="'images/flags/' + country.slug + '.png'" class="imgModalAvatar"/>
+							<div class="overlayOtherTeam" @click="selectedCountry = country.slug" style="cursor: pointer;">
+								<div class="textActivity">Football</br></br>{{ country.name }}</br></div>
+							</div>
+						</div>
+					</div>
+				</vue-slide-up-down>
+
+
+				<div class="flex-container-modal-Title banner text-center" v-if="selectedCountry && showCountries">
+					<h2>Compétitions du pays sélectionné</h2>
+				</div>
+				<div class="flex-container-modal-OtherTeam-Img" v-if="selectedCountry && showCountries">
+					<div class="OtherTeam" v-for="competition in loadedCountryCompetitions(this.selectedCountry)" style="cursor: pointer;" :class="[selectedCompetition.slug === competition.slug ? 'active' : '']" @click="fetchCompetitionResults(competition)">
+						<img :src="'images/competitions/' + competition.image" class="imgModalAvatar"/>
+						<div class="overlayOtherTeam" style="cursor: pointer;">
+							<div class="textActivity">Football</br></br>{{ competition.name }}</br></div>
+						</div>
+					</div>
+				</div> -->
+
+
+				<div class="flex-container-modal-Title banner text-center" v-if="selectedCompetition">
+					<h2>Derniers résultats</h2>
+					<!-- {{ selectedCompetition }} -->
+				</div>
+				<!-- <div class="flex-container-modal-OtherTeam-Img"> -->
+				<!-- loadedCompetitionResults: {{ loadedCompetitionResults(selectedCompetition.livescore_api_league_id) }}<br /> -->
+				<!-- loadedCompetitionResults2: {{ loadedCompetitionResults2 }}<br /> -->
+				<!-- def: {{ def }}<br /> -->
+				<div class="flex-container-modal-OtherTeam-Img" style="background: #fff;" v-if="selectedCompetition">
+					<table class="table tableText">
+					  	<tbody>
+					  		<!-- {{ selectedCompetition.livescore_api_league_id }}<br /> -->
+					  		<!-- loadedCompetitionResults: {{ loadedCompetitionResults(46) }}<br /> -->
+							<tr class="borderResultatTermine" style="padding: 10px;" v-for="event in loadedCompetitionResults">
+								<!-- {{ event }} -->
+							<!-- <tr class="borderResultatTermine" style="padding: 10px;" v-for="event in events"> -->
+								<!-- event: {{ event }}<br /> -->
+							  	<td class="tdResultat1 text-left">
+							  		<a href="mesEquipesDetails.html" class="linkEvent">
+							  			<img :src="'images/teams/' + event.home_team.slug + '.png'" class="imgModalAgendaFlags"/> {{ event.home_team.name }}
+							  		</a>
+							  	</td>
+							  	<td class="tdResultat text-center">
+							  		<a href="matchTermine.html" class="linkEvent">
+							  			{{ event.competition.name }}</br>{{ event.date }}</br>{{ event.score }}</br>{{ event.status }}
+							  		</a>
+							  	</td>
+							  	<td class="tdResultat1 text-right">
+							  		<a href="autresEquipesDetails.html" class="linkEvent">
+							  			{{ event.visitor_team.name }} <img :src="'images/teams/' + event.visitor_team.slug + '.png'" class="imgModalAgendaFlags"/>
+							  		</a>
+							  	</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<!-- <div class="flex-container-modal-OtherTeam-Img" style="background: #fff;">
+					<table class="table tableText">
+					  	<tbody>
+							<tr class="borderResultatTermine" style="padding: 10px;">
+							  	<td class="tdResultat1 text-left">
+							  		<a href="mesEquipesDetails.html" class="linkEvent">
+							  			<img src="images/flags/163.png" class="imgModalAgendaFlags"/> Suisse
+							  		</a>
+							  	</td>
+							  	<td class="tdResultat text-center">
+							  		<a href="matchTermine.html" class="linkEvent">
+							  			Groupe A</br>27.03.2018</br>0 - 0</br>Terminé
+							  		</a>
+							  	</td>
+							  	<td class="tdResultat1 text-right">
+							  		<a href="autresEquipesDetails.html" class="linkEvent">
+							  			Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/>
+							  		</a>
+							  	</td>
+							</tr>
+						</tbody>
+					</table>
+				</div> -->
+
+			</div><!-- /#pxBottom -->
 						
 			<!-- footer -->
-			<div id="footer" class="col-12 col-sm-12 col-md-12 col-lg-12">					
+			<!-- <div id="footer" class="col-12 col-sm-12 col-md-12 col-lg-12">					
 				<div id="dock-container">
 					<div id="dock">
 						<ul>
@@ -118,54 +360,156 @@
 								<span class="textMenu">Résultats</span></a>
 							</li>
 						</ul>
-					</div><!-- /#dock -->
-				</div><!-- /#dock-container -->			
-			</div><!-- /#footer -->
+					</div>
+				</div>	
+			</div> -->
 		</div>
+
+		
+
 	</div><!-- /.container-fluid -->
 </template>
 
 <script>
-  export default {
-    layout: 'layoutFront',
-    data () {
-    	return {
-
-    	}
-    },
-    created () {
-    	// if (Object.keys(this.$store.getters['competitions/loadedCompetitions']).length === 0) {
-    		this.$store.dispatch('competitions/loadedCompetitions')
-    	// }
-
-    	// if (Object.keys(this.$store.getters['users/loadedUserTeams']).length === 0) {
-    		this.$store.dispatch('users/loadedUserTeams')
-    	// }
-		
-    	// if (Object.keys(this.$store.getters['users/loadedTeams']).length === 0) {
-    		// this.$store.dispatch('users/loadedTeams')
-    	// }
-	},
-    computed: {
-		loadedUser () {
-			return this.$store.getters['users/loadedUser']
+	import firebase from 'firebase'
+	import VueSlideUpDown from 'vue-slide-up-down'
+  	export default {
+	    layout: 'layoutFront',
+	    components: {
+			VueSlideUpDown
 		},
-		loadedLevel () {
-			return this.$store.getters['level/loadedLevel']
+	    data () {
+	    	return {
+	    		selectedActivity: 'sport',
+	    		selectedCategory: 'football',
+	    		selectedCompetition: {},
+	    		selectedGroup: 'group_a',
+	    		selectedCompetitionId: 46,
+	    		selectedCountry: '',
+	    		// showMainCompetitions: false,
+	    		showCountries: false,
+	    	}
+	    },
+	    created () {
+	    		this.$store.dispatch('activities/loadedActivities')
+
+	    		this.$store.dispatch('categories/loadedCategories')
+
+	    	// if (Object.keys(this.$store.getters['competitions/loadedCompetitions']).length === 0) {
+	    		this.$store.dispatch('competitions/loadedCompetitions')
+	    	// }
+
+	    	// if (Object.keys(this.$store.getters['users/loadedUserTeams']).length === 0) {
+	    		this.$store.dispatch('users/loadedUserTeams')
+	    	// }
+			
+	    	// if (Object.keys(this.$store.getters['users/loadedTeams']).length === 0) {
+	    		// this.$store.dispatch('users/loadedTeams')
+	    	// }
+	    		this.$store.dispatch('countries/loadedCountries')
+
+	    		this.$store.dispatch('events/loadedEvents')
 		},
-    	loadedCompetitions () {
-    		return this.$store.getters['competitions/loadedCompetitions']
-    	},
-    	loadedUserTeams () {
-            return this.$store.getters['users/loadedUserTeams']
-        },
-		loadedTeams () {
-			return this.$store.getters['users/loadedTeams']
-		}
-    }
-  }
+	    computed: {
+			loadedUser () {
+				return this.$store.getters['users/loadedUser']
+			},
+			loadedLevel () {
+				return this.$store.getters['level/loadedLevel']
+			},
+			loadedActivities () {
+				return this.$store.getters['activities/loadedActivities']
+			},
+			loadedCategories () {
+				return this.$store.getters['categories/loadedCategories']
+			},
+			loadedCountries () {
+				return this.$store.getters['countries/loadedCountries'].filter(country => country.competitions === true)
+			},
+	    	loadedCompetitions () {
+	    		return this.$store.getters['competitions/loadedCompetitions']
+	    	},
+	    	loadedMainCompetitions () {
+	    		return this.$store.getters['competitions/loadedCompetitions'].filter(competition => competition.type === 'main' && competition.importance === 1)
+	    	},
+	    	loadedUserTeams () {
+	            return this.$store.getters['users/loadedUserTeams']
+	        },
+			loadedTeams () {
+				return this.$store.getters['users/loadedTeams']
+			},
+			loadedCompetitionResults () {
+				return this.$store.getters['events/loadedCompetitionEvents']
+			}
+	    },
+	    methods: {
+	    	// selectCountry (country) {
+	    	// 	console.log('country: ', country)
+	    	// 	this.loadedCountryCompetitions(country)
+
+	    	// },
+	    	loadedCountryCompetitions (country) {
+	    		// console.log('country: ', country)
+				return this.$store.getters['competitions/loadedCompetitions']
+					.filter(competition => competition.countries ? competition.countries[country] : '')
+			},
+			fetchCompetitionResults (competition) {
+				console.log('competition: ', competition)
+
+				if (competition.countries) {
+					this.selectedCountry = Object.keys(competition.countries)[0]
+				}
+				if (competition.type === 'main') {
+					this.selectedCompetition = competition
+				} else {
+					this.selectedGroup = competition.slug
+				}
+				return this.$store.dispatch('events/loadedCompetitionEvents', competition)	
+			}
+			// loadedCompetitionResults (competitionId) {
+			// 	return this.$store.dispatch('events/loadedCompetitionEvents')
+			// 	this.$store.dispatch('events/loadedCompetitionEvents').then(response => {
+			// 		console.log('done!')
+			// 		return this.$store.getters['events/loadedCompetitionEvents']
+			// 	})
+			// 	console.log('done2!')
+			// 	// return
+
+			// 	// return this.$store.getters['events/loadedCompetitionEvents']
+			// 	// // )
+			// 	// // return
+			// 	// // return this.$store.getters['events/loadedCompetitionEvents']
+			// 	// // return this.$store.getters['events/loadedCompetitionEvents'].filter(event => event.competition ? event.competition.id == 46 : '')
+			// 	// // this.abc = 'abc'
+			// 	// firebase.database().ref('/events_new2/').orderByChild('competition_id')
+			// 	// 	.equalTo(competitionId)
+			// 	// 	.limitToLast(2)
+			// 	// 	.on('value', function (snapshot) {
+			// 	// 	// .once('value').then(function (snapshot) {
+			// 	// 		// console.log('snapshot.val(): ', snapshot.val())
+			// 	// 		// return snapshot.val()
+
+	  //  //                  const eventsArray = []
+	  //  //                  for (const key in snapshot.val()) {
+	  //  //                      eventsArray.push({...snapshot.val()[key], id: key})
+	  //  //                  }
+	  //  //                  // // commit('setEvents', eventsArray)
+	  //  //                  // // resolve(eventsArray)
+	  //  //                  console.log('eventsArray: ', eventsArray)
+	  //  //                  // this.abc = eventsArray
+	  //  //                  return eventsArray
+   //  //             })
+			// }
+	    }
+  	}
 </script>
 
-<style>
+<style scoped>
+	.active {
+		background-color: orangered;
+	}
+	.inactive {
+		background-color: #fff;
+	}
 
 </style>

@@ -7,9 +7,15 @@
 			eyebrows_color: {{ this.eyebrows_color }}<br /><br />
 		</p> -->
 
-	    <div v-for="index in total_eyebrows_shapes" @click="addToMerge({gender: gender1, type: 'eyebrows', property: 'color', image: 'eyebrows' + convertTo2Digits(index) + eyebrows_color + '.png', index: index, layerPosition: 4})">
+	    <!-- <div v-for="index in total_eyebrows_shapes" @click="addToMerge({gender: gender1, type: 'eyebrows', property: 'color', image: 'eyebrows' + convertTo2Digits(index) + eyebrows_color + '.png', index: index, layerPosition: 4})">
             <img :src="'/images/avatars/jm/' + gender1 + '/' + 'eyebrows' + '/' + 'eyebrows' + convertTo2Digits(index) + '01' + '.png'" class="imgModalAvatar" :class="{active: (eyebrows_shape === convertTo2Digits(index)) }" style="cursor: pointer;" />
-        </div>
+        </div> -->
+
+        <carousel-3d :width="200" :height="200" :startIndex="eyebrows_shape - 1">
+            <slide v-for="(index, i) in total_eyebrows_shapes" :index="i" :key="i" >
+                <img v-lazy="'/images/avatars/jm/' + gender + '/eyebrows/eyebrows' + convertTo2Digits(index) + '01.png'" class="imgModalAvatar" :class="{active: (eyebrows_shape === convertTo2Digits(index)) }" style="cursor: pointer;" @click="addToMerge({gender: gender, type: 'eyebrows', image: 'eyebrows' + convertTo2Digits(index) + eyebrows_color + '.png', index: index, layerPosition: 4})" />
+            </slide>
+        </carousel-3d>
 	</div>
 </template>
 
@@ -46,6 +52,22 @@
 <style scoped>
 	.active {
         background-color: orangered;
-        border: 2px solid red;
+        border: 2px solid orangered;
+    }
+    .imgModalAvatar {
+        margin: 0px;
+    }
+    .carousel-3d-slide {
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        border: none;
+        background-size: cover;
+        background-color: #fff;
+        display: block;
+        margin: 0;
+    }
+    .carousel-3d-slide img {
+        background-color: #fff;
     }
 </style>

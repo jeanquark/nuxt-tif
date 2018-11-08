@@ -1,5 +1,5 @@
 <template>
-	<div class="container-fluid">
+	<div class="container-fluid" v-cloak>
 		<!-- Header -->
 
 		<!-- <div v-if="!loadedUser">
@@ -7,7 +7,7 @@
 			  background: url('/images/loader.gif') 50% 50% no-repeat rgb(249,249,249);"></div>
 		</div> -->
 		
-		<div v-if="loadedUser && loadedUser.level && loadedUser.level.value" v-cloak>
+		<div v-if="loadedUser && loadedUser.level && loadedUser.level.value">
 			<!-- <h1 class="text-center" style="color: #fff;">Loading...{{ loadedUser }}</h1> -->
 			<div id="header" class="col-12 col-sm-12 col-md-12 col-lg-12 top-fixed">
 				<div class="flex-container-header text-center">
@@ -163,8 +163,31 @@
             console.log(time.length === 8 ? 'yes' : 'no')
             const date_time = date + ' ' + time
             console.log(moment(date_time).format('X'))
+            console.log('loading: ', this.$store.getters['loading'])
+            // this.$store.commit('setLoading', false, { root: true })
+		},
+		mounted () {
+			// document.onreadystatechange = () => { 
+			//     if (document.readyState == "complete") { 
+			//         // run code here
+			//         console.log('Done loading the page')
+			//     } 
+			// }
+			// console.log('mounted!')
+			// setTimeout(() => {
+			//   	this.loading = false
+			// }, 300)
+		},
+		data () {
+			return {
+				// loading: true
+			}
 		},
 		computed: {
+			loading () {
+				// return true
+				return this.$store.getters['loading']
+			},
 			loadedUser () {
 				return this.$store.getters['users/loadedUser']
 			},
@@ -222,6 +245,16 @@
 
 <style scoped>
 	[v-cloak] > * { display:none; }
+    /*[v-cloak]::before {
+        content: '';
+        background: url("images/loader.gif") center no-repeat;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }*/
+	/*[v-cloak] > * { display:none; }*/
     [v-cloak]::before { 
         content: " ";
         display: block;

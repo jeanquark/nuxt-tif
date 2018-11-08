@@ -7,9 +7,15 @@
 			accessories_color: {{ this.accessories_color }}<br /><br />
 		</p> -->
 
-	    <div v-for="index in total_accessories_shapes" @click="addToMerge({gender: gender1, type: 'accessories', property: 'color', image: 'accessories' + convertTo2Digits(index) + accessories_color + '.png', index: index, layerPosition: 8})">
+	    <!-- <div v-for="index in total_accessories_shapes" @click="addToMerge({gender: gender1, type: 'accessories', property: 'color', image: 'accessories' + convertTo2Digits(index) + accessories_color + '.png', index: index, layerPosition: 8})">
             <img :src="'/images/avatars/jm/' + gender1 + '/' + 'accessories' + '/' + 'accessories' + convertTo2Digits(index) + '01.png'" class="imgModalAvatar" :class="{active: (accessories_shape === convertTo2Digits(index)) }" style="cursor: pointer;" />
-        </div>
+        </div> -->
+
+        <carousel-3d :width="200" :height="200" :startIndex="accessories_shape - 1">
+            <slide v-for="(index, i) in total_accessories_shapes" :index="i" :key="i" >
+                <img v-lazy="'/images/avatars/jm/' + gender + '/accessories/accessories' + convertTo2Digits(index) + '01.png'" class="imgModalAvatar" :class="{active: (accessories_shape === convertTo2Digits(index)) }" style="cursor: pointer;" @click="addToMerge({gender: gender, type: 'accessories', image: 'accessories' + convertTo2Digits(index) + accessories_color + '.png', index: index, layerPosition: 8})" />
+            </slide>
+        </carousel-3d>
 	</div>
 </template>
 
@@ -46,6 +52,22 @@
 <style scoped>
 	.active {
         background-color: orangered;
-        border: 2px solid red;
+        border: 2px solid orangered;
+    }
+    .imgModalAvatar {
+        margin: 0px;
+    }
+    .carousel-3d-slide {
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        border: none;
+        background-size: cover;
+        background-color: #fff;
+        display: block;
+        margin: 0;
+    }
+    .carousel-3d-slide img {
+        background-color: #fff;
     }
 </style>

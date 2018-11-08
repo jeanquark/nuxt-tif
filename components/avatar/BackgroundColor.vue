@@ -1,5 +1,5 @@
 <template>
-	<div class="flex-container-modal-avatar-color no-margin">
+	<div class="">
 		<p>
 			<!-- total_background_colors: {{ this.total_background_colors }}<br /><br />
 			background: {{ background }}<br /><br />
@@ -49,6 +49,22 @@
 <style scoped>
 	.active {
         background-color: orangered;
-        border: 2px solid red;
+        border: 2px solid orangered;
+    }
+    .imgModalAvatar {
+    	margin: 0px;
+    }
+    .carousel-3d-slide {
+    	position: absolute;
+        opacity: 0;
+        top: 0;
+        border: none;
+        background-size: cover;
+        background-color: #fff;
+        display: block;
+        margin: 0;
+    }
+    .carousel-3d-slide img {
+        background-color: #fff;
     }
 </style>

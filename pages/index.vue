@@ -65,9 +65,9 @@
 
             <div class="row button-section">
                 <div class="col-twelve">
-					<button type="submit" class="button btn-facebook" @click.prevent="signInWithFacebook" :disabled="loading"><i class="fa fa-facebook"></i> {{ $t('pages.login.facebook_oauth') }}</button>
-					<button type="submit" class="button btn-google" @click.prevent="signInWithGoogle"><i class="fa fa-google"></i> {{ $t('pages.login.google_oauth') }}</button>
-					<nuxt-link :to="localePath({ name: 'register'})"><button title="Inscription" class="button stroke smoothscroll">{{ $t('pages.index.sign_up') }}</button></nuxt-link>           
+                    <button type="submit" class="button btn-facebook" @click.prevent="signInWithFacebook" :disabled="loading"><i class="fa fa-facebook"></i> {{ $t('pages.login.facebook_oauth') }}</button>
+                    <button type="submit" class="button btn-google" @click.prevent="signInWithGoogle"><i class="fa fa-google"></i> {{ $t('pages.login.google_oauth') }}</button>
+                    <nuxt-link :to="localePath({ name: 'register'})"><button title="Inscription" class="button stroke smoothscroll">{{ $t('pages.index.sign_up') }}</button></nuxt-link>           
                 </div>          
             </div>
 
@@ -366,14 +366,14 @@
                         <!-- Simply type    the promocode in the box labeled “Promo Code” when placing your order. -->  </p>
 
                 </div>
-				
-				<div class="row button-section">
-					<div class="col-twelve">
-						<button type="submit" class="button btn-facebook" @click.prevent="signInWithFacebook" :disabled="loading"><i class="fa fa-facebook"></i> {{ $t('pages.login.facebook_oauth') }}</button>
-						<button type="submit" class="button btn-google" @click.prevent="signInWithGoogle"><i class="fa fa-google"></i> {{ $t('pages.login.google_oauth') }}</button>
-						<nuxt-link :to="localePath({ name: 'register'})"><button title="Inscription" class="button stroke smoothscroll">{{ $t('pages.index.sign_up') }}</button></nuxt-link>           
-					</div>          
-				</div>
+                
+                <div class="row button-section">
+                    <div class="col-twelve">
+                        <button type="submit" class="button btn-facebook" @click.prevent="signInWithFacebook" :disabled="loading"><i class="fa fa-facebook"></i> {{ $t('pages.login.facebook_oauth') }}</button>
+                        <button type="submit" class="button btn-google" @click.prevent="signInWithGoogle"><i class="fa fa-google"></i> {{ $t('pages.login.google_oauth') }}</button>
+                        <nuxt-link :to="localePath({ name: 'register'})"><button title="Inscription" class="button stroke smoothscroll">{{ $t('pages.index.sign_up') }}</button></nuxt-link>           
+                    </div>          
+                </div>
 
             </div> <!-- /cta-content -->
 
