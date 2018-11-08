@@ -47,153 +47,6 @@
 						<!-- selectedCompetitionId: {{ selectedCompetitionId }}<br /><br /> -->
 					</div>
 				</div>
-				<!--<div v-if="loadedUserTeams.length > 0">
-					<div class="flex-container-modal-Title banner2 text-center">
-						<h2>Mes équipes</h2>
-					</div>
-				</div>
-				<div id="resultatBoxFlags" class="resultatBody">
-					<div class="flex-container-MesEquipes">
-						<div class="OtherTeam" v-for="team in loadedUserTeams">
-							<span v-if="team">
-								<img v-lazy="'/images/teams/' + team.image" class="imgModalFlagTeam" />
-								<nuxt-link :to="'/user/teams/' + team.slug" class="overlay">
-									<div class="textActivity">{{ team.category.name }}<br />{{ team.name }}<br /><br />+Infos</div>
-								</nuxt-link>
-							</span>
-						</div>
-					</div>
-				</div>
-
-
-				<div>
-					<div class="flex-container-modal-Title banner text-center">
-						<h2>Principales compétitions</h2>
-					</div>
-					<div class="flex-container-modal-OtherTeam-Img" v-if="loadedMainCompetitions != ''">
-						<div class="OtherTeam" v-for="competition in loadedMainCompetitions" style="background: #fff; cursor: pointer;" @click="selectCompetition(competition.slug)">
-							<img :src="'/images/competitions/' + competition.image" class="imgModalFlagTeam" />
-						</div>
-					</div>
-					
-					<div class="ph-item" v-else>
-						<div class="col-md-2">
-							<div class="ph-picture"></div>
-						</div>
-						<div class="col-md-2">
-							<div class="ph-picture"></div>
-						</div>
-						<div class="col-md-2">
-							<div class="ph-picture"></div>
-						</div>
-						<div class="col-md-2">
-							<div class="ph-picture"></div>
-						</div>
-						<div class="col-md-2">
-							<div class="ph-picture"></div>
-						</div>
-						<div class="col-md-2">
-							<div class="ph-picture"></div>
-						</div>
-					</div>
-				</div>
-
-				<div v-if="selectedCompetition != ''">
-					<div class="flex-container-modal-Title banner text-center">
-						<h2>Derniers résultats</h2>
-					</div>
-					<div class="flex-container-modal-OtherTeam-Img" style="background: #fff;">
-						<table class="table tableText">
-						  	<tbody>
-								<tr class="borderResultatTermine" style="padding: 10px;">
-								  	<td class="tdResultat1 text-left">
-								  		<a href="mesEquipesDetails.html" class="linkEvent">
-								  			<img src="images/flags/163.png" class="imgModalAgendaFlags"/> Suisse
-								  		</a>
-								  	</td>
-								  	<td class="tdResultat text-center">
-								  		<a href="matchTermine.html" class="linkEvent">
-								  			Groupe A</br>27.03.2018</br>0 - 0</br>Terminé
-								  		</a>
-								  	</td>
-								  	<td class="tdResultat1 text-right">
-								  		<a href="autresEquipesDetails.html" class="linkEvent">
-								  			Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/>
-								  		</a>
-								  	</td>
-								</tr>
-								<tr class="borderResultatTermine">
-								  	<td class="tdResultat1 text-left">
-								  		<a href="mesEquipesDetails.html" class="linkEvent">
-								  			<img src="images/flags/163.png" class="imgModalAgendaFlags"/> Suisse
-								  		</a>
-								  	</td>
-								  	<td class="tdResultat text-center">
-								  		<a href="matchTermine.html" class="linkEvent">
-								  			Groupe A</br>27.03.2018</br>0 - 0</br>Terminé
-								  		</a>
-								  	</td>
-								  	<td class="tdResultat1 text-right">
-								  		<a href="autresEquipesDetails.html" class="linkEvent">
-								  			Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/>
-								  		</a>
-								  	</td>
-								</tr>
-								<tr class="borderResultatTermine">
-								  	<td class="tdResultat1 text-left">
-								  		<a href="mesEquipesDetails.html" class="linkEvent">
-								  			<img src="images/flags/163.png" class="imgModalAgendaFlags"/> Suisse
-								  		</a>
-								  	</td>
-								  	<td class="tdResultat text-center">
-								  		<a href="matchTermine.html" class="linkEvent">
-								  			Groupe A</br>27.03.2018</br>0 - 0</br>Terminé
-								  		</a>
-								  	</td>
-								  	<td class="tdResultat1 text-right">
-								  		<a href="autresEquipesDetails.html" class="linkEvent">
-								  			Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/>
-								  		</a>
-								  	</td>
-								</tr>
-								<tr class="borderResultatTermine">
-								  	<td class="tdResultat1 text-left">
-								  		<a href="mesEquipesDetails.html" class="linkEvent">
-								  			<img src="images/flags/163.png" class="imgModalAgendaFlags"/> Suisse
-								  		</a>
-								  	</td>
-								  	<td class="tdResultat text-center">
-								  		<a href="matchTermine.html" class="linkEvent">
-								  			Groupe A</br>27.03.2018</br>0 - 0</br>Terminé
-								  		</a>
-								  	</td>
-								  	<td class="tdResultat1 text-right">
-								  		<a href="autresEquipesDetails.html" class="linkEvent">
-								  			Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/>
-								  		</a>
-								  	</td>
-								</tr>
-								<tr class="borderResultatTermine">
-								  	<td class="tdResultat1 text-left">
-								  		<a href="mesEquipesDetails.html" class="linkEvent">
-								  			<img src="images/flags/163.png" class="imgModalAgendaFlags"/> Suisse
-								  		</a>
-								  	</td>
-								  	<td class="tdResultat text-center">
-								  		<a href="matchTermine.html" class="linkEvent">
-								  			Groupe A</br>27.03.2018</br>0 - 0</br>Terminé
-								  		</a>
-								  	</td>
-								  	<td class="tdResultat1 text-right">
-								  		<a href="autresEquipesDetails.html" class="linkEvent">
-								  			Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/>
-								  		</a>
-								  	</td>
-								</tr>	
-						  	</tbody>
-						</table>
-					</div>
-				</div>-->
 				
 
 				<div class="flex-container-modal-Title banner text-center">
@@ -243,7 +96,7 @@
 				</div>
 
 
-				<!-- <div class="flex-container-modal-Title banner text-center" style="cursor: pointer;" @click="showCountries = !showCountries">
+				<div class="flex-container-modal-Title banner text-center" style="cursor: pointer;" @click="showCountries = !showCountries">
 					<h2>Compétitions par pays<i :class="[showCountries ? 'fas fa-chevron-up' : 'fas fa-chevron-down']" style="float: right;"></i></h2>
 				</div>
 				<vue-slide-up-down :active="showCountries" :duration="1000">
@@ -268,26 +121,17 @@
 							<div class="textActivity">Football</br></br>{{ competition.name }}</br></div>
 						</div>
 					</div>
-				</div> -->
+				</div>
 
 
 				<div class="flex-container-modal-Title banner text-center" v-if="selectedCompetition">
 					<h2>Derniers résultats</h2>
-					<!-- {{ selectedCompetition }} -->
 				</div>
-				<!-- <div class="flex-container-modal-OtherTeam-Img"> -->
-				<!-- loadedCompetitionResults: {{ loadedCompetitionResults(selectedCompetition.livescore_api_league_id) }}<br /> -->
-				<!-- loadedCompetitionResults2: {{ loadedCompetitionResults2 }}<br /> -->
-				<!-- def: {{ def }}<br /> -->
+
 				<div class="flex-container-modal-OtherTeam-Img" style="background: #fff;" v-if="selectedCompetition">
 					<table class="table tableText">
 					  	<tbody>
-					  		<!-- {{ selectedCompetition.livescore_api_league_id }}<br /> -->
-					  		<!-- loadedCompetitionResults: {{ loadedCompetitionResults(46) }}<br /> -->
 							<tr class="borderResultatTermine" style="padding: 10px;" v-for="event in loadedCompetitionResults">
-								<!-- {{ event }} -->
-							<!-- <tr class="borderResultatTermine" style="padding: 10px;" v-for="event in events"> -->
-								<!-- event: {{ event }}<br /> -->
 							  	<td class="tdResultat1 text-left">
 							  		<a href="mesEquipesDetails.html" class="linkEvent">
 							  			<img :src="'images/teams/' + event.home_team.slug + '.png'" class="imgModalAgendaFlags"/> {{ event.home_team.name }}
@@ -308,34 +152,10 @@
 					</table>
 				</div>
 
-				<!-- <div class="flex-container-modal-OtherTeam-Img" style="background: #fff;">
-					<table class="table tableText">
-					  	<tbody>
-							<tr class="borderResultatTermine" style="padding: 10px;">
-							  	<td class="tdResultat1 text-left">
-							  		<a href="mesEquipesDetails.html" class="linkEvent">
-							  			<img src="images/flags/163.png" class="imgModalAgendaFlags"/> Suisse
-							  		</a>
-							  	</td>
-							  	<td class="tdResultat text-center">
-							  		<a href="matchTermine.html" class="linkEvent">
-							  			Groupe A</br>27.03.2018</br>0 - 0</br>Terminé
-							  		</a>
-							  	</td>
-							  	<td class="tdResultat1 text-right">
-							  		<a href="autresEquipesDetails.html" class="linkEvent">
-							  			Panama <img src="images/flags/163.png" class="imgModalAgendaFlags"/>
-							  		</a>
-							  	</td>
-							</tr>
-						</tbody>
-					</table>
-				</div> -->
-
 			</div><!-- /#pxBottom -->
 						
 			<!-- footer -->
-			<!-- <div id="footer" class="col-12 col-sm-12 col-md-12 col-lg-12">					
+			<div id="footer" class="col-12 col-sm-12 col-md-12 col-lg-12">					
 				<div id="dock-container">
 					<div id="dock">
 						<ul>
@@ -362,7 +182,7 @@
 						</ul>
 					</div>
 				</div>	
-			</div> -->
+			</div>
 		</div>
 
 		
