@@ -35,19 +35,20 @@
 				<div id="resultatHeader">
 					<div class="flex-container-Resultat">
 						<span class="resultatTitle">Tous les résultats</span>
-						<!-- loadedUserTeams: {{ loadedUserTeams }}<br /><br /> -->
-						<!-- loadedCompetitions: {{ loadedCompetitions }}<br /><br /> -->
-						<!-- loadedCountries: {{ loadedCountries }}<br /><br /> -->
-						<!-- selectedActivity: {{ selectedActivity }}<br /><br /> -->
-						<!-- selectedCategory: {{ selectedCategory }}<br /><br /> -->
-						<!-- selectedCountry: {{ selectedCountry }}<br /><br /> -->
-						<!-- selectedCompetition: {{ selectedCompetition }}<br /><br /> -->
-						<!-- loadedCompetitionResults: {{ loadedCompetitionResults }}<br /><br /> -->
-						<!-- loadedCountryCompetitions: {{ loadedCountryCompetitions('france') }}<br /><br /> -->
-						<!-- selectedCompetitionId: {{ selectedCompetitionId }}<br /><br /> -->
 					</div>
 				</div>
 				
+				<!-- loadedUserTeams: {{ loadedUserTeams }}<br /><br /> -->
+				<!-- loadedCompetitions: {{ loadedCompetitions }}<br /><br /> -->
+				<!-- loadedCountries: {{ loadedCountries }}<br /><br /> -->
+				<!-- selectedActivity: {{ selectedActivity }}<br /><br /> -->
+				<!-- selectedCategory: {{ selectedCategory }}<br /><br /> -->
+				<!-- selectedCountry: {{ selectedCountry }}<br /><br /> -->
+				<!-- selectedCompetition: {{ selectedCompetition }}<br /><br /> -->
+				<!-- selectedCompetition.slug: {{ selectedCompetition.slug }}<br /><br /> -->
+				<!-- loadedCompetitionResults: {{ loadedCompetitionResults }}<br /><br /> -->
+				<!-- loadedCountryCompetitions: {{ loadedCountryCompetitions('france') }}<br /><br /> -->
+				<!-- selectedCompetitionId: {{ selectedCompetitionId }}<br /><br /> -->
 
 				<div class="flex-container-modal-Title banner text-center">
 					<h2>Choisissez une activité</h2>
@@ -103,7 +104,8 @@
 					<div class="flex-container-modal-OtherTeam-Img">
 						<div class="OtherTeam" v-for="country in loadedCountries" :class="[selectedCountry === country.slug ? 'active' : '']">
 							<img :src="'images/flags/' + country.slug + '.png'" class="imgModalAvatar"/>
-							<div class="overlayOtherTeam" @click="selectedCountry = country.slug" style="cursor: pointer;">
+							<!-- <div class="overlayOtherTeam" @click="selectedCountry = country.slug" style="cursor: pointer;"> -->
+							<div class="overlayOtherTeam" @click="selectCountry(country)" style="cursor: pointer;">
 								<div class="textActivity">Football</br></br>{{ country.name }}</br></div>
 							</div>
 						</div>
@@ -115,7 +117,8 @@
 					<h2>Compétitions du pays sélectionné</h2>
 				</div>
 				<div class="flex-container-modal-OtherTeam-Img" v-if="selectedCountry && showCountries">
-					<div class="OtherTeam" v-for="competition in loadedCountryCompetitions(this.selectedCountry)" style="cursor: pointer;" :class="[selectedCompetition.slug === competition.slug ? 'active' : '']" @click="fetchCompetitionResults(competition)">
+					<div class="OtherTeam" v-for="competition in loadedCountryCompetitions(this.selectedCountry)" style="cursor: pointer;" :class="[selectedCompetition && selectedCompetition.slug === competition.slug ? 'active' : '']" @click="fetchCompetitionResults(competition)">
+						<!-- {{ competition }} -->
 						<img :src="'images/competitions/' + competition.image" class="imgModalAvatar"/>
 						<div class="overlayOtherTeam" style="cursor: pointer;">
 							<div class="textActivity">Football</br></br>{{ competition.name }}</br></div>
@@ -131,20 +134,37 @@
 				<div class="flex-container-modal-OtherTeam-Img" style="background: #fff;" v-if="selectedCompetition">
 					<table class="table tableText">
 					  	<tbody>
-							<tr class="borderResultatTermine" style="padding: 10px;" v-for="event in loadedCompetitionResults">
+							<tr class="borderResultatTermine" style="border: 1px solid orangered;" v-for="event in loadedCompetitionResults" :key="event.id">
 							  	<td class="tdResultat1 text-left">
 							  		<a href="mesEquipesDetails.html" class="linkEvent">
-							  			<img :src="'images/teams/' + event.home_team.slug + '.png'" class="imgModalAgendaFlags"/> {{ event.home_team.name }}
+							  			<img v-lazy="'images/teams/' + event.home_team.slug + '.png'" class="imgModalAgendaFlags" /> {{ event.home_team.name }}
+							  			<!-- <img v-lazy="imgObj" /> -->
+							  			<span v-if="event.status === 'FINISHED'">
+							  				<span class="dot dot-success" v-if="getHomeTeamScore(event.score) > getVisitorTeamScore(event.score)"></span>
+							  				<span class="dot dot-warning" v-if="getHomeTeamScore(event.score) === getVisitorTeamScore(event.score)"></span>
+							  				<span class="dot dot-error" v-if="getHomeTeamScore(event.score) < getVisitorTeamScore(event.score)"></span>
+							  			</span>
 							  		</a>
 							  	</td>
+							  	<td style="border: none;">{{ getHomeTeamScore(event.score) }}</td>
 							  	<td class="tdResultat text-center">
 							  		<a href="matchTermine.html" class="linkEvent">
-							  			{{ event.competition.name }}</br>{{ event.date }}</br>{{ event.score }}</br>{{ event.status }}
+							  			{{ event.date | moment("dddd, MMMM Do") }}<br />
+							  			{{ convertToLocaltime(event.timestamp) }}<br />
+							  			<!-- <span v-if="event.time !== 'FT'">{{ event.time }}<br /></span> -->
+							  			<span :class="classObject(event)">{{ event.status }}</span>
 							  		</a>
 							  	</td>
+							  	<td style="border: none;">{{ getVisitorTeamScore(event.score) }}</td>
 							  	<td class="tdResultat1 text-right">
 							  		<a href="autresEquipesDetails.html" class="linkEvent">
-							  			{{ event.visitor_team.name }} <img :src="'images/teams/' + event.visitor_team.slug + '.png'" class="imgModalAgendaFlags"/>
+							  			<span v-if="event.status === 'FINISHED'">
+								  			<span class="dot dot-success" v-if="getVisitorTeamScore(event.score) > getHomeTeamScore(event.score)"></span>
+								  			<span class="dot dot-warning" v-if="getVisitorTeamScore(event.score) === getHomeTeamScore(event.score) && event.status === 'FINISHED'"></span>
+								  			<span class="dot dot-error" v-if="getVisitorTeamScore(event.score) < getHomeTeamScore(event.score)"></span>
+								  		</span>
+								  		{{ event.visitor_team.name }} 
+								  		<img v-lazy="'images/teams/' + event.visitor_team.slug + '.png'" class="imgModalAgendaFlags"/>
 							  		</a>
 							  	</td>
 							</tr>
@@ -155,7 +175,7 @@
 			</div><!-- /#pxBottom -->
 						
 			<!-- footer -->
-			<div id="footer" class="col-12 col-sm-12 col-md-12 col-lg-12">					
+			<!-- <div id="footer" class="col-12 col-sm-12 col-md-12 col-lg-12">					
 				<div id="dock-container">
 					<div id="dock">
 						<ul>
@@ -182,7 +202,7 @@
 						</ul>
 					</div>
 				</div>	
-			</div>
+			</div> -->
 		</div>
 
 		
@@ -193,6 +213,7 @@
 <script>
 	import firebase from 'firebase'
 	import VueSlideUpDown from 'vue-slide-up-down'
+	import moment from 'moment'
   	export default {
 	    layout: 'layoutFront',
 	    components: {
@@ -208,6 +229,11 @@
 	    		selectedCountry: '',
 	    		// showMainCompetitions: false,
 	    		showCountries: false,
+	    		imgObj: {
+    				src: 'images/teams/real_madrid.png',
+    				error: 'images/loader.gif',
+    				loading: 'images/loader.gif'
+  				}
 	    	}
 	    },
 	    created () {
@@ -259,15 +285,23 @@
 				return this.$store.getters['users/loadedTeams']
 			},
 			loadedCompetitionResults () {
-				return this.$store.getters['events/loadedCompetitionEvents']
-			}
+				return this.$store.getters['events/loadedCompetitionEvents'].sort((a, b) => a.timestamp - b.timestamp)
+			},
+			
 	    },
 	    methods: {
-	    	// selectCountry (country) {
-	    	// 	console.log('country: ', country)
-	    	// 	this.loadedCountryCompetitions(country)
-
-	    	// },
+	    	selectCountry (country) {
+	    		console.log('country: ', country)
+	    		this.selectedCountry = country
+	    		this.showCountries = true
+	    		this.selectedCompetition = this.loadedCompetitions.find(competition => competition.importance === 1 && competition.countries ? competition.countries[country.slug] : '')
+	    		// this.selectedCompetition = 'abc'
+	    		console.log('selectedCompetition: ', this.selectedCompetition)
+	    		if (this.selectedCompetition) {
+	    			console.log('abc')
+	    			this.fetchCompetitionResults(this.selectedCompetition)
+	    		}
+	    	},
 	    	loadedCountryCompetitions (country) {
 	    		// console.log('country: ', country)
 				return this.$store.getters['competitions/loadedCompetitions']
@@ -278,14 +312,34 @@
 
 				if (competition.countries) {
 					this.selectedCountry = Object.keys(competition.countries)[0]
+					// this.selectedCountry = Object.keys(competition.countries)[0]
 				}
 				if (competition.type === 'main') {
 					this.selectedCompetition = competition
 				} else {
 					this.selectedGroup = competition.slug
+					this.selectedCountry = ''
 				}
 				return this.$store.dispatch('events/loadedCompetitionEvents', competition)	
-			}
+			},
+			convertToLocaltime (timestamp) {
+				const utcDiff = new Date().getTimezoneOffset()
+				// const utcDiff = '60'
+				console.log('utcDiff: ', utcDiff)
+				if (utcDiff > 0) {
+					return moment.unix(timestamp).add(utcDiff, 'minutes').format("HH:mm")
+				} else {
+					return moment.unix(timestamp).subtract(utcDiff, 'minutes').format("HH:mm")
+				}
+			},
+			getHomeTeamScore (score) {
+				if (!score) return
+				return parseInt(score.substring(0, 2))
+			},
+			getVisitorTeamScore (score) {
+				if (!score) return
+				return parseInt(score.slice(-2))
+			},
 			// loadedCompetitionResults (competitionId) {
 			// 	return this.$store.dispatch('events/loadedCompetitionEvents')
 			// 	this.$store.dispatch('events/loadedCompetitionEvents').then(response => {
@@ -320,6 +374,11 @@
 	  //  //                  return eventsArray
    //  //             })
 			// }
+			classObject (event) {
+			    return {
+			    	'finished' : event.status === 'FINISHED'
+			    }
+			}
 	    }
   	}
 </script>
@@ -331,5 +390,28 @@
 	.inactive {
 		background-color: #fff;
 	}
-
+	.finished {
+		background-color: green;
+		color: #fff;
+	}
+	.in_play {
+		background-color: yellow;
+	}
+	.dot {
+		display: inline-block;
+		border-radius: 50%;
+		width: 50%;
+		height: 15px;
+		width: 15px;
+		margin: 0 2px;
+	}
+	.dot-success {
+    	background-color: green;
+	}
+	.dot-warning {
+		background-color: orange;
+	}
+	.dot-error {
+    	background-color: red;
+	}
 </style>
